@@ -1,0 +1,822 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>WEB前端——CSS布局（样式,浮动,清除,块级元素处理）（语法）_comonly.cn</title>
+<meta name="keywords" content="WEB前端——CSS布局（样式,浮动,清除,块级元素处理）（语法）" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">WEB前端——CSS布局（样式,浮动,清除,块级元素处理）（语法）</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-04-17</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='盒模型'>
+	盒模型
+</h2>
+<p>
+	一个盒子模型由4部分组成
+</p>
+<ol>
+	<li>
+		content
+	</li>
+	<li>
+		border（边框）指盒子周边的直线，四条边都可以设置边框线。border: 2px solid #f00;<span>（top,bottom,left,right）</span>（width,style,color）
+	</li>
+	<li>
+		padding（填充）内容与边框线之间的空间。（top,bottom,left,right）
+	</li>
+	<li>
+		margin（边距）指一个标签与另一个标签之间的间隔。<span>（top,bottom,left,right）</span> 
+	</li>
+</ol>
+<h4>
+	border-style的属性值
+</h4>
+<ol>
+	<li>
+		none  定义无边框。
+	</li>
+	<li>
+		hidden  与 "none" 相同。不过应用于表时除外，对于表，hidden 用于解决边框冲突。
+	</li>
+	<li>
+		dotted  定义点状边框。在大多数浏览器中呈现为实线。
+	</li>
+	<li>
+		dashed  定义虚线。在大多数浏览器中呈现为实线。
+	</li>
+	<li>
+		solid  定义实线。
+	</li>
+	<li>
+		double定义双线。双线的宽度等于 border-width 的值。
+	</li>
+</ol>
+<p>
+	页面上的每一个元素都被浏览器看成是一个矩形的盒子，网页就是有许多盒子通过排列堆积而成（上下排列，并列排列，嵌套排列）。在css中分为block box（块级盒子）和inline box（内联盒子），它们分别对应于块级标签和内联标签。
+</p>
+盒子模型的实际width（宽度）和height（高度）：width和height属性设置了内容区域，实际宽度和高度是margin,border,padding,width/height的总和。
+<h3>
+	块级标签
+</h3>
+<p>
+	当做容器，可以容纳内联标签和其它块级标签。主要特点是排他性，在页面布局时独占同一行。标签的宽度（width），高度（height），填充（padding）和边距（margin）都有效。
+</p>
+<p>
+	width和height指的是内容区域的宽度和高度，使用css的长度单位：像素（px），百分比，em（字号的倍数），auto（和父元素宽度相同）
+</p>
+<h3>
+	内联标签
+</h3>
+<p>
+	只能容纳文本或其他的内联标签。主要特点是允许其他标签与其位于一行，标签的宽度（width）和高度（height）不起作用，其宽度就是自身文字或者图片的宽度。填充（padding）和边距（margin）只有左右方向有效，上下方向无效。
+</p>
+<h4>
+	块级标签和内联标签的关系
+</h4>
+<table border="1" cellpadding="0" cellspacing="0" bordercolor="#000000">
+	<tbody>
+		<tr>
+			<td>
+				块级标签
+			</td>
+			<td>
+				内联标签
+			</td>
+		</tr>
+		<tr>
+			<td>
+				独占一行
+			</td>
+			<td>
+				允许其他标签同处一行
+			</td>
+		</tr>
+		<tr>
+			<td>
+				高度，行高及外边距和内边距都可控
+			</td>
+			<td>
+				高，行高及外边距（上下）和内边距（上下）不可改变，但内外边距（左右）有效。高度可通过line-height设置
+			</td>
+		</tr>
+		<tr>
+			<td>
+				宽度默认为100%，除非设定一个宽度
+			</td>
+			<td>
+				宽度是它的文字或图片的宽度，不可改变
+			</td>
+		</tr>
+		<tr>
+			<td>
+				它可以容纳内联标签和其它块标签
+			</td>
+			<td>
+				只能容纳文本或者其他内联标签
+			</td>
+		</tr>
+	</tbody>
+</table>
+<h4>
+	块级标签和内联标签的相互转换
+</h4>
+<p>
+	每个标签都有一个display属性，用于确定该属性的类型。比如&lt;div&gt;标签默认display属性值为“block”,成为块级标签，而&lt;span&gt;标签的默认值为“inline”,成为内联标签。如果要实现内联标签向块级标签转换只需要将display属性设置为block就行了。在&lt;a&gt;标签加上"display:block"，转换成块级标签，宽度和高度值生效，并且可以独占一行。
+</p>
+<h3>
+	规定应该生成的框的类型，display属性的常用取值
+</h3>
+<table cellpadding="0" cellspacing="0" border="1" bordercolor="#000000">
+	<tbody>
+		<tr>
+			<th>
+				值
+			</th>
+			<th>
+				描述
+			</th>
+		</tr>
+		<tr>
+			<td>
+				none
+			</td>
+			<td>
+				此元素不会被显示。
+			</td>
+		</tr>
+		<tr>
+			<td>
+				block
+			</td>
+			<td>
+				此元素将显示为块级元素，此元素前后会带有换行符。
+			</td>
+		</tr>
+		<tr>
+			<td>
+				inline
+			</td>
+			<td>
+				默认。此元素会被显示为内联元素，元素前后没有换行符。
+			</td>
+		</tr>
+		<tr>
+			<td>
+				inline-block
+			</td>
+			<td>
+				行内块元素。（CSS2.1 新增的值）
+			</td>
+		</tr>
+		<tr>
+			<td>
+				inherit
+			</td>
+			<td>
+				规定应该从父元素继承 display 属性的值。
+			</td>
+		</tr>
+	</tbody>
+</table>
+<ol>
+	<li>
+		当style.display="block"或style.visibility="visible"时控件或见
+	</li>
+	<li>
+		当style.display="none"或style.visibility="hidden"时控件不可见。
+	</li>
+</ol>
+<p>
+	不同的是“display”不但隐藏控件，而且被隐藏的控件不再占用显示时占用的位置，而“visibility”隐藏的控件仅仅是将控件设置成不可见了，控件仍然占俱原来的位置。
+</p>
+<h2 id='fot标签及其属性'>
+	font标签及其属性
+</h2>
+<h4>
+	1、font-family 定义字体（下为简书的字体）
+</h4>
+font-family:&nbsp;"lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;<br />
+<h4>
+	2、font-size 字体大小
+</h4>
+font-size:18px;&nbsp;&nbsp;<br />
+font-size:150%;&nbsp;&nbsp;<br />
+font-size:xx-small,x-small,small,medium,large,x-large,xx-large;&nbsp;&nbsp;<br />
+<h4>
+	3、font-style 字体样式
+</h4>
+font-style:normal,italic,oblique（后两个均为斜体）;&nbsp;&nbsp;<br />
+<h4>
+	4、font-weight 字体粗细
+</h4>
+font-weight:normal,bold,bolder,lighter,100-900;&nbsp;&nbsp;<br />
+<h4>
+	&nbsp;5、font-variant 使输入不受大小写限制
+</h4>
+font-variant: normal,small-caps;&nbsp;&nbsp;<br />
+<h4>
+	最后，font属性的简写
+</h4>
+font:&nbsp; bold italic 18px&nbsp; arial ;&nbsp;&nbsp;
+<h2 id='c浮动与清除'>
+	<span>css浮动与清除</span> 
+</h2>
+css浮动（float）可以用在任何元素上，取值：left(左浮动),right(右浮动),none(不浮动，默认值)<br />
+<h4>
+	清除（clear）
+</h4>
+和浮动属性是对立的，去掉某个位置的浮动元素。本质上是迫使它落到浮动元素的下方。属性的取值：（clear:both;）<br />
+<ul>
+	<li>
+		left：左边不允许浮动
+	</li>
+	<li>
+		right：右边不允许浮动元素
+	</li>
+	<li>
+		both：两边都不允许
+	</li>
+	<li>
+		none：默认值，关闭清除属性
+	</li>
+</ul>
+<h2 id='定位方式'>
+	定位方式
+</h2>
+position定位面板就是把对象放在一个层里来定位，相当于HTML的DIV标签。<br />
+position属性取值<br />
+<ol>
+	<li>
+		absolute：绝对定位，位置不会随网页大小而改变。既然已经绝对地址了，一般就放在页面代码的最下面。&nbsp;
+	</li>
+	<li>
+		fixed：特殊的absolute，即fixed总是以body为定位对象的，按照浏览器的窗口进行定位
+	</li>
+	<li>
+		relative：相对定位，位置会随网页大小改变而改变
+	</li>
+	<li>
+		static：无定位，默认设置
+	</li>
+</ol>
+定位absolute和relative要与top，bottom,right,left结合使用。这几个属性取值方式有三种：auto（自动，这是默认的），长度值（px）和百分比。
+<h4>
+	overflow溢出属性
+</h4>
+<p>
+	当内容超出层的大小，发生溢出时，有四种处理方法：
+</p>
+<ol>
+	<li>
+		visible：增加层的大小，从而将层的所有内容显示出来
+	</li>
+	<li>
+		hidden：保持层的大小不变，将超出层的内容剪裁掉
+	</li>
+	<li>
+		scroll：总是显示滚动条
+	</li>
+	<li>
+		auto：只有在内容超出层的边界时才显示滚动条
+	</li>
+</ol>
+<h4>
+	clip剪辑属性
+</h4>
+<p>
+	设置层的可视区域，将需要的部分留下，不需要的部分裁掉。必须将position属性的值设为absolute，此属性方可使用。另外clip裁切的计算坐标都是从左上角（0,0）点开始计算。<br />
+clip属性取值方式有两种
+</p>
+<ol>
+	<li>
+		auto，默认值，没有剪辑
+	</li>
+	<li>
+		依据上，右，下，左的顺序提供自左上角为（0,0）坐标计算的4个偏移数值，其中任一数值都可用auto替换，即此边不剪辑。
+	</li>
+</ol>
+<h2 id='对齐方式'>
+	对齐方式
+</h2>
+<h4>
+	垂直对齐（vertical-align）
+</h4>
+<p>
+	该属性只对内联标签有效，对块级标签没有效果。
+</p>
+<p>
+	内联标签如&lt;img&gt;,表单中的输入框，单选按钮，文本区域等。
+</p>
+<p>
+	vertical-align属性取值
+</p>
+<ul>
+	<li>
+		baseline：将对象内容与基线对齐
+	</li>
+	<li>
+		sub：垂直对齐文本下标
+	</li>
+	<li>
+		super：垂直对齐文本上标
+	</li>
+	<li>
+		top：将对象的内容与对象顶端对齐
+	</li>
+	<li>
+		text-top：将对象文本与对象顶端对齐
+	</li>
+	<li>
+		middle：将对象的内容与对象中部对齐
+	</li>
+	<li>
+		bottom：将对象的内容与对象底部对齐
+	</li>
+	<li>
+		text-bottom：将对象文本与对象底端对齐
+	</li>
+	<li>
+		数值：像素或百分比
+	</li>
+</ul>
+<h4>
+	文本对齐方式（text-align）
+</h4>
+<p>
+	text-align属性的取值
+</p>
+<ul>
+	<li>
+		left：左对齐
+	</li>
+	<li>
+		center：居中对齐
+	</li>
+	<li>
+		right：右对齐
+	</li>
+	<li>
+		justify：两端对齐
+	</li>
+</ul>
+<h4>
+	调整单词间距（word-spacing）
+</h4>
+<p>
+	该属性可以改变单词与单词之间的距离，对单词本身没有影响。使用单位包括所有度量单位：像素（px），em，百分比等，正负值都可以。
+</p>
+<p>
+	调整字符间距（letter-spacing）
+</p>
+<p>
+	控制字母之间的距离，负值减少，正数增加字母之间的距离。
+</p>
+<p>
+	letter-spacing: 10px;
+</p>
+<h4>
+	处理空白区（white-space）
+</h4>
+<p>
+	设置处理元素内的空白，white-space属性的取值
+</p>
+<ul>
+	<li>
+		normal：默认，文本自然换行。如果超过元素宽度，内容自然换到下一行
+	</li>
+	<li>
+		pre：保留换行和空白。只有声明了!DOCTYPE且IE6以上版本才支持
+	</li>
+	<li>
+		nowrap：文本不允许换行，直到遇到标签为止
+	</li>
+	<li>
+		pre-wrap：同pre,但遇到超出范围会自动换行
+	</li>
+	<li>
+		pre-line：同pre，但遇到连续空格会被看做一个空格
+	</li>
+</ul>
+<h2 id='一些常用显示'>
+	一些常用显示
+</h2>
+<h3>
+	background属性的取值
+</h3>
+<ol>
+	<li>
+		background-color: #000000;&nbsp; &nbsp; &nbsp; /*同文字颜色属性，transparent表示透明（初始值）*/
+	</li>
+	<li>
+		background-image: url(000.jpg);
+	</li>
+	<li>
+		background-repeat: no-repeat;&nbsp; &nbsp; &nbsp;/*对于图片不展开（no-repeat：只显示图片一次，不平铺不重复；repeat：默认值，从左往右，从上往下平铺； repeat-x：水平方向平铺图片； repeat-y：垂直方向平铺图片； inherit：规定从父类继承）*/
+	</li>
+	<li>
+		background-position: center center;&nbsp; &nbsp; &nbsp;/*设置图像的起始位置 ，可以用百分比 0% 0%表示左边顶部* /&nbsp; &nbsp; &nbsp;
+	</li>
+</ol>
+<h3>
+	cursor属性设置鼠标的各种形状
+</h3>
+<p>
+	cursor取值有三种方式：
+</p>
+<ul>
+	<li>
+		auto自动，根据元素内容自动选择鼠标形状
+	</li>
+	<li>
+		图像地址url，选择自定义的图像为鼠标的形状
+	</li>
+	<li>
+		关键字，下面列出了部分显示形态
+	</li>
+</ul>
+<p>
+	下面的设置和上面代码均相同。
+</p>
+<p>
+	<table cellpadding="0" cellspacing="0" border="1" bordercolor="#000000">
+		<tbody>
+			<tr>
+				<td>
+					<span>cursor的属性取值</span><br />
+				</td>
+				<td>
+					<span>手型</span><br />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span>crosshair</span><br />
+				</td>
+				<td>
+					<span>十字型</span><br />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span>move</span><br />
+				</td>
+				<td>
+					<span>十字箭头形</span><br />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span>text</span><br />
+				</td>
+				<td>
+					鼠标移动到文本上的样式&nbsp;&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td>
+					wait
+				</td>
+				<td>
+					等待效果沙漏形
+				</td>
+			</tr>
+			<tr>
+				<td>
+					default
+				</td>
+				<td>
+					默认的那种效果指针形&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td>
+					help
+				</td>
+				<td>
+					带问号的鼠标样式
+				</td>
+			</tr>
+			<tr>
+				<td>
+					e-resize
+				</td>
+				<td>
+					向右的箭头
+				</td>
+			</tr>
+			<tr>
+				<td>
+					ne-resize
+				</td>
+				<td>
+					向右上方的箭头
+				</td>
+			</tr>
+			<tr>
+				<td>
+					n-resize
+				</td>
+				<td>
+					向上的箭头
+				</td>
+			</tr>
+			<tr>
+				<td>
+					nw-resize
+				</td>
+				<td>
+					向左上方的箭头
+				</td>
+			</tr>
+			<tr>
+				<td>
+					w-resize
+				</td>
+				<td>
+					向左的箭关
+				</td>
+			</tr>
+			<tr>
+				<td>
+					sw-resize
+				</td>
+				<td>
+					向左下的箭头
+				</td>
+			</tr>
+			<tr>
+				<td>
+					s-resize
+				</td>
+				<td>
+					向下的箭头
+				</td>
+			</tr>
+			<tr>
+				<td>
+					se-resize
+				</td>
+				<td>
+					向右下方的箭头
+				</td>
+			</tr>
+			<tr>
+				<td>
+					auto
+				</td>
+				<td>
+					系统自动的效果
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</p>
+<h3>
+	伪类（不只用于a标签）
+</h3>
+<table border="1" cellpadding="0" cellspacing="0" bordercolor="#000000">
+	<tbody>
+		<tr>
+			<td>
+				:link
+			</td>
+			<td>
+				指网页中正常的，还没访问到的，鼠标也没有移到过或点击过的所有链接
+			</td>
+		</tr>
+		<tr>
+			<td>
+				:visited
+			</td>
+			<td>
+				已经点击过的链接
+			</td>
+		</tr>
+		<tr>
+			<td>
+				:hover
+			</td>
+			<td>
+				用户鼠标滑过这个链接时改变链接的展示效果
+			</td>
+		</tr>
+		<tr>
+			<td>
+				:active
+			</td>
+			<td>
+				当用户点击链接时的效果，作用范围是按下鼠标的那短暂的十亿分之一秒
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	<br />
+如果改变顺序，hover和active状态将不起作用
+</p>
+<p>
+	a: link{text-decoration: none;&nbsp;} &nbsp; &nbsp;/*取消链接下划线*/
+</p>
+<p>
+	a: hover{text-decoration: underline;&nbsp;} &nbsp; /*鼠标经过链接时添加下划线*/
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/899.html">XML相关</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/903.html">WEB前端——JS实现ajax异步提交,及返回处理（含js动态生成网页元素《实例》）</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#盒模型">盒模型</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#fot标签及其属性">fot标签及其属性</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#c浮动与清除">c浮动与清除</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#定位方式">定位方式</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#对齐方式">对齐方式</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#一些常用显示">一些常用显示</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,392 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>cookie—JavaScript_comonly.cn</title>
+<meta name="keywords" content="cookie—JavaScript" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">cookie—JavaScript</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-03-12</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">JavaScript,cookie</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	document对象中的cookie属性是存储在访问者计算机中的变量，保存在客户端的机器上，以便于服务器端程序在一个页面中使用另一个页面的数据，或者在用户离开页面并返回时恢复用户的状态变量。
+</p>
+<p>
+	同一台计算机通过浏览器请求某个页面时，会发生这个cookie。可以使用JavaScript来创建和取回cookie值。
+</p>
+<h2 id='cookie'>
+	cookie
+</h2>
+<p>
+	cookie机制将信息存储于用户硬盘，可以作为全局变量。
+</p>
+<blockquote>
+	<p>
+		保存用户登录状态
+	</p>
+	<p>
+		电子商务记录购物车
+	</p>
+	<p>
+		定制用户页面
+	</p>
+	<p>
+		跟踪用户行为
+	</p>
+</blockquote>
+<h2 id='创建和读取cookie'>
+	创建和读取cookie
+</h2>
+<p>
+	对cookie读操作可以得到一个字符串，这个字符串包含了应用到当前文档的所有的cookie的名字和值。通过设置cookie的值可以创建，修改或删除一个cookie。
+</p>
+<p>
+	除名字外，每个cookie有4个可选属性，分别控制生存期，可见性和安全性。
+</p>
+<p>
+	cookie的属性设置成一个字符串形式：name=value
+</p>
+<p>
+	<em>document.cookie="name=value";</em> &nbsp; &nbsp; &nbsp; &nbsp;//将上述语句保存在cookie中
+</p>
+<p>
+	<em>document.cookie="userid=100; username=chen";</em> &nbsp;//同时存储多个名值，用分号加空格隔开 <span style="color:#E53333;"><strong>尽量分开写！！！！</strong></span>
+</p>
+<p>
+	name为cookie的名字，value为cookie的值。
+</p>
+<p>
+	<em>document.cookie="str="+escape("I Love You");</em> &nbsp;相当于document.cookie="str=I%20Love%You";
+</p>
+<p>
+	<em>unescape(document.cookie);</em> &nbsp; &nbsp; &nbsp;//进行解码得到原来的cookie值。
+</p>
+<p>
+	cookie的名或值中不能有分号，逗号，等号以及空格。如果要使用这些特殊符号，必须在写入cookie前，使用escape()函数对cookie值进行编码，它能将一些特殊符号用16进制表示，读取cookie时再通过unescape()函数将其还原。
+</p>
+<p>
+	在同一网页创建的cookie，都会写在一个cookie文件中。读cookie时，只会读cookie文件的所有内容。
+</p>
+<p>
+	<em>document.cookie </em>&nbsp; &nbsp;//读取cookie内容
+</p>
+<p>
+	改写cookie的值，只要使用相同名字的cookie名和新的值重新设置一次就行了。
+</p>
+<p>
+	&lt;script type="text/javascript"&gt;<br />
+function setcookie(){<br />
+document.cookie="userid="+document.form1.userid.value;<br />
+document.cookie="username="+document.form1.username.value;<br />
+window.alert("cookie中的保存的值是：\n"+document.cookie);<br />
+}<br />
+&lt;/script&gt;<br />
+&lt;form name="form1"&gt;<br />
+用户id：&lt;input type="text" name="userid"/&gt;&lt;/br&gt;<br />
+用户名字：&lt;input type="text" name="username"/&gt;&lt;/br&gt;<br />
+&lt;input type="button" onclick="setcookie()" value="保存cookie"/&gt;&lt;/br&gt;<br />
+&lt;/form&gt;
+</p>
+<p>
+	复制代码<a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank"><span style="background-color:#FFE500;">在线测试运行效果</span></a> 
+</p>
+<h2 id='获取cookie的值'>
+	获取cookie的值
+</h2>
+<p>
+	只能获取所有的cookie值，而不能指定cookie名字来获得指定的值。
+</p>
+<p>
+	&lt;script type="text/javascript"&gt;<br />
+document.cookie="userid=000001";<br />
+document.cookie="username=chen";<br />
+document.cookie="userpass=111111";<br />
+var str=document.cookie; &nbsp; &nbsp; &nbsp;//读取cookie<br />
+document.write("cookie中的保存的值是：&lt;/br&gt;"+str);<br />
+var arrcookie=str.split("; "); &nbsp; &nbsp; //分割cookie，保存在数组中。<span style="color:#E53333;">这里分割要用“; ”分号加空格，不然会出错。</span><br />
+for(var i=0;i&lt;arrcookie.length;i++){<br />
+document.write("&lt;br/&gt;*****"+i+arrcookie[i]);<br />
+}<br />
+for(var i=0;i&lt;arrcookie.length;i++){<br />
+var arr=arrcookie[i].split("="); &nbsp; &nbsp; &nbsp;//分割cookie名和cookie值<br />
+if("userid"==arr[0]){<br />
+var userid=arr[1];<br />
+break;<br />
+}<br />
+}<br />
+window.alert("userid的值是："+userid);<br />
+&lt;/script&gt;
+</p>
+<p>
+	复制代码<span style="background-color:#FFE500;"><a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank">在线测试运行效果</a></span>
+</p>
+<h2 id='cookie的生存期（exire）'>
+	cookie的生存期<span>（expires）</span> 
+</h2>
+<p>
+	cookie的第一个性质是生存期（expires）。默认情况下，cookie是暂时存在的，他们存储的值只是在浏览器会话期间存在，当用户退出浏览器后就会丢失。可以用expires性质指定一个终止日期，这样就会使浏览器把cookie保存到一个本地文件中，以便用户下次访问这个网页能读出。一但超过规定时间，cookie会自动从cookie文件中删除。
+</p>
+<p>
+	&lt;script type="text/javascript"&gt;<br />
+var d=new Date();<br />
+var expiredays=1; &nbsp; &nbsp; &nbsp;//一天后过期<br />
+d.setTime(d.getTime()+expiredays*24*3600*1000);<br />
+document.cookie="username=chen"+d.toGMTString();<br />
+window.alert("cookie中的保存的值是：\n"+document.cookie);<br />
+&lt;/script&gt;
+</p>
+<p>
+	复制代码<span style="background-color:#FFE500;"><a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank">在线测试运行效果</a></span>
+</p>
+<h2 id='cookie的路径（th）'>
+	cookie的路径（path）
+</h2>
+<p>
+	指定了与cookie关联在一起的网页。默认情况下，cookie会和创建它的网页以及与这个网页处于同一目录下的网页和处于该目录的子目录的子目录下的网页关联在一起。
+</p>
+<p>
+	http://www.123.com/book.3.html
+</p>
+<p>
+	那么该网站的/book/虚拟目录以及该虚拟目录下的所有子目录都可以读取该cookie。
+</p>
+<h2 id='cookie的域名（domi）'>
+	cookie的域名（domain）
+</h2>
+<p>
+	解决在不同域中访问cookie的问题。
+</p>
+<p>
+	path=/;domin=.123.com
+</p>
+<p>
+	通常在设置cookie的domain时，都会将cookie的path设为“/”。如果当前文件在www.123.com域上，只能设置“.123.com”而不能是其他域
+</p>
+<h2 id='cookie的安全性（ecure）'>
+	cookie的安全性（secure）
+</h2>
+<p>
+	cookie的secure是一个布尔类型。设置之后cookie只能通过HTTPS或在其他安全的协议下才能传输
+</p>
+<h2 id='cookie的局限性'>
+	cookie的局限性
+</h2>
+<ul>
+	<li>
+		<span style="line-height:1.5;">浏览器保存的cookie总数不能超过300个</span> 
+	</li>
+	<li>
+		<span style="line-height:1.5;">为每一个web服务器保存的cookie数不超过20个</span> 
+	</li>
+	<li>
+		<span style="line-height:1.5;">每个cookie存放的数据不超过4KB</span> 
+	</li>
+	<li>
+		<span style="line-height:1.5;">cookie的生存周期是以毫秒为单位计算的</span> 
+	</li>
+	<li>
+		<span style="line-height:1.5;">用户浏览器可通过设置来接受或拒绝cookie</span>
+	</li>
+</ul></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/627.html">链接对象,锚对象—JavaScript</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/629.html">表单对象—JavaScript</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#cookie">cookie</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#创建和读取cookie">创建和读取cookie</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#获取cookie的值">获取cookie的值</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#cookie的生存期（exire）">cookie的生存期（exire）</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#cookie的路径（th）">cookie的路径（th）</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#cookie的域名（domi）">cookie的域名（domi）</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#cookie的安全性（ecure）">cookie的安全性（ecure）</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#cookie的局限性">cookie的局限性</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

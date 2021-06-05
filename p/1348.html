@@ -1,0 +1,328 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>winio生成库调用及使win7系统下蜂鸣器发声_comonly.cn</title>
+<meta name="keywords" content="winio生成库调用及使win7系统下蜂鸣器发声" />
+<meta name="description" content="过去的beep是用主板的Speaker发声，直接操作硬件端口。现在的Windows可能出于安全考虑，beep已经不用主板的Speaker了，改用声卡输出。
+
+
+	wio的获取及配置使用参考：winio的使用，InitializeWinIo Winio64在64位系统中初始化失败问题(下载源码，直接看文档帮助)
+
+
+	
+
+
+	C++中调用winio库
+
+
+	可以使用常规的引入winio.h头文件，使用winio.lib链接来使用winio.dll动态库。
+
+
+	如果通过Load" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">winio生成库调用及使win7系统下蜂鸣器发声</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-08-26</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>过去的beep是用主板的Speaker发声，直接操作硬件端口。现在的Windows可能出于安全考虑，beep已经不用主板的Speaker了，改用声卡输出。
+
+
+	wio的获取及配置使用参考：winio的使用，InitializeWinIo Winio64在64位系统中初始化失败问题(下载源码，直接看文档帮助)
+
+
+	
+
+
+	C++中调用winio库
+
+
+	可以使用常规的引入winio.h头文件，使用winio.lib链接来使用winio.dll动态库。
+
+
+	如果通过Load</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	过去的beep是用主板的Speaker发声，直接操作硬件端口。现在的Windows可能出于安全考虑，beep已经不用主板的Speaker了，改用声卡输出。
+</p>
+<p>
+	wio的获取及配置使用参考：<a href="http://comonly.cn/l/p/1190.html" target="_blank">winio的使用，InitializeWinIo Winio64在64位系统中初始化失败问题(下载源码，直接看文档帮助)</a>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	C++中调用winio库
+</p>
+<p>
+	可以使用常规的引入winio.h头文件，使用winio.lib链接来使用winio.dll动态库。
+</p>
+<p>
+	如果通过LoadLibrary的方式引入动态库，需要注意winio库中提供的对外调用函数用 "_stdcall" 关键字修饰。被这个关键字修饰的函数，其参数都是从右向左通过堆栈传递的， 函数调用在返回前要由被调用者清理堆栈（C++默认使用 __cdecl 修饰，函数调用结束后由函数调用者清除栈内数据）[堆溢出问题]。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	导入winio后,基本调用方法
+</p>
+<pre class="prettyprint lang-cpp">InitializeWinIo();
+DWORD data=0; //speaker on
+GetPortVal(0x61,&amp;data,1); data|=0x03;
+SetPortVal(0x61,data,1);
+Sleep(30);
+//speaker off
+GetPortVal(0x61,&amp;data,1);
+data&amp;=0xFC;
+SetPortVal(0x61,data,1);
+ShutdownWinIo();</pre>
+<p>
+	winio的初始化和关闭，获取和设置返回值类型都是bool型，可以判断调用是否成功。完整的调用示例(转)：
+</p>
+<pre class="prettyprint lang-cpp">//使用WinIO驱动PC喇叭发声
+#include "WinIo.h"
+#define TIMER_FREQUENCY 1193167 //; 1,193,167 Hz
+#define	OCTAVE	2
+#define PITCH_C   523  // 523,25 Hz
+#define PITCH_Cs  554  // 554,37 Hz
+#define PITCH_D   587  // 587,33 Hz
+#define PITCH_Ds  622  // 622,25 Hz
+#define PITCH_E   659  // 659,25 Hz
+#define PITCH_F   698  // 698,46 Hz
+#define PITCH_Fs  740  // 739,99 Hz
+#define PITCH_G   784  // 783,99 Hz
+#define PITCH_Gs  831  // 830,61 Hz
+#define PITCH_A   880  // 880,00 Hz
+#define PITCH_As  988  // 987,77 Hz
+#define PITCH_H  1047  //1046,50 Hz
+// We are going to play c-major chord
+#define	TONE_1	(TIMER_FREQUENCY/(PITCH_C*OCTAVE))
+#define	TONE_2	(TIMER_FREQUENCY/(PITCH_E*OCTAVE))
+#define	TONE_3	(PITCH_G*OCTAVE)
+void Beep(DWORD pitch) {
+    DWORD data=0;
+    //Timer 8253-5 (AT: 8254.2).
+    data=0xb6;
+    SetPortVal(0x43,data,1);
+    data=pitch&amp;0xff;
+    SetPortVal(0x42,data,1);
+    data=(pitch&gt;&gt;8)&amp;0xff;
+    SetPortVal(0x42,data,1);
+    //speaker on
+    GetPortVal(0x61,&amp;data,1);
+    data|=0x03;
+    SetPortVal(0x61,data,1);
+    Sleep(30);
+    //speaker off
+    GetPortVal(0x61,&amp;data,1);
+    data&amp;=0xFC;
+    SetPortVal(0x61,data,1);
+}
+int main() {
+    InitializeWinIo();//调用WinIO初始化函数
+    for(int i=0;i&lt;10;i++) {
+        Beep(TONE_1);
+        Beep(TONE_2);
+        Beep(TONE_3);
+    }
+    ShutdownWinIo();//退出WinIO库
+    return 0;
+}</pre></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1347.html">java中map迭代方法</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1349.html">java文件创建、删除、读取、写入操作大全</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

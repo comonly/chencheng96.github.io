@@ -1,0 +1,270 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>CRC码计算及校验原理_comonly.cn</title>
+<meta name="keywords" content="CRC码计算及校验原理" />
+<meta name="description" content="循环校验码（CRC码）是数据通信领域中最常用的一种差错校验码，其特征是信息字段和校验字段的长度可以任意选定。
+
+
+	
+
+
+	CRC校验码原理、实例、手动计算&nbsp;https://www.cnblogs.com/bugutian/p/6221783.html
+
+
+	CRC码计算及校验原理的最通俗诠释 https://www.cnblogs.com/liushui-sky/p/9962123.html
+
+
+	
+
+
+	CRC校验原理就是以下几个步骤：
+
+&nbsp; &n" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">CRC码计算及校验原理</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2020-09-25</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>循环校验码（CRC码）是数据通信领域中最常用的一种差错校验码，其特征是信息字段和校验字段的长度可以任意选定。
+
+
+	
+
+
+	CRC校验码原理、实例、手动计算&nbsp;https://www.cnblogs.com/bugutian/p/6221783.html
+
+
+	CRC码计算及校验原理的最通俗诠释 https://www.cnblogs.com/liushui-sky/p/9962123.html
+
+
+	
+
+
+	CRC校验原理就是以下几个步骤：
+
+&nbsp; &n</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	循环校验码（CRC码）是数据通信领域中最常用的一种差错校验码，其特征是信息字段和校验字段的长度可以任意选定。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	CRC校验码原理、实例、手动计算&nbsp;<a href="https://www.cnblogs.com/bugutian/p/6221783.html">https://www.cnblogs.com/bugutian/p/6221783.html</a>
+</p>
+<p>
+	CRC码计算及校验原理的最通俗诠释 <a href="https://www.cnblogs.com/liushui-sky/p/9962123.html">https://www.cnblogs.com/liushui-sky/p/9962123.html</a>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	CRC校验原理就是以下几个步骤：<br />
+<br />
+&nbsp; &nbsp;（1）先选择（可以随机选择，也可按标准选择，具体在后面介绍）一个用于在接收端进行校验时，对接收的帧进行除法运算的除数（是二进制比较特串，通常是以多项方式表示，所以CRC又称多项式编码方法，这个多项式也称之为“生成多项式”）。<br />
+<br />
+&nbsp; &nbsp;（2）看所选定的除数二进制位数（假设为k位），然后在要发送的数据帧（假设为m位）后面加上k-1位“0”，然后以这个加了k-1个“0“的新帧（一共是m+k-1位）以“模2除法”方式除以上面这个除数，所得到的余数（也是二进制的比特串）就是该帧的CRC校验码，也称之为FCS（帧校验序列）。但要注意的是，余数的位数一定要是比除数位数只能少一位，哪怕前面位是0，甚至是全为0（附带好整除时）也都不能省略。<br />
+<br />
+&nbsp; &nbsp;（3）再把这个校验码附加在原数据帧（就是m位的帧，注意不是在后面形成的m+k-1位的帧）后面，构建一个新帧发送到接收端，最后在接收端再把这个新帧以“模2除法”方式除以前面选择的除数，如果没有余数，则表明该帧在传输过程中没出错，否则出现了差错。<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1752.html">关于C++中的句柄(handle)</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1754.html">各种排序算法 的 时间复杂度 和 空间复杂度</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

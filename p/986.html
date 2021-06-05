@@ -1,0 +1,239 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>延迟执行代码【转】_comonly.cn</title>
+<meta name="keywords" content="延迟执行代码【转】" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">延迟执行代码【转】</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-09-28</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	android
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 使用Sleep方法，就是去新建一个线程，然后里边放一个Thread.sleep()方法，这也是比较通俗的做法。<br />
+new Thread(){<br />
+&nbsp; public void run(){<br />
+&nbsp; &nbsp; &nbsp;try {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; Thread.sleep(5000);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; System.out.println("love");<br />
+&nbsp; &nbsp; &nbsp;} catch (InterruptedException e) { }<br />
+&nbsp; }<br />
+}.start();&nbsp; &nbsp; &nbsp;//这种内部匿名类的写法，快速生成一个线程对象，也有利于快速垃圾回收<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />
+但在main方法里直接加入Thread.sleep()，是对main线程的休眠；另一种错误的方法是把Thread.sleep放在一个方法内，而这个方法也是在main方法体内调用，与前者结果一样。<br />
+<br />
+<br />
+当然也可以使用 Java API 提供的Timer类，来实现。如下代码所示：<br />
+public class TimerDemo {&nbsp;&nbsp;<br />
+&nbsp; public static void main(String[] args) {<br />
+&nbsp; &nbsp; &nbsp;final Timer timer=new Timer();<br />
+&nbsp; &nbsp; &nbsp;TimerTask task=new TimerTask(){<br />
+&nbsp; &nbsp; &nbsp; &nbsp; public void run(){<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; System.out.println("计时任务");<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//timer.cancel(); //终止此计时器，丢弃所有当前已安排的任务。这不会干扰当前正在执行的任务（如果存在）。一旦终止了计时器，那么它的执行线程也会终止，并且无法根据它安排更多的任务。注意，在此计时器调用的计时器任务的 run 方法内调用此方法，就可以绝对确保正在执行的任务是此计时器所执行的最后一个任务。&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}<br />
+&nbsp; &nbsp; &nbsp; &nbsp; };<br />
+&nbsp; &nbsp; &nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp;timer.schedule(task,5000, 2000);&nbsp; &nbsp;//这个命令就是5秒钟之后执行TimerTask里边的内容，后边的执行时间间隔为2秒钟。<br />
+&nbsp; &nbsp; }<br />
+}<br />
+<br />
+通过调试发现，创建一个Timer对象，就会创建一个main线程之外的独立子线程程序，来专门执行计时器里的任务，而任务也被理解成为对象：TimerTask，这也体现了JAVA中一切皆是对象的理念。一个Timer里即使有多个TimerTask对象，也只会开启一个线程来应付。简单的时间延迟还是推荐用第一种方案，当然如果有间隔性的执行，只能用第二种。如果硬要第一种方案实现间隔性的执行，只能引入线程池来解决，那样就杀鸡用牛刀了。<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/985.html">Android页面滚动</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/987.html">Skipped 103 frames! The application may be doing too much work on its main thread.</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

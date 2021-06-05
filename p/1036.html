@@ -1,0 +1,392 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>git相关操作_comonly.cn</title>
+<meta name="keywords" content="git相关操作" />
+<meta name="description" content="廖雪峰基础教程：https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000
+
+
+	易百教程含命令介绍：https://www.yiibai.com/git/git_pull.html" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">git相关操作</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-10-17</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	电脑配置设置  软件使用 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>廖雪峰基础教程：https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000
+
+
+	易百教程含命令介绍：https://www.yiibai.com/git/git_pull.html</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	廖雪峰基础教程：https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000
+</p>
+<p>
+	易百教程含命令介绍：https://www.yiibai.com/git/git_pull.html
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1035.html">使用webpack打包项目 并 使用electron生成exe桌面程序——由vue-cli搭建的vue项目</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1037.html">win10 + TensorFlow1.8.0-GPU版 + CUDA9.0 + cudnn7.1 + python3.6安装心得</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="git仓库的初始化及上传信息">
+							<h2 style="display:inline;color:#5BC648;">git仓库的初始化及上传信息</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-10-17&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+<pre class="prettyprint lang-bsh">初始化git仓库
+$ git init
+查看本地仓库离上一次commit之间更新
+$ git status
+添加修改的信息到暂存区
+$ git add * or filename
+删除某一移除的文件it rm 命令完成此项工作，并连带从工作目录中删除指定的文件，这样以后就不会出现在未跟踪文件清单中了
+$ git rm test.txt
+提交修改
+$ git commit -m "tip一些备注信息"
+查看文件的具体修改
+$ git diff filename
+ Git 提供了一个跳过使用暂存区域的方式， 只要在提交的时候，给 git commit 加上 -a 选项，Git 
+就会自动把所有已经跟踪过的文件暂存起来一并提交，从而跳过 git add 步骤：
+$ git commit -a -m 'added new benchmarks'
+
+改名
+$ git mv file_from file_to</pre>
+</p>
+<p>
+<pre class="prettyprint lang-js">$ git push &lt;远程主机名&gt; &lt;本地分支名&gt;:&lt;远程分支名&gt;
+$ git push origin :master
+# 等同于
+$ git push origin --delete master
+
+$ git pull &lt;远程主机名&gt; &lt;远程分支名&gt;:&lt;本地分支名&gt;
+$ git pull origin next:master
+
+$ git fetch &lt;远程主机名&gt; &lt;分支名&gt;
+
+合并分支fixes和enhancements在当前分支的顶部，使它们合并：
+$ git merge fixes enhancements</pre>
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="远程仓库的上传">
+							<h2 style="display:inline;color:#5BC648;">远程仓库的上传</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-10-17&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><pre class="prettyprint lang-bsh">关联远程库
+$ git remote add origin  https://github.com/....(项目地址可以是ssh协议类型的地址)
+添加远程库，第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送给
+远程新的master分支，还会把本地的master分支和远程的master分支关联起来
+$ git push -u origin master
+
+将本地仓库内容同步到远程仓库
+$ git push origin master
+关联分支
+$ git branch --set-upstream-to=origin/远程分支的名字 本地分支的名字 </pre>
+<pre class="prettyprint lang-bsh">
+</pre>
+<pre class="prettyprint lang-bsh">
+</pre>
+<pre class="prettyprint lang-bsh">执行git log命令查看提交的详细信息。最后一次提交的代码的提交ID是：51de0f02eb48ed6b84a732512f230028d866b1ea</pre>
+<pre class="prettyprint lang-bsh">推送(push)操作之前，如想要检查文件代码变化，可使用git show命令指定提交ID来查看具体的变化。
+</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="远程仓库下载同步">
+							<h2 style="display:inline;color:#5BC648;">远程仓库下载同步</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-10-17&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	git pull命令的作用是：取回远程主机某个分支的更新，再与本地的指定分支合并
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<pre class="prettyprint lang-bsh">$ git pull &lt;远程主机名&gt; &lt;远程分支名&gt;:&lt;本地分支名&gt;
+Shell比如，要取回origin主机的next分支，与本地的master分支合并，需要写成下面这样 -
+$ git pull origin next:master
+Shell如果远程分支(next)要与当前分支合并，则冒号后面的部分可以省略。上面命令可以简写为：
+$ git pull origin next
+Shell上面命令表示，取回origin/next分支，再与当前分支合并。实质上，这等同于先做git fetch，再执行git merge。
+$ git fetch origin
+
+$ git merge origin/next</pre>
+<br />
+Shell在某些场合，Git会自动在本地分支与远程分支之间，建立一种追踪关系(tracking)。比如，在git clone的时候，所有本地分支默认与远程主机的同名分支，建立追踪关系，也就是说，本地的master分支自动”追踪”origin/master分支。
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	就如刚才所见，从远程仓库中获得数据，可以执行：$ git fetch [remote-name]<br />
+Shell这个命令会访问远程仓库，从中拉取所有还没有的数据。执行完成后，将会拥有那个远程仓库中所有分支的引用，可以随时合并或查看。如果使用 clone 命令克隆了一个仓库，命令会自动将其添加为远程仓库并默认以 “origin” 为简写。 所以，git fetch origin 会抓取克隆(或上一次抓取)后新推送的所有工作。 必须注意 git fetch 命令会将数据拉取到本地仓库 - 它并不会自动合并或修改当前的工作。 当准备好时必须手动将其合并入你的工作区。如果你有一个分支设置为跟踪一个远程分支，可以使用 git pull 命令来自动的抓取然后合并远程分支到当前分支。 这对你来说可能是一个更简单或更舒服的工作流程；默认情况下，git clone 命令会自动设置本地 master 分支跟踪克隆的远程仓库的 master 分支(或不管是什么名字的默认分支)。 运行 git pull 通常会从最初克隆的服务器上抓取数据并自动尝试合并到当前所在的分支。
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="创建并切换分支">
+							<h2 style="display:inline;color:#5BC648;">创建并切换分支</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-10-17&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><pre class="prettyprint lang-bsh">创建并切换分支dev。本地新建的分支如果不推送到远程，对其他人就是不可见的。
+$ git checkout -b dev
+=
+$ git branch dev
+$ git checkout dev
+
+查看当前分支（当前分支前面有一个*）
+$ git branch
+
+把dev分支的工作成果合并到master分支上：
+$ git merge dev
+
+删除分支
+$ git branch -d dev
+
+查看远程库信息
+$ git remote -v
+推送分支，就是把该分支上的所有本地提交推送到远程库。推送时，要指定本地分支，这样，Git就会
+把该分支推送到远程库对应的远程分支上。如果推送失败，先用git pull抓取远程的新提交。
+$ git push origin dev</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#git仓库的初始化及上传信息">git仓库的初始化及上传信息</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#远程仓库的上传">远程仓库的上传</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#远程仓库下载同步">远程仓库下载同步</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#创建并切换分支">创建并切换分支</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

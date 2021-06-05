@@ -1,0 +1,257 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>判断指针已经被释放 delete_comonly.cn</title>
+<meta name="keywords" content="判断指针已经被释放 delete" />
+<meta name="description" content="个野指针/悬垂指针指向的内存区域可能无效可能未知，但是这个指针仍然会被当作指针所指的对象解析。
+那么可以定义一个基类，并让需要判断的类继承他。基类中包含一个私有长整型数，在构造函数里赋给一个特定数值（这个特定值应当不容易与内存中的不确定的数据重复，一般来说重复的概率也有一千八亿亿分之一了），析构函数中将该值置零。
+那么如果一个继承自该类的指针直接判断该整数是否等于特定值即可。
+
+
+	
+class Ptr
+{
+public:
+ Ptr()&nbsp;
+ :value(0x12345678" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">判断指针已经被释放 delete</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-12-03</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>个野指针/悬垂指针指向的内存区域可能无效可能未知，但是这个指针仍然会被当作指针所指的对象解析。
+那么可以定义一个基类，并让需要判断的类继承他。基类中包含一个私有长整型数，在构造函数里赋给一个特定数值（这个特定值应当不容易与内存中的不确定的数据重复，一般来说重复的概率也有一千八亿亿分之一了），析构函数中将该值置零。
+那么如果一个继承自该类的指针直接判断该整数是否等于特定值即可。
+
+
+	
+class Ptr
+{
+public:
+ Ptr()&nbsp;
+ :value(0x12345678</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	个野指针/悬垂指针指向的内存区域可能无效可能未知，但是这个指针仍然会被当作指针所指的对象解析。<br />
+那么可以定义一个基类，并让需要判断的类继承他。基类中包含一个私有长整型数，在构造函数里赋给一个特定数值（这个特定值应当不容易与内存中的不确定的数据重复，一般来说重复的概率也有一千八亿亿分之一了），析构函数中将该值置零。<br />
+那么如果一个继承自该类的指针直接判断该整数是否等于特定值即可。
+</p>
+<p>
+	<br />
+class Ptr<br />
+{<br />
+public:<br />
+<span> </span>Ptr()&nbsp;<br />
+<span> </span>:value(0x123456789ABCDE0)<br />
+<span> </span>{<br />
+<span> </span>cout &lt;&lt; "constructor:" &lt;&lt; value &lt;&lt; endl;<br />
+<span> </span>}<br />
+<span> </span>~Ptr()<br />
+<span> </span>{<br />
+<span> </span>value = 0;<br />
+<span> </span>cout &lt;&lt; "destructor:" &lt;&lt; value &lt;&lt; endl;<br />
+<span> </span>}<br />
+<span> </span>bool isWildPointer() { return value != 0x123456789ABCDE0; }<br />
+private:<br />
+<span> </span>long long value;<br />
+};<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1581.html">WaitForSingleObject会结束子线程</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1583.html">对线程CloseHandle，会对WaitForSingleObject产生什么作用？</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

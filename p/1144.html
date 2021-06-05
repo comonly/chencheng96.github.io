@@ -1,0 +1,296 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>vue-element-admin 后台前端框架_comonly.cn</title>
+<meta name="keywords" content="vue-element-admin 后台前端框架" />
+<meta name="description" content="vue-element-admin" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">vue-element-admin 后台前端框架</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2020-03-18</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	工程详细_各项目设计文档
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>vue-element-admin</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> vue-element-admin</div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1143.html">putty远程linux连接工具包含psftp上传下载文件及文件夹</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1145.html">java web相关数据库框架</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="相关文档">
+							<h2 style="display:inline;color:#5BC648;">相关文档</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-03-18&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	git 源码：<a href="https://github.com/PanJiaChen/vue-element-admin" target="_blank">https://github.com/PanJiaChen/vue-element-admin</a>
+</p>
+<p>
+	在线预览：<a href="https://panjiachen.github.io/vue-element-admin/" target="_blank">https://panjiachen.github.io/vue-element-admin/</a>
+</p>
+<p>
+	中文文档：<a href="https://panjiachen.gitee.io/vue-element-admin-site/zh/guide/" target="_blank">https://panjiachen.gitee.io/vue-element-admin-site/zh/guide/</a>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	vue文档：<a href="https://cn.vuejs.org/v2/guide/" target="_blank">https://cn.vuejs.org/v2/guide/</a>
+</p>
+<p>
+	element文档：<a href="https://element.eleme.cn/#/zh-CN/component/installation" target="_blank">https://element.eleme.cn/#/zh-CN/component/installation</a>
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="开发环境与生产环境的路由配置">
+							<h2 style="display:inline;color:#5BC648;">开发环境与生产环境的路由配置</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-03-18&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	.env.production 文件存放的生产环境使用的路径宏&nbsp;&nbsp;VUE_APP_BASE_API = '/prod-api'
+</p>
+<p>
+	src/utils目录request.js文件中设置api请求的超时时间timeout: 50000
+</p>
+<p>
+	src/main.js中 取消生产环境模拟数据的使用
+</p>
+<p>
+	/* 去掉生产环境的模拟数据<br />
+if (process.env.NODE_ENV === 'production') {<br />
+&nbsp; const { mockXHR } = require('../mock')<br />
+&nbsp; mockXHR()<br />
+}<br />
+*/<br />
+vue.config.js 配置开发环境中的代理
+</p>
+<p>
+	&nbsp; &nbsp; proxy: {<br />
+&nbsp; &nbsp; &nbsp; // change xxx-api/login =&gt; mock/login<br />
+&nbsp; &nbsp; &nbsp; // detail: https://cli.vuejs.org/config/#devserver-proxy<br />
+&nbsp; &nbsp; &nbsp; '/dev-api': {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; target: 'http://localhost:8088/manageSystem',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; //changeOrigin: true<br />
+&nbsp; &nbsp; &nbsp; &nbsp; pathRewrite: {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; '^/dev-api': '/'<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //pathRewrite: {'^/api': '/'} 重写之后url为 http://192.168.1.16:8085/xxxx<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //pathRewrite: {'^/api': '/api'} 重写之后url为 http://192.168.1.16:8085/api/xxxx<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; }
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#相关文档">相关文档</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#开发环境与生产环境的路由配置">开发环境与生产环境的路由配置</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

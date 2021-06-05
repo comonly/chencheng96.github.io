@@ -1,0 +1,259 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>windows下C++开发新版本vs使用旧版本vs编译的静态库动态库(项目vs版本升级)_comonly.cn</title>
+<meta name="keywords" content="windows下C++开发新版本vs使用旧版本vs编译的静态库动态库(项目vs版本升级)" />
+<meta name="description" content="关于vs潜在的升级问题概述 (Visual C++)查看官网的介绍：潜在的升级问题概述 (Visual C++)。主要问题： 
+
+
+	1.&nbsp;如果使用 /GL（全程序优化）进行编译，则生成的对象文件只能使用生成它时所用的同一工具集进行链接。即若在编译静态库时开启了全程序优化，那么编译出的静态库不可移植。 
+
+
+	2. 在 Visual Studio 2013 及更低版本中，不能保证使用不同编译器工具集和运行时库版本生成的对象文件 (OBJ)、静态库 (LIB)、动态库 (DLL) 和可" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">windows下C++开发新版本vs使用旧版本vs编译的静态库动态库(项目vs版本升级)</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-08-21</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>关于vs潜在的升级问题概述 (Visual C++)查看官网的介绍：潜在的升级问题概述 (Visual C++)。主要问题： 
+
+
+	1.&nbsp;如果使用 /GL（全程序优化）进行编译，则生成的对象文件只能使用生成它时所用的同一工具集进行链接。即若在编译静态库时开启了全程序优化，那么编译出的静态库不可移植。 
+
+
+	2. 在 Visual Studio 2013 及更低版本中，不能保证使用不同编译器工具集和运行时库版本生成的对象文件 (OBJ)、静态库 (LIB)、动态库 (DLL) 和可</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	关于vs潜在的升级问题概述 (Visual C++)查看官网的介绍：<span id="__kindeditor_bookmark_start_24__"><a href="https://docs.microsoft.com/zh-cn/cpp/porting/overview-of-potential-upgrade-issues-visual-cpp?view=vs-2019" target="_blank"><span>潜在的升级问题概述 (Visual C++)</span></a>。主要问题：</span> 
+</p>
+<p>
+	<span>1.&nbsp;如果使用 /GL（全程序优化）进行编译，则生成的对象文件只能使用生成它时所用的同一工具集进行链接。即若在编译静态库时开启了全程序优化，那么编译出的静态库不可移植。</span> 
+</p>
+<p>
+	<span>2. <span>在 Visual Studio 2013 及更低版本中，不能保证使用不同编译器工具集和运行时库版本生成的对象文件 (OBJ)、静态库 (LIB)、动态库 (DLL) 和可执行文件 (EXE) 之间的二进制兼容性。</span><span>在 Visual Studio 2015 及更高版本中</span>，使用两个版本之一的编译器编译的运行时库和应用程序是二进制兼容的。 这意味着，如果拥有使用 Visual Studio 2015 生成的第三方库，则无需对其进行重新编译即可通过使用 Visual Studio 2017 或 Visual Studio 2019 生成的应用程序使用该库。关于二进制兼容可以查看：<a href="https://docs.microsoft.com/zh-cn/cpp/porting/binary-compat-2015-2017?view=vs-2019" target="_blank">Visual Studio 2015 和 Visual Studio 2019 之间的 C++ 二进制兼容性</a>。</span> 
+</p>
+<p>
+	3. 对于vs2013及更早版本编译的静态库，在vs及之后版本中提供了库 legacy_stdio_definitions.lib，该库提供了符号兼容性。但是，对于某些从通用 CRT 删除的符号，则无法提供兼容性符号。 这些符号包括一些函数（例如，__iob_func）和数据导出（例如，__imp___iob、__imp___pctype、__imp___mb_cur_max）。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	总的来说，vs中将项目从vs2015之前版本升级到vs2015及之后版本需要做的是：
+</p>
+<p>
+	1. 项目使用的静态库库文件若有源码的情况下，在新版本vs中编译生成新的库文件。
+</p>
+<p>
+	2. 若无源码(通用第三方库大部分没有/GL优化，若有全程序优化，则该库无法继续使用)，根据编译过程中提示解决。
+</p>
+<ul>
+	<li>
+		vs2015链接vs2012的库时，提示无法解析的外部符号 __snprintf，无法解析的外部符号&nbsp;&nbsp;__imp__vsnprintf，可以通过导入legacy_stdio_definitions.lib解决。附加链接库legacy_stdio_definitions.lib可以解决此问题&nbsp; &nbsp;#pragma comment(lib, "legacy_stdio_definitions.lib")
+	</li>
+	<li>
+		无法解析的外部符号&nbsp; __iob_func, VS2015中__iob_func改成了__acrt_iob_func，可以通过在自己的代码中增加了一个名为__iob_func转换函数解决以兼容问题。<a href="https://blog.csdn.net/10km/article/details/50528908" target="_blank">无法解析的外部符号 __iob_func</a> 
+	</li>
+</ul>
+<p>
+	3. 由于低版本生成的动态库 DLL&nbsp;依赖于低版本的 C++ 运行时，高版本生成的可执行程序依赖高版本的 C++ 运行时，所以在高版本vs中调用低版本生成的动态库，可能发生意想不到的后果（包括运行中断、堆被破坏等错误）。<a href="https://goclis.github.io/posts/2017/05/26/%E9%9D%99%E6%80%81%E5%BA%93%E4%B8%8E%E5%8A%A8%E6%80%81%E5%BA%93%E7%9A%84%E8%B7%A8%E7%BC%96%E8%AF%91%E5%99%A8%E5%85%BC%E5%AE%B9.html" target="_blank">静态库与动态库的跨编译器兼容</a>中提出把所有的运行时同时放在程序运行目录下(msvc2013.dll、msvc2015.dll)来解决动态库C++运行时不一致的问题，没有尝试该解决方案（也不推荐！）。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1197.html">mysql通过sql对数据库信息(表结构、存储信息)查询</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1199.html">【待补充】C++类、容器、对象初始化时机 C++中map等容器在使用前需要初始化，不止赋值为null </a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

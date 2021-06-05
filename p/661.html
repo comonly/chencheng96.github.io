@@ -1,0 +1,648 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>jquery uploadify插件多文件上传_comonly.cn</title>
+<meta name="keywords" content="jquery uploadify插件多文件上传" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">jquery uploadify插件多文件上传</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">给太阳洒水</li>
+          <li class="lmname"><a href="http://lisanlai.iteye.com/blog/680785" target="_blank">http://lisanlai.iteye.com/blog/680785</a></li>
+          <li class="timer">2017-03-31</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">jquery,uploadify</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	<br />
+</p>
+<p>
+	<img alt="" src="http://dl.iteye.com/upload/attachment/258012/76709525-1db5-31b7-9edd-9bfa202059cc.png" /><br />
+&nbsp;<br />
+<img alt="" src="http://dl.iteye.com/upload/attachment/258021/b96e6ffa-ea56-3ccf-a780-1011198eea29.png" /><br />
+&nbsp;<br />
+<img alt="" src="http://dl.iteye.com/upload/attachment/258016/8576345a-3234-33f7-b61e-8534741a9e1a.png" /><br />
+&nbsp;<br />
+<img alt="" src="http://dl.iteye.com/upload/attachment/258018/513a8b50-8bdf-3b3e-ac1c-605036f744f4.png" /><br />
+&nbsp;效果图：
+</p>
+<p>
+	1、jquery uploadify 下载：<a href="http://www.uploadify.com/">http://www.uploadify.com/</a> 
+</p>
+<p>
+	2、安装：解压后拷贝的工程目录下面，如：WebRoot/uploaddify
+</p>
+<p>
+	3、配置项说明：
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; uploader： uploadify.swf 文件的相对路径，该swf文件是一个带有文字BROWSE的按钮，点击后淡出打开文件对话框，默认值：uploadify.swf。
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; onInit :做一些初始化的工作。
+</p>
+<p>
+	onSelect：选择文件时触发，该函数有三个参数
+</p>
+<p>
+	event:事件对象。
+</p>
+<p>
+	queueID：文件的唯一标识，由6为随机字符组成。
+</p>
+<p>
+	fileObj：选择的文件对 象，有name、size、creationDate、modificationDate、type 5个属性
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;onSelectOnce：在单文件或多文件上传时，选择文件时触发。该函数有两个参数event，data，data对象有以下几个属性：
+</p>
+<p>
+	fileCount：选择文件的总数。
+</p>
+<p>
+	filesSelected：同时选择文件的个数，如果一次选择了3个文件该属性值为3。
+</p>
+<p>
+	filesReplaced：如果文件队列中已经存在A和B两个文件，再次选择文件时又选择了A和B，该属性值为2。
+</p>
+<p>
+	allBytesTotal：所有选择的文件的总大小。
+</p>
+<p>
+	onCancel :当点击文件队列中文件的关闭按钮或点击取消上传时触发。该函数有event、queueId、fileObj、data四个参数，前三个参数同
+</p>
+<p>
+	onSelect中的三个参数，data对象有两个属性fileCount和allBytesTotal。
+</p>
+<p>
+	fileCount：取消 一个文件后，文件队列中剩余文件的个数。
+</p>
+<p>
+	allBytesTotal：取消一个文件后，文件队列中剩余文件的大小。
+</p>
+<p>
+	onClearQueue：当调用函数fileUploadClearQueue时触发。有event和data两个参数，同onCancel 中的两个对应参数。
+</p>
+<p>
+	onQueueFull ：当设置了queueSizeLimit并且选择的文件个数超出了queueSizeLimit的值时触发。该函数有两个参数event和 queueSizeLimit。
+</p>
+<p>
+	onError ：当上传过程中发生错误时触发。该函数有event、queueId、fileObj、errorObj四个参数，其中前三个参数同上，errorObj 对象有type和info两个属性。
+</p>
+<p>
+	type：错误的类型，有三种‘HTTP’, ‘IO’, or ‘Security’
+</p>
+<p>
+	info：错误的描述
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp; onOpen ：点击上传时触发，如果auto设置为true则是选择文件时触发，如果有多个文件上传则遍历整个文件队列。该函数有event、queueId、 fileObj三个参数，参数的解释同上。
+</p>
+<p>
+	onProgress：点击上传时触发，如果auto设置为true则是选择文件时触发，如 果有多个文件上传则遍历整个文件队列，在onOpen之后触发。该函数有 event、queueId、fileObj、data四个参数，前三个参数的解释同上。data对象有四个属性percentage、 bytesLoaded、allBytesLoaded、speed：
+</p>
+<p>
+	percentage：当前完成的百分比
+</p>
+<p>
+	bytesLoaded：当前上传的大小
+</p>
+<p>
+	allBytesLoaded：文件队列中已经上传完的大小
+</p>
+<p>
+	speed：上传速率 kb/s
+</p>
+<p>
+	onComplete：文件上传完成后触发。该函数有四个参数event、queueId、 fileObj、response、data五个参数，前三个参数同上。response为后台处理程序返回的值，在上面的例子中为1或0，data有两 个属性fileCount和speed
+</p>
+<p>
+	fileCount：剩余没有上传完成的文件的个数。
+</p>
+<p>
+	speed：文件上传 的平均速率 kb/s
+</p>
+<p>
+	onAllComplete：文件队列中所有的文件上传完成后触发。该函数有event和data两个参 数，data有四个属性，分别为：
+</p>
+<p>
+	filesUploaded :上传的所有文件个数。
+</p>
+<p>
+	errors ：出现错误的个数。
+</p>
+<p>
+	allBytesLoaded ：所有上传文件的总大小。
+</p>
+<p>
+	speed ：平均上传速率 kb/s
+</p>
+<p>
+	相关函数介绍
+</p>
+<p>
+	在上面的例子中已经用了uploadifyUpload和 uploadifyClearQueue两个函数，除此之外还有几个函数：
+</p>
+<p>
+	uploadifySettings：可以动态修改上面介绍 的那些key值，如下面代码
+</p>
+<p>
+	$('#uploadify').uploadifySettings('folder','JS');
+</p>
+<p>
+	如果上传按钮的事件写成下面这样，文件将会上传到uploadifySettings定义的目录中
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;a　 href="javascript:$('#uploadify').uploadifySettings('folder','JS');<br />
+&nbsp;&nbsp;&nbsp; $('#uploadify').uploadifyUpload()"&gt; 上传&lt;/a&gt;
+</p>
+<p>
+	uploadifyCancel：该函数接受一个queueID作为参数，可以取消文件队列中 指定queueID的文件。
+</p>
+<p>
+	$('#uploadify').uploadifyCancel(id);
+</p>
+<p>
+	4、使用：
+</p>
+<p>
+	前台
+</p>
+<p>
+	&lt;%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%&gt;<br />
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" &gt;<br />
+&lt;html&gt;<br />
+&lt;head&gt;<br />
+&lt;title&gt;uploadify-实例&lt;/title&gt;<br />
+&lt;meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema"&gt;<br />
+&lt;link href="uploadify/css/default.css" rel="stylesheet" type="text/css" /&gt;<br />
+&lt;link href="uploadify/css/uploadify.css" rel="stylesheet" type="text/css" /&gt;<br />
+&lt;script type="text/javascript" src="uploadify/scripts/jquery-1.3.2.min.js"&gt;&lt;/script&gt;<br />
+&lt;script type="text/javascript" src="uploadify/scripts/swfobject.js"&gt;&lt;/script&gt;<br />
+&lt;script type="text/javascript" src="uploadify/scripts/jquery.uploadify.v2.1.0.min.js"&gt;&lt;/script&gt;<br />
+&lt;script type="text/javascript"&gt;<br />
+$(document).ready(function() {<br />
+$("#uploadify").uploadify({<br />
+'uploader' &nbsp; &nbsp; &nbsp; : 'uploadify/scripts/uploadify.swf',<br />
+'script' &nbsp; &nbsp; &nbsp; &nbsp; : 'UploadPhotoServlet',<br />
+'cancelImg' &nbsp; &nbsp; &nbsp;: 'uploadify/cancel.png',<br />
+'buttonImg'		 : 'uploadify/buttonImg.png',<br />
+'folder' &nbsp; &nbsp; &nbsp; &nbsp; : '/jxdBlog/photos',<br />
+'queueID' &nbsp; &nbsp; &nbsp; &nbsp;: 'fileQueue',<br />
+'auto' &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : false,<br />
+'multi' &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: true,<br />
+'wmode'			 : 'transparent',<br />
+'simUploadLimit' : 999,<br />
+'fileExt'		 : '*.png;*.gif;*.jpg;*.bmp;*.jpeg',<br />
+'fileDesc'		 : '图片文件(*.png;*.gif;*.jpg;*.bmp;*.jpeg)',<br />
+'onAllComplete' &nbsp;:function(event,data)&nbsp;<br />
+{<br />
+$('#result').html(data.filesUploaded +'个图片上传成功');<br />
+}<br />
+});<br />
+});<br />
+&lt;/script&gt;<br />
+&lt;style type="text/css"&gt;<br />
+.inputcss<br />
+{<br />
+color:#333333;<br />
+font-family: "Tahoma";&nbsp;<br />
+font-size: 12px;&nbsp;<br />
+border:solid 1px #CCCCCC;<br />
+}<br />
+.buttoncss<br />
+{<br />
+color:#333333;<br />
+font-family: "Tahoma";&nbsp;<br />
+font-size: 12px;&nbsp;<br />
+background-color:#FFFFFF;<br />
+border:solid 1px #CCCCCC;<br />
+}<br />
+&lt;/style&gt;<br />
+&lt;/head&gt;<br />
+&lt;body&gt;<br />
+&lt;table style="width: 90%;"&gt;<br />
+&lt;tr&gt;<br />
+&lt;td style="width: 100px;"&gt;<br />
+&lt;input type="file" name="uploadify" id="uploadify" /&gt;<br />
+&lt;/td&gt;<br />
+&lt;td align="left"&gt;<br />
+&lt;a href="javascript:$('#uploadify').uploadifyUpload()"&gt;开始上传&lt;/a&gt;|<br />
+&lt;a href="javascript:jQuery('#uploadify').uploadifyClearQueue()"&gt;取消上传&lt;/a&gt;<br />
+&lt;span id="result" style="font-size: 13px;color: red"&gt;&lt;/span&gt;<br />
+&lt;/td&gt;<br />
+&lt;/tr&gt;<br />
+&lt;/table&gt;<br />
+&lt;div id="fileQueue" style="width: 400px;height: 300px; border: 2px solid green;"&gt;&lt;/div&gt;<br />
+&lt;/body&gt;<br />
+&lt;/html&gt;
+</p>
+<p>
+	<br />
+</p>
+<p style="font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	后台：
+</p>
+<p style="font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	这里需要用到commons-fileupload组件
+</p>
+<p style="font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	所需要的包：
+</p>
+<p style="font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	1、commons-fileupload-1.2.1.jar：
+</p>
+<p style="font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	下载地址<br />
+<a href="http://commons.apache.org/downloads/download_fileupload.cgi"><span style="color:#108AC6;">http://commons.apache.org/downloads/download_fileupload.cgi</span></a> 
+</p>
+<p style="font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	2、commons-io-1.4.jar：
+</p>
+<p style="font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	下载地址<br />
+<span style="color:#108AC6;"><a href="http://commons.apache.org/downloads/download_io.cgi">http://commons.apache.org/downloads/download_io.cgi</a></span> 
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	/**<br />
+&nbsp;* 文件上传实例<br />
+&nbsp;* @author samLee<br />
+&nbsp;*<br />
+&nbsp;*/<br />
+public class UploadPhotoServlet extends HttpServlet {<br />
+private static final long serialVersionUID = 1L;<br />
+&nbsp; &nbsp; &nbsp; &nbsp;<br />
+&nbsp; &nbsp; public UploadPhotoServlet() {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; super();<br />
+&nbsp; &nbsp; }<br />
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {<br />
+this.doPost(request, response);<br />
+}<br />
+<br />
+@SuppressWarnings("unchecked")<br />
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {<br />
+<br />
+//文件存放的目录<br />
+File tempDirPath =new File(request.getSession().getServletContext().getRealPath("/")+"\\upload\\");<br />
+if(!tempDirPath.exists()){<br />
+tempDirPath.mkdirs();<br />
+}<br />
+<br />
+//创建磁盘文件工厂<br />
+DiskFileItemFactory fac = new DiskFileItemFactory(); &nbsp; &nbsp;<br />
+//创建servlet文件上传组件<br />
+ServletFileUpload upload = new ServletFileUpload(fac); &nbsp; &nbsp;<br />
+//文件列表<br />
+List fileList = null; &nbsp; &nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; //解析request从而得到前台传过来的文件<br />
+try { &nbsp; &nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; fileList = upload.parseRequest(request); &nbsp; &nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; } catch (FileUploadException ex) { &nbsp; &nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ex.printStackTrace(); &nbsp; &nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return; &nbsp; &nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; //保存后的文件名<br />
+&nbsp; &nbsp; &nbsp; &nbsp; String imageName = null;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; //便利从前台得到的文件列表<br />
+&nbsp; &nbsp; &nbsp; &nbsp; Iterator&lt;FileItem&gt; it = fileList.iterator(); &nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; while(it.hasNext()){ &nbsp; &nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; FileItem item = &nbsp;it.next(); &nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //如果不是普通表单域，当做文件域来处理<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if(!item.isFormField()){<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; imageName = new Date().getTime()+Math.random()*10000+item.getName();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 	BufferedInputStream in = new BufferedInputStream(item.getInputStream()); &nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; BufferedOutputStream out = new BufferedOutputStream( &nbsp; &nbsp; &nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; new FileOutputStream(new File(tempDirPath+"\\"+imageName)));<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Streams.copy(in, out, true);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; //<br />
+&nbsp; &nbsp; &nbsp; &nbsp; PrintWriter out = null;<br />
+try {<br />
+out = encodehead(request, response);<br />
+} catch (IOException e) {<br />
+e.printStackTrace();<br />
+}<br />
+//这个地方不能少，否则前台得不到上传的结果<br />
+out.write("1");<br />
+out.close();&nbsp;<br />
+}<br />
+<br />
+/**<br />
+* Ajax辅助方法 获取 PrintWriter<br />
+* @return<br />
+* @throws IOException&nbsp;<br />
+* @throws IOException&nbsp;<br />
+* request.setCharacterEncoding("utf-8");<br />
+response.setContentType("text/html; charset=utf-8");<br />
+*/<br />
+private PrintWriter encodehead(HttpServletRequest request,HttpServletResponse response) throws IOException{<br />
+request.setCharacterEncoding("utf-8");<br />
+response.setContentType("text/html; charset=utf-8");<br />
+return response.getWriter();<br />
+}<br />
+}
+</p>
+<p>
+	<br />
+</p>
+<p>
+	script：　　 后台处理程序的相对路径 。默认值：uploadify.php
+</p>
+<p>
+	checkScript：用来判断上传选择的文 件在服务器是否存在的后台处理程序的相对路径
+</p>
+<p>
+	fileDataName：设置一个名字，在服务器处理程序中根据该名字来取上传文件的 数据。默认为Filedata
+</p>
+<p>
+	method： 提交方式Post 或Get 默认为Post
+</p>
+<p>
+	scriptAccess ：flash脚本文件的访问模式，如果在本地测试设置为always，默认值：sameDomain
+</p>
+<p>
+	folder ：上传文件存放的目录 。
+</p>
+<p>
+	queueID ：文件队列的ID，该ID与存放文件队列的div的ID一致。
+</p>
+<p>
+	queueSizeLimit ：当允许多文件生成时，设置选择文件的个数，默认值：999 。
+</p>
+<p>
+	multi ：设置为true时可以上传多个文件。
+</p>
+<p>
+	auto ：设置为true当选择文件后就直接上传了，为false需要点击上传按钮才上传 。
+</p>
+<p>
+	fileDesc ：这个属性值必须设置fileExt属性后才有效，用来设置选择文件对话框中的提示文本，如设置fileDesc为“请选择rar doc pdf文件”
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fileExt ：设置可以选择的文件的类型，格式如：'*.doc;*.pdf;*.rar' 。
+</p>
+<p>
+	sizeLimit ：上传文件的大小限制 。
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp; simUploadLimit ：允许同时上传的个数 默认值：1 。
+</p>
+<p>
+	buttonText ：浏览按钮的文本，默认值：BROWSE 。
+</p>
+<p>
+	buttonImg ：浏览按钮的图片的路径 。
+</p>
+<p>
+	hideButton ：设置为true则隐藏浏览按钮的图片 。
+</p>
+<p>
+	rollover ：值为true和false，设置为true时当鼠标移到浏览按钮上时有反转效果。
+</p>
+<p>
+	width ：设置浏览按钮的宽度 ，默认值：110。
+</p>
+<p>
+	height ：设置浏览按钮的高度 ，默认值：30。
+</p>
+<p>
+	wmode ：设置该项为transparent 可以使浏览按钮的flash背景文件透明，并且flash文件会被置为页面的最高层。 默认值：opaque 。
+</p>
+<p>
+	cancelImg：选择文件到文件队列中后的每一个文件上的关闭按钮图标，
+</p>
+<p>
+	<br />
+</p>
+<div>
+	<ul>
+		<li>
+			<a href="http://dl.iteye.com/topics/download/630fc432-7265-38a8-aa6f-521843c3984a">uploadify_example.zip</a>&nbsp;(2.6 KB)
+		</li>
+		<li>
+			下载次数: 3608
+		</li>
+	</ul>
+	<ul>
+		<li>
+			<a href="http://dl.iteye.com/topics/download/b406a43b-544c-32d6-8b62-dbd95a589141">配置项说明.zip</a>&nbsp;(2.3 KB)
+		</li>
+		<li>
+			下载次数: 2036
+		</li>
+	</ul>
+	<ul>
+		<li>
+			<a href="http://lisanlai.iteye.com/blog/680785#">查看图片附件</a> 
+		</li>
+	</ul>
+</div>
+<div>
+</div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/660.html">利用URL重写实现参数目录化—实例</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/662.html">怎么样设置网页关键字以及网页标题</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="http://lisanlai.iteye.com/blog/680785" target="_blank">http://lisanlai.iteye.com/blog/680785</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

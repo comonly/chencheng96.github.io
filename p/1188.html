@@ -1,0 +1,756 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>直线检测-Radon变换、Hough变换_comonly.cn</title>
+<meta name="keywords" content="直线检测-Radon变换、Hough变换" />
+<meta name="description" content="Radon
+
+
+	&nbsp; &nbsp; &nbsp;radon函数对应格式包括：[R,xp] = radon(I,theta);
+
+
+	&nbsp; &nbsp; 其中，R为线积分值，xp为径向坐标，theta为投影角度；
+
+
+	&nbsp; &nbsp; &nbsp;图像投影，就是说将图像在某一方向上做线性积分（累加求和）。如果将图像看成二维函数f(x, y)，则其投影就是在特定方向上的线性积分，比如f(x, y)在垂直方向上的线性积分就是其在x轴上的投影；f(x, y)在水平方" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">直线检测-Radon变换、Hough变换</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">菜鸟知识搬运工</li>
+          <li class="lmname"><a href="https://blog.csdn.net/qq_30815237/article/details/106405302" target="_blank">https://blog.csdn.net/qq_30815237/article/details/106405302</a></li>
+          <li class="timer">2020-11-20</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	机器学习算法分析
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>Radon
+
+
+	&nbsp; &nbsp; &nbsp;radon函数对应格式包括：[R,xp] = radon(I,theta);
+
+
+	&nbsp; &nbsp; 其中，R为线积分值，xp为径向坐标，theta为投影角度；
+
+
+	&nbsp; &nbsp; &nbsp;图像投影，就是说将图像在某一方向上做线性积分（累加求和）。如果将图像看成二维函数f(x, y)，则其投影就是在特定方向上的线性积分，比如f(x, y)在垂直方向上的线性积分就是其在x轴上的投影；f(x, y)在水平方</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h1>
+	Radon
+</h1>
+<p>
+	&nbsp; &nbsp; &nbsp;radon函数对应格式包括：[R,xp] = radon(I,theta);
+</p>
+<p>
+	&nbsp; &nbsp; 其中，R为线积分值，xp为径向坐标，theta为投影角度；
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp;图像投影，就是说将图像在某一方向上做线性积分（累加求和）。如果将图像看成二维函数f(x, y)，则其投影就是在特定方向上的线性积分，比如f(x, y)在垂直方向上的线性积分就是其在x轴上的投影；f(x, y)在水平方向上的线积分就是其在y轴上的投影。通过这些投影，可以获取图像在指定方向上的突出特性，这在图像模式识别等处理中可能会用到。
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp;Radon（拉东）算法通过定方向投影叠加，可以找到最大投影值时角度，从而确定图像倾斜角度：
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;<img alt="" height="169" src="https://img-blog.csdnimg.cn/20200528152941296.png" width="661" style="height:auto;" /> 
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp; Radon变换（拉东变换），就是将数字图像矩阵在某一指定角度射线方向上做投影变换。这就是说可以沿着任意角度theta来做Radon变换。&nbsp; radon变换就是图像在不同方向上的投影。下图f(x,y)可以代表图像，R(x')就是图像向右下方的投影。数学上是按投影方向进行线积分，在图像领域就是按照投影方向累加像素就行了。
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<img alt="" height="258" src="https://img-blog.csdnimg.cn/20200528150204981.png" width="266" style="height:auto;" /> 
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp; &nbsp;Radon变换的本质是将原来的XY平面内的点映射到AB平面上，那么原来在XY平面上的一条直线的所有的点在AB平面上都位于同一点。记录AB平面上的点的积累厚度，便可知XY平面上的线的存在性。这便是大家所公认的Radon变换的实质所在。&nbsp;
+</p>
+<p>
+	<img alt="" height="242" src="https://img-blog.csdnimg.cn/2020052815095690.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMwODE1MjM3,size_16,color_FFFFFF,t_70" width="737" style="height:auto;" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</p>
+<h3>
+	<a></a><a></a>数学理论
+</h3>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果我们将图像中心设为原点，用P（直线到原点的距离）和<img alt="" height="26" src="https://img-blog.csdnimg.cn/20200528150730395.png" width="18" style="height:auto;" />（某一特定方向）代替a、b，即，理解为图像在空间的投影，用参数表示上述直线，则有：
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<img alt="" height="30" src="https://img-blog.csdnimg.cn/20200528150859272.png" width="174" style="height:auto;" /> 
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img alt="" height="261" src="https://img-blog.csdnimg.cn/20200528150814978.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMwODE1MjM3,size_16,color_FFFFFF,t_70" width="237" style="height:auto;" /> 
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp; &nbsp;假定有一个函数f(x,y)代表图像的像素，如上图所示，那么该函数过直线L区域的积分即为：<img alt="" height="53" src="https://img-blog.csdnimg.cn/20200528151154624.png" width="146" style="height:auto;" /> 
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp; &nbsp; 其中ds是该直线的微分。上述积分可以写为：<img alt="" height="49" src="https://img-blog.csdnimg.cn/20200528151225703.png" width="406" style="height:auto;" /> 
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;因而，给定一组P和<img alt="" height="26" src="https://img-blog.csdnimg.cn/20200528150730395.png" width="18" style="height:auto;" />，就可以得出一个沿L(P,<img alt="" height="26" src="https://img-blog.csdnimg.cn/20200528150730395.png" width="18" style="height:auto;" />)的积分值，即在指定角度上的像素累加和。因此，Radon变换就是函数f (x,y)的线积分，如图所示。假如有很多平行于L的线，他们有相同的\theta，径向坐标P却不同，这就很好的印证了matlab自带的radon变换命令中每个\theta角度的Radon变换结果是有两个输出项R（一个\theta角度下的Radon变换值，即线积分值）与xp（径向坐标），两者一一对应。我们对每一条这样的平行线都做f(x,y)的线积分，会产生很多投影线，也就是说对一幅图像在某一特定角度下的Radon变换会产生N个线积分值，而每一个线积分值会对应一个径向坐标xp，各个角度的Radon变换值汇总在一起就构成一幅Radon变化图。
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<img alt="" height="375" src="https://img-blog.csdnimg.cn/20200528151508445.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMwODE1MjM3,size_16,color_FFFFFF,t_70" width="482" style="height:auto;" /> 
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	使用Radon变换检测直线，检测步骤如下：<br />
+（1）使用边缘检测函数edge函数计算二值图像；<br />
+（2）计算二值图像的Radon变换；<br />
+（3）寻找Radon变换的局部极大值，这些极大值的位置即为原始图像中直线的位置。
+</p>
+<ol>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				BW= edge(I1);
+			</div>
+		</div>
+	</li>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				imshow(BW)
+			</div>
+		</div>
+	</li>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				theta=0:179;
+			</div>
+		</div>
+	</li>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				[R,xp] = radon(BW,theta);
+			</div>
+		</div>
+	</li>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				figure,imagesc(theta,xp,R)
+			</div>
+		</div>
+	</li>
+</ol>
+<p>
+	&nbsp; &nbsp; &nbsp; Radon变换用于直线检测，比Hough变换优越的地方在于：Radon变换可以针对非二值图像，Radon变换检测直线：灰度值高的线段会在P 空间中形成亮点，而低灰度值的直线会在P 空间中形成暗点，而Hough变换需要针对二值图像进行，仅仅积攒非0点在某一个上的个数。
+</p>
+<p>
+	from：<a href="https://blog.csdn.net/yu132563/article/details/99228303">https://blog.csdn.net/yu132563/article/details/99228303</a> 
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<a href="https://blog.csdn.net/kongxp_1/article/details/81448210">https://blog.csdn.net/kongxp_1/article/details/81448210</a> 
+</p>
+<hr />
+<h1>
+	<a></a><a></a>Hough变换
+</h1>
+<p>
+	直线的表示方式
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;对于平面中的一条直线，在笛卡尔坐标系中，常见的有点斜式，两点式两种表示方法。然而在hough变换中，考虑的是另外一种表示方式：使用（r,theta）来表示一条直线。其中r为该直线到原点的距离，theta为该直线的垂线与x轴的夹角。如下图所示。也就是霍夫变换中表示一条直线的参数变成了（r,theta）。如果对位于同一直线上的n个点进行变换，原图像空间的n个点在参数空间对应得到有n条正弦曲线，并且这些曲线相交于一点。&nbsp;&nbsp;
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img alt="" height="271" src="https://img-blog.csdnimg.cn/20200528153600407.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMwODE1MjM3,size_16,color_FFFFFF,t_70" width="698" style="height:auto;" /><br />
+2.如何判断多个点是否在同一直线上
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当我们的对象变成点时，我们知道一个点可以发射出无数条直线，根据霍夫变换的直线表达形式，假设这个点为 i, 则通过这个点的直线我们用（ri,thetai）表示。再假设一个点为 j，则通过点 j 的一系列直线我们用（rj,thetaj）表示。我们知道两点决定一条直线，所以这两个点的直线必定有r_i=r_j,theta_i= theta_j的时候。那如果是三个点呢，假设第三个点是k，则通过k点的一系列直线为（r_k,\theta_k）,如果三点在一条直线上，那必定有某个r_i=r_j=r_k = r,theta_i = theta_j= theta_k = theta。<br />
+在霍夫变换检测直线时我们需要找到这样一样直线.
+</p>
+<p>
+	3.如何检测出直线
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;假设有N个点，我们要检测其中的直线，也就是我们要找到具体的r和theata。对于上面所说的每个点可以通过无数条直线，这里我们设为n条（通常 n = 180），则我们一起可以找到N*N个（r, theata），对这N*N个（r,theata）,我们可以利用统计学，统计到在theta=某个值theta_i时，多个点的r近似相等于r_i。也就是说这多个点都在直线（r_i,theta_i）上。
+</p>
+<p>
+	4.举例说明
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果空间中有3个点，如何判断这三个点在不在一个直线上，如果在，这条直线的位置为？这个例子中，对于每个点均求过该点的6条直线的（r,theta）坐标，共求了3*6个（r,theta）坐标。可以发现在theta=60时，三个点的r都近似为80.7，由此可判定这三个点都在直线（80.7，60）上。通过 r-o-theta 坐标系可更直观表示这种关系，如下图：图中三个点的（r,theta）曲线汇集在一起，该交点就是同时经过这三个点的直线。
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<img alt="" height="272" src="https://img-blog.csdnimg.cn/20200528153803897.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMwODE1MjM3,size_16,color_FFFFFF,t_70" width="398" style="height:auto;" /> 
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在实际的直线检测情况中，如果超过一定数目的点拥有相同的（r,theta）坐标，那么就可以判定此处有一条直线。在r-O-theta 坐标系图中，明显的交汇点就标示一条检测出的直线。如下图，可以判定出平面上的点共构成了两条直线，即检测出两条直线。
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img alt="" height="335" src="https://img-blog.csdnimg.cn/20200528153822690.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMwODE1MjM3,size_16,color_FFFFFF,t_70" width="414" style="height:auto;" /> 
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp;亮点对应笛卡尔坐标系下（图像）的一条直线，越亮，代表在这条直线上的非零像素数越多。（原图像是二值图像，亮度代表像素个数）
+</p>
+<p>
+	霍夫变换直线检测的步骤：
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp;如果一幅图像中的像素构成一条直线，那么这些像素坐标值（x, y）在霍夫空间对应的曲线一定相交于一个点，所以我们只需要将图像中的所有像素点（坐标值）变换成霍夫空间的曲线，并在霍夫空间检测曲线交点就可以确定直线了。
+</p>
+<p>
+	1、对边缘二值化图像进行霍夫空间变换；
+</p>
+<p>
+	2、在4邻域内找到霍夫空间变换的极大值；
+</p>
+<p>
+	3、对这些极大值安装由大到小顺序进行排序，极大值越大，越有可能是直线；
+</p>
+<p>
+	4、输出直线。
+</p>
+<p>
+	MATLAB实现：
+</p>
+<ol>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				close all;
+			</div>
+		</div>
+	</li>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				clear all;
+			</div>
+		</div>
+	</li>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				I  = imread('scratch.tif');
+			</div>
+		</div>
+	</li>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				figure;
+			</div>
+		</div>
+	</li>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				subplot(1,3,1);
+			</div>
+		</div>
+	</li>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				imshow(I);
+			</div>
+		</div>
+	</li>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				BW = edge(I,'canny');%Canny提取图像边界
+			</div>
+		</div>
+	</li>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				[H,T,R] = hough(BW);%计算二值图像的标准霍夫变换，H为霍夫变换矩阵，I,R为计算霍夫变换的角度和半径值
+			</div>
+		</div>
+	</li>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				subplot(1,3,2);
+			</div>
+		</div>
+	</li>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				imshow(imadjust(mat2gray(H)),[],'XData',T,'YData',R,'InitialMagnification','fit');%hough变换的图像
+			</div>
+		</div>
+	</li>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				xlabel('\theta'), ylabel('\rho');
+			</div>
+		</div>
+	</li>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				axis on,axis square,hold on;
+			</div>
+		</div>
+	</li>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				P  = houghpeaks(H,5,'threshold',ceil(0.3*max(H(:)))); % 从霍夫变换矩阵H中提取5个极值点
+			</div>
+		</div>
+	</li>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				x = T(P(:,2));
+			</div>
+		</div>
+	</li>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				y = R(P(:,1));
+			</div>
+		</div>
+	</li>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				plot(x,y,'s','color','white');%标出极值点
+			</div>
+		</div>
+	</li>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				lines=houghlines(BW,T,R,P);%提取线段
+			</div>
+		</div>
+	</li>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				subplot(1,3,3);
+			</div>
+		</div>
+	</li>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				imshow(I), hold on;
+			</div>
+		</div>
+	</li>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				fork =1:length(lines)
+			</div>
+		</div>
+	</li>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				xy = [lines(k).point1; lines(k).point2];
+			</div>
+		</div>
+	</li>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				plot(xy(:,1),xy(:,2),'LineWidth',2,'Color','green');%画出线段
+			</div>
+		</div>
+	</li>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				end
+			</div>
+		</div>
+	</li>
+</ol>
+<p>
+	from：<a href="https://blog.csdn.net/u010839382/article/details/30810325">https://blog.csdn.net/u010839382/article/details/30810325</a> 
+</p>
+<p>
+	下面详细介绍关于hough变换的函数用法：
+</p>
+<p>
+	[H,T,R] = hough(BW,'RhoResolution',0.5,'Theta',-90:0.5:89.5);
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp; &nbsp;计算二值图像BW的标准hough变换。（我在MATLAB2008中，BW不是二值图像，也能处理）H为hough转换矩阵。theta和rho是一维数组，theta记录半径，rho记录角度。&nbsp;'RhoResolution'&nbsp; 指定一个位于0到&nbsp;norm(size(BW))间的实散值去作为hough转换的径（rho轴）的步长，默认值为1。 'Theta' 时，用ParameterValue指定 一个矢量去作为hough转换的角度范围，可接受的范围为-90&lt;=theta&lt;90。默认值为-90:89。 0.5表示沿ρ轴的霍夫变换的间隔。
+</p>
+<p>
+	<img alt="" height="215" src="https://img-blog.csdnimg.cn/20200827112320482.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMwODE1MjM3,size_16,color_FFFFFF,t_70" width="261" style="height:auto;" /><img alt="" height="211" src="https://img-blog.csdnimg.cn/20200827112331476.png" width="195" style="height:auto;" /> 
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp;左图对应mat矩阵（x-列数，y-行数，角度-（90到0到-90，例如当直线垂直x轴时，角度为0）），右图为生成的H矩阵。
+</p>
+<p>
+	&nbsp; &nbsp;请注意：MATLAB2008和2014的版本中hough的参数 有些许不同
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp; houghpeaks：在霍夫变换矩阵里找极值点。线检测和连接用的霍夫变换的第一步是用高的计数寻找累加单元(工具箱文本把高的计数单元作为峰值)。因为存在霍夫变换参数空间中的量化和典型图像的边缘并不是很完美的直线这样的事实，霍夫变换的峰值倾向于相比霍夫变换单元更多。函数houghpeaks用任意默认语法来寻找指定的峰值数：
+</p>
+<blockquote>
+	<p>
+		peaks = houghpeaks(H, numpeaks)%提取极值点的个数
+	</p>
+	<p>
+		peaks = houghpeaks(..., param1, val1,param2, val2)&nbsp;
+	</p>
+</blockquote>
+<p>
+	P = houghpeaks(H,5,'threshold',ceil(0.3*max(H(:))));%'threshold'表示：低于0.3*max(H(:))的像素不会被作为极值点。
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp;houghlines：从霍夫变换矩阵中提取线段。一旦一组候选的峰值在霍夫变换中被识别出来，如果存在与这些峰值相关的有意义的线段，剩下的就是决定线的起始点和终点。函数houghlines用默认的语法执行这个任务
+</p>
+<blockquote>
+	<p>
+		lines = houghlines(BW, theta, rho,peaks)&nbsp; &nbsp; &nbsp;%peaks为 houghpeaks函数返回的结果
+	</p>
+	<p>
+		lines = houghlines(..., param1, val1,param2, val2)
+	</p>
+</blockquote>
+<p>
+	&nbsp;lines = houghlines(BW,theta,rho,P,'FillGap',5,'MinLength',7);
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp; &nbsp;FillGap是正的标量，指定了与相同的霍夫变换相关的两条线段的距离（距离是怎么算的？若是两条线段在同一直线上，这里的距离是否指的是：两线段的端点之间的距离呢？）。当两条线段之间的距离小于指定的值时，函数houghlines把线段合并为一条线段(默认的距离是20个像素)。
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp;MinLength是正的标量，指定合并的线是保留还是丢弃。如果合并的线比val2指定的值短，就丢弃(默认值是40)
+</p>
+<p>
+	关于hough线检测的演示：<a href="https://blog.csdn.net/xsjwangyb/article/details/10917945">https://blog.csdn.net/xsjwangyb/article/details/10917945</a> 
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp; from：<a href="https://blog.csdn.net/zhanshen112/article/details/79949257?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.channel_param&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.channel_param">https://blog.csdn.net/zhanshen112/article/details/79949257?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.channel_param&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.channel_param</a> 
+</p>
+<p>
+	&nbsp;imadjust(mat2gray(H))：
+</p>
+<p>
+	mat2gray(H功能是实现图像矩阵的归一化操作，使矩阵的每个元素的值都在0和1之间。
+</p>
+<p>
+	&nbsp;imadjust：将灰度图像 I 中的亮度值映射到 J 中的新值并使 1% 的数据是在低高强度和饱和；
+</p>
+<p>
+	from：<a href="https://blog.csdn.net/zaishuiyifangxym/article/details/78244308?utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2~all~first_rank_v2~rank_v25-3-78244308.nonecase&amp;utm_term=imadjust%E5%87%BD%E6%95%B0%E4%BD%9C%E7%94%A8">https://blog.csdn.net/zaishuiyifangxym/article/details/78244308?utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2~all~first_rank_v2~rank_v25-3-78244308.nonecase&amp;utm_term=imadjust%E5%87%BD%E6%95%B0%E4%BD%9C%E7%94%A8</a> 
+</p>
+<hr />
+<p>
+	hough线检测OpenCV实现参见：<a href="https://blog.csdn.net/qq_30815237/article/details/86750576?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522159849654319724846455228%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&amp;request_id=159849654319724846455228&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_v2~rank_blog_default-2-86750576.pc_v2_rank_blog_default&amp;utm_term=hough&amp;spm=1018.2118.3001.4187">https://blog.csdn.net/qq_30815237/article/details/86750576?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522159849654319724846455228%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&amp;request_id=159849654319724846455228&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_v2~rank_blog_default-2-86750576.pc_v2_rank_blog_default&amp;utm_term=hough&amp;spm=1018.2118.3001.4187</a> 
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1187.html">混合动态纹理模型(Mixtures of Dynamic Textures, MDT)</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1189.html">AlexNet网络</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/qq_30815237/article/details/106405302" target="_blank">https://blog.csdn.net/qq_30815237/article/details/106405302</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

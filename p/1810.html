@@ -1,0 +1,366 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>编译原理 -- 编译的过程_comonly.cn</title>
+<meta name="keywords" content="编译原理 -- 编译的过程" />
+<meta name="description" content="被隐藏的过程
+
+
+	
+		预处理（Prepressing）- 展开宏定义（处理#define，#include），删除注释，添加行号和文件名标识。生成.i 预处理文件
+	
+	
+		编译（Compilation）- 词法分析、语法分析、语义分析、优化。预处理+编译用ccl完成。生成.s 汇编代码文件
+	
+	
+		汇编（Assembly）- 把汇编代码转成机器可执行的指令，不需要做指令优化。用汇编器as&nbsp;完成。生成.o 目标文件(object file)
+	
+	
+		链接（" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">编译原理 -- 编译的过程</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">Imutaku</li>
+          <li class="lmname"><a href="https://blog.csdn.net/baidu_36359440/article/details/108100411" target="_blank">https://blog.csdn.net/baidu_36359440/article/details/108100411</a></li>
+          <li class="timer">2020-10-04</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>被隐藏的过程
+
+
+	
+		预处理（Prepressing）- 展开宏定义（处理#define，#include），删除注释，添加行号和文件名标识。生成.i 预处理文件
+	
+	
+		编译（Compilation）- 词法分析、语法分析、语义分析、优化。预处理+编译用ccl完成。生成.s 汇编代码文件
+	
+	
+		汇编（Assembly）- 把汇编代码转成机器可执行的指令，不需要做指令优化。用汇编器as&nbsp;完成。生成.o 目标文件(object file)
+	
+	
+		链接（</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='被隐藏的过程'>
+	被隐藏的过程
+</h2>
+<ol>
+	<li>
+		预处理（Prepressing）- 展开宏定义（处理#define，#include），删除注释，添加行号和文件名标识。生成.i 预处理文件
+	</li>
+	<li>
+		编译（Compilation）- 词法分析、语法分析、语义分析、优化。预处理+编译用ccl完成。生成.s 汇编代码文件
+	</li>
+	<li>
+		汇编（Assembly）- 把汇编代码转成机器可执行的指令，不需要做指令优化。用汇编器as&nbsp;完成。生成.o 目标文件(object file)
+	</li>
+	<li>
+		链接（Linking）- 用链接器ld完成。
+	</li>
+</ol>
+<h2 id='编译器做了什么'>
+	<a></a><a></a><a></a>编译器做了什么
+</h2>
+<p>
+	通常，编译过程分为6步：扫描、语法分析、语义分析、源代码优化、代码生成、目标代码优化。
+</p>
+<p>
+	1 词法分析（src -&gt; Tokens, Scannar：lex）
+</p>
+<ul>
+	<li>
+		源代码进入扫描器，用有限状态机&nbsp;把源代码的字符分割成Token。Token&nbsp;一般包括关键字、标识符、字面量、特殊符号。
+	</li>
+	<li>
+		同时，扫描器也会完成其他工作，例如将标识符放到符号表，将数字、字符串常量放到文字表等。
+	</li>
+	<li>
+		lex，可以根据用户描述好的词法规则，来进行词法扫描的，词法扫描器。
+	</li>
+</ul>
+<p>
+	2 语法分析（Tokens -&gt; ST, Parser ：yacc）
+</p>
+<ul>
+	<li>
+		对Tokens进行语法分析，产生语法树（Syntax Tree）。ST以表达式为节点，叶子节点是数字字面值或标识符。
+	</li>
+	<li>
+		采用的是上下文无关语法（Context-free Grammar）。
+	</li>
+	<li>
+		yacc，可以根据用户给定的语法规则，对输入的Token序列进行解析，并构建语法树的，语法分析器。
+	</li>
+</ul>
+<p>
+	3 语义分析（ST -&gt; commented ST， Semantic Analyzer）
+</p>
+<ul>
+	<li>
+		完成静态语义分析（编译时确定的语义是静态的，运行时确定的是动态的，编译器只能完成静态语义分析）。静态语义分析一般包括声明和类型的匹配、类型转换等。
+		<ul>
+			<li>
+				例如，在语法分析得到的ST中，可能出现两个指针做乘法；在经过语义分析后，判定这是不合法的。
+			</li>
+			<li>
+				动态语义是运行时出现的语义问题，例如将0作为除数。这是不能被编译器检查到的。
+			</li>
+		</ul>
+	</li>
+	<li>
+		经过语义分析后，ST的所有节点被标识了类型，对于隐式转换的，会插入相应转换节点。语义分析器还会对符号表中的符号类型也做更新。
+	</li>
+</ul>
+<p>
+	4 中间语言生成（commented ST -&gt; IR， Source Code Optimizer）
+</p>
+<ul>
+	<li>
+		代码优化器将语法树转换成中间代码，也称中间表达式（IR）。IR是语法树的顺序表示，通常为三地址码，或P-代码。
+		<ul>
+			<li>
+				三地址码：x = y op z
+			</li>
+			<li>
+				为什么要转成IR呢？因为直接在语法树上做优化比较困难。
+			</li>
+		</ul>
+	</li>
+	<li>
+		非常接近目标代码，但是IR与目标机器和运行时环境无关（而目标代码依赖于目标机器）
+		<ul>
+			<li>
+				与目标代码和运行时环境无关，是因为IR不包含数据的大小、变量的地址和寄存器的名字（会用t1/t2/t3这种临时变量表示）。
+			</li>
+		</ul>
+	</li>
+	<li>
+		根据IR，编译器分为前端和后端。前端负责产生IR，后端负责将IR转换成目标机器码。
+		<ul>
+			<li>
+				对于跨平台的编译器，可以使用同一个前端和针对不同机器平台的不同后端。
+			</li>
+		</ul>
+	</li>
+</ul>
+<p>
+	5 目标代码生成（IR -&gt; Target Code，code generator）
+</p>
+<ul>
+	<li>
+		代码生成器将IR转换成目标机器码（例如，x86汇编语言）
+	</li>
+	<li>
+		这个过程依赖于机器。
+		<ul>
+			<li>
+				因为不同机器有不同的word size/寄存器名称/整数数据类型/浮点数数据类型等。
+			</li>
+		</ul>
+	</li>
+</ul>
+<p>
+	6 目标代码优化（Target Code -&gt; Final Target Code, target code optimizer）
+</p>
+<ul>
+	<li>
+		目标代码优化器对上述目标代码进行优化
+	</li>
+</ul></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1809.html">处理器栈增长方向、堆区增长方向、大小端、数组在内存中地址的分配上的区别</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1811.html">Shell脚本中$0、$?、$!、$$、$*、$#、$@等的意义以及linux命令执行返回值代表意义</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/baidu_36359440/article/details/108100411" target="_blank">https://blog.csdn.net/baidu_36359440/article/details/108100411</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#被隐藏的过程">被隐藏的过程</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#编译器做了什么">编译器做了什么</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

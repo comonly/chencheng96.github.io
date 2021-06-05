@@ -1,0 +1,411 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>日期对象—JavaScript_comonly.cn</title>
+<meta name="keywords" content="日期对象—JavaScript" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">日期对象—JavaScript</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-03-11</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">JavaScript,日期对象</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	日期对象是常用的内置对象，主要用来显示时间和制作日历。
+</p>
+<p>
+	日期对象中的日期分为两部分，日期和时间。日期包括年月日星期，时间包括时分秒毫秒。
+</p>
+<h2 id='创建日期对象'>
+	创建日期对象
+</h2>
+<p>
+	使用系统内置的构造函数来创建日期对象：
+</p>
+<p>
+	<em>new Date(); </em>&nbsp; &nbsp; &nbsp;//创建日期对象，自动获取当前时间
+</p>
+<p>
+	<em>new Date(str);</em> &nbsp;//str为表达日期的字符串，一般为：月日年小时分钟秒
+</p>
+<p>
+	<em>new Date(ms); </em>&nbsp;//ms表示距离需要创建的时间和GMT时间1970年1月1日之间相差的毫秒数
+</p>
+<p>
+	<em>new Date(yyyy,mth,dd,hh,mm,ss); </em>&nbsp;//年份，月份，号，小时数，分钟数，秒数
+</p>
+<p>
+	&lt;script type="text/javascript"&gt;<br />
+var d1=new Date(); &nbsp; //创建日期对象，自动获取当前时间<br />
+var d2=new Date("May 1,2011"); &nbsp; //将字符串转换为日期对象<br />
+var d3=new Date(2011,5,1,20,18,30); &nbsp; //给定时间创建日期对象<br />
+var d4=new Date(10000); &nbsp; //距离1970年1月1日10000毫秒<br />
+document.write(d1.toLocaleString()+"&lt;/br&gt;");<br />
+document.write(d2.toLocaleString()+"&lt;/br&gt;"); &nbsp; &nbsp;//2011/5/1 上午12:00:00<br />
+document.write(d3.toLocaleString()+"&lt;/br&gt;"); &nbsp; &nbsp;//2011/6/1 下午8:18:30<br />
+document.write(d4.toLocaleString()+"&lt;/br&gt;"); &nbsp; &nbsp;//1970/1/1 上午8:00:10<br />
+&lt;/script&gt;
+</p>
+<p>
+	复制代码<a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank"><span style="background-color:#FFE500;">在线测试运行效果</span></a> 
+</p>
+<h2 id='格式化日期'>
+	格式化日期
+</h2>
+<p>
+	将日期格式化为字符串的方法
+</p>
+<p>
+	<em>toDateString()</em> &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;//把data对象的日期部分转换为字符串
+</p>
+<p>
+	<em>toTimeString() </em>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//把data对象的时间部分转换为字符串
+</p>
+<p>
+	<em>toLocalDateString() </em>&nbsp; //采用本地时间显示星期，月，日，年
+</p>
+<p>
+	<em>toLocalTimeString()</em> &nbsp;//采用本地时间显示时，分，秒和地区
+</p>
+<p>
+	<em>toUTCString()</em> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//采用世界时间格式显示完整的UTC日期 &nbsp; &nbsp; 一般不用toGMTString()
+</p>
+<p>
+	&lt;script type="text/javascript"&gt;<br />
+var d1=new Date(); &nbsp; //创建日期对象，自动获取当前时间<br />
+document.write(d1.toLocaleString()+"&lt;/br&gt;");<br />
+document.write(d1.toDateString()+"&lt;/br&gt;");<br />
+document.write(d1.toTimeString()+"&lt;/br&gt;");<br />
+document.write(d1.toUTCString()+"&lt;/br&gt;");<br />
+&lt;/script&gt;
+</p>
+<p>
+	复制代码<span style="background-color:#FFE500;"><a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank">在线测试运行效果</a></span> 
+</p>
+<h2 id='获取日期和时间'>
+	获取日期和时间
+</h2>
+<p>
+	可以通过get字母开头的方法来分别获取日期和时间
+</p>
+<p>
+	<em>日期对象中获取日期的方法</em>
+</p>
+<p>
+	getFullYear()：取4位数的年份
+</p>
+<p>
+	getUTCFullYear()：返回世界时间格式的4位数年份
+</p>
+<p>
+	getMonth()：返回日期中的月份
+</p>
+<p>
+	getUTCMonth()：返回世界时间格式的月份
+</p>
+<p>
+	getDate()：返回日期中的天数
+</p>
+<p>
+	getUTCDate()：返回世界时间日期中的天数
+</p>
+<p>
+	getDay()：返回星期
+</p>
+<p>
+	getUTCDay()：返回世界时间日期中的星期
+</p>
+<p>
+	<em>日期对象中获取时间的方法</em>
+</p>
+<p>
+	getHours()：返回日期对象中的小时部分
+</p>
+<p>
+	getUTCHours()：世界时间中的小时部分
+</p>
+<p>
+	getMinutes()：分钟
+</p>
+<p>
+	getUTCMinutes()：世界时间中的分钟部分
+</p>
+<p>
+	getSeconds()：秒钟
+</p>
+<p>
+	getUTCSeconds()：世界时间中的秒钟部分
+</p>
+<p>
+	getMilliseconds()：毫秒数
+</p>
+<p>
+	getUTCMilliseconds()：世界时间中的毫秒
+</p>
+<p>
+	getTime()：日期对象中的时间与1970年1月1日相差的毫秒数
+</p>
+<p>
+	getTimezoneOffset()：本地时间与世界时间相差的分钟数
+</p>
+<p>
+	&lt;script type="text/javascript"&gt;<br />
+var d=new Date(); &nbsp; //创建日期对象，自动获取当前时间<br />
+document.write(d.getFullYear()+"&lt;/br&gt;");<br />
+document.write(d.getUTCFullYear()+"&lt;/br&gt;");<br />
+document.write(d.getMilliseconds()+"&lt;/br&gt;");<br />
+document.write(d.getTime()+"&lt;/br&gt;");<br />
+document.write(d.getTimezoneOffset()+"&lt;/br&gt;");<br />
+&lt;/script&gt;
+</p>
+<p>
+	复制代码<span style="background-color:#FFE500;"><a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank">在线测试运行效果</a></span> 
+</p>
+<h2 id='设置日期和时间'>
+	设置日期和时间
+</h2>
+<p>
+	通过set字母开头的方法设置时间与日期
+</p>
+<p>
+	setFullYear(yyyy)：设置4位数的年份
+</p>
+<p>
+	<span>set</span>UTCFullYear(yyyy)：<span>设置</span>世界时间格式的4位数年份
+</p>
+<p>
+	<span>set</span>Month(mm)：<span>设置</span>日期中的月份
+</p>
+<p>
+	<span>set</span>tUTCMonth()mm：<span>设置</span>世界时间格式的月份
+</p>
+<p>
+	<span>set</span>Date(dd)：<span>设置</span>日期中的天数
+</p>
+<p>
+	<span>set</span>UTCDate(dd)：<span>设置</span>世界时间日期中的天数
+</p>
+<p>
+	<span>set</span>Hours()：<span>设置</span>日期对象中的小时部分
+</p>
+<p>
+	<span>set</span>UTCHours()：<span>设置</span>时间中的小时部分
+</p>
+<p>
+	<span>set</span>Minutes()：<span>设置</span>分钟
+</p>
+<p>
+	<span>set</span>UTCMinutes()：<span>设置</span>世界时间中的分钟部分
+</p>
+<p>
+	<span>set</span>Seconds()：<span>设置</span>秒钟
+</p>
+<p>
+	<span>set</span>UTCSeconds()：<span>设置</span>世界时间中的秒钟部分
+</p>
+<p>
+	<span>set</span>Milliseconds()：<span>设置</span>毫秒数
+</p>
+<p>
+	<span>set</span>UTCMilliseconds()：<span>设置</span>世界时间中的毫秒
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/609.html">布尔对象—JavaScript</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/611.html">数字对象—JavaScript</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#创建日期对象">创建日期对象</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#格式化日期">格式化日期</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#获取日期和时间">获取日期和时间</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#设置日期和时间">设置日期和时间</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

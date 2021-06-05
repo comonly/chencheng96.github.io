@@ -1,0 +1,533 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>事件驱动与事件处理—JavaScript_comonly.cn</title>
+<meta name="keywords" content="事件驱动与事件处理—JavaScript" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">事件驱动与事件处理—JavaScript</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-03-11</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">JavaScript,事件驱动,事件处理</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	JavaScript和HTML之间的交互是通过用户和浏览器操作页面时引发的事件来处理的。通过事件驱动可以调用JavaScript中的函数或方法，开发人员用这些事件来执行编码进行响应。
+</p>
+<h2 id='在HTML标签属性中调用事件'>
+	在HTML标签属性中调用事件
+</h2>
+<p>
+	&lt;script type="text/javascript"&gt;<br />
+function btclick(){window.alert("单击了按钮，调用函数");}<br />
+&lt;/script&gt;<br />
+&lt;input type="button" name="bt" value="点击我" onclick="btclick()"/&gt;<br />
+&lt;input type="button" name="bt" value="点击我" onclick="window.alert('单击了按钮，直接激发')"/&gt;
+</p>
+<p>
+	复制代码<span style="background-color:#FFE500;"><a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank">在线测试效果</a></span> 
+</p>
+<p>
+	在HTML代码中添加一个按钮，为这个按钮添加一个onclick属性，属性值是一个函数。当用户的鼠标单击了这个按钮，会调用函数。
+</p>
+<p>
+	也可以将激发时间直接写在HTML标签属性中
+</p>
+<h2 id='在JvScrit代码中调用事件'>
+	在JavaScript代码中调用事件
+</h2>
+<p>
+	<span>&lt;form&gt;&lt;input type="button" name="bt" value="点击我"/&gt;&lt;/form&gt;<br />
+&lt;script type="text/javascript"&gt;<br />
+function btclick(){window.alert("单击了按钮，调用函数");}<br />
+//调用事件<br />
+document.forms[0].elements[0].onclick=btclick;<br />
+&lt;/script&gt;<br />
+</span> 
+</p>
+<p>
+	<span>复制代码</span><span style="background-color:#FFE500;"><a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank">在线测试效果</a></span> 
+</p>
+<p>
+	在JavaScript代码中调用对象事件可以增加代码的独立性与模块性。
+</p>
+<p>
+	JavaScript代码要放在表单后面，因为要载入表单事件，然后才激活JavaScript中的代码。
+</p>
+<p>
+	<span>document.forms[0].elements[0].onclick=btclick; &nbsp; &nbsp; //forms[0]表示HTML中的第一个表单，elements[0]表示表单中的第一个标签元素，这样就指定了input标签</span> 
+</p>
+<p>
+	在JavaScript代码中调用事件时，直接输入函数名，不需要后面的括号。
+</p>
+<h2 id='事件的返回值'>
+	事件的返回值
+</h2>
+<p>
+	事件处理程序返回一个值，判断事件处理程序是否正确处理，或者判断是否进行下一步操作。一般返回值是布尔值（true和false）
+</p>
+<p>
+	&lt;script type="text/javascript"&gt;<br />
+function check(){<br />
+var len=document.myform.myname.value.length;<br />
+if(len==0){window.alert("没有输入姓名！");return false;}<br />
+else{return true;}<br />
+}<br />
+&lt;/script&gt;<br />
+&lt;form name="myform" onsubmit="return check()"&gt;<br />
+姓名：&lt;input type="text" name="myname" value=""/&gt;<br />
+&lt;input type="submit" name="" value="提交"/&gt;<br />
+&lt;/form&gt;
+</p>
+<p>
+	复制代码<span style="background-color:#FFE500;"><a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank">在线测试效果</a></span> 
+</p>
+<span>return check()就是返回check()函数的值。如果返回值为true，提交表单。如果是false，则不会提交表单。</span>
+<h2 id='thi操作符'>
+	this操作符
+</h2>
+<p>
+	this操作符用来传递参数，表示对象本身。
+</p>
+<p>
+	&lt;script type="text/javascript"&gt;<br />
+function check1(obj){window.alert(obj.value);}<br />
+function check2(str){window.alert(str);}<br />
+&lt;/script&gt;<br />
+&lt;form name="myform"&gt;<br />
+&lt;input type="button" name="b1" value="这是this操作符返回的值1" onclick="check1(this)"/&gt;<br />
+&lt;input type="button" name="b2" value="这是this操作符返回的值2" onclick="check2(this.value)"/&gt;
+</p>
+<p>
+	&lt;/form&gt;
+</p>
+<p>
+	复制代码<span style="background-color:#FFE500;"><a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank">在线测试效果</a></span> 
+</p>
+check1()的参数是一个对象，函数作用是显示对象的value属性值
+<p>
+	check2()的参数是一个字符串，作用是显示字符串str的值
+</p>
+<h2 id='浏览器事件'>
+	浏览器事件
+</h2>
+<p>
+	大多数事件由浏览器产生
+</p>
+<p>
+	HTML 4.01/XHTML 1.0规定的事件标准
+</p>
+<p>
+	<table style="width:800px;" cellpadding="1" cellspacing="0" border="1" bordercolor="#999999">
+		<tbody>
+			<tr>
+				<td>
+					事件名称
+				</td>
+				<td>
+					支持标签
+				</td>
+				<td>
+					说明
+				</td>
+			</tr>
+			<tr>
+				<td>
+					blur
+				</td>
+				<td>
+					a,area,label,input,select,textarea,button
+				</td>
+				<td>
+					对象失去焦点时所激发的事件
+				</td>
+			</tr>
+			<tr>
+				<td>
+					change
+				</td>
+				<td>
+					input,select,textarea
+				</td>
+				<td>
+					值改变时所激发的事件
+				</td>
+			</tr>
+			<tr>
+				<td>
+					click
+				</td>
+				<td>
+					大多数标签
+				</td>
+				<td>
+					单击鼠标（按下并释放鼠标键）<span>激发的事件</span> 
+				</td>
+			</tr>
+			<tr>
+				<td>
+					dblclick
+				</td>
+				<td>
+					大多数标签
+				</td>
+				<td>
+					双击鼠标时<span>激发的事件</span> 
+				</td>
+			</tr>
+			<tr>
+				<td>
+					focus
+				</td>
+				<td>
+					<span>a,area,label,input,select,textarea,button</span><br />
+				</td>
+				<td>
+					对象得到焦点时所<span>激发的事件</span> 
+				</td>
+			</tr>
+			<tr>
+				<td>
+					keydown
+				</td>
+				<td>
+					<span>大多数标签</span><br />
+				</td>
+				<td>
+					按下键盘键<span>激发的事件</span> 
+				</td>
+			</tr>
+			<tr>
+				<td>
+					keypress
+				</td>
+				<td>
+					<span>大多数标签</span><br />
+				</td>
+				<td>
+					按下并释放键盘键时所<span>激发的事件</span> 
+				</td>
+			</tr>
+			<tr>
+				<td>
+					keyup
+				</td>
+				<td>
+					<span>大多数标签</span><br />
+				</td>
+				<td>
+					释放键盘键时所激发的事件
+				</td>
+			</tr>
+			<tr>
+				<td>
+					load
+				</td>
+				<td>
+					body,frameset
+				</td>
+				<td>
+					在一个浏览器窗口中加载文档时，或框架集中所有框架文件中的文档<span>激发的事件</span> 
+				</td>
+			</tr>
+			<tr>
+				<td>
+					mousedown
+				</td>
+				<td>
+					<span>大多数标签</span><span></span><br />
+				</td>
+				<td>
+					按下鼠标（没有释放）时所<span>激发的事件</span> 
+				</td>
+			</tr>
+			<tr>
+				<td>
+					mousemove
+				</td>
+				<td>
+					<span>大多数标签</span><span></span><br />
+				</td>
+				<td>
+					移动鼠标时激发的事件
+				</td>
+			</tr>
+			<tr>
+				<td>
+					mouseover
+				</td>
+				<td>
+					<span>大多数标签</span><span></span><br />
+				</td>
+				<td>
+					鼠标从对象上移开<span>激发的事件</span> 
+				</td>
+			</tr>
+			<tr>
+				<td>
+					mouseup
+				</td>
+				<td>
+					<span>大多数标签</span><span></span><br />
+				</td>
+				<td>
+					释放鼠标键时所<span>激发的事件</span> 
+				</td>
+			</tr>
+			<tr>
+				<td>
+					mouseout
+				</td>
+				<td>
+					<span>大多数标签</span><span></span><br />
+				</td>
+				<td>
+					鼠标键从对象上移开时所激发的事件
+				</td>
+			</tr>
+			<tr>
+				<td>
+					reset
+				</td>
+				<td>
+					form
+				</td>
+				<td>
+					重置表单时所<span>激发的事件</span> 
+				</td>
+			</tr>
+			<tr>
+				<td>
+					select
+				</td>
+				<td>
+					input,textarea
+				</td>
+				<td>
+					选中文本时所<span>激发的事件</span> 
+				</td>
+			</tr>
+			<tr>
+				<td>
+					submit
+				</td>
+				<td>
+					form
+				</td>
+				<td>
+					提交表单时<span>激发的事件</span> 
+				</td>
+			</tr>
+			<tr>
+				<td>
+					unload
+				</td>
+				<td>
+					body,frameset
+				</td>
+				<td>
+					卸载浏览器窗口或框架中的文档时所<span>激发的事件</span> 
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/615.html">对象层次—JavaScript</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/617.html">window对象—JavaScript</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#在HTML标签属性中调用事件">在HTML标签属性中调用事件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#在JvScrit代码中调用事件">在JvScrit代码中调用事件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#事件的返回值">事件的返回值</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#thi操作符">thi操作符</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#浏览器事件">浏览器事件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

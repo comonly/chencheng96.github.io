@@ -1,0 +1,284 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>HOG方向梯度直方图、光流、HOF与MBH特征简述_comonly.cn</title>
+<meta name="keywords" content="HOG方向梯度直方图、光流、HOF与MBH特征简述" />
+<meta name="description" content="HOG
+
+
+	HOG （Histogram of oriented gradient）特征是法国研究人员Dalal在2005年CVPR上提出的一种实现人体目标检测的图像描述方法，该特征通过计算和统计图像局部区域的梯度方向直方图来构成特征。其优点是可以对几何和光学的形变保持很好的不变形，换句话说，对环境的变化具有很强的鲁棒性。
+
+
+	该特征的主要思想是：图像中局部目标的表象和性状能够被梯度或边缘的方向密度很好的描述本（本质：梯度的统计信息，而梯度主要存在于边缘的地方）。在实际操作中，将图像分为小" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">HOG方向梯度直方图、光流、HOF与MBH特征简述</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2020-11-08</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	机器学习算法分析
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>HOG
+
+
+	HOG （Histogram of oriented gradient）特征是法国研究人员Dalal在2005年CVPR上提出的一种实现人体目标检测的图像描述方法，该特征通过计算和统计图像局部区域的梯度方向直方图来构成特征。其优点是可以对几何和光学的形变保持很好的不变形，换句话说，对环境的变化具有很强的鲁棒性。
+
+
+	该特征的主要思想是：图像中局部目标的表象和性状能够被梯度或边缘的方向密度很好的描述本（本质：梯度的统计信息，而梯度主要存在于边缘的地方）。在实际操作中，将图像分为小</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='HOG'>
+	HOG
+</h2>
+<p>
+	HOG （Histogram of oriented gradient）特征是法国研究人员Dalal在2005年CVPR上提出的一种实现人体目标检测的图像描述方法，该特征通过计算和统计图像局部区域的梯度方向直方图来构成特征。其优点是可以对几何和光学的形变保持很好的不变形，换句话说，对环境的变化具有很强的鲁棒性。
+</p>
+<p>
+	该特征的主要思想是：图像中局部目标的表象和性状能够被梯度或边缘的方向密度很好的描述本（本质：梯度的统计信息，而梯度主要存在于边缘的地方）。在实际操作中，将图像分为小的细胞单元(cells)，每个细胞单元计算一个梯度方向(或边缘方向)直方图。为了对光照和阴影有更好的不变性，需要对直方图进行对比度归一化，可以通过将细胞单元组成更大的块(blocks)并归一化块内的所有细胞单元来实现。我们将归一化的块描述符叫做HOG描述子。将检测窗口中的所有块的HOG描述子组合起来就形成了最终的特征向量。
+</p>
+<h2 id='光流'>
+	光流
+</h2>
+<p>
+	光流是空间运动物体在观测成像平面上的像素运动的“瞬时速度”。光流的研究是利用图像序列中的像素强度数据的时域变化和相关性来确定各自像素位置的“运动”。研究光流场的目的就是为了从图片序列中近似得到不能直接得到的运动场。<br />
+<br />
+光流法的前提假设：<br />
+（1）相邻帧之间的亮度恒定；<br />
+（2）相邻视频帧的取帧时间连续，或者，相邻帧之间物体的运动比较“微小”；<br />
+（3）保持空间一致性；即，同一子图像的像素点具有相同的运动
+</p>
+<h2 id='HOF'>
+	HOF
+</h2>
+<p>
+	HOF(Histogramsof Oriented Optical Flow)与HOG类似，是对光流方向进行加权统计，得到光流方向信息直方图。通常用于动作识别中。<br />
+不懂HOG特征的，这篇文章讲得很清楚。<br />
+由于目标的尺寸会随着时间发生变化，相应的光流特征描述子的维度也会变化，同时，光流的计算对背景噪声、尺度变化以及运动方向都较敏感，因此需要寻找一种基于光流的既能表征时域动作信息，又对尺度和运动方向不敏感的特征。HOF则是基于此需求提出来的。
+</p>
+<h2 id='MBH'>
+	MBH
+</h2>
+<p>
+	MBH特征，它的处理方法是将x方向和y方向上的光流图像视作两张灰度图像，然后提取这些灰度图像的梯度直方图。即MBH特征是分别在图像的x和y方向光流图像上计算HOG特征。
+</p>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1170.html">多线程线程中，等待另一线程结束后，调用回调函数的处理流程</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1172.html">【认真学习】行为识别笔记：improved dense trajectories算法（iDT算法）</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="来源文章">
+							<h2 style="display:inline;color:#5BC648;">来源文章</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-11-08&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span>方向梯度直方图（HOG）<a href="https://www.jianshu.com/p/6f69c751e9e7" target="_blank">https://www.jianshu.com/p/6f69c751e9e7</a><br />
+行人检测之HOG——方向梯度直方图(Histogram of Oriented Gradient）<a href="https://blog.csdn.net/qq_14845119/article/details/52187774" target="_blank">https://blog.csdn.net/qq_14845119/article/details/52187774</a><br />
+一文讲解方向梯度直方图（hog）<a href="https://zhuanlan.zhihu.com/p/85829145" target="_blank">https://zhuanlan.zhihu.com/p/85829145<br />
+</a><br />
+光流法简单介绍&nbsp; <a href="https://blog.csdn.net/carson2005/article/details/7581642" target="_blank">https://blog.csdn.net/carson2005/article/details/7581642</a><br />
+HOF特征 <a href="https://blog.csdn.net/u013089961/article/details/44981815" target="_blank">https://blog.csdn.net/u013089961/article/details/44981815</a><br />
+HOF与MBH <a href="https://blog.csdn.net/qq_32642107/article/details/104007090" target="_blank">https://blog.csdn.net/qq_32642107/article/details/104007090</a><br /></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#HOG">HOG</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#光流">光流</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#HOF">HOF</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#MBH">MBH</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#来源文章">来源文章</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

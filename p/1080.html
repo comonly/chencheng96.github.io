@@ -1,0 +1,289 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>JDBC事务_comonly.cn</title>
+<meta name="keywords" content="JDBC事务" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">JDBC事务</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-03-03</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	java-含工具类
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <pre class="prettyprint lang-java">//JDBC的事务直接将数据库的操作写在同一个连接中，最后通过commit提交事务即可。
+conn.setAutoCommit(false);
+conn=DBUtilConnection.getConnectionImportData();
+String sql="insert into inss(test) values(?)";
+try {
+	pstmt = conn.prepareStatement(sql);
+	pstmt.setString(1, test);
+	pstmt.executeUpdate();
+	conn.commit();
+} catch (Exception e) {
+        conn.rollback();
+}finally{
+        conn.setAutoCommit(true);
+	DBUtilConnection.closeAll(null, null, pstmt, conn); }</pre></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1079.html">Java事务介绍</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1081.html">事务嵌套的可行性</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="参考内容">
+							<h2 style="display:inline;color:#5BC648;">参考内容</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-03-03&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span>JDBC事务回滚mysql在cmd下命令效果：https://blog.csdn.net/youcheng_ge/article/details/77683768</span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="事务的提交、回滚与连接之间的关系">
+							<h2 style="display:inline;color:#5BC648;">事务的提交、回滚与连接之间的关系</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-03-03&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	commit和rollback只对insert、update、delete（DML数据操纵语句）操作有效。先commit再rollback，则rollback相当于不起作用。若先delete再select再rollback，则rollback会撤回delete操作。其他用户查询看到的是commit之后的表，而你看到的是最新操作的表（比如insert但是没有commit的表）。
+</p>
+<ul>
+	<li>
+		commit: 就是确定提交的意思，比如你用update更新表中一条记录，而不commit,那么别的账户在查询这个表时就查询不到你update的记录，自己是可以查询到的；而commit后则其他账户就能查询到你update的记录了。&nbsp;
+	</li>
+	<li>
+		rollback：就是回退的意思，比如你用update更新表中一条记录，这时你查询这个表时，则发现表已经更新（注意别的用户查询这个表会发现表未更新）；再rollback后，你再查询表时，发现表还是更新之前的样子。
+	</li>
+</ul>
+<p>
+	在JDBC中是通过Connection对象进行事务管理的，默认是自动提交事务，可以手工将自动提交关闭，通过commit方法进行提交，rollback方法进行回滚，如果不提交，则数据不会真正的插入到数据库中。在mysql中通过select @@autocommit;查看是否自动提交，默认值1表示自动提交。set autocommit=0;设置为手动提交。在Java的mysql驱动中，获取数据库连接后通过conn.setAutoCommit(false);设置手动提交事务。
+</p>
+<p>
+	手动提交事务，在数据库操作之后必须有显式commit提交数据，不然数据不能保存在数据库。不使用rollback方法，在连接关闭时也会自动回滚。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	//下面是一些其他内容
+</p>
+<p>
+	事务是一个单一的工作单位。如果事务成功，则在事务中进行的所有数据修改都将被提交并成为数据库的永久部分。如果事务遇到错误，必须取消或回退，则所有数据修改都将被清除这表明事实上交易应该自动回滚。如果客户端到数据库引擎的实例的网络连接中断，则在网络通知中断实例时，所有未完成的连接事务将被回滚。如果连接关闭（网络错误，客户端断开，严重性错误）并且未提交，则事务将回滚。 如果SQL Server终止（关闭，电源故障，意外终止）并且未达到提交，事务将被回滚。 在默认设置下，事务中的语句抛出的非致命错误不会自动导致回滚。 （致命=严重程度为19以上）
+</p>
+<p>
+	当你执行事物启动以后，会导致你insert的area表处于锁定状态，这时候必须有个配对的rollback或commit，这个锁才会释放。在这个锁没有释放以前，对这个表的其他更新就处于等待状态，甚至连查询也处于等待状态。如果你开启了一个事务，迟迟没有提交或回滚，这时候正好其他地方也要操作area表，那么就会导致其他所有地方都处于等待状态，逻辑不对的话，可能会导致循环锁，也就是死锁！！！
+</p>
+<p>
+	不过如果你通过其他的语言的MySQL驱动来操作的话，这些驱动一般都带有自动恢复 AUTOCOMMIT 的功能，在请求处理完成后会自动 ROLLBACK 没有处理的事务。
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#参考内容">参考内容</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#事务的提交、回滚与连接之间的关系">事务的提交、回滚与连接之间的关系</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

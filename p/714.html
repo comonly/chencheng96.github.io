@@ -1,0 +1,607 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>JSON 教程_comonly.cn</title>
+<meta name="keywords" content="JSON 教程" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">JSON 教程</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">周起</li>
+          <li class="lmname"><a href="http://www.cnblogs.com/zhouqi666/p/5978025.html" target="_blank">http://www.cnblogs.com/zhouqi666/p/5978025.html</a></li>
+          <li class="timer">2017-05-20</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	其他
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	&lt;body&gt;<br />
+&lt;h2&gt;JSON Object Creation in JavaScript&lt;/h2&gt;
+</p>
+<p>
+	&lt;p&gt;<br />
+Name: &lt;span id="jname"&gt;&lt;/span&gt;&lt;br /&gt;&nbsp;<br />
+Age: &lt;span id="jage"&gt;&lt;/span&gt;&lt;br /&gt;&nbsp;<br />
+Address: &lt;span id="jstreet"&gt;&lt;/span&gt;&lt;br /&gt;&nbsp;<br />
+Phone: &lt;span id="jphone"&gt;&lt;/span&gt;&lt;br /&gt;&nbsp;<br />
+&lt;/p&gt;
+</p>
+<p>
+	&lt;script&gt;<br />
+var JSONObject= {<br />
+"name":"John Johnson",<br />
+"street":"Oslo West 555",&nbsp;<br />
+"age":33,<br />
+"phone":"555 1234567"};<br />
+document.getElementById("jname").innerHTML=JSONObject.name&nbsp;<br />
+document.getElementById("jage").innerHTML=JSONObject.age&nbsp;<br />
+document.getElementById("jstreet").innerHTML=JSONObject.street&nbsp;<br />
+document.getElementById("jphone").innerHTML=JSONObject.phone&nbsp;<br />
+&lt;/script&gt;<br />
+<br />
+&lt;/body&gt;<br />
+JSON数据的访问格式为 &nbsp;JOSNNAME.JSONDATA
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	JSON 语法是 JavaScript 对象表示法语法的子集。
+</p>
+<ul>
+	<li>
+		数据在名称/值对中
+	</li>
+	<li>
+		数据由逗号分隔
+	</li>
+	<li>
+		花括号保存对象
+	</li>
+	<li>
+		方括号保存数组
+	</li>
+</ul>
+<h2 id='JSON名称值对'>
+	JSON 名称/值对
+</h2>
+<p>
+	JSON 数据的书写格式是：名称/值对。
+</p>
+<p>
+	名称/值对包括字段名称（在双引号中），后面写一个冒号，然后是值：
+</p>
+<p>
+	"firstName" : "John"
+</p>
+<p>
+	这很容易理解，等价于这条&nbsp;JavaScript 语句：
+</p>
+<p>
+	firstName = "John"
+</p>
+<h2 id='JSON值'>
+	JSON 值
+</h2>
+<p>
+	JSON 值可以是：
+</p>
+<ul>
+	<li>
+		数字（整数或浮点数）
+	</li>
+	<li>
+		字符串（在双引号中）
+	</li>
+	<li>
+		逻辑值（true 或 false）
+	</li>
+	<li>
+		数组（在方括号中）
+	</li>
+	<li>
+		对象（在花括号中）
+	</li>
+	<li>
+		null
+	</li>
+</ul>
+<h2 id='JSON对象'>
+	JSON 对象
+</h2>
+<p>
+	JSON 对象在花括号中书写：
+</p>
+<p>
+	对象可以包含多个名称/值对：
+</p>
+<p>
+	{ "firstName":"John" , "lastName":"Doe" }
+</p>
+<p>
+	这一点也容易理解，与这条&nbsp;JavaScript 语句等价：
+</p>
+<p>
+	firstName = "John"<br />
+lastName = "Doe"
+</p>
+<h2 id='JSON数组'>
+	JSON 数组
+</h2>
+<p>
+	JSON 数组在方括号中书写：
+</p>
+<p>
+	数组可包含多个对象：
+</p>
+<p>
+	{<br />
+"employees": [<br />
+{ "firstName":"John" , "lastName":"Doe" },&nbsp;<br />
+{ "firstName":"Anna" , "lastName":"Smith" },&nbsp;<br />
+{ "firstName":"Peter" , "lastName":"Jones" }<br />
+]<br />
+}
+</p>
+<p>
+	在上面的例子中，对象&nbsp;"employees" 是包含三个对象的数组。每个对象代表一条关于某人（有姓和名）的记录。
+</p>
+<h2 id='JSON使用JvScrit语法'>
+	JSON 使用 JavaScript 语法
+</h2>
+<p>
+	因为&nbsp;JSON 使用 JavaScript 语法，所以无需额外的软件就能处理 JavaScript 中的 JSON。
+</p>
+<p>
+	通过&nbsp;JavaScript，您可以创建一个对象数组，并像这样进行赋值：
+</p>
+<h2 id='实例'>
+	实例
+</h2>
+<p>
+	var employees = [<br />
+{ "firstName":"John" , "lastName":"Doe" },&nbsp;<br />
+{ "firstName":"Anna" , "lastName":"Smith" },&nbsp;<br />
+{ "firstName":"Peter" , "lastName": "Jones" }<br />
+];
+</p>
+<p>
+	可以像这样访问&nbsp;JavaScript 对象数组中的第一项：
+</p>
+<p>
+	employees[0].lastName;
+</p>
+<p>
+	返回的内容是：
+</p>
+<p>
+	Doe
+</p>
+<p>
+	可以像这样修改数据：
+</p>
+<p>
+	employees[0].firstName = "Jonatan";
+</p>
+<h2 id='JSON文件'>
+	JSON 文件
+</h2>
+<ul>
+	<li>
+		JSON 文件的文件类型是 ".json"
+	</li>
+	<li>
+		JSON 文本的 MIME 类型是 "application/json"
+	</li>
+</ul>
+<h1>
+	PHP操作JSON
+</h1>
+<p>
+	在&nbsp;php5.2.0 及以上版本已经内置 JSON 扩展。
+</p>
+<h2 id='JSON函数'>
+	JSON 函数
+</h2>
+<table>
+	<tbody>
+		<tr>
+			<td>
+				<p>
+					函数
+				</p>
+			</td>
+			<td>
+				<p>
+					描述
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<p>
+					json_encode
+				</p>
+			</td>
+			<td>
+				<p>
+					对变量进行 JSON 编码
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<p>
+					json_decode
+				</p>
+			</td>
+			<td>
+				<p>
+					对 JSON 格式的字符串进行解码，转换为 PHP 变量
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<p>
+					json_last_error
+				</p>
+			</td>
+			<td>
+				<p>
+					返回最后发生的错误
+				</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<h2 id='jo_ecode'>
+	json_encode
+</h2>
+<p>
+	PHP json_encode() 用于对变量进行 JSON 编码，该函数如果执行成功返回 JSON 数据，否则返回 FALSE 。
+</p>
+<h3>
+	语法
+</h3>
+<p>
+	string&nbsp;json_encode (&nbsp;$value [,&nbsp;$options =&nbsp;0&nbsp;]&nbsp;)
+</p>
+<h3>
+	参数
+</h3>
+<ul>
+	<li>
+		value: 要编码的值。该函数只对 UTF-8 编码的数据有效。
+	</li>
+	<li>
+		options:由以下常量组成的二进制掩码：太乱不记了
+	</li>
+</ul>
+<p>
+	以下实例演示了如何将&nbsp;PHP 数组转换为 JSON 格式数据：
+</p>
+<p>
+	&lt;?php
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;$arr =&nbsp;array('a'&nbsp;=&gt;&nbsp;1,&nbsp;'b'&nbsp;=&gt;&nbsp;2,&nbsp;'c'&nbsp;=&gt;&nbsp;3,&nbsp;'d'&nbsp;=&gt;&nbsp;4,&nbsp;'e'&nbsp;=&gt;&nbsp;5);
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;echo json_encode($arr);?&gt;
+</p>
+<p>
+	以上代码执行结果为：
+</p>
+<p>
+	{"a":1,"b":2,"c":3,"d":4,"e":5}
+</p>
+<p>
+	以下实例演示了如何将&nbsp;PHP 对象转换为 JSON 格式数据：
+</p>
+<p>
+	&lt;?php
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;class&nbsp;Emp&nbsp;{
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;$name =&nbsp;"";
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;$hobbies &nbsp;=&nbsp;"";
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;$birthdate =&nbsp;"";
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;}
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;$e =&nbsp;new&nbsp;Emp();
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;$e-&gt;name =&nbsp;"sachin";
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;$e-&gt;hobbies &nbsp;=&nbsp;"sports";
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;$e-&gt;birthdate =&nbsp;date('m/d/Y h:i:s a',&nbsp;"8/5/1974 12:20:03 p");
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;$e-&gt;birthdate =&nbsp;date('m/d/Y h:i:s a',&nbsp;strtotime("8/5/1974 12:20:03"));
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;echo json_encode($e);?&gt;
+</p>
+<p>
+	以上代码执行结果为：
+</p>
+<p>
+	{"name":"sachin","hobbies":"sports","birthdate":"08\/05\/1974 12:20:03 pm"}
+</p>
+<h2 id='jo_decode'>
+	json_decode
+</h2>
+<p>
+	PHP json_decode() 函数用于对 JSON 格式的字符串进行解码，并转换为 PHP 变量。
+</p>
+<h3>
+	语法
+</h3>
+<p>
+	mixed json_decode ($json [,$assoc =&nbsp;false&nbsp;[,&nbsp;$depth =&nbsp;512&nbsp;[,&nbsp;$options =&nbsp;0&nbsp;]]])
+</p>
+<h3>
+	参数
+</h3>
+<p>
+	json_string: 待解码的 JSON 字符串，必须是 UTF-8 编码数据
+</p>
+<p>
+	assoc: 当该参数为 TRUE 时，将返回数组，FALSE 时返回对象。
+</p>
+<p>
+	depth: 整数类型的参数，它指定递归深度
+</p>
+<p>
+	options: 二进制掩码，目前只支持 JSON_BIGINT_AS_STRING 。
+</p>
+<h1>
+	PHP写入和读取JSON文件
+</h1>
+<p>
+	&lt;?php<br />
+&nbsp;&nbsp;&nbsp;&nbsp;//生成一个PHP数组 假装从前端或者其他地方拿来的数据<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;$data =&nbsp;array();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;$data['name'] = 'test1';<br />
+&nbsp;&nbsp;&nbsp;&nbsp;$data['work'] = 'process';<br />
+&nbsp;&nbsp;&nbsp;&nbsp;$data['purpose'] = 'json';<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;//json_encode — 对变量进行 JSON 编码 待编码的 value ，除了resource 类型之外，可以为任何数据类型<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;//该函数只能接受 UTF-8 编码的数据（译注：指字符/字符串类型的数据）<br />
+&nbsp;&nbsp;&nbsp;&nbsp;//编码成功则返回一个以 JSON 形式表示的 string 。<br />
+&nbsp;&nbsp;&nbsp;&nbsp;//首先将数组转换成JSON<br />
+&nbsp;&nbsp;&nbsp;&nbsp;$json_string = json_encode($data);<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;//写入文件<br />
+&nbsp;&nbsp;&nbsp;&nbsp;file_put_contents('test.json',$json_string);
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	&lt;?php<br />
+&nbsp;&nbsp;&nbsp;&nbsp;//从文件中读取数据，以字符串形式到PHP中<br />
+&nbsp;&nbsp;&nbsp;&nbsp;$json_string = file_get_contents('test.json');<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;//json_decode — 对 JSON 格式的字符串进行解码<br />
+&nbsp;&nbsp;&nbsp;&nbsp;//mixed json_decode ( string $json [, bool $assoc ] )<br />
+&nbsp;&nbsp;&nbsp;&nbsp;//接受一个 JSON 格式的字符串并且把它转换为 PHP 变量<br />
+&nbsp;&nbsp;&nbsp;&nbsp;//$assoc当该参数为 TRUE 时，将返回 array 而非 object 。<br />
+&nbsp;&nbsp;&nbsp;&nbsp;//把JSON字符串转成PHP数组<br />
+&nbsp;&nbsp;&nbsp;&nbsp;$data = json_decode($json_string,true);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;var_dump($data);
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/699.html">imacros的一些注意事项比如模拟鼠标点击</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/720.html">网页制作1—静态网页的基本操作</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="http://www.cnblogs.com/zhouqi666/p/5978025.html" target="_blank">http://www.cnblogs.com/zhouqi666/p/5978025.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#JSON名称值对">JSON名称值对</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#JSON值">JSON值</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#JSON对象">JSON对象</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#JSON数组">JSON数组</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#JSON使用JvScrit语法">JSON使用JvScrit语法</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#实例">实例</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#JSON文件">JSON文件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#JSON函数">JSON函数</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#jo_ecode">jo_ecode</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#jo_decode">jo_decode</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

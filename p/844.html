@@ -1,0 +1,383 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>C++基本语法_comonly.cn</title>
+<meta name="keywords" content="C++基本语法" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">C++基本语法</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-02-07</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	c c++
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	C++源程序文件扩展名是.cpp。可以使用Microsoft Visual Studio的集成开发环境（Integrated Develop Environment, IDE）开发。注释同C
+</p>
+<p>
+	#include//编译预处理命令，iostream是Visual C++.NET系统提供的头文件。声明输入输出的有关信息。
+</p>
+<p>
+	using namespace std;//命名空间
+</p>
+<p>
+<pre class="prettyprint lang-cpp">cout &lt;&lt; "" &lt;&lt; a &lt;&lt; endl;     //cout通过&lt;&lt;输出字符串""，变量a，和控制字符。endl用来换行。
+cin &gt;&gt; a;    //cin通过&gt;&gt;输入内容给a。</pre>
+</p>
+<p>
+	基本数据类型有：int, short int, long int, unsigned. 浮点型float, double. 字符型char. 布尔型boolean。
+</p>
+<p>
+	构造数据类型有：数组，指针，结构体，共用体，枚举，类，空类型。
+</p>
+<p>
+	常量用const关键字进行定义。const double PI = 3.1415926;
+</p>
+<p>
+	#define命令定义一个常量（预处理）。#define PI 3.1415926
+</p>
+<h4>
+	运算符
+</h4>
+<p>
+	算数运算：+，-，*，/，%（取模）
+</p>
+<p>
+	++，--
+</p>
+<p>
+	&amp;&amp;，||，！
+</p>
+<p>
+	&gt;,&lt;,==,&gt;=,&lt;=,!=
+</p>
+<p>
+	位运算：x&lt;<n(x各比特位左移n位，右补0),>&gt;(右移，左按符号位补1或0), &gt;&gt;&gt;(无符合右移左补0), &amp;(与), |(或), ^(异或), ~(位反)</n(x各比特位左移n位，右补0),>
+</p>
+<h4>
+	内置函数
+</h4>
+<p>
+	求整数绝对值int abs(int x);&nbsp; &nbsp; 头文件cstdlib
+</p>
+<p>
+	占用内存字节数 sizeof(x);&nbsp; &nbsp; 头文件iostream
+</p>
+<p>
+	<br />
+</p>
+<p>
+	程序控制语句同C
+</p>
+<h4>
+	函数的调用
+</h4>
+<p>
+	函数的传值调用：主调函数把实参的值传送给被调函数的形参
+</p>
+<p>
+	函数的引用调用：int a; int &amp;ra=a; //ra为引用变量，a为被引用变量，不同于取址运算符。ra和a的地址相同，共用同一个存储单元。用引用变量做函数的形参，则对形参的操作，实参也会发生相应的改变。对应函数void change(int &amp;a_temp){a_temp=5;}则调用函数change(a);后a==5;
+</p>
+<p>
+	函数的嵌套调用和函数的递归调用
+</p>
+<h4>
+	函数模板
+</h4>
+<p>
+	由模板函数实现，调用时自动选择合适的参数类型。
+</p>
+<p>
+<pre class="prettyprint lang-cpp">Template &lt;class T&gt;
+void swap(T a, T b)
+{
+    T temp;
+    temp=a;a=b;b=temp;
+}</pre>
+</p>
+<p>
+	动态局部变量auto;静态局部变量static;
+</p>
+<p>
+	外部变量 extern int s; //定义外部变量s,改变s的值，其他程序中同名的全局变量会受到影响。
+</p>
+<h4>
+	随机函数
+</h4>
+<p>
+	rand()结合两个用于产生随机数种子的函数srand()（需要用到cstalib头文件）和time()（需要用到ctime头文件）才能产生不同序列的随机数。srand(time(0)); int n=rand();
+</p>
+<h4>
+	函数的重载
+</h4>
+<p>
+	重载函数需要在参数类型，参数个数或者参数顺序上有所不同。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	数组，字符数组（字符串处理函数）
+</p>
+<p>
+	结构体struct，共用体union
+</p>
+<p>
+	枚举类型enum Color{red, blue, green};，其值为字符串对于位置的整数值
+</p>
+<h4>
+	文件包含预处理
+</h4>
+<p>
+	#include &lt;文件名&gt;
+</p>
+<p>
+	#include "文件名"
+</p>
+<h4>
+	宏定义
+</h4>
+<p>
+	无参数宏定义 #define PI &nbsp;3.1415926
+</p>
+<p>
+	带参数宏定义 #define S(a,b) &nbsp;a*b
+</p>
+<p>
+	宏定义的解除 #undef PI
+</p>
+<p>
+	<br />
+</p>
+<p>
+	条件编译
+</p>
+<p>
+	类型重定义typedef 为已有数据类型增加一个新名字。
+</p>
+<p>
+	指针，指针变量，字符串，数字，指针型函数，指向结构体的指针。
+</p>
+<h4>
+	带参数的main()函数
+</h4>
+<p>
+<pre class="prettyprint lang-cpp">int main(int argc, char *argv[]){} </pre>
+</p>
+<p>
+	//argc为以命令行方式执行程序时所带参数的个数（包括该程序的程序名）。第二个参数存放执行程序时命令行的命令及命令带的字符串参数。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/843.html">从小白创建网站的流程</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/845.html">erp报表项目</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="">
+							<h2 style="display:inline;color:#5BC648;"></h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-02-07&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span>常用的转义字符</span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

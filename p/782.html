@@ -1,0 +1,356 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>在access中求时间差——DateDiff 函数_comonly.cn</title>
+<meta name="keywords" content="在access中求时间差——DateDiff 函数" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">在access中求时间差——DateDiff 函数</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-07-13</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	数据库
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">access,datediff,dateadd</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='DteDiff函数,返回Vrit(Log)的值，表示两个指定日期间的时间间隔数目。'>
+	DateDiff 函数,返回 Variant (Long) 的值，表示两个指定日期间的时间间隔数目。
+</h2>
+<p>
+	语法 DateDiff(interval, date1, date2[, firstdayofweek[, firstweekofyear]])
+</p>
+DateDiff 函数语法中有下列命名参数：<br />
+interval &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 必要。字符串表达式，表示用来计算date1 和 date2 的时间差的时间间隔<br />
+Date1□date2 &nbsp; &nbsp; &nbsp;必要；Variant (Date)。计算中要用到的两个日期。<br />
+Firstdayofweek &nbsp; 可选。指定一个星期的第一天的常数。如果未予指定，则以星期日为第一天。<br />
+firstweekofyear &nbsp; 可选。指定一年的第一周的常数。如果未予指定，则以包含 1 月 1 日的星期为第一周。<br />
+interval &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 参数的设定值同DateAdd函数<br />
+<p>
+	例：DateDiff("d",#2004-01-06#,#2004-01-07#) 1
+</p>
+<p>
+	<br />
+</p>
+<h2 id='DteAdd函数,返回已添加指定时间间隔的日期。'>
+	DateAdd 函数,返回已添加指定时间间隔的日期。
+</h2>
+<p>
+	DateAdd(interval, number, date)
+</p>
+<p>
+	interval &nbsp; &nbsp;必选项。字符串表达式，表示要添加的时间间隔。有关数值，请参阅“设置”部分。<br />
+number &nbsp; 必选项。数值表达式，表示要添加的时间间隔的个数。数值表达式可以是正数（得到未来的日期）或负数（得到过去的日期）。<br />
+date &nbsp; &nbsp; &nbsp; &nbsp;必选项。Variant&nbsp;或要添加&nbsp;interval&nbsp;的表示日期的文字。
+</p>
+<h4>
+	interval&nbsp;参数可以有以下值：
+</h4>
+<table border="1">
+	<tbody>
+		<tr>
+			<th>
+				设置
+			</th>
+			<th>
+				描述
+			</th>
+		</tr>
+		<tr>
+			<td>
+				yyyy
+			</td>
+			<td>
+				年
+			</td>
+		</tr>
+		<tr>
+			<td>
+				q
+			</td>
+			<td>
+				季度
+			</td>
+		</tr>
+		<tr>
+			<td>
+				m
+			</td>
+			<td>
+				月
+			</td>
+		</tr>
+		<tr>
+			<td>
+				y
+			</td>
+			<td>
+				一年的日数
+			</td>
+		</tr>
+		<tr>
+			<td>
+				d
+			</td>
+			<td>
+				日
+			</td>
+		</tr>
+		<tr>
+			<td>
+				w
+			</td>
+			<td>
+				一周的日数
+			</td>
+		</tr>
+		<tr>
+			<td>
+				ww
+			</td>
+			<td>
+				周
+			</td>
+		</tr>
+		<tr>
+			<td>
+				h
+			</td>
+			<td>
+				小时
+			</td>
+		</tr>
+		<tr>
+			<td>
+				n
+			</td>
+			<td>
+				分钟
+			</td>
+		</tr>
+		<tr>
+			<td>
+				s
+			</td>
+			<td>
+				秒
+			</td>
+		</tr>
+	</tbody>
+</table>
+<h4>
+	<br />
+说明
+</h4>
+<p>
+	可用&nbsp;DateAdd&nbsp;函数从日期中添加或减去指定时间间隔。例如可以使用&nbsp;DateAdd&nbsp;从当天算起 30 天以后的日期或从现在算起 45 分钟以后的时间。要向&nbsp;date&nbsp;添加以“日”为单位的时间间隔，可以使用“一年的日数”（“y”）、“日”（“d”）或“一周的日数”（“w”）。
+</p>
+<p>
+	DateAdd&nbsp;函数不会返回无效日期。如下示例将 95 年 1 月 31 日加上一个月：
+</p>
+NewDate = DateAdd("m", 1, "31-Jan-95")
+<p>
+	在这个示例中，DateAdd&nbsp;返回 95 年 2 月 28 日，而不是 95 年 2 月 31 日。如果&nbsp;date&nbsp;为 96 年 1 月 31 日，则返回 96 年 2 月 29 日，这是因为 1996 是闰年。
+</p>
+<p>
+	如果计算的日期是在公元 100 年之前，则会产生错误。
+</p>
+<p>
+	如果&nbsp;number&nbsp;不是&nbsp;Long&nbsp;型值，则在计算前四舍五入为最接近的整数。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/781.html">Access和sql server的语法区别 db2 oracle</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/783.html">python对数据库进行操作</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#DteDiff函数,返回Vrit(Log)的值，表示两个指定日期间的时间间隔数目。">DteDiff函数,返回Vrit(Log)的值，表示两个指定日期间的时间间隔数目。</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#DteAdd函数,返回已添加指定时间间隔的日期。">DteAdd函数,返回已添加指定时间间隔的日期。</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

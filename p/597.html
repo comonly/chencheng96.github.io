@@ -1,0 +1,695 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>常量和变量—JavaScript_comonly.cn</title>
+<meta name="keywords" content="常量和变量—JavaScript" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">常量和变量—JavaScript</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-03-07</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">JavaScript,date</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h1>
+	常量
+</h1>
+<p>
+	一个固定的值，一但确定就不会被改变，有4种
+</p>
+<h3>
+	布尔常量
+</h3>
+<p>
+	true和false，一般用于条件语句判断
+</p>
+<h3>
+	整数常量
+</h3>
+<p>
+	十进制：0~9的数字序列
+</p>
+<p>
+	八进制：第一个数字是0，后面是0~7组成的数字序列
+</p>
+<p>
+	十六进制：以0x或0X开头，后面由0~9和a~f组成的数字序列
+</p>
+<h3>
+	浮点常量
+</h3>
+<p>
+	整数部分加小数部分表示：12.32,123.12
+</p>
+<p>
+	科学或标准方法表示：5E7,3e5（e后面的整数代表10的指数次幂）
+</p>
+<h3>
+	字符串常量
+</h3>
+<p>
+	用单引号或双引号括起来的一个或几个字符："javascript",'211','sd12'
+</p>
+<p>
+	如果一个字符串中本身包含单引号和双引号，可以使用字符串转义字符
+</p>
+<p>
+	<table style="width:600px;" cellpadding="2" cellspacing="0" border="1" bordercolor="#999999">
+		<tbody>
+			<tr>
+				<td>
+					转义字符
+				</td>
+				<td>
+					\n
+				</td>
+				<td>
+					\t
+				</td>
+				<td>
+					\b
+				</td>
+				<td>
+					\r
+				</td>
+				<td>
+					\f
+				</td>
+				<td>
+					\\
+				</td>
+				<td>
+					\'
+				</td>
+				<td>
+					\"
+				</td>
+				<td>
+					\v
+				</td>
+				<td>
+					\0
+				</td>
+			</tr>
+			<tr>
+				<td>
+					含义
+				</td>
+				<td>
+					换行
+				</td>
+				<td>
+					水平制表符
+				</td>
+				<td>
+					空格
+				</td>
+				<td>
+					回车
+				</td>
+				<td>
+					换页
+				</td>
+				<td>
+					斜杠
+				</td>
+				<td>
+					单引号
+				</td>
+				<td>
+					双引号
+				</td>
+				<td>
+					垂直制表符
+				</td>
+				<td>
+					null
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</p>
+<h1>
+	变量
+</h1>
+<p>
+	常量值不变，变量值可以随程序的执行而发生变化
+</p>
+<h2 id='变量的命名方式'>
+	变量的命名方式
+</h2>
+<p>
+	以字母，数字，下划线（_）组成，必须以字母或下划线开头。不能有其他符号。对大小写敏感。
+</p>
+<p>
+	关键字和保留字不能作为变量名。
+</p>
+<p>
+	JavaScript中的关键字
+</p>
+<p>
+	<table style="width:764px;color:#333333;font-family:'Microsoft Yahei', Arial, Helvetica, sans-serif;font-size:14px;background-color:#FCFCFC;">
+		<tbody>
+			<tr>
+				<td style="border:1px solid #CCCCCC;">
+					break
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					do
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					instanceof
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					typeof
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #CCCCCC;">
+					case
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					else
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					new
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					var
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #CCCCCC;">
+					catch
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					finally
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					return
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					void
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #CCCCCC;">
+					continue
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					for
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					switch
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					while
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #CCCCCC;">
+					debugger*
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					function
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					this
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					with
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #CCCCCC;">
+					default
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					if
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					throw
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					delete
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #CCCCCC;">
+					in
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					try
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+				</td>
+			</tr>
+		</tbody>
+	</table>
+<span>JavaScript中的保留字</span> 
+</p>
+<p>
+	<table style="width:764px;color:#333333;font-family:'Microsoft Yahei', Arial, Helvetica, sans-serif;font-size:14px;background-color:#FCFCFC;">
+		<tbody>
+			<tr>
+				<td style="border:1px solid #CCCCCC;">
+					abstract
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					enum
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					int
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					short
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #CCCCCC;">
+					boolean
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					export
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					interface
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					static
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #CCCCCC;">
+					byte
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					extends
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					long
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					super
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #CCCCCC;">
+					char
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					final
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					native
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					synchronized
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #CCCCCC;">
+					class
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					float
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					package
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					throws
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #CCCCCC;">
+					const
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					goto
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					private
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					transient
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #CCCCCC;">
+					debugger
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					implements
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					protected
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					volatile
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #CCCCCC;">
+					double
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					import
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					public
+				</td>
+				<td style="border:1px solid #CCCCCC;">
+					<br />
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</p>
+<h2 id='定义变量'>
+	定义变量
+</h2>
+<p>
+	var a; &nbsp; //定义变量a,没有赋值，此时变量会保存一个特殊的值——undefined
+</p>
+<p>
+	给变量赋值，JavaScript会自动根据赋值数据类型确定变量的类型。
+</p>
+<p>
+	var x=100; &nbsp;//变量x是数字类型
+</p>
+<p>
+	var y="123"; &nbsp; //y是字符串类型
+</p>
+<p>
+	var xy=true; &nbsp; //xy是布尔类型
+</p>
+<p>
+	var z=19.5; &nbsp;//z是数字类型
+</p>
+<h2 id='变量的值'>
+	变量的值
+</h2>
+<p>
+	变量可能包含两种不同类型的值：基本类型值和引用类型值。
+</p>
+<ul>
+	<li>
+		<span style="line-height:1.5;">基本类型值是指保存在栈内存中的简单数据段，这些值完全保存在内存中的一个位置，常见的值有数字类型，布尔类型，字符串类型，空值，未定义值。这5种值在内存中分别占用固定大小空间，我们操作的是他们实际保存的值，所以它们是按值访问的。</span> 
+	</li>
+	<li>
+		<span style="line-height:1.5;">引用类型值是指保存在堆内存中的对象，保存的是一个指针。访问这种变量，先从栈内存中读取指针的内存地址，根据这个地址找到保存在堆内存中的值，即引用访问。</span>
+	</li>
+</ul>
+<p>
+	引用类型的变量可以添加属性和方法，也可以改变和删除其属性和方法，但是基本类型值不可以。
+</p>
+<h2 id='变量的复制'>
+	变量的复制
+</h2>
+<p>
+	基本类型的值复制
+</p>
+<p>
+	var a=10;var b=a;//定义变量a,赋值10，定义变量b,把变量a的值赋给b.
+</p>
+<p>
+	&lt;script type="text/javascript"&gt;<br />
+var a=10;<br />
+var b=a;<br />
+b=b+20;<br />
+window.alert("a的值是"+a+"，b的值是"+b);<br />
+&lt;/script&gt;
+</p>
+<p>
+	复制上述代码<span style="background-color:#FFE500;"><a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank">进入在线测试</a></span> 
+</p>
+<h2 id='引用类型的值的复制'>
+	引用类型的值的复制
+</h2>
+<p>
+	从一个变量向另一个变量复制引用型的值，也会把栈内存中的值复制一份放到为新变量分配的空间中，但这个值是指针。两个变量实际指向的是同一个对象。
+</p>
+<p>
+	&lt;script type="text/javascript"&gt;<br />
+var obj1=new Object(); //创建变量对象<br />
+var obj2=obj1;<br />
+obj1.age=30;<br />
+window.alert("变量1的年龄属性值是"+obj1.age+"，变量2的年龄属性值是"+obj2.age);<br />
+obj2.name="中国";<br />
+window.alert("变量1的姓名属性值是"+obj1.name+"，变量2的姓名属性值是"+obj2.name);<br />
+&lt;/script&gt;
+</p>
+<p>
+	<span>复制上述代码</span><span style="background-color:#FFE500;"><a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank">进入在线测试</a></span> 
+</p>
+<h2 id='检测变量的类型'>
+	检测变量的类型
+</h2>
+<p>
+	使用typeof操作符，当前数据类型是null，返回的值是object。
+</p>
+<p>
+	&lt;script type="text/javascript"&gt;<br />
+var str="javascript";<br />
+var b=true;<br />
+var num=100;<br />
+var m;<br />
+var n=null;<br />
+window.alert("变量str的类型是"+typeof str+"，变量b的类型是"+typeof b+"，变量num的类型是"+typeof num+"，变量m的类型是"+typeof m+"，变量n的类型是"+typeof n);<br />
+&lt;/script&gt;
+</p>
+<p>
+	复制上述代码<span style="background-color:#FFE500;"><a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank">进入在线测试</a></span> 
+</p>
+如果是引用型的，typeof也会返回object，但可以用专门检测对象的操作符instanceof，
+<p>
+	<span>&lt;script type="text/javascript"&gt;<br />
+var obj=new Object();<br />
+window.alert("typeof返回的值"+typeof obj);<br />
+window.alert(obj instanceof Object); &nbsp; &nbsp;//判断变量obj是Object吗？返回true<br />
+&lt;/script&gt;</span> 
+</p>
+<p>
+	<span>复制上述代码</span><span style="background-color:#FFE500;"><a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank">进入在线测试</a></span> 
+</p>
+<h2 id='常量和变量的区别'>
+	常量和变量的区别
+</h2>
+<p>
+	常量不能改变，变量的值可以改变。对于每一个变量都有两个值与其关联：
+</p>
+<blockquote>
+	<p>
+		它的数据值，存储在某个内存地址中，有时这个值也称为右值即被读取的值，常量和变量都可以做右值。
+	</p>
+	<p>
+		它的地址值，保存数据的那块内存的地址，有时也被称为左值，可以认为左值的意思是位置值，常量不能用作左值。
+	</p>
+</blockquote>
+<p>
+	1=3; &nbsp;//错误，常量1不能做左值<br />
+y=3; &nbsp;//正确<br />
+y=y+3;
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/596.html">数据类型转换—JavaScript</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/598.html">表达式—JavaScript</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#变量的命名方式">变量的命名方式</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#定义变量">定义变量</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#变量的值">变量的值</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#变量的复制">变量的复制</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#引用类型的值的复制">引用类型的值的复制</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#检测变量的类型">检测变量的类型</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#常量和变量的区别">常量和变量的区别</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

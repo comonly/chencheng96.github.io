@@ -1,0 +1,280 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>sql语句执行顺序_comonly.cn</title>
+<meta name="keywords" content="sql语句执行顺序" />
+<meta name="description" content="sql语句定义和执行顺序
+摘自《MySQL技术内幕:SQL编程》
+
+sql语句定义的顺序
+(1) SELECT (2)DISTINCT&lt;select_list&gt;
+(3) FROM &lt;left_table&gt;
+(4) &lt;join_type&gt; JOIN &lt;right_table&gt;
+(5)&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ON &lt;join_condition&gt;
+(6) WHERE &lt;where_co" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">sql语句执行顺序</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">iiaythi</li>
+          <li class="lmname"><a href="https://blog.csdn.net/u013887008/article/details/93377939" target="_blank">https://blog.csdn.net/u013887008/article/details/93377939</a></li>
+          <li class="timer">2020-09-20</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>sql语句定义和执行顺序
+摘自《MySQL技术内幕:SQL编程》
+
+sql语句定义的顺序
+(1) SELECT (2)DISTINCT&lt;select_list&gt;
+(3) FROM &lt;left_table&gt;
+(4) &lt;join_type&gt; JOIN &lt;right_table&gt;
+(5)&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ON &lt;join_condition&gt;
+(6) WHERE &lt;where_co</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> sql语句定义和执行顺序<br />
+摘自《MySQL技术内幕:SQL编程》<br />
+<br />
+sql语句定义的顺序<br />
+(1) SELECT (2)DISTINCT&lt;select_list&gt;<br />
+(3) FROM &lt;left_table&gt;<br />
+(4) &lt;join_type&gt; JOIN &lt;right_table&gt;<br />
+(5)&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ON &lt;join_condition&gt;<br />
+(6) WHERE &lt;where_condition&gt;<br />
+(7) GROUP BY &lt;group_by_list&gt;<br />
+(8) WITH {CUBE|ROLLUP}<br />
+(9) HAVING &lt;having_condition&gt;<br />
+(10) ORDER BY &lt;order_by_condition&gt;<br />
+(11) LIMIT &lt;limit_number&gt;<br />
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+sql语句执行顺序<br />
+(8) SELECT (9)DISTINCT&lt;select_list&gt;<br />
+(1) FROM &lt;left_table&gt;<br />
+(3) &lt;join_type&gt; JOIN &lt;right_table&gt;<br />
+(2)&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ON &lt;join_condition&gt;<br />
+(4) WHERE &lt;where_condition&gt;<br />
+(5) GROUP BY &lt;group_by_list&gt;<br />
+(6) WITH {CUBE|ROLLUP}<br />
+(7) HAVING &lt;having_condition&gt;<br />
+(10) ORDER BY &lt;order_by_list&gt;<br />
+(11) LIMIT &lt;limit_number&gt;<br />
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+可以看到，一共有十一个步骤，最先执行的是FROM操作，最后执行的是LIMIT操作。每个操作都会产生一个虚拟表，该虚拟表作为一个处理的输入，看下执行顺序：<br />
+<br />
+(1) FROM:对FROM子句中的左表&lt;left_table&gt;和右表&lt;right_table&gt;执行笛卡儿积，产生虚拟表VT1;<br />
+(2) ON: 对虚拟表VT1进行ON筛选，只有那些符合&lt;join_condition&gt;的行才被插入虚拟表VT2;<br />
+(3) JOIN: 如果指定了OUTER JOIN(如LEFT OUTER JOIN、RIGHT OUTER JOIN)，那么保留表中未匹配的行作为外部行添加到虚拟表VT2，产生虚拟表VT3。如果FROM子句包含两个以上的表，则对上一个连接生成的结果表VT3和下一个表重复执行步骤1~步骤3，直到处理完所有的表;<br />
+(4) WHERE: 对虚拟表VT3应用WHERE过滤条件，只有符合&lt;where_condition&gt;的记录才会被插入虚拟表VT4;<br />
+(5) GROUP By: 根据GROUP BY子句中的列，对VT4中的记录进行分组操作，产生VT5;<br />
+(6) CUBE|ROllUP: 对VT5进行CUBE或ROLLUP操作，产生表VT6;<br />
+(7) HAVING: 对虚拟表VT6应用HAVING过滤器，只有符合&lt;having_condition&gt;的记录才会被插入到VT7;<br />
+(8) SELECT: 第二次执行SELECT操作，选择指定的列，插入到虚拟表VT8中;<br />
+(9) DISTINCT: 去除重复，产生虚拟表VT9;<br />
+(10) ORDER BY: 将虚拟表VT9中的记录按照&lt;order_by_list&gt;进行排序操作，产生虚拟表VT10;<br />
+(11) LIMIT: 取出指定街行的记录，产生虚拟表VT11，并返回给查询用户<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1727.html">mysql的查询需要遍历几次B+树，理论上需要几次磁盘I/O？</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1729.html">mysql分表的3种方法</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/u013887008/article/details/93377939" target="_blank">https://blog.csdn.net/u013887008/article/details/93377939</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

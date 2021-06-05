@@ -1,0 +1,248 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>ffmpeg常用指令 -stimeout  超时参数_comonly.cn</title>
+<meta name="keywords" content="ffmpeg常用指令 -stimeout  超时参数" />
+<meta name="description" content="只搜索到 rtp/rtsp&nbsp; 可以设置&nbsp; -stimeout&nbsp; 超时参数，请问下拉其余格式/协议的文件或者流时，能在命令行直接设置timeout吗？
+我之前的做法是改了ffmpeg的代码，avformat绑定了一个interrupt_callback函数，超时时间是在代码里面写死的，感觉不是很好，有更优雅的方式吗？" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">ffmpeg常用指令 -stimeout  超时参数</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2020-03-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>只搜索到 rtp/rtsp&nbsp; 可以设置&nbsp; -stimeout&nbsp; 超时参数，请问下拉其余格式/协议的文件或者流时，能在命令行直接设置timeout吗？
+我之前的做法是改了ffmpeg的代码，avformat绑定了一个interrupt_callback函数，超时时间是在代码里面写死的，感觉不是很好，有更优雅的方式吗？</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 只搜索到 rtp/rtsp&nbsp; 可以设置&nbsp; -stimeout&nbsp; 超时参数，请问下拉其余格式/协议的文件或者流时，能在命令行直接设置timeout吗？<br />
+我之前的做法是改了ffmpeg的代码，avformat绑定了一个interrupt_callback函数，超时时间是在代码里面写死的，感觉不是很好，有更优雅的方式吗？<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1678.html">windows管理相关批处理指令进程管理</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1680.html">Flash文件和swf文件关系</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="推流命令">
+							<h2 style="display:inline;color:#5BC648;">推流命令</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-04-28&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span>-re -stream_loop -1 -i "D:\90903103540/Bill Conti - Gonna Fly Now.mp3" -map 0:0 -ar 48000 -ab 128000 -acodec mp3 -f rtp udp://227.50.50.50:5000 -vn -acodec mp3 -ar 44100 "Recording\1567662896_Bill Conti - Gonna Fly Now.mp3"<br />
+-re -stream_loop -1 -i "D:\0903103540/Bill Conti - Gonna Fly Now.mp3" -map 0:0 -ar 48000 -ab 128000 -acodec mp3 -rtsp_transport tcp -f rtsp rtsp://192.168.61.66:5554/44413000000000101010101201909050005.sdp -vn -acodec mp3 -ar 44100 "Recording\1567663696_Bill Conti - Gonna Fly Now.mp3"<br />
+-re -stream_loop -1 -i "G:\094741/David Arnold - A Man Who Can.mp3" -map 0:0 -ar 48000 -ab 128000 -acodec mp3 -rtsp_transport tcp -f rtsp rtsp://192.168.61.66:5554/44413000000000101010101201909050005.sdp<br />
+<br />
+推流到rtsp服务器<br />
+ffmpeg -re -stream_loop -1 -i "E:\CloudMusic\Alan Walker - Fade.mp3" -map 0:0 -ar 48000 -ab 128000 -acodec mp3 -rtsp_transport tcp -f rtsp rtsp://192.168.20.154:5554/test.sdp<br />
+c\test.aac<br />
+E:\CloudMusic\David Arnold - Elegy.mp3<br />
+ffmpeg -re -i&nbsp; "G:\cc\test.aac" -c copy -f flv rtmp://192.168.20.154:5554/live/streamName<br />
+<br />
+&nbsp; 文件<br />
+ffmpeg -re -stream_loop 0 -i "G:\test.aac" -map 0:0 -ar 48000 -ab 64000 -acodec mp3 -rtsp_transport tcp -f rtsp rtsp://192.168.20.154:5554/512.sdp<br />
+ffmpeg -re -stream_loop 0 -i "G:\est.aac" -map 0:0 -ar 48000 -ab 64000 -acodec mp3 -rtsp_transport tcp -f rtsp rtsp://192.168.20.154:5554/512.sdp -vn -acodec mp3 -ar 44100 "1575533618_David Arnold - Back to Work.mp3"<br />
+<div>
+	<br />
+</div></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#推流命令">推流命令</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

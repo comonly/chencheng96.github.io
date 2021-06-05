@@ -1,0 +1,342 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>mysql 8安装过程需要注意的问题及密码设置_comonly.cn</title>
+<meta name="keywords" content="mysql 8安装过程需要注意的问题及密码设置" />
+<meta name="description" content="安装数据库
+
+
+	安装，mysql安装目标bin同层目录添加my.ini文件。
+
+[mysqld]
+#设置3306端口
+port = 3306
+# 设置mysql的安装目录
+basedir=D:\\soft_not_install\mysql-8.0.17-winx64
+# 设置mysql数据库的数据的存放目录
+datadir=D:\\soft_not_install\mysql-8.0.17-winx64\data
+# 允许最大连接数
+max_connections=50
+#" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">mysql 8安装过程需要注意的问题及密码设置</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-09-17</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>安装数据库
+
+
+	安装，mysql安装目标bin同层目录添加my.ini文件。
+
+[mysqld]
+#设置3306端口
+port = 3306
+# 设置mysql的安装目录
+basedir=D:\\soft_not_install\mysql-8.0.17-winx64
+# 设置mysql数据库的数据的存放目录
+datadir=D:\\soft_not_install\mysql-8.0.17-winx64\data
+# 允许最大连接数
+max_connections=50
+#</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='安装数据库'>
+	安装数据库
+</h2>
+<p>
+	安装，mysql安装目标bin同层目录添加my.ini文件。
+</p>
+<pre class="prettyprint">[mysqld]
+#设置3306端口
+port = 3306
+# 设置mysql的安装目录
+basedir=D:\\soft_not_install\mysql-8.0.17-winx64
+# 设置mysql数据库的数据的存放目录
+datadir=D:\\soft_not_install\mysql-8.0.17-winx64\data
+# 允许最大连接数
+max_connections=50
+# 服务端使用的字符集默认为8比特编码的latin1字符集
+character-set-server=utf8
+# 创建新表时将使用的默认存储引擎
+default-storage-engine=INNODB
+
+#设置密码编码为老版本的
+default_authentication_plugin=mysql_native_password
+
+sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES
+
+#设置时区
+default-time-zone='+08:00'
+
+#shared-memory
+#skip-grant-tables</pre>
+<p>
+	cmd管理员身份进入bin目录，执行下面操作。
+</p>
+<pre class="prettyprint lang-bsh">mysqld -install   进行安装
+mysqld --initialize   初始化data目录
+net start mysql   启动服务
+net stop mysql    停止服务</pre>
+<p>
+	初始化时使用mysqld --initialize --console，这样会把默认密码打印出来。
+</p>
+<h2 id='设置密码'>
+	设置密码
+</h2>
+<p>
+	mysqld --initialize --console初始化data目录时，会打印出初始随机密码。
+</p>
+<p>
+	[Note] [MY-010454] [Server] A temporary password is generated for root@localhost: jaYf8F(H(kuX
+</p>
+<p>
+	配置文件中default_authentication_plugin=mysql_native_password指定密码的编码方式，mysql8默认编码为caching_sha2_password。
+</p>
+<p>
+	用默认密码登录数据库后修改新密码：ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '新密码';
+</p>
+<h2 id='忘记密码重新设置'>
+	忘记密码重新设置
+</h2>
+<p>
+	往 ini 里配置 skip-grant-tables，但是MySQL 服务一启动就会立刻自动关闭，ini 里加上了 shared-memory 之后就能用了。err文件中有相关说明。TCP/IP, --shared-memory, or --named-pipe should be configured on NT OS
+</p>
+<p>
+	之后通过语句修改密码：
+</p>
+<pre class="prettyprint lang-bsh">UPDATE mysql.user SET authentication_string=” 密码" WHERE user='root' and host='localhost';</pre>
+<h2 id='添加用户'>
+	添加用户
+</h2>
+<p>
+	insert into mysql.user(Host,User,plugin,authentication_string,ssl_cipher,x509_issuer,x509_subject) values("localhost","test","mysql_native_password","*AEF67EDB7A85613793EF46824CAD957B356E11F8","","","");
+</p>
+<p>
+	其中<span>*AEF67EDB7A85613793EF46824CAD957B356E11F8是<span>mysql_native_password编码方式下"xixichencheng"的编码值。</span></span> 
+</p>
+<h2 id='部分问题解决'>
+	部分问题解决
+</h2>
+<p>
+	<span style="color:#E53333;">通过data目录下.err后缀的文件，查看问题产生原因。</span><span style="color:#E53333;"></span> 
+</p>
+<p>
+	初始化data文件夹时提示：mysqld: Can't create directory '...' (OS errno 2 - No such file or directory)
+</p>
+<p>
+	my.ini文件中basedir=E:\\software\\mysql\\mysql-8.0.11-winx64 此处要用双斜杠\\，单斜杠可能会出错。
+</p>
+<p>
+	<br />
+mysql启动成功后立刻关闭
+</p>
+<p>
+	err文件中报错All I/O interfaces are disabled, X Protocol won't be accessible。因为配置文件中添加了skip-grant-tables导致的，删除就好了。skip-grant-tables 是跳过数据库权限验证
+</p>
+<p>
+	<br />
+</p>
+<p>
+	unknown variable 'default-character-set=utf8'.
+</p>
+<p>
+	设置mysql客户端默认字符集没有default-character-set参数。通过character-set-server=utf8设置
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1450.html">Windows Server 设置自动备份</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1452.html">maven下载的包放哪里了</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#安装数据库">安装数据库</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#设置密码">设置密码</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#忘记密码重新设置">忘记密码重新设置</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#添加用户">添加用户</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#部分问题解决">部分问题解决</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

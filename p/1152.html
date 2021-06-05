@@ -1,0 +1,253 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>数据库死锁_comonly.cn</title>
+<meta name="keywords" content="数据库死锁" />
+<meta name="description" content="一、死锁的表现
+1、错误信息是:事务(进程 ID)与另一个进程被死锁在 锁 资源上，并且已被选作死锁牺牲品。请重新运行该事务。
+2、错误信息是:事务(进程 ID )与另一个进程被死锁在 锁 | 通信缓冲区 资源上，并且已被选作死锁牺牲品。请重新运行该事务。
+
+二、死锁的原因
+1、由于多用户、多任务的并发性和事务的完整性要求，当多个事务处理对多个资源同时访问时，若双方已锁定一部分资源但也都需要对方已锁定的资源时，无法在有限的时间内完全获得所需的资源，就会处于无限的等待状态，从而造成其对资源需求的死" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">数据库死锁</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">csdn风清扬</li>
+          <li class="lmname"><a href="https://blog.csdn.net/hexieshangwang/article/details/47189213" target="_blank">https://blog.csdn.net/hexieshangwang/article/details/47189213</a></li>
+          <li class="timer">2020-09-20</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	数据库
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>一、死锁的表现
+1、错误信息是:事务(进程 ID)与另一个进程被死锁在 锁 资源上，并且已被选作死锁牺牲品。请重新运行该事务。
+2、错误信息是:事务(进程 ID )与另一个进程被死锁在 锁 | 通信缓冲区 资源上，并且已被选作死锁牺牲品。请重新运行该事务。
+
+二、死锁的原因
+1、由于多用户、多任务的并发性和事务的完整性要求，当多个事务处理对多个资源同时访问时，若双方已锁定一部分资源但也都需要对方已锁定的资源时，无法在有限的时间内完全获得所需的资源，就会处于无限的等待状态，从而造成其对资源需求的死</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 一、死锁的表现<br />
+1、错误信息是:事务(进程 ID)与另一个进程被死锁在 锁 资源上，并且已被选作死锁牺牲品。请重新运行该事务。<br />
+2、错误信息是:事务(进程 ID )与另一个进程被死锁在 锁 | 通信缓冲区 资源上，并且已被选作死锁牺牲品。请重新运行该事务。<br />
+<br />
+二、死锁的原因<br />
+1、由于多用户、多任务的并发性和事务的完整性要求，当多个事务处理对多个资源同时访问时，若双方已锁定一部分资源但也都需要对方已锁定的资源时，无法在有限的时间内完全获得所需的资源，就会处于无限的等待状态，从而造成其对资源需求的死锁。<br />
+<p>
+	2、数据库本身加锁机制的实现方法不同，各数据库系统也会产生其特殊的死锁情况。如在Sybase SQL Server 11 中，最小锁为 2K一页的加锁方法，而非行级锁。如果某张表的记录数少且记录的长度较短(即记录密度高，如应用系统中的系统配置表或系统参数表就属于此类表)，被访问的频率高，就容易在该页上产生死锁。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	表现一：<br />
+一个用户 A 访问表 A(锁住了表 A)，然后又访问表 B。另一个用户 B 访问表 B(锁住了表 B)，<br />
+然后企图访问表 A。这时用户 A 由于用户 B 已经锁住表 B，它必须等待用户 B 释放表 B，<br />
+才能继续，同样用户 B 要等用户 A 释放表 A 才能继续操作，这样就造成了死锁。<br />
+解决方法：<br />
+这种死锁是由于程序的 BUG 产生的，需调整程序对数据库层的实现逻辑。仔细分析程序的逻辑：<br />
+（1）尽量避免同时锁定两个资源。<br />
+（2）必须同时锁定两个资源时，要保证在任何时刻都应该按照相同的顺序来锁定资源。<br />
+<br />
+表现二：<br />
+用户 A 读一条纪录，然后修改该条纪录，同时用户 B 也修改该条纪录。这里用户 A 的事务里锁的性质由共享锁企图上升到独占锁 (for update)，而用户 B 里的独占锁由于 A 有共享锁存在所以必须等 A 释放掉共享锁，而 A 由于 B 的独占锁而无法上升的独占锁也就不可能释<br />
+放共享锁，于是出现了死锁。这种死锁比较隐蔽，但其实在稍大点的项目中经常发生。<br />
+解决方法:<br />
+让用户 A 的事务（即先读后写类型的操作)，在 select 时就是用 update lock。<br />
+语法如下：select * from table1 with(updlock) where ….<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1151.html">python, perl</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1153.html">异常ip</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/hexieshangwang/article/details/47189213" target="_blank">https://blog.csdn.net/hexieshangwang/article/details/47189213</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

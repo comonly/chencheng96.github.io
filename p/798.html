@@ -1,0 +1,313 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Java Spring MVC入门_comonly.cn</title>
+<meta name="keywords" content="Java Spring MVC入门" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Java Spring MVC入门</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">scofi</li>
+          <li class="lmname"><a href="http://www.cnblogs.com/scofi/articles/5885109.html" target="_blank">http://www.cnblogs.com/scofi/articles/5885109.html</a></li>
+          <li class="timer">2017-07-20</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	java框架-spring等
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">spring,mvc</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='1、安装jdk'>
+	1、安装jdk
+</h2>
+<h2 id='2、下载eclie并安装，我们下载的是eo版本。'>
+	2、下载eclispe并安装，我们下载的是neon版本。
+</h2>
+下载地址（64位）： https://www.eclipse.org/downloads/download.php?file=/oomph/epp/neon/R/eclipse-inst-win64.exe<br />
+下载地址（32位）： https://www.eclipse.org/downloads/download.php?file=/oomph/epp/neon/R/eclipse-inst-win32.exe<br />
+选择 Java EE ，接着输入安装目录，点击INSTALL。OK，安装成功！<br />
+<h2 id='3、安装一个tomct'>
+	3、安装一个tomcat
+</h2>
+<h2 id='4、建立SrigMVC项目'>
+	4、建立Spring MVC项目
+</h2>
+打开安装好的eclipse ，选择File-&gt;new-&gt;other。在弹出的框内选择Web-&gt;Dynamic Web Project , 选择Next<br />
+现在要给项目起个名字，我们起个SpringDemo：点击Finish之后项目就建立完成。<br />
+<h2 id='5、导入SrigMVC安装包'>
+	5、导入Spring MVC安装包
+</h2>
+好了，上面我们已经建立完成一个动态网站项目，但这些和Spring MVC还没什么关系，所以我们现在要把Spring MVC相关的jar包导入到项目里。<br />
+下载地址：http://repo.springsource.org/libs-release-local/org/springframework/spring/&nbsp;<br />
+我们选择4.3.2.RELEASE，下载，解压缩之后<br />
+<p>
+	其中libs里面就是Spring MVC 的jar包。把这些包都复制到项目的/WebContent/WEB-INF/lib 目录里。
+</p>
+<h2 id='6、将包导入项目里'>
+	6、将包导入项目里
+</h2>
+在项目名上，点击右键先刷新下项目，因为刚刚复制jar进来，再选中项目名右击 Build Path - Configure Bulid Path... - Libraries - Add JARs...，在弹出的框里边找到项目的/WebContent/WEB-INF/lib，这样就看到刚刚你复制过来的 jar 包了。<br />
+<p>
+	选择所有的包点击“OK”。这样我们的包就导入成功了。
+</p>
+<h2 id='7、ervlet和&b;commo-logig包'>
+	7、<span>servlet和 &nbsp;commons-loging 包</span>
+</h2>
+<p>
+	如果想要正常运行项目，仅仅有Spring MVC 的jar包还是不够的，还需要servlet和 &nbsp;commons-loging 包 ,希望初学者自己去网上寻找下载，并导入到build path 。
+</p>
+<p>
+	<h2 id='8、每一个SrigMVC项目都必须有一个站点配置文件web.xml'>
+		8、每一个Spring MVC 项目都必须有一个站点配置文件web.xml
+	</h2>
+下面我们在/WebContent/WEB-INF/下新建web.xml文件，具体内容如下,里面有一些最基本的配置，里面的配置都有注释：
+</p>
+<p>
+	具体web.xml内容参考：<a href="http://www.iyaka.cn/blog/17_797.html" target="_blank">http://www.iyaka.cn/blog/17_797.html</a><br />
+	<h2 id='9、SrigMVC配置文件&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;'>
+		9、Spring MVC配置文件 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+	</h2>
+大家肯定都注意到web.xml文件里有个配置为 “/WEB-INF/springMVC-servlet.xml” &nbsp;这个文件是Spring MVC的配置文件，Spring官方文档上推荐的默认的文件名是[servlet-name]-servlet.xml文件，这里 servlet-name 叫 springMVC，因此，我新建了一个springMVC-servlet.xml。<br />
+<br />
+我们现在在/WEB-INF/下建立一个/springMVC-servlet.xml文件，内容参考：<a href="http://www.iyaka.cn/blog/17_796.html" target="_blank">http://www.iyaka.cn/blog/17_796.html</a>
+</p>
+<h2 id='10、添加Helloworld.jv'>
+	10、添加<span>Helloworld.java</span>
+</h2>
+<p>
+	首先在Java Resource -&gt; src上 右键点击-&gt; new -&gt;package &nbsp;建立com.game.controller 建立一个包，之后在这个包上右键点击new-&gt;class ，类名为Helloworld，之后点击Finish.<br />
+下面我看看看Helloworld.java里面的内容：<br />
+<br />
+package com.game.controller;<br />
+import java.io.IOException;<br />
+import javax.servlet.http.HttpServletRequest;<br />
+import javax.servlet.http.HttpServletResponse;<br />
+import org.springframework.stereotype.Controller;<br />
+import org.springframework.web.bind.annotation.RequestMapping;<br />
+@Controller<br />
+public class Helloworld {<br />
+&nbsp; &nbsp; @RequestMapping("/helloworld") &nbsp;//此处控制浏览器里访问路径 具体为：/SpringDemo/helloworld<br />
+&nbsp; &nbsp; public void helloWorld(HttpServletRequest request, HttpServletResponse response) throws IOException {&nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; //输出字符串<br />
+&nbsp; &nbsp; &nbsp; &nbsp; response.getWriter().append("hello world");<br />
+&nbsp; &nbsp; }<br />
+}<br />
+helloworld内容很简单通过servlet输出对象输出字符串“hello world”。下面我们启动服务器并且在浏览器里运行看看结果。<br />
+	<h2 id='11、配置服务器'>
+		11、配置服务器
+	</h2>
+</p>
+<p>
+	事先必须安装好tomcat<br />
+	<h2 id='12、启动服务器'>
+		12、启动服务器
+	</h2>
+	<h2 id='13、启动成功之后'>
+		13、启动成功之后
+	</h2>
+</p>
+<p>
+	打开浏览器输入http://localhost:8080/SpringDemo/helloworld&nbsp;
+</p>
+<p>
+	<br />
+OK，恭喜你已经入门了。
+</p>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/797.html">站点配置文件web.xml</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/799.html">spring mvc无法显示html文件</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="http://www.cnblogs.com/scofi/articles/5885109.html" target="_blank">http://www.cnblogs.com/scofi/articles/5885109.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#1、安装jdk">1、安装jdk</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#2、下载eclie并安装，我们下载的是eo版本。">2、下载eclie并安装，我们下载的是eo版本。</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#3、安装一个tomct">3、安装一个tomct</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#4、建立SrigMVC项目">4、建立SrigMVC项目</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#5、导入SrigMVC安装包">5、导入SrigMVC安装包</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#6、将包导入项目里">6、将包导入项目里</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#7、ervlet和&b;commo-logig包">7、ervlet和&b;commo-logig包</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#8、每一个SrigMVC项目都必须有一个站点配置文件web.xml">8、每一个SrigMVC项目都必须有一个站点配置文件web.xml</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#9、SrigMVC配置文件&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;">9、SrigMVC配置文件&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#10、添加Helloworld.jv">10、添加Helloworld.jv</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#11、配置服务器">11、配置服务器</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#12、启动服务器">12、启动服务器</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#13、启动成功之后">13、启动成功之后</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

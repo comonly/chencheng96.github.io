@@ -1,0 +1,316 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>一个exe文件都会存储哪些信息？_comonly.cn</title>
+<meta name="keywords" content="一个exe文件都会存储哪些信息？" />
+<meta name="description" content="作者：向阳
+链接：https://www.zhihu.com/question/266634982/answer/1389715637
+来源：知乎
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+	
+		
+			反出源码的题主指的是C#写的程序吧hhhh。其实——EXE里面的东西那么多，可没人说过"执行"的代码都放在同一位置。
+		
+		
+			C#的程序，首先通过一个_CorExeMain的dll调用，然后虚拟机才跑来来执行字节码的，并不是把这些代码直接扔给CPU" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">一个exe文件都会存储哪些信息？</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">向阳</li>
+          <li class="lmname"><a href="https://www.zhihu.com/question/266634982/answer/1389715637" target="_blank">https://www.zhihu.com/question/266634982/answer/1389715637</a></li>
+          <li class="timer">2021-03-31</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	c c++
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>作者：向阳
+链接：https://www.zhihu.com/question/266634982/answer/1389715637
+来源：知乎
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+	
+		
+			反出源码的题主指的是C#写的程序吧hhhh。其实——EXE里面的东西那么多，可没人说过"执行"的代码都放在同一位置。
+		
+		
+			C#的程序，首先通过一个_CorExeMain的dll调用，然后虚拟机才跑来来执行字节码的，并不是把这些代码直接扔给CPU</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <div>
+	作者：向阳<br />
+链接：https://www.zhihu.com/question/266634982/answer/1389715637<br />
+来源：知乎<br />
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br />
+	<div>
+		<p>
+			反出源码的题主指的是C#写的程序吧hhhh。其实——<b>EXE里面的东西那么多，可没人说过"执行"的代码都放在同一位置</b>。
+		</p>
+		<p>
+			C#的程序，首先通过一个_CorExeMain的dll调用，然后虚拟机才跑来来执行字节码的，并不是把这些代码直接扔给CPU跑。而这些字节码能反编译出C#的源程序（很完整的那种）。
+		</p>
+		<p>
+			C/C++写的，只有机器码，一般只能反汇编。反编译出来的代码很难看（比如写的a = b + c 会变成<i> _</i>x124 = <i>_</i>x67 + _x78这样的代码）。
+		</p>
+		<p>
+			那我们来偷看一下EXE有什么吧。
+		</p>
+		<p>
+			<b>现在的EXE一般是PE文件格式</b>。EXE是MS DOS年代的东西，到今天早已经换样子了——至少在我出生之前就已经换样子了。<b>这些玩意被称作目标文件</b>。一个EXE大体包括：
+		</p>
+		<ol>
+			<li>
+				<b>头信息</b>，如EXE，就有PE文件头、DOS文件头这些部分。包括这个是在什么平台上运行的、文件多大、各个段的位置等等。
+			</li>
+			<li>
+				<b>目标代码</b>，总体两部分，一部分是二进制的机器码，这<b>是CPU上真真实实跑的机器码（注意，没有通过虚拟机，就是本机的机器码）</b>。另一部分是<b>数据。也就是什么"string"这样的字符串常量、这个文件的地址空间（简单理解，这个程序的变量储存布局）</b>等等。
+			</li>
+			<li>
+				<b>重定位信息</b>（暂时打问号吧hhh后面再提）
+			</li>
+			<li>
+				<b>符号，包括导入符号和导出符号</b>。<b>exe一般没有导出符号</b>。导入符号就是你写的那些各个dll调用，什么CreateWindow啊、LoadLibrary啊。什么？你没写？链接器的胶连代码也会包括一些dll调用的，不然操作系统怎么把它启动起来呢~。
+			</li>
+		</ol>
+		<p>
+			下面我简单解释一下这些听着很高级实际也很高级的玩意：
+		</p>
+		<hr />
+		<p>
+			<b>先把exe扔掉吧。我们来自己设计一个"EXE"文件吧</b>。很明显，哪怕是最小的机器，也需要两个玩意——头信息和目标代码。我们给目标代码分个段，I段存放机器码，D段存放各种数据、变量的内存布局等等。好把它们摞在一起就是一个文件了，对，就是这么轻松：
+		</p>
+<img src="https://pic4.zhimg.com/50/v2-16f27112577d6a615929fa35dab43aaa_hd.jpg?source=1940ef5c" class="content_image" width="249" /><img src="https://pic4.zhimg.com/80/v2-16f27112577d6a615929fa35dab43aaa_720w.jpg?source=1940ef5c" class="content_image lazy" width="249" />
+		<p>
+			很小巧的呢~<b>透露一下，CPU的跳转是跳转到某个具体地址</b>。所以汇编jmp label实际上会变成jmp 0x12401;的形式。我们把它放到内存里面看看：
+		</p>
+<img src="https://pic1.zhimg.com/50/v2-ed5b649eee2e69e0e094a4aef46f79c4_hd.jpg?source=1940ef5c" class="content_image" width="288" /><img src="https://pic1.zhimg.com/80/v2-ed5b649eee2e69e0e094a4aef46f79c4_720w.jpg?source=1940ef5c" class="content_image lazy" width="288" />
+		<p>
+			那问题来了！这个jmp跳转到的是内存里面的具体地址，如果编译出来的"exe"就确定好了，这个exe不是换个地方就没用了吗（例如原本jmp到0x22，但是这个位置因为某些原因变了，最简单的情况，这个程序换个地方加载，如下图）：
+		</p>
+<img src="https://pic1.zhimg.com/50/v2-adb933de0e6b2973a94a86988c14a0b9_hd.jpg?source=1940ef5c" class="content_image" width="333" /><img src="https://pic1.zhimg.com/80/v2-adb933de0e6b2973a94a86988c14a0b9_720w.jpg?source=1940ef5c" class="content_image lazy" width="333" />
+		<p>
+			<b>很显然，原本的0x22现在是0x50。那么jmp 0x22就不要指望它工作正常了</b>。那怎么办？细心的观察，发现文件位置虽然放到了0x38，但是跳转位置依然是0x38 + 0x12。和之前放到0x10，然后跳转到0x22的偏移量是一致的。<b>换句话说，都是jmp 加载位置 + 一个固定的偏移量</b>。那么，我们就在"exe"里面做一个表，表示哪个位置的指令应该被这样修改。这个表就是重定位表。顺便操作一下，我们引入动态库吧！也就是说，我们需要一个符号表，表示导入导出符号。现在我们把它们摞在一起，是的，还是摞在一起：
+		</p>
+<img src="https://pic2.zhimg.com/50/v2-7793a7f5a39a06d1359ab7e1ecb2d0e5_hd.jpg?source=1940ef5c" class="content_image" width="200" /><img src="https://pic2.zhimg.com/80/v2-7793a7f5a39a06d1359ab7e1ecb2d0e5_720w.jpg?source=1940ef5c" class="content_image lazy" width="200" />
+		<p>
+			<b>现在，到加载进入内存的时候，就快速地在重定位表里面刷一遍，把需要修改的位置改一下。这样，我们就完成了离今天的exe最接近的格式。</b>
+		</p>
+		<hr />
+		<p>
+			最后是真正的EXE格式了。真正的EXE格式除了包括上面这个小玩具"exe"的内容，还包括：
+		</p>
+		<ol>
+			<li>
+				资源区段，就是放资源文件的
+			</li>
+			<li>
+				线程本地存储区段，这是各个线程的地址空间。
+			</li>
+			<li>
+				调整区段，这是为了方便操作系统移动exe准备的
+			</li>
+			<li>
+				加载配置
+			</li>
+			<li>
+				镜像描述
+			</li>
+			<li>
+				机器特定数据
+			</li>
+		</ol>
+	</div>
+</div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1195.html">找工作 秋招 参考网站</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1197.html">mysql通过sql对数据库信息(表结构、存储信息)查询</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.zhihu.com/question/266634982/answer/1389715637" target="_blank">https://www.zhihu.com/question/266634982/answer/1389715637</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,377 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>MySQL优化  explain 关键字使用 查看语句的执行计划_comonly.cn</title>
+<meta name="keywords" content="MySQL优化  explain 关键字使用 查看语句的执行计划" />
+<meta name="description" content="信息
+			
+			
+				描述
+			
+		
+		
+			
+				id
+			
+			
+				查询的序号，包含一组数字，表示查询中执行select子句或操作表的顺序
+**两种情况**
+id相同，执行顺序从上往下
+id不同，id值越大，优先级越高，越先执行
+			
+		
+		
+			
+				select_type
+			
+			
+				查询类型，主要用于区别普通查询，联合查询，子查询等的复杂查询
+1、simple ——简单的select查询，查询中不" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">MySQL优化  explain 关键字使用 查看语句的执行计划</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">mandy@i</li>
+          <li class="lmname"><a href="https://blog.csdn.net/jiadajing267/article/details/81269067" target="_blank">https://blog.csdn.net/jiadajing267/article/details/81269067</a></li>
+          <li class="timer">2020-09-23</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>信息
+			
+			
+				描述
+			
+		
+		
+			
+				id
+			
+			
+				查询的序号，包含一组数字，表示查询中执行select子句或操作表的顺序
+**两种情况**
+id相同，执行顺序从上往下
+id不同，id值越大，优先级越高，越先执行
+			
+		
+		
+			
+				select_type
+			
+			
+				查询类型，主要用于区别普通查询，联合查询，子查询等的复杂查询
+1、simple ——简单的select查询，查询中不</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <table cellpadding="0" cellspacing="0" border="1" bordercolor="#000000">
+	<tbody>
+		<tr>
+			<td>
+				信息
+			</td>
+			<td>
+				描述
+			</td>
+		</tr>
+		<tr>
+			<td>
+				id
+			</td>
+			<td>
+				查询的序号，包含一组数字，表示查询中执行select子句或操作表的顺序<br />
+**两种情况**<br />
+id相同，执行顺序从上往下<br />
+id不同，id值越大，优先级越高，越先执行
+			</td>
+		</tr>
+		<tr>
+			<td>
+				select_type
+			</td>
+			<td>
+				查询类型，主要用于区别普通查询，联合查询，子查询等的复杂查询<br />
+1、simple ——简单的select查询，查询中不包含子查询或者UNION<br />
+2、primary ——查询中若包含任何复杂的子部分，最外层查询被标记<br />
+3、subquery——在select或where列表中包含了子查询<br />
+4、derived——在from列表中包含的子查询被标记为derived（衍生），MySQL会递归执行这些子查询，把结果放到临时表中<br />
+5、union——如果第二个select出现在UNION之后，则被标记为UNION，如果union包含在from子句的子查询中，外层select被标记为derived<br />
+6、union result:UNION 的结果
+			</td>
+		</tr>
+		<tr>
+			<td>
+				table
+			</td>
+			<td>
+				输出的行所引用的表
+			</td>
+		</tr>
+		<tr>
+			<td>
+				type
+			</td>
+			<td>
+				显示联结类型，显示查询使用了何种类型，按照从最佳到最坏类型排序<br />
+1、system：表中仅有一行（=系统表）这是const联结类型的一个特例。<br />
+2、const：表示通过索引一次就找到，const用于比较primary key或者unique索引。因为只匹配一行数据，所以如果将主键置于where列表中，mysql能将该查询转换为一个常量<br />
+3、eq_ref:唯一性索引扫描，对于每个索引键，表中只有一条记录与之匹配。常见于唯一索引或者主键扫描<br />
+4、ref:非唯一性索引扫描，返回匹配某个单独值的所有行，本质上也是一种索引访问，它返回所有匹配某个单独值的行，可能会找多个符合条件的行，属于查找和扫描的混合体<br />
+5、range:只检索给定范围的行，使用一个索引来选择行。key列显示使用了哪个索引，一般就是where语句中出现了between,in等范围的查询。这种范围扫描索引扫描比全表扫描要好，因为它开始于索引的某一个点，而结束另一个点，不用全表扫描<br />
+6、index:index 与all区别为index类型只遍历索引树。通常比all快，因为索引文件比数据文件小很多。<br />
+7、all：遍历全表以找到匹配的行<br />
+注意:一般保证查询至少达到range级别，最好能达到ref。
+			</td>
+		</tr>
+		<tr>
+			<td>
+				possible_keys
+			</td>
+			<td>
+				指出MySQL能使用哪个索引在该表中找到行
+			</td>
+		</tr>
+		<tr>
+			<td>
+				key
+			</td>
+			<td>
+				显示MySQL实际决定使用的键(索引)。如果没有选择索引,键是NULL。查询中如果使用覆盖索引，则该索引和查询的select字段重叠。
+			</td>
+		</tr>
+		<tr>
+			<td>
+				key_len
+			</td>
+			<td>
+				表示索引中使用的字节数，该列计算查询中使用的索引的长度在不损失精度的情况下，长度越短越好。如果键是NULL,则长度为NULL。该字段显示为索引字段的最大可能长度，并非实际使用长度。
+			</td>
+		</tr>
+		<tr>
+			<td>
+				ref
+			</td>
+			<td>
+				显示索引的哪一列被使用了，如果有可能是一个常数，哪些列或常量被用于查询索引列上的值
+			</td>
+		</tr>
+		<tr>
+			<td>
+				rows
+			</td>
+			<td>
+				根据表统计信息以及索引选用情况，大致估算出找到所需的记录所需要读取的行数
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Extra
+			</td>
+			<td>
+				包含不适合在其他列中显示，但是十分重要的额外信息<br />
+1、Using filesort：说明mysql会对数据适用一个外部的索引排序。而不是按照表内的索引顺序进行读取。MySQL中无法利用索引完成排序操作称为“文件排序”<br />
+2、Using temporary:使用了临时表保存中间结果，mysql在查询结果排序时使用临时表。常见于排序order by和分组查询group by。<br />
+3、Using index:表示相应的select操作用使用覆盖索引，避免访问了表的数据行。如果同时出现using where，表名索引被用来执行索引键值的查找；如果没有同时出现using where，表名索引用来读取数据而非执行查询动作。<br />
+4、Using where :表明使用where过滤<br />
+5、using join buffer:使用了连接缓存<br />
+6、impossible where:where子句的值总是false，不能用来获取任何元组<br />
+7、select tables optimized away：在没有group by子句的情况下，基于索引优化Min、max操作或者对于MyISAM存储引擎优化count（*），不必等到执行阶段再进行计算，查询执行计划生成的阶段即完成优化。<br />
+8、distinct：优化distinct操作，在找到第一匹配的元组后即停止找同样值的动作。
+			</td>
+		</tr>
+	</tbody>
+</table></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1743.html">c++ 11多线程创建 标准线程库</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1745.html">进程间的五种通信方式</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/jiadajing267/article/details/81269067" target="_blank">https://blog.csdn.net/jiadajing267/article/details/81269067</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

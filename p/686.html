@@ -1,0 +1,336 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>404错误、500错误、异常错误提示页面的拦截和自定义_comonly.cn</title>
+<meta name="keywords" content="404错误、500错误、异常错误提示页面的拦截和自定义" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">404错误、500错误、异常错误提示页面的拦截和自定义</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-04-15</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	javaweb---jsp asp数据库框架
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">404,500,异常错误</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	在写程序时，别忘记给程序加上错误捕获处理。&nbsp;在web.xml中添加以下内容，捕获错误。&nbsp;
+</p>
+<p>
+	web.xml中的配置 ，<span style="line-height:1.5;">步骤如下：&nbsp;</span>
+</p>
+一、打开WEB-INF文件夹下web.xml文件；&nbsp;<br />
+二、在里面新增：&nbsp;<br />
+<blockquote>
+	&lt;!-- 404 页面不存在错误 --&gt;&nbsp;<br />
+&lt;error-page&gt;&nbsp;<br />
+&lt;error-code&gt;404&lt;/error-code&gt;&nbsp;<br />
+&lt;location&gt;/errorPage404.jsp&lt;/location&gt;&nbsp;<br />
+&lt;/error-page&gt;&nbsp;<br />
+&lt;!-- 500 服务器内部错误 --&gt;&nbsp;<br />
+&lt;error-page&gt;&nbsp;<br />
+&lt;error-code&gt;500&lt;/error-code&gt;&nbsp;<br />
+&lt;location&gt;/errorPage500.jsp&lt;/location&gt;&nbsp;<br />
+&lt;/error-page&gt;&nbsp;<br />
+&lt;!--&nbsp;Java.lang.Exception异常错误,依据这个标记可定义多个类似错误提示 --&gt;&nbsp;<br />
+&lt;error-page&gt;&nbsp;<br />
+&lt;exception-type&gt;java.lang.Exception&lt;/exception-type&gt;&nbsp;<br />
+&lt;location&gt;/exceptionError.jsp&lt;/location&gt;&nbsp;
+	<p>
+		&lt;/error-page&gt;&nbsp;
+	</p>
+</blockquote>
+<p>
+	500错误： 服务器内部错误，或是程序有问题。&nbsp;<br />
+400错误：URL 地址请求错误。&nbsp;<br />
+403错误：权限错误。&nbsp;<br />
+404错误：客户端请求的网页不存在。&nbsp;
+</p>
+<p>
+	<br />
+</p>
+<h3>
+	1xx-信息提示 ：这些状态代码表示临时的响应。客户端在收到常规响应之前，应准备接收一个或多个1xx响应。&nbsp;
+</h3>
+100-继续。&nbsp;<br />
+101-切换协议。&nbsp;<br />
+<h3>
+	2xx-成功 ：这类状态代码表明服务器成功地接受了客户端请求。&nbsp;
+</h3>
+200-确定。客户端请求已成功。&nbsp;<br />
+201-已创建。&nbsp;<br />
+202-已接受。&nbsp;<br />
+203-非权威性信息。&nbsp;<br />
+204-无内容。&nbsp;<br />
+205-重置内容。&nbsp;<br />
+206-部分内容。&nbsp;<br />
+<h3>
+	3xx-重定向 ：客户端浏览器必须采取更多操作来实现请求。例如，浏览器可能不得不请求服务器上的不同的页面，或通过代理服务器重复该请求。&nbsp;
+</h3>
+301-对象已永久移走，即永久重定向。&nbsp;<br />
+302-对象已临时移动。&nbsp;<br />
+304-未修改。&nbsp;<br />
+307-临时重定向。&nbsp;<br />
+<h3>
+	4xx-客户端错误 ：发生错误，客户端似乎有问题。例如，客户端请求不存在的页面，客户端未提供有效的身份验证信息。400-错误的请求。&nbsp;
+</h3>
+401-访问被拒绝。IIS定义了许多不同的401错误，它们指明更为具体的错误原因。这些具体的错误代码在浏览器中显示，但不在IIS日志中显示：&nbsp;<br />
+401.1-登录失败。&nbsp;<br />
+401.2-服务器配置导致登录失败。&nbsp;<br />
+401.3-由于ACL对资源的限制而未获得授权。&nbsp;<br />
+401.4-筛选器授权失败。&nbsp;<br />
+401.5-ISAPI/CGI应用程序授权失败。&nbsp;<br />
+401.7–访问被Web服务器上的URL授权策略拒绝。这个错误代码为IIS6.0所专用。&nbsp;<br />
+403-禁止访问：IIS定义了许多不同的403错误，它们指明更为具体的错误原因：&nbsp;<br />
+403.1-执行访问被禁止。&nbsp;<br />
+403.2-读访问被禁止。&nbsp;<br />
+403.3-写访问被禁止。&nbsp;<br />
+403.4-要求SSL。&nbsp;<br />
+403.5-要求SSL128。&nbsp;<br />
+403.6-IP地址被拒绝。&nbsp;<br />
+403.7-要求客户端证书。&nbsp;<br />
+403.8-站点访问被拒绝。&nbsp;<br />
+403.9-用户数过多。&nbsp;<br />
+403.10-配置无效。&nbsp;<br />
+403.11-密码更改。&nbsp;<br />
+403.12-拒绝访问映射表。&nbsp;<br />
+403.13-客户端证书被吊销。&nbsp;<br />
+403.14-拒绝目录列表。&nbsp;<br />
+403.15-超出客户端访问许可。&nbsp;<br />
+403.16-客户端证书不受信任或无效。&nbsp;<br />
+403.17-客户端证书已过期或尚未生效。&nbsp;<br />
+403.18-在当前的应用程序池中不能执行所请求的URL。这个错误代码为IIS6.0所专用。&nbsp;<br />
+403.19-不能为这个应用程序池中的客户端执行CGI。这个错误代码为IIS6.0所专用。&nbsp;<br />
+403.20-Passport登录失败。这个错误代码为IIS6.0所专用。&nbsp;<br />
+404-未找到。&nbsp;<br />
+404.0-（无）–没有找到文件或目录。&nbsp;<br />
+404.1-无法在所请求的端口上访问Web站点。&nbsp;<br />
+404.2-Web服务扩展锁定策略阻止本请求。&nbsp;<br />
+404.3-MIME映射策略阻止本请求。&nbsp;<br />
+405-用来访问本页面的HTTP谓词不被允许（方法不被允许）&nbsp;<br />
+406-客户端浏览器不接受所请求页面的MIME类型。&nbsp;<br />
+407-要求进行代理身份验证。&nbsp;<br />
+412-前提条件失败。&nbsp;<br />
+413–请求实体太大。&nbsp;<br />
+414-请求URI太长。&nbsp;<br />
+415–不支持的媒体类型。&nbsp;<br />
+416–所请求的范围无法满足。&nbsp;<br />
+417–执行失败。&nbsp;<br />
+423–锁定的错误。&nbsp;<br />
+<h3>
+	5xx-服务器错误 ：服务器由于遇到错误而不能完成该请求。&nbsp;
+</h3>
+500-内部服务器错误。&nbsp;<br />
+500.12-应用程序正忙于在Web服务器上重新启动。&nbsp;<br />
+500.13-Web服务器太忙。&nbsp;<br />
+500.15-不允许直接请求Global.asa。&nbsp;<br />
+500.16–UNC授权凭据不正确。这个错误代码为IIS6.0所专用。&nbsp;<br />
+500.18–URL授权存储不能打开。这个错误代码为IIS6.0所专用。&nbsp;<br />
+500.100-内部ASP错误。&nbsp;<br />
+501-页眉值指定了未实现的配置。&nbsp;<br />
+502-Web服务器用作网关或代理服务器时收到了无效响应。&nbsp;<br />
+502.1-CGI应用程序超时。&nbsp;<br />
+502.2-CGI应用程序出错。application.&nbsp;<br />
+503-服务不可用。这个错误代码为IIS6.0所专用。&nbsp;<br />
+504-网关超时。&nbsp;<br />
+505-HTTP版本不受支持。
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/685.html">域名过期后多长时间可以注册</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/687.html">那些年</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

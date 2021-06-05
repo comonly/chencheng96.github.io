@@ -1,0 +1,379 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>css介绍与图层的嵌套  单一超链接样式_comonly.cn</title>
+<meta name="keywords" content="css介绍与图层的嵌套  单一超链接样式" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">css介绍与图层的嵌套  单一超链接样式</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-05-20</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p class="STYLE4">
+	CSS文字链接
+</p>
+<p>
+	这里重点说一下只改变一个页面中个别超链接文字颜色的方法，即第二个多重超链接样式要用到CSS样式
+</p>
+<p>
+	1.单一超链接样式，上面已经说到，在页面属性面板也可以直接进行设置
+</p>
+<p>
+	2.多重超链接样式
+</p>
+<p>
+	新建一个样式.title1用于修饰文字
+</p>
+<p>
+	创建基于样式.title1的超链接样式。点击新建CSS样式的+按钮，对话框选择高级，选择器中输入样式名称“A.title1:link”确定
+</p>
+<p>
+	然后同样建立“A.title1:hover”，“A.title1:visited”，其中“A.title1:visted”“A.title1:link”属性设置相同。
+</p>
+<p>
+	CSS面板可以看到基于.title1的三个超链接样式
+</p>
+<p>
+	用“A.title1:hover”，“A.title1:visited”，“A.title1:link”设置的超链接，代表只有应用了样式title1的超链接才会应用改样式
+</p>
+<p>
+	选择要链接的文本，输入链接后，样式下拉列表中选择title1即可。
+</p>
+<p>
+	超链接样式与一般的不同，不会出现在属性面板，而样式title1会出现在属性面板
+</p>
+<p>
+	必须采用&lt;a href="链接地址"class="title1"&gt;链接文字&lt;/a&gt;的方式使用超链接样式，即class="title1" 要写入&lt;a&gt;标记中。如果写入&lt;td&gt;,&lt;span&gt;,&lt;div&gt;标记中则不会起作用。只有写入&lt;a&gt;才能调用这三个子样式。其他标记它只是一个不同的文本修饰样式 。 效果如下
+</p>
+<div>
+	<span class="text_title1"><a href="http://www.iyaka.cn/www root direction/web/myself/page/www.zhuanba8.cn" class="text_title1">超链接一运用了多重超链接样式</a></span><a href="http://www.iyaka.cn/www root direction/web/myself/page/www.zhuanba8.cn">&nbsp;</a> &nbsp;&nbsp;&nbsp;&nbsp;                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                &nbsp;&nbsp;&nbsp; <a href="http://www.iyaka.cn/www root direction/web/myself/page/www.zhuanba8.cn">超链接二普通样式</a>
+</div>
+<p>
+	&nbsp;
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	HTML标记：标题        &lt;hl&gt;段落  
+             &lt;p&gt;&nbsp;&nbsp; 表格&nbsp;&nbsp;&lt;table&gt;&nbsp; 链接&lt;a&gt;
+</p>
+<p>
+	CSS(Cascading Style Sheet,层叠样式表)，<a href="http://www.iyaka.cn/advertiser/pageManagement/#">关于CSS</a>
+</p>
+<p>
+	打开：窗口—CSS样式
+</p>
+<p>
+	使用CSS
+</p>
+<p>
+	1.标记加注法，如果只有一个内容需要用到，可以在HTML标记后书写CSS属性，给一个图像加模糊效果&lt;img src="images/fly.gift" width="500" height="500" style="filter:Blue(Strength=50)"&gt;。
+</p>
+<p>
+	2.外部调用法，将CSS写成一个文件，HTML文档头推广引用文件；来使用CSS进行控制
+</p>
+<p>
+	建立：文件—新建—CSS样式表
+</p>
+<p>
+	调用外部CSS样式表：HTML标签之间写人&lt;link href="image/style.css"rel="stylesheet"type="text/css"&gt;。
+</p>
+<p>
+	单击CSS样式表下方的“附加样式表”，安下图设置即可使用外部CSS样式表
+</p>
+<p>
+	也可以将外部CSS样式表导入文档头之间
+</p>
+<p>
+	点击+新建CSS样式，定义CSS的三种方法
+</p>
+<p>
+	类：以“.”开头，将CSS样式用于选定的区域，比较类似于html的样式。
+</p>
+<p>
+	标签：将页面源文件中的html标记重定义。用标签定义的CSS样式设置完毕后，CSS样式立即生效。因此，标签处的下拉列表是页面的html标记。
+</p>
+<p>
+	高级：将此时的css样式用于特定的html标记组合或ID名。选择器下拉列表的4个选项
+</p>
+<p>
+	a:active超链接的激活状态
+</p>
+<p>
+	a:hover鼠标移动到超链接上的状态
+</p>
+<p>
+	a:link超链接的链接状态
+</p>
+<p>
+	a:visited超链接访问过的状态
+</p>
+<p>
+	也可以直接在文本框填入一下html组合，
+</p>
+<p>
+	填入td p,则这个css样式将用于网页上所有td标记内p标签的作用范围
+</p>
+<p>
+	以符合#开头的ID名，填入#abc，则这个CSS样式表将用于网页上所有带有ID=“abc”的html标记的作用范围
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	CSS的文字排版效果
+</p>
+<p>
+	在div标签运用CSS控制段落，标题，表格。。 定义CSS样式表后进行设置即可，，插入图片
+</p>
+<p>
+	字体，颜色，大小，控制段落排版
+</p>
+<p>
+	项目符号的问题都可以通过可视化操作进行实现。
+</p>
+<p>
+	文字竖排等一些效果比较好的属性在CSS样式面板没有提供，可以查阅CSS手册
+</p>
+<p>
+	css美化表格
+</p>
+<p>
+	建立样式，对边框进行选择，最后在表格面板类的下拉列表中选择样式，根据需要作出设置即可
+</p>
+<p>
+	有的样式直接添加代码，在扩展面板里面没有
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	CSS滤镜
+</p>
+<p>
+	CSS滤镜属性只能用在HTML空间元素上，所谓的HTML空间元素就是它们在页面上定义了一个矩形空间，浏览器的窗口可以显示这些空间。
+</p>
+<p>
+	关于CSS滤镜的具体格式及<a href="https://www.baidu.com/s?ie=utf-8&amp;f=8&amp;rsv_bp=1&amp;ch=9&amp;tn=98012088_5_dg&amp;wd=CSS%E6%BB%A4%E9%95%9C%E5%AE%9E%E4%BE%8B&amp;oq=%26lt%3BSS%E6%BB%A4%E9%95%9C%E5%AE%9E%E4%BE%8B&amp;rsv_pq=8302d2760000cc8a&amp;rsv_t=fece%2BgTEoWU1vOcf%2B%2BfhkDlweUEg4Fh1cPOLqLXzxGRyAvvF%2BfJoeDVSkZc5VeHBkgAvIQ&amp;rsv_enter=0&amp;rsv_sug=1">特效实例</a>可以先查看其它资料
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	&nbsp;
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/720.html">网页制作1—静态网页的基本操作</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/722.html">制作连续滚动图片</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

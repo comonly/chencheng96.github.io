@@ -1,0 +1,284 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>WEB前端——JS实现ajax异步提交,及返回处理（含js动态生成网页元素《实例》）_comonly.cn</title>
+<meta name="keywords" content="WEB前端——JS实现ajax异步提交,及返回处理（含js动态生成网页元素《实例》）" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">WEB前端——JS实现ajax异步提交,及返回处理（含js动态生成网页元素《实例》）</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-04-17</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='JS实现jx异步提交'>
+	JS实现ajax异步提交
+</h2>
+<p>
+	对于文件的上传建议使用iframe来模拟ajax的异步提交，还有参数较多不想拼接的时候。当然可以使用Jquery提供的方法来进行处理。
+</p>
+<pre class="prettyprint lang-js">var XMLHttpReq;  //创建XMLHttpRequest对象
+
+//发送请求函数
+function ajaxDiffMovie(obj) { 
+    //对点击事件的js响应，如选中状态，提示刷新等进行设置。
+    createXMLHttpRequest();  //调用下面函数创建一个XMLHttpRequest对象（全局变量）
+    var url = "/graduation_project/ajax/Index?kind="+obj.innerText;  //设置需要请求的URL
+    XMLHttpReq.open("GET", url, true);  //发送请求
+    XMLHttpReq.onreadystatechange = processResponse;//指定响应函数
+    XMLHttpReq.send(null);  // 发送请求，只有POST方法是send()方法的参数才有意义
+}
+
+//创建一个XMLHttpRequest对象保存在全局变量XMLHttpReq中
+function createXMLHttpRequest() {
+    if(window.XMLHttpRequest) { //Mozilla 浏览器
+        XMLHttpReq = new XMLHttpRequest();
+    }
+    else if (window.ActiveXObject) { // IE浏览器
+         try {
+                XMLHttpReq = new ActiveXObject("Msxml2.XMLHTTP");
+         } catch (e) {
+             try {
+                    XMLHttpReq = new ActiveXObject("Microsoft.XMLHTTP");  
+             } catch (e) {}
+         }
+    }
+}
+   
+// 处理返回信息函数
+function processResponse() {
+    if (XMLHttpReq.readyState == 4) { // 判断对象状态
+        if (XMLHttpReq.status == 200) { // 信息已经成功返回，开始处理信息
+            DisplayHot();  //处理返回信息
+            //在返回信息处理完成后执行一些操作，比如更改刷新状态
+            setTimeout("sendRequest()", 1000);
+        } else { //页面不正常
+             window.alert("您所请求的页面有异常。");
+        }
+    }
+}
+
+//将内容显示到页面待处理(这里用js生成内容)
+function DisplayHot() {
+    var resx=XMLHttpReq.responseXML;    //获取返回的XML的根节点，然后继续进行处理...
+    //XMLHttpReq.responseText;    //获取返回的一个字符串...然后进行后续操作
+}</pre>
+对于post方法将个参数拼接后作为send的参数&nbsp;
+<pre class="prettyprint lang-js">var data = "name=" + document.getElementById("staffName").value
+                      + "&amp;sex=" + document.getElementById("staffSex").value
+                      + "&amp;job=" + document.getElementById("staffJob").value;
+XMLHttpReq.send(data);</pre>
+<h2 id='j对返回的XML或字符串进行处理'>
+	js对返回的XML或字符串进行处理
+</h2>
+<pre class="prettyprint lang-js">resx.getElementsByTagName("oneMovie")[0];  //通过标签获取第一个标签为oneMovie的XML结点
+node.children[0].firstChild.nodeValue;  //获取node的第一个孩子内的文本信息
+node.length  //获得结点的个数</pre>
+<h2 id='j生成HTML结点'>
+	js生成HTML结点
+</h2>
+<pre class="prettyprint lang-js">document.createElement("li");  //创建一个DOM结点
+node.setAttribute("id","hotmovie"+i);  //设置属性id node.setAttribute("data-title",name);  //设置属性data-title（自定义属性）
+node.className="ui-slide-item" ;  //设置class属性
+node.innerHTML=name;  //设置结点内的HTML信息
+node.onmouseover= function remoover() {//添加事件！
+    mouseover(this);//这里设置的id为什么是固定的
+};
+fatherNode.appendChild(node);  //将node结点添加到fatherNode下</pre></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/901.html">WEB前端——CSS布局（样式,浮动,清除,块级元素处理）（语法）</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/904.html">WEB前端——html页面引入其他页面或js,css方法</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#JS实现jx异步提交">JS实现jx异步提交</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#j对返回的XML或字符串进行处理">j对返回的XML或字符串进行处理</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#j生成HTML结点">j生成HTML结点</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

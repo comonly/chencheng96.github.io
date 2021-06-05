@@ -1,0 +1,387 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>文档对象—JavaScript_comonly.cn</title>
+<meta name="keywords" content="文档对象—JavaScript" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">文档对象—JavaScript</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-03-12</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">JavaScript,文档对象</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	文档对象（document）是window对象的一个子对象，是客户端JavaScript中最常用的对象，代表了浏览器窗口中的文档。
+</p>
+<h2 id='documet对象'>
+	document对象
+</h2>
+<p>
+	document对象用于大量属性和方法，还拥有很多子对象，这些子对象可以用来控制HTML文档中的图片，链接，表单等。
+</p>
+<p>
+	document对象中的location对象与window对象中的location对象完全相同，都用来表示当前窗口的地址，但一般都使用window对象中的location对象。
+</p>
+<p>
+	applet对象代表网页中的小程序，并不是严格意义的JavaScript对象。
+</p>
+<h2 id='documet对象的属性'>
+	document对象的属性
+</h2>
+<p>
+	document对象的属性主要用于描述HTML文档中的标题，颜色，图片，链接，表单元素等。
+</p>
+<p>
+	<table style="margin:0px;padding:0px;border:1px solid silver;">
+		<tbody>
+			<tr>
+				<th style="border:1px solid silver;">
+					属性
+				</th>
+				<th style="border:1px solid silver;">
+					说明
+				</th>
+			</tr>
+		</tbody>
+		<tbody>
+			<tr>
+				<td style="border:1px solid silver;">
+					document.title
+				</td>
+				<td style="border:1px solid silver;">
+					设置文档标题等价于HTML的&lt;title&gt;标签
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid silver;">
+					document.bgColor
+				</td>
+				<td style="border:1px solid silver;">
+					设置页面背景色
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid silver;">
+					document.linkColor
+				</td>
+				<td style="border:1px solid silver;">
+					未点击过的链接颜色
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid silver;">
+					document.alinkColor
+				</td>
+				<td style="border:1px solid silver;">
+					激活链接(焦点在此链接上)的颜色
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid silver;">
+					document.fgColor
+				</td>
+				<td style="border:1px solid silver;">
+					设置前景色(文本颜色)
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid silver;">
+					document.vlinkColor
+				</td>
+				<td style="border:1px solid silver;">
+					已点击过的链接颜色
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid silver;">
+					document.URL
+				</td>
+				<td style="border:1px solid silver;">
+					设置URL属性从而在同一窗口打开另一网页
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid silver;">
+					document.fileCreatedDate
+				</td>
+				<td style="border:1px solid silver;">
+					文件建立日期，只读属性
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid silver;">
+					document.fileModifiedDate
+				</td>
+				<td style="border:1px solid silver;">
+					文件修改日期，只读属性
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid silver;">
+					document.fileSize
+				</td>
+				<td style="border:1px solid silver;">
+					文件大小，只读属性
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid silver;">
+					document.cookie
+				</td>
+				<td style="border:1px solid silver;">
+					设置和读出cookie
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid silver;">
+					document.charset
+				</td>
+				<td style="border:1px solid silver;">
+					设置字符集 简体中文:gb2312
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</p>
+<h2 id='documet对象的方法'>
+	document对象的方法
+</h2>
+<p>
+	clear()：可以清除网页文档中的内容，一般不使用
+</p>
+<p>
+	close()：可以关闭的输出流，并显示已存在文档流中的内容
+</p>
+<p>
+	open()：打开一个新文档
+</p>
+<p>
+	write()：在网页中输出内容
+</p>
+<p>
+	writeln()：在网页输出内容后换行
+</p>
+<h2 id='tyle="color:#E53333;"documet对象的命名'>
+	<span style="color:#E53333;">document对象的命名</span>
+</h2>
+<p>
+	一个HTML文档中的每一个&lt;form&gt;标签都会在document对象的forms[]数组中创建一个带编码的元素，通过forms[]数组可以访问这些元素。<span style="line-height:1.5;">类似的，每个&lt;img&gt;标签也会创建一个images[]数组的元素，每个&lt;a&gt;标签也会创建一个links[]数组的元素，每个锚点也会创建一个anchors[]数组的元素。还有&lt;applet&gt;,&lt;embed&gt;标签。</span>
+</p>
+<p>
+	如果HTML中的标签元素有name属性，document对象也可以通过name属性来调用这些由HTML标签所创建的对象。
+</p>
+<p>
+	&lt;form name="f1"&gt;
+</p>
+<p>
+	&lt;input type="text" name="t1"&gt;
+</p>
+<p>
+	&lt;/form&gt;
+</p>
+<p>
+	document.form[0].elements[0] //<span>获取第一个&lt;form&gt;标签的第一个文本框</span>
+</p>
+<p>
+	document.f1.t1 &nbsp; &nbsp; &nbsp;//获取第一个&lt;form&gt;标签的第一个文本框，同上
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/623.html">window子对象—JavaScript</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/625.html">document对象的应用—JavaScript</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#documet对象">documet对象</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#documet对象的属性">documet对象的属性</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#documet对象的方法">documet对象的方法</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#tyle="color:#E53333;"documet对象的命名">tyle="color:#E53333;"documet对象的命名</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,457 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>解决Could not load dynamic library 'libcudart.so.10.0'的问题_comonly.cn</title>
+<meta name="keywords" content="解决Could not load dynamic library 'libcudart.so.10.0'的问题" />
+<meta name="description" content="由于目前版本的Tensorflow还只能支持CUDA10.0，而英伟达的CUDA则是更新到了10.1，要解决这个问题，其实可以通过两个版本切换的方式来达到，要用哪个切换哪个。
+
+
+	
+
+
+	下载CUDA10.0，我电脑上面已经配置了10.1版本了
+
+wget https://developer.nvidia.com/compute/cuda/10.0/Prod/local_installers/cuda_10.0.130_410.48_linux
+
+	添加可执行权限
+
+sudo c" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">解决Could not load dynamic library 'libcudart.so.10.0'的问题</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">arenascat</li>
+          <li class="lmname"><a href="https://blog.csdn.net/u012388993/article/details/102573117" target="_blank">https://blog.csdn.net/u012388993/article/details/102573117</a></li>
+          <li class="timer">2020-10-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	机器学习算法分析
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>由于目前版本的Tensorflow还只能支持CUDA10.0，而英伟达的CUDA则是更新到了10.1，要解决这个问题，其实可以通过两个版本切换的方式来达到，要用哪个切换哪个。
+
+
+	
+
+
+	下载CUDA10.0，我电脑上面已经配置了10.1版本了
+
+wget https://developer.nvidia.com/compute/cuda/10.0/Prod/local_installers/cuda_10.0.130_410.48_linux
+
+	添加可执行权限
+
+sudo c</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	由于目前版本的Tensorflow还只能支持CUDA10.0，而英伟达的CUDA则是更新到了10.1，要解决这个问题，其实可以通过两个版本切换的方式来达到，要用哪个切换哪个。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	下载CUDA10.0，我电脑上面已经配置了10.1版本了
+</p>
+wget https://developer.nvidia.com/compute/cuda/10.0/Prod/local_installers/cuda_10.0.130_410.48_linux
+<p>
+	添加可执行权限
+</p>
+sudo chmod +x cuda_10.0.130_410.48_linux
+<p>
+	以sudo执行这个安装程序，记得这样选，只安装CUDA10.0但是不要安装驱动程序，选项可以参考我这边的截图
+</p>
+<p>
+	<img alt="" height="143" src="https://img-blog.csdnimg.cn/20191015194037957.png" width="673" style="height:auto;" /> 
+</p>
+<p>
+	<img alt="" src="https://img-blog.csdnimg.cn/20191015194327632.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTIzODg5OTM=,size_16,color_FFFFFF,t_70" style="height:auto;" /> 
+</p>
+<p>
+	然后就会开始安装了，安装完成之后，sudo vim ~/.bashrc 修改环境变量，修改前如下
+</p>
+<p>
+	<img alt="" height="84" src="https://img-blog.csdnimg.cn/20191015194618532.png" width="665" style="height:auto;" /> 
+</p>
+<p>
+	修改后，把这部分我们先前配置的删除，替换成如下，保存文件
+</p>
+<ol>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				exportCUDA_HOME=/usr/local/cuda
+			</div>
+		</div>
+	</li>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				exportLD_LIBRARY_PATH=/usr/local/cuda/lib64:"$LD_LIBRARY_PATH:/usr/loacl/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64"
+			</div>
+		</div>
+	</li>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				exportPATH=/usr/local/cuda/bin:$PATH
+			</div>
+		</div>
+	</li>
+</ol>
+<p>
+	使用 source ~/.bashrc 来应用环境配置，如果一切就绪，应该使用nvcc --version显示的就是CUDA 10.0版本了
+</p>
+<ol>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				arenascat@TensorSystem:~$ nvcc --version
+			</div>
+		</div>
+	</li>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				nvcc: NVIDIA (R) Cuda compiler driver
+			</div>
+		</div>
+	</li>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				Copyright (c) 2005-2018 NVIDIA Corporation
+			</div>
+		</div>
+	</li>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				Built on Sat_Aug_25_21:08:01_CDT_2018
+			</div>
+		</div>
+	</li>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				Cuda compilation tools, release 10.0, V10.0.130
+			</div>
+		</div>
+	</li>
+</ol>
+<p>
+	如果Pycharm那边再运行python还是没成功，就先把cuda目录文件删除，这个文件其实是一个软链接，之后，再重建一个链接就好了
+</p>
+<ol>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				sudo rm -rf /usr/local/cuda
+			</div>
+		</div>
+	</li>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+			</div>
+		</div>
+	</li>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				sudo ln -s /usr/local/cuda-10.0/ /usr/local/cuda
+			</div>
+		</div>
+	</li>
+</ol>
+<p>
+	再次运行调用了tensorflow-gpu的代码，可以看到已经成功的读取了库
+</p>
+<p>
+	<img alt="" src="https://img-blog.csdnimg.cn/20191015200135423.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTIzODg5OTM=,size_16,color_FFFFFF,t_70" style="height:auto;" /> 
+</p>
+<p>
+	如果要设置为CUDA 10.1的话，把上面的10.0改一改就行了
+</p>
+<p>
+	<br />
+</p>
+<p>
+	如果这个问题不能解决的话，再试试多设置一下环境变量，新建一个文件
+</p>
+sudo vi/etc/profile.d/cuda.sh
+<p>
+	把以下内容复制进去并保存
+</p>
+<ol>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				export PATH=$PATH:/usr/local/cuda/bin
+			</div>
+		</div>
+	</li>
+	<li>
+		<div>
+			<div>
+			</div>
+		</div>
+		<div>
+			<div>
+				export CUDADIR=/usr/local/cuda
+			</div>
+		</div>
+	</li>
+</ol>
+<p>
+	这一个位置也要新建一个文件，如果你装了10.1可能里面会已经有一个cuda10.1.conf不用管它
+</p>
+sudo vi /etc/ld.so.conf.d/cuda.conf
+<p>
+	文件里面有这一句
+</p>
+/usr/local/cuda/lib64
+<p>
+	应用设置
+</p>
+sudoldconfig</div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1873.html">linux 中用户不在 sudoers 文件中。此事将被报告。添加管理员权限</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1875.html">GPU Memory-Usage拉满，Volatile GPU-Util却为0的问题</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/u012388993/article/details/102573117" target="_blank">https://blog.csdn.net/u012388993/article/details/102573117</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

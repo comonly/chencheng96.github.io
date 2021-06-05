@@ -1,0 +1,446 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Web Uploader百度上传插件_comonly.cn</title>
+<meta name="keywords" content="Web Uploader百度上传插件" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Web Uploader百度上传插件</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">百度</li>
+          <li class="lmname"><a href="http://fex.baidu.com/webuploader/getting-started.html" target="_blank">http://fex.baidu.com/webuploader/getting-started.html</a></li>
+          <li class="timer">2017-03-31</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">Web Uploader,上传</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='引入资源'>
+	引入资源
+</h2>
+<p>
+	使用Web Uploader文件上传需要引入三种资源：JS, CSS, SWF。
+</p>
+<hr />
+&lt;!--引入CSS--&gt;<br />
+&lt;link rel="stylesheet" type="text/css" href="webuploader文件夹/webuploader.css"&gt;<br />
+&lt;!--引入JS--&gt;<br />
+&lt;script type="text/javascript" src="webuploader文件夹/webuploader.js"&gt;&lt;/script&gt;<br />
+&lt;!--SWF在初始化的时候指定，在后面将展示--&gt;
+<h2 id='hr文件上传'>
+	<hr />
+	文件上传
+</h2>
+<p>
+	WebUploader只包含文件上传的底层实现，不包括UI部分。所以交互方面可以自由发挥，以下将演示如何去实现一个简单的版本。
+</p>
+<p>
+	请点击下面的选择文件按钮，然后点击开始上传体验此Demo。
+</p>
+<h3>
+	Html部分
+</h3>
+<p>
+	首先准备dom结构，包含存放文件信息的容器、选择按钮和上传按钮三个部分。
+</p>
+<hr />
+&lt;div id="uploader" class="wu-example"&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;!--用来存放文件信息--&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;div id="thelist" class="uploader-list"&gt;&lt;/div&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;div class="btns"&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;div id="picker"&gt;选择文件&lt;/div&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;button id="ctlBtn" class="btn btn-default"&gt;开始上传&lt;/button&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;/div&gt;<br />
+&lt;/div&gt;
+<h3>
+	<hr />
+	初始化Web Uploader
+</h3>
+<p>
+	具体说明，请看一下代码中的注释部分。
+</p>
+<hr />
+var uploader = WebUploader.create({<br />
+<br />
+&nbsp;&nbsp;&nbsp; // swf文件路径<br />
+&nbsp;&nbsp;&nbsp; swf: BASE_URL + '/js/Uploader.swf',<br />
+&nbsp;&nbsp;&nbsp;&nbsp; // 文件接收服务端。<br />
+&nbsp;&nbsp;&nbsp; server: 'http://webuploader.duapp.com/server/fileupload.php',<br />
+&nbsp;&nbsp;&nbsp;&nbsp; // 选择文件的按钮。可选。<br />
+&nbsp;&nbsp;&nbsp; // 内部根据当前运行是创建，可能是input元素，也可能是flash.<br />
+&nbsp;&nbsp;&nbsp; pick: '#picker',<br />
+&nbsp;&nbsp;&nbsp;&nbsp; // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！<br />
+&nbsp;&nbsp;&nbsp; resize: false<br />
+});
+<h3>
+	<hr />
+	显示用户选择
+</h3>
+<p>
+	由于webuploader不处理UI逻辑，所以需要去监听fileQueued事件来实现。
+</p>
+<hr />
+// 当有文件被添加进队列的时候<br />
+uploader.on( 'fileQueued', function( file ) {<br />
+&nbsp;&nbsp;&nbsp; $list.append( '&lt;div id="' + file.id + '" class="item"&gt;' +<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '&lt;h4 class="info"&gt;' + file.name + '&lt;/h4&gt;' +<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '&lt;p class="state"&gt;等待上传...&lt;/p&gt;' +<br />
+&nbsp;&nbsp;&nbsp; '&lt;/div&gt;' );<br />
+});
+<h3>
+	<hr />
+	文件上传进度
+</h3>
+<p>
+	文件上传中，Web Uploader会对外派送uploadProgress事件，其中包含文件对象和该文件当前上传进度。
+</p>
+<hr />
+// 文件上传过程中创建进度条实时显示。<br />
+uploader.on( 'uploadProgress', function( file, percentage ) {<br />
+&nbsp;&nbsp;&nbsp; var $li = $( '#'+file.id ),<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $percent = $li.find('.progress .progress-bar');<br />
+&nbsp;&nbsp;&nbsp;&nbsp; // 避免重复创建<br />
+&nbsp;&nbsp;&nbsp; if ( !$percent.length ) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $percent = $('&lt;div class="progress progress-striped active"&gt;' +<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '&lt;div class="progress-bar" role="progressbar" style="width: 0%"&gt;' +<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '&lt;/div&gt;' +<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '&lt;/div&gt;').appendTo( $li ).find('.progress-bar');<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp;&nbsp; $li.find('p.state').text('上传中');<br />
+&nbsp;&nbsp;&nbsp;&nbsp; $percent.css( 'width', percentage * 100 + '%' );<br />
+});
+<h3>
+	<hr />
+	文件成功、失败处理
+</h3>
+<p>
+	文件上传失败会派送uploadError事件，成功则派送uploadSuccess事件。不管成功或者失败，在文件上传完后都会触发uploadComplete事件。
+</p>
+<hr />
+uploader.on( 'uploadSuccess', function( file ) {<br />
+&nbsp;&nbsp;&nbsp; $( '#'+file.id ).find('p.state').text('已上传');<br />
+});<br />
+<br />
+uploader.on( 'uploadError', function( file ) {<br />
+&nbsp;&nbsp;&nbsp; $( '#'+file.id ).find('p.state').text('上传出错');<br />
+});<br />
+<br />
+uploader.on( 'uploadComplete', function( file ) {<br />
+&nbsp;&nbsp;&nbsp; $( '#'+file.id ).find('.progress').fadeOut();<br />
+});
+<hr />
+图片上传
+<p>
+	与普通文件上传相比，此demo演示了：文件过滤，图片预览，图片压缩上传等功能。
+</p>
+<h3>
+	Html
+</h3>
+<p>
+	要实现如上demo，首先需要准备一个按钮，和一个用来存放添加的文件信息列表的容器。
+</p>
+<hr />
+&lt;!--dom结构部分--&gt;<br />
+&lt;div id="uploader-demo"&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;!--用来存放item--&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;div id="fileList" class="uploader-list"&gt;&lt;/div&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;div id="filePicker"&gt;选择图片&lt;/div&gt;<br />
+&lt;/div&gt;
+<h3>
+	<hr />
+	Javascript
+</h3>
+<p>
+	创建Web Uploader实例
+</p>
+<hr />
+// 初始化Web Uploader<br />
+var uploader = WebUploader.create({<br />
+<br />
+&nbsp;&nbsp;&nbsp; // 选完文件后，是否自动上传。<br />
+&nbsp;&nbsp;&nbsp; auto: true,<br />
+<br />
+&nbsp;&nbsp;&nbsp; // swf文件路径<br />
+&nbsp;&nbsp;&nbsp; swf: BASE_URL + '/js/Uploader.swf',<br />
+<br />
+&nbsp;&nbsp;&nbsp; // 文件接收服务端。<br />
+&nbsp;&nbsp;&nbsp; server: 'http://webuploader.duapp.com/server/fileupload.php',<br />
+<br />
+&nbsp;&nbsp;&nbsp; // 选择文件的按钮。可选。<br />
+&nbsp;&nbsp;&nbsp; // 内部根据当前运行是创建，可能是input元素，也可能是flash.<br />
+&nbsp;&nbsp;&nbsp; pick: '#filePicker',<br />
+<br />
+&nbsp;&nbsp;&nbsp; // 只允许选择图片文件。<br />
+&nbsp;&nbsp;&nbsp; accept: {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; title: 'Images',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; extensions: 'gif,jpg,jpeg,bmp,png',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mimeTypes: 'image/*'<br />
+&nbsp;&nbsp;&nbsp; }<br />
+});
+<hr />
+监听fileQueued事件，通过uploader.makeThumb来创建图片预览图。<br />
+PS: 这里得到的是<a href="http://en.wikipedia.org/wiki/Data_URI_scheme">Data URL</a>数据，IE6、IE7不支持直接预览。可以借助FLASH或者服务端来完成预览。
+<hr />
+// 当有文件添加进来的时候<br />
+uploader.on( 'fileQueued', function( file ) {<br />
+&nbsp;&nbsp;&nbsp; var $li = $(<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '&lt;div id="' + file.id + '" class="file-item thumbnail"&gt;' +<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '&lt;img&gt;' +<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '&lt;div class="info"&gt;' + file.name + '&lt;/div&gt;' +<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '&lt;/div&gt;'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ),<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $img = $li.find('img');<br />
+&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp; // $list为容器jQuery实例<br />
+&nbsp;&nbsp;&nbsp; $list.append( $li );<br />
+<br />
+&nbsp;&nbsp;&nbsp; // 创建缩略图<br />
+&nbsp;&nbsp;&nbsp; // 如果为非图片文件，可以不用调用此方法。<br />
+&nbsp;&nbsp;&nbsp; // thumbnailWidth x thumbnailHeight 为 100 x 100<br />
+&nbsp;&nbsp;&nbsp; uploader.makeThumb( file, function( error, src ) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( error ) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $img.replaceWith('&lt;span&gt;不能预览&lt;/span&gt;');<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $img.attr( 'src', src );<br />
+&nbsp;&nbsp;&nbsp; }, thumbnailWidth, thumbnailHeight );<br />
+});
+<hr />
+然后剩下的就是上传状态提示了，当文件上传过程中, 上传成功，上传失败，上传完成都分别对应uploadProgress,uploadSuccess,&nbsp;uploadError,&nbsp;uploadComplete事件
+<hr />
+// 文件上传过程中创建进度条实时显示。<br />
+uploader.on( 'uploadProgress', function( file, percentage ) {<br />
+&nbsp;&nbsp;&nbsp; var $li = $( '#'+file.id ),<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $percent = $li.find('.progress span');<br />
+<br />
+&nbsp;&nbsp;&nbsp; // 避免重复创建<br />
+&nbsp;&nbsp;&nbsp; if ( !$percent.length ) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $percent = $('&lt;p class="progress"&gt;&lt;span&gt;&lt;/span&gt;&lt;/p&gt;')<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .appendTo( $li )<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .find('span');<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; $percent.css( 'width', percentage * 100 + '%' );<br />
+});<br />
+<br />
+// 文件上传成功，给item添加成功class, 用样式标记上传成功。<br />
+uploader.on( 'uploadSuccess', function( file ) {<br />
+&nbsp;&nbsp;&nbsp; $( '#'+file.id ).addClass('upload-state-done');<br />
+});<br />
+<br />
+// 文件上传失败，显示上传出错。<br />
+uploader.on( 'uploadError', function( file ) {<br />
+&nbsp;&nbsp;&nbsp; var $li = $( '#'+file.id ),<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $error = $li.find('div.error');<br />
+<br />
+&nbsp;&nbsp;&nbsp; // 避免重复创建<br />
+&nbsp;&nbsp;&nbsp; if ( !$error.length ) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $error = $('&lt;div class="error"&gt;&lt;/div&gt;').appendTo( $li );<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; $error.text('上传失败');<br />
+});<br />
+&nbsp;// 完成上传完了，成功或者失败，先删除进度条。<br />
+uploader.on( 'uploadComplete', function( file ) {<br />
+&nbsp;&nbsp;&nbsp; $( '#'+file.id ).find('.progress').remove();<br />
+});
+<hr />
+更多细节，请查看<a href="http://fex.baidu.com/webuploader/js/getting-started.js">js源码</a>。</div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/662.html">怎么样设置网页关键字以及网页标题</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/664.html">上传照片，并且马上能预览到缩略图—实例</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="http://fex.baidu.com/webuploader/getting-started.html" target="_blank">http://fex.baidu.com/webuploader/getting-started.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#引入资源">引入资源</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#hr文件上传">hr文件上传</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

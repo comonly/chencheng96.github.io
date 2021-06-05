@@ -1,0 +1,403 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>图像对象—JavaScript_comonly.cn</title>
+<meta name="keywords" content="图像对象—JavaScript" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">图像对象—JavaScript</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-03-12</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">JavaScript,图像对象</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	图像（image）对象是document对象的子对象。
+</p>
+<h2 id='图像对象介绍'>
+	图像对象介绍
+</h2>
+<p>
+	JavaScript加载网页文档时会自动创建一个images[]数组，这个数组中的每一个元素都代表网页中的一张图片。引用图片的方法：
+</p>
+<p>
+	document.images[i] &nbsp; //如果网页有三张图片，那么images[1]表示第二个图片
+</p>
+<p>
+	document.imgname &nbsp;//通过img标签的name属性值。
+</p>
+<h2 id='图像对象属性'>
+	图像对象属性
+</h2>
+<p>
+	除了基础document对象属性外，图像对象也有自己的属性，主要描述宽度，高度，边框等信息。
+</p>
+<blockquote>
+	<p>
+		align：设置图片与内联内容的对齐方式
+	</p>
+	<p>
+		alt：设置或返回图片无法显示时的文字
+	</p>
+	<p>
+		complete：浏览器判断图片是否加载完整 &nbsp; &nbsp;这个是否涉及到懒加载？？？有待研究
+	</p>
+	<p>
+		border：设置或者返回图片周围的边框
+	</p>
+	<p>
+		height：设置或返回图片的高度
+	</p>
+	<p>
+		width：设置或返回图片的宽度
+	</p>
+	<p>
+		isMap：返回图像是否是服务器端的图像映射。 &nbsp;这个是否可以用做判断从数据库中拿到的数据是否正确？
+	</p>
+	<p>
+		useMap：设置或返回客户端图像映射的 usemap 属性的值。
+	</p>
+	<p>
+		id：设置或者返回图片的id &nbsp;利用id操作图片
+	</p>
+	<p>
+		name：设置或者返回图片的name&nbsp;
+	</p>
+	<p>
+		hspace：设置或者返回图片左或者右的空白部分
+	</p>
+	<p>
+		vspace：设置或者返回图片上或者下的空白部分
+	</p>
+	<p>
+		longDesc：设置或返回指向包含图像描述的文档的 URL。（即alt或者是有文字的图片中的文字）
+	</p>
+	<p>
+		lowsrc：设置或返回指向图像的低分辨率版本的 URL。
+	</p>
+	<p>
+		src：设置或返回图像的 URL。
+	</p>
+</blockquote>
+<span style="line-height:1.5;">&lt;img src="https://953.jpg" hspace="30" vspace="10" border="5" name="tx" lowsrc="https://53.jpg" align="left"&gt;<br />
+&lt;script type="text/javascript"&gt;<br />
+document.write("图像的宽度为"+document.tx.width+"像素&lt;/br&gt;");<br />
+document.write("图像与文字水平方向间距是"+document.tx.hspace+"像素&lt;/br&gt;");<br />
+document.write("图像的地址为"+document.tx.src+"&lt;/br&gt;");<br />
+document.write("图像的低质量代替图像是"+document.tx.lowsrc);<br />
+&lt;/script&gt;</span> 
+<p>
+	复制代码<a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank"><span style="background-color:#FFE500;">在线查看运行效果</span></a> 
+</p>
+<h2 id='图像对象事件'>
+	图像对象事件
+</h2>
+<blockquote>
+	<p>
+		abort：用户放弃加载图像时激发的事件
+	</p>
+	<p>
+		click：在图像上单击鼠标左键时激发的事件
+	</p>
+	<p>
+		dbclick：在图像上双击鼠标时激发的事件
+	</p>
+	<p>
+		error：加载图像发生错误时激发的事件
+	</p>
+	<p>
+		load：加载图像成功时激发的事件
+	</p>
+	<p>
+		keydown：按下键盘上的键时激发的事件
+	</p>
+	<p>
+		keypress：按下并释放键盘上的键时激发的事件
+	</p>
+	<p>
+		keyup：释放键盘上的键时激发的事件
+	</p>
+	<p>
+		mousedown：在图像上按下鼠标键时激发的事件
+	</p>
+	<p>
+		mouseup：在图像上释放鼠标键时激发的事件
+	</p>
+	<p>
+		mouseover：把鼠标移动到图像上时激发的事件
+	</p>
+	<p>
+		mousemove：在图像上移动鼠标时激发的事件
+	</p>
+	<p>
+		mouseout：把鼠标从图像上移开时激发的事件
+	</p>
+</blockquote>
+<h2 id='随机图像'>
+	随机图像
+</h2>
+<p>
+	有JavaScript产生一个随机数，再根据这个随机数显示图片，然后在网页上循环显示图片，显示顺序是随机的。
+</p>
+<p>
+	<span style="line-height:1.5;">&lt;script type="text/javascript"&gt;<br />
+function simg(){<br />
+var r=Math.random(); //产生0~1之间的随机数<br />
+var ran=Math.round(r*10); //转换成1~10之间的随机数<br />
+if(ran&gt;5)ran=ran-5;<br />
+var arr=new Array(); &nbsp; //图像地址保存在数组中<br />
+arr[0]="http://www.iyaka.cn/advertiser/kindeditor/plugins/emoticons/images/0.gif";<br />
+arr[1]="http://www.iyaka.cn/advertiser/kindeditor/plugins/emoticons/images/1.gif";<br />
+arr[2]="http://www.iyaka.cn/advertiser/kindeditor/plugins/emoticons/images/2.gif";<br />
+arr[3]="http://www.iyaka.cn/advertiser/kindeditor/plugins/emoticons/images/3.gif";<br />
+arr[4]="http://www.iyaka.cn/advertiser/kindeditor/plugins/emoticons/images/4.gif";<br />
+arr[5]="http://www.iyaka.cn/advertiser/kindeditor/plugins/emoticons/images/5.gif";<br />
+document.tx.src=arr[ran]; &nbsp; //数组元素中的图像地址赋给图像的src属性<br />
+}<br />
+window.setInterval("simg()",2000); //设置两秒换一张图像<br />
+&lt;/script&gt;<br />
+&lt;img src="http://www.iyaka.cn/advertiser/kindeditor/plugins/emoticons/images/6.gif" name="tx"/&gt;</span>
+</p>
+<p>
+	复制代码<span style="background-color:#FFE500;"><a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank">在线查看运行效果</a></span>
+</p>
+<h2 id='改变图像大小'>
+	改变图像大小
+</h2>
+<p>
+	在程序代码中修改图像宽度和高度的值来动态改变图像大小。
+</p>
+<p>
+	<span style="line-height:1.5;">&lt;script type="text/javascript"&gt;<br />
+function larger(){<br />
+document.images.tx.width=document.images.tx.width*1.5;<br />
+document.images.tx.width=document.images.tx.height*1.5;<br />
+}<br />
+function smaller(){<br />
+document.images.tx.width=document.images.tx.width*0.5;<br />
+document.images.tx.width=document.images.tx.height*0.5;<br />
+}<br />
+&lt;/script&gt;<br />
+&lt;img src="http://www.iyaka.cn/advertiser/kindeditor/plugins/emoticons/images/6.gif" name="tx"/&gt;<br />
+&lt;input type="button" value="放大图像" onclick="larger()"/&gt;<br />
+&lt;input type="button" value="缩小图像" onclick="smaller()"/&gt;<br />
+</span> 
+</p>
+<p>
+	复制代码<span style="background-color:#FFE500;"><a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank">在线查看运行效果</a></span>
+</p>
+<h2 id='显示默认图像'>
+	显示默认图像
+</h2>
+<p>
+	网页中加载图像出现错误（路径不正确或不存在）时，会激发error事件。可以用一张默认的图像代替。
+</p>
+<p>
+	<span style="line-height:1.5;">&lt;script type="text/javascript"&gt;<br />
+function show(image){image.src="http://www.iyaka.cn/advertiser/kindeditor/plugins/emoticons/images/1.gif";}<br />
+&lt;/script&gt;<br />
+&lt;img src="images/6.gif" onerror="show(this)"/&gt;<br />
+</span> 
+</p>
+<p>
+	复制代码<span style="background-color:#FFE500;"><a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank">在线查看运行效果</a></span>
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/625.html">document对象的应用—JavaScript</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/627.html">链接对象,锚对象—JavaScript</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#图像对象介绍">图像对象介绍</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#图像对象属性">图像对象属性</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#图像对象事件">图像对象事件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#随机图像">随机图像</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#改变图像大小">改变图像大小</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#显示默认图像">显示默认图像</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

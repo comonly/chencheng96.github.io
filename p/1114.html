@@ -1,0 +1,284 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>在Ubuntu 下通过apt-get安装MySQL并设置运行远程访问_comonly.cn</title>
+<meta name="keywords" content="在Ubuntu 下通过apt-get安装MySQL并设置运行远程访问" />
+<meta name="description" content="1，首先执行下面三条命令：
+执行第一条命令：
+sudo apt-get install mysql-server
+输入 y ，下载安装时会出现要求设置密码的界面：
+输入自己想设置的密码，之后再次输入确认密码。
+
+执行第二条命令：（安装客户端？）
+sudo apt-get install mysql-client
+接着执行第三条命令：（连接c++?）
+sudo apt-get install libmysqlclient-dev
+输入 y ，完成
+
+安装成功后可以通过下面的命令测试是" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">在Ubuntu 下通过apt-get安装MySQL并设置运行远程访问</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-10-11</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	数据库
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>1，首先执行下面三条命令：
+执行第一条命令：
+sudo apt-get install mysql-server
+输入 y ，下载安装时会出现要求设置密码的界面：
+输入自己想设置的密码，之后再次输入确认密码。
+
+执行第二条命令：（安装客户端？）
+sudo apt-get install mysql-client
+接着执行第三条命令：（连接c++?）
+sudo apt-get install libmysqlclient-dev
+输入 y ，完成
+
+安装成功后可以通过下面的命令测试是</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 1，首先执行下面三条命令：<br />
+执行第一条命令：<br />
+sudo apt-get install mysql-server<br />
+输入 y ，下载安装时会出现要求设置密码的界面：<br />
+输入自己想设置的密码，之后再次输入确认密码。<br />
+<br />
+执行第二条命令：（安装客户端？）<br />
+sudo apt-get install mysql-client<br />
+接着执行第三条命令：（连接c++?）<br />
+sudo apt-get install libmysqlclient-dev<br />
+输入 y ，完成<br />
+<br />
+安装成功后可以通过下面的命令测试是否安装成功：<br />
+sudo netstat -tap | grep mysql<br />
+<br />
+接下来就可以打开数据库了<br />
+mysql -uroot -p<br />
+之后输入你的密码：<br />
+&nbsp;<br />
+现在设置mysql允许远程访问，首先编辑文件/etc/mysql/mysql.conf.d/mysqld.cnf：<br />
+sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf<br />
+注释掉bind-address = 127.0.0.1：<br />
+保存退出，然后进入mysql服务，执行授权命令：<br />
+<p>
+	<br />
+</p>
+<p>
+	可以直接更新已有用户的访问限制：update user set host='%' where user='root'; 也可以创建一个新用户：
+</p>
+<p>
+	创建可以访问的用户名即密码<br />
+GRANT ALL PRIVILEGES ON *.* TO '账号'@'%' IDENTIFIED BY '密码';<br />
+%代表所有主机，也可以具体到你的主机ip地址&nbsp; &nbsp;， 注：用户名处，填写自己的用户名， 密码处，填写自己访问的密码<br />
+创建完成后再次查询用户表：<br />
+刷新权限:&nbsp; &nbsp; flush privileges;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<br />
+这一步一定要做，不然无法成功！ 这句表示从mysql数据库的grant表中重新加载权限数据。因为MySQL把权限都放在了cache中，所以在做完更改后需要重新加载。<br />
+执行完这两步，再次查询用户表命令：use mysql; select&nbsp; User,authentication_string,Host from user&nbsp; 可以看到成功添加了用户
+</p>
+<p>
+	<br />
+重新启动mysql服务 service mysql restart
+</p>
+<p>
+	<br />
+</p>
+<p>
+	考虑防火墙问题，输入抓包命令：tcpdump port 3306 查看端口状态
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1113.html">apt-get</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1115.html">Ubuntu下安装java开发环境</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

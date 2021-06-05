@@ -1,0 +1,281 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>WEB前端——js（点击移动，滑动和定时功能，显示浮层，4种输出消息方法）（实例）_comonly.cn</title>
+<meta name="keywords" content="WEB前端——js（点击移动，滑动和定时功能，显示浮层，4种输出消息方法）（实例）" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">WEB前端——js（点击移动，滑动和定时功能，显示浮层，4种输出消息方法）（实例）</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-04-10</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='弹出窗口（浮层）'>
+	弹出窗口（浮层）
+</h2>
+弹窗本质是html页面的某层。某事件发生后执行相应的js程序，使某容器的display属性为block。对于显示的内容可以是在页面已经加载的，也可以是通过js动态生成的。对于弹窗显示的位置，如果不是针对某元素可以设置浮在页面的某个地方（既然已经绝对地址了，一般就放在页面代码的最下面）。
+<p>
+	&lt;div id="floatDiv" style="display:none; top: 155px; left: 300px; width: 380px;position: fixed;&nbsp;display: block;&nbsp;background: #F0F3F5;&nbsp;padding: 10px 10px 10px 10px;&nbsp;border: 1px solid #d6d6d6;&nbsp;"&gt;
+</p>
+<h3>
+	弹窗的关闭
+</h3>
+<p>
+	一般在右上角用一个标记，然后添加一个onclick事件，当事件发生时，设置上面弹窗的的display属性为none。
+</p>
+<h3>
+	弹窗表单的提交
+</h3>
+<p>
+	对于弹窗来说，提交数据一般是采用异步提交的方法。当然可以用常用的两种方法，ajax和隐藏区域（伪异步）提交相关数据。
+</p>
+<h3>
+	信息提交后的反馈
+</h3>
+<p>
+	对于提交信息的返回值进行判断，然后显示相应的提示信息。可以在原浮动窗口上实现此种变化。对于表单的提交，可以显示是否提交成功的反馈。在显示信息时，可以对原表单信息进行隐藏，而显示相关的提示信息。
+</p>
+<h2 id='点击按钮切换页面内容'>
+	点击按钮切换页面内容
+</h2>
+这里是在页面加载全部所需的数据，当点击切换时，调用相应的js函数，对显示内容的display属性进行设置。对于异步加载内容并显示，在另一个模块（ajax）中已经进行了说明。<br />
+<h2 id='j代码定时更新'>
+	js代码定时更新
+</h2>
+js中按照指定的周期循环调用函数。self.setInterval("clock();",1000);//每1秒调用一次clock()函数<br />
+<h2 id='JS的常用输出消息的四个方法'>
+	JS的常用输出消息的四个方法
+</h2>
+1)JavaScript 语句告诉浏览器向网页输出消息<br />
+document.write("你好,JS!!!");<br />
+2) alert() 弹出消息框<br />
+3) true | false&nbsp; confirm() 弹出消息框,返回true或false询问框<br />
+&lt;script type="text/javascript"&gt;<br />
+//使用var关键字声明变量&nbsp; &nbsp;<br />
+&nbsp;var result = confirm("你确定吗?");<br />
+&nbsp;document.write("你选择的是:"+result);&nbsp;<br />
+&lt;/script&gt;<br />
+4) prompt() 用于提示用户输入消息<br />
+&lt;script type="text/javascript"&gt;<br />
+&nbsp; var name = prompt("请输入你的名字:","");<br />
+&nbsp; document.write("你输入的是: "+name);<br />
+&lt;/script&gt;</div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/894.html">AJAX相关</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/896.html">Android开发之基本控件和详解四种布局方式【链接待处理】</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="">
+							<h2 style="display:inline;color:#5BC648;"></h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-04-11&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><br />
+<h3>
+	js循环取出xml某个子节点的值(待处理在做后端使用xml文件时进行整理)
+</h3>
+<br /></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#弹出窗口（浮层）">弹出窗口（浮层）</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#点击按钮切换页面内容">点击按钮切换页面内容</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#j代码定时更新">j代码定时更新</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#JS的常用输出消息的四个方法">JS的常用输出消息的四个方法</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

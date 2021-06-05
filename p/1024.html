@@ -1,0 +1,349 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Hexo+GitHub创建个人站点并发布_comonly.cn</title>
+<meta name="keywords" content="Hexo+GitHub创建个人站点并发布" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Hexo+GitHub创建个人站点并发布</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">visugar</li>
+          <li class="lmname"><a href="http://visugar.com/2017/05/04/20170504SetUpHexoBlog/" target="_blank">http://visugar.com/2017/05/04/20170504SetUpHexoBlog/</a></li>
+          <li class="timer">2018-10-09</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	通过github可以发布个人博客（免去了寻找服务器的麻烦），通过域名绑定，可以使用自己的域名访问个人站点。
+</p>
+<h2 id='1.安装GitBh'>
+	1. 安装Git Bash
+</h2>
+<p>
+	git原来是为了同步github安装的，通过git bash 命令：git version 可以获取版本号。
+</p>
+<h2 id='2.安装NodeJ'>
+	2. 安装NodeJs
+</h2>
+Hexo是基于nodeJS环境的静态博客，里面的npm工具很有用啊，下载地址(说明：LTS为长期支持版，Current为当前最新版)。之前也安装过NodeJs。通过（可以在cmd中）node -v 可以查看版本号。<br />
+<h2 id='3.安装hexo'>
+	3. 安装hexo
+</h2>
+<p>
+	#安装过程中的警告(WARN)在不影响下一步操作时，可以先忽略。ERR要处理。
+</p>
+<p>
+	在gitbash中用npm工具安装就好了。先创建一个文件夹（用来存放所有blog的东西），然后cd到该文件夹下。安装hexo命令：npm i -g hexo 安装完成后，可以通过 npm-v 查看版本。
+</p>
+<p>
+	初始化命令：hexo init ，初始化完成之后打开所在的文件夹可以看到以下文件：
+</p>
+<ul>
+	<li>
+		node_modules：是依赖包
+	</li>
+	<li>
+		public：存放的是生成的页面
+	</li>
+	<li>
+		scaffolds：命令生成文章等的模板
+	</li>
+	<li>
+		source：用命令创建的各种文章
+	</li>
+	<li>
+		themes：主题
+	</li>
+	<li>
+		_config.yml：整个博客的配置
+	</li>
+	<li>
+		db.json：source解析所得到的
+	</li>
+	<li>
+		package.json：项目所需模块项目的配置信息
+	</li>
+</ul>
+<h2 id='4.生成SSH并添加到github'>
+	4. 生成SSH并添加到github
+</h2>
+<p>
+	需要有一个github的账号，然后创建一个repository，名称为yourname.github.io(其中yourname是你的github名称)，必须这样命名。
+</p>
+<p>
+	回到gitbash中，配置github账户信息（YourName和YourEail都替换成你自己的）：
+</p>
+<pre class="prettyprint lang-bsh">$ git config --global user.name "your username"
+$ git config --global user.email "your email"</pre>
+<p>
+	创建SSH。在gitbash中输入：ssh-keygen -t rsa -C "youremail@example.com"，生成ssh。需要输入保存的路径，其中文件名字必须是id_rsa。输入密码可以跳过为免密码。
+</p>
+<pre class="prettyprint lang-js">Enter file in which to save the key (/c/Users/19829/.ssh/id_rsa): ...
+...
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+...
+The key's randomart image is:</pre>
+<p>
+	创建成功会生成类似下图这样的图像
+</p>
+<pre class="prettyprint lang-js">+---[RSA 2048]----+
+|   oo o          |
+|  o..* o         |
+| . o. B .        |
+|  = .o o .       |
+| o +  . S        |
+|  o = ...   E    |
+| ooOo=.=.  .     |
+|.+*+=++.o .      |
+|===ooo. .+.      |
++----[SHA256]-----+</pre>
+<p>
+	然后通过
+</p>
+<pre class="prettyprint lang-bsh">$ cat id_rsa.pub</pre>
+<p>
+	打开id_rsa.pub文件（上一步生成了两个文件分别是id_rsa和id_rsa.pub）复制文件内全部内容。将获取的ssh放到github中：settings——&gt;ssh-key——&gt;添加一个 New SSH key ，title随便取，key就填复制的内容。
+</p>
+<p>
+	在gitbash中验证是否添加成功（完成下一步你就成功啦！）：
+</p>
+<pre class="prettyprint lang-bsh">ssh -T git@github.com</pre>
+<p>
+	Permission denied (publickey) 问题的一种可能解决方案（命名问题也可能导致该问题）：通过ssh-add -l 查看的加入密匙列表，通过 ssh-add 添加密匙。
+</p>
+<pre class="prettyprint lang-bsh">$ ssh-add -l
+Could not open a connection to your authentication agent.
+
+$ ssh-add -l
+The agent has no identities.
+
+$ ssh-add /f(window下的F盘)/生成的ssh所在位置/id_rsa
+
+#添加成功后可以通过ssh-add -l 看到相关信息
+
+$ ssh -T git@github.com
+Hi username! You've successfully authenticated, but GitHub does not provide shell access.
+#添加成功</pre>
+<h2 id='5.部署项目'>
+	5. 部署项目
+</h2>
+<p>
+	用编辑器打开你的blog项目，修改_config.yml文件的一些配置(冒号之后都是有一个半角空格的)：
+</p>
+<pre class="prettyprint">deploy:
+  type: git
+  repo: https://github.com/YourgithubName/YourgithubName.github.io.git
+  branch: master</pre>
+回到gitbash中，进入你的blog目录，分别执行以下命令：<br />
+<pre class="prettyprint lang-bsh">hexo clean
+hexo generate
+hexo server</pre>
+<p>
+	注：hexo 3.0把服务器独立成个别模块，需要单独安装：npm i hexo-server。打开浏览器输入：http://localhost:4000，接着你就可以遇见天使的微笑了~
+</p>
+<h2 id='6.上传到github'>
+	6. 上传到github
+</h2>
+先安装一波：npm install hexo-deployer-git --save（这样才能将你写好的文章部署到github服务器上并让别人浏览到）。执行命令(建议每次都按照如下步骤部署)：<br />
+<pre class="prettyprint lang-bsh">hexo clean
+hexo generate
+hexo deploy</pre>
+在浏览器中输入http://yourgithubname.github.io就可以看到你的个人博客啦！<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1023.html">机器学习入门2——链接汇总，入门后回头整理类</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1025.html">Hexo+GitHub创建个人站点——HEXO编辑页面及添加文章</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="http://visugar.com/2017/05/04/20170504SetUpHexoBlog/" target="_blank">http://visugar.com/2017/05/04/20170504SetUpHexoBlog/</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#1.安装GitBh">1.安装GitBh</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#2.安装NodeJ">2.安装NodeJ</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#3.安装hexo">3.安装hexo</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#4.生成SSH并添加到github">4.生成SSH并添加到github</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#5.部署项目">5.部署项目</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#6.上传到github">6.上传到github</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

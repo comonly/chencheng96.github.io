@@ -1,0 +1,255 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Git中的变基(Rebase)_comonly.cn</title>
+<meta name="keywords" content="Git中的变基(Rebase)" />
+<meta name="description" content="背景介绍
+VCS(版本管理系统)是我们开发中每天都会打交道的基础开发系统，当前使用最为广泛的非SVN和GIT两者莫属，两者分别代表了CVCS(集中式版本管理系统)和DVCS(分布式版本管理系统)。两者具体的区别网上有大量的文档，可以自行google和bing。
+
+作者之前一直使用的是SVN，既CVCS的一种，这种系统的操作较为简单明了(也可能是之前习惯了)。而现在转为使用Git后，由于Git中引入了本地仓库、暂存区，使得开发中的常用操作从两点(远程仓库、工作空间)间的操作扩展为三点(远程仓库、本地仓" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Git中的变基(Rebase)</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">Studious_Li</li>
+          <li class="lmname"><a href="https://blog.csdn.net/li_xiao_dai/article/details/80515624" target="_blank">https://blog.csdn.net/li_xiao_dai/article/details/80515624</a></li>
+          <li class="timer">2019-11-23</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>背景介绍
+VCS(版本管理系统)是我们开发中每天都会打交道的基础开发系统，当前使用最为广泛的非SVN和GIT两者莫属，两者分别代表了CVCS(集中式版本管理系统)和DVCS(分布式版本管理系统)。两者具体的区别网上有大量的文档，可以自行google和bing。
+
+作者之前一直使用的是SVN，既CVCS的一种，这种系统的操作较为简单明了(也可能是之前习惯了)。而现在转为使用Git后，由于Git中引入了本地仓库、暂存区，使得开发中的常用操作从两点(远程仓库、工作空间)间的操作扩展为三点(远程仓库、本地仓</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 背景介绍<br />
+VCS(版本管理系统)是我们开发中每天都会打交道的基础开发系统，当前使用最为广泛的非SVN和GIT两者莫属，两者分别代表了CVCS(集中式版本管理系统)和DVCS(分布式版本管理系统)。两者具体的区别网上有大量的文档，可以自行google和bing。<br />
+<br />
+作者之前一直使用的是SVN，既CVCS的一种，这种系统的操作较为简单明了(也可能是之前习惯了)。而现在转为使用Git后，由于Git中引入了本地仓库、暂存区，使得开发中的常用操作从两点(远程仓库、工作空间)间的操作扩展为三点(远程仓库、本地仓库、工作空间)间的操作，大大增加了代码管理的空间。<br />
+<br />
+本文中将要介绍的变基就是之前CVCS限于架构无法实现的一种代码分支管理策略(Git的基本操作请自行google、bing)。本文中的介绍来源于已有文档和作者个人的理解，如有不当之处请指出，谢谢！<br />
+<br />
+Rebase 和 Merge<br />
+在介绍一个新概念、技术时从一个大家熟知的概念、技术入手更容易使大家理解。变基(既Rebase，后续统一使用变基指代)相似的概念就是Merge，也可以说变基是从Merge演化而来。<br />
+<br />
+众所周知，Merge是用来合并分支的，那么变基呢？变基的结果一般和Merge一样，但是变基实现方式并不是合并，而是重放，既将分支A的提交在分支B上重新提交一遍。变基的一般命令为：<br />
+<br />
+git rebase baseBranch [rebaseBranch]<br />
+<br />
+意为将rebaseBranch分支的提交提取出来，在baseBranch分支上重放(提交内容相同，但是校验和不同)。其中rebaseBranch可以省略，省略后既使用当前分支的提交在baseBranch分支上重放。<br />
+<br />
+变基和Merge**最大的不同是使用git log查看提交历史**，使用Merge的提交历史如下图(图片来源于progit.pdf)：<br />
+<img src="https://img-blog.csdn.net/20180530203550378?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dvc2hpc215YXdlaQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="merge" /><br />
+<br />
+<br />
+而使用变基的提交历史则为(图片来源于progit.pdf)：<br />
+<br />
+<img src="https://img-blog.csdn.net/20180530203604859?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dvc2hpc215YXdlaQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="rebase" /><br />
+<br />
+可以看出，使用变基可以使提交历史为线性提交。这样做的好处下文会介绍。<br />
+<br />
+变基的场景<br />
+从上文我们可以得出结论，变基最大的特点是可以使提交历史称为线性，那么这么做的好处或者适用于什么场景呢？在给出结论之前，我们先要明确，或者牢记一点：<br />
+<br />
+变基要在自己本地仓库中拉出来的分支使用，不要对本地仓库外有副本的分支执行变基<br />
+<br />
+也就是说变基本质上是一个完全在本地仓库进行的操作(这是DCSV特有的)，我们往往是在本地执行完成变基操作后，再向远程仓库push。这样做，避免了其他合作者的处理冲突，其他合作者只需要利用git merge自身的fast-forward即可完成Merge的工作。<br />
+<br />
+综上，变基适用于多人线上合作开发的场景，避免其他合作者处理冲突，例如github上开源项目的维护。公司内部因为地理上、组织上的便利性，可以酌情使用变基。<br />
+<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1554.html">【C++】 error C2572: 重定义默认参数</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1556.html">原子变量和非原子变量</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/li_xiao_dai/article/details/80515624" target="_blank">https://blog.csdn.net/li_xiao_dai/article/details/80515624</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

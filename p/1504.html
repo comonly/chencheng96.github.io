@@ -1,0 +1,373 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>TCP和UDP的区别_comonly.cn</title>
+<meta name="keywords" content="TCP和UDP的区别" />
+<meta name="description" content="TCP 和 UDP 是传输层的两个协议
+
+
+	
+ 
+
+
+	传输层的两大功能： 
+
+复用：在发送端，多个应用进程公用一个传输层；
+
+	分用：在接收端，传输层会根据端口号将数据分给不同的应用进程。
+
+
+	
+
+传输层和网络层的区别：
+网络层为不同的主机提供通信服务，传输层为不同应用进程提供通信服务。
+
+	网络层只对报文头部进行差错检测，而传输层对整个报文进行差错检测。
+
+
+	
+
+
+	
+		
+			
+				
+					UDP（User Data Prot" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">TCP和UDP的区别</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-10-15</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">套接字,TCP连接,传输层</a></div>
+      
+      
+        <div class="news_about"><strong>简介</strong>TCP 和 UDP 是传输层的两个协议
+
+
+	
+ 
+
+
+	传输层的两大功能： 
+
+复用：在发送端，多个应用进程公用一个传输层；
+
+	分用：在接收端，传输层会根据端口号将数据分给不同的应用进程。
+
+
+	
+
+传输层和网络层的区别：
+网络层为不同的主机提供通信服务，传输层为不同应用进程提供通信服务。
+
+	网络层只对报文头部进行差错检测，而传输层对整个报文进行差错检测。
+
+
+	
+
+
+	
+		
+			
+				
+					UDP（User Data Prot</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	TCP 和 UDP 是传输层的两个协议
+</p>
+<p>
+	<span><br />
+</span> 
+</p>
+<p>
+	<span>传输层的两大功能：</span> 
+</p>
+<span>复用：在发送端，多个应用进程公用一个传输层；</span><br />
+<p>
+	分用：在接收端，传输层会根据端口号将数据分给不同的应用进程。
+</p>
+<p>
+	<br />
+</p>
+<span>传输层和网络层的区别：</span><br />
+<span>网络层为不同的主机提供通信服务，传输层为不同应用进程提供通信服务。</span><br />
+<p>
+	网络层只对报文头部进行差错检测，而传输层对整个报文进行差错检测。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<table style="width:100%;" cellpadding="1" cellspacing="1" border="1" bordercolor="#000000">
+		<tbody>
+			<tr>
+				<td>
+					UDP（User Data Protocol）用户数据报协议
+				</td>
+				<td>
+					TCP（Transmission Control Protocol）传输控制协议
+				</td>
+			</tr>
+			<tr>
+				<td>
+					无连接
+				</td>
+				<td>
+					有连接
+				</td>
+			</tr>
+			<tr>
+				<td>
+					不可靠（不能保证都送达）
+				</td>
+				<td>
+					可靠的
+				</td>
+			</tr>
+			<tr>
+				<td>
+					面向报文（UDP数据传输单位是报文，不会对数据进行拆分和拼接操作，只是给上层传来的数据加个UDP头或者给下层来的数据去掉UDP头）
+				</td>
+				<td>
+					面向字节流
+				</td>
+			</tr>
+			<tr>
+				<td>
+					没有拥塞控制，始终以恒定速率发送数据
+				</td>
+				<td>
+					全双工通信，TCP两端既可以作为发送端也可以作为接收端
+				</td>
+			</tr>
+			<tr>
+				<td>
+					支持一对一、一对多、多对多、多对一
+				</td>
+				<td>
+					连接的两端只能是两个端点，即一对一，不能一对多
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span>首部开销小，只有8字节</span><br />
+				</td>
+				<td>
+					至少20个字节，比UDP大的多
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</p>
+<span>什么是TCP连接</span><br />
+<span>TCP连接是一种抽象的概念，表示一条可以通信的链路。</span><br />
+<p>
+	每个TCP连接有且仅有两个端点，表示通信的双方，且双方在任意时刻都可以作为发送者和接受者。
+</p>
+<p>
+	<br />
+</p>
+<span>什么是套接字</span><br />
+<span>一条TCP连接的两端就是两个套接字。</span><br />
+<span>套接字 = IP地址 ：端口号</span><br />
+<p>
+	因此，TCP连接 = （套接字1，套接字2）= （IP1：端口号1，IP2：端口号2）
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1503.html">tcp 和 udp问题描述 问题介绍</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1505.html">CRT detected that the application wrote to memory after end of heap buffer</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

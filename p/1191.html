@@ -1,0 +1,446 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>高斯混合模型原理_comonly.cn</title>
+<meta name="keywords" content="高斯混合模型原理" />
+<meta name="description" content="什么是高斯混合模型（Gaussian Mixture Model）
+
+
+	
+
+
+	高斯混合模型（Gaussian Mixture Model）通常简称GMM，是一种业界广泛使用的聚类算法，该方法使用了高斯分布作为参数模型，并使用了期望最大（Expectation Maximization，简称EM）算法进行训练。
+
+
+	本文对该方法的原理进行了通俗易懂的讲解，期望读者能够更直观地理解方法原理。文本的最后还分析了高斯混合模型了另一种常见聚类算法K-means的关系，实际上在特定约束条件下，" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">高斯混合模型原理</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">陈运文</li>
+          <li class="lmname"><a href="https://zhuanlan.zhihu.com/p/31103654" target="_blank">https://zhuanlan.zhihu.com/p/31103654</a></li>
+          <li class="timer">2020-11-20</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	机器学习算法分析
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>什么是高斯混合模型（Gaussian Mixture Model）
+
+
+	
+
+
+	高斯混合模型（Gaussian Mixture Model）通常简称GMM，是一种业界广泛使用的聚类算法，该方法使用了高斯分布作为参数模型，并使用了期望最大（Expectation Maximization，简称EM）算法进行训练。
+
+
+	本文对该方法的原理进行了通俗易懂的讲解，期望读者能够更直观地理解方法原理。文本的最后还分析了高斯混合模型了另一种常见聚类算法K-means的关系，实际上在特定约束条件下，</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='什么是高斯混合模型（GuiMixtureModel）'>
+	什么是高斯混合模型（Gaussian Mixture Model）
+</h2>
+<p>
+	<br />
+</p>
+<p>
+	高斯混合模型（Gaussian Mixture Model）通常简称GMM，是一种业界广泛使用的聚类算法，该方法使用了高斯分布作为参数模型，并使用了期望最大（Expectation Maximization，简称EM）算法进行训练。
+</p>
+<p>
+	本文对该方法的原理进行了通俗易懂的讲解，期望读者能够更直观地理解方法原理。文本的最后还分析了高斯混合模型了另一种常见聚类算法K-means的关系，实际上在特定约束条件下，K-means算法可以被看作是高斯混合模型（GMM）的一种特殊形式（达观数据 陈运文）。
+</p>
+<p>
+	<br />
+</p>
+<h2 id='1什么是高斯分布？'>
+	1 什么是高斯分布？
+</h2>
+<p>
+	<br />
+</p>
+<p>
+	高斯分布（Gaussian distribution）有时也被称为正态分布（normal distribution），是一种在自然界大量的存在的、最为常见的分布形式。在提供精确数学定义前，先用一个简单的例子来说明。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	如果我们对大量的人口进行身高数据的随机采样，并且将采得的身高数据画成柱状图，将会得到如下图1所示的图形。这张图模拟展示了334个成人的统计数据，可以看出图中最多出现的身高在180cm左右2.5cm的区间里。
+</p>
+<img src="https://pic3.zhimg.com/80/v2-b53ae90fe547609f970b71a670b7076a_720w.jpg" width="907" />图1 由334个人的身高数据构成的正态分布直方图
+<p>
+	这个图形非常直观的展示了高斯分布的形态。接下来看下严格的高斯公式定义，高斯分布的概率密度函数公式如下：
+</p>
+<p>
+	<img src="https://www.zhihu.com/equation?tex=f%28x%E4%B8%A8%5Cmu%2C%5Csigma%5E%7B2%7D%29%3D%5Cfrac%7B1%7D%7B%5Csqrt%7B2%5Csigma%5E%7B2%7D%5Cpi%7D%7De%5E%7B-%5Cfrac%7B%28x-%5Cmu%29%5E%7B2%7D%7D%7B2%5Csigma%5E%7B2%7D%7D%7D" alt="[公式]" /> 
+</p>
+<p>
+	公式中包含两个参数，参数&nbsp;<img src="https://www.zhihu.com/equation?tex=%5Cmu" alt="[公式]" />&nbsp;表示均值，参数&nbsp;<img src="https://www.zhihu.com/equation?tex=%5Csigma" alt="[公式]" />&nbsp;表示标准差，均值对应正态分布的中间位置，在本例中我们可以推测均值在180cm附近。标准差衡量了数据围绕均值分散的程度。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	学过大学高数的同学应该还记得，正态分布的一个背景知识点是，95%的数据分布在均值周围2个标准差的范围内。本例中大约20到30左右是标准差参数的取值，因为大多数数据都分布在120cm到240cm之间。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	上面的公式是概率密度函数，也就是在已知参数的情况下，输入变量指x，可以获得相对应的概率密度。还要注意一件事，就是在实际使用前，概率分布要先进行归一化，也就是说曲线下面的面积之和需要为1，这样才能确保返回的概率密度在允许的取值范围内。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	如果需要计算指定区间内的分布概率，则可以计算在区间首尾两个取值之间的面积的大小。另外除了直接计算面积，还可以用更简便的方法来获得同样的结果，就是减去区间x对应的累积密度函数（cumulative density function，CDF）。因为CDF表示的是数值小于等于x的分布概率。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	回到之前的例子来评估下参数和对应的实际数据。假设我们用柱状线来表示分布概率，每个柱状线指相应身高值在334个人中的分布概率，用每个身高值对应的人数除以总数（334）就可以得到对应概率值，图2用左侧的红色线（Sample Probability）来表示。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	如果我们设置参数&nbsp;<img src="https://www.zhihu.com/equation?tex=%5Cmu" alt="[公式]" />&nbsp;=180，&nbsp;<img src="https://www.zhihu.com/equation?tex=%5Csigma" alt="[公式]" />&nbsp;=28，使用累积密度函数来计算对应的概率值——右侧绿色线（Model Probability），可以肉眼观察到模型拟合的精度。
+</p>
+<img src="https://pic4.zhimg.com/80/v2-97aafd95dc5a25ca78dfb5ee8205ba47_720w.jpg" width="896" />图2 对给定用户，身高分布的采样概率用红色柱状图表示，高斯模型在参数μ=180，σ=28时计算出的概率用绿色柱状图表示
+<p>
+	观察图2可以看出，刚才咱们猜测的均值参数180和标准差参数28拟合的效果很不错，虽然可能稍微偏小了一点点。当然我们可以不断调校参数来拟合得更好些，但是更准确的办法是通过算法来生成它们，这个过程就被称为模型训练（model training）。最常用的方法是期望最大（EM）算法，下文会进行详细讲解。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	顺便一提，采样的数据和全体数据的分布多少总是存在一定差异的。这里首先假设了采集的334个用户的数据能代表全体人口的身高分布。另外我们还假定了隐含的数据分布是高斯分布，并以此来绘制分布曲线，并以此为前提预估潜在的分布情况。如果采集越来越多的数据，通常身高的分布越来越趋近于高斯（尽管仍然有其他不确定因素），模型训练的目的就是在这些假设前提下尽可能降低不确定性（达观数据 陈运文）。
+</p>
+<p>
+	<br />
+</p>
+<h2 id='2期望最大与高斯模型训练'>
+	2 期望最大与高斯模型训练
+</h2>
+<p>
+	<br />
+</p>
+<p>
+	模型的EM训练过程，直观的来讲是这样：我们通过观察采样的概率值和模型概率值的接近程度，来判断一个模型是否拟合良好。然后我们通过调整模型以让新模型更适配采样的概率值。反复迭代这个过程很多次，直到两个概率值非常接近时，我们停止更新并完成模型训练。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	现在我们要将这个过程用算法来实现，所使用的方法是模型生成的数据来决定似然值，即通过模型来计算数据的期望值。通过更新参数μ和σ来让期望值最大化。这个过程可以不断迭代直到两次迭代中生成的参数变化非常小为止。该过程和k-means的算法训练过程很相似（k-means不断更新类中心来让结果最大化），只不过在这里的高斯模型中，我们需要同时更新两个参数：分布的均值和标准差
+</p>
+<p>
+	<br />
+</p>
+<h2 id='3高斯混合模型（GMM）'>
+	3 高斯混合模型（GMM）
+</h2>
+<p>
+	<br />
+</p>
+<p>
+	高斯混合模型是对高斯模型进行简单的扩展，GMM使用多个高斯分布的组合来刻画数据分布。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	举例来说：想象下现在咱们不再考察全部用户的身高，而是要在模型中同时考虑男性和女性的身高。假定之前的样本里男女都有，那么之前所画的高斯分布其实是两个高斯分布的叠加的结果。相比只使用一个高斯来建模，现在我们可以用两个（或多个）高斯分布（陈运文）：
+</p>
+<p>
+	<img src="https://www.zhihu.com/equation?tex=p%28x%29%3D%5Csum_%7Bi%3D1%7D%5E%7BK%7D%7B%5Cphi_%7Bi%7D%7D%5Cfrac%7B1%7D%7B%5Csqrt%7B2%5Csigma_%7Bi%7D%5E%7B2%7D%5Cpi%7D%7De%5E%7B-%5Cfrac%7B%28x-%5Cmu_%7Bi%7D%29%5E%7B2%7D%7D%7B2%5Csigma_%7Bi%7D%5E%7B2%7D%7D%7D" alt="[公式]" /> 
+</p>
+<p>
+	<br />
+</p>
+<p>
+	该公式和之前的公式非常相似，细节上有几点差异。首先分布概率是K个高斯分布的和，每个高斯分布有属于自己的&nbsp;<img src="https://www.zhihu.com/equation?tex=%5Cmu" alt="[公式]" />&nbsp;和&nbsp;<img src="https://www.zhihu.com/equation?tex=%5Csigma" alt="[公式]" />&nbsp;参数，以及对应的权重参数，权重值必须为正数，所有权重的和必须等于1，以确保公式给出数值是合理的概率密度值。换句话说如果我们把该公式对应的输入空间合并起来，结果将等于1。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	回到之前的例子，女性在身高分布上通常要比男性矮，画成图的话如图3。
+</p>
+<img src="https://pic3.zhimg.com/80/v2-5cc4a35306b5b1f3176188e04d786c86_720w.jpg" width="921" />图3 男性和女性身高的概率分布图
+<p>
+	图3的y-轴所示的概率值，是在已知每个用户性别的前提下计算出来的。但通常情况下我们并不能掌握这个信息（也许在采集数据时没记录），因此不仅要学出每种分布的参数，还需要生成性别的划分情况（&nbsp;<img src="https://www.zhihu.com/equation?tex=%5Cvarphi_%7Bi%7D" alt="[公式]" />&nbsp;）。当决定期望值时，需要将权重值分别生成男性和女性的相应身高概率值并相加。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	注意，虽然现在模型更复杂了，但仍然可使用与之前相同的技术进行模型训练。在计算期望值时（很可能通过已被混合的数据生成），只需要一个更新参数的最大化期望策略。
+</p>
+<h2 id='4高斯混合模型的学习实例'>
+	4 高斯混合模型的学习实例
+</h2>
+<p>
+	<br />
+</p>
+<p>
+	前面的简单例子里使用了一维高斯模型：即只有一个特征（身高）。但高斯不仅局限于一维，很容易将均值扩展为向量，标准差扩展为协方差矩阵，用n-维高斯分布来描述多维特征。接下来的程序清单里展示了通过scikit-learn的高斯混合模型运行聚类并对结果进行可视化展示。
+</p>
+<img src="https://pic2.zhimg.com/80/v2-afb796f843112b8e4dc844de64fc7cdd_720w.jpg" width="920" /> 
+<p>
+	在初始化GMM算法时，传入了以下参数：
+</p>
+<p>
+	<br />
+</p>
+<p>
+	-n_components ——用户混合的高斯分布的数量。之前的例子里是2个
+</p>
+<p>
+	-covariance_type<br />
+——约定协方差矩阵的属性，即高斯分布的形状。参考下面文档来具体了解：<a href="https://link.zhihu.com/?target=http%3A/scikit-learn.org/stable/modules/mixture.html" target="_blank">http://scikit-learn.org/stable/modules/mixture.html</a> 
+</p>
+<p>
+	-n_iter —— EM的迭代运行次数
+</p>
+<p>
+	计算结果如下图（Iris数据集）
+</p>
+<p>
+	-有关make_ellipses<br />
+——make_ellipses来源于plot_gmm_classifier方法，作者为scikit-learn的Ron Weiss和Gael Varoquaz。根据协方差矩阵绘制的二维图形，可以找出方差最大和其次大的坐标方向，以及相对应的量级。然后使用这些坐标轴将相应的高斯分布的椭圆图形绘制出来。这些轴方向和量级分别被称为特征向量（eigenvectors）和特征值（eigenvalues）。
+</p>
+<img src="https://pic4.zhimg.com/80/v2-9ca340b43592ab4431a77165df06b643_720w.jpg" width="949" />图4展示了Iris数据集的4-D高斯聚类结果在二维空间上的映射图
+<p>
+	make_ellipses方法概念上很简单，它将gmm对象（训练模型）、坐标轴、以及x和y坐标索引作为参数，运行后基于指定的坐标轴绘制出相应的椭圆图形。
+</p>
+<p>
+	<br />
+</p>
+<h2 id='5k-me和GMM的关系'>
+	5 k-means和GMM的关系
+</h2>
+<p>
+	<br />
+</p>
+<p>
+	在特定条件下，k-means和GMM方法可以互相用对方的思想来表达。在k-means中根据距离每个点最接近的类中心来标记该点的类别，这里存在的假设是每个类簇的尺度接近且特征的分布不存在不均匀性。这也解释了为什么在使用k-means前对数据进行归一会有效果。高斯混合模型则不会受到这个约束，因为它对每个类簇分别考察特征的协方差模型。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	K-means算法可以被视为高斯混合模型（GMM）的一种特殊形式。整体上看，高斯混合模型能提供更强的描述能力，因为聚类时数据点的从属关系不仅与近邻相关，还会依赖于类簇的形状。n维高斯分布的形状由每个类簇的协方差来决定。在协方差矩阵上添加特定的约束条件后，可能会通过GMM和k-means得到相同的结果。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	实践中如果每个类簇的协方差矩阵绑定在一起（就是说它们完全相同），并且矩阵对角线上的协方差数值保持相同，其他数值则全部为0，这样能够生成具有相同尺寸且形状为圆形类簇。在此条件下，每个点都始终属于最近的中间点对应的类。（达观数据 陈运文）
+</p>
+<p>
+	<br />
+</p>
+<p>
+	在k-means方法中使用EM来训练高斯混合模型时对初始值的设置非常敏感。而对比k-means，GMM方法有更多的初始条件要设置。实践中不仅初始类中心要指定，而且协方差矩阵和混合权重也要设置。可以运行k-means来生成类中心，并以此作为高斯混合模型的初始条件。由此可见并两个算法有相似的处理过程，主要区别在于模型的复杂度不同。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	整体来看，所有无监督机器学习算法都遵循一条简单的模式：给定一系列数据，训练出一个能描述这些数据规律的模型（并期望潜在过程能生成数据）。训练过程通常要反复迭代，直到无法再优化参数获得更贴合数据的模型为止。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1190.html">卷积神经网络CNN经典模型整理Lenet，Alexnet，Googlenet，VGG，Deep Residual Learning</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1192.html">混合高斯背景建模 -- 运动目标检测背景提取</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://zhuanlan.zhihu.com/p/31103654" target="_blank">https://zhuanlan.zhihu.com/p/31103654</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#什么是高斯混合模型（GuiMixtureModel）">什么是高斯混合模型（GuiMixtureModel）</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#1什么是高斯分布？">1什么是高斯分布？</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#2期望最大与高斯模型训练">2期望最大与高斯模型训练</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#3高斯混合模型（GMM）">3高斯混合模型（GMM）</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#4高斯混合模型的学习实例">4高斯混合模型的学习实例</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#5k-me和GMM的关系">5k-me和GMM的关系</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

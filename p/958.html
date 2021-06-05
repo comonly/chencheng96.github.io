@@ -1,0 +1,283 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>kanzi简介_comonly.cn</title>
+<meta name="keywords" content="kanzi简介" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">kanzi简介</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">基本概念</li>
+          <li class="lmname"><a href="https://blog.csdn.net/xi_gua_gua/article/details/70195572" target="_blank">https://blog.csdn.net/xi_gua_gua/article/details/70195572</a></li>
+          <li class="timer">2018-08-21</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='Kzi基础---Kzi基本概念'>
+	Kanzi基础---Kanzi基本概念
+</h2>
+<p>
+	Kanzi UI Solution是一个完整的跨平台的UI解决方案, 基于OpenGL 和 OpenGL ES。Kanzi为UI的设计、开发和部署在嵌入式设备上的图形用户界面提供一个完善的开发平台。
+</p>
+<p>
+	Kanzi Studio是kanzi的UI编辑器，最近kanzi开始从外国进入中国市场，主要服务于车载电子的中控、仪表盘界面设置。
+</p>
+<p>
+	安装完kanzi之后会看到下图的目录结构
+</p>
+<p>
+	Kanzi Workspace——Projects——Application
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;——bin、configs、output、src
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;——Tool_project
+</p>
+<ul>
+	<li>
+		KanziWorkspace：安装完kanzi之后会有一个对应的kanzi工作空间，集成了kanzi的开发环境，后续的开发将会在这个目录里。
+	</li>
+	<li>
+		Projects：工程目录，在kanzi上建立的新工程应该放在这里面。只要在kanzi studio上新建一个工程保存就会生成一个project文件。
+	</li>
+	<li>
+		Tool_project：kanzi studio的工程，UI设计师工作目录。
+	</li>
+	<li>
+		Application：kanzi studio中工程对应的代码工程，外部代码与kanzi交互，HMI工程师工作目录。
+	</li>
+	<li>
+		bin：存放kanzi的kzb文件，cfg文件等，HMI工程师需要导入这些资源到代码中。
+	</li>
+	<li>
+		config：里面有对应Window、Linux、QNX等不同平台的工程文件
+	</li>
+	<li>
+		output：HMI工程师对kanzi工程编译后生成的文件
+	</li>
+	<li>
+		src：HMI的 .c、 .cpp、 .h、 .hpp源文件存放路径。
+	</li>
+</ul>
+<p>
+	1、kanzi非开源，开发学习费用较高，资料较少。qt开源，学习的成本也就较低，使用的人较多，使用的领域也很广，学习的途径特别多；<br />
+2、kanzi不开源，整个框架也并不是太成熟，由于从2.8到3.0又有一个较大的跨越，又由原来的c转到了c++，有问题请原厂的人来协助的话，整个的费用也是很高的。qt由于开源，大家都可以提交bug，实在不行，可以自己修改源码，自己编译，而且年头久远，框架稳定。<br />
+3、kanzi的开发模式新颖，kanzi studio 和kanzi engine将设计与代码分开，效果可以更好的由设计师设计，方式灵活，美工和程序员分工明确。qt虽然也有对应的qt designer，但是使用起来并没有kanzi studio方便，还有一些bug。不过qt的qml，使用描述性语言，简化了界面的布局开发，倒是也给qt在这点上扳回了一些，但是，设计师或者美工还是不能够实时看到自己的一个开发效果，所以kanzi在这点上还是很占优势的，这也是它得到推广的一个亮点。<br />
+4、kanzi的3D效果支持的较好，而且提高了局部刷新的方法，所以，做出的产品很炫，但是它要一开始就要加载一个kzb文件，读入到内存，所以对于内存和cpu的消耗较大。qt的很早之前已经支持OpenGL，但是使用起来较为麻烦。在qt5.5左右开始引入了Qt3D模块，来补充自己在3D方面的不足，但是现在到了5.6，它的一些API接口才逐渐稳定下来，但是这方面的文档很少，给开发也还是带来了不少的麻烦。虽然同kanzi一样，qt5.0之后使用的都是scene graph渲染架构，但是貌似没有提供出局部刷新的实现接口，使得帧数还是一个较大的问题。
+</p>
+<h2 id='区别于其他平台'>
+	区别于其他平台
+</h2>
+<p>
+	1.工作方式上的改变<br />
+在传统的工作方式中，UI的设计只能基于图片，裁剪相应的图片交给软件工程师，一切的实现都由软件工程师完成。所以UI设计师在设计的时候总是要考虑软件工程师能否实现某些界面效果，也很难看得到真正想设计的效果；软件工程师也很难理解UI设计师的意图，并且被大量繁琐的界面布局、切换等工作耗费心机而不能专注于真正的功能实现。<br />
+在Kanzi中，UI设计师可以使用Kanzi Stadio设计软件自由地完成自己的构想。设计师可以在Kanzi Stadio中设计所有的效果、界面切换和部分界面逻辑，能够所见即所得地设计UI、展示UI。最终，UI设计师把最终的UI界面导出kzb资源包给软件工程师使用。<br />
+而HMI软件工程师根据设计师导出的kzb资源文件，使用Kanzi Engine，通过路径读取设计师已经设计好的界面和元素，对其中的元素的点击等事件设置监听处理，并对其中需要传递的数据进行读写，编写代码完成实际功能的实现。
+</p>
+<p>
+	在这种工作方式下，设计师专注于设计和用户体验，软件工程师关注数据和功能实现，二者的工作减少了相互的依赖，很好地实现了分离。<br />
+2.其他优点<br />
+与其他的UI工具不同，更偏向于UI设计。<br />
+由于前期可以脱离软件工程师，设计师可以使用Kanzi比较快速地制作出产品原型。<br />
+Kanzi是一个3D的UI引擎，对模型的支持非常好，并且支持从3dmax中导入动画。Kanzi 的3D性能比QT好很多。<br />
+Kanzi与QNX合作，比较适合汽车行业注重安全的环境。<br />
+设计师可以在上面做出很炫的动画效果。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/957.html">MFC介绍——以前、现实与未来</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/959.html">qt介绍</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/xi_gua_gua/article/details/70195572" target="_blank">https://blog.csdn.net/xi_gua_gua/article/details/70195572</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Kzi基础---Kzi基本概念">Kzi基础---Kzi基本概念</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#区别于其他平台">区别于其他平台</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

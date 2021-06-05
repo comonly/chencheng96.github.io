@@ -1,0 +1,437 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>studying12 如何在自己的网站上实现QQ授权登录？_comonly.cn</title>
+<meta name="keywords" content="studying12 如何在自己的网站上实现QQ授权登录？" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">studying12 如何在自己的网站上实现QQ授权登录？</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">null</li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2016-05-02</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	第三方api
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">网页技术</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	最近在实现QQ授权登录，现将我的实现过程以及我的理解整理如下。以下所述如有不对之处，请指正。
+</p>
+<p>
+	官方提供的SDK有：JS，PHP，Java。我的网站使用Scala+Play搭建的，所以只能用JS SDk。
+</p>
+<ul>
+	<li>
+		AppID：你的应用(网站)的ID。
+	</li>
+	<li>
+		AppKey：对你的应用的验证。
+	</li>
+	<li>
+		Redirect_uri：用户确认授权后的回调地址。(需自己设置，有防止别人盗用你的身份获取授权用户信息的作用)
+	</li>
+	<li>
+		OpenID：用户身份的唯一标识。建议保存在本地并与本地创建的uid绑定，以便用户下次登录时可对应到其之前的身份信息，不需要重新授权，使用户体验一致。(获取不到用户的QQ号)
+	</li>
+	<li>
+		AccessToken：表示当前用户在此网站/应用的登录状态与授权信息，建议保存在本地。(相当于token，令牌)
+	</li>
+	<li>
+		Scope：你要获取的信息。
+	</li>
+</ul>
+<p>
+	2.准备
+</p>
+<p>
+	注册QQ互联开发者身份
+</p>
+<p>
+	需要去腾讯QQ互联注册：http://connect.qq.com/。
+</p>
+<p>
+	准备好网站
+</p>
+<p>
+	网站要基本开发完成。网站域名，Logo等都有。
+</p>
+<p>
+	创建应用
+</p>
+<p>
+	在QQ互联管理中心创建应用。
+</p>
+<p>
+	<img src="https://img.alicdn.com/imgextra/i4/2294440953/TB2Ns7boXXXXXXFXXXXXXXXXXXX_!!2294440953.jpg" alt="" /> 
+</p>
+<p>
+	<br />
+</p>
+<p>
+	上面的信息，创建好了之后随时可以更改。
+</p>
+<p>
+	网站验证
+</p>
+<p>
+	上图中的网站地址后面的验证，我选择的是在自己网站首页HTML代码的HEAD标签中添加：
+</p>
+<blockquote>
+	&lt;meta property="qc:admins" content="你的验证信息" /&gt;
+</blockquote>
+<p>
+	回调地址可以自己设置一个。我网站首页是http://xjpz.me,因此设置的是http://xjpz.me/blog/test/qcback。
+</p>
+<p>
+	其他的按需填写。
+</p>
+<p>
+	创建了应用可获得AppID与AppKey。
+</p>
+<p>
+	3.部署测试
+</p>
+<p>
+	添加登录入口
+</p>
+<p>
+	引入JS SDK文件：
+</p>
+<p>
+	<br />
+</p>
+<p>
+	在登录页面&lt;head&gt;&lt;/head&gt;中引入：
+</p>
+<blockquote>
+	&lt;script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" 
+data-appid="APPID" 
+data-redirecturi="REDIRECTURI" 
+charset="utf-8"&gt;
+&lt;/script&gt;
+</blockquote>
+<p>
+	将APPID换成你自己的APPID，REDIRECTURI换成你自己设置的回调地址。
+</p>
+<p>
+	放置QQ图标(下面有素材地址)，设置图标超链接地址：
+</p>
+<blockquote>
+	<p>
+		a href="http://openapi.qzone.qq.com/oauth/show?
+	</p>
+	<p>
+		which=ConfirmPage&amp;display=pc&amp;response_type=token&amp;
+	</p>
+	<p>
+		client_id=xxxxxxx&amp;redirect_uri=http://xxxx.com&amp;scope=get_user_info"
+	</p>
+	<p>
+		img src="/assets/images/Connect_logo_1.png" alt="QQ授权登录 QQ授权登录开发 QQ授权登录管理"
+	</p>
+</blockquote>
+<p>
+	<br />
+</p>
+<p>
+	将client_id换成你的AppID，redirect_uri换成你的回调地址。 如果你要获取其他信息或者调用其它接口，请将scope改成你需要的API名或者直接改成 all 。(API列表可查看http://wiki.connect.qq.com/api%E5%88%97%E8%A1%A8)。
+</p>
+<p>
+	我的登录入口样例：
+</p>
+<p>
+	<img src="https://img.alicdn.com/imgextra/i2/2294440953/TB28AL3oXXXXXbcXXXXXXXXXXXX_!!2294440953.jpg" alt="" /> 
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	官方资料：
+</p>
+<p>
+	<a href="http://wiki.connect.qq.com/%E7%BD%91%E7%AB%99%E5%89%8D%E7%AB%AF%E9%A1%B5%E9%9D%A2%E8%A7%84%E8%8C%83#1..E4.BD.BF.E7.94.A8.E8.85.BE.E8.AE.AF.E6.8F.90.E4.BE.9B.E7.9A.84.E6.A0.87.E5.87.86.E2.80.9CQQ.E7.99.BB.E5.BD.95.E2.80.9D.E6.A0.87.E8.AF.86">素材与放置规范</a>?或者这个
+</p>
+<p>
+	官方提供的登录按钮代码，可直接将代码贴到你想要放置入口的位置就行：
+</p>
+<blockquote>
+	&lt;span id="qqLoginBtn"&gt;&lt;/span&gt;  &lt;script type="text/javascript"&gt;QC.Login({         btnId:"qqLoginBtn"    //插入按钮的节点id  });  &lt;/script&gt;
+</blockquote>
+<p>
+	设置回调页面
+</p>
+<blockquote>
+	<ol>
+		<li>
+			同样需要引入JS SDK文件，参照上面。
+		</li>
+		<li>
+			用JS SDK协助调用OpenAPI的get_user_info方法，获取用户头像、用户名等基础信息。
+		</li>
+	</ol>
+</blockquote>
+<p>
+	我的回调页面代码如下：
+</p>
+<blockquote>
+	&lt;html&gt;&lt;head&gt;&nbsp;&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;&lt;title&gt; QQConnect JSDK - redirectURI &lt;/title&gt;&lt;script src="/assets/javascripts/jquery.min.js"&gt;&lt;/script&gt;&lt;script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="xxxxxxx" data-redirecturi="http://xxxx.com/xxxxx" charset="utf-8"&gt;&lt;/script&gt;&lt;style type="text/css"&gt;html, body{font-size:14px; line-height:180%;}&lt;/style&gt;&lt;/head&gt;&lt;body onload="getInfo()"&gt;&lt;div&gt;&lt;h3&gt;数据传输中，请稍后...&lt;/h3&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;&lt;script type="text/javascript"&gt;function getInfo(){                  if(QC.Login.check()){                      QC.api("get_user_info")                          .success(function(s){//成功回调                              QC.Login.getMe(function(openId, accessToken){$.post('/你的后台处理Action',{name:s.data.nickname,openid:openId,otype:1,token:accessToken},function(data,status){if(status=="success"){alert(s.data.nickname+"恭喜你,登录成功!");                                        &nbsp;location.href = "/";}else{alert("获取用户信息成功！登录失败！");location.href = "/blog/to/login";&nbsp;}  &nbsp;})})}).error(function(f){//失败回调alert("获取用户信息失败！登录失败！");location.href = "/blog/to/login";}).complete(function(c){//完成请求回调             &nbsp;//alert("获取用户信息完成！");});                 &nbsp;}else{                    &nbsp;alert("请登录！");&nbsp;location.href = "/blog/to/login";&nbsp;}              } &nbsp;&lt;/script&gt;
+</blockquote>
+<p>
+	说明，
+</p>
+<blockquote>
+	<p>
+		- 引入的`JS SDK`文件中的`data-appid` 和 `data-redirecturi` 同样需要改为你的AppID 和回调地址。
+	</p>
+	<p>
+		- 授权成功后`Openid`和`token`会缓存在本地。可通过`QC.Login.getMe(function(openId, accessToken){}` 获取。
+	</p>
+	<p>
+		- 回调成功后，我这里把用户名和openid提交给服务器，保存在本地，使用户体验一致。即`$.post(){}`方法，你需要换成你服务端的Action。
+	</p>
+	<p>
+		- 服务器处理成功后重定向到网站首页。授权登录结束。
+	</p>
+</blockquote>
+<p>
+	为了方便用户，用户授权成功后，我并没有再继续让用户输入邮箱、密码等。如果再让用户输入一遍，那和直接注册有什么区别？那样授权登录基本就失去了意义。
+</p>
+<p>
+	顺便贴一下我后台处理步骤：
+</p>
+<blockquote>
+	<p>
+		- //判断openid是否存在。
+	</p>
+	<p>
+		- // 如果openid存在，则说明此用户之前登录过或者已与本地user表中的用户绑定。写入cookie，使用户为登录状态，到此结束。
+	</p>
+	<p>
+		- //如果用户openid不存在，则判断用户名是否存在。
+	</p>
+	<p>
+		- //如果用户名不存在，则直接生成新的本地用户，并绑定uid与openid。写入cookie，使用户为登录状态，到此结束。
+	</p>
+	<p>
+		- //如果用户名存在，提醒用户是否验证并与之绑定。如果用户选择验证，并验证通过，则与之绑定。写入cookie，使用户为登录状态，到此结束。
+	</p>
+	<p>
+		- //如果用户放弃验证，或者验证失败，则生成新的本地用户，并生成新的用户名，绑定uid与openid。写入cookie，使用户为登录状态，到此结束。
+	</p>
+</blockquote>
+<p>
+	4.提交
+</p>
+<p>
+	以上完成，自己测试通过，就可以提交腾讯审核。没有审核通过之前只能设置几个账号测试，其他账号无法授权登录。
+</p>
+<p>
+	提交时需注意，
+</p>
+<blockquote>
+	<p>
+		在显要位置放置登录入口。至少在你网站登录页面要放置。我第一次提交时专门做了一个授权登录入口并在应用信息设置里填写了。结果腾讯以"未放置登录入口或放置不规范"为由拒绝。
+	</p>
+	<p>
+		网站要基本开发完成。我第二次提交，因有未实现的页面，被腾讯以"网站不完善"为由拒绝。然后我把未实现页面入口撤下，审核通过。
+	</p>
+</blockquote></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/372.html">dreamweaver连接数据库典型问题解决方法</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/376.html">studying13 彻底解决win7 64位在指定的 DSN 中，驱动程序和应用程序之间的体系结构</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

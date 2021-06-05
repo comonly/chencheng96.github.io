@@ -1,0 +1,529 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>JNDI相关_comonly.cn</title>
+<meta name="keywords" content="JNDI相关" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">JNDI相关</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">孤傲苍狼</li>
+          <li class="lmname"><a href="https://www.cnblogs.com/xdp-gacl/p/3951952.html" target="_blank">https://www.cnblogs.com/xdp-gacl/p/3951952.html</a></li>
+          <li class="timer">2018-09-05</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	java-含工具类
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	JNDI是 Java 命名和目录接口（Java Naming and Directory Interface，JNDI） 的简称。从一开始就一直是 Java 2 平台企业版的核心技术之一。在 JMS，JMail,JDBC,EJB 等技术中，就大量应用的这种技术。JNDI 可访问的现有的目录及服务有：DNS、XNam 、Novell目录服务、LDAP(Lightweight Directory Access Protocol 轻型目录访问协议)、 CORBA对象服务、文件系统、WindowsXP/2000/NT/Me/9x的注册表、RMI、DSML v1&amp;v2、NIS。
+</p>
+<p>
+	JNDI诞生的理由似乎很简单。随着分布式应用的发展，远程访问对象访问成为常用的方法。虽然说通过 Socket等编程手段仍然可实现远程通信，但按照模式的理论来说，仍是有其局限性的。RMI技术，RMI-IIOP 技术的产生，使远程对象的查找成为了技术焦点。JNDI 技术就应运而生。JNDI 技术产生后，就可方便的查找远程或是本地对象。包含命名和目录服务：
+</p>
+<p>
+	JNDI 的主要功能可以这样描述，它使用一张哈希表存储对象（大多数的J2EE容器也的确是这样做的），然后，开发人员可以使用键值——也就是一个字符串——来获取这个对象。这里就包括取JNDI的两个最主要操作，bind和lookup。bind操作负责往哈希表里存对象，存对象的时候要定义好对象的键值字符串，lookup则根据这个键值字符串往外取对象。在我们实际生活或工作中，命名类似如你的身份证号和工号可以"理解"成一种命名服务，即一个值到另一个值的映射，从身份证或工号就可以得知你人本身。
+</p>
+<p>
+	JNDI的名称可能会让人产生混淆，似乎觉得这是一个用来操作目录的，事实上，我更愿意把这个目录理解成为JNDI存放对象时使用的格式，也就是说，JNDI以目录的方式存储对象的属性。例如，用户通过JNDI存储一个汽车对象，那么，汽 车就是根目录，汽车的轮子、引擎之类的子对象就算是子目录，而属性，比如说汽车的牌子、重量之类，就算是汽车目录下的文件。从计算机角度理解为在互联网上有着各种各样的资源和主机,但是这些内容都是散落在互联网中,为了访问这些散落的资源并获得相应的服务,就需要用到目录服务。
+</p>
+JNDI的架构与 JDBC的架构非常类似。JNDI 架构提供了一组标准命名系统的API,这些API 在JDK1.3 之前是作为一个单独的扩展包。jndi.jar,这个基础 API构建在与SPI 之上。这个 API提供如下五个包：<br />
+<ul>
+	<li>
+		javax.naming
+	</li>
+	<li>
+		javax.naming.directory
+	</li>
+	<li>
+		javax.naming.event
+	</li>
+	<li>
+		javax.naming.ldap
+	</li>
+	<li>
+		javax.naming.spi
+	</li>
+</ul>
+在应用程序中,我们实际上只使到用以上几个包的中类.具体调用类及通信过程对用户来说是透明的。JNDI API 提供了访问不同 JNDI服务的一个标准的统一 的实现,其具体实现可由不同的 ServiceProvider来完成。前面讲的为第一层 JNDI API 层。最下层为 JNDI SPI API 及其具体实现。它包括了几个增强和下面的命名/目录服务提供者：<br />
+<ul>
+	<li>
+		LDAP(Lightweight DirectoryAccess Protocol)服务提供者；
+	</li>
+	<li>
+		CORBACOS（Common ObjectRequest Broker Architecture Common Object Services）命名服务提供者；
+	</li>
+	<li>
+		RMI(Java Remote MethodInvocation)注册服务提供者 DNS(Domain NameSystem)服务提供者；
+	</li>
+	<li>
+		FSSP(File System Service Provider)文件系统服务提供者。
+	</li>
+</ul></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/964.html">数据库连接池{待实例}</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/966.html">长尾关键词</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.cnblogs.com/xdp-gacl/p/3951952.html" target="_blank">https://www.cnblogs.com/xdp-gacl/p/3951952.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="如果不用JNDI我们怎样做？用了JNDI后我们又将怎样做">
+							<h2 style="display:inline;color:#5BC648;">如果不用JNDI我们怎样做？用了JNDI后我们又将怎样做</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-09-06&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	||转自：https://blog.csdn.net/defonds/article/details/4287785
+</p>
+<p>
+	<br />
+</p>
+<h4>
+	没有JNDI的做法：&nbsp;
+</h4>
+程序员开发时，知道要开发访问MySQL数据库的应用，于是将一个对 MySQL JDBC 驱动程序类的引用进行了编码，并通过使用适当的 JDBC URL 连接到数据库。&nbsp;<br />
+就像以下代码这样：<br />
+<br />
+Connection conn=null;<br />
+try {<br />
+&nbsp; Class.forName("com.mysql.jdbc.Driver",<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; true, Thread.currentThread().getContextClassLoader());<br />
+&nbsp; conn=DriverManager.getConnection("jdbc:mysql://MyDBServer?user=qingfeng&amp;password=mingyue");<br />
+&nbsp;&nbsp;<br />
+&nbsp; ......<br />
+&nbsp; conn.close();<br />
+}&nbsp;<br />
+catch(Exception e) {<br />
+&nbsp; e.printStackTrace();<br />
+}&nbsp;<br />
+finally {<br />
+&nbsp; if(conn!=null) {<br />
+&nbsp; &nbsp; try {<br />
+&nbsp; &nbsp; &nbsp; conn.close();<br />
+&nbsp; &nbsp; } catch(SQLException e) {}<br />
+&nbsp; }<br />
+}<br />
+<br />
+这是传统的做法，也是以前非Java程序员（如Delphi、VB等）常见的做法。这种做法一般在小规模的开发过程中不会产生问题，只要程序员熟悉Java语言、了解JDBC技术和MySQL，可以很快开发出相应的应用程序。<br />
+<br />
+没有JNDI的做法存在的问题：&nbsp;<br />
+1、数据库服务器名称MyDBServer 、用户名和口令都可能需要改变，由此引发JDBC URL需要修改；&nbsp;<br />
+2、数据库可能改用别的产品，如改用DB2或者Oracle，引发JDBC驱动程序包和类名需要修改；&nbsp;<br />
+3、随着实际使用终端的增加，原配置的连接池参数可能需要调整；&nbsp;<br />
+4、......<br />
+<br />
+解决办法：&nbsp;<br />
+程序员应该不需要关心“具体的数据库后台是什么？JDBC驱动程序是什么？JDBC URL格式是什么？访问数据库的用户名和口令是什么？”等等这些问题，程序员编写的程序应该没有对 JDBC 驱动程序的引用，没有服务器名称，没有用户名称或口令 —— 甚至没有数据库池或连接管理。而是把这些问题交给J2EE容器来配置和管理，程序员只需要对这些配置和管理进行引用即可。<br />
+<br />
+由此，就有了JNDI。<br />
+<h4>
+	用了JNDI之后的做法：&nbsp;
+</h4>
+首先，在J2EE容器中配置JNDI参数，定义一个数据源，也就是JDBC引用参数，给这个数据源设置一个名称；然后，在程序中，通过数据源名称引用数据源从而访问后台数据库。&nbsp;<br />
+具体操作如下（以JBoss为例）：&nbsp;<br />
+1、配置数据源&nbsp;<br />
+在JBoss 的 D:/jboss420GA/docs/examples/jca 文件夹下面，有很多不同数据库引用的数据源定义模板。将其中的 mysql-ds.xml 文件Copy到你使用的服务器下，如 D:/jboss420GA/server/default/deploy。&nbsp;<br />
+修改 mysql-ds.xml 文件的内容，使之能通过JDBC正确访问你的MySQL数据库，如下：&nbsp;<br />
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;&nbsp;<br />
+&lt;datasources&gt;&nbsp;<br />
+&lt;local-tx-datasource&gt;&nbsp;<br />
+&nbsp; &nbsp; &lt;jndi-name&gt;MySqlDS &lt;/jndi-name&gt;&nbsp;<br />
+&nbsp; &nbsp; &lt;connection-url&gt;jdbc:mysql://localhost:3306/lw &lt;/connection-url&gt;&nbsp;<br />
+&nbsp; &nbsp; &lt;driver-class&gt;com.mysql.jdbc.Driver &lt;/driver-class&gt;&nbsp;<br />
+&nbsp; &nbsp; &lt;user-name&gt;root &lt;/user-name&gt;&nbsp;<br />
+&nbsp; &nbsp; &lt;password&gt;rootpassword &lt;/password&gt;&nbsp;<br />
+&lt;exception-sorter-class-name&gt;org.jboss.resource.adapter.jdbc.vendor.MySQLExceptionSorter &lt;/exception-sorter-class-name&gt;&nbsp;<br />
+&nbsp; &nbsp; &lt;metadata&gt;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &lt;type-mapping&gt;mySQL &lt;/type-mapping&gt;&nbsp;<br />
+&nbsp; &nbsp; &lt;/metadata&gt;&nbsp;<br />
+&lt;/local-tx-datasource&gt;&nbsp;<br />
+&lt;/datasources&gt;<br />
+<br />
+这里，定义了一个名为MySqlDS的数据源，其参数包括JDBC的URL，驱动类名，用户名及密码等。<br />
+<br />
+2、在程序中引用数据源：<br />
+<br />
+Connection conn=null;<br />
+try {<br />
+&nbsp; Context ctx=new InitialContext();<br />
+&nbsp; Object datasourceRef=ctx.lookup("java:MySqlDS"); //引用数据源<br />
+&nbsp; DataSource ds=(Datasource)datasourceRef;<br />
+&nbsp; conn=ds.getConnection();<br />
+&nbsp;&nbsp;<br />
+&nbsp; ......<br />
+&nbsp; c.close();<br />
+}&nbsp;<br />
+catch(Exception e) {<br />
+&nbsp; e.printStackTrace();<br />
+}&nbsp;<br />
+finally {<br />
+&nbsp; if(conn!=null) {<br />
+&nbsp; &nbsp; try {<br />
+&nbsp; &nbsp; &nbsp; conn.close();<br />
+&nbsp; &nbsp; } catch(SQLException e) { }<br />
+&nbsp; }<br />
+}<br />
+<br />
+直接使用JDBC或者通过JNDI引用数据源的编程代码量相差无几，但是现在的程序可以不用关心具体JDBC参数了。&nbsp;<br />
+在系统部署后，如果数据库的相关参数变更，只需要重新配置 mysql-ds.xml 修改其中的JDBC参数，只要保证数据源的名称不变，那么程序源代码就无需修改。<br />
+<br />
+由此可见，JNDI避免了程序与数据库之间的紧耦合，使应用更加易于配置、易于部署。<br />
+<br />
+JNDI的扩展：&nbsp;<br />
+JNDI在满足了数据源配置的要求的基础上，还进一步扩充了作用：所有与系统外部的资源的引用，都可以通过JNDI定义和引用。<br />
+<br />
+所以，在J2EE规范中，J2EE 中的资源并不局限于 JDBC 数据源。引用的类型有很多，其中包括资源引用（已经讨论过）、环境实体和 EJB 引用。特别是 EJB 引用，它暴露了 JNDI 在 J2EE 中的另外一项关键角色：查找其他应用程序组件。<br />
+<br />
+EJB 的 JNDI 引用非常类似于 JDBC 资源的引用。在服务趋于转换的环境中，这是一种很有效的方法。可以对应用程序架构中所得到的所有组件进行这类配置管理，从 EJB 组件到 JMS 队列和主题，再到简单配置字符串或其他对象，这可以降低随时间的推移服务变更所产生的维护成本，同时还可以简化部署，减少集成工作。外部资源”。<br />
+<br />
+总结：&nbsp;<br />
+J2EE 规范要求所有 J2EE 容器都要提供 JNDI 规范的实现。JNDI 在 J2EE 中的角色就是“交换机” —— J2EE 组件在运行时间接地查找其他组件、资源或服务的通用机制。在多数情况下，提供 JNDI 供应者的容器可以充当有限的数据存储，这样管理员就可以设置应用程序的执行属性，并让其他应用程序引用这些属性（Java 管理扩展（Java Management Extensions，JMX）也可以用作这个目的）。JNDI 在 J2EE 应用程序中的主要角色就是提供间接层，这样组件就可以发现所需要的资源，而不用了解这些间接性。<br />
+<br />
+在 J2EE 中，JNDI 是把 J2EE 应用程序合在一起的粘合剂，JNDI 提供的间接寻址允许跨企业交付可伸缩的、功能强大且很灵活的应用程序。这是 J2EE 的承诺，而且经过一些计划和预先考虑，这个承诺是完全可以实现的。<br />
+<br />
+通俗点说JNDI就好像一棵倒挂的树，本地的机器可以把东西挂在这棵树上，远程的机器也可以把东西挂在这棵树上，&nbsp;<br />
+这样大家要取东西的时候都从这棵树上取就行了，这也是实现分布式的简单办法
+<p>
+	<br />
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="参考资料">
+							<h2 style="display:inline;color:#5BC648;">参考资料</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-09-06&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	百科：https://baike.baidu.com/item/JNDI
+</p>
+<p>
+	数据源的配置：https://www.cnblogs.com/xdp-gacl/p/3951952.html
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="使用JNDI API获取DNS信息">
+							<h2 style="display:inline;color:#5BC648;">使用JNDI API获取DNS信息</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-09-06&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span>待处理：https://blog.csdn.net/u010430304/article/details/54601302/</span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="其他">
+							<h2 style="display:inline;color:#5BC648;">其他</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-09-06&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	JNDI的功能既然就是根据一个字符串键值就可以取得一个想要得到的对象，我一开始就觉得这不是跟COM或CORBA一样吗？SUN也是有野心的企业啊，JNDI应该就是它要努力推行的JAVA下的分布式开发的标准吧。
+</p>
+<p>
+	JNDI 的出现应该就是为了分步式开发服务的，有人负责开发这种分布式对象，有人只需要使用这些分布式对象就可以了，这两组人不必属于同一个公司，而且这种开发通常应该是不并行的，也不必是为了同一个项目服务。就如果数据源对象，它放在JNDI中，只要想要用的人，直接通过JNDI服务取来用就可以了，至于当初是谁把它放进JNDI中的，还是不用操这份心了吧。而我一直没有使用JNDI，也就是这个原因，项目中的所有对象都在我控制之下，我不去使用别人的对象，也 没打算把我的对象贡献出来给别人使用，那自然也就没必要去跟JNDI打交道。我觉得是否使用JNDI，这应该是关键原因，至于什么方便性、安全性之类的考虑，应该不是JNDI的主要目的，就如同你可以用JAVA来做网站，但JAVA并不是专门用来做网站的。
+</p>
+可能有人觉得这种功能跟IoC也很像，这个我倒不觉得，虽然对于对象的使用人员来说的确是这种感觉，且不说IoC需要为对象定义接口，而JNDI并无此限制，先说这里有一个使用环境问题，我觉得IoC是用来解决并行开发问题的，也就是说IoC主要是用于明确设计人员与实现/使用人员的分工，无论是设计的，还是使用的，通常是一个项目组里的人，使用IoC，可以使得设计人员专注于设计，加快设计速度。因此，IoC的用途要比JNDI广泛的多，现在大型系统中，不使用IoC的，几稀矣。<br /></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="数据源配置">
+							<h2 style="display:inline;color:#5BC648;">数据源配置</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-09-06&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	tomcat 中配置一个数据源，程序就可以通过 java.sql 接口去访问数据库，不管底层的数据库是什么类型。对于一个简单的系统，我们一般会将数据库的连接url、用户名、密码、数据源（c3p0,dbcp等）配置在本系统中，对于SSH项目，通常会这些写在配置文件（properties、xml等）中，在系统初始化的时候，进行读取加载。
+</p>
+存在的问题：<br />
+<ol>
+	<li>
+		数据库服务器名称MySQL、用户名和密码都可能需要改变，由此引发JDBC URL需要修改；
+	</li>
+	<li>
+		数据库可能改用别的产品，如改用DB2或者Oracle，引发JDBC驱动程序包和类名需要修改；
+	</li>
+	<li>
+		随着实际使用终端的增加，原配置的连接池参数可能需要调整；
+	</li>
+</ol>
+即耦合性太高。<br />
+<br />
+使用JNDI，在J2EE容器中配置JNDI参数，定义一个数据源，也就是JDBC引用参数，给这个数据源设置一个名称，然后在程序中，通过数据源名称引用数据源从而访问后台数据库。<br />
+如果项目中使用到spring,可以定义一个spring-res.xml,用于定义使用的jndi名称。<br />
+<br />
+如：<br />
+<br />
+&lt;!-- JNDI数据源 --&gt;<br />
+&lt;jee:jndi-lookup id="dataSource" jndi-name="jndi/Java"<br />
+proxy-interface="javax.sql.DataSource" lookup-on-startup="false" /&gt;<br />
+<br />
+即配置数据源名称为jndi/Java，<br />
+如果使用Tomcat作为web容器，则在context.xml中配置：<br />
+<br />
+&lt;Resource auth="Container" driverClassName="com.mysql.jdbc.Driver"&nbsp;<br />
+factory="org.apache.tomcat.dbcp.dbcp.BasicDataSourceFactory" maxActive="20"&nbsp;<br />
+maxIdel="10" maxWait="1000" name="jndi/shds" type="javax.sql.DataSource"&nbsp;<br />
+url="jdbc:mysql://localhost:3306/java?user=xxx&amp;amp;password=123#pwd&amp;amp;useUnicode=true&amp;amp;characterEncoding=utf8&amp;amp;autoReconnect=true&amp;amp;generateSimpleParameterMetadata=true&amp;amp;" /&gt;<br />
+<br />
+如果使用JBOSS作为web容器，则在mysql-ds.xml修改<br />
+在程序中引用数据源：<br />
+<br />
+Context ctx=new InitialContext();&nbsp;&nbsp;<br />
+Object datasourceRef=ctx.lookup("jndi/Java"); //引用数据源，实际项目中，可以获取spring-res.xml配置文件中jndi-name来获取实际数据源名称。<br />
+DataSource ds=(Datasource)datasourceRef;&nbsp;&nbsp;<br />
+conn=ds.getConnection();&nbsp;<br />
+<br />
+在系统部署后，如果数据源参数发生改变，只要jndi名称不改，那么我们只要在一个地方修改配置即可，不需要修改源代码，从而是程序员真正关心代码逻辑的实现，也达到解耦的目的。<br />
+<br />
+<p>
+	JNDI的扩展：JNDI在满足了数据源配置的要求的基础上，还进一步扩充了作用：所有与系统外部的资源的引用，都可以通过JNDI定义和引用。
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="J2EE环境下使用JNDI">
+							<h2 style="display:inline;color:#5BC648;">J2EE环境下使用JNDI</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-09-06&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span>实例——待处理：http://yangzb.iteye.com/blog/242560</span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#如果不用JNDI我们怎样做？用了JNDI后我们又将怎样做">如果不用JNDI我们怎样做？用了JNDI后我们又将怎样做</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#参考资料">参考资料</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#使用JNDI API获取DNS信息">使用JNDI API获取DNS信息</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#其他">其他</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#数据源配置">数据源配置</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#J2EE环境下使用JNDI">J2EE环境下使用JNDI</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

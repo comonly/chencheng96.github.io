@@ -1,0 +1,355 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>KindEditor 编辑器粘贴图片直接上传（Chrome,IE11,opera）_comonly.cn</title>
+<meta name="keywords" content="KindEditor 编辑器粘贴图片直接上传（Chrome,IE11,opera）" />
+<meta name="description" content="只用修改一个js文件即可，仅限于剪切板中存放的是图片，包含图片的富文本不适用。
+
+
+	
+
+
+	本方法来自网络，适用于KindEditor4.1.10。经本人测试，Chrome,Firefox,360浏览器8.1极速模式可用，ie9测试不能用。经测试KindEditor4.1.11版本，用此代码也可以实现自动上传功能。代码粘贴好后，直接用源代码里面提供的demo.php测试即可。如果自己引用的KindEditor编辑器实现不了，最好比对一下自己引用编辑器的代码和demo.php引用代码的区别，如" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">KindEditor 编辑器粘贴图片直接上传（Chrome,IE11,opera）</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">淘淘IT</li>
+          <li class="lmname"><a href="https://taotaoit.com/article/details/41.html" target="_blank">https://taotaoit.com/article/details/41.html</a></li>
+          <li class="timer">2020-11-07</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>只用修改一个js文件即可，仅限于剪切板中存放的是图片，包含图片的富文本不适用。
+
+
+	
+
+
+	本方法来自网络，适用于KindEditor4.1.10。经本人测试，Chrome,Firefox,360浏览器8.1极速模式可用，ie9测试不能用。经测试KindEditor4.1.11版本，用此代码也可以实现自动上传功能。代码粘贴好后，直接用源代码里面提供的demo.php测试即可。如果自己引用的KindEditor编辑器实现不了，最好比对一下自己引用编辑器的代码和demo.php引用代码的区别，如</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	只用修改一个js文件即可，仅限于剪切板中存放的是图片，包含图片的富文本不适用。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	本方法来自网络，适用于KindEditor4.1.10。经本人测试，Chrome,Firefox,360浏览器8.1极速模式可用，ie9测试不能用。经测试KindEditor4.1.11版本，用此代码也可以实现自动上传功能。代码粘贴好后，直接用源代码里面提供的demo.php测试即可。如果自己引用的KindEditor编辑器实现不了，最好比对一下自己引用编辑器的代码和demo.php引用代码的区别，如果有区别，仿照一下基本能实现。<br />
+<br />
+方法，修改kindeditor.js中的代码：<br />
+在5825行附近大概是下面这个样子的：<br />
+<br />
+K(doc.body).bind('paste', function (e) {&nbsp;&nbsp;<br />
+&nbsp; &nbsp; if (self.pasteType === 0) {&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; e.stop();&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; return;&nbsp;&nbsp;<br />
+&nbsp; &nbsp; }<br />
+在第1行和第2行之间插入：<br />
+<br />
+//处理IE11,Chrome粘贴图片上传&nbsp;&nbsp;<br />
+function dopasteImg() {&nbsp;&nbsp;<br />
+&nbsp; &nbsp; //debugger;&nbsp;&nbsp;<br />
+&nbsp; &nbsp; var file = null;&nbsp;&nbsp;<br />
+&nbsp; &nbsp; if (window.clipboardData) {//ie&nbsp;&nbsp;<br />
+&nbsp; &nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; if (clipboardData.files &amp;&amp; clipboardData.files.length)//IE11&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; file = clipboardData.files[0];&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; else if (!clipboardData.getData("text") &amp;&amp; !clipboardData.getData("url")) {&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; alert("不能粘贴文件或图片,请使用IE11或者Chrome浏览器,或使用上传功能");&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return true;&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }&nbsp;&nbsp;<br />
+&nbsp; &nbsp; } else {&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; if (e.event.clipboardData.items)//chrome&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; for (var i = 0; i &lt; e.event.clipboardData.items.length; i++) {&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (e.event.clipboardData.items[i].kind === "file") {&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; file = e.event.clipboardData.items[i];&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; break;&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; if (file == null) {&nbsp;&nbsp;<br />
+&nbsp; &nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (!e.event.clipboardData.getData("url") &amp;&amp; !e.event.clipboardData.getData("text")) {&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; alert("不能粘贴文件或图片,请使用IE11或者Chrome浏览器,或使用上传功能");&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return true;&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }&nbsp;&nbsp;<br />
+&nbsp; &nbsp; }&nbsp;&nbsp;<br />
+&nbsp; &nbsp; if (file) {&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; if (!K.undef(self.allowImageUpload, true)) {&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; alert("编辑器禁止上传图片,请与有关人员联系!");&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return true;&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; //获取File Blob&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; //debugger;&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; var blb;&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; if (file.getAsFile) {//Chrome&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; blb = file.getAsFile();&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (blb.size === 0) {&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; alert("不能获取剪切板中的" + (file.type.indexOf("image/") === 0 ? "图像" : "文件")&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; +"\n如果是从OutLook中复制的,请换其他程序,如Word");&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return true;&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; sendfile(blb, file.type);&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; } else {&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var fr = new FileReader();&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (fr.readAsArrayBuffer) {//ie&nbsp;&nbsp;<br />
+&nbsp; &nbsp;<br />
+&nbsp; &nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; fr.onloadend = function (evt) {&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; blb = evt.target.result;&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; sendfile(blb, file.type);&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }&nbsp;&nbsp;<br />
+&nbsp; &nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; fr.readAsArrayBuffer(file);&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; function sendfile(b, t) {&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var xhr = new XMLHttpRequest();&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var formData = new FormData();&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var isImg = t.indexOf("image/") === 0;&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //formData.append('imgFile', file,"untitled." + t.split('/')[1]);&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //formData.append('imgFile', b);&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var myBlob = new Blob([b], { "type": t });&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; formData.append('imgFile', myBlob, "untitled." + t.split('/')[1]);&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //formData.append('imgFile', b);&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; formData.append('dir', isImg ? 'image' : 'file');&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; xhr.open('POST', self.uploadJson);&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; xhr.onreadystatechange = function () {&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (xhr.readyState == 4&amp;&amp;xhr.status == 200) {&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // if (fn) {&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var data = _trim(xhr.responseText);&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //if (dataType == 'json') {&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; data = _json(data);&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (data.error) {&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (typeof ($) !== "undefined" &amp;&amp; $.messager &amp;&amp; $.messager.alert) {&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $.messager.alert('Error', data.message, 'warning');&nbsp;&nbsp;<br />
+&nbsp; &nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else {&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; alert(data.message);&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else {&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //self.exec('insertimage', url, title, width, height, border, align);&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if(K.undef(self.formatUploadUrl, true))&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; data.url =K.formatUrl(data.url, 'absolute');&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; self.exec('insertimage', data.url, "from clipboard", undefined, undefined, undefined, undefined);&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //}&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // fn(data);&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // }&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; xhr.send(formData);&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; return true;&nbsp;&nbsp;<br />
+&nbsp; &nbsp; }&nbsp;&nbsp;<br />
+}&nbsp;&nbsp;<br />
+//debugger;&nbsp;&nbsp;<br />
+if (dopasteImg())&nbsp;&nbsp;<br />
+&nbsp; &nbsp; e.stop();&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; //处理粘贴结束5825
+</p>
+<p>
+	此代码在chrome中测试通过，上传文件的服务器端处理无须改变，本代码已在chrome v35,IE11上测试通过<br />
+其中处理的几个例外情况是：<br />
+.在IE11和Chrome以外的浏览器中，如果复制了图片，粘贴，有可能会粘贴成&lt;img src="data:img/png:base64:xxxxxx"..../&gt;这种形式的，如IE10或者Firefox，但也可能会粘贴成&lt;img src="本地路径" 这种格式的，前一种格式，如果通过一些复杂的处理，做成上传比较容易（或者直接不处理，但这只能显示在支持这种HTML5格式的浏览器中），但后一种情况，如从OutLook收件箱中复制的图片，本人认为处理会很复杂，所以简单起见，禁止这些情况的粘贴<br />
+在chrome中，如果复制了Outlook收件箱的图片，在剪切板中是找不到这个文件的内容的（file.size==0），这种情况下的粘贴也会被禁止并提示<br />
+在IE11和Chrome中都有FormData对象，所以当能取到文件的时候一定是IE11或者Chrome
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1167.html">动态规划 题型汇总</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1169.html">数据库分页实现 后台</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://taotaoit.com/article/details/41.html" target="_blank">https://taotaoit.com/article/details/41.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

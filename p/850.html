@@ -1,0 +1,656 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>c++输入输出流_comonly.cn</title>
+<meta name="keywords" content="c++输入输出流" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">c++输入输出流</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-02-11</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	c c++
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	流（Stream），就是字节的序列。数据存放地向内存传送数据称为输入流，其操作称为“读操作”。流是有方向的，只能从输入流中读数据。
+</p>
+<p>
+	streambuf类及其派生类是用来提供缓冲或处理流的通用方法，主要完成信息通过缓冲区的交换。可以派生出3个类：filebuf类，strstreambuf类和conbuf类。
+</p>
+<p>
+	ios类及其派生类为用户提供使用流类的接口，提供了多种格式化输入/输出控制方法。包括的主要类有ios,istream,ostream,iostream,ifstream,ofstream,fstream,istrstream,ostrstream,strstream。
+</p>
+<h2 id='标准输入输出'>
+	标准输入输出
+</h2>
+<p>
+	iostream类中定义的4个流对象：cin,cout,cerr,clog为预定义的流对象。
+</p>
+<ul>
+	<li>
+		cin&nbsp; &nbsp; 对应于标准输入设备（键盘）
+	</li>
+	<li>
+		cout&nbsp; &nbsp; 对应于标准输出设备（显示器）
+	</li>
+	<li>
+		cerr&nbsp; &nbsp; 对应于标准错误输出设备（显示器），它是非缓冲输出
+	</li>
+	<li>
+		clog&nbsp; &nbsp; 对应于标准错误输出设备（显示器），它的输出是缓冲输出
+	</li>
+</ul>
+<h4>
+	运算符的重载与提前实现标准输入输出
+</h4>
+<p>
+	c++通过重载运算符&lt;&lt;（插入运算符）作用在流对象cout上和&gt;&gt;（提取运算符）作用在流对象cin上执行输入输出的操作。
+</p>
+<h4>
+	输出流的成员函数
+</h4>
+<p>
+	put函数把一个字符写到输出流中。
+</p>
+<pre class="prettyprint lang-cpp">cout.put('a');    //等价于cout&lt;&lt;'a';
+cout.put('a').put('b').put('\n');</pre>
+<p>
+	write函数把内存中的一块内容写到一个输出流中。
+</p>
+<pre class="prettyprint lang-cpp">char *s="will be send out";
+cout.write(s, strlen(s) );    //两个参数从字符指针s所指的字符存储区首地址开始，取出n个字节，输出显示。</pre>
+<h4>
+	输入流的成员函数
+</h4>
+<p>
+	get函数读取数据可以包含空字符（&gt;&gt;是拒绝空字符的）
+</p>
+<pre class="prettyprint lang-cpp">cin.get();    //从指定输入流中提取一个字符
+char ch;
+cin.get(ch);    //读取一个字符存放到变量ch中
+char buffer[10];
+cin.get(buffer, 10, '#');    //buffer指向字符串存放区首地址，10为字符串大小，#为指定的终止符（默认为'\0'）</pre>
+<p>
+	getline函数允许从输入流中读取多个字符，运行指定终止符（默认是换行符'\n'）
+</p>
+<pre class="prettyprint lang-cpp">char buffer[10];
+cin.getline(buffer ,10 ,'\n');    //类似get函数3个参数的情况</pre>
+<p>
+	read函数可以从输入流中每次读取一行字符。
+</p>
+<pre class="prettyprint lang-cpp">char buffer[10];
+cin.read(buffer, 10);    //10为字符序列的总字符上限</pre>
+<h2 id='文件'>
+	文件
+</h2>
+<p>
+	字符文件又称为ASCII码文件或文本文件。每个字节单元的内容为字符的ASCII码，读出的直接是对应的字符。
+</p>
+<p>
+	字节文件又称为二进制文件。文件内容是数据1的内部表示，是从内存中直接复制过来的。
+</p>
+<p>
+	文件流对象常用的文件操作成员函数
+</p>
+<ul>
+	<li>
+		get(chae &amp;ch)&nbsp; &nbsp; 从文件读取一个字符
+	</li>
+	<li>
+		getline(char *pch,int count,char delim='\n')&nbsp; &nbsp; 从文件读取多个字符，读取个数由count决定，delim为读取的结束符通常为换行符
+	</li>
+	<li>
+		read(char *pch,int count)&nbsp;&nbsp;&nbsp;&nbsp;<span>从文件读取多个字符，读取个数由count决定</span> 
+	</li>
+	<li>
+		put(char ch)&nbsp; &nbsp; 向文件写入一个字符
+	</li>
+	<li>
+		write(const char *pch,int count)&nbsp; &nbsp; 向文件写入多个字符，字符个数由参数count决定
+	</li>
+	<li>
+		open(const char *filename,int mode)&nbsp; &nbsp; 按mode方式打开文件
+	</li>
+	<li>
+		eof()&nbsp; &nbsp; 函数返回值为0，文件中还有数据可读，否则文件指针指向文件末尾
+	</li>
+	<li>
+		gcount()&nbsp; &nbsp; 获得实际读取的字节数
+	</li>
+	<li>
+		seekg(流中的绝对位置);&nbsp; &nbsp; 绝对移动，适用于输入流操作
+	</li>
+	<li>
+		seekg(偏移量, 参考位置);&nbsp; &nbsp; 相对操作，适用于输入流操作
+	</li>
+	<li>
+		tellg();&nbsp; &nbsp; 返回当前指针位置，适用于输入流操作
+	</li>
+	<li>
+		seekp(流中的绝对位置);&nbsp; &nbsp; 绝对移动，适用于输出流操作
+	</li>
+	<li>
+		seekp(<span>偏移量, 参考位置</span>);<span>&nbsp; &nbsp; 相对移动，适用于输出流操作</span> 
+	</li>
+	<li>
+		tellp();&nbsp; &nbsp; 返回当前指针位置，适用于输出流操作
+	</li>
+	<li>
+		close()&nbsp; &nbsp; 关闭文件
+	</li>
+</ul>
+<p>
+	文件中保存的内容按字节从数值0开始顺序编址，开始位置字节地址为0，最后存放文件结束符的地址为n（假设文件长度为n）
+</p>
+<h3>
+	文件的打开与关闭
+</h3>
+<p>
+	打开文件就是使一个文件流对象与一个指定的文件相关联。
+</p>
+<p>
+	1. 先建立相应的文件流对象，再用文件流对象的成员函数open()打开一个文件。
+</p>
+<p>
+	流类 对象名;
+</p>
+<p>
+	对象名.open("文件名",打开模式);
+</p>
+<p>
+	2. 通过文件流对象的构造函数打开文件。
+</p>
+<p>
+	流类 对象名<span>("文件名",打开模式</span><span>)</span> 
+</p>
+<h4>
+	有3种文件流类：
+</h4>
+<ol>
+	<li>
+		输入文件流类ifstream
+	</li>
+	<li>
+		输出文件流类ofstream
+	</li>
+	<li>
+		输入输出文件流类fstream
+	</li>
+</ol>
+<h4>
+	打开模式open_mode枚举类型的符号常量：
+</h4>
+<ul>
+	<li>
+		ios :: in&nbsp; &nbsp; 打开用于数据输入的文件，即从文件中读取数据。若文件不存在，不建立新文件，并返回打开失败信息（若无该参数，建立一个长度为0的空文件）。
+	</li>
+	<li>
+		ios :: out&nbsp; &nbsp; 打开用于数据输出的文件，即向文件中写入数据。不含in,ate,app时，若打开文件存在，则原有内容会被清除。
+	</li>
+	<li>
+		ios :: ate&nbsp; &nbsp; 使文件指针移至文件尾
+	</li>
+	<li>
+		ios :: app&nbsp; &nbsp; 使文件指针移至文件尾，并只允许在文件尾部追加数据
+	</li>
+	<li>
+		ios :: trunc&nbsp; &nbsp; 若打开的文件存在，则清除其全部内容，使之变为空文件
+	</li>
+	<li>
+		ios ::&nbsp;binary&nbsp; &nbsp; 文件以二进制方式打开（默认以文本文件）
+	</li>
+</ul>
+<p>
+	不含ate,app时，文件指针自动移动到文件开始位置。
+</p>
+<p>
+	输入文件流对象调用open()函数打开一个文件时，默认ios::in方式打开；当用输出文件流对象调用open()函数打开一个文件时，默认按ios::out方式打开。
+</p>
+<p>
+	文件的打开模式可以为多个符号常量用按位或运算“|”的组合。
+</p>
+<h4>
+	判断文件是否成功打开
+</h4>
+<pre class="prettyprint lang-cpp">ifstream f_read;
+f_read.open("文件路径及文件名");
+if(!f_read)    //!f_read可以换为f_read.fail()或f_read.is_open==0
+{
+...
+exit(1);
+}
+
+f_read.close();    //流对象名.close();关闭流对象对应的文件</pre>
+<h3>
+	文本文件的读写操作
+</h3>
+<p>
+	向文件写入数据，即从内存向文件输出数据，需要使用输出流类。
+</p>
+<ol>
+	<li>
+		调用从ostream流类中继承来的插入操作符重载函数"&lt;&lt;"
+	</li>
+	<li>
+		调用从ostream流类中继承来的put()函数
+	</li>
+</ol>
+<pre class="prettyprint lang-cpp">#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+using namespace std;
+void main(void)
+{
+	int s=0;
+	ofstream fileout("data1.dat");
+	if(!fileout){
+		cerr&lt;&lt;"文件data1.dat open fail"&lt;&lt;endl;
+		exit(1);
+	}
+	for(int i=0;i&lt;11;i++)
+		fileout&lt;&lt;i&lt;&lt;"+1 = "&lt;&lt;i+1&lt;&lt;endl;&nbsp;&nbsp;&nbsp;&nbsp;//&lt;&lt;写入数据
+
+	char ch=cin.get();
+	while(ch != EOF)
+	{
+		fileout.put(ch);&nbsp;&nbsp;&nbsp;&nbsp; ch=cin.get();	//获取键盘输入的数据，以Ctrl+Z结束
+	}
+	cout&lt;&lt;"write data in data1.data successful!";
+	fileout.close();
+}</pre>
+<p>
+	从打开的文本文件中读取数据到内存变量有3种方法。
+</p>
+<ol>
+	<li>
+		调用提取操作符重载成员函数“&gt;&gt;”。自动跳过空白字符
+	</li>
+	<li>
+		调用get()函数，每次从文件流中提取一个字符（不跳过一个字符，回车和换行作为一个换行字符对待）并作为返回值返回。
+	</li>
+	<li>
+		调用get(char&amp;)函数，每次从文件流中读取一个字符到引用变量中，同样不跳过任何字符。一般和put()函数建立的文件向对应。
+	</li>
+	<li>
+		调用getline(char *buffer, int len, char='\n')函数，每次从文件流中读取以换行符隔开（最后一行以文件结尾符为结束标志）的一行字符到字符指针buffer所指向的存储空间，最多读取len-1个字符
+	</li>
+</ol>
+<p>
+	<span>get()函数</span>判断返回值是否等于EOF可知文件中的数据是否输入完毕。其他方法若读取成功返回非0值，读取失败（读到文件结束符或未读到文件）返回0；
+</p>
+<pre class="prettyprint lang-cpp">#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+using namespace std;
+void main(void)
+{
+	int s=0;
+	ofstream fileout("data1.dat");
+	if(!fileout){
+		cerr&lt;&lt;"文件data1.dat open fail"&lt;&lt;endl;
+		exit(1);
+	}
+	for(int i=0;i&lt;11;i++)
+		fileout&lt;&lt;i&lt;&lt;"+1 = "&lt;&lt;i+1&lt;&lt;endl;
+	cout&lt;&lt;"write data in data1.data successful!\n";
+
+	char x;	//读取文件
+	ifstream filein("data1.dat",ios :: in);
+	if(!filein){
+		cerr&lt;&lt;"文件data1.dat open fail"&lt;&lt;endl;
+		exit(1); }
+	while(filein&gt;&gt;x)
+		cout  &lt;&lt; x&lt;&lt;' ';	//空字符
+	cout&lt;&lt;endl;
+	filein.close();
+	fileout.close();
+} </pre>
+<p>
+	使用成员函数read()和write()读写文件
+</p>
+<pre class="prettyprint lang-cpp">#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+using namespace std;
+void main(void)
+{
+	char *s1="the first line,";
+	char *s3="the secend line.";
+	char *s2="\n";
+	ofstream f_write("data1.dat");
+	if(!f_write){
+		cerr&lt;&lt;"文件data1.dat open fail"&lt;&lt;endl;
+		exit(1);
+	}
+	f_write.write(s1,strlen(s1)).write(s2,strlen(s2)).write(s3,strlen(s3));
+	cout&lt;&lt;"write data in data1.data successful!\n";
+	f_write.close();
+
+	ifstream f_read("data1.dat");
+	if(f_read.fail()){
+		cerr&lt;&lt;"文件data1.dat open fail"&lt;&lt;endl;
+		exit(1);
+	}
+	char x;
+	while(!f_read.eof())
+	{
+		f_read.read((char *)&amp;x,sizeof(x));
+		cout&lt;&lt;x;
+	}
+	f_read.close();
+} </pre>
+<h3>
+	二进制文件的读写操作
+</h3>
+<p>
+	打开二进制文件时要在open()函数中加上ios::binary方式做参数。采用二进制格式对文件流进行读写。有两种方法：
+</p>
+<ol>
+	<li>
+		get()函数读取数据，put()函数写入数据
+	</li>
+	<li>
+		read()函数读数据，write()函数写数据
+	</li>
+</ol>
+<pre class="prettyprint lang-cpp">//创建一个学生类，建立记录学生成绩的二进制文件
+#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+using namespace std;
+class Student
+{
+public:
+	char *name;
+	char *kemu;
+	double chengji;
+
+	Student(char *name1,char *kemu1,double cj)
+	{
+		name=name1;&nbsp;&nbsp;&nbsp;&nbsp;//这里不能用this.name
+		kemu=kemu1;
+		chengji=cj;
+	}
+};
+void main()
+{
+	Student dat("Rom","matlab",95);
+	ofstream f_out("data.dat",ios::binary);
+	f_out.write((char *)&amp;dat, sizeof(dat));    //保存整个对象
+	f_out.close();
+
+	ifstream f_in("data.dat",ios::binary);
+	f_in.read((char *)&amp;dat, sizeof(dat));    //读取数据
+
+	cout&lt;&lt;"name	"&lt;&lt;"couse	"&lt;&lt;"grade	"&lt;&lt;endl;
+	cout&lt;&lt;dat.name&lt;&lt;"	"&lt;&lt;dat.kemu&lt;&lt;"	"&lt;&lt;dat.chengji&lt;&lt;endl;
+	f_in.close();
+}</pre>
+<h3>
+	随机访问文件
+</h3>
+<p>
+	从指定的位置开始读写文件，只需要增加文件指针定位处理。
+</p>
+<p>
+	移动指针的两种方法：
+</p>
+<ol>
+	<li>
+		移动到指定位置
+	</li>
+	<li>
+		在某个参照位置的基础上，将指针移动一定的偏移量
+	</li>
+</ol>
+<p>
+	参照位置的3种情况：
+</p>
+<ul>
+	<li>
+		ios::beg：文件开始处，位置置为0
+	</li>
+	<li>
+		ios::cur：文件当前位置
+	</li>
+	<li>
+		ios::end：文件末尾处，换算的位置置为文件长度
+	</li>
+</ul>
+<p>
+	seekg()函数：将文件的“读”指针移到制定的位置
+</p>
+<p>
+	seekp()函数：<span>将文件的“写”指针移到制定的位置</span> 
+</p>
+<blockquote>
+	流对象 seek~(流中的位置)；
+	<p>
+		<span>流对象 seek~(偏移量, 参照位置)；</span> 
+	</p>
+</blockquote>
+<pre class="prettyprint lang-cpp">//创建一个学生类，建立记录学生成绩的二进制文件
+#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+using namespace std;
+class Student
+{
+public:
+	char *name;
+	char *kemu;
+	double chengji;
+
+	Student(char *name1,char *kemu1,double cj)
+	{
+		name=name1;
+		kemu=kemu1;
+		chengji=cj;
+	}
+};
+void main()
+{
+	Student dat("Rom","matlab",95),dat2("chen","math",148);
+	ofstream f_out("data.dat",ios::binary);
+	f_out.write((char *)&amp;dat, sizeof(dat)).write((char *)&amp;dat2, sizeof(dat2));
+	f_out.close();
+
+	ifstream f_in("data.dat",ios::binary);
+	f_in.seekg(sizeof(dat),ios::beg);    //将指针移到dat2存储的位置。
+	f_in.read((char *)&amp;dat, sizeof(dat));
+	cout&lt;&lt;"name	"&lt;&lt;"couse	"&lt;&lt;"grade	"&lt;&lt;endl;
+	cout&lt;&lt;dat.name&lt;&lt;"	"&lt;&lt;dat.kemu&lt;&lt;"	"&lt;&lt;dat.chengji&lt;&lt;endl;
+	f_in.close();
+}</pre></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/849.html">c++运算符重载</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/851.html">c++网络应用——套接字Winsocket</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#标准输入输出">标准输入输出</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#文件">文件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,320 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>YOLOv4在Windows上编译 DLL 库 之后通过python调用_comonly.cn</title>
+<meta name="keywords" content="YOLOv4在Windows上编译 DLL 库 之后通过python调用" />
+<meta name="description" content="在Windows上
+	
+		
+			使用build.ps1或
+		
+		
+			darknet使用cmake或建立
+		
+		
+			编译build\darknet\yolo_cpp_dll.sln解决方案或build\darknet\yolo_cpp_dll_no_gpu.sln解决方案
+		
+	
+第二种方法直接生成exe文件，通过命令行传参使用。
+
+
+	
+
+
+	BuildCustomizations\CUDA 11.1.props 无法找到的问题：
+
+
+	在 " />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">YOLOv4在Windows上编译 DLL 库 之后通过python调用</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2020-11-26</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	机器学习算法分析
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>在Windows上
+	
+		
+			使用build.ps1或
+		
+		
+			darknet使用cmake或建立
+		
+		
+			编译build\darknet\yolo_cpp_dll.sln解决方案或build\darknet\yolo_cpp_dll_no_gpu.sln解决方案
+		
+	
+第二种方法直接生成exe文件，通过命令行传参使用。
+
+
+	
+
+
+	BuildCustomizations\CUDA 11.1.props 无法找到的问题：
+
+
+	在 </div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	在Windows上<br />
+	<ul>
+		<li>
+			使用build.ps1或
+		</li>
+		<li>
+			darknet使用cmake或建立
+		</li>
+		<li>
+			编译build\darknet\yolo_cpp_dll.sln解决方案或build\darknet\yolo_cpp_dll_no_gpu.sln解决方案
+		</li>
+	</ul>
+第二种方法直接生成exe文件，通过命令行传参使用。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	BuildCustomizations\CUDA 11.1.props 无法找到的问题：
+</p>
+<p>
+	在 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.1\extras\visual_studio_integration\MSBuildExtensions 下找到4个文件，放在提示报错的位置。同时在 .vcxproj 中更改版本号和电脑安装的cuda版本一致。
+</p>
+<p>
+	https://blog.csdn.net/wield_jjz/article/details/105894362
+</p>
+<p>
+	<br />
+</p>
+<p>
+	Unsupported gpu architecture 'compute_86'
+</p>
+<p>
+	vs在项目名上--右键--属性--CUD C/C++--Device--Code Generation 将算力改为自己gpu的算了，在python中调用gpu会显示。我的是 6.1 这里将86改为61
+</p>
+<p>
+	https://www.codetd.com/article/1662299
+</p>
+<p>
+	<br />
+</p>
+<p>
+	unsupported Microsoft Visual Studio version! Only the versions between 2013
+</p>
+<p>
+	visual studio installer-修改-单个组件，把老版本的VC++加上，然后项目用老版VC++编译 通过平台工具集选项进行设置。
+</p>
+<p>
+	https://blog.csdn.net/shenpibaipao/article/details/79519533
+</p>
+<p>
+	<br />
+</p>
+<p>
+	错误<span> </span>C1083<span> </span>无法打开包括文件: “opencv2/opencv.hpp”: No such file or directory<span> </span>darknet
+</p>
+<p>
+	需要安装opencv2
+</p>
+<p>
+	https://blog.csdn.net/maizousidemao/article/details/81474834
+</p>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1902.html">linux 设置操作文件夹权限</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1904.html">YOLOv4在Linux (Ubuntu)上编译</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

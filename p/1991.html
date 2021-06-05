@@ -1,0 +1,373 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>SpringBoot2.0 基础案例(13)：基于Cache注解模式，管理Redis缓存_comonly.cn</title>
+<meta name="keywords" content="SpringBoot2.0 基础案例(13)：基于Cache注解模式，管理Redis缓存" />
+<meta name="description" content="本文源码GitHub地址：知了一笑https://github.com/cicadasmile/spring-boot-base一、Cache缓存简介从Spring3开始定义Cache和CacheManager接口来统一不同的缓存技术；Cache接口为缓存的组件规范定义，包含缓存的各种操作集合；Cache接口下Spring提供了各种缓存的实现；如RedisCache，EhCacheCache,Co" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">SpringBoot2.0 基础案例(13)：基于Cache注解模式，管理Redis缓存</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">知了一笑</li>
+          <li class="lmname"><a href="https://blog.51cto.com/14439672/2430857" target="_blank">https://blog.51cto.com/14439672/2430857</a></li>
+          <li class="timer">2019-08-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>本文源码GitHub地址：知了一笑https://github.com/cicadasmile/spring-boot-base一、Cache缓存简介从Spring3开始定义Cache和CacheManager接口来统一不同的缓存技术；Cache接口为缓存的组件规范定义，包含缓存的各种操作集合；Cache接口下Spring提供了各种缓存的实现；如RedisCache，EhCacheCache,Co</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <div class="con artical-content editor-preview-side"><pre><code class="hljs cpp">本文源码
+GitHub地址：知了一笑
+https:<span class="hljs-comment">//github.com/cicadasmile/spring-boot-base</span></code></pre>
+<h1>一、Cache缓存简介</h1>
+<p>从Spring3开始定义Cache和CacheManager接口来统一不同的缓存技术；<br>Cache接口为缓存的组件规范定义，包含缓存的各种操作集合；<br>Cache接口下Spring提供了各种缓存的实现；<br>如RedisCache，EhCacheCache ,ConcurrentMapCache等；</p>
+<h1>二、核心API</h1>
+<p>1、Cache缓存接口<br>定义缓存操作。实现有：RedisCache、EhCacheCache、ConcurrentMapCache等<br>2、CacheManager<br>缓存管理器，管理各种缓存（cache）组件<br>3、Cacheable 主要针对方法配置，能够根据方法的请求参数对其进行缓存</p>
+<pre><code class="hljs sql">Cacheable 执行流程
+1）方法运行之前，按照cacheNames指定的名字先去查询<span class="hljs-keyword">Cache</span> 缓存组件
+<span class="hljs-number">2</span>）第一次获取缓存如果没有<span class="hljs-keyword">Cache</span>组件会自动创建
+<span class="hljs-number">3</span>）<span class="hljs-keyword">Cache</span>中查找缓存的内容，使用一个<span class="hljs-keyword">key</span>，默认就是方法的参数
+<span class="hljs-number">4</span>）<span class="hljs-keyword">key</span>是按照某种策略生成的；默认是使用keyGenerator生成的，这里使用自定义配置
+<span class="hljs-number">5</span>）没有查到缓存就调用目标方法；
+<span class="hljs-number">6</span>）将目标方法返回的结果，放进缓存中
+
+Cacheable 注解属性
+cacheNames/<span class="hljs-keyword">value</span>：指定方法返回结果使用的缓存组件的名字，可以指定多个缓存
+<span class="hljs-keyword">key</span>：缓存数据使用的<span class="hljs-keyword">key</span>
+<span class="hljs-keyword">key</span>/keyGenerator：<span class="hljs-keyword">key</span>的生成器，可以自定义
+cacheManager：指定缓存管理器
+cacheResolver：指定缓存解析器
+condition：指定符合条件的数据才缓存
+unless:否定缓存；当unless指定的条件为<span class="hljs-literal">true</span>，方法的返回值就不会被缓存
+<span class="hljs-keyword">sync</span>：是否使用异步模式</code></pre>
+<p>4、CacheEvict<br>清除缓存</p>
+<pre><code class="hljs makefile">CacheEvict：缓存清除
+key：指定要清除的数据
+allEntries = true：指定清除这个缓存中所有的数据
+beforeInvocation = false：方法之前执行清除缓存,出现异常不执行
+beforeInvocation = true：代表清除缓存操作是在方法运行之前执行，无论方法是否出现异常，缓存都清除</code></pre>
+<p>5、CachePut  <br>保证方法被调用，又希望结果被缓存。<br>与Cacheable区别在于是否每次都调用方法，常用于更新，写入</p>
+<pre><code class="hljs">CachePut：执行方法且缓存方法执行的结果
+修改了数据库的某个数据，同时更新缓存；
+执行流程
+ 1)先调用目标方法
+ 2)然后将目标方法的结果缓存起来</code></pre>
+<p>6、EnableCaching<br>开启基于注解的缓存<br>7、keyGenerator  <br>缓存数据时key生成策略<br>8、CacheConfig<br>统一配置本类的缓存注解的属性</p>
+<h1>三、与SpringBoot2.0整合</h1>
+<h2 id='、核心依赖'>1、核心依赖</h2>
+<pre><code class="language-xml hljs"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-cache<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></code></pre>
+<h2 id='、Cche缓存配置'>2、Cache缓存配置</h2>
+<pre><code class="language-java hljs"><span class="hljs-keyword">import</span> org.springframework.cache.interceptor.KeyGenerator;
+<span class="hljs-keyword">import</span> org.springframework.context.annotation.Bean;
+<span class="hljs-keyword">import</span> org.springframework.context.annotation.Configuration;
+<span class="hljs-keyword">import</span> java.lang.reflect.Method;
+<span class="hljs-meta">@Configuration</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CacheConfig</span> </span>{
+    <span class="hljs-comment">/**
+     * 自定义 Cache 的 key 生成器
+     */</span>
+    <span class="hljs-meta">@Bean</span>(<span class="hljs-string">"oneKeyGenerator"</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> KeyGenerator <span class="hljs-title">getKeyGenerator</span> <span class="hljs-params">()</span></span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> KeyGenerator() {
+            <span class="hljs-meta">@Override</span>
+            <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">generate</span><span class="hljs-params">(Object obj, Method method, Object... objects)</span> </span>{
+                <span class="hljs-keyword">return</span> <span class="hljs-string">"KeyGenerator:"</span>+method.getName();
+            }
+        } ;
+    }
+}</code></pre>
+<h2 id='、启动类注解开启Cche'>3、启动类注解开启Cache</h2>
+<pre><code class="language-java hljs"><span class="hljs-meta">@EnableCaching</span>            <span class="hljs-comment">// 开启Cache 缓存注解</span>
+<span class="hljs-meta">@SpringBootApplication</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CacheApplication</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
+        SpringApplication.run(CacheApplication.class,args) ;
+    }
+}</code></pre>
+<h2 id='、Cche注解使用代码'>4、Cache注解使用代码</h2>
+<p>1）封装增删改查接口</p>
+<pre><code class="language-java hljs"><span class="hljs-keyword">import</span> com.boot.cache.entity.User;
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">UserService</span> </span>{
+    <span class="hljs-comment">// 增、改、查、删</span>
+    <span class="hljs-function">User <span class="hljs-title">addUser</span> <span class="hljs-params">(User user)</span> </span>;
+    <span class="hljs-function">User <span class="hljs-title">updateUser</span> <span class="hljs-params">(Integer id)</span> </span>;
+    <span class="hljs-function">User <span class="hljs-title">selectUser</span> <span class="hljs-params">(Integer id)</span> </span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">deleteUser</span> <span class="hljs-params">(Integer id)</span></span>;
+}</code></pre>
+<p>2）Cache注解使用案例</p>
+<pre><code class="language-java hljs"><span class="hljs-keyword">import</span> com.boot.cache.entity.User;
+<span class="hljs-keyword">import</span> com.boot.cache.service.UserService;
+<span class="hljs-keyword">import</span> org.springframework.cache.annotation.CacheEvict;
+<span class="hljs-keyword">import</span> org.springframework.cache.annotation.CachePut;
+<span class="hljs-keyword">import</span> org.springframework.cache.annotation.Cacheable;
+<span class="hljs-keyword">import</span> org.springframework.stereotype.Service;
+<span class="hljs-meta">@Service</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserServiceImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">UserService</span> </span>{
+    <span class="hljs-comment">// 使用自定义的key生成策略</span>
+    <span class="hljs-comment">// 缓存结果key：addUser::KeyGenerator:addUser</span>
+    <span class="hljs-meta">@CachePut</span>(value = <span class="hljs-string">"addUser"</span>,keyGenerator=<span class="hljs-string">"oneKeyGenerator"</span>)
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> User <span class="hljs-title">addUser</span><span class="hljs-params">(User user)</span> </span>{
+        <span class="hljs-keyword">return</span> user ;
+    }
+    <span class="hljs-comment">// 缓存结果key：updateUser::2</span>
+    <span class="hljs-meta">@CachePut</span>(value = <span class="hljs-string">"updateUser"</span>,key = <span class="hljs-string">"#result.id"</span>)
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> User <span class="hljs-title">updateUser</span><span class="hljs-params">(Integer id)</span> </span>{
+        User user = <span class="hljs-keyword">new</span> User() ;
+        user.setId(id);
+        user.setName(<span class="hljs-string">"smile"</span>);
+        <span class="hljs-keyword">return</span> user;
+    }
+    <span class="hljs-comment">// 缓存结果key: selectUser::3</span>
+    <span class="hljs-meta">@Cacheable</span>(cacheNames = <span class="hljs-string">"selectUser"</span>,key = <span class="hljs-string">"#id"</span>)
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> User <span class="hljs-title">selectUser</span><span class="hljs-params">(Integer id)</span> </span>{
+        User user = <span class="hljs-keyword">new</span> User() ;
+        user.setId(id);
+        user.setName(<span class="hljs-string">"cicadaSmile"</span>);
+        <span class="hljs-keyword">return</span> user;
+    }
+    <span class="hljs-comment">// 删除指定key: selectUser::3</span>
+    <span class="hljs-meta">@CacheEvict</span>(value = <span class="hljs-string">"selectUser"</span>,key = <span class="hljs-string">"#id"</span>,beforeInvocation = <span class="hljs-keyword">true</span>)
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">deleteUser</span><span class="hljs-params">(Integer id)</span> </span>{
+
+    }
+}</code></pre>
+<h2 id='、测试代码块'>5、测试代码块</h2>
+<pre><code class="language-java hljs"><span class="hljs-meta">@RunWith</span>(SpringJUnit4Cla***unner.class)
+<span class="hljs-meta">@SpringBootTest</span>(classes = CacheApplication.class)
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CacheTest</span> </span>{
+    <span class="hljs-meta">@Resource</span>
+    <span class="hljs-keyword">private</span> UserService userService ;
+    <span class="hljs-comment">// 分别测试：增、改、查、删,四个方法</span>
+    <span class="hljs-meta">@Test</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testAdd</span> <span class="hljs-params">()</span></span>{
+        User user = <span class="hljs-keyword">new</span> User() ;
+        user.setId(<span class="hljs-number">1</span>);
+        user.setName(<span class="hljs-string">"cicada"</span>);
+        userService.addUser(user) ;
+    }
+    <span class="hljs-meta">@Test</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testUpdate</span> <span class="hljs-params">()</span></span>{
+        userService.updateUser(<span class="hljs-number">2</span>) ;
+    }
+    <span class="hljs-meta">@Test</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testSelect</span> <span class="hljs-params">()</span></span>{
+        userService.selectUser(<span class="hljs-number">3</span>) ;
+    }
+    <span class="hljs-meta">@Test</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testDelete</span> <span class="hljs-params">()</span></span>{
+        userService.deleteUser(<span class="hljs-number">3</span>) ;
+    }
+}</code></pre>
+<h1>四、源代码地址</h1>
+<pre><code class="hljs cpp">GitHub地址：知了一笑
+https:<span class="hljs-comment">//github.com/cicadasmile/spring-boot-base</span>
+码云地址：知了一笑
+https:<span class="hljs-comment">//gitee.com/cicadasmile/spring-boot-base</span></code></pre>
+<p><img src="https://s1.51cto.com/images/blog/201908/08/69a823164f6f9064a9fa69fb341e07ef.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="SpringBoot2.0 基础案例(13)：基于Cache注解模式，管理Redis缓存" style="cursor: pointer;"></p></div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1990.html">low code - 潮流还是闹剧？</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1992.html">Linux磁盘管理与文件系统（精简理论部分，浓缩的精华！）</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.51cto.com/14439672/2430857" target="_blank">https://blog.51cto.com/14439672/2430857</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#、核心依赖">、核心依赖</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#、Cche缓存配置">、Cche缓存配置</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#、启动类注解开启Cche">、启动类注解开启Cche</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#、Cche注解使用代码">、Cche注解使用代码</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#、测试代码块">、测试代码块</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

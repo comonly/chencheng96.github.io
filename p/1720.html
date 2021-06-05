@@ -1,0 +1,357 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>mysql事务_comonly.cn</title>
+<meta name="keywords" content="mysql事务" />
+<meta name="description" content="事务的特点：ACID&nbsp; 原子性、一致性、持久性、隔离性&nbsp; &nbsp;https://www.jianshu.com/p/bcbeb58963c3
+
+
+	事务隔离级别：读未提交、读已提交、可重复读、串行化
+
+
+	MVCC
+
+
+	脏读、不可重复读、幻读" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">mysql事务</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2020-09-20</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>事务的特点：ACID&nbsp; 原子性、一致性、持久性、隔离性&nbsp; &nbsp;https://www.jianshu.com/p/bcbeb58963c3
+
+
+	事务隔离级别：读未提交、读已提交、可重复读、串行化
+
+
+	MVCC
+
+
+	脏读、不可重复读、幻读</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	事务的特点：ACID&nbsp; 原子性、一致性、持久性、隔离性&nbsp; &nbsp;<a href="https://www.jianshu.com/p/bcbeb58963c3">https://www.jianshu.com/p/bcbeb58963c3</a>
+</p>
+<p>
+	事务隔离级别：读未提交、读已提交、可重复读、串行化
+</p>
+<p>
+	MVCC
+</p>
+<p>
+	脏读、不可重复读、幻读
+</p>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1719.html">mysql垂直分区和水平分区</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1721.html">MySQL查看SQL语句执行效率</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="InnoDB在MySQL默认隔离级别下解决幻读">
+							<h2 style="display:inline;color:#5BC648;">InnoDB在MySQL默认隔离级别下解决幻读</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-09-20&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	<a href="https://www.cnblogs.com/heqiyoujing/p/11221271.html">https://www.cnblogs.com/heqiyoujing/p/11221271.html</a>
+</p>
+<p>
+	在RR的隔离级别下，Innodb使用MVVC和next-key locks解决幻读，MVVC解决的是普通读（快照读）的幻读，next-key locks解决的是当前读情况下的幻读。
+</p>
+<p>
+	幻读和不可重复读的区别是，前者是一个范围，后者是本身。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	3.1. 当前读<br />
+所谓当前读，指的是加锁的select(S或者X), update, delete等语句。在RR的事务隔离级别下，数据库会使用next-key locks来锁住本条记录以及索引区间。<br />
+拿上面那个例子来说，在RR的情况下，假设使用的是当前读，加锁了的读<br />
+select * from table where id&gt;3 锁住的就是id=3这条记录以及id&gt;3这个区间范围，锁住索引记录之间的范围，避免范围间插入记录，以避免产生幻影行记录。<br />
+<br />
+3.2. 普通读<br />
+因为普通读是不会加锁的读，故不会有next-key locks的使用，解决幻读的手段是MVVC<br />
+mvvc会给每行元组加一些辅助字段，记录创建版本号和删除版本号。<br />
+而每一个事务在启动的时候，都有一个唯一的递增的版本号。每开启一个新事务，事务的版本号就会递增。<br />
+默认的隔离级别（REPEATABLE READ）下，增删查改变成了这样：<br />
+<br />
+SELECT<br />
+读取创建版本小于或等于当前事务版本号，并且删除版本为空或大于当前事务版本号的记录。这样可以保证在读取之前记录是存在的<br />
+INSERT<br />
+将当前事务的版本号保存至行的创建版本号<br />
+UPDATE<br />
+新插入一行，并以当前事务的版本号作为新行的创建版本号，同时将原记录行的删除版本号设置为当前事务版本号<br />
+DELETE<br />
+将当前事务的版本号保存至行的删除版本号<br />
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="当前读和快照读">
+							<h2 style="display:inline;color:#5BC648;">当前读和快照读</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-09-20&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	<a href="https://blog.csdn.net/qq_27037443/article/details/94390952">https://blog.csdn.net/qq_27037443/article/details/94390952</a>
+</p>
+<p>
+	MySQL数据库
+</p>
+在MVCC并发控制中，读操作可以分成两类：快照读 (snapshot read)与当前读 (current read)。快照读，读取的是记录的可见版本 (有可能是历史版本)，不用加锁。当前读，读取的是记录的最新版本，并且，当前读返回的记录，都会加上锁，保证其他事务不会再并发修改这条记录。<br />
+<br />
+innodb的默认事务隔离级别是rr（可重复读）。它的实现技术是mvcc。基于版本的控制协议。该技术不仅可以保证innodb的可重复读，而且可以防止幻读。（这也就是是此前以rr隔离级别实践时，不仅可以防止可重复读，也防止了幻读），但是它防止的是快照读，也就是读取的数据虽然是一致的，但是数据是历史数据。<br />
+<br />
+如何做到的？<br />
+如何做到保证数据是一致的（可重复、幻）（也就是一个事务，其内部读取对应某一个数据的时候，数据都是一样的），同时读取的数据是最新的数据。innodb提供了一个间隙锁的技术，即next－key，也就是结合grap锁与行锁，达到最终目的。当使用索引进行插入（或select，update等）的时候，innodb会将当前的节点（record_lock）和上一个节点（gap lock）加锁？。这样当进行select的时候，就不允许加x锁。那么在进行该事务的时候，读取的就是最新的数据。（同样的，反过来看，当select in share mode时加next－key锁，视查询索引是否唯一而定一片数据的insert和update阻塞），当两个当前读在一个事务中，别的update insert delete就无法打断，也就不会出现重复读和幻读。<br />
+<br />
+哪些是快照读哪些是当前读？<br />
+在一个支持MVCC并发控制的系统中，哪些读操作是快照读？哪些操作又是当前读呢？以MySQL InnoDB为例：<br />
+<br />
+快照读：简单的select操作，属于快照读，不加锁。(当然，也有例外，下面会分析)<br />
+select * from table where ?;<br />
+简单的select操作(不包括 select … lock in share mode, select … for update)<br />
+当前读：特殊的读操作，插入/更新/删除操作，属于当前读，需要加锁。<br />
+select * from table where ? lock in share mode;<br />
+select * from table where ? for update;<br />
+insert into table values (…);<br />
+update table set ? where ?;<br />
+delete from table where ?;<br /></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="ACID特性的实现原理">
+							<h2 style="display:inline;color:#5BC648;">ACID特性的实现原理</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-09-20&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span>ACID是衡量事务的四个特性：<br />
+<br />
+原子性（Atomicity，或称不可分割性）<br />
+一致性（Consistency）<br />
+隔离性（Isolation）<br />
+持久性（Durability）<br /></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#InnoDB在MySQL默认隔离级别下解决幻读">InnoDB在MySQL默认隔离级别下解决幻读</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#当前读和快照读">当前读和快照读</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#ACID特性的实现原理">ACID特性的实现原理</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

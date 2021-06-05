@@ -1,0 +1,328 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>document对象的应用—JavaScript_comonly.cn</title>
+<meta name="keywords" content="document对象的应用—JavaScript" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">document对象的应用—JavaScript</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-03-12</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">JavaScript,document对象</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='设置链接颜色'>
+	设置链接颜色
+</h2>
+<p>
+	默认情况，链接没有访问为蓝色，已访问过的链接和正在访问的链接颜色为暗红色，document对象的linkColor,vlinkColor和alinkColor属性可以分别设置这三个属性。
+</p>
+<h2 id='设置网页背景颜色和文字颜色'>
+	设置网页背景颜色和文字颜色
+</h2>
+<p>
+	document对象的bgColor属性可以设置网页背景颜色，fgColor属性可以设置网页默认文字颜色。
+</p>
+<p>
+	&lt;script type="text/javascript"&gt;<br />
+function set(){<br />
+document.alinkColor=document.f1.b1.value;<br />
+document.linkColor=document.f1.b2.value;<br />
+document.vlinkColor=document.f1.b3.value;<br />
+document.bgColor=document.f1.b4.value;<br />
+document.fgColor=document.f1.b5.value;<br />
+}<br />
+&lt;/script&gt;<br />
+&lt;form name="f1"&gt;<br />
+未访问过的链接：&lt;input type="text" name="b1" value="red"/&gt;&lt;/br&gt;<br />
+已访问过的链接：&lt;input type="text" name="b2" value="blue"/&gt;&lt;/br&gt;<br />
+激活的超链接：&lt;input type="text" name="b3" value="green"/&gt;&lt;/br&gt;<br />
+网页背景颜色：&lt;input type="text" name="b4" value="white"/&gt;&lt;/br&gt;<br />
+网页文字颜色：&lt;input type="text" name="b5" value="yellow"/&gt;&lt;/br&gt;<br />
+&lt;input type="button" name="b1" value="设置" onclick="set()"/&gt;<br />
+&lt;/form&gt;&lt;/br&gt;<br />
+&lt;a href="#"&gt;未被访问过的超链接&lt;/a&gt;<br />
+&lt;a href="#"&gt;已访问过的超链接&lt;/a&gt;<br />
+&lt;a href="#"&gt;激活的超链接&lt;/a&gt;
+</p>
+<p>
+	复制代码<span style="background-color:#FFE500;"><a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank">在线查看运行效果</a></span>
+</p>
+<h2 id='文档信息'>
+	文档信息
+</h2>
+<p>
+	使用lastModified属性查看文档最后修改时间，通过title和URL属性可以查看网页文档的标题和地址
+</p>
+<p>
+	&lt;script type="text/javascript"&gt;<br />
+document.write("网页文档的最后修改时间："+document.lastModified+"&lt;/br&gt;");<br />
+document.write("网页文档的标题："+document.title+"&lt;/br&gt;");<br />
+document.write("网页文档的地址："+document.URL+"&lt;/br&gt;");<br />
+&lt;/script&gt;
+</p>
+<p>
+	<span>复制代码</span><span style="background-color:#FFE500;"><a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank">在线查看运行效果</a></span> 
+</p>
+<h2 id='在标题栏和状态栏显示滚动信息'>
+	在标题栏和状态栏显示滚动信息
+</h2>
+<p>
+	可以在网页标题栏和状态栏显示文本信息，文本信息保存在数组中，循环显示数组中的元素。
+</p>
+<p>
+	&lt;script type="text/javascript"&gt;<br />
+var i=0;<br />
+var sarr=["html","css","javascript"];<br />
+function showstatus(){<br />
+if(i==sarr.length)i=0; &nbsp; //如果已经显示完毕，让数组下标为0，重新开始<br />
+document.title=sarr[i]; &nbsp;//循环显示数组的信息在状态栏上<br />
+window.status=sarr[i]; //循环显示数组信息在状态栏<br />
+i++; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//计数器增加1，显示下一条数组的元素<br />
+document.write("a&lt;/br&gt;");<br />
+}<br />
+window.setInterval("showstatus()",2000); //设置循环显示的时间间隔为2秒<br />
+&lt;/script&gt;
+</p>
+<p>
+	<span>复制代码</span><span style="background-color:#FFE500;"><a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank">在线查看运行效果</a></span>
+</p>
+<h2 id='防止盗链'>
+	防止盗链
+</h2>
+<p>
+	所以document对象的URL属性和referrer属性防止盗链行为。
+</p>
+<p>
+	&lt;script type="text/javascript"&gt;<br />
+function plink()<br />
+{var cURL=document.URL; &nbsp; //当前文档的链接<br />
+var fURL=document.referrer; &nbsp; //上一个文档的链接<br />
+if(fURL!="") &nbsp; &nbsp; &nbsp; //如果上一个文档为空，说明是直接打开的，否则可能是盗链<br />
+{var cURLs=cURL.split("/"); &nbsp; &nbsp; //当前文档各部分URL存放在cURLs数组中<br />
+var fURLs=fURL.split("/"); &nbsp; &nbsp; &nbsp;//上一个文档的URL各部分存放在fURLs数组中<br />
+if(cURLs[2]==fURLs[2])document.write("不是盗链"); //比较两数组的第三个元素，相同则不是盗链<br />
+else{<br />
+document.write("这是盗链");<br />
+history.location="http://"+cURLs[2]; &nbsp;//跳转到网站首面<br />
+}<br />
+}<br />
+else document.write("您是直接打开的文件");<br />
+}<br />
+plink();<br />
+&lt;/script&gt;
+</p>
+<p>
+	<span>复制代码</span><span style="background-color:#FFE500;"><a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank">在线查看运行效果</a></span><span></span><span></span> 
+</p>
+<h2 id='在网页中输出内容'>
+	在网页中输出内容
+</h2>
+<p>
+	<em>document.write(v1,v2…);</em> 
+</p>
+<p>
+	<em>document.writeln(</em><span><em>v1,v2…</em></span><em>);</em> 
+</p>
+<p>
+	可以有一个或者多个参数，也可以没有参数。参数类型为字符串，如果不是字符串则自动转换为字符串。后者输出后会自动换行。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/624.html">文档对象—JavaScript</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/626.html">图像对象—JavaScript</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#设置链接颜色">设置链接颜色</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#设置网页背景颜色和文字颜色">设置网页背景颜色和文字颜色</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#文档信息">文档信息</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#在标题栏和状态栏显示滚动信息">在标题栏和状态栏显示滚动信息</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#防止盗链">防止盗链</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#在网页中输出内容">在网页中输出内容</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,312 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>项目如何进行压力测试？_comonly.cn</title>
+<meta name="keywords" content="项目如何进行压力测试？" />
+<meta name="description" content="前言：这里对压测进行一些简介，本篇介绍项目压测场景，使用jmeter进行压测。
+
+
+	压测相关的一些指标：
+
+
+	
+		QPS（Queries Per Second）：每秒能够响应的查询次数，也即是最大吞吐能力（吞吐量）。
+	
+	
+		TPS（Transactions Per Second）：每秒处理的事务数目。一个事务是指一个客户端向服务器发送请求然后服务器做出反应的过程。TPS 的过程包括：客户端请求服务端、服务端内部处理、服务端返回客户端。
+例如，访问一个页面会请求服务器 3 " />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">项目如何进行压力测试？</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">七星程序员</li>
+          <li class="lmname"><a href="https://blog.csdn.net/m0_37679452/article/details/103895809" target="_blank">https://blog.csdn.net/m0_37679452/article/details/103895809</a></li>
+          <li class="timer">2020-10-05</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>前言：这里对压测进行一些简介，本篇介绍项目压测场景，使用jmeter进行压测。
+
+
+	压测相关的一些指标：
+
+
+	
+		QPS（Queries Per Second）：每秒能够响应的查询次数，也即是最大吞吐能力（吞吐量）。
+	
+	
+		TPS（Transactions Per Second）：每秒处理的事务数目。一个事务是指一个客户端向服务器发送请求然后服务器做出反应的过程。TPS 的过程包括：客户端请求服务端、服务端内部处理、服务端返回客户端。
+例如，访问一个页面会请求服务器 3 </div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	前言：这里对压测进行一些简介，本篇介绍项目压测场景，使用jmeter进行压测。
+</p>
+<p>
+	压测相关的一些指标：
+</p>
+<ul>
+	<li>
+		QPS（Queries Per Second）：每秒能够响应的查询次数，也即是最大吞吐能力（吞吐量）。
+	</li>
+	<li>
+		TPS（Transactions Per Second）：每秒处理的事务数目。一个事务是指一个客户端向服务器发送请求然后服务器做出反应的过程。TPS 的过程包括：客户端请求服务端、服务端内部处理、服务端返回客户端。<br />
+例如，访问一个页面会请求服务器 3 次，那么访问这一个页面就会产生一个TPS，三个QPS。
+	</li>
+</ul>
+<h2 id='安装Jmeter'>
+	<a></a><a></a><a></a>安装Jmeter
+</h2>
+<ul>
+	<li>
+		jmeter官网：https://jmeter.apache.org
+	</li>
+	<li>
+		解压后，进入bin目录，使用jmeter.bat启动程序。
+	</li>
+	<li>
+		注意：因为JMeter是使用JAVA写的，所以使用JMeter之前，先安装JAVA环境，这个自行搜索安装。.
+	</li>
+	<li>
+		改为中文显示：Options -&gt; Choose Language 改为简体中文
+	</li>
+</ul>
+<h2 id='项目压测'>
+	<a></a><a></a><a></a>项目压测
+</h2>
+<p>
+	项目压测包含了web程序 + 数据库 + 缓存 +其他等指标，体现出了项目整体的性能，比较有参考意义，如果程序性能比较低，可对其他指标进行压测来查找原因（性能瓶颈一般出现在数据库）。
+</p>
+<ul>
+	<li>
+		创建线程组<br />
+在“测试计划”上右键 【添加】-&gt;【线程（用户）】-&gt;【线程组】<br />
+<img src="https://img-blog.csdnimg.cn/20200109113037673.png" alt="在这里插入图片描述" /><br />
+设置线程数和循环次数，我这里设置线程数为1000，循环10次<br />
+<img src="https://img-blog.csdnimg.cn/20200109113351782.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzM3Njc5NDUy,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /> 
+	</li>
+	<li>
+		配置元件<br />
+在线程组上右键【添加】-&gt;【配置元件】-&gt;【HTTP请求默认值】<br />
+<img src="https://img-blog.csdnimg.cn/20200109113849920.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzM3Njc5NDUy,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /><br />
+配置 HTTP请求默认值：协议、服务IP、端口<br />
+<img src="https://img-blog.csdnimg.cn/20200109114056334.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzM3Njc5NDUy,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /> 
+	</li>
+	<li>
+		添加 Http请求<br />
+在“线程组”右键 【添加-】-&gt;【取样器】-&gt;【HTTP 请求】<br />
+<img src="https://img-blog.csdnimg.cn/20200109114507915.png" alt="在这里插入图片描述" /><br />
+设置路径和数据（参数可录入简单类型，消息体数据可录入json）<br />
+<img src="https://img-blog.csdnimg.cn/20200109115340127.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzM3Njc5NDUy,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /><br />
+如果是json数据，需要添加HTTP信息头管理器<br />
+在线程组上右键 【添加】-&gt;【配置元件】-&gt;【HTTP信息头管理器】，添加 Content-Type:application/json<br />
+<img src="https://img-blog.csdnimg.cn/20200109124543614.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzM3Njc5NDUy,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /> 
+	</li>
+	<li>
+		添加监听器（这里截图是测试后的）<br />
+线程组上右键【添加】-&gt;【监听器】-&gt;【聚合报告】<br />
+<img src="https://img-blog.csdnimg.cn/20200109125140972.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzM3Njc5NDUy,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /><br />
+线程组上右键 【添加】-&gt;【监听器】-&gt;【察看结果树】<br />
+<img src="https://img-blog.csdnimg.cn/20200109125317336.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzM3Njc5NDUy,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /> 
+	</li>
+	<li>
+		执行测试<br />
+下图的绿色按钮为开始执行，如果要重新执行需清除上一次结果。<br />
+<img src="https://img-blog.csdnimg.cn/20200109125610299.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzM3Njc5NDUy,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /> 
+	</li>
+</ul></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1831.html">MPEG中的三种图像类型（I帧、P帧、B帧）及码流组成</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1833.html">SOA （面向服务的架构）</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/m0_37679452/article/details/103895809" target="_blank">https://blog.csdn.net/m0_37679452/article/details/103895809</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#安装Jmeter">安装Jmeter</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#项目压测">项目压测</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

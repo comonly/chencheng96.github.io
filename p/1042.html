@@ -1,0 +1,354 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Java中获取时间以及java.util和java.sql之间时间日期的转换_comonly.cn</title>
+<meta name="keywords" content="Java中获取时间以及java.util和java.sql之间时间日期的转换" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Java中获取时间以及java.util和java.sql之间时间日期的转换</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-01-06</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	java-含工具类
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">java时间,sql,Date</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='一、获取时间和日期'>
+	一、获取时间和日期
+</h2>
+<h3>
+	通过java.util从系统获取当前时间
+</h3>
+<pre class="prettyprint lang-java">import java.util.Date;
+import java.text.SimpleDateFormat;
+ 
+public class time {
+	public static void main(String[] args) {
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+		System.out.println(  df.format(new Date())  );
+	}
+}
+ 
+//输出：2019-01-07 10:51:35
+//df.format(new Date())返回的是一个格式化时间的字符串</pre>
+<p>
+	获取当前时间，以字符串返回。由返回值可以看到 java.util.Date 获取的是完整的时间包括日期和时间
+</p>
+<h3>
+	通过java.sql类型数据获取时间
+</h3>
+<pre class="prettyprint lang-java">java.sql.Date ctime = new java.sql.Date(new java.util.Date().getTime());
+System.out.println(df.format( ctime ));
+		
+java.sql.Timestamp ctime2 = new java.sql.Timestamp(new java.util.Date().getTime());
+System.out.println(df.format( ctime2 ));
+ 
+//输出
+//2019-01-07 10:59:28
+//2019-01-07 10:59:28</pre>
+通过输出的结果可以发现，java.sql 存储的时间日期数据也是完整的。<br />
+<h3>
+	将字符串转换成java.util.Date类型数据
+</h3>
+<pre class="prettyprint lang-java">String strDate="2005年04月22日";
+SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy年MM月dd日");
+try {
+    Date date = simpleDateFormat.parse(strDate);
+    System.out.println(date);
+} catch (ParseException e) {
+    e.printStackTrace();
+}
+ 
+//输出Fri Apr 22 00:00:00 CST 2005</pre>
+<h3>
+	将毫秒数转换成java.util.Date类型数据
+</h3>
+<pre class="prettyprint lang-java">long now=System.currentTimeMillis();
+System.out.println("毫秒数："+now);
+Date dNow=new Date(now);
+System.out.println("日期："+dNow);
+ 
+//输出
+//毫秒数：1546830663261
+//日期：Mon Jan 07 11:11:03 CST 2019</pre>
+<h2 id='二、数据库中存储日期的三种数据类型'>
+	二、数据库中存储日期的三种数据类型
+</h2>
+Mysql中经常用来存储日期的数据类型有三种：Date、Datetime、Timestamp。<br />
+<ol>
+	<li>
+		Date数据类型：用来存储没有时间的日期。Mysql获取和显示这个类型的格式为“YYYY-MM-DD”。支持的时间范围为“1000-00-00”到“9999-12-31”。
+	</li>
+	<li>
+		Datetime类型：存储既有日期又有时间的数据。存储和显示的格式为 “YYYY-MM-DD HH:MM:SS”。支持的时间范围是“1000-00-00 00:00:00”到“9999-12-31 23:59:59”。
+	</li>
+	<li>
+		Timestamp类型：也是存储既有日期又有时间的数据。存储和显示的格式跟Datetime一样。支持的时间范围是“1970-01-01 00:00:01”到“2038-01-19 03:14:07”。
+	</li>
+	<li>
+		所有不符合上面所述格式的数据都会被转换为相应类型的0值。（0000-00-00或者0000-00-00 00:00:00）
+	</li>
+</ol>
+<h2 id='三、数据库中三种数据对应Jv中获取数据的存储结果'>
+	三、数据库中三种数据对应Java中获取数据的存储结果
+</h2>
+<h3>
+	数据库数据类型为date
+</h3>
+<pre class="prettyprint lang-java">Timestamp ctime = new java.sql.Timestamp(new java.util.Date().getTime());
+pstmt.setTimestamp(11, ctime);
+//存入数据：2019-01-07
+ 
+java.sql.Date ctime = new java.sql.Date(new java.util.Date().getTime());
+pstmt.setDate(4, ctime);
+//存入数据：2019-01-07</pre>
+<h3>
+	数据库数据类型为datatime
+</h3>
+<pre class="prettyprint lang-java">Timestamp ctime = new java.sql.Timestamp(new java.util.Date().getTime());
+pstmt.setTimestamp(11, ctime);
+//存入数据：2019-01-07 10:35:10
+ 
+Date ctime = new java.sql.Date(new java.util.Date().getTime());
+pstmt.setDate(4, ctime);
+//存入数据：2019-01-07 00:00:00</pre>
+<h3>
+	数据库数据类型为timestamp
+</h3>
+<pre class="prettyprint lang-java">java.sql.Timestamp ctime = new java.sql.Timestamp(new java.util.Date().getTime());
+pstmt.setTimestamp(11, ctime);
+//存入数据：2019-01-07 10:42:14
+ 
+java.sql.Date ctime = new java.sql.Date(new java.util.Date().getTime());
+pstmt.setDate(4, ctime);
+//存入数据：2019-01-07 00:00:00</pre>
+由datatime和timestamp的对比可以看出，两者在数据库中的存储内容相同（格式不同），关于timestamp类型数据的取值范围问题参考：<a href="/common_url/id/1041" target="_blank">[id1041]</a>。其次，虽然在java.sql.Timestamp和java.sql.Date中都存储的是完整的时间日期数据，但是在向数据库写入时结果却不相同。<br />
+<h2 id='四、jv.util和jv.ql之间时间日期的转换'>
+	四、java.util和java.sql之间时间日期的转换
+</h2>
+java.util.Date通常情况下用它获取当前时间或构造时间，java.sql.Date是针对SQL语句使用的，它只包含日期而没有时间部分。它们都有getTime方法返回毫秒数，都可以直接构造<br />
+<br />
+通过getTime()方法将util.date转换成sql.date<br />
+<pre class="prettyprint lang-java">java.util.Date utilDate = new java.util.Date();  //获取当前时间
+java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());  //通过getTime()转换</pre>
+通过getTime()方法将sql.date转换成util.date<br />
+<pre class="prettyprint lang-java">java.util.Date utilDate = new java.util.Date(sqlDate.getTime());  //通过getTime()转换，一般sql.date在数据库的存取时使用。</pre></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1041.html">Java获取系统时间日期存储到数据库Timestamp时间限制</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1043.html">Access数据库在jdk1.8版本无法使用jdbc-odbc问题的解决过程及问题汇总</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="java获取当前时间前一周、前一月、前一年的时间">
+							<h2 style="display:inline;color:#5BC648;">java获取当前时间前一周、前一月、前一年的时间</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-06-08&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	java获取当前时间前一周、前一月、前一年的时间<a href="https://www.cnblogs.com/bunuo/p/6140750.html">https://www.cnblogs.com/bunuo/p/6140750.html</a>通过Calendar实现
+</p>
+<p>
+	java 获取昨天日期<a href="https://af8991.iteye.com/blog/1166530">https://af8991.iteye.com/blog/1166530</a>通过<span style="font-family:&quot;font-size:14px;background-color:#FFFFFF;">currentTimeMillis实现</span>
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#一、获取时间和日期">一、获取时间和日期</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#二、数据库中存储日期的三种数据类型">二、数据库中存储日期的三种数据类型</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#三、数据库中三种数据对应Jv中获取数据的存储结果">三、数据库中三种数据对应Jv中获取数据的存储结果</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#四、jv.util和jv.ql之间时间日期的转换">四、jv.util和jv.ql之间时间日期的转换</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#java获取当前时间前一周、前一月、前一年的时间">java获取当前时间前一周、前一月、前一年的时间</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

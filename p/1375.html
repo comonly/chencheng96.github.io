@@ -1,0 +1,366 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>shell三剑客之awk 报告生成器_comonly.cn</title>
+<meta name="keywords" content="shell三剑客之awk 报告生成器" />
+<meta name="description" content="shell三剑客
+grep 文本搜索工具  全局搜索剪切
+sed 流文本编辑器 逐行进行处理
+awk 报告生成器  自由的文本格式化工具 支持判断数组循环
+awk 报告生成器
+显示文件名
+
+以:为分隔符 显示总列数
+
+NF表示列
+以:为分隔符 显示总行数
+
+NR表示行
+打印第二行
+
+以:为分隔符 显示前三列
+
+以:为分隔符 显示第二行的前三列
+
+以:为分隔符 显示第二行的前三列抓取中间密码占位符x
+
+另一种方式
+
+$2表示第二列
+BEGIN{}
+		
+	" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">shell三剑客之awk 报告生成器</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">NoWowo</li>
+          <li class="lmname"><a href="https://blog.51cto.com/14190777/2434086" target="_blank">https://blog.51cto.com/14190777/2434086</a></li>
+          <li class="timer">2019-08-30</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>shell三剑客
+grep 文本搜索工具  全局搜索剪切
+sed 流文本编辑器 逐行进行处理
+awk 报告生成器  自由的文本格式化工具 支持判断数组循环
+awk 报告生成器
+显示文件名
+
+以:为分隔符 显示总列数
+
+NF表示列
+以:为分隔符 显示总行数
+
+NR表示行
+打印第二行
+
+以:为分隔符 显示前三列
+
+以:为分隔符 显示第二行的前三列
+
+以:为分隔符 显示第二行的前三列抓取中间密码占位符x
+
+另一种方式
+
+$2表示第二列
+BEGIN{}
+		
+	</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <div class="con artical-content editor-preview-side">
+	<blockquote>
+		<p>
+			shell三剑客<br />
+grep 文本搜索工具  全局搜索剪切<br />
+sed 流文本编辑器 逐行进行处理<br />
+awk 报告生成器  自由的文本格式化工具 支持判断数组循环<br />
+awk 报告生成器<br />
+显示文件名<br />
+<img src="https://s1.51cto.com/images/blog/201908/30/fdb7b34fce1793ecb6ef7d1483390ebe.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="shell三剑客之awk 报告生成器" /><br />
+以:为分隔符 显示总列数<br />
+<img src="https://s1.51cto.com/images/blog/201908/30/787b49682239fdc83dc36a242e6bd18d.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="shell三剑客之awk 报告生成器" /><br />
+NF表示列<br />
+以:为分隔符 显示总行数<br />
+<img src="https://s1.51cto.com/images/blog/201908/30/9ba08f7652304d4128dc6fd755b03e07.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="shell三剑客之awk 报告生成器" /><br />
+NR表示行<br />
+打印第二行<br />
+<img src="https://s1.51cto.com/images/blog/201908/30/f702355447560139a4f1d7594ad5dc21.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="shell三剑客之awk 报告生成器" /><br />
+以:为分隔符 显示前三列<br />
+<img src="https://s1.51cto.com/images/blog/201908/30/1ced2ab88898f910427883b8b9965a77.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="shell三剑客之awk 报告生成器" /><br />
+以:为分隔符 显示第二行的前三列<br />
+<img src="https://s1.51cto.com/images/blog/201908/30/70cdd91aebe8581ec88f33171161e6b7.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="shell三剑客之awk 报告生成器" /><br />
+以:为分隔符 显示第二行的前三列抓取中间密码占位符x<br />
+<img src="https://s1.51cto.com/images/blog/201908/30/962e05020c4d51b627a5f61fa894edd9.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="shell三剑客之awk 报告生成器" /><br />
+另一种方式<br />
+<img src="https://s1.51cto.com/images/blog/201908/30/1c748870c566a089d6fb06562be8b345.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="shell三剑客之awk 报告生成器" /><br />
+$2表示第二列<br />
+BEGIN{}
+		</p>
+	</blockquote>
+	<p>
+		读取第一行文本之前执行，一般用来初始化操作
+	</p>
+	<p>
+		{}
+	</p>
+	<p>
+		逐行处理，逐行读入文本执行相应的处理，是最常见的编辑指令块
+	</p>
+	<p>
+		END{}
+	</p>
+	<p>
+		处理完最后一行文本之后执行，一般用来输出处理结果<br />
+以 ： 分隔列从 NAME 为第1行开始依次输出多少行 END 为结束行<br />
+<img src="https://s1.51cto.com/images/blog/201908/30/de823cf20a7e65440a9921de7e55d09f.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="shell三剑客之awk 报告生成器" /><br />
+以 ： 分隔列从 NAME 为第1行开始依次输出第1列 END 为结束行
+	</p>
+	<p>
+		<img src="https://s1.51cto.com/images/blog/201908/30/fdd162f62cdb59feb552c5ad0a2a2a45.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="shell三剑客之awk 报告生成器" /><br />
+以 ： 分隔列从 NAME 为第1行开始依次输出第1列和第7列 END 为结束行<br />
+<img src="https://s1.51cto.com/images/blog/201908/30/3caab825d55fb49096bb6378c314514c.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="shell三剑客之awk 报告生成器" /><br />
+以 ： 分隔列从 NAME 为第1行开始依次输出全部内容 END 为结束行<br />
+<img src="https://s1.51cto.com/images/blog/201908/30/5e69162543b4d320d2715b02868fbbe7.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="shell三剑客之awk 报告生成器" /><br />
+以 ： 分隔列从 NAME 为第1行开始依次输出第1列为空显示全部内容 END 为结束行<br />
+<img src="https://s1.51cto.com/images/blog/201908/30/ea3ec0ec33a9a53aba1b6167569dd4fe.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="shell三剑客之awk 报告生成器" /><br />
+以 ： 分隔列从 NAME 为第1行开始依次输出全部内容 加上分隔符：END 为结束行<br />
+<img src="https://s1.51cto.com/images/blog/201908/30/f4ed8f65f96e30138187880e0fde13e7.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="shell三剑客之awk 报告生成器" /><br />
+显示以bash结尾的行<br />
+<img src="https://s1.51cto.com/images/blog/201908/30/d5c53ef60b806d9a1f42d139583b7378.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="shell三剑客之awk 报告生成器" /><br />
+显示非bash结尾的行<br />
+<img src="https://s1.51cto.com/images/blog/201908/30/06521925b32f31638ce2971beccb46d0.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="shell三剑客之awk 报告生成器" /><br />
+显示非bash结尾或nologin内容的行<br />
+<img src="https://s1.51cto.com/images/blog/201908/30/ba183885c1887b084601e8020e81787e.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="shell三剑客之awk 报告生成器" />
+	</p>
+	<p>
+		显示以r开头的行<br />
+<img src="https://s1.51cto.com/images/blog/201908/30/0b1f521bc573a35a88ab7494b61c5ee1.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="shell三剑客之awk 报告生成器" /><br />
+显示以a-d开头的行<br />
+<img src="https://s1.51cto.com/images/blog/201908/30/b1cb9f8de76ac493dc123918c0f55dbf.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="shell三剑客之awk 报告生成器" /><br />
+以 ： 分隔列输出第六列以 bin 为止的行<br />
+<img src="https://s1.51cto.com/images/blog/201908/30/1bd32c267eda395ebffae3830d61d450.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="shell三剑客之awk 报告生成器" /><br />
+以 ： 分隔列输出第六列以非 bin 为止的行<br />
+<img src="https://s1.51cto.com/images/blog/201908/30/53188c64d58a0f54113dd1734ada2f88.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="shell三剑客之awk 报告生成器" /><br />
+显示/etc/passwd总行数<br />
+<img src="https://s1.51cto.com/images/blog/201908/30/b9c757f1c991b4e1eb1f1b96c0e0ee7d.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="shell三剑客之awk 报告生成器" />
+	</p>
+	<p>
+		显示管理员用户<br />
+<img src="https://s1.51cto.com/images/blog/201908/30/d34cb46185b5b7602af1f85b068c3b2e.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="shell三剑客之awk 报告生成器" /><br />
+显示普通用户<br />
+<img src="https://s1.51cto.com/images/blog/201908/30/826c07057fba111390ae5f32dfb3f453.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="shell三剑客之awk 报告生成器" /><br />
+显示可登录的用户行<br />
+<img src="https://s1.51cto.com/images/blog/201908/30/ce527086cb9e1ccd1ca5f3db7fba94af.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="shell三剑客之awk 报告生成器" /><br />
+显示可登录的用户的第3行的前3列<br />
+<img src="https://s1.51cto.com/images/blog/201908/30/d9f1b3c9bdd7643eb115f09ec235c69f.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="shell三剑客之awk 报告生成器" /><br />
+显示可登录的用户的第3行的第2列<br />
+<img src="https://s1.51cto.com/images/blog/201908/30/eaf393172ee797faef953bde880d2628.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="shell三剑客之awk 报告生成器" /><br />
+统计在系统中可以登录的用户<br />
+<img src="https://s1.51cto.com/images/blog/201908/30/4817e3f765fde049df94ef6ebcefb82e.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="shell三剑客之awk 报告生成器" /><br />
+显示管理员用户个数<br />
+<img src="https://s1.51cto.com/images/blog/201908/30/732cd6176ca44599ecbd10b33e309c07.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="shell三剑客之awk 报告生成器" /><br />
+显示普通用户个数<br />
+<img src="https://s1.51cto.com/images/blog/201908/30/2020bfb5d0c36e83b8104b54a704bdcc.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="shell三剑客之awk 报告生成器" /><br />
+显示可登录的用户个数<br />
+<img src="https://s1.51cto.com/images/blog/201908/30/e774f8891ff91df89565bd5306a8cd95.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="shell三剑客之awk 报告生成器" /><br />
+输出eth0 网卡的 ip<br />
+<img src="https://s1.51cto.com/images/blog/201908/30/13e297324a7500f75f432ef1dae3f731.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="shell三剑客之awk 报告生成器" />
+	</p>
+</div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1374.html">C++日志库log4cplus使用</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1394.html">xcopy使用</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.51cto.com/14190777/2434086" target="_blank">https://blog.51cto.com/14190777/2434086</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

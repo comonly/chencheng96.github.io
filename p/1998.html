@@ -1,0 +1,292 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通_comonly.cn</title>
+<meta name="keywords" content="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" />
+<meta name="description" content="基本介绍：DNS服务器：是进行域名(domainname)和与之相对应的IP地址(IPaddress)转换的服务器。DNS中保存了一张域名(domainname)和与之相对应的IP地址(IPaddress)的表，以解析消息的域名。Web服务器：Web服务器一般指网站服务器，是指驻留于因特网上某种类型计算机的程序，可以向浏览器等Web客户端提供文档，也可以放置网站文件，让全世界浏览；可以放置数据文件" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">wx5d2c2d660c282</li>
+          <li class="lmname"><a href="https://blog.51cto.com/14449541/2430833" target="_blank">https://blog.51cto.com/14449541/2430833</a></li>
+          <li class="timer">2019-08-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>基本介绍：DNS服务器：是进行域名(domainname)和与之相对应的IP地址(IPaddress)转换的服务器。DNS中保存了一张域名(domainname)和与之相对应的IP地址(IPaddress)的表，以解析消息的域名。Web服务器：Web服务器一般指网站服务器，是指驻留于因特网上某种类型计算机的程序，可以向浏览器等Web客户端提供文档，也可以放置网站文件，让全世界浏览；可以放置数据文件</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <div class="con artical-content editor-preview-side"><h1>基本介绍：</h1>
+<blockquote>
+<p><strong>DNS服务器：</strong>是进行域名(domain name)和与之相对应的IP地址 (IP address)转换的服务器。DNS中保存了一张域名(domain name)和与之相对应的IP地址 (IP address)的表，以解析消息的域名。<br><strong>Web服务器：</strong>Web服务器一般指网站服务器，是指驻留于因特网上某种类型计算机的程序，可以向浏览器等Web客户端提供文档，也可以放置网站文件，让全世界浏览；可以放置数据文件，让全世界下载。目前最主流的三个Web服务器是Apache、 Nginx 、IIS。<br><strong>DHCP服务器：</strong>指的是由服务器控制一段IP地址范围，客户机登录服务器时就可以自动获得服务器分配的IP地址和子网掩码。</p>
+</blockquote>
+<h1>实验设备：</h1>
+<p><strong>WMware Workstation Pro14（建立两台虚拟机，一台server2016系统作为服务器、一台win10系统作为客户机）</strong></p>
+<h1>实验目的：</h1>
+<p><strong>使用DNS服务器将Web服务器的网址解析为IP地址，再由DHCP服务器给客户机分配IP地址，使客户机能够通过Web服务的网址访问到Web网站。</strong></p>
+<h1>实验操作：</h1>
+<h2 id='、实验前准备。'>1、实验前准备。</h2>
+<p><strong>将两台虚拟机的网络连接模式均改为仅主机模式，同时将虚拟网络编辑器的WMnet1下面的“使用本地DHCP服务将IP地址分配给虚拟机”选项去掉。</strong></p>
+<p><img src="https://s1.51cto.com/images/blog/201908/19/ea1a9ad229300ffe30361e66696400a2.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><img src="https://s1.51cto.com/images/blog/201908/19/fd383484952c269982e220fa35df2d79.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><img src="https://s1.51cto.com/images/blog/201908/19/d33fedf5fa8abdc0a1a21c43f0909807.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><strong>给服务器手动设置一个IP地址。</strong></p>
+<p><img src="https://s1.51cto.com/images/blog/201908/19/4555304158fe7e322f36fcaf9966caed.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><strong>给客户机设置IP地址和DNS服务器地址。</strong></p>
+<p><img src="https://s1.51cto.com/images/blog/201908/19/7ce36e054ff2b8c3931a3b3d2d67f993.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><strong>关闭服务器的防火墙。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/37e34e19bf41096abb4bc3c9371c8ecf.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><strong>用客户机去ping服务器的IP地址，检查是否能通信。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/1e2914f49b8617294dd010420b0a2d0e.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><img src="https://s1.51cto.com/images/blog/201908/19/da4bb96c26892b34a2e417e07839f589.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><strong>网络连接正常，可以开始实验。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/1090ad7c645ec8b8da7aed07bb9cc184.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<h2 id='、DNS管理器的新建与管理。'>2、DNS管理器的新建与管理。</h2>
+<p><strong>进入服务器管理器。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/9e055cb95bac366c09f37330bb5c6031.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><strong>新建一个DNS服务器，按下列步骤操作。</strong></p>
+<p><img src="https://s1.51cto.com/images/blog/201908/19/fe8adc96e67d8ae628656b3800c97b5c.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><img src="https://s1.51cto.com/images/blog/201908/19/ecf238ad78d8537b7273354e33d2b3a7.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><img src="https://s1.51cto.com/images/blog/201908/19/c6b123adfa9719b5453456152997ca90.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><strong>选择DNS服务器，点击添加功能。</strong></p>
+<p><img src="https://s1.51cto.com/images/blog/201908/19/dc7ae08cf90636aadaa8dbaf9f7f871e.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"><br><strong>继续按照下列步骤操作。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/eb9b542e2bc3732fd3dcc3ebbb4a1933.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><img src="https://s1.51cto.com/images/blog/201908/19/efe6b3a0a21278c416a91fe938d07cff.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><img src="https://s1.51cto.com/images/blog/201908/19/85354a101705869856aad4114cf25471.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><img src="https://s1.51cto.com/images/blog/201908/19/9c0e1663d8bab878f7ed3e444d826e5c.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><strong>DNS服务器功能安装完成。</strong></p>
+<p><img src="https://s1.51cto.com/images/blog/201908/19/2e25b1de186c8fe1e144f566c8edbd41.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><strong>进入DNS管理器。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/ec731098a199e9dc094de684e18bfe87.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"><br><strong>新建一个正向查找区域。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/4cd3e28b242fca9259a1b85c558730d8.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><strong>按照下列步骤进行操作。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/c7c6185d3e9d92d0640d084d5af4d7a9.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"><br><img src="https://s1.51cto.com/images/blog/201908/19/a038a44556a14de9b1146c86531393b5.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><strong>设置域名，可以随意设置，只要符合域名格式。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/86fce2d34e2ac918a6852c0379e3d501.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"><br><strong>继续下列步骤。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/3e96b72f694a8a92e510f83e9582d583.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"><br><img src="https://s1.51cto.com/images/blog/201908/19/883aee07a3f364449c0c4d3f722e2270.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><strong>新建正向查找区域完成。</strong></p>
+<p><img src="https://s1.51cto.com/images/blog/201908/19/840ac882e00a9016d203400311bc66dd.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><strong>新建一个主机。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/c8ee257ce2698a1e23ea223e0875264d.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"><br><strong>新建主机完成。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/a667c293c580c8f4d7eb25b189ec186b.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><strong>用客户机检查DNS服务器是否能解析域名，结果成功。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/60d978447513e97179a70c63838af0b2.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<h2 id='、Web服务器的新建与管理。'>3、Web服务器的新建与管理。</h2>
+<p><strong>给服务器添加一个网络适配器。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/738b11b95307834c5ab793e9011ee6d5.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><strong>新建网络适配器的网络连接同样选择仅主机模式。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/a22c493eeea9518929a29243639ab133.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><strong>给新建网络适配器手动设置一个IP地址。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/7c2df9cba884b9856fa4cd93b61debea.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><strong>用服务器检查IP地址是否正常，结果正常。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/3ed2d92d419c40a24622841327383bc6.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><strong>新建Web服务器，步骤大部分与新建DNS服务器相同，下面只展示不同的步骤，如果不会，请往上翻。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/3af0239c1599244e1a28449aa42fe610.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><strong>安装完成。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/30b634f65c9a3c4300144e57d5693678.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"><br><strong>进入Web服务器管理工具。</strong></p>
+<p><img src="https://s1.51cto.com/images/blog/201908/19/21f93992ee0681e6dd4552781f96f3c9.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><strong>给网站绑定IP地址，设置端口。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/7dfdec41a64bfbf9400788fe70baf695.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><strong>用命令提示符新建网站物理路径并在里面新建一个网页文件（也可以直接在图形化界面新建）。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/03a308d0c3788f39b0f5dc725c6cf5c5.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"><br><img src="https://s1.51cto.com/images/blog/201908/19/540a6179a8e3f7aae008d8d6011273d8.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"><br><img src="https://s1.51cto.com/images/blog/201908/19/95ba500b971abd602002b47fe73aaad8.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<h2 id='、实验能否通过两个不同IP，访问两个网站。'>4、实验能否通过两个不同IP，访问两个网站。</h2>
+<p><strong>给网站设置物理路径。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/560028fac060a7c80261b818263889d8.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><strong>用客户机检查网站是否能访问，访问成功。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/50b5e615b6be53e2537ce8da24fca44b.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><strong>再新建一个网站。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/d882470e772ffd11bd8b2c9540ad7b36.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"><br><strong>选择与之前网站不同的IP地址。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/2767f5653c99a10a5a9942cf99fb3ae1.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><strong>检查网站是否能访问，成功通过两个IP地址访问不同网站。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/eff31aaa934527bf9f80ef354cd4eede.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<h2 id='、实验能否通过同个IP，不同端口访问两个网站。'>5、实验能否通过同个IP，不同端口访问两个网站。</h2>
+<p><strong>将第二个网站的IP设置跟第一个网站相同，端口不同。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/981fc00d890395b1f00ddec221212801.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><strong>检查是否能通过相同IP地址，不同端口访问两个网站。访问成功。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/ae595b2ca509b74d32983639bfa48780.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"><br><img src="https://s1.51cto.com/images/blog/201908/19/52a9c9a640932e259205813621f8633c.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<h2 id='、实验能否通过相同IP、端口，不同域名访问两个网站。'>6、实验能否通过相同IP、端口，不同域名访问两个网站。</h2>
+<p><strong>给第一个网站设置主机名。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/7d415b32136f532a6121bfeee5f3c667.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"><br><strong>给第二个网站设置主机名，同时保证IP、端口与第一个网站相同。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/cb8668382e1e65f0f8cb51f4d165e719.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><strong>给第二个网站设置一个DNS正向查找域。</strong></p>
+<p><img src="https://s1.51cto.com/images/blog/201908/19/d51a0c8cc10dd6dec031010b6db85489.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"><br><img src="https://s1.51cto.com/images/blog/201908/19/274f0fac4501132ef4e79830d65c4011.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"><br><strong>验证是否能够通过相同IP、端口，不同域名访问两个网站。访问成功。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/e5715f27992ee3c7f9f76907f424a4e5.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><img src="https://s1.51cto.com/images/blog/201908/19/6aa9a77d0f7cd667ae6b2e030639ba64.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<h2 id='、实现DNS服务器、Web服务器、DHCP服务器的互联互通。'>7、实现DNS服务器、Web服务器、DHCP服务器的互联互通。</h2>
+<p><strong>新建一个DHCP服务器。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/85cdedc05fc9e42432f19cd86e5246df.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><strong>完成安装。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/dc22248b52ce0fc1d927b9852c0dc3dd.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"><br><strong>进入DHCP服务器管理工具。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/a068a43a3f5a2fd8a9f4993de4d3df71.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"><br><strong>新建一个作用域。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/c26accbe824f41382d13198516e6dd09.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><strong>设置作用域名。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/037595459009c565eda01e6c4c140f32.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><strong>按照下列步骤进行操作。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/b52331e05427ff002e8b3d5ffcdd55bd.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"><br><img src="https://s1.51cto.com/images/blog/201908/19/4a37a8065f4b16f608238ca76dcfb31d.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><img src="https://s1.51cto.com/images/blog/201908/19/db56b3ed62ea789abbc22dfc6ec914c7.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><img src="https://s1.51cto.com/images/blog/201908/19/dd7123d71935d83bae8838d92040c543.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><strong>添加默认网关。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/989f332294f6f178cd06d191b9e4d85c.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><strong>添加DNS服务器IP地址。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/27546c3ce49d83ed2d3c51a3824a6811.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><strong>继续下列步骤。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/426bedcad0260dbac7adacb08bef327f.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><strong>激活新建作用域。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/ee0f9bd080aae68400e61ef2c95fd73e.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><strong>客户机重新获取IP地址，获取之前将实验前准备的手动IP改为自动获取IP。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/9f2d51b39c104b9f8b19255c4568cf42.jpg?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"></p>
+<p><strong>获取DHCP服务器分配的地址成功。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/0c088544870e7394f3fe9c3fbb39a6f2.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"><br><strong>验证是否完成DNS、Web、DHCP服务器的互联互通。</strong><br><img src="https://s1.51cto.com/images/blog/201908/19/461c5607eb22d59ad126e3df76caad35.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"><br><img src="https://s1.51cto.com/images/blog/201908/19/8c63886ab3e59cf9794b01640ac41453.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通" style="cursor: pointer;"><br><strong>网站访问成功，服务器完成互联互通。</strong></p></div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1997.html">kubectl 命令梳理</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1999.html">深度破解学习————Linux磁盘管理和管理文件系统</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.51cto.com/14449541/2430833" target="_blank">https://blog.51cto.com/14449541/2430833</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#、实验前准备。">、实验前准备。</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#、DNS管理器的新建与管理。">、DNS管理器的新建与管理。</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#、Web服务器的新建与管理。">、Web服务器的新建与管理。</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#、实验能否通过两个不同IP，访问两个网站。">、实验能否通过两个不同IP，访问两个网站。</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#、实验能否通过同个IP，不同端口访问两个网站。">、实验能否通过同个IP，不同端口访问两个网站。</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#、实验能否通过相同IP、端口，不同域名访问两个网站。">、实验能否通过相同IP、端口，不同域名访问两个网站。</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#、实现DNS服务器、Web服务器、DHCP服务器的互联互通。">、实现DNS服务器、Web服务器、DHCP服务器的互联互通。</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

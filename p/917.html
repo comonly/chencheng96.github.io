@@ -1,0 +1,324 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>登录验证码（实例）_comonly.cn</title>
+<meta name="keywords" content="登录验证码（实例）" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">登录验证码（实例）</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-04-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	javaweb---jsp asp数据库框架
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> &lt;img src="image" /&gt;&nbsp; 通过img标签处的src=”指定servlet”来请求服务生成验证码.<br />
+<ol>
+	<li>
+		创建随机数对象
+	</li>
+	<li>
+		服务器响应内容类型MIME设置为 图片 image/jpeg，设置浏览器不缓存图像
+	</li>
+	<li>
+		在服务器端内存中生成一个缓冲图像 BufferedImage ,(宽,高)
+	</li>
+	<li>
+		从缓冲区图像获取Graphics对象à g.drawString() ,g.drawLine()…
+	</li>
+	<li>
+		使用Graphics对象绘制验证码
+	</li>
+	<li>
+		使用ImageIO类的方法将缓冲区中的图像输出到客户端浏览器ImageIO.write()
+	</li>
+</ol>
+<pre class="prettyprint lang-js">/*
+ * 返回图片验证码
+ * */
+private void loginimage(HttpServletRequest request,
+		HttpServletResponse response) {
+	//设置服务器响应内容类型
+	response.setContentType("image/jpeg");
+	//设置浏览器不缓存图片
+	//&lt;meta http-equiv="pragma" content="no-cache"&gt;
+	//&lt;meta http-equiv="cache-control" content="no-cache"&gt;
+	//&lt;meta http-equiv="expires" content="0"&gt;    
+	response.setHeader("pragma","no-cache");
+	response.setHeader("cache-control","no-cache");
+	response.setDateHeader("expires", 0);
+	
+	//在服务器内存中生成一个缓冲图像
+	int width=200,height=100;
+	BufferedImage image=new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
+	
+	//从缓冲区获取Graphics对象--&gt;图像上下文（画笔）
+	Graphics g=image.getGraphics();
+	g.setColor(new Color(255,255,255));
+	
+	//绘制填充矩形
+	g.fillRect(0, 0, width, height);
+	g.setColor(new Color(0,0,0));
+	
+	//绘制空心矩形
+	g.drawRect(0, 0, width-1, height-1);
+	
+	//绘制干扰线条
+	for(int i=0;i&lt;600;i++){
+		//设置线条颜色
+		g.setColor(getColor(100,200));
+		int x1=rand.nextInt(width);
+		int y1=rand.nextInt(height);
+		int x2=rand.nextInt(30);
+		int y2=rand.nextInt(30);
+		
+		g.drawLine(x1, y1, x1+x2, y1+y2);
+	}
+	
+	String vcode="";
+	//使用Graphics对象绘制验证码
+	for(int i=0;i&lt;4;i++){
+		//获取随机字符
+		char ch=str.charAt(rand.nextInt(str.length()));
+		//将字符转String ch--&gt;String 'a'--&gt;"a"
+		String s=String.valueOf(ch);
+		vcode +=s;
+		//设置字体
+		Font font=new Font("宋体",Font.BOLD|Font.ITALIC,30+rand.nextInt(30));
+		g.setFont(font);
+		
+		//设置字符颜色
+		g.setColor(getColor(0,100));
+		
+		
+		//绘制字符串
+		g.drawString(s, 20+40*i, 40+rand.nextInt(40));
+	}
+	
+	//将服务器中的验证码字符串存入会话作用域
+	request.getSession().setAttribute("vcode", vcode);
+	
+	//使用ImageIO的方法将缓冲区的图像输出到客户端浏览器
+	try {
+		ImageIO.write(image,"jpeg",response.getOutputStream());
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+	
+}
+/**
+ * 生成指定范围的随机颜色
+ */
+private Color getColor(int start, int end) {
+   if(start&gt;255){
+	   start=255;
+   }
+   if(start&lt;0)
+	   start=0;
+   if(end&gt;255){
+	   end=255;
+   }
+   if(end&lt;0)
+	   end=0;
+   
+   int r=start+rand.nextInt(end-start);
+   int g=start+rand.nextInt(end-start);
+   int b=start+rand.nextInt(end-start);
+	return new Color(r,g,b);
+}</pre></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/916.html">数据建模</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/918.html">分页技术Access数据库</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

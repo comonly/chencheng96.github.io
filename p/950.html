@@ -1,0 +1,314 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>MongoDB的备份与恢复_comonly.cn</title>
+<meta name="keywords" content="MongoDB的备份与恢复" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">MongoDB的备份与恢复</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">yaoxing</li>
+          <li class="lmname"><a href="https://www.cnblogs.com/qingtianyu2015/p/5968400.html" target="_blank">https://www.cnblogs.com/qingtianyu2015/p/5968400.html</a></li>
+          <li class="timer">2018-08-18</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	数据库
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='mogodummogoretore备份和恢复数据库'>
+	mongodump/mongorestore备份和恢复数据库
+</h2>
+<h4>
+	备份数据
+</h4>
+<p>
+	打开命令提示符，进入安装好的MongoDB的bin目录下，输入命令：
+</p>
+<pre class="prettyprint lang-bsh">D:\Program Files\MongoDB\Server\3.2\bin&gt;mongodump -h 127.0.0.1:27017 -d mytest -o f:\mongodb\dump</pre>
+其中：<br />
+<ul>
+	<li>
+		-h：MongDB所在服务器地址，例如：127.0.0.1，当然也可以指定端口号
+	</li>
+	<li>
+		-d：需要备份的数据库实例，例如：mytest （数据库名称，可以备份该数据库下所有集合）
+	</li>
+	<li>
+		-o：备份的数据存放位置，例如：f:\mongodb\dump，在备份完成后，系统自动在dump目录下建立一个mytest目录，这个目录里面存放该数据库实例的备份数据。
+	</li>
+</ul>
+<h4>
+	数据恢复
+</h4>
+<p>
+	使用mongorestore命令，进行数据恢复，同样打开命令提示符，进入安装好的MongoDB的bin目录下，然后输入命令
+</p>
+<pre class="prettyprint lang-bsh">D:\Program Files\MongoDB\Server\3.2\bin&gt;mongorestore -h 127.0.0.1:27017 -d mytest f:\mongodb\dump\mytest</pre>
+<ul>
+	<li>
+		-h：MongoDB所在服务器地址
+	</li>
+	<li>
+		-d：需要恢复的数据库实例，例如：mytest。当然这个名称也可以和备份时候的不一样，比如test2，这样就会创建一个新的集合。
+	</li>
+	<li>
+		--directoryperdb：备份数据所在位置，例如：f:\mongodb\dump\mytest
+	</li>
+	<li>
+		--drop： 恢复的时候，先删除当前数据，然后恢复备份的数据。就是说，恢复后，备份后添加修改的数据都会被删除，慎用！
+	</li>
+</ul>
+<h2 id='mogoexortmogoimort数据导入导出'>
+	mongoexport/mongoimport数据导入导出
+</h2>
+<h4>
+	导出工具：mongoexport
+</h4>
+mongoexport工具可以把一个collection导出成JSON格式或CSV格式的文件。可以通过参数指定导出的数据项，也可以根据指定的条件导出数据。<br />
+mongoexport -d dbname -c collectionname -o file --type json/csv -f field<br />
+参数说明：<br />
+<ul>
+	<li>
+		-d ：数据库名
+	</li>
+	<li>
+		-c ：collection名
+	</li>
+	<li>
+		-o ：输出的文件名，可以指明路径
+	</li>
+	<li>
+		--type ： 输出的格式，默认为json
+	</li>
+	<li>
+		-f ：输出的字段，如果-type为csv，则需要加上-f "字段名"
+	</li>
+</ul>
+<p>
+	示例：
+</p>
+<pre class="prettyprint lang-bsh">D:\Program Files\MongoDB\Server\3.2\bin&gt;mongoexport -d mytest -c first -o f:\mongodb\dump\mytest_first.json --type json</pre>
+<h4>
+	数据导入：mongoimport
+</h4>
+mongoimport -d dbname -c collectionname --file filename --headerline --type json/csv -f field<br />
+参数说明：<br />
+<ul>
+	<li>
+		-d ：数据库名
+	</li>
+	<li>
+		-c ：collection名
+	</li>
+	<li>
+		--type ：导入的格式默认json
+	</li>
+	<li>
+		-f ：导入的字段名
+	</li>
+	<li>
+		--headerline ：如果导入的格式是csv，则可以使用第一行的标题作为导入的字段
+	</li>
+	<li>
+		--file ：要导入的文件
+	</li>
+</ul>
+<p>
+	示例：
+</p>
+<pre class="prettyprint lang-bsh">D:\Program Files\MongoDB\Server\3.2\bin&gt;mongoimport -d mytest -c first --file f:\mongodb\dump\mytest_first.json --type json</pre></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/949.html">Windows平台MongoDB的使用</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/951.html">mongo客户端mongo VUE</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.cnblogs.com/qingtianyu2015/p/5968400.html" target="_blank">https://www.cnblogs.com/qingtianyu2015/p/5968400.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#mogodummogoretore备份和恢复数据库">mogodummogoretore备份和恢复数据库</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#mogoexortmogoimort数据导入导出">mogoexortmogoimort数据导入导出</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

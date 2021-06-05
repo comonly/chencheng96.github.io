@@ -1,0 +1,249 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>测试_comonly.cn</title>
+<meta name="keywords" content="测试" />
+<meta name="description" content="测试" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">测试</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">糊糊蛋</li>
+          <li class="lmname"><a href="https://blog.51cto.com/13127286/2430791" target="_blank">https://blog.51cto.com/13127286/2430791</a></li>
+          <li class="timer">2019-08-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>测试</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <div class="con artical-content editor-preview-side"><ol>
+<li>监控（Monitoring）： Sentinel 会不断地检查你的主服务器和从服务器是否运作正常。</li>
+<li>提醒（Notification）： 当被监控的某个 Redis 服务器出现问题时， Sentinel 可以通过 API 向管理员或者其他应用程序发送通知。
+<ol start="3">
+<li>自动故障迁移（Automatic failover）： 当一个主服务器不能正常工作时， Sentinel 会开始一次自动故障迁移操作， 它会将失效主服务器的其中一个从服务器升级为新的主服务器， 并让失效主服务器的其他从服务器改为复制新的主服务器； 当客户端试图连接失效的主服务器时， 集群也会向客户端返回新主服务器的地址， 使得集群可以使用新主服务器代替失效服务器。</li>
+</ol></li>
+</ol>
+<p>接下来我们准备两台机器，ip分别是<br>192.168.124.148 （6379老大哥 6380从机）<br>192.168.124.82 （6379老二 6380从机）</p>
+<pre><code class="hljs bash">安装所需要的环境和工具
+mkdir -p /data/server
+<span class="hljs-built_in">cd</span> /data/server
+yum -y install wget vim tcl gcc make</code></pre>
+<pre><code class="hljs sql">下载redis安装包
+
+wget http://download.redis.io/releases/redis-3.2.10.tar.gz
+tar -zxvf redis-3.2.10.tar.gz
+解压之后把之前安装的包移动到/usr/local/src目录下
+cd redis-3.2.10
+编译源文件
+make
+cd src
+make <span class="hljs-keyword">install</span>
+测试一下：make <span class="hljs-keyword">test</span>
+（如果 /usr/<span class="hljs-keyword">local</span>/<span class="hljs-keyword">bin</span>/ 文件夹内没有 redis-<span class="hljs-keyword">server</span> 那几个文件，
+就从 /<span class="hljs-keyword">data</span>/<span class="hljs-keyword">server</span>/redis<span class="hljs-number">-3.2</span><span class="hljs-number">.10</span>/src/ 中拷贝过去，
+命令：cp redis-<span class="hljs-keyword">server</span> redis-cli redis-sentinel redis-<span class="hljs-keyword">benchmark</span> redis-<span class="hljs-keyword">check</span>-aof redis-<span class="hljs-keyword">check</span>-rdb /usr/<span class="hljs-keyword">local</span>/<span class="hljs-keyword">bin</span>/）</code></pre>
+<p>创建多实例的文件夹，用来存放不同实例的配置文件</p>
+<p>cd /data/server</p>
+<p>mkdir cluster</p>
+<p>cd cluster</p>
+<p><code>mkdir 6379 6380 我们这里创建两个文件夹6379是主6380是从</code></p>
+<p>拷贝一下配置文件 148这台机器是老大哥不需要哨兵所以就不拷贝了</p>
+<p>cp /data/server/redis-3.2.10/redis.conf /data/server/cluster/6379<br>cp /data/server/redis-3.2.10/redis.conf /data/server/cluster/6380<br>cp /data/server/redis-3.2.10/sentinel.conf /data/server/cluster/6380</p>
+<p>以上配置另外一台机器同步<br>配置192.168.124.148机器<br>cd /data/server/cluster/6379 (老大哥和老二一定要把slave-priority改成25 越低越优先)<br><img src="https://s1.51cto.com/images/blog/201908/14/a24649461adf06ec1d0a972a2bb02d44.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="测试" style="cursor: pointer;"></p>
+<p>按照如图所配置 （个人把注释和空行都去掉了）<br><img src="https://s1.51cto.com/images/blog/201908/14/b1f514f97fea227194014b07ae178133.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="测试" style="cursor: pointer;"><br>cd /data/server/cluster/6380<br>![](<a href="https://s1.51cto.com/images/blog/201908/14/7b082bee12aa87041733a065c2b1bdf8.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,typ" style="color: rgb(66, 133, 244);">https://s1.51cto.com/images/blog/201908/14/7b082bee12aa87041733a065c2b1bdf8.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,typ</a> </p></div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1969.html">Giraph源码分析（七）—— 添加消息统计功能</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1971.html">GPON与EPON，哪个更具备有优势?</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.51cto.com/13127286/2430791" target="_blank">https://blog.51cto.com/13127286/2430791</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

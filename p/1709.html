@@ -1,0 +1,397 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>单例模式和工厂模式_comonly.cn</title>
+<meta name="keywords" content="单例模式和工厂模式" />
+<meta name="description" content="单例模式
+
+
+	单例模式（Singleton Pattern）是 Java 中最简单的设计模式之一。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。这种模式涉及到一个单一的类，该类负责创建自己的对象，同时确保只有单个对象被创建。这个类提供了一种访问其唯一的对象的方式，可以直接访问，不需要实例化该类的对象。
+
+
+	关键代码：构造函数是私有的。让构造函数为 private,这样该类就不会被实例化。
+
+
+	饿汉式
+
+
+	在程序启动或单件模式类被加载的时候，单件模式实例就" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">单例模式和工厂模式</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2020-06-09</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>单例模式
+
+
+	单例模式（Singleton Pattern）是 Java 中最简单的设计模式之一。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。这种模式涉及到一个单一的类，该类负责创建自己的对象，同时确保只有单个对象被创建。这个类提供了一种访问其唯一的对象的方式，可以直接访问，不需要实例化该类的对象。
+
+
+	关键代码：构造函数是私有的。让构造函数为 private,这样该类就不会被实例化。
+
+
+	饿汉式
+
+
+	在程序启动或单件模式类被加载的时候，单件模式实例就</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='单例模式'>
+	单例模式
+</h2>
+<div>
+	单例模式（Singleton Pattern）是 Java 中最简单的设计模式之一。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。这种模式涉及到一个单一的类，该类负责创建自己的对象，同时确保只有单个对象被创建。这个类提供了一种访问其唯一的对象的方式，可以直接访问，不需要实例化该类的对象。
+</div>
+<div>
+	关键代码：构造函数是私有的。<span style="color:#E53333;">让构造函数为 private,这样该类就不会被实例化。</span>
+</div>
+<h3>
+	饿汉式
+</h3>
+<div>
+	在程序启动或单件模式类被加载的时候，单件模式实例就已经被创建。
+</div>
+<div>
+<pre class="prettyprint lang-java">//饿汉式单例类.在类初始化时，已经自行实例化   
+public class Singleton {  
+     //私有的默认构造子  
+     private Singleton() {}  
+     //已经自行实例化   
+     private static Singleton single = new Singleton();  
+     //静态工厂方法   
+     public static Singleton getInstance() {  
+         return single;  
+    }  
+}  </pre>
+</div>
+<h3>
+	懒汉式
+</h3>
+<div>
+	当程序第一次访问单件模式实例时才进行创建。
+</div>
+<div>
+<pre class="prettyprint lang-java">//懒汉式单例类.在第一次调用的时候实例化   
+public class Singleton2 {  
+     //私有的默认构造子  
+     private Singleton2() {}  
+     //注意，这里没有final      
+     private static Singleton2 single=null;  
+     //静态工厂方法   
+     public synchronized  static Singleton2 getInstance() {  
+          if (single == null) {    
+              single = new Singleton2();  
+          }    
+         return single;  
+    }  
+}</pre>
+</div>
+<h2 id='工厂模式'>
+	工厂模式
+</h2>
+<div>
+	工厂模式在一些设计模式的书中分为简单工厂模式，工厂方法模式和抽象工厂模式三类。也有把工厂方法模式划分到抽象工厂模式的，认为工厂方法是抽象工厂模式的特例的一种，就是只有一个要实现的产品接口。
+</div>
+<h3>
+	工厂方法
+</h3>
+<div>
+	工厂方法模式通过一个抽象的工厂类来创建工厂，再由工厂通过一定的方法创造一定的对象，这样如果有新的产C出现不需要修改已有代码只要新建一个产品的从子类和工厂的子类就可以啦，简单代码如下：
+</div>
+<div>
+<pre class="prettyprint lang-java">//抽象工厂类
+abstract class Factory{
+    abstract Product create();
+}
+//工厂A
+class FactoryA{
+    public Product create(){
+        return new ProductA();
+    };
+}
+//工厂B
+class FactoryB{
+    public Product create(){
+        return new ProductA();
+    };
+}
+//产品父类
+abstract class Product{}
+//产品子类A
+class ProductA extends Product{}
+//产品子类B
+class ProductB extends Product{}
+
+public class App{
+    public static void main(String[] args){
+        Product p;
+        Factory f=new FactoryA()
+        //消费者类中创造A产品
+        p=f.create();
+    }
+}</pre>
+</div>
+<div>
+	-----------------------傻子这样写？？
+</div>
+<h3>
+	抽象工厂模式
+</h3>
+<div>
+	抽象工厂模式较好的实现了“开放-封闭”原则，是三个模式中较为抽象，并具一般性的模式。我们在使用中要注意使用抽象工厂模式的条件。
+</div>
+<div>
+<pre class="prettyprint lang-java">//工厂里嵌套工厂，用不同工厂生产不同商品
+class Program
+{
+    static void Main(string[] args)
+    {
+        //实例化惠普鼠标工厂
+        Factory factory = new HPFactory();
+        string mouseInfo1 = factory.GetMouseFactory().GetMouseInfo();
+        string keyboard1 = factory.GetKeyboardFactory().GetKeyboardInfo();
+
+        //实例化联想鼠标工厂
+        Factory factory2 = new LenoveFactory();
+        string mouseInfo2 = factory2.GetMouseFactory().GetMouseInfo();
+        string keyboard2= factory2.GetKeyboardFactory().GetKeyboardInfo();
+
+    }
+}</pre>
+</div>
+<p>
+	<br />
+</p>
+<pre class="prettyprint lang-java">//工厂创造不同的商品，用同一工厂生产不同商品
+interface IProduct1 {
+  public void show();
+}
+interface IProduct2 {
+  public void show();
+} class Product1 implements IProduct1 {
+  public void show() {
+    System.out.println("这是1型产品");
+  }
+}
+class Product2 implements IProduct2 {
+  public void show() {
+    System.out.println("这是2型产品");
+  }
+}
+interface IFactory {
+  public IProduct1 createProduct1();
+  public IProduct2 createProduct2();
+}
+class Factory implements IFactory{
+  public IProduct1 createProduct1() {
+    return new Product1();
+  }
+  public IProduct2 createProduct2() {
+    return new Product2();
+  }
+}
+public class Client {
+  public static void main(String[] args){
+    IFactory factory = new Factory();
+    factory.createProduct1().show();
+    factory.createProduct2().show();
+  }
+}</pre></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1708.html">WritePrivateProfileString向文件中写信息</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1710.html">SQL Server系统表sysobjects介绍与使用</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#单例模式">单例模式</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#工厂模式">工厂模式</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

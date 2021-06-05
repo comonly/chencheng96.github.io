@@ -1,0 +1,354 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>kubernetes集群发布 Pod 端口_comonly.cn</title>
+<meta name="keywords" content="kubernetes集群发布 Pod 端口" />
+<meta name="description" content="kubernetes集群暴露Pod端口创建测试环境vinginx.yamlapiVersion:apps/v1kind:Deploymentmetadata:name:my-nginxspec:selector:matchLabels:run:my-nginxreplicas:2template:metadata:labels:run:my-nginxspec:containers:-name:m" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">kubernetes集群发布 Pod 端口</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">无锋剑</li>
+          <li class="lmname"><a href="https://blog.51cto.com/michaelkang/2430830" target="_blank">https://blog.51cto.com/michaelkang/2430830</a></li>
+          <li class="timer">2019-08-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>kubernetes集群暴露Pod端口创建测试环境vinginx.yamlapiVersion:apps/v1kind:Deploymentmetadata:name:my-nginxspec:selector:matchLabels:run:my-nginxreplicas:2template:metadata:labels:run:my-nginxspec:containers:-name:m</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <div class="con artical-content editor-preview-side"><h2 id='uberete集群发布Pod端口'>kubernetes集群发布Pod 端口</h2>
+<h3>创建测试环境</h3>
+<pre><code class="hljs makefile">vi nginx.yaml
+
+<span class="hljs-section">apiVersion: apps/v1</span>
+<span class="hljs-section">kind: Deployment</span>
+<span class="hljs-section">metadata:</span>
+  name: my-nginx
+<span class="hljs-section">spec:</span>
+  selector:
+    matchLabels:
+      run: my-nginx
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        run: my-nginx
+    spec:
+      containers:
+      - name: my-nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+</code></pre>
+<h3>验证服务启动</h3>
+<pre><code class="hljs perl">[root@kubm-<span class="hljs-number">02</span> ~]<span class="hljs-comment"># kubectl get pods</span>
+NAME                        READY   STATUS    RESTARTS   AGE
+<span class="hljs-keyword">my</span>-nginx-<span class="hljs-number">756</span>fb87568-jwgp8   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running   <span class="hljs-number">0</span>          <span class="hljs-number">64</span><span class="hljs-keyword">s</span>
+<span class="hljs-keyword">my</span>-nginx-<span class="hljs-number">756</span>fb87568-vshxc   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running   <span class="hljs-number">0</span>          <span class="hljs-number">64</span><span class="hljs-keyword">s</span>
+[root@kubm-<span class="hljs-number">02</span> ~]<span class="hljs-comment"># </span></code></pre>
+<pre><code class="hljs xml">[root@kubm-02 ~]# kubectl get pods -l run=my-nginx -o wide
+NAME                        READY   STATUS    RESTARTS   AGE     IP             NODE         NOMINATED NODE   READINESS GATES
+my-nginx-756fb87568-jwgp8   1/1     Running   0          2m12s   10.244.3.101   kubnode-01   <span class="hljs-tag">&lt;<span class="hljs-name">none</span>&gt;</span>           <span class="hljs-tag">&lt;<span class="hljs-name">none</span>&gt;</span>
+my-nginx-756fb87568-vshxc   1/1     Running   0          2m12s   10.244.4.123   kubnode-02   <span class="hljs-tag">&lt;<span class="hljs-name">none</span>&gt;</span>           <span class="hljs-tag">&lt;<span class="hljs-name">none</span>&gt;</span></code></pre>
+<h3>检查 Pod 的 IP 地址：</h3>
+<pre><code class="hljs coffeescript">[root@kubm<span class="hljs-number">-02</span> ~]<span class="hljs-comment"># kubectl get pods -l run=my-nginx -o yaml | grep podIP</span>
+    podIP: <span class="hljs-number">10.244</span><span class="hljs-number">.3</span><span class="hljs-number">.101</span>
+    podIP: <span class="hljs-number">10.244</span><span class="hljs-number">.4</span><span class="hljs-number">.123</span></code></pre>
+<h2 id='建Service'>创建 Service</h2>
+<p>Kubernetes Service 从逻辑上定义了运行在集群中的一组 Pod，这些 Pod 提供了相同的功能。 当每个 Service 创建时，会被分配一个唯一的 IP 地址（也称为 clusterIP）。 这个 IP 地址与一个 Service 的生命周期绑定在一起，当 Service 存在的时候它也不会改变。 可以配置 Pod 使它与 Service 进行通信，Pod 知道与 Service 通信将被自动地负载均衡到该 Service 中的某些 Pod 上。</p>
+<h3>创建nginx 服务</h3>
+<p>kubectl expose 命令为 2个 Nginx 副本创建一个 Service：</p>
+<pre><code class="hljs perl">[root@kubm-<span class="hljs-number">02</span> ~]<span class="hljs-comment"># kubectl expose deployment/my-nginx</span>
+service/<span class="hljs-keyword">my</span>-nginx exposed
+</code></pre>
+<h3>验证服务启动</h3>
+<pre><code class="hljs perl">[root@kubm-<span class="hljs-number">02</span> ~]<span class="hljs-comment"># kubectl  get svc</span>
+NAME         TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE
+<span class="hljs-keyword">my</span>-nginx     ClusterIP   <span class="hljs-number">10.245</span>.<span class="hljs-number">206.203</span>   &lt;none&gt;        <span class="hljs-number">80</span>/TCP    <span class="hljs-number">2</span>m36s</code></pre>
+<h3>查看详细信息</h3>
+<pre><code class="hljs makefile">[root@kubm-02 ~]<span class="hljs-comment"># kubectl describe svc my-nginx </span>
+<span class="hljs-section">Name:              my-nginx</span>
+<span class="hljs-section">Namespace:         default</span>
+<span class="hljs-section">Labels:            &lt;none&gt;</span>
+<span class="hljs-section">Annotations:       &lt;none&gt;</span>
+<span class="hljs-section">Selector:          run=my-nginx</span>
+<span class="hljs-section">Type:              ClusterIP</span>
+<span class="hljs-section">IP:                10.245.206.203</span>
+<span class="hljs-section">Port:              &lt;unset&gt;  80/TCP</span>
+<span class="hljs-section">TargetPort:        80/TCP</span>
+<span class="hljs-section">Endpoints:         10.244.3.101:80,10.244.4.123:80</span>
+Session Affinity:  None
+<span class="hljs-section">Events:            &lt;none&gt;</span></code></pre>
+<pre><code class="hljs perl">kubectl describe po <span class="hljs-keyword">my</span>-nginx <span class="hljs-comment"># 查看my-nginx pod的详细状态</span>
+kubectl describe rs <span class="hljs-keyword">my</span>-nginx <span class="hljs-comment"># 查看my-nginx replica set的详细状态</span>
+kubectl describe deployment <span class="hljs-keyword">my</span>-nginx <span class="hljs-comment"># 查看my-nginx deployment的详细状态</span></code></pre>
+<h3>访问 Service</h3>
+<p>Kubernetes 支持两种主要的服务发现模式 —— 环境变量和 DNS。前者在单个节点上可用使用，然而后者必须使用 kube-dns 集群插件。</p>
+<pre><code class="hljs makefile">[root@kubm-02 ~]<span class="hljs-comment"># kubectl get pods</span>
+NAME                        READY   STATUS    RESTARTS   AGE
+my-nginx-756fb87568-jwgp8   1/1     Running   0          23m
+my-nginx-756fb87568-vshxc   1/1     Running   0          23m
+
+[root@kubm-02 ~]<span class="hljs-comment"># kubectl exec my-nginx-756fb87568-jwgp8 -- printenv | grep SERVICE                         </span>
+KUBERNETES_SERVICE_HOST=10.245.0.1
+KUBERNETES_SERVICE_PORT=443
+KUBERNETES_SERVICE_PORT_HTTPS=443
+</code></pre>
+<h2 id='NS解析测试'>DNS 解析测试</h2>
+<p>Kubernetes 提供 DNS ，如果它在集群中处于运行状态，可以通过如下命令来检查：</p>
+<pre><code class="hljs coffeescript">[root@kubm<span class="hljs-number">-02</span> ~]<span class="hljs-comment"># kubectl get services kube-dns --namespace=kube-system</span>
+NAME       TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)                  AGE
+kube-dns   ClusterIP   <span class="hljs-number">10.245</span><span class="hljs-number">.0</span><span class="hljs-number">.10</span>   &lt;none&gt;        <span class="hljs-number">53</span>/UDP,<span class="hljs-number">53</span>/TCP,<span class="hljs-number">9153</span>/TCP   <span class="hljs-number">11</span>d</code></pre>
+<h3>验证服务解析</h3>
+<h4>启动一个安装有curl 的镜像</h4>
+<pre><code class="hljs coffeescript">[root@kubm<span class="hljs-number">-02</span> ~]<span class="hljs-comment"># kubectl run curl --image=radial/busyboxplus:curl -i --tty</span></code></pre>
+<h4>测试解析 my-nginx</h4>
+<pre><code class="hljs ruby">[ root@curl-<span class="hljs-number">6</span>bf6db5c4f-<span class="hljs-number">96</span><span class="hljs-symbol">nhg:</span>/ ]$ nslookup my-nginx
+<span class="hljs-symbol">Server:</span>    <span class="hljs-number">10.245</span>.<span class="hljs-number">0</span>.<span class="hljs-number">10</span>                                          《==== dns 服务器
+Address <span class="hljs-number">1</span>: <span class="hljs-number">10.245</span>.<span class="hljs-number">0</span>.<span class="hljs-number">10</span> kube-dns.kube-system.svc.cluster.local
+
+<span class="hljs-symbol">Name:</span>      my-nginx
+Address <span class="hljs-number">1</span>: <span class="hljs-number">10.245</span>.<span class="hljs-number">206.203</span> my-nginx.default.svc.cluster.local    《==== my-nginx服务的集群IP地址
+[ root@curl-<span class="hljs-number">6</span>bf6db5c4f-<span class="hljs-number">96</span><span class="hljs-symbol">nhg:</span>/ ]$ </code></pre>
+<h3>curl 测试</h3>
+<pre><code class="hljs xml">[ root@curl-6bf6db5c4f-96nhg:/ ]$ curl my-nginx 
+
+........
+<span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Welcome to nginx!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+.........
+</code></pre>
+<pre><code class="hljs xml">[ root@curl-6bf6db5c4f-96nhg:/ ]$ curl 10.245.206.203
+........
+<span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Welcome to nginx!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+......</code></pre>
+<h3>服务资源扩容</h3>
+<pre><code class="hljs coffeescript">收缩服务
+[root@kubm<span class="hljs-number">-02</span> ~]<span class="hljs-comment"># kubectl scale deployment my-nginx --replicas=0</span>
+
+验证
+[root@kubm<span class="hljs-number">-02</span> ~]<span class="hljs-comment"># kubectl get pods -o wide</span>
+</code></pre>
+<p>No resources found.</p>
+<pre><code class="hljs perl">扩容服务至<span class="hljs-number">2</span>节点
+[root@kubm-<span class="hljs-number">02</span> ~]<span class="hljs-comment"># kubectl scale deployment my-nginx --replicas=2</span>
+deployment.extensions/<span class="hljs-keyword">my</span>-nginx scaled
+
+验证
+[root@kubm-<span class="hljs-number">02</span> ~]<span class="hljs-comment"># kubectl get pods -o wide                      </span>
+NAME                        READY   STATUS              RESTARTS   AGE   IP       NODE         NOMINATED NODE   READINESS GATES
+<span class="hljs-keyword">my</span>-nginx-<span class="hljs-number">756</span>fb87568-gmgfq   <span class="hljs-number">0</span>/<span class="hljs-number">1</span>     ContainerCreating   <span class="hljs-number">0</span>          <span class="hljs-number">1</span><span class="hljs-keyword">s</span>    &lt;none&gt;   kubnode-<span class="hljs-number">02</span>   &lt;none&gt;           &lt;none&gt;
+<span class="hljs-keyword">my</span>-nginx-<span class="hljs-number">756</span>fb87568-gvhbm   <span class="hljs-number">0</span>/<span class="hljs-number">1</span>     ContainerCreating   <span class="hljs-number">0</span>          <span class="hljs-number">1</span><span class="hljs-keyword">s</span>    &lt;none&gt;   kubnode-<span class="hljs-number">01</span>   &lt;none&gt;           &lt;none&gt;</code></pre>
+<h3>清理服务</h3>
+<pre><code class="hljs perl"><span class="hljs-comment">#直接使用配置文件删除</span>
+[root@kubm-<span class="hljs-number">02</span> ~]<span class="hljs-comment"># kubectl delete -f nginx.yaml    </span>
+deployment.apps <span class="hljs-string">"my-nginx"</span> deleted
+
+<span class="hljs-comment">#删除服务</span>
+[root@kubm-<span class="hljs-number">02</span> ~]<span class="hljs-comment"># kubectl get svc</span>
+NAME         TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   <span class="hljs-number">10.245</span>.<span class="hljs-number">0</span>.<span class="hljs-number">1</span>       &lt;none&gt;        <span class="hljs-number">443</span>/TCP   <span class="hljs-number">11</span>d
+<span class="hljs-keyword">my</span>-nginx     ClusterIP   <span class="hljs-number">10.245</span>.<span class="hljs-number">206.203</span>   &lt;none&gt;        <span class="hljs-number">80</span>/TCP    <span class="hljs-number">48</span><span class="hljs-keyword">m</span>
+
+[root@kubm-<span class="hljs-number">02</span> ~]<span class="hljs-comment"># kubectl delete  svc my-nginx </span>
+service <span class="hljs-string">"my-nginx"</span> deleted
+
+[root@kubm-<span class="hljs-number">02</span> ~]<span class="hljs-comment"># kubectl get svc              </span>
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   <span class="hljs-number">10.245</span>.<span class="hljs-number">0</span>.<span class="hljs-number">1</span>   &lt;none&gt;        <span class="hljs-number">443</span>/TCP   <span class="hljs-number">11</span>d
+</code></pre></div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1961.html">nginx日志切割</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1963.html">F5-ASM-AdvWAF后续转至csdn</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.51cto.com/michaelkang/2430830" target="_blank">https://blog.51cto.com/michaelkang/2430830</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#uberete集群发布Pod端口">uberete集群发布Pod端口</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#建Service">建Service</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#NS解析测试">NS解析测试</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

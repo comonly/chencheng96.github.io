@@ -1,0 +1,248 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>【C++】 error C2572: 重定义默认参数_comonly.cn</title>
+<meta name="keywords" content="【C++】 error C2572: 重定义默认参数" />
+<meta name="description" content="&nbsp; &nbsp;当debug时遇到这个错误C2572: “XXXX”: 重定义默认参数，往往是因为在函数的声明和定义中同时给参数设定了默认值。想修改这个错误，你只需将函数的定义中的形参默认值部分删除即可。（注：不是删除形参，而是删除默认值部分）例如以下这种情况，编译器就会报错；
+
+Student(int a , char *n = "default name");&nbsp; &nbsp; //函数声明
+Student::Student(int a, char *n = "default " />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">【C++】 error C2572: 重定义默认参数</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">不用先生</li>
+          <li class="lmname"><a href="https://blog.csdn.net/u013921430/article/details/83025434" target="_blank">https://blog.csdn.net/u013921430/article/details/83025434</a></li>
+          <li class="timer">2019-11-23</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>&nbsp; &nbsp;当debug时遇到这个错误C2572: “XXXX”: 重定义默认参数，往往是因为在函数的声明和定义中同时给参数设定了默认值。想修改这个错误，你只需将函数的定义中的形参默认值部分删除即可。（注：不是删除形参，而是删除默认值部分）例如以下这种情况，编译器就会报错；
+
+Student(int a , char *n = "default name");&nbsp; &nbsp; //函数声明
+Student::Student(int a, char *n = "default </div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> &nbsp; &nbsp;当debug时遇到这个错误C2572: “XXXX”: 重定义默认参数，往往是因为在函数的声明和定义中同时给参数设定了默认值。想修改这个错误，你只需将函数的定义中的形参默认值部分删除即可。（注：不是删除形参，而是删除默认值部分）例如以下这种情况，编译器就会报错；<br />
+<br />
+Student(int a , char *n = "default name");&nbsp; &nbsp; //函数声明<br />
+Student::Student(int a, char *n = "default name" )&nbsp; &nbsp; //函数定义<br />
+{&nbsp;<br />
+&nbsp; &nbsp; &nbsp;/*函数实现*/<br />
+}<br />
+&nbsp; &nbsp; &nbsp; 修改后的代码如下；这样程序就能正常运行了。<br />
+<br />
+Student(int a , char *n = "default name");&nbsp; &nbsp; //函数声明<br />
+Student::Student(int a, char *n&nbsp; )&nbsp; &nbsp; //函数定义<br />
+{&nbsp;<br />
+&nbsp; &nbsp; &nbsp;/*函数实现*/<br />
+}<br />
+<p>
+	<br />
+</p>
+<p>
+	在类中，如果你想定义一个构造函数，并且将某一构造函数中的所有形参都设定默认值，这样做会发生什么呢？
+</p>
+<p>
+	<br />
+Student(){ age = 20; name = "default name"; }&nbsp; //不带形参的默认构造函数<br />
+Student(int a = 20, char *n = "default name"); //形参有默认值的默认构造函数<br />
+&nbsp; &nbsp; &nbsp; &nbsp;答案是你使他变成了一个默认构造函数；<br />
+<br />
+Student NI;&nbsp; &nbsp;//报错，定义了多个默认构造函数
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1553.html">C++ 程序崩溃时生成Dump文件</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1555.html">Git中的变基(Rebase)</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/u013921430/article/details/83025434" target="_blank">https://blog.csdn.net/u013921430/article/details/83025434</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

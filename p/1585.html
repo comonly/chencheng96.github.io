@@ -1,0 +1,359 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>ResetEvent、CreateEvent、SetEvent  event_comonly.cn</title>
+<meta name="keywords" content="ResetEvent、CreateEvent、SetEvent  event" />
+<meta name="description" content="ResetEvent
+&nbsp; &nbsp; &nbsp; &nbsp;这个函数把指定的事件对象设置为无信号状态。
+&nbsp;
+&nbsp;
+BOOL ResetEvent(
+&nbsp;
+HANDLE hEvent
+&nbsp;
+);
+参数说明：
+&nbsp;
+hEvent
+&nbsp;
+[in] 指向事件对象的句柄.由 CreateEvent or OpenEvent 函数返回。 这个句柄需要拥有EVENT_MODIFY_STATE 访问权限.
+&nbsp;
+函数成" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">ResetEvent、CreateEvent、SetEvent  event</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-12-03</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>ResetEvent
+&nbsp; &nbsp; &nbsp; &nbsp;这个函数把指定的事件对象设置为无信号状态。
+&nbsp;
+&nbsp;
+BOOL ResetEvent(
+&nbsp;
+HANDLE hEvent
+&nbsp;
+);
+参数说明：
+&nbsp;
+hEvent
+&nbsp;
+[in] 指向事件对象的句柄.由 CreateEvent or OpenEvent 函数返回。 这个句柄需要拥有EVENT_MODIFY_STATE 访问权限.
+&nbsp;
+函数成</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> ResetEvent<br />
+&nbsp; &nbsp; &nbsp; &nbsp;这个函数把指定的事件对象设置为无信号状态。<br />
+&nbsp;<br />
+&nbsp;<br />
+BOOL ResetEvent(<br />
+&nbsp;<br />
+HANDLE hEvent<br />
+&nbsp;<br />
+);<br />
+参数说明：<br />
+&nbsp;<br />
+hEvent<br />
+&nbsp;<br />
+[in] 指向事件对象的句柄.由 CreateEvent or OpenEvent 函数返回。 这个句柄需要拥有EVENT_MODIFY_STATE 访问权限.<br />
+&nbsp;<br />
+函数成功，返回非0值，否则返回0值，可以调用GetLastError得到错误的详细信息。<br />
+&nbsp;<br />
+Remarks<br />
+&nbsp;<br />
+一个事件对象一直都保持在无信号状态，直到显式调用 SetEvent or PulseEvent 函数把它设置到有信号状态。 这些无信号的事件对象会阻塞任何在内部调用wait函数的线程。<br />
+&nbsp;<br />
+这个函数用于手动重置的事件对象。手动重置的对象在线程释放后必须手动置为无信号状态。 自动重置的事件对象在一个等待它成功的线程释放后会自动变为无信号状态。<br />
+&nbsp;<br />
+重置一个无信号的事件对象没有任何效果。<br />
+<br />
+&nbsp;<br />
+<br />
+CreateEvent&nbsp;&nbsp;<br />
+‍<br />
+函数功能描述　　创建或打开一个命名的或无名的事件对象 函数原型 <br />
+HANDLE CreateEvent(<br />
+&nbsp;<br />
+LPSECURITY_ATTRIBUTES lpEventAttributes, // 安全属性<br />
+&nbsp;<br />
+BOOL bManualReset, // 复位方式<br />
+&nbsp;<br />
+BOOL bInitialState, // 初始状态<br />
+&nbsp;<br />
+LPCTSTR lpName // 对象名称<br />
+&nbsp;<br />
+);<br />
+‍<br />
+参数　　lpEventAttributes：<br />
+&nbsp;<br />
+[输入]一个指向SECURITY_ATTRIBUTES结构的指针，确定返回的句柄是否可被子进程继承。如果lpEventAttributes是NULL，此句柄不能被继承。<br />
+&nbsp;<br />
+Windows NT/2000：lpEventAttributes的结构中的成员为新的事件指定了一个安全符。如果lpEventAttributes是NULL，事件将获得一个默认的安全符。<br />
+&nbsp;<br />
+bManualReset：<br />
+&nbsp;<br />
+[输入]指定将事件对象创建成手动复原还是自动复原。如果是TRUE，那么必须用ResetEvent函数来手工将事件的状态复原到无信号状态。如果设置为FALSE，当事件被一个等待线程释放以后，系统将会自动将事件状态复原为无信号状态。<br />
+&nbsp;<br />
+bInitialState：<br />
+&nbsp;<br />
+[输入]指定事件对象的初始状态。如果为TRUE，初始状态为有信号状态；否则为无信号状态。<br />
+&nbsp;<br />
+lpName：<br />
+&nbsp;<br />
+[输入]指定事件的对象的名称，是一个以0结束的字符串指针。名称的字符格式限定在MAX_PATH之内。名字是对大小写敏感的。<br />
+&nbsp;<br />
+如果lpName指定的名字，与一个存在的命名的事件对象的名称相同，函数将请求EVENT_ALL_ACCESS来访问存在的对象。这时候，由于bManualReset和bInitialState参数已经在创建事件的进程中设置，这两个参数将被忽略。如果lpEventAttributes是参数不是NULL，它将确定此句柄是否可以被继承，但是其安全描述符成员将被忽略。<br />
+&nbsp;<br />
+如果lpName为NULL，将创建一个无名的事件对象。<br />
+&nbsp;<br />
+如果lpName的和一个存在的信号、互斥、等待计时器、作业或者是文件映射对象名称相同，函数将会失败，在GetLastError函数中将返回ERROR_INVALID_HANDLE。造成这种现象的原因是这些对象共享同一个命名空间。<br />
+&nbsp;<br />
+终端服务(Terminal Services)：名称中可以加入"Global\"或是"Local\"的前缀，这样可以明确的将对象创建在全局的或事务的命名空间。名称的其它部分除了反斜杠(\)，可以使用任意字符。详细内容可参考Kernel Object Name Spaces。<br />
+&nbsp;<br />
+Windows 2000：在Windows 2000系统中，没有终端服务运行，"Global\"和"Local\"前缀将被忽略。名称的其它部分除了反斜杠(\)，可以使用任意字符。<br />
+&nbsp;<br />
+Windows NT 4.0以及早期版本, Windows 95/98：名称中除了反斜杠(\)，可以使用任意字符。<br />
+&nbsp;<br />
+&nbsp;<br />
+返回值　　如果函数调用成功，函数返回事件对象的句柄。如果对于命名的对象，在函数调用前已经被创建，函数将返回存在的事件对象的句柄，而且在GetLastError函数中返回ERROR_ALREADY_EXISTS。<br />
+&nbsp;<br />
+如果函数失败，函数返回值为NULL，如果需要获得详细的错误信息，需要调用GetLastError。<br />
+&nbsp;<br />
+备注：<br />
+&nbsp;<br />
+调用CreateEvent函数返回的句柄，该句柄具有EVENT_ALL_ACCESS权限去访问新的事件对象，同时它可以在任何有此事件对象句柄的函数中使用。<br />
+&nbsp;<br />
+在调用的过程中，所有线程都可以在一个等待函数中指定事件对象句柄。当指定的对象的状态被置为有信号状态时，单对象等待函数将返回。<br />
+&nbsp;<br />
+对于多对象等待函数，可以指定为任意或所有指定的对象被置为有信号状态。当等待函数返回时，等待线程将被释放去继续运行。<br />
+&nbsp;<br />
+初始状态在bInitialState参数中进行设置。使用SetEvent函数将事件对象的状态置为有信号状态。使用ResetEvent函数将事件对象的状态置为无信号状态。<br />
+&nbsp;<br />
+当一个手动复原的事件对象的状态被置为有信号状态时，该对象状态将一直保持有信号状态，直至明确调用ResetEvent函数将其置为无符号状态。<br />
+&nbsp;<br />
+当事件的对象被置为有信号状态时，任意数量的等待中线程，以及随后开始等待的线程均会被释放。<br />
+&nbsp;<br />
+当一个自动复原的事件对象的状态被置为有信号状态时，该对象状态将一直保持有信号状态，直至一个等待线程被释放;系统将自动将此函数置为无符号状态。如果没有等待线程正在等待，事件对象的状态将保持有信号状态。<br />
+&nbsp;<br />
+多个进程可持有同一个事件对象的多个句柄，可以通过使用此对象来实现进程间的同步。下面的对象共享机制是可行的：<br />
+&nbsp;<br />
+·在CreateEvent函数中，lpEventAttributes参数指定句柄可被继承时，通过CreateProcess函数创建的子进程继承的事件对象句柄。<br />
+&nbsp;<br />
+·一个进程可以在DuplicateHandle函数中指定事件对象句柄，从而获得一个复制的句柄，此句柄可以被其它进程使用。<br />
+&nbsp;<br />
+·一个进程可以在OpenEvent或CreateEvent函数中指定一个名字，从而获得一个有名的事件对象句柄。<br />
+&nbsp;<br />
+使用CloseHandle函数关闭句柄。当进程停止时，系统将自动关闭句柄。当最后一个句柄被关闭后，事件对象将被销毁。<br />
+&nbsp;<br />
+&nbsp;<br />
+BOOL WINAPI SetEvent(<br />
+&nbsp; &nbsp; &nbsp; &nbsp;HANDLE hEvent<br />
+&nbsp; &nbsp; &nbsp; &nbsp;);<br />
+&nbsp;<br />
+返回值：如果操作成功，则返回非零值，否则为0。<br />
+&nbsp;<br />
+说明：<br />
+&nbsp;<br />
+设置事件的状态为有标记，释放任意等待线程。如果事件是手工的，此事件将保持有标记直到调用ResetEvent。这种情况下将释放多个线程，如果事件是自动的，此事件将保持有标记，直到一个线程被释放，系统将设置事件的状态为无标记。如果没有线程在等待，则此事件将保持有标记，直到一个线程被释放。<br />
+‍<br />
+总结：<br />
+&nbsp;<br />
+一个Event被创建以后，可以用OpenEvent()API来获得它的Handle，用CloseHandle() 来关闭它，用SetEvent()或PulseEvent()来设置它使其有信号，用ResetEvent() 来使其无信号，用WaitForSingleObject()或WaitForMultipleObjects()来等待其变为有信号。PulseEvent()是一个比较有意思的使用方法，正如这个API的名字，它使一个Event 对象的状态发生一次脉冲变化，从无信号变成有信号再变成无信号,而整个操作是原子的。对自动复位的Event对象，它仅释放第一个等到该事件的thread（如果有)，而对于人工复位的Event对象，它释放所有等待的thread。<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1584.html">指向指针的引用  指针的引用（指针） </a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1586.html">CloseHandle</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

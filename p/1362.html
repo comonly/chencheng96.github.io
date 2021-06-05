@@ -1,0 +1,279 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>WaitForSingleObject等待某信号量_comonly.cn</title>
+<meta name="keywords" content="WaitForSingleObject等待某信号量" />
+<meta name="description" content="在多线程的情况下，有时候我们会希望等待某一线程完成了再继续做其他事情，要实现这个目的，可以使用Windows API函数WaitForSingleObject，或者WaitForMultipleObjects。这两个函数都会等待Object被标为有信号(signaled)时才返回的。
+
+	那么，信号是什么呢？首先我们可以假设这里存在一个文件和两个线程，我们规定这个文件同一时刻只能被一个线程所访问打开，那么我们的线程该如何知道这个文件现在有没有被别的线程访问呢？我们可以让线程等在一个死循环里，这个循环之" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">WaitForSingleObject等待某信号量</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">WaitForSingleObject[CC 4.0 by-sa]</li>
+          <li class="lmname"><a href="https://blog.csdn.net/LL596214569/article/details/81088862" target="_blank">https://blog.csdn.net/LL596214569/article/details/81088862</a></li>
+          <li class="timer">2019-08-29</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>在多线程的情况下，有时候我们会希望等待某一线程完成了再继续做其他事情，要实现这个目的，可以使用Windows API函数WaitForSingleObject，或者WaitForMultipleObjects。这两个函数都会等待Object被标为有信号(signaled)时才返回的。
+
+	那么，信号是什么呢？首先我们可以假设这里存在一个文件和两个线程，我们规定这个文件同一时刻只能被一个线程所访问打开，那么我们的线程该如何知道这个文件现在有没有被别的线程访问呢？我们可以让线程等在一个死循环里，这个循环之</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 在多线程的情况下，有时候我们会希望等待某一线程完成了再继续做其他事情，要实现这个目的，可以使用Windows API函数WaitForSingleObject，或者WaitForMultipleObjects。这两个函数都会等待Object被标为有信号(signaled)时才返回的。<br />
+<p>
+	那么，信号是什么呢？首先我们可以假设这里存在一个文件和两个线程，我们规定这个文件同一时刻只能被一个线程所访问打开，那么我们的线程该如何知道这个文件现在有没有被别的线程访问呢？我们可以让线程等在一个死循环里，这个循环之一在尝试打开访问这个文件，直到能够打开为止；这样做虽然可以实现目的，但是死循环会占用大量的内存，所以windows就设置了信号量。信号量的作用简单理解就是一个标志位，在我们上述的问题中，这个文件就有一个信号量，初始时我们设信号量为FALSE，而只有当信号量为FALSE时线程才可以打开访问这个文件。那么，当第一个线程到达，信号量为FALSE，线程打开文件进行访问，并将信号量置为TRUE；在第一个线程在访问文件时，第二个线程到来，此时信号量仍未TRUE，所以第二个线程等待，这个等待的过程就是WaitForSingleObject。WaitForSingleObject在等待的过程中会进入一个非常高效的沉睡等待状态，只占用极少的CPU时间片。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	1. 格式<br />
+DWORD WaitForSingleObject( HANDLE hHandle, DWORDdwMilliseconds);<br />
+有两个参数，分别是THandle和Timeout(毫秒单位)。<br />
+如果想要等待一条线程，那么你需要指定线程的Handle，以及相应的Timeout时间。当然，如果你想无限等待下去，Timeout参数可以指定系统常量INFINITE。<br />
+<br />
+2. 使用对象<br />
+它可以等待如下几种类型的对象：<br />
+Event，Mutex，Semaphore，Process，Thread&nbsp;<br />
+<br />
+3. 返回类型<br />
+有三种返回类型：<br />
+WAIT_OBJECT_0, 表示等待的对象有信号（对线程来说，表示执行结束）；<br />
+WAIT_TIMEOUT, 表示等待指定时间内，对象一直没有信号（线程没执行完）；<br />
+WAIT_ABANDONED 表示对象有信号，但还是不能执行&nbsp; 一般是因为未获取到锁或其他原因
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1361.html">C++中HRESULT相关介绍</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1363.html">C++信号量 互斥Mutex（互斥对象）和Critical_Section（关键代码段）</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/LL596214569/article/details/81088862" target="_blank">https://blog.csdn.net/LL596214569/article/details/81088862</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="使用">
+							<h2 style="display:inline;color:#5BC648;">使用</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-12-03&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span>你可以使用WaitForSingleObject函数来等待一个内核对象变为已通知状态：<br />
+<br />
+DWORD WaitForSingleObject(<br />
+HANDLE hObject, //指明一个内核对象的句柄<br />
+DWORD dwMilliseconds); //等待时间<br />
+该函数需要传递一个内核对象句柄，该句柄标识一个内核对象，如果该内核对象处于未通知状态，则该函数导致线程进入阻塞状态；如果该内核对象处于已通知状态，则该函数立即返回WAIT_OBJECT_0。第二个参数指明了需要等待的时间（毫秒），可以传递INFINITE指明要无限期等待下去，如果第二个参数为0，那么函数就测试同步对象的状态并立即返回。如果等待超时，该函数返回WAIT_TIMEOUT。如果该函数失败，返回WAIT_FAILED。可以通过下面的代码来判断：<br />
+<br />
+DWORD dw = WaitForSingleObject(hProcess, 5000); //等待一个进程结束<br />
+switch (dw)<br />
+{<br />
+case WAIT_OBJECT_0:<br />
+// hProcess所代表的进程在5秒内结束<br />
+break;<br />
+<br />
+case WAIT_TIMEOUT:<br />
+// 等待时间超过5秒<br />
+break;<br />
+<br />
+case WAIT_FAILED:<br />
+// 函数调用失败，比如传递了一个无效的句柄<br />
+break;<br />
+}<br /></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#使用">使用</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

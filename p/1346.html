@@ -1,0 +1,351 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>__stdcall、__cdcel和__fastcall对函数参数的入栈方式、栈内数据的清除方式的影响_comonly.cn</title>
+<meta name="keywords" content="__stdcall、__cdcel和__fastcall对函数参数的入栈方式、栈内数据的清除方式的影响" />
+<meta name="description" content="__stdcall、__cdecl和__fastcall是三种函数调用协议，函数调用协议会影响函数参数的入栈方式、栈内数据的清除方式、编译器函数名的修饰规则等。
+
+调用协议常用场合
+
+	
+		__stdcall：Windows API默认的函数调用协议。
+	
+	
+		__cdecl：C/C++默认的函数调用协议。
+	
+	
+		__fastcall：适用于对性能要求较高的场合。
+	
+
+函数参数入栈方式
+
+	
+		__stdcall：函数参数由右向左入栈。
+	
+	
+		" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">__stdcall、__cdcel和__fastcall对函数参数的入栈方式、栈内数据的清除方式的影响</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">博客园</li>
+          <li class="lmname"><a href="https://www.cnblogs.com/yejianyong/p/7506465.html" target="_blank">https://www.cnblogs.com/yejianyong/p/7506465.html</a></li>
+          <li class="timer">2019-08-26</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>__stdcall、__cdecl和__fastcall是三种函数调用协议，函数调用协议会影响函数参数的入栈方式、栈内数据的清除方式、编译器函数名的修饰规则等。
+
+调用协议常用场合
+
+	
+		__stdcall：Windows API默认的函数调用协议。
+	
+	
+		__cdecl：C/C++默认的函数调用协议。
+	
+	
+		__fastcall：适用于对性能要求较高的场合。
+	
+
+函数参数入栈方式
+
+	
+		__stdcall：函数参数由右向左入栈。
+	
+	
+		</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> __stdcall、__cdecl和__fastcall是三种函数调用协议，函数调用协议会影响函数参数的入栈方式、栈内数据的清除方式、编译器函数名的修饰规则等。<br />
+<br />
+调用协议常用场合<br />
+<ol>
+	<li>
+		__stdcall：Windows API默认的函数调用协议。
+	</li>
+	<li>
+		__cdecl：C/C++默认的函数调用协议。
+	</li>
+	<li>
+		__fastcall：适用于对性能要求较高的场合。
+	</li>
+</ol>
+函数参数入栈方式<br />
+<ol>
+	<li>
+		__stdcall：函数参数由右向左入栈。
+	</li>
+	<li>
+		__cdecl：函数参数由右向左入栈。
+	</li>
+	<li>
+		__fastcall：从左开始不大于4字节的参数放入CPU的ECX和EDX寄存器，其余参数从右向左入栈。
+	</li>
+</ol>
+<ul>
+	<li>
+		问题一：__fastcall在寄存器中放入不大于4字节的参数，故性能较高，适用于需要高性能的场合。
+	</li>
+</ul>
+栈内数据清除方式<br />
+<ol>
+	<li>
+		__stdcall：函数调用结束后由被调用函数清除栈内数据。
+	</li>
+	<li>
+		__cdecl：函数调用结束后由函数调用者清除栈内数据。
+	</li>
+	<li>
+		__fastcall：函数调用结束后由被调用函数清除栈内数据。
+	</li>
+</ol>
+<ul>
+	<li>
+		问题一：不同编译器设定的栈结构不尽相同，跨开发平台时由函数调用者清除栈内数据不可行。
+	</li>
+	<li>
+		问题二：某些函数的参数是可变的，如printf函数，这样的函数只能由函数调用者清除栈内数据。
+	</li>
+	<li>
+		问题三：由调用者清除栈内数据时，每次调用都包含清除栈内数据的代码，故可执行文件较大。
+	</li>
+</ul>
+C语言编译器函数名称修饰规则<br />
+<ol>
+	<li>
+		__stdcall：编译后，函数名被修饰为“_functionname@number”。
+	</li>
+	<li>
+		__cdecl：编译后，函数名被修饰为“_functionname”。
+	</li>
+	<li>
+		__fastcall：编译后，函数名给修饰为“@functionname@nmuber”。
+	</li>
+</ol>
+<ul>
+	<li>
+		注：“functionname”为函数名，“number”为参数字节数。
+	</li>
+	<li>
+		注：函数实现和函数定义时如果使用了不同的函数调用协议，则无法实现函数调用。
+	</li>
+</ul>
+C++语言编译器函数名称修饰规则<br />
+<ol>
+	<li>
+		__stdcall：编译后，函数名被修饰为“?functionname@@YG******@Z”。
+	</li>
+	<li>
+		__cdecl：编译后，函数名被修饰为“?functionname@@YA******@Z”。
+	</li>
+	<li>
+		__fastcall：编译后，函数名被修饰为“?functionname@@YI******@Z”。
+	</li>
+</ol>
+<ul>
+	<li>
+		注：“******”为函数返回值类型和参数类型表。
+	</li>
+	<li>
+		注：函数实现和函数定义时如果使用了不同的函数调用协议，则无法实现函数调用。
+	</li>
+	<li>
+		C语言和C++语言间如果不进行特殊处理，也无法实现函数的互相调用。
+	</li>
+</ul></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1345.html">堆溢出错误crtUnhandledException</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1347.html">java中map迭代方法</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.cnblogs.com/yejianyong/p/7506465.html" target="_blank">https://www.cnblogs.com/yejianyong/p/7506465.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,326 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Dreamweaver限制访问的BUG_comonly.cn</title>
+<meta name="keywords" content="Dreamweaver限制访问的BUG" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Dreamweaver限制访问的BUG</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">希赛网</li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2016-04-11</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	ide -- myeclipse相关
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">网页技术</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h1 style="text-indent:2em;">
+	一、步骤叙述：
+</h1>
+<p style="text-indent:2em;">
+	1、数据库文件mysite.mdb，其中两个表：admininfo（表示管理员的记录表）和memberinfo（普通用户的记录表）
+</p>
+<p style="text-indent:2em;">
+	2、普通用户登陆页 login.asp ，添加服务器行为时候，选择基于用户名和密码的访问。即表示产生了 Session（"MM_Username"） （其值即为当前正确登陆的用户名）。因为此时为选择访问级别，所以代表访问级别的 Session（"MM_UserAuthorization"） = ""
+</p>
+<p style="text-indent:2em;">
+	3、普通用户登陆成功页 personal.asp，服务器行为“限制对页访问”同样设置为用户名和密码的访问。实质是判断Session，即可实现“限制对页的访问”。
+</p>
+<p style="text-indent:2em;">
+	以上2→3均能正常，接着就开始出现问题了。
+</p>
+<p style="text-indent:2em;">
+	4、管理员登陆页 adminlogin.asp ，添加服务器行为时候，选择基于用户名、密码和访问级别的访问（当然这要求admininfo表中必须具有表示访问级别的字段）。生成Session（"MM_Username"） （其值即为当前正确登陆的管理员名），同时生成表示访问级别的Session（"MM_UserAuthorization"） = CStr（MM_rsUser.FIElds.Item（MM_fldUserAuthorization）。Value）
+</p>
+<p style="text-indent:2em;">
+	5、管理员登陆正确页 admin.asp，很显然，服务器行为“限制对页访问”必须选择“用户名、密码和访问权限的访问”，级别的定义值即是admininfo表中表示访问级别字段的值。同样也能实现“限制对页的访问”。
+</p>
+<h1 style="text-indent:2em;">
+	二、BUG来了
+</h1>
+<p style="text-indent:2em;">
+	1、普通用户登陆。
+</p>
+<p style="text-indent:2em;">
+	2、正确登陆。
+</p>
+<p style="text-indent:2em;">
+	3、将URL地址直接切换为“admin.asp”的地址。
+</p>
+<p style="text-indent:2em;">
+	4、完全可访问。
+</p>
+<p style="text-indent:2em;">
+	注：在admin.asp提取Session（"MM_UserAuthorization"） 是为空值，而当从adminlogin.asp正确登陆到adming.asp提取Session（"MM_UserAuthorization"） 值为数据库表中相应字段的值
+</p>
+<p style="text-indent:2em;">
+	得出结论：代表权限的访问级别没有起效。Session（"MM_UserAuthorization"） 针对同一站点同一数据库不同表时——形同虚设！
+</p>
+<h1 style="text-indent:2em;">
+	三、原理分析
+</h1>
+<p style="text-indent:2em;">
+	在管理员登陆成功页中，有如下代码是用来进行“限制对页访问的”
+</p>
+<p style="text-indent:2em;">
+	' *** Restrict Access To Page： Grant or deny access to this page MM_authorizedUsers="administrator" MM_authFailedURL="adminlogin.asp" MM_grantAccess=false If Session（"MM_Username"） &lt;&gt; "" Then If （false Or CStr（Session（"MM_UserAuthorization"））=""） Or _（InStr（1，MM_authorizedUsers，Session（"MM_UserAuthorization"））&gt;=1） Then MM_grantAccess = true End If
+</p>
+<p style="text-indent:2em;">
+	If Session（"MM_Username"） &lt;&gt; "" Then
+</p>
+<p style="text-indent:2em;">
+	如果表示用户的Session不为空，即可MM_grantAccess = true，当然，其中还有嵌套IF.
+</p>
+<p style="text-indent:2em;">
+	If （false Or CStr（Session（"MM_UserAuthorization"））=""） Or （InStr（1，MM_authorizedUsers，Session（"MM_UserAuthorization"））&gt;=1） Then
+</p>
+<p style="text-indent:2em;">
+	因为MM_authorizedUsers="administrator"，这里的"administrator"是级别的定义值，即是admininfo表中表示访问级别字段的值
+</p>
+<p style="text-indent:2em;">
+	所以，其只能限制admininfo表其他的访问级别（非administrator）的管理员的访问，而对于普通会员而言，其Session（"MM_UserAuthorization"）值为空，同样可访问该权限页面。
+</p>
+<p style="text-indent:2em;">
+	这就是BUG所在！
+</p>
+<h1 style="text-indent:2em;">
+	四、目前解决方案
+</h1>
+<p style="text-indent:2em;">
+	1、要做基于用户名、密码和访问级别的访问，必须是同一数据库表中的。即将普通会员和管理员的信息都保存在同一表中，区分他们权限的方法即是添加一个代表权限的字段，使得他们具有不同的值。
+</p>
+<p style="text-indent:2em;">
+	当然，这不是很完整的，很多情况需要将两个表分开，那么则可以用如下方法：
+</p>
+<p style="text-indent:2em;">
+	2、当基于用户名、密码和访问级别的访问，在代码
+</p>
+<p style="text-indent:2em;">
+	If Session
+</p>
+<p style="text-indent:2em;">
+	（"MM_Username"） &lt;&gt; "" Then
+</p>
+<p style="text-indent:2em;">
+	继续添加内容
+</p>
+<p style="text-indent:2em;">
+	and Session（"MM_UserAuthorization"） &lt;&gt; "" ，即最后为：
+</p>
+<p style="text-indent:2em;">
+	If Session（"MM_Username"） &lt;&gt; "" and Session
+</p>
+<p style="text-indent:2em;">
+	（"MM_UserAuthorization"） &lt;&gt; "" Then
+</p>
+<p style="text-indent:2em;">
+	注意：当基于用户名、密码和访问级别的访问时，才可以修改（因为有访问级别，就表示有Session（"MM_UserAuthorization"） ）；而只当基于用户名和的访问时，则不需要。
+</p>
+<h1 style="text-indent:2em;">
+	五、最后的建议
+</h1>
+<p style="text-indent:2em;">
+	当然，这个建议最好给MM公司，即是：当基于用户名、密码和访问级别的访问时，代码判断行和当基于用户名和的访问时，要不一样，应该是：
+</p>
+<p style="text-indent:2em;">
+	If Session（"MM_Username"） &lt;&gt; "" and Session
+</p>
+<p style="text-indent:2em;">
+	（"MM_UserAuthorization"） &lt;&gt; "" Then
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/289.html">阶段变量(会话变量)session，什么情况下用SESSION,什么时候用cookie?</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/291.html">ASP 语法</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

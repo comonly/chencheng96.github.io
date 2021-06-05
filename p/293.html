@@ -1,0 +1,329 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>kindeditor/ckeditor编辑器加+图片自动上传成功_comonly.cn</title>
+<meta name="keywords" content="kindeditor/ckeditor编辑器加+图片自动上传成功" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">kindeditor/ckeditor编辑器加+图片自动上传成功</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">幸凡学习网</li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2016-04-11</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">网页技术</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p style="color:#777777;font-family:΢���ź�, sans-serif;">
+	源代码下载地址在文章底部。
+</p>
+<p style="color:#777777;font-family:΢���ź�, sans-serif;">
+	（此实例功能是偷懒的程序———就是复制网络文章只要有不是本站的图片就会显示【上传】按钮，你点击【上传】后程序会自动帮你把图片存到你的服务器上）
+</p>
+<p class="ht" style="text-indent:1em;color:#FFFFFF;font-family:΢���ź�, sans-serif;background:#333333;">
+	第一步：下载并安装
+</p>
+<p style="color:#777777;font-family:΢���ź�, sans-serif;">
+	在IIS中虚拟upload站点（注意本实例不是主目录）我设置的IIS端口是1100(http://localhost:1100/ckeditor.aspx)，然后选择你已经解压好的目录。在IIS中浏览ckeditor.aspx文件。(就可以开始复制网络的图文混版文章了)当然你也可以修改里面的目录。详细的我会在下面讲述清楚。
+</p>
+<p style="color:#777777;font-family:΢���ź�, sans-serif;">
+	你可以把一切可以复制的网络图片都可以自动上传到你的上传目录，而且上传完后文章内容的图片会自动修改成你自己的上传目录的路径。
+</p>
+<p style="color:#777777;font-family:΢���ź�, sans-serif;">
+	不过没试过最多能添加多少个图片。有谁试过可以在此留言，谢谢。（在此声明word暂时不支持复制图片功能，还在研究中）
+</p>
+<p class="ht" style="text-indent:1em;color:#FFFFFF;font-family:΢���ź�, sans-serif;background:#333333;">
+	第二步：修改代码
+</p>
+<p style="color:#777777;font-family:΢���ź�, sans-serif;">
+	1、目录js下jq.js文件的修改(我有注释【需要修改】的地方把localhost:1100改成你自己的域名或者IIS地址即可)这个文件我计算了下一共有4处需要修改,你可以按在【当前文档】查找修改。其它不一一列出，时间宝贵，见谅！
+</p>
+<div class="dp-highlighter" style="font-family:Monaco, 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Consolas, 'Courier New', monospace;padding:1px;color:#777777;">
+	<div class="bar">
+		<div class="tools" style="padding:3px;margin:0px;color:black;font-weight:bold;">
+			Js代码&nbsp;
+		</div>
+	</div>
+	<ol class="dp-c" style="vertical-align:bottom;color:#999999;background:#EEEEEE;">
+		<li style="vertical-align:bottom;">
+			<span style="color:#666666;"><span class="keyword" style="color:#5F0404;font-weight:bold;">if</span>(img[i].src.indexOf(<span class="string" style="color:blue;">'localhost:1100'</span>)&gt;0)piccount=piccount+1;&nbsp;&nbsp;</span>
+		</li>
+	</ol>
+</div>
+<p style="color:#777777;font-family:΢���ź�, sans-serif;">
+	2、目录ckfinder下config.ascx 这个是关于权限的设置，当需要使用ckfinder的浏览服务器目录时需要 此处我把权限去掉了。所以你可以直接浏览！
+</p>
+<div class="dp-highlighter" style="font-family:Monaco, 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Consolas, 'Courier New', monospace;padding:1px;color:#777777;">
+	<div class="bar">
+		<div class="tools" style="padding:3px;margin:0px;color:black;font-weight:bold;">
+			C#代码&nbsp;
+		</div>
+	</div>
+	<ol class="dp-c" style="vertical-align:bottom;color:#999999;background:#EEEEEE;">
+		<li style="vertical-align:bottom;">
+			<span style="color:#666666;"><span class="keyword" style="color:#5F0404;font-weight:bold;">if</span>(Session[<span class="string" style="color:blue;">"admin"</span>]==<span class="string" style="color:blue;">"asdf"</span>)&nbsp;&nbsp;</span>
+		</li>
+		<li style="vertical-align:bottom;">
+			<span style="color:#666666;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:#5F0404;font-weight:bold;">return</span>&nbsp;<span class="keyword" style="color:#5F0404;font-weight:bold;">true</span>;&nbsp;<span class="comment" style="color:#008200;">//需要修改&nbsp;当需要使用ckfinder的浏览服务器目录时需要&nbsp;此处我把权限去掉了。</span>&nbsp;&nbsp;</span>
+		</li>
+		<li style="vertical-align:bottom;">
+			<span style="color:#666666;"><span class="keyword" style="color:#5F0404;font-weight:bold;">else</span>&nbsp;&nbsp;</span>
+		</li>
+		<li style="vertical-align:bottom;">
+			<span style="color:#666666;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:#5F0404;font-weight:bold;">return</span>&nbsp;<span class="keyword" style="color:#5F0404;font-weight:bold;">true</span>;&nbsp;&nbsp;&nbsp;</span>
+		</li>
+	</ol>
+</div>
+<p style="color:#777777;font-family:΢���ź�, sans-serif;">
+	3、根目录下uploadpic.ashx的修改主要是判断网站以外的图片并上传
+</p>
+<div class="dp-highlighter" style="font-family:Monaco, 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Consolas, 'Courier New', monospace;padding:1px;color:#777777;">
+	<div class="bar">
+		<div class="tools" style="padding:3px;margin:0px;color:black;font-weight:bold;">
+			C#代码&nbsp;
+		</div>
+	</div>
+	<ol class="dp-c" style="vertical-align:bottom;color:#999999;background:#EEEEEE;">
+		<li style="vertical-align:bottom;">
+			<span style="color:#666666;"><span class="keyword" style="color:#5F0404;font-weight:bold;">if</span>&nbsp;(arr[i].IndexOf(<span class="string" style="color:blue;">"localhost:1100"</span>)&nbsp;&gt;&nbsp;0)&nbsp;&nbsp;<span class="comment" style="color:#008200;">//需要修改</span>&nbsp;&nbsp;</span>
+		</li>
+		<li style="vertical-align:bottom;">
+			<span style="color:#666666;">{&nbsp;&nbsp;</span>
+		</li>
+		<li style="vertical-align:bottom;">
+			<span style="color:#666666;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:#5F0404;font-weight:bold;">if</span>&nbsp;(i&nbsp;==&nbsp;suc&nbsp;-&nbsp;1)&nbsp;&nbsp;</span>
+		</li>
+		<li style="vertical-align:bottom;">
+			<span style="color:#666666;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sstr&nbsp;+=&nbsp;arr[i];&nbsp;&nbsp;</span>
+		</li>
+		<li style="vertical-align:bottom;">
+			<span style="color:#666666;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:#5F0404;font-weight:bold;">else</span>&nbsp;&nbsp;</span>
+		</li>
+		<li style="vertical-align:bottom;">
+			<span style="color:#666666;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sstr&nbsp;+=&nbsp;arr[i]&nbsp;+&nbsp;<span class="string" style="color:blue;">"|"</span>;&nbsp;&nbsp;</span>
+		</li>
+		<li style="vertical-align:bottom;">
+			<span style="color:#666666;">}&nbsp;&nbsp;</span>
+		</li>
+	</ol>
+</div>
+<p style="color:#777777;font-family:΢���ź�, sans-serif;">
+	如果以上三个配置修改完后应该就没有问题了，当然IIS肯定要配置好
+</p>
+<p class="ht" style="text-indent:1em;color:#FFFFFF;font-family:΢���ź�, sans-serif;background:#333333;">
+	结语:
+</p>
+<p style="color:#777777;font-family:΢���ź�, sans-serif;">
+	在此祝大家运行成功！然后有什么技术有关的问题可以在此留言也可以直接Q我:471880721
+</p>
+<p style="color:#777777;font-family:΢���ź�, sans-serif;">
+	效果图如下：IE FF测试正常（如果有什么问题可以交流）
+</p>
+<p style="color:#777777;font-family:΢���ź�, sans-serif;">
+	<a href="http://www.86y.org/art_detail.aspx?id=113" target="_blank"></a>
+</p>
+<p style="color:#777777;font-family:΢���ź�, sans-serif;">
+	<a href="http://www.86y.org/art_detail.aspx?id=113" target="_blank"><img alt="" height="309" src="http://www.86y.org/upload/images/20131221131227968.jpg" width="439" class="loaded" style="border:1px solid #999999;" /></a>
+</p>
+<p style="color:#777777;font-family:΢���ź�, sans-serif;">
+	<br />
+</p>
+<p style="color:#777777;font-family:΢���ź�, sans-serif;">
+	<span style="color:#777777;font-family:΢���ź�, sans-serif;line-height:25px;">出处:</span><a href="http://www.86y.org/art_detail.aspx?id=658">http://www.86y.org/art_detail.aspx?id=658</a>
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/292.html">如何在Dreamweaver 制作弹出菜单？</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/294.html">ASP去掉HTML代码,显示纯文本，截取100个字符</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,235 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>#pragma once 与 #ifndef _XXX_H_ #define _XXX_H__comonly.cn</title>
+<meta name="keywords" content="#pragma once 与 #ifndef _XXX_H_ #define _XXX_H_" />
+<meta name="description" content="#ifndef方式:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+#ifndef __SOMEFILE_H__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+#define __SOMEFILE_H__&nbsp;&nbsp;&nbsp; 1 &nbsp;&nbsp;&nbsp; ... ... // 一些声明语句&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+#endif&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+#ifndef的方式" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">#pragma once 与 #ifndef _XXX_H_ #define _XXX_H_</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">hello world 1</li>
+          <li class="lmname"><a href="https://blog.csdn.net/lxw907304340/article/details/50839662" target="_blank">https://blog.csdn.net/lxw907304340/article/details/50839662</a></li>
+          <li class="timer">2020-10-03</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>#ifndef方式:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+#ifndef __SOMEFILE_H__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+#define __SOMEFILE_H__&nbsp;&nbsp;&nbsp; 1 &nbsp;&nbsp;&nbsp; ... ... // 一些声明语句&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+#endif&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+#ifndef的方式</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> #ifndef方式:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+#ifndef __SOMEFILE_H__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+#define __SOMEFILE_H__&nbsp;&nbsp;&nbsp; 1 &nbsp;&nbsp;&nbsp; ... ... // 一些声明语句&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+#endif&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+#ifndef的方式依赖于&nbsp;宏名字不能冲突&nbsp;，这不光可以保证同一个文件不会被包含多次，也能保证内容完全相同的两个文件不会被不小心同时包含。当然，缺点就是如果不同头文件的宏名不小心“撞车”，可能就会导致头文件明明存在，编译器却硬说找不到声明的状况<br />
+&nbsp;<br />
+#pragma方式&nbsp;&nbsp;&nbsp;&nbsp;<br />
+#pragma once &nbsp;&nbsp;&nbsp; ... ... // 一些声明语句&nbsp;&nbsp;&nbsp;<br />
+#pragma once 是个预处理指令，在头文件的最开始加入这条指令表示：这个头文件只被编译一次 &nbsp;&nbsp;&nbsp; #pragma once则由编译器提供保证：同一个文件不会被包含多次。注意这里所说的“同一个文件”是&nbsp;指物理上的一个文件&nbsp;，而不是指内容相同的两个文件。带来的好处 是，你不必再费劲想个宏名了，当然也就不会出现宏名碰撞引发的奇怪问题。&nbsp;对应的缺点就是如果某个头文件有多份拷贝，本方法不能保证他们不被重复包含。&nbsp;当 然，相比宏名碰撞引发的“找不到声明”的问题，重复包含更容易被发现并修正。<br />
+<br />
+<p>
+	总结: 1. #ifndef 由语言支持所以移植性好，#pragma 可以避免名字冲突
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1793.html">vector中不能存放引用类型</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1795.html">头文件循环引用 -- 通过前置声明解决</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/lxw907304340/article/details/50839662" target="_blank">https://blog.csdn.net/lxw907304340/article/details/50839662</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

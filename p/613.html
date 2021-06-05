@@ -1,0 +1,341 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>字符串对象—JavaScript_comonly.cn</title>
+<meta name="keywords" content="字符串对象—JavaScript" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">字符串对象—JavaScript</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-03-11</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">JavaScript,字符串对象</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	字符串对象（String）提供对字符串处理的支持，与字符串类型是完全不同的。也可以通过new操作符来创建。
+</p>
+<p>
+	var s=new String("hello") &nbsp;//创建一个字符串对象
+</p>
+<h2 id='字符串的长度'>
+	字符串的长度
+</h2>
+<p>
+	字符串对象中的length属性可以返回一个字符串的长度。即使包含双字节字符（比如一个汉字）任然算一个字符。
+</p>
+<h2 id='查找字符串的方法'>
+	查找字符串的方法
+</h2>
+<p>
+	charAt(r)和charCodeAt(r)用于访问字符串特定字符，接收一个参数（范围为0~string.length-1，如果超过这个范围则返回一个空字符串）。
+</p>
+<span style="line-height:1.5;"> 
+<ul>
+	<li>
+		<span style="line-height:1.5;">charAt(r)</span><span style="line-height:1.5;">：得到第r个字符（r从0开始）</span> 
+	</li>
+	<li>
+		<span style="line-height:1.5;">charCodeAt(r)</span><span style="line-height:1.5;">：得到第r个字符的编码</span> 
+	</li>
+</ul>
+</span> 
+<h2 id='字符串操作方法'>
+	字符串操作方法
+</h2>
+<ul>
+	<li>
+		<span style="line-height:1.5;">concat()方法，将多个字符串拼接起来，返回拼接得到的新字符串</span> 
+	</li>
+	<li>
+		<span style="line-height:1.5;">slice()和substring()方法，可以接收两个参数，第一个参数指子字符串的开始位置，第二个参数表示子字符串最后一个字符后面的位置（所以是字符位置减1），若省略表示最后一个字符。对原始被操作字符串没有影响。</span> 
+	</li>
+	<li>
+		<span style="line-height:1.5;">sub</span><span style="line-height:1.5;">str()方法，</span><span style="line-height:1.5;">可以接收两个参数，第一个参数指子字符串的开始位置，第二个参数指定返回字符个数。对原始被操作字符串没有影响。</span>
+	</li>
+</ul>
+<h2 id='字符串位置方法'>
+	字符串位置方法
+</h2>
+<p>
+	indexOf()和lastIndexOf()这两个方法从一个字符串中搜索给定的子字符串，然后返回子字符串的位置，如果没有找到子字符串，返回-1.
+</p>
+<p>
+	indexOf()从字符串开始位置向后搜索，lastIndexOf()是从字符串的末尾向前搜索子字符串。
+</p>
+<h2 id='字符串转换大小写'>
+	字符串转换大小写
+</h2>
+<blockquote>
+	<p>
+		toLowerCase() &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;//转换为小写
+	</p>
+	<p>
+		toLocaleLowerCase() &nbsp; //转换为本地小写
+	</p>
+	<p>
+		toUpperCase() &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //转换为大写
+	</p>
+	<p>
+		toLocaleUpperCase() &nbsp; //转换为本地大写
+	</p>
+</blockquote>
+<h2 id='字符串匹配方法'>
+	字符串匹配方法
+</h2>
+<blockquote>
+	<p>
+		match()方法：只接受一个参数，一个正则表达式或者是一个RegExp对象。匹配成功返回由匹配成功的字符串组成的数组，否则返回null。
+	</p>
+	<p>
+		replace()方法：可以接收两个参数，第一个参数可以是字符串或者RegExp对象，第二个参数可以是一个字符串或一个函数。
+	</p>
+	<blockquote>
+		<p>
+			如果第一个参数是字符串，那么只会替换第一个子字符串。如果要替换所有的字符串，需要提供一个正则表达式，加上指定全局的（g）标志。
+		</p>
+	</blockquote>
+	<p>
+		split()方法：按照指定的分隔符将一个字符串分割成多个子字符串，并将结果放在一个数组中。第二个参数用于指定数组的大小，确保返回的数组元素不会多于参数所指定的数字，如果没有该参数，整个字符串都会被分割，而不考虑数组元素的个数。
+	</p>
+</blockquote>
+<h2 id='字符串比较方法'>
+	字符串比较方法
+</h2>
+<p>
+	localeCompare(str)方法用于比较两个字符串。
+</p>
+<ul>
+	<li>
+		<span style="line-height:1.5;">如果字符串在字母表中排在字符串str之前，返回一个负数（-1）；</span> 
+	</li>
+	<li>
+		<span style="line-height:1.5;">如果字符串等于字符串参数str，则返回0；如果字符串排在字符串str之后，则返回一个正数（1）。</span>
+	</li>
+</ul>
+<p>
+	&lt;script type="text/javascript"&gt;<br />
+var s1=new String("Hello World"); &nbsp; //创建一个字符串对象<br />
+var s2="中国China";<br />
+document.write(s1+" 的长度为："+s1.length+"&lt;/br&gt;");<br />
+document.write(s2+" 的长度为："+s2.length+"&lt;/br&gt;");<br />
+document.write(s1+" 的charAt()方法："+s1.charAt(1)+"&lt;/br&gt;");<br />
+document.write(s1+" 的charCodeAt()方法："+s1.charCodeAt(1)+"&lt;/br&gt;");<br />
+document.write(s1+" 的concat()方法："+s1.concat(s2,"_test")+"&lt;/br&gt;");<br />
+document.write(s1+" 的slice()方法："+s1.slice(1,3)+"&lt;/br&gt;");<br />
+document.write(s1+" 的substring()方法："+s1.substring(1,3)+"&lt;/br&gt;");<br />
+document.write(s1+" 的substr()方法："+s1.substr(1,3)+"&lt;/br&gt;");<br />
+document.write(s1+" 的indexOf()方法："+s1.indexOf("o")+"&lt;/br&gt;");<br />
+document.write(s1+" 的lastIndexOf()方法："+s1.lastIndexOf("o")+"&lt;/br&gt;");<br />
+document.write(s1+" 的toUpperCase()方法："+s1.toUpperCase()+"&lt;/br&gt;");<br />
+document.write(s1+" 的toLocaleUpperCase()方法："+s1.toLocaleUpperCase()+"&lt;/br&gt;");<br />
+document.write(s1+" 的match()方法："+s1.match("He")+"&lt;/br&gt;");<br />
+document.write(s1+" 的split()方法："+s1.split("l")+"&lt;/br&gt;");<br />
+document.write(s1+" 的split()方法："+s1.split("l",3)+"&lt;/br&gt;");<br />
+document.write(s1+" 的localeCompare(str)方法："+s1.localeCompare("AB")+"&lt;/br&gt;");<br />
+document.write(s1+" 的localeCompare(str)方法："+s1.localeCompare("yz")+"&lt;/br&gt;");<br />
+document.write(s1+" 的replace()方法："+s1.replace("l","换")+"&lt;/br&gt;");<br />
+document.write(s1+" 的replace()方法："+s1.replace(/l/g,"换")+"&lt;/br&gt;");<br />
+&lt;/script&gt;
+</p>
+<p>
+	复制代码<a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank"><span style="background-color:#FFE500;">在线测试效果</span></a> 
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/612.html">数学对象—JavaScript</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/614.html">RegExp对象—JavaScript</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#字符串的长度">字符串的长度</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#查找字符串的方法">查找字符串的方法</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#字符串操作方法">字符串操作方法</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#字符串位置方法">字符串位置方法</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#字符串转换大小写">字符串转换大小写</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#字符串匹配方法">字符串匹配方法</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#字符串比较方法">字符串比较方法</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

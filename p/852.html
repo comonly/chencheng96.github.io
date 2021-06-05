@@ -1,0 +1,413 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>C基础_comonly.cn</title>
+<meta name="keywords" content="C基础" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">C基础</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-02-17</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	c c++
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='数据类型'>
+	数据类型
+</h2>
+<p>
+	<img src="/File/ForKindEditor/image/20180217200639_623.jpg" alt="" width="674" height="503" title="" align="" />
+</p>
+<h2 id='C运算符'>
+	C运算符
+</h2>
+<p>
+	算数运算符（+, -, *, /, %, ++, --）
+</p>
+<p>
+	关系运算符（&gt;, &lt;, ==, &gt;=, &lt;=, !=）
+</p>
+<p>
+	逻辑运算符（!, &amp;&amp;, ||）
+</p>
+<p>
+	位运算符（&lt;&lt;, &gt;&gt;, ~, |, ^, &amp;）
+</p>
+<p>
+	赋值运算符（=）
+</p>
+<p>
+	条件运算符（?:）
+</p>
+<p>
+	逗号运算符（,）
+</p>
+<p>
+	指针运算符（*, &amp;）
+</p>
+<p>
+	求字节数运算符（sizeof）
+</p>
+<p>
+	强制类型转换运算符（(类型)）
+</p>
+<p>
+	成员运算符（., -&gt;）
+</p>
+<p>
+	下标运算符（[]）
+</p>
+<p>
+	其他（函数调用运算符()）
+</p>
+<h2 id='C语句控制语句'>
+	C语句控制语句
+</h2>
+<p>
+	if()...else...
+</p>
+<p>
+	for()...
+</p>
+<p>
+	while()...
+</p>
+<p>
+	do...while()
+</p>
+<p>
+	continue;&nbsp; &nbsp; //提前结束本次循环
+</p>
+<p>
+	break;&nbsp; &nbsp; //从循环体中跳出，提前结束循环1
+</p>
+<p>
+	switch(表达式){case 常量1: 语句1；break; default: 语句;}&nbsp; &nbsp; 表达式应为整数类型或字符型
+</p>
+<p>
+	return
+</p>
+<p>
+	goto
+</p>
+<h2 id='数据的输入输出'>
+	数据的输入输出
+</h2>
+<pre class="prettyprint lang-cpp">#include&lt;stdio.h&gt;
+int main()
+{
+    double a,b,c;
+    scanf("%1f%1f",&amp;a,&amp;b);
+    printf("sum=%7.2f",a+b);
+}</pre>
+<h4>
+	标准输入输出函数
+</h4>
+<ul>
+	<li>
+		putchar(输出字符);putchar(c);
+	</li>
+	<li>
+		getchar(输入字符);a=getchar();
+	</li>
+	<li>
+		printf(格式输出);
+	</li>
+	<li>
+		scanf(格式输入);
+	</li>
+	<li>
+		puts(输出字符串);
+	</li>
+	<li>
+		gets(输入字符串);
+	</li>
+</ul>
+<h4>
+	printf(格式控制,输出表列)函数输出数据
+</h4>
+<p>
+	对不同类型的数据要指定不同的格式声明
+</p>
+<ul>
+	<li>
+		d格式符（同i格式符）用来输出一个有符号的十进制整数。%5d指定输出数据占5列
+	</li>
+	<li>
+		c格式符用来输出一个字符。%5c指定输出数据格式为字符前面4个空格
+	</li>
+	<li>
+		s格式符用来输出一个字符串。%s
+	</li>
+	<li>
+		f格式符用来输出实数（单双精度，长双精度），以小数形式输出。%f。%7.2f制定输出数据占7列其中小数占2列。
+	</li>
+	<li>
+		e,E格式符以指数形式输出实数。%13.2e保留2为小数的指数形式，输出总长度为13，不足补空格。
+	</li>
+	<li>
+		o, x(X)格式符分别以八进制和16进制形式输出整数。
+	</li>
+	<li>
+		u格式符输出无符号型（unsigned）数据，以十进制输出。
+	</li>
+	<li>
+		g,G格式符输出浮点数，系统自动选用f格式或e格式，选择其中长度较短的格式输出。
+	</li>
+</ul>
+<p>
+	输出%用%%
+</p>
+<h4>
+	scanf(格式控制,地址表列)函数输入数据
+</h4>
+<p>
+	格式字符与printf函数相同。输入字符串，在输入时以非空白字符开始，以第一个空白字符结束。
+</p>
+<p>
+	scanf函数中的格式控制后面应是变量地址，而不是变量名。在输入数据时要和scanf函数引号内的内容一一对应。scanf("a=%f",&amp;a);应输入：a=1
+</p>
+<p>
+	格式附加字符l用于输入长整型数据及double型数据（%lf, %le）
+</p>
+<p>
+	<span>格式附加字符h用于输入短整型数据</span>（%hd, %ho）
+</p>
+<h2 id='函数'>
+	函数
+</h2>
+<pre class="prettyprint lang-cpp">void printstr()    //定义函数
+{
+    printf("this is function\n");
+}</pre>
+<p>
+	若函数位置在调用他的函数的后面，应在主调用函数中对被调用函数做声明：<span>void printstr();</span> 
+</p>
+<p>
+	数组元素做实参时，是值传递。数组名作函数实参是，向形参（数组名或指针变量）传递的是数组首元素的地址。
+</p>
+<p>
+	二维数组的传递，形参数组定义时可以省略第一维的大小。
+</p>
+<h2 id='变量的存储方式'>
+	变量的存储方式
+</h2>
+<ul>
+	<li>
+		自动变量（auto变量，默认类型）
+	</li>
+	<li>
+		静态局部变量（static局部变量），函数调用后不消失，下一次进入函数变量值继承上次结果。
+	</li>
+	<li>
+		寄存器变量（register变量）
+	</li>
+</ul>
+<h4>
+	全局变量
+</h4>
+<p>
+	在两个文件中可以用 extern A;来将其他文件定义的变量A扩展到本文件。若在定义A是用static修饰，则不能被其他文件引用。
+</p>
+<h4>
+	内部函数
+</h4>
+<p>
+	两个文件中，可以用过extern（extern <span>void printstr();</span>）来声明外部函数以供本文件调用。若在定义内部函数是加上static修饰，则该函数不能被其他文件所调用。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/851.html">c++网络应用——套接字Winsocket</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/853.html">C数组指针</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#数据类型">数据类型</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#C运算符">C运算符</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#C语句控制语句">C语句控制语句</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#数据的输入输出">数据的输入输出</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#函数">函数</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#变量的存储方式">变量的存储方式</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

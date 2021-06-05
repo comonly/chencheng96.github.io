@@ -1,0 +1,315 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>分页技术Access数据库_comonly.cn</title>
+<meta name="keywords" content="分页技术Access数据库" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">分页技术Access数据库</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-04-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	数据库
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 传统的分页方式是将查询结果缓存在HttpSession中,翻页的时候从缓存中取出一页的数据。该方法主要有两个缺点，一是用户可能看到的是过期的数据；二是数据量大时效率明显下降。比较好的分页做法应该是每次翻页的时候只从数据库里检索页面大小的块区的数据。这样虽然每次翻页都需要查询数据库，但查询出的记录数很少，网络的传输量不大，比在应用服务器层做缓存有效得多。<br />
+<h2 id='几种常用的SQL的分页'>
+	几种常用的SQL的分页
+</h2>
+<h3>
+	MySQL
+</h3>
+<p>
+	MySql有直接的分页语句limit可以使用，一般只需要直接写到sql语句后面就行了。
+</p>
+<p>
+	Select * from 表名 [where 条件]&nbsp; limit 起始索引号, 每页记录数pageSize;其中起始索引号startIndex = pageSize * (当前页码currPage - 1);
+</p>
+<p>
+	LIMIT子句可以用来限制由SELECT语句返回过来的数据数量，它有一个或两个参数，如果给出两个参数， 第一个参数指定返回的第一行在所有数据中的位置，从0开始（注意不是1），第二个参数指定最多返回行数。
+</p>
+<h3>
+	SQL Server（2005）
+</h3>
+<p>
+	SELECT TOP 页大小 * FROM TestTable WHERE ID NOT IN (SELECT TOP 页大小*(当前页码-1) id FROM 表&nbsp; ORDER BY id)
+</p>
+<p>
+	该语句由于存在not in ，所以对于数据较多的数据库时处理是有难度的，该算法的具体分析在下面的Access数据库中进行说明。
+</p>
+<p>
+	目前SQLServer2005提供了一个row_number()函数。ROW_NUMBER() 就是生成一个顺序的行号,而他生成顺序的标准,就是后面紧跟的OVER(ORDER BY ReportID)，其中ReportID可以是联合主键。下面,我们看看怎么具体应用这个RowNo进行分页。
+</p>
+SELECT TOP 10 *&nbsp; FROM(SELECT top 10 ROW_NUMBER() OVER (ORDER BY ReportID) AS RowNo&nbsp;FROM TABLE&nbsp;) AS AWHERE RowNo &gt; " + pageIndex*10； 其中pageIndex就是我们需要数据的页数.
+<h3>
+	Oracle
+</h3>
+<p>
+	ORCALE数据库实现分页查询可以使用row_number()函数或者使用rownum 虚列两种方法。<br />
+第一种：利用分析函数row_number() 方法，相当于SQLServer2005的row_number()函数<br />
+select top 10 * from(select t.*,row_number() over (order by t1.id) rowno from TABLE1)where rowno between 21 and 40;<br />
+第二种：直接使用rownum 虚列
+</p>
+<p>
+	通过rownum来控制分页，下面是sql语句：
+</p>
+<div>
+	select * from(select t.*,rownum as rowno from TABLE1 )where rowno between 10 and 20<br />
+这两种方法比较，显然第二种方法比较好。因为不用order by语句，会提高检索数据的速度的，尤其数据量越大时，第二种方法快速检索数据越明显。同样oracle中慎用带有order by的分页。尤其是在oracle10g中，会出现会引起混乱，即相同记录会出现在不同页中。<br />
+</div>
+<h2 id='Acce数据库分页及效率优化'>
+	Access数据库分页及效率优化
+</h2>
+<p>
+	access数据库无须开专门的数据库空间，调用，迁移也方便，节省费用。另外对网站搭建者的专业能力要求也相对低一些。但随着网站的运行，数据库体积越来越大，数据量也从最初的几百条到了现在的上万条，上十万条甚至更多。于是因数据应用级别的改变带来的各种各样的应用问题出现了。而其中大数据量的列表分页效率问题更是一个难点。下面通过几种方案来探索ACCESS数据库分页实现的效率及可行性。
+</p>
+<h3>
+	读取所有符合条件的数据。然后在java中对数据进行相关处理
+</h3>
+该方法有一个致命的缺点，由于每次都要读入符合条件的所有记录，然后再定位于对应页的记录。显然，当数据量大的时候，效率就十分的低下，甚至根本无法实现响应的数据处理。<br />
+<h3>
+	not in 方法（"not in"本身就是个耗费资源的算法）
+</h3>
+sql="select toppagesize* from 表 where Id not in(select top page*pagesize Id from 表 order by id desc) order by Id desc"<br />
+这条语句，从理论上讲，整条语句的执行时间应该比子句的执行时间长，但事实相反。因为，子句执行后返回的是pagesize*page条记录，而整条语句仅返回pagesize条语句，所以影响数据库响应时间最大的因素是物理I/O操作。而限制物理I/O操作此处的最有效方法之一就是使用TOP关键词了。TOP关键词是经过系统优化过的一个用来提取前几条或前几个百分比数据的词。但是该语句的有一个致命的缺点，就是它含有NOT IN字样，要换成用not exists来代替not in，二者的执行效率实际上是没有区别的。在实际测试中（20万条数据的表中），使用该方法提取某页数据基本上是无法实现的（在测试中使用5分钟还没有获取到结果），在实际项目中根本无法使用。
+<p>
+	该分页算法中，影响我们查询速度的关键因素有两点：TOP和NOT IN。TOP可以提高我们的查询速度，而NOT IN会减慢我们的查询速度，in的效率太低，不能利用索引，所以要提高我们整个分页算法的速度，就要彻底改造NOT IN，同其他方法来替代它。
+</p>
+<h3>
+	通过改进后的where子句快速获取指定数据
+</h3>
+<p>
+	我们知道，几乎任何字段，我们都可以通过max(字段)或min(字段)来提取某个字段中的最大或最小值，所以如果这个字段不重复，那么就可以利用这些不重复的字段的max或min作为分水岭，使其成为分页算法中分开每页的参照物。在这里，我们可以用操作符“&gt;”或“&lt;”号来完成这个使命。如：Select top 10 * from table1 where id&gt;200。<br />
+于是就有了如下分页方案：<br />
+select top 页大小 * from table1&nbsp; where id&gt;(select max (id) from&nbsp;(select top ((页码-1)*页大小) id from table1 order by id) as T)&nbsp; order by id
+</p>
+<p>
+	该方法对于数据量大的时候有很大的优势。处理相同的数据用“not in”方法在5分钟不能出结果的，但是该方法可以在5秒内查询到所需数据！使用TOP要求主键必须唯一，一般选择自动增量的id字段。若有筛选条件且有相关的排序策略，该方法要进一步优化。下面结合本项目处理电影列表的分页的策略对本问题进行讨论。
+</p>
+<p>
+	下面是通过一个筛选条件（lkind），一个排序方式（orderway），和页数（index）来查询出每页25条数据的方法。
+</p>
+<p>
+	String sqlMinId="select min(lnumber) from (select top "+((index-1)*25+1)+" lnumber from listMovie where lkind like '"+kind+"' order by&nbsp;&nbsp;lnumber desc,"+orderway+" desc)";
+</p>
+<p>
+	String sqlMaxId="select min(lnumber) from (select top "+(index*25+1)+" lnumber from listMovie where lkind like '"+kind+"' order by lnumber desc,"+orderway+" desc)";
+</p>
+<p>
+	String sql="select top 25 * from listMovie where lkind like '"+kind+"' and lnumber between "+minId+" and "+maxId+"&nbsp; order by lnumber desc,"+orderway+" desc ";
+</p>
+<p>
+	由于sql比较复杂，所以可以在java程序中分块进行处理。分别按照需要参考的id和实际排序需求对获取需要的前(index-1)*25+1和index*25+1数据，因为这里的id是按降序排序的，所以取现在id用min。之后在通过id between min and max即可获取指定的数据。
+</p>
+<p>
+	需要注意的是参考id的排序应该在最前面（并且不能省略），因为在sql的between中要确保所需的最小id和最大id之间正好有25条数据。所以在sql中的top25只是附加限制，因为取出来的一定是25条数据（符合条件的数据大于等于25条时）。
+</p>
+<h3>
+	使用like搜索时出现“内存溢出”
+</h3>
+<p>
+	access在使用 like 搜索时如果遇到日文"ゴ","ガ","ギ","グ","ゲ","ザ","ジ","ズ","ヅ","デ",&nbsp;"ド","ポ","ベ","プ","ビ","パ","ヴ","ボ","ペ","ブ","ピ","バ",&nbsp;"ヂ","ダ","ゾ","ゼ"就会出现“内存溢出”的问题，提示“80040e14/内存溢出”。一般可以在存入数据库和取出数据库时，分别对会出现问题的日文字符进行编码和解码。一种简单的方式，在使用SQL时不要使用like或not like语句，用下面的语句进行替换：
+</p>
+<p>
+	where title like 'keyword&amp;'。现在换成下面的就不会出现内存溢出了：where InStr(1,LCase(Title),LCase('keyword'),0)&lt;&gt;0，not like可以写成：(InStr(1, LCase(Title), LCase('keyword'), 0) = 0 or InStr(1, LCase(Title), LCase('keyword'), 0) is Null)<br />
+其中Lcase（string）将大写字母转换成小写字母，若String本身为小写字母或非字母函数，函数的返回值不变；若String为NULL，则函数的返回值为null。
+</p>
+<p>
+	InStr([start, ]string1, string2[, compare])&nbsp;返回指定一字符串在另一字符串中最先出现的位置。在字符串string1中，从start开始找string2，省略start时从string1的第1个字符开始找。找不到时，函数返回值为0，找到则返回所在位置。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/917.html">登录验证码（实例）</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/919.html">用户注册——发送邮件验证码（含实例）</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#几种常用的SQL的分页">几种常用的SQL的分页</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Acce数据库分页及效率优化">Acce数据库分页及效率优化</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

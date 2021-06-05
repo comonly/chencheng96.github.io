@@ -1,0 +1,366 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>主成分分析（PCA）直观的理解_comonly.cn</title>
+<meta name="keywords" content="主成分分析（PCA）直观的理解" />
+<meta name="description" content="模型降维(Dimensionality Reduction For Dummies)——直觉
+
+
+	原文地址，不翻墙也能看，只是加载的慢。
+
+
+	人类是视觉生物。为了相信我们需要去亲自目睹。当你有一个超过三维的数据集时，你就不可能用眼睛去看这堆数据到底表达了什么。但是那些额外的维度真的是必须的吗？是否有一个方法可以将它降到一维，二维或者人类的三维？确实有这种方法。
+
+
+	主成分分析（PCA）就是专门解决这个问题的。它简单优雅。不幸的是，简单并不意味着容易看透和理解。如果你之前接触过PCA" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">主成分分析（PCA）直观的理解</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">DismalSnail</li>
+          <li class="lmname"><a href="https://www.cnblogs.com/DismalSnail/p/13657950.html" target="_blank">https://www.cnblogs.com/DismalSnail/p/13657950.html</a></li>
+          <li class="timer">2020-11-20</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	机器学习算法分析
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>模型降维(Dimensionality Reduction For Dummies)——直觉
+
+
+	原文地址，不翻墙也能看，只是加载的慢。
+
+
+	人类是视觉生物。为了相信我们需要去亲自目睹。当你有一个超过三维的数据集时，你就不可能用眼睛去看这堆数据到底表达了什么。但是那些额外的维度真的是必须的吗？是否有一个方法可以将它降到一维，二维或者人类的三维？确实有这种方法。
+
+
+	主成分分析（PCA）就是专门解决这个问题的。它简单优雅。不幸的是，简单并不意味着容易看透和理解。如果你之前接触过PCA</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h1>
+	模型降维(Dimensionality Reduction For Dummies)——直觉
+</h1>
+<p>
+	原文<a href="https://towardsdatascience.com/https-medium-com-abdullatif-h-dimensionality-reduction-for-dummies-part-1-a8c9ec7b7e79">地址</a>，不翻墙也能看，只是加载的慢。
+</p>
+<p>
+	人类是视觉生物。为了相信我们需要去亲自目睹。当你有一个超过三维的数据集时，你就不可能用眼睛去看这堆数据到底表达了什么。但是那些额外的维度真的是必须的吗？是否有一个方法可以将它降到一维，二维或者人类的三维？确实有这种方法。
+</p>
+<p>
+	主成分分析（PCA）就是专门解决这个问题的。它简单优雅。不幸的是，简单并不意味着容易看透和理解。如果你之前接触过PCA，你可能已经遇到了一堆的数学抽象公式，而无法理解重要的核心思想。或者你所了解的只是没有数学背景的“外行风格”。再或者，两者都有一点，中间有一个概念上的鸿沟，这个鸿沟没有把直觉和严谨联系起来。我尽量避免这个。
+</p>
+<p>
+	降维的主要目标是:找到一个数据的更低维度表示，同时又尽可能的保留更多的信息。这是一个相当大胆的声明。让我们看看这是什么意思。
+</p>
+<h2 id='去除冗余'>
+	去除冗余
+</h2>
+<p>
+	假设我们具有以下某个区域的房屋价值或价格（以千美元为单位）的数据集：
+</p>
+<p>
+	<img src="https://img2020.cnblogs.com/blog/1105549/202009/1105549-20200912182433373-1314291536.jpg" alt="" style="height:auto;" /> 
+</p>
+每个记录有四个属性的数据集
+<p>
+	该数据集具有4个特征（4个维度），不可能整体上以图形方式可视化。但是，如果您仔细研究这些特征之间和同一个特征的数据之间的关系，您会发现并非所有特征都同样重要。
+</p>
+<p>
+	例如，您可以通过楼层的数量来标志每个房子吗？楼层数是否有助于将一所房子与另一所房子区分开？似乎并非如此，因为它们几乎相等，即它们的方差很小，σ²= 0.2，因此并不是很有用。容纳人口怎么样?它的变化不大，但是它的方差肯定比楼层数大，因此更有帮助。现在，对于最后的两个特征，面积(σ²= 43)和价格(σ²= 127)，它们的变化更大，因此在我们的数据中它们比其他两个特征更有代表性。
+</p>
+<p>
+	我们可以做一些事情，在不牺牲精确性的情况下，最大限度地利用每个特性。到目前为止，我们已经分别研究了每个特征。他们之间的关系如何？如果仔细看一下前两个特征（价格和面积），你会注意到该价格大约是面积的两倍。这是非常有用的，因为我们现在可以从一个特征推导出另一个特征，实际上现在只要一个特征就够了。这个属性叫协方差。协方差越高，这两个特征的相关性就越强，这就意味着数据中存在冗余，因为我们可以从一个特征推导出另一个特征，因此存在比需要的更多的数据。
+</p>
+<p>
+	从前面的讨论中，就因该很明显了：
+</p>
+<ul>
+	<li>
+		具有高方差的特征是一件好事，因为它们包含了更多的信息也更重要
+	</li>
+	<li>
+		具有高度相关的特征或较高的协方差是一件坏事，因为可以在损失少量信息的情况下从一个特征推导出另一个特征，因此将它们保持在一起是多余的。
+	</li>
+</ul>
+<p>
+	这就是PCA的作用。它试图找到数据的另一种表示(另一组特征)，以便这种表示中的特征具有最大可能的方差和最小可能的协方差。但在我们亲眼看到它之前，还不是很好理解。
+</p>
+<h2 id='见证奇迹的时刻'>
+	见证奇迹的时刻
+</h2>
+<p>
+	在访问PCA时，我问她以下问题：“您的理想数据集是什么样的？”她给我看了这个：
+</p>
+<p>
+	<img src="https://img2020.cnblogs.com/blog/1105549/202009/1105549-20200912182447520-529081068.jpg" alt="" style="height:auto;" /> 
+</p>
+<p>
+	这很有意义 —— 数据基本上可以简化为一条线。观察:沿着&nbsp;x1方向的方差比沿着&nbsp;x2&nbsp;方向的高,这意味着我们可以安全地将&nbsp;x2&nbsp;剔除而没有太大的危险(“沿着&nbsp;x1&nbsp;方向的方差”的意思是第一个特征的方差。因为我们选择了x1轴来代表它，x2轴也一样)。而且，&nbsp;x1似乎根本不依赖于&nbsp;x2，它只会继续增加而不管&nbsp;x2的值如何，这意味着协方差相对较低。至于为什么这对于PCA来说是完美的，很简单，因为她需要做的就是:
+</p>
+<p>
+	<img src="https://img2020.cnblogs.com/blog/1105549/202009/1105549-20200912182457777-1427805956.jpg" alt="" style="height:auto;" /> 
+</p>
+将数据集投影到x1轴上
+<p>
+	<img src="https://img2020.cnblogs.com/blog/1105549/202009/1105549-20200912182506501-770026028.jpg" alt="" style="height:auto;" /> 
+</p>
+投影之后，数据只有一个维度
+<p>
+	了解所发生的事情至关重要。由于&nbsp;x1&nbsp;比&nbsp;x2&nbsp;重要得多（根据前面所述的两个条件），因此我们决定仅保留&nbsp;x1，将数据点投射到其轴上，这相当于仅保留点的&nbsp;x1&nbsp;坐标，这也相当于丢弃"不重要"特征&nbsp;x2。现在我们有一个 1D 数据集，而不是 2D！
+</p>
+<p>
+	这就是特征降维的本质：寻找数据的最佳低维表示。当然，会有一些错误，因为我们忽略了第二个特征，该特征由上面的虚线表示。但是由于数据几乎在一条线上，所以这个误差被保持到最小，并且这是我们对于给定信息所能做到的最好的结果(稍后会有更多关于这个的讨论)。
+</p>
+<h2 id='高潮部分'>
+	高潮部分
+</h2>
+<p>
+	我问PCA：“那你认为什么是不那么完美的数据呢？这些数据看起来是什么样的？” 。没有丝毫的犹豫，她说：“我不认为会有这种事情。每个人都是完美的，你只是需要改变你的视角。来，看看这个。”
+</p>
+<p>
+	<img src="https://img2020.cnblogs.com/blog/1105549/202009/1105549-20200912182519825-2072752384.jpg" alt="" style="height:auto;" /> 
+</p>
+<p>
+	她说：”不像以前那么容易了，你不觉得吗?不。你转一下头“
+</p>
+<p>
+	<img src="https://img2020.cnblogs.com/blog/1105549/202009/1105549-20200912182529327-1704317983.gif" alt="" style="height:auto;" /> 
+</p>
+<p>
+	“它实际上和我之前展示的‘完美’数据集是一样的，只是旋转了45度。我们所要做的就是旋转我们自己的轴来与数据集对齐，然后像以前一样：投影到新的x1轴上，省略新的x2轴。”
+</p>
+<p>
+	重要的是要停下来思考一下这意想不到的变化。就像工程师通常做的那样，PCA将数据集没有“对齐”，不太完美的问题简化为一个完美的、容易解决的“对齐”的问题。
+</p>
+<p>
+	这是怎么发生的？本质上，PCA尝试查找另一组轴，以使沿该轴的方差尽可能大。当我说“沿&nbsp;x1轴的方差”时，是指特征&nbsp;x1的方差。但是在旋转轴之后，轴失去了意义——它们不再代表x1或x2。而是，它们代表了两者的线性组合。要了解如何做到这一点，请注意上图中新的x1轴是一条满足等式的直线:x2=x1或x1-x2= 0(相对于旧的特征轴)。x1-x2&nbsp;= 0只是特征的线性组合，特征的权重分别为1和-1。现在，此旋转轴表示一个新特征，称为z1，即：
+</p>
+<p>
+	<img src="https://img2020.cnblogs.com/blog/1105549/202009/1105549-20200912182538543-1185290604.jpg" alt="" style="height:auto;" /> 
+</p>
+<p>
+	同样，旋转的x2轴现在表示一个新特征，称为z2：
+</p>
+<p>
+	<img src="https://img2020.cnblogs.com/blog/1105549/202009/1105549-20200912182559711-1840188438.jpg" alt="" style="height:auto;" /> 
+</p>
+<p>
+	这两个新方向z1和z2就是数据集的&nbsp;主成分（PC Principal Components）。第一个主成分z1，是方差最大的一个，因此是最重要的一个，携带最多的信息，从某种意义上说，这是数据所依赖的。第一个主成分方向上的方差现在被解释为新组成的特征z1的方差。对于第二个主成分z2，它是与第一主成分垂直的方差第二大的那个。
+</p>
+<p>
+	顾名思义，主成分分析就是要找到这些主成分，这样我们就可以利用其中的前几个具有最大方差的主成分来表示我们的数据，就像我们将完美数据集投影到一条直线上所做的那样。
+</p>
+<p>
+	这很容易推广到二维以上的情况。我们投影到平面上，而不是直线上，我们完美的3D数据集现在近似地躺在一个平面上(或者，更好的是，一条直线)：
+</p>
+<p>
+	<img src="https://img2020.cnblogs.com/blog/1105549/202009/1105549-20200912182612739-679866558.gif" alt="" style="height:auto;" /> 
+</p>
+<h2 id='如何找到这些魔法线'>
+	如何找到这些魔法线
+</h2>
+<p>
+	现在引出正真的麻烦：如何找到这些主要成分？
+</p>
+<p>
+	要解决这个问题就要引出一个主要公式了：
+</p>
+<p>
+	<img src="https://img2020.cnblogs.com/blog/1105549/202009/1105549-20200912182624569-723756723.jpg" alt="" style="height:auto;" /> 
+</p>
+<p>
+	在<a href="https://www.cnblogs.com/DismalSnail/p/13635736.html">你不知道SVD</a>会详细讨论这个问题。在这个过程中，我们会发现如何将我们的定性直觉转化为一个优雅的数学结构并推广到所有维度。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1185.html">LRN 局部响应归一化层</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1187.html">混合动态纹理模型(Mixtures of Dynamic Textures, MDT)</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.cnblogs.com/DismalSnail/p/13657950.html" target="_blank">https://www.cnblogs.com/DismalSnail/p/13657950.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#去除冗余">去除冗余</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#见证奇迹的时刻">见证奇迹的时刻</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#高潮部分">高潮部分</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#如何找到这些魔法线">如何找到这些魔法线</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

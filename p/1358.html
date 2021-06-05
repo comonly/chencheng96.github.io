@@ -1,0 +1,437 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>宏定义，变参宏实现宏重载_comonly.cn</title>
+<meta name="keywords" content="宏定义，变参宏实现宏重载" />
+<meta name="description" content="在软件开发过程中，经常有一些常用或者通用的功能或者代码段，这些功能既可以写成函数，也可以封装成为宏定义。那么究竟是用函数好，还是宏定义好？这就要求我们对二者进行合理的取舍。
+
+宏定义中允许包含两行以上命令的情形，此时必须在最右边加上”\”且该行”\”后不能再有任何字符，连注释部分都不能有，下面的每行最后的一定要是”\”,”\”后面加一个空格都会报错，更不能跟注释。
+
+我们来看一个例子，比较两个数或者表达式大小，首先我们把它写成宏定义：
+#define MAX( a, b) ( (a) &gt; " />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">宏定义，变参宏实现宏重载</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-08-29</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>在软件开发过程中，经常有一些常用或者通用的功能或者代码段，这些功能既可以写成函数，也可以封装成为宏定义。那么究竟是用函数好，还是宏定义好？这就要求我们对二者进行合理的取舍。
+
+宏定义中允许包含两行以上命令的情形，此时必须在最右边加上”\”且该行”\”后不能再有任何字符，连注释部分都不能有，下面的每行最后的一定要是”\”,”\”后面加一个空格都会报错，更不能跟注释。
+
+我们来看一个例子，比较两个数或者表达式大小，首先我们把它写成宏定义：
+#define MAX( a, b) ( (a) &gt; </div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 在软件开发过程中，经常有一些常用或者通用的功能或者代码段，这些功能既可以写成函数，也可以封装成为宏定义。那么究竟是用函数好，还是宏定义好？这就要求我们对二者进行合理的取舍。<br />
+<br />
+宏定义中允许包含两行以上命令的情形，此时必须在最右边加上”\”且该行”\”后不能再有任何字符，连注释部分都不能有，下面的每行最后的一定要是”\”,”\”后面加一个空格都会报错，更不能跟注释。<br />
+<br />
+我们来看一个例子，比较两个数或者表达式大小，首先我们把它写成宏定义：<br />
+#define MAX( a, b) ( (a) &gt; (b) (a) : (b) )<br />
+其次，把它用函数来实现：<br />
+int max( int a, int b)<br />
+{<br />
+return (a &gt; b a : b)<br />
+}<br />
+<br />
+很显然，我们不会选择用函数来完成这个任务，原因有两个：首先，函数调用会带来额外的开销，它需要开辟一片栈空间，记录返回地址，将形参压栈，从函数返回还要释放堆栈。这种开销不仅会降低代码效率，而且代码量也会大大增加，而使用宏定义则在代码规模和速度方面都比函数更胜一筹；其次，函数的参数必须被声明为一种特定的类型，所以它只能在类型合适的表达式上使用，我们如果要比较两个浮点型的大小，就不得不再写一个专门针对浮点型的比较函数。反之，上面的那个宏定义可以用于整形、长整形、单浮点型、双浮点型以及其他任何可以用“&gt;”操作符比较值大小的类型，也就是说，宏是与类型无关的。<br />
+<br />
+和使用函数相比，使用宏的不利之处在于每次使用宏时，一份宏定义代码的拷贝都会插入到程序中。除非宏非常短，否则使用宏会大幅度增加程序的长度。<br />
+<br />
+还有一些任务根本无法用函数实现，但是用宏定义却很好实现。比如参数类型没法作为参数传递给函数，但是可以把参数类型传递给带参的宏。<br />
+<br />
+看下面的例子：<br />
+<br />
+#define MALLOC（n, type） <br />
+（ (type ) malloc（（n） sizeof（type）））<br />
+1<br />
+2<br />
+利用这个宏，我们就可以为任何类型分配一段我们指定的空间大小，并返回指向这段空间的指针。我们可以观察一下这个宏确切的工作过程：<br />
+<br />
+int *ptr;<br />
+ptr = MALLOC ( 5, int );<br />
+将这宏展开以后的结果：<br />
+<br />
+ptr = (int ) malloc ( (5) sizeof(int) );<br />
+<p>
+	这个例子是宏定义的经典应用之一，完成了函数不能完成的功能，但是宏定义也不能滥用，通常，如果相同的代码需要出现在程序的几个地方，更好的方法是把它实现为一个函数。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	变参宏实现宏重载
+</p>
+<p>
+	#define TL_OVERLOAD(prefix, ...) TL_CAT(prefix, TL_VARIADIC_SIZE(__VA_ARGS__))<br />
+<br />
+#define MACRO_1(number) MACRO_2(number,10)<br />
+#define MACRO_2(number1,number2) TL_ADD(number1,number2)<br />
+<br />
+#define MACRO_ADD_NUMBERS(...) \<br />
+TL_CAT(TL_OVERLOAD(MACRO_,__VA_ARGS__)(__VA_ARGS__),TL_EMPTY())<br />
+<br />
+TL_ASSERT(TL_EQUAL(MACRO_ADD_NUMBERS(5),15))<br />
+TL_ASSERT(TL_EQUAL(MACRO_ADD_NUMBERS(3,6),9))
+</p>
+<p>
+	<br />
+</p>
+<p>
+	宏的一下其他用法：<a href="https://www.jianshu.com/p/a3e3e9fb5598">https://www.jianshu.com/p/a3e3e9fb5598</a>
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1357.html">去除一个字符串的最后一个字符</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1359.html">.bat批处理相关用法</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="宏定义#define">
+							<h2 style="display:inline;color:#5BC648;">宏定义#define</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-07-02&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><div>
+	宏（Macro），是一种批量处理的称谓。计算机科学里的宏是一种抽象（Abstraction），它根据一系列预定义的规则替换一定的文本模式。解释器或编译器在遇到宏时会自动进行这一模式替换。对于编译语言，宏展开在编译时发生，进行宏展开的工具常被称为宏展开器。宏这一术语也常常被用于许多类似的环境中，它们是源自宏展开的概念，这包括键盘宏和宏语言。绝大多数情况下，“宏”这个词的使用暗示着将小命令或动作转化为一系列指令。
+</div>
+<div>
+	<br />
+</div>
+<div>
+	#define是C语言中的一个预处理命令，其中#表示这是一条预处理命令。凡是以#开头的均为预处理命令，“define”为宏定义命令。
+</div>
+<div>
+	<img alt="" src="G:\common_temp_data\youdaonote\weixinobU7VjhyiFjwy4r_SA_xy7Mru7JA\301c3c4fe88c4ba28ffd0684b9fc87b7\clipboard.png" style="width:620px;" /> 
+</div>
+<div>
+	<br />
+</div>
+<div>
+	1. 宏可以像函数一样被定义，例如：#define min(x,y) (x &lt;y?x:y;)但是在实际使用时，只有当写上min()，必须加括号，min才会被作为宏展开，否则不做任何处理。
+</div>
+<div>
+	<br />
+</div>
+<div>
+	2. 如果宏需要参数，你可以不传，编译器会给你警告(宏参数不够)，但是这会导致错误。如C++书籍中所描述的，编译器(预处理器)对宏的语法检查不够，所以更多的检查性工作得你自己来做。
+</div>
+<div>
+	<br />
+</div>
+<div>
+	3. 很多程序员不知道的#和##
+</div>
+<div>
+	#符号把一个符号直接转换为字符串，例如：
+</div>
+<div>
+	#define STRING(x) #x    const char *str = STRING( test_string ); str的内容就是"test_string"，也就是说#会把其后的符号直接加上双引号。
+</div>
+<div>
+	##符号会连接两个符号，从而产生新的符号(词法层次)，例如：#define SIGN( x ) INT_##x    int SIGN( 1 ); 宏被展开后将成为：int INT_1;
+</div>
+<div>
+	<br />
+</div>
+<div>
+	4. 变参宏，这个比较酷，它使得你可以定义类似的宏：
+</div>
+<div>
+	#define LOG( format, ... ) printf( format, __VA_ARGS__ )
+</div>
+<div>
+	LOG( "%s %d", str, count );     __VA_ARGS__是系统预定义宏，被自动替换为参数列表。
+</div>
+<div>
+	<br />
+</div>
+<div>
+	5. 当一个宏自己调用自己时，会发生什么？例如：
+</div>
+<div>
+	#define TEST( x ) ( x + TEST( x ) )
+</div>
+<div>
+	TEST( 1 ); 会发生什么？为了防止无限制递归展开，语法规定，当一个宏遇到自己时，就停止展开，也就是说，当对TEST( 1 )进行展开时，展开过程中又发现了一个TEST，那么就将这个TEST当作一般的符号。TEST(1)最终被展开为：1 + TEST( 1) 。
+</div>
+<div>
+	<br />
+</div>
+<div>
+	6. 宏参数的prescan，
+</div>
+<div>
+	当一个宏参数被放进宏体时，这个宏参数会首先被全部展开(有例外，见下文)。当展开后的宏参数被放进宏体时，预处理器对新展开的宏体进行第二次扫描，并继续展开。例如：
+</div>
+<div>
+	#define PARAM( x ) x
+</div>
+<div>
+	#define ADDPARAM( x ) INT_##x
+</div>
+<div>
+	PARAM( ADDPARAM( 1 ) );    因为ADDPARAM( 1 ) 是作为PARAM的宏参数，所以先将ADDPARAM( 1 )展开为INT_1，然后再将INT_1放进PARAM。
+</div>
+<div>
+	<br />
+</div>
+<div>
+	例外情况是，如果PARAM宏里对宏参数使用了#或##，那么宏参数不会被展开：
+</div>
+<div>
+	#define PARAM( x ) #x
+</div>
+<div>
+	#define ADDPARAM( x ) INT_##x
+</div>
+<div>
+	PARAM( ADDPARAM( 1 ) ); 将被展开为"ADDPARAM( 1 )"。
+</div>
+<div>
+	<br />
+</div>
+<div>
+	使用这么一个规则，可以创建一个很有趣的技术：打印出一个宏被展开后的样子，这样可以方便你分析代码：
+</div>
+<div>
+	#define TO_STRING( x ) TO_STRING1( x )
+</div>
+<div>
+	#define TO_STRING1( x ) #x
+</div>
+<div>
+	TO_STRING首先会将x全部展开(如果x也是一个宏的话)，然后再传给TO_STRING1转换为字符串，现在你可以这样：
+</div>
+<div>
+	const char *str = TO_STRING( PARAM( ADDPARAM( 1 ) ) );去一探PARAM展开后的样子。
+</div>
+<div>
+	<br />
+</div>
+<div>
+	7. 一个很重要的补充：就像我在第一点说的那样，如果一个像函数的宏在使用时没有出现括号，那么预处理器只是将这个宏作为一般的符号处理(那就是不处理)。
+</div>
+<div>
+	<br />
+</div>
+<div>
+	<br />
+</div>
+<div>
+	3、#@（参数字符化操作，将宏参数字符化， 去参数中的最后一个），例如：
+</div>
+<div>
+	#define sign(arg) #@arg
+</div>
+<div>
+	sign(dkakhfkh);     // 返回结果为 'h'，单引号，字符
+</div>
+<div>
+	<br />
+</div>
+<div>
+	4、\（连接至下一行， 实现#define的多行定义）
+</div></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#宏定义#define">宏定义#define</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

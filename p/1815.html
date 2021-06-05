@@ -1,0 +1,315 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>count(*) count(1)与count(col)的区别_comonly.cn</title>
+<meta name="keywords" content="count(*) count(1)与count(col)的区别" />
+<meta name="description" content="一、执行结果
+
+
+	count(*) 和count(1) 都是统计行数，而count(col) 是统计col列非null的行数
+
+
+	二、执行计划
+
+
+	MyISAM与InnoDB，正如在不同的存储引擎中，count(*)函数的执行是不同的
+
+
+	在MyISAM存储引擎中，count()函数是直接读取数据表保存的行记录数并返回,效率很高，但是如果添加了where条件的话，MyISAM表也不能返回得很快。
+
+
+	在InnoDB存储引擎中，count(*)函数是先从内存中读取表中" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">count(*) count(1)与count(col)的区别</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">week</li>
+          <li class="lmname"><a href="https://cloud.tencent.com/developer/article/1444409" target="_blank">https://cloud.tencent.com/developer/article/1444409</a></li>
+          <li class="timer">2020-10-04</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>一、执行结果
+
+
+	count(*) 和count(1) 都是统计行数，而count(col) 是统计col列非null的行数
+
+
+	二、执行计划
+
+
+	MyISAM与InnoDB，正如在不同的存储引擎中，count(*)函数的执行是不同的
+
+
+	在MyISAM存储引擎中，count()函数是直接读取数据表保存的行记录数并返回,效率很高，但是如果添加了where条件的话，MyISAM表也不能返回得很快。
+
+
+	在InnoDB存储引擎中，count(*)函数是先从内存中读取表中</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='一、执行结果'>
+	一、执行结果
+</h2>
+<p>
+	count(*) 和count(1) 都是统计行数，而count(col) 是统计col列非null的行数
+</p>
+<h2 id='二、执行计划'>
+	二、执行计划
+</h2>
+<p>
+	MyISAM与InnoDB，正如在不同的存储引擎中，count(*)函数的执行是不同的
+</p>
+<p>
+	在MyISAM存储引擎中，count()函数是直接读取数据表保存的行记录数并返回,效率很高，但是如果添加了where条件的话，MyISAM表也不能返回得很快。
+</p>
+<p>
+	在InnoDB存储引擎中，count(*)函数是先从内存中读取表中的数据到内存缓冲区，然后扫描全表获得行记录数。在使用count函数中加上where条件时，在两个存储引擎中的效果是一样的，都会扫描全表计算某字段有值项的次数。
+</p>
+<p>
+	InnoDB 是索引组织表，主键索引树的叶子节点是数据，而普通索引树的叶子节点是主键值。所以，普通索引树比主键索引树小很多。对于 count() 这样的操作，遍历哪个索引树得到的结果逻辑上都是一样的。因此，<a href="https://cloud.tencent.com/product/cdb?from=10680" target="_blank">MySQL</a> 优化器会找到最小的那棵树来遍历。因此表有二级索引，则使用二级索引key_len最小的索引进行扫描，尽管这个二级索引的key_len的值大于主键，都使用二级索引。在保证逻辑正确的前提下，尽量减少扫描的数据量，是数据库系统设计的通用法则之一。
+</p>
+<p>
+	count(字段)
+</p>
+<p>
+	1、如果这个字段定义为not null的话，一行行地从记录里面读出这个字段，判断不能为null，按行累计加1
+</p>
+<p>
+	2、如果这个字段定义允许为null，一行行地从记录里面读出这个字段，执行的时候还要判断是否为null，不为null的按行累计加1，返回累加值
+</p>
+<h2 id='三、执行效率'>
+	三、执行效率
+</h2>
+<p>
+	1、如果在开发中确实需要用到count()聚合，那么优先考虑count(*)，因为mysql本身对于count(*)做了特别的优化处理。
+</p>
+<p>
+	有主键或联合主键的情况下，count(*)略比count(1)快一些。&nbsp;
+ 没有主键的情况下count(1)比count(*)快一些。&nbsp;
+ 如果表只有一个字段，则count(*)是最快的。
+</p>
+<p>
+	2、使用count()聚合函数后，最好不要跟where age = 1；这样的条件，会导致不走索引，降低查询效率。除非该字段已经建立了索引。使用count()聚合函数后，若有where条件，且where条件的字段未建立索引，则查询不会走索引，直接扫描了全表。
+</p>
+<p>
+	3、count(字段),非主键字段，这样的使用方式最好不要出现，因为它不会走索引。
+</p>
+<h3>
+	count(主键ID)比count(1)慢的原因？
+</h3>
+<p>
+	对于 count(主键 ID) 来说，InnoDB 引擎会遍历主键索引树，把每一行的ID值取出来，返回给server层，server层拿到ID后，判断是不可能为空的，按行累加加1，最后返回累计值。
+</p>
+<p>
+	对于count(1)，InnoDB引擎会扫描主键索引树，但不取值，server层对于返回的每一行，按行累计加1，判断不可能为NULL，返回累计值。
+</p>
+<p>
+	从InnoDB引擎层返回ID会涉及到解析数据行、拷贝字段值的操作，因此count(主键 ID)执行要比count(1)执行慢。
+</p>
+<h3>
+	count(主键id)走主键索引的时候效率较count(*)差的原因？
+</h3>
+<p>
+	平时我们检索一列的时候，基本上等值或范围查询，那么索引基数大的索引必然效率很高(符合走主键索引查找速度最快的原则)。
+</p>
+<p>
+	但是在做count(*)的时候并没有检索具体的一行或者一个范围，那么选择基数小的索引对count操作效率会更高。在做count操作的时候，mysql会遍历每个叶子节点，所以基数越小，效率越高。mysql非聚簇索引叶子节点保存指向主键ID的指针，所以需要检索两遍索引。但是这里相对于遍历主键索引,即使检索两遍索引效率也比单纯的检索主键索引快。
+</p>
+<p>
+	Innodb是索引组织表，主键索引树的叶子节点是数据，而普通索引树的叶子节点是主键值，索引普通索引树小很多，索引长度越小树的大小就越小。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1814.html">SHA 消息摘要算法</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1816.html">group by 两个字段</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://cloud.tencent.com/developer/article/1444409" target="_blank">https://cloud.tencent.com/developer/article/1444409</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#一、执行结果">一、执行结果</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#二、执行计划">二、执行计划</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#三、执行效率">三、执行效率</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

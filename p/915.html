@@ -1,0 +1,1250 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title> Servlet_comonly.cn</title>
+<meta name="keywords" content=" Servlet" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title"> Servlet</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-04-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	javaweb---jsp asp数据库框架
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h1>
+	<a name="_Toc508175144"></a><a name="_Toc311835279"></a><a name="_Toc521309527"></a><span>1</span>知识点
+</h1>
+<h2 id='me="_Toc508175145"me="_Toc311835281"me="_Toc521309529"1.2本次预计讲解的知识点'>
+	<a name="_Toc508175145"></a><a name="_Toc311835281"></a><a name="_Toc521309529"></a><span>1.2 </span>本次预计讲解的知识点
+</h2>
+<p class="MsoNormal" style="margin-left:42.0pt;text-indent:-21.0pt;">
+	?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Servlet简介
+</p>
+<p class="MsoNormal" style="margin-left:42.0pt;text-indent:-21.0pt;">
+	?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Servlet
+配置与运行
+</p>
+<div style="border:none;padding:0cm 0cm 1.0pt 0cm;margin-left:21.0pt;">
+	<p class="MsoNormal" style="margin-left:21.0pt;text-indent:-21.0pt;">
+		?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 乱码解决
+	</p>
+</div>
+<p class="MsoNormal" style="margin-left:42.0pt;text-indent:-21.0pt;">
+	?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Servlet生命周期 à Servlet接口
+</p>
+<p class="MsoNormal" style="margin-left:42.0pt;text-indent:-21.0pt;">
+	?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Servlet与表单
+</p>
+<p class="MsoNormal" style="margin-left:42.0pt;text-indent:-21.0pt;">
+	?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+两种请求方式的区别
+</p>
+<p class="MsoNormal" style="margin-left:42.0pt;text-indent:-21.0pt;">
+	?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+页面的跳转
+</p>
+<h1>
+	<a name="_Toc508175146"></a><a name="_Toc311835282"></a><a name="_Toc521309532"></a><span>2</span>具体内容
+</h1>
+<h2 id='me="_Toc508175147"2.1Servlet简介'>
+	<a name="_Toc508175147"></a><span>2.1 Servlet</span>简介
+</h2>
+<p class="MsoNormal">
+	<span>Server+ let =&nbsp; </span>服务器端小应用程序<span>.</span>
+</p>
+<p class="MsoNormal">
+	定义<span>: &nbsp;Servlet </span>是一个 <span>Java</span>程序，是驻留在服务器端<span>.</span>运行以处理客户端请求并做出响应的程序
+</p>
+<p class="MsoNormal">
+	类似生活中的餐厅服务员
+</p>
+<p class="MsoNormal">
+	<span>1. Servlet </span><b>本质是一个Java</b><b>类</b><span>.</span>只是需要满足以下两个条件:
+</p>
+<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%;border-collapse:collapse;border:none;">
+	<tbody>
+		<tr>
+			<td width="100%" valign="top" style="border:solid black 1.0pt;">
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;">1&gt; </span><span style="font-size:10.5pt;font-family:宋体;">作为</span><span style="font-size:10.5pt;font-family:&quot;">Servlet</span><span style="font-size:10.5pt;font-family:宋体;">的</span><span style="font-size:10.5pt;font-family:&quot;">Java</span><span style="font-size:10.5pt;font-family:宋体;">类必须继承</span><span style="font-size:10.5pt;font-family:&quot;"> <span></span></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;text-indent:27.0pt;">
+					<span style="font-size:13.5pt;font-family:&quot;color:red;">javax.servlet.http.HttpServlet</span><span style="font-size:13.5pt;font-family:宋体;color:red;">类</span><span style="font-size:13.5pt;font-family:&quot;color:red;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:13.5pt;font-family:&quot;color:#0000CC;">2&gt;</span><span style="font-size:13.5pt;font-family:宋体;color:#0000CC;">必须覆写父类中的</span><span style="font-size:13.5pt;font-family:&quot;color:#0000CC;"> doGet()</span><span style="font-size:13.5pt;font-family:宋体;color:#0000CC;">或</span><span style="font-size:13.5pt;font-family:&quot;color:#0000CC;">doPost()</span><span style="font-size:13.5pt;font-family:宋体;color:#0000CC;">方法</span><span style="font-size:13.5pt;font-family:&quot;color:#0000CC;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:13.5pt;font-family:&quot;color:#0000CC;"><span>&nbsp;&nbsp; </span>throws ServletException,IOException</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:13.5pt;font-family:宋体;color:#0000CC;">两个参数</span><span style="font-size:13.5pt;font-family:&quot;color:#0000CC;">:</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:13.5pt;font-family:&quot;color:#0000CC;">HttpServletRequest </span><span style="font-size:13.5pt;font-family:&quot;color:red;">request</span><span style="font-size:13.5pt;font-family:宋体;color:#0000CC;">和</span><span style="font-size:13.5pt;font-family:&quot;color:#0000CC;"> HttpServletResponse </span><span style="font-size:13.5pt;font-family:&quot;color:red;">response</span><span style="font-size:13.5pt;font-family:&quot;color:#0000CC;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;color:#0000CC;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;color:#0000CC;">Servlet</span><span style="font-size:10.5pt;font-family:宋体;color:#0000CC;">程序将按照如下的步骤进行处理</span><span style="font-size:10.5pt;font-family:&quot;color:#0000CC;">:</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;color:#0000CC;"><span>&nbsp; </span>1) </span><span style="font-size:10.5pt;font-family:宋体;color:#0000CC;">客户端</span><span style="font-size:10.5pt;font-family:&quot;color:#0000CC;">(</span><span style="font-size:10.5pt;font-family:宋体;color:#0000CC;">很可能是</span><span style="font-size:10.5pt;font-family:&quot;color:#0000CC;">Web</span><span style="font-size:10.5pt;font-family:宋体;color:#0000CC;">浏览器</span><span style="font-size:10.5pt;font-family:&quot;color:#0000CC;">)</span><span style="font-size:10.5pt;font-family:宋体;color:#0000CC;">通过</span><span style="font-size:10.5pt;font-family:&quot;color:#0000CC;">HTTP</span><span style="font-size:10.5pt;font-family:宋体;color:#0000CC;">提出请求</span><span style="font-size:10.5pt;font-family:&quot;color:#0000CC;">.</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;color:#0000CC;"><span>&nbsp; </span>2) WEB</span><span style="font-size:10.5pt;font-family:宋体;color:#0000CC;">服务器接收该请求并将其发送给</span><span style="font-size:10.5pt;font-family:&quot;color:#0000CC;">servlet.</span><span style="font-size:10.5pt;font-family:宋体;color:#0000CC;">如果这个</span><span style="font-size:10.5pt;font-family:&quot;color:#0000CC;">Servlet</span><span style="font-size:10.5pt;font-family:宋体;color:#0000CC;">尚未被加载</span><span style="font-size:10.5pt;font-family:&quot;color:#0000CC;">,Web</span><span style="font-size:10.5pt;font-family:宋体;color:#0000CC;">服务器将把它加载到</span><span style="font-size:10.5pt;font-family:&quot;color:#0000CC;">Java</span><span style="font-size:10.5pt;font-family:宋体;color:#0000CC;">虚拟机并且执行它</span><span style="font-size:10.5pt;font-family:&quot;color:#0000CC;">.</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;color:#0000CC;"><span>&nbsp; </span>3) Servlet</span><span style="font-size:10.5pt;font-family:宋体;color:#0000CC;">程序将接收该</span><span style="font-size:10.5pt;font-family:&quot;color:#0000CC;">HTTP</span><span style="font-size:10.5pt;font-family:宋体;color:#0000CC;">请求并执行某种处理</span><span style="font-size:10.5pt;font-family:&quot;color:#0000CC;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;color:#0000CC;"><span>&nbsp; </span>4) Servlet</span><span style="font-size:10.5pt;font-family:宋体;color:#0000CC;">会将处理后的结果向</span><span style="font-size:10.5pt;font-family:&quot;color:#0000CC;">Web</span><span style="font-size:10.5pt;font-family:宋体;color:#0000CC;">服务器返回应答</span><span style="font-size:10.5pt;font-family:&quot;color:#0000CC;">.</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;color:#0000CC;"><span>&nbsp; </span>5) WEB</span><span style="font-size:10.5pt;font-family:宋体;color:#0000CC;">服务器将从</span><span style="font-size:10.5pt;font-family:&quot;color:#0000CC;">Servlet</span><span style="font-size:10.5pt;font-family:宋体;color:#0000CC;">收到的应答发回给客户端</span><span style="font-size:10.5pt;font-family:&quot;color:#0000CC;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;color:#0000CC;"></span>
+				</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p class="MsoNormal">
+	<span>2.Servlet</span>作用<span>:</span>
+</p>
+<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%;border-collapse:collapse;border:none;">
+	<tbody>
+		<tr>
+			<td width="100%" valign="top" style="border:solid black 1.0pt;">
+				<p class="MsoNormal" align="left" style="margin-left:36.0pt;text-align:left;text-indent:-18.0pt;">
+					<span style="font-size:13.5pt;font-family:Wingdings;"><span>v<span>&nbsp;&nbsp;&nbsp; </span></span></span><span style="font-size:13.5pt;font-family:宋体;">其功能就是<b>动态地生成网页</b>，<b><span style="color:red;">接收用户发送的请求和数据</span></b><span style="color:red;">，</span>然后<b>根据这些请求和<span style="color:#0000CC;">数据访问数据库</span>等其它应用程序</b>，最后<b>将产生的结果以</b></span><b><span style="font-size:13.5pt;font-family:&quot;">HTML</span></b><b><span style="font-size:13.5pt;font-family:宋体;">格式的页面返回给客户端</span></b><span style="font-size:13.5pt;font-family:宋体;">。</span><span style="font-size:13.5pt;font-family:&quot;"></span>
+				</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p class="MsoNormal">
+	<span>3.Servlet</span>类的继承关系<span>(</span>了解<span>):</span>
+</p>
+<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%;border-collapse:collapse;border:none;">
+	<tbody>
+		<tr>
+			<td width="100%" valign="top" style="border:solid black 1.0pt;">
+<pre><span><a href="http://java.sun.com/j2se/1.4/docs/api/java/lang/Object.html">java.lang.Object</a></span></pre>
+<pre><span><span>&nbsp;&nbsp; </span>|-</span></pre>
+<pre><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>&lt;&lt;<a href="mk:@MSITStore:D:\Software\JDK\Servlet.J2EE_API.chm::/j2ee14/javax/servlet/Servlet.html">Servlet</a></span>接口<span>&gt;&gt;</span></pre>
+<pre><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>|</span></pre>
+<pre><span><span>&nbsp; </span><a href="mk:@MSITStore:D:\Software\JDK\Servlet.J2EE_API.chm::/j2ee14/javax/servlet/GenericServlet.html">javax.servlet.GenericServlet</a><span>&nbsp; </span></span></pre>
+<pre><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>|-<b>javax.servlet.http.HttpServlet [</b></span><b><span style="color:#0000CC;">抽象类</span><span>]</span></b></pre>
+<pre><b><span></span></b></pre>
+<pre><b><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>|-</span><span style="color:#0000CC;">自定义<span>Servlet</span>类</span></b><span style="color:#0000CC;"></span></pre>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:12.5pt;font-family:&quot;"></span>
+				</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p class="MsoNormal">
+	<span>4. </span>创建自定义<span>Servlet</span>类<span>.</span>
+</p>
+<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%;border-collapse:collapse;border:none;">
+	<tbody>
+		<tr>
+			<td width="100%" valign="top" style="border:solid black 1.0pt;">
+				<div style="border:none;padding:0cm 0cm 1.0pt 0cm;">
+<pre><span style="font-size:12.5pt;font-family:&quot;color:red;"><span>1.<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><span style="font-size:12.5pt;color:red;">继承</span><span style="font-size:12.5pt;font-family:&quot;color:red;">HttpServlet</span><span style="font-size:12.5pt;color:red;">类</span><span style="font-size:12.5pt;font-family:&quot;color:red;"></span></pre>
+<pre><span style="font-size:12.5pt;font-family:&quot;color:red;"><span>2.<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><span style="font-size:12.5pt;color:red;">覆写</span><span style="font-size:12.5pt;font-family:&quot;color:red;">override<span>&nbsp; </span></span><span style="font-size:12.5pt;color:red;">此类中的</span><span style="font-size:12.5pt;font-family:&quot;color:red;">doGet()</span><span style="font-size:12.5pt;color:red;">和</span><span style="font-size:12.5pt;font-family:&quot;color:red;">doPost()</span></pre>
+<pre><span style="font-size:12.5pt;color:red;">关注此方法的两个参数</span><span style="font-size:12.5pt;font-family:&quot;color:red;"> :</span></pre>
+<pre><span style="font-size:12.5pt;font-family:&quot;color:#0000CC;">HttpServletRequest – </span><span style="font-size:12.5pt;color:#0000CC;">封装了客户端的请求信息</span><span style="font-size:12.5pt;font-family:&quot;color:#0000CC;"></span></pre>
+<pre><span style="font-size:12.5pt;font-family:&quot;color:#0000CC;"><span>&nbsp;&nbsp;&nbsp; </span>|- </span><span>public <a href="http://java.sun.com/j2se/1.4/docs/api/java/lang/String.html">String</a> <b>getParameter</b>(<a href="http://java.sun.com/j2se/1.4/docs/api/java/lang/String.html">String</a>&nbsp;name)</span><span style="color:red;">获取客户端请求的参数值<span></span></span></pre>
+<pre><span style="color:red;"></span></pre>
+<pre><span>public <a href="http://java.sun.com/j2se/1.4/docs/api/java/lang/String.html">String</a>[] <b>getParameterValues</b>(<a href="http://java.sun.com/j2se/1.4/docs/api/java/lang/String.html">String</a>&nbsp;name) [</span>针对表单中<span>checkbox</span>和<span>radio]<span style="color:red;"></span></span></pre>
+<pre><span style="font-size:12.5pt;font-family:&quot;color:red;"></span></pre>
+<pre><span style="font-size:12.5pt;font-family:&quot;color:#0000CC;">HttpServletResposne –</span><span style="font-size:12.5pt;color:#0000CC;">封装了服务器端向客户端响应信息</span><span style="font-size:12.5pt;font-family:&quot;color:#0000CC;"></span></pre>
+				</div>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<b><span style="font-size:11.0pt;font-family:&quot;color:#7F0055;">package</span></b><span style="font-size:11.0pt;font-family:&quot;color:black;"> com.whos.servlet;</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<b><span style="font-size:11.0pt;font-family:&quot;color:#7F0055;">import</span></b><span style="font-size:11.0pt;font-family:&quot;color:black;"> java.io.IOException;</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<b><span style="font-size:11.0pt;font-family:&quot;color:#7F0055;">import</span></b><span style="font-size:11.0pt;font-family:&quot;color:black;"> javax.servlet.ServletException;</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<b><span style="font-size:11.0pt;font-family:&quot;color:#7F0055;">import</span></b><span style="font-size:11.0pt;font-family:&quot;color:black;"> javax.servlet.http.HttpServlet;</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<b><span style="font-size:11.0pt;font-family:&quot;color:#7F0055;">import</span></b><span style="font-size:11.0pt;font-family:&quot;color:black;"> javax.servlet.http.HttpServletRequest;</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<b><span style="font-size:11.0pt;font-family:&quot;color:#7F0055;">import</span></b><span style="font-size:11.0pt;font-family:&quot;color:black;"> javax.servlet.http.HttpServletResponse;</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:#3F5FBF;">/**</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:#3F5FBF;"><span>&nbsp;</span>* </span><span style="font-size:11.0pt;font-family:宋体;color:#3F5FBF;">第一个</span><u><span style="font-size:11.0pt;font-family:&quot;color:#3F5FBF;">Servlet</span></u><span style="font-size:11.0pt;font-family:宋体;color:#3F5FBF;">类</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:#3F5FBF;"><span>&nbsp;</span>*/</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<b><span style="font-size:11.0pt;font-family:&quot;color:#7F0055;">public</span></b><span style="font-size:11.0pt;font-family:&quot;color:black;"> </span><b><span style="font-size:11.0pt;font-family:&quot;color:#7F0055;">class</span></b><span style="font-size:11.0pt;font-family:&quot;color:black;"> <u>HelloServlet</u> </span><b><span style="font-size:11.0pt;font-family:&quot;color:#7F0055;">extends</span></b><span style="font-size:11.0pt;font-family:&quot;color:black;"> HttpServlet {</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp; </span></span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp; </span></span><span style="font-size:11.0pt;font-family:&quot;color:#3F7F5F;">//</span><span style="font-size:11.0pt;font-family:宋体;color:#3F7F5F;">处理</span><span style="font-size:11.0pt;font-family:&quot;color:#3F7F5F;">GET</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp; </span></span><b><span style="font-size:11.0pt;font-family:&quot;color:#7F0055;">public</span></b><span style="font-size:11.0pt;font-family:&quot;color:black;"> </span><b><span style="font-size:11.0pt;font-family:&quot;color:#7F0055;">void</span></b><span style="font-size:11.0pt;font-family:&quot;color:black;"> doGet(HttpServletRequest
+  request,HttpServletResponse response)</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp; </span></span><b><span style="font-size:11.0pt;font-family:&quot;color:#7F0055;">throws</span></b><span style="font-size:11.0pt;font-family:&quot;color:black;"> ServletException,IOException{</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>System.</span><i><span style="font-size:11.0pt;font-family:&quot;color:#0000C0;">out</span></i><span style="font-size:11.0pt;font-family:&quot;color:black;">.println(</span><span style="font-size:11.0pt;font-family:&quot;color:#2A00FF;">"</span><span style="font-size:11.0pt;font-family:宋体;color:#2A00FF;">一个</span><span style="font-size:11.0pt;font-family:&quot;color:#2A00FF;">GET</span><span style="font-size:11.0pt;font-family:宋体;color:#2A00FF;">方式的请求到达</span><span style="font-size:11.0pt;font-family:&quot;color:#2A00FF;">HelloServlet..."</span><span style="font-size:11.0pt;font-family:&quot;color:black;">);</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp; </span>}</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp; </span></span><span style="font-size:11.0pt;font-family:&quot;color:#3F7F5F;">//</span><span style="font-size:11.0pt;font-family:宋体;color:#3F7F5F;">处理</span><span style="font-size:11.0pt;font-family:&quot;color:#3F7F5F;">POST</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp; </span></span><b><span style="font-size:11.0pt;font-family:&quot;color:#7F0055;">public</span></b><span style="font-size:11.0pt;font-family:&quot;color:black;"> </span><b><span style="font-size:11.0pt;font-family:&quot;color:#7F0055;">void</span></b><span style="font-size:11.0pt;font-family:&quot;color:black;"> doPost(HttpServletRequest request,
+  HttpServletResponse response)</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><b><span style="font-size:11.0pt;font-family:&quot;color:#7F0055;">throws</span></b><span style="font-size:11.0pt;font-family:&quot;color:black;"> ServletException,
+  IOException {</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>System.</span><i><span style="font-size:11.0pt;font-family:&quot;color:#0000C0;">out</span></i><span style="font-size:11.0pt;font-family:&quot;color:black;">.println(</span><span style="font-size:11.0pt;font-family:&quot;color:#2A00FF;">"</span><span style="font-size:11.0pt;font-family:宋体;color:#2A00FF;">一个</span><span style="font-size:11.0pt;font-family:&quot;color:#2A00FF;">POST</span><span style="font-size:11.0pt;font-family:宋体;color:#2A00FF;">方式的请求到达</span><span style="font-size:11.0pt;font-family:&quot;color:#2A00FF;">HelloServlet..."</span><span style="font-size:11.0pt;font-family:&quot;color:black;">);</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp; </span>}</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp; </span></span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp; </span></span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;">}</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<div style="border:none;padding:0cm 0cm 1.0pt 0cm;">
+<pre><span style="font-size:12.5pt;font-family:&quot;color:red;"></span></pre>
+<pre><span style="font-size:12.5pt;font-family:&quot;color:red;"></span></pre>
+<pre><span>HTTP Status 404 - /myfirstweb/HelloServlet.java</span><span style="font-size:12.5pt;font-family:&quot;color:red;"></span></pre>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<h2 id='me="_Toc508175148"2.2Servlet的配置和运行'>
+	<a name="_Toc508175148"></a><span>2.2 Servlet</span>的配置和运行
+</h2>
+<p class="MsoNormal">
+	如果前台浏览端需要访问<span>,java web</span>应用中的后台<span>Servlet</span>程序<span>,</span>则必须先配置<span>Servlet</span>的映射名称<span>.</span>
+</p>
+<p class="MsoNormal">
+	mapping<span>&nbsp; </span>à映射<span>&nbsp; [</span>一一对应<span>]</span>
+</p>
+<p class="MsoNormal">
+	需要在web.xml文件中添加配置信息
+</p>
+<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%;border-collapse:collapse;border:none;">
+	<tbody>
+		<tr>
+			<td width="100%" valign="top" style="border:solid black 1.0pt;">
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<b><span style="font-size:10.5pt;font-family:宋体;">有两种方式来配置</span></b><b><span style="font-size:10.5pt;font-family:&quot;">Servlet:</span></b>
+				</p>
+				<p class="MsoNormal" align="left" style="margin-left:28.5pt;text-align:left;text-indent:-18.0pt;">
+					<span style="font-size:12.5pt;font-family:&quot;"><span>1&gt;<span>&nbsp; </span></span></span><span style="font-size:12.5pt;font-family:宋体;">使用</span><span style="font-size:12.5pt;font-family:&quot;">MyEclipse</span><span style="font-size:12.5pt;font-family:宋体;">向导</span><span style="font-size:12.5pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="margin-left:28.5pt;text-align:left;">
+					<span style="font-size:12.5pt;font-family:&quot;color:#0000CC;">Servlet</span><span style="font-size:12.5pt;font-family:宋体;color:#0000CC;">向导</span><span style="font-size:12.5pt;font-family:Wingdings;color:#0000CC;"><span>à</span></span><span style="font-size:12.5pt;font-family:宋体;color:#0000CC;">自动生成</span><span style="font-size:12.5pt;font-family:&quot;color:#0000CC;">web.xml </span><span style="font-size:12.5pt;font-family:宋体;color:#0000CC;">中的映射信息</span><span style="font-size:12.5pt;font-family:&quot;color:#0000CC;">,</span><span style="font-size:12.5pt;font-family:宋体;color:#0000CC;">还会在</span><span style="font-size:12.5pt;font-family:&quot;color:#0000CC;">Servlet</span><span style="font-size:12.5pt;font-family:宋体;color:#0000CC;">类中生成</span><span style="font-size:12.5pt;font-family:&quot;color:#0000CC;">doGet()</span><span style="font-size:12.5pt;font-family:宋体;color:#0000CC;">和</span><span style="font-size:12.5pt;font-family:&quot;color:#0000CC;">doPost()</span><span style="font-size:12.5pt;font-family:宋体;color:#0000CC;">方法</span><span style="font-size:12.5pt;font-family:&quot;color:#0000CC;">.</span>
+				</p>
+				<p class="MsoNormal" align="left" style="margin-left:28.5pt;text-align:left;text-indent:-18.0pt;">
+					<b><span style="font-size:10.5pt;font-family:&quot;color:red;"><span>2&gt;<span>&nbsp;&nbsp;&nbsp; </span></span></span></b><span style="font-size:12.5pt;font-family:宋体;color:red;">手工配置</span><b><span style="font-size:10.5pt;font-family:&quot;color:red;"></span></b>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:teal;">&lt;</span><span style="font-size:11.0pt;font-family:&quot;color:#3F7F7F;background:silver;">servlet</span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&gt;</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;</span><span>&nbsp; </span></span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&lt;</span><span style="font-size:11.0pt;font-family:&quot;color:#3F7F7F;">servlet-name</span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&gt;</span><span style="font-size:11.0pt;font-family:&quot;color:black;">HelloServlet</span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&lt;/</span><span style="font-size:11.0pt;font-family:&quot;color:#3F7F7F;">servlet-name</span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&gt;</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;</span><span>&nbsp; </span></span><span style="font-size:11.0pt;font-family:&quot;color:#3F5FBF;">&lt;!-- </span><span style="font-size:11.0pt;font-family:宋体;color:#3F5FBF;">类的完全限定名</span><span style="font-size:11.0pt;font-family:&quot;color:#3F5FBF;"> --&gt;</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;</span><span>&nbsp; </span></span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&lt;</span><span style="font-size:11.0pt;font-family:&quot;color:#3F7F7F;">servlet-class</span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&gt;</span><span style="font-size:11.0pt;font-family:&quot;color:black;">com.whos.servlet.HelloServlet</span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&lt;/</span><span style="font-size:11.0pt;font-family:&quot;color:#3F7F7F;">servlet-class</span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&gt;</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;</span></span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&lt;/</span><span style="font-size:11.0pt;font-family:&quot;color:#3F7F7F;background:silver;">servlet</span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&gt;</span><span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp; </span></span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp; </span></span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp; </span></span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&lt;</span><span style="font-size:11.0pt;font-family:&quot;color:#3F7F7F;">servlet-mapping</span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&gt;</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp; </span></span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&lt;</span><span style="font-size:11.0pt;font-family:&quot;color:#3F7F7F;">servlet-name</span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&gt;</span><span style="font-size:11.0pt;font-family:&quot;color:black;">HelloServlet</span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&lt;/</span><span style="font-size:11.0pt;font-family:&quot;color:#3F7F7F;">servlet-name</span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&gt;</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp; </span></span><span style="font-size:11.0pt;font-family:&quot;color:#3F5FBF;">&lt;!-- </span><span style="font-size:11.0pt;font-family:宋体;color:#3F5FBF;">请求路径名</span><span style="font-size:11.0pt;font-family:&quot;color:#3F5FBF;"> --&gt;</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp; </span></span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&lt;</span><span style="font-size:11.0pt;font-family:&quot;color:#3F7F7F;">url-pattern</span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&gt;</span><span style="font-size:11.0pt;font-family:&quot;color:red;">/</span><span style="font-size:11.0pt;font-family:&quot;color:black;">hello</span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&lt;/</span><span style="font-size:11.0pt;font-family:&quot;color:#3F7F7F;">url-pattern</span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&gt;</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp; </span></span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&lt;/</span><span style="font-size:11.0pt;font-family:&quot;color:#3F7F7F;">servlet-mapping</span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&gt;</span>
+				</p>
+				<p class="MsoNormal">
+					<b><span style="font-size:13.0pt;font-family:宋体;color:#0000CC;">执行过程</span></b><b><span style="font-size:13.0pt;font-family:&quot;color:#0000CC;">: </span></b><b><span style="font-size:13.0pt;font-family:宋体;color:#0000CC;">客户端通过</span></b><b><span style="font-size:13.0pt;font-family:&quot;color:#0000CC;">URL-pattern</span></b><b><span style="font-size:13.0pt;font-family:宋体;color:#0000CC;">指定的映射名称</span></b><b><span style="font-size:13.0pt;font-family:&quot;color:#0000CC;">,</span></b><b><span style="font-size:13.0pt;font-family:宋体;color:#0000CC;">找到对应的</span></b><b><span style="font-size:13.0pt;font-family:&quot;color:#0000CC;">Servlet-Name</span></b><b><span style="font-size:13.0pt;font-family:宋体;color:#0000CC;">名称</span></b><b><span style="font-size:13.0pt;font-family:&quot;color:#0000CC;">,</span></b><b><span style="font-size:13.0pt;font-family:宋体;color:#0000CC;">再执行所对应的</span></b><b><span style="font-size:13.0pt;font-family:&quot;color:#0000CC;">java</span></b><b><span style="font-size:13.0pt;font-family:宋体;color:#0000CC;">类</span></b><b><span style="font-size:10.5pt;font-family:&quot;color:#0000CC;"></span></b>
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td width="100%" valign="top" style="border:solid black 1.0pt;">
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:12.0pt;font-family:&quot;color:teal;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<b><span style="font-size:12.0pt;font-family:宋体;color:red;">通过表单发送</span></b><b><span style="font-size:12.0pt;font-family:&quot;color:red;">post</span></b><b><span style="font-size:12.0pt;font-family:宋体;color:red;">方式的请求</span></b><b><span style="font-size:12.0pt;font-family:&quot;color:red;">:</span></b>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:12.0pt;font-family:&quot;color:teal;">&lt;</span><span style="font-size:12.0pt;font-family:&quot;color:#3F7F7F;">form</span><span style="font-size:12.0pt;font-family:&quot;"> <span style="color:#7F007F;">name</span><span style="color:black;">=</span><i><span style="color:#2A00FF;">"myform"</span></i> <span style="color:#7F007F;">action</span><span style="color:black;">=</span><i><span style="color:#2A00FF;">"hello"</span></i> <span style="color:#7F007F;">method</span><span style="color:black;">=</span><i><span style="color:#2A00FF;">"POST"</span></i><span style="color:teal;">&gt;</span></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:12.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp; </span><span>&nbsp; </span></span><span style="font-size:12.0pt;font-family:宋体;color:black;">请输入信息息</span><span style="font-size:12.0pt;font-family:&quot;color:black;">:<span>&nbsp; </span></span><span style="font-size:12.0pt;font-family:&quot;color:teal;">&lt;</span><span style="font-size:12.0pt;font-family:&quot;color:#3F7F7F;">input</span><span style="font-size:12.0pt;font-family:&quot;"> <span style="color:#7F007F;">type</span><span style="color:black;">=</span><i><span style="color:#2A00FF;">"text"</span></i> <span style="color:#7F007F;">name</span><span style="color:black;">=</span><i><span style="color:#2A00FF;">"info"</span></i> <span style="color:teal;">/&gt;</span></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:12.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp; </span><span>&nbsp; </span></span><span style="font-size:12.0pt;font-family:&quot;color:teal;">&lt;</span><span style="font-size:12.0pt;font-family:&quot;color:#3F7F7F;">input</span><span style="font-size:12.0pt;font-family:&quot;"> <span style="color:#7F007F;">type</span><span style="color:black;">=</span><i><span style="color:#2A00FF;">"submit"</span></i> <span style="color:#7F007F;">value</span><span style="color:black;">=</span><i><span style="color:#2A00FF;">" </span></i></span><i><span style="font-size:12.0pt;font-family:宋体;color:#2A00FF;">确定</span></i><i><span style="font-size:12.0pt;font-family:&quot;color:#2A00FF;"> "</span></i><span style="font-size:12.0pt;font-family:&quot;"> <span style="color:teal;">/&gt;</span></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;text-indent:24.0pt;">
+					<span style="font-size:12.0pt;font-family:&quot;color:teal;">&lt;/</span><span style="font-size:12.0pt;font-family:&quot;color:#3F7F7F;">form</span><span style="font-size:12.0pt;font-family:&quot;color:teal;">&gt;</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;text-indent:24.0pt;">
+					<b><span style="font-size:10.5pt;font-family:&quot;"></span></b>
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td width="100%" valign="top" style="border:solid black 1.0pt;">
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:12.0pt;font-family:&quot;color:#3F7F5F;">//</span><span style="font-size:12.0pt;font-family:宋体;color:#3F7F5F;">处理</span><span style="font-size:12.0pt;font-family:&quot;color:#3F7F5F;">POST</span><span style="font-size:12.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:12.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp; </span></span><b><span style="font-size:12.0pt;font-family:&quot;color:#7F0055;">public</span></b><span style="font-size:12.0pt;font-family:&quot;color:black;"> </span><b><span style="font-size:12.0pt;font-family:&quot;color:#7F0055;">void</span></b><span style="font-size:12.0pt;font-family:&quot;color:black;"> doPost(HttpServletRequest request,
+  HttpServletResponse response)</span><span style="font-size:12.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:12.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><b><span style="font-size:12.0pt;font-family:&quot;color:#7F0055;">throws</span></b><span style="font-size:12.0pt;font-family:&quot;color:black;"> ServletException, IOException {</span><span style="font-size:12.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:12.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>System.</span><i><span style="font-size:12.0pt;font-family:&quot;color:#0000C0;">out</span></i><span style="font-size:12.0pt;font-family:&quot;color:black;">.println(</span><span style="font-size:12.0pt;font-family:&quot;color:#2A00FF;">"</span><span style="font-size:12.0pt;font-family:宋体;color:#2A00FF;">一个</span><span style="font-size:12.0pt;font-family:&quot;color:#2A00FF;">POST</span><span style="font-size:12.0pt;font-family:宋体;color:#2A00FF;">方式的请求到达</span><span style="font-size:12.0pt;font-family:&quot;color:#2A00FF;">HelloServlet..."</span><span style="font-size:12.0pt;font-family:&quot;color:black;">);</span><span style="font-size:12.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:12.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:12.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:12.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:12.0pt;font-family:&quot;color:#3F7F5F;">//</span><span style="font-size:12.0pt;font-family:宋体;color:#3F7F5F;">接收客户端请求信息</span><span style="font-size:12.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:12.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>String info =request.</span><span style="font-size:12.0pt;font-family:&quot;color:red;">getParameter</span><span style="font-size:12.0pt;font-family:&quot;color:black;">(</span><span style="font-size:12.0pt;font-family:&quot;color:#2A00FF;">"info"</span><span style="font-size:12.0pt;font-family:&quot;color:black;">);</span><span style="font-size:12.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:12.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:12.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:12.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:12.0pt;font-family:&quot;color:#3F7F5F;">//</span><span style="font-size:12.0pt;font-family:宋体;color:#3F7F5F;">向客户端浏览器输出消息</span><span style="font-size:12.0pt;font-family:&quot;color:#3F7F5F;">--&gt; response</span><span style="font-size:12.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:12.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>response.setContentType(</span><span style="font-size:12.0pt;font-family:&quot;color:#2A00FF;">"text/html;</span><span style="font-size:12.0pt;font-family:&quot;color:red;">charset=gbk</span><span style="font-size:12.0pt;font-family:&quot;color:#2A00FF;">"</span><span style="font-size:12.0pt;font-family:&quot;color:black;">);</span><span style="font-size:12.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:12.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:12.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:12.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:12.0pt;font-family:&quot;color:#3F7F5F;">//</span><span style="font-size:12.0pt;font-family:宋体;color:#3F7F5F;">获取指向客户端的输出流</span><span style="font-size:12.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:12.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>PrintWriter out =
+  response.getWriter();</span><span style="font-size:12.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:12.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>out.println(</span><span style="font-size:12.0pt;font-family:&quot;color:#2A00FF;">"&lt;html&gt;"</span><span style="font-size:12.0pt;font-family:&quot;color:black;">);</span><span style="font-size:12.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:12.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>out.println(</span><span style="font-size:12.0pt;font-family:&quot;color:#2A00FF;">"&lt;head&gt;&lt;title&gt;A
+  Servlet&lt;/title&gt;&lt;/head&gt;"</span><span style="font-size:12.0pt;font-family:&quot;color:black;">);</span><span style="font-size:12.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:12.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>out.println(</span><span style="font-size:12.0pt;font-family:&quot;color:#2A00FF;">"&lt;body&gt;"</span><span style="font-size:12.0pt;font-family:&quot;color:black;">);</span><span style="font-size:12.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:12.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>out.println(</span><span style="font-size:12.0pt;font-family:&quot;color:#2A00FF;">"</span><span style="font-size:12.0pt;font-family:宋体;color:#2A00FF;">服务器输出</span><span style="font-size:12.0pt;font-family:&quot;color:#2A00FF;">: "</span><span style="font-size:12.0pt;font-family:&quot;color:black;">+info);</span><span style="font-size:12.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:12.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>out.println(</span><span style="font-size:12.0pt;font-family:&quot;color:#2A00FF;">"&lt;/body&gt;"</span><span style="font-size:12.0pt;font-family:&quot;color:black;">);</span><span style="font-size:12.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:12.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>out.println(</span><span style="font-size:12.0pt;font-family:&quot;color:#2A00FF;">"&lt;/html&gt;"</span><span style="font-size:12.0pt;font-family:&quot;color:black;">);</span><span style="font-size:12.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:12.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:12.0pt;font-family:&quot;color:#3F7F5F;">//</span><span style="font-size:12.0pt;font-family:宋体;color:#3F7F5F;">释放自己资源</span><span style="font-size:12.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:12.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>out.flush();</span><span style="font-size:12.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:12.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>out.close();</span><span style="font-size:12.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:12.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp; </span>}</span><span style="font-size:12.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:12.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp; </span></span><span style="font-size:12.0pt;font-family:&quot;color:teal;"></span>
+				</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<h2 id='me="_Toc508175149"2.3乱码解决(重点)'>
+	<a name="_Toc508175149"></a><span>2.3</span>乱码解决(重点)
+</h2>
+<p class="MsoNormal">
+	客户端和服务器之间默认都是使用<span>Latin1</span>英文字符集编码<span>,</span>不支持中文<span>.</span>
+</p>
+<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%;border-collapse:collapse;border:none;">
+	<tbody>
+		<tr>
+			<td width="100%" valign="top" style="border:solid black 1.0pt;">
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<b><span style="font-size:10.5pt;font-family:宋体;">客户端到服务器的乱码</span></b><b><span style="font-size:10.5pt;font-family:&quot;">:</span></b>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;text-indent:21.0pt;">
+					<b><span style="font-size:10.5pt;font-family:&quot;">Get</span></b>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;text-indent:21.0pt;">
+					<b><span style="font-size:10.5pt;font-family:&quot;"></span></b>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;text-indent:21.0pt;">
+					<span style="font-size:12.5pt;font-family:宋体;">在</span><span style="font-size:12.5pt;font-family:&quot;color:red;">conf/server.xml</span><span style="font-size:12.5pt;font-family:宋体;">中添加配置信息：</span><span style="font-size:12.5pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;text-indent:21.0pt;">
+					<span style="font-size:12.5pt;font-family:&quot;"><span>&nbsp;</span><span>&nbsp;</span>&lt;Connector port="80"
+  protocol="HTTP/1.1" </span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;text-indent:21.0pt;">
+					<span style="font-size:12.5pt;font-family:&quot;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>connectionTimeout="20000" </span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;text-indent:21.0pt;">
+					<span style="font-size:12.5pt;font-family:&quot;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>redirectPort="8443" <b><span style="color:red;">URIEncoding="UTF-8"</span></b>/&gt;</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;text-indent:21.0pt;">
+					<b><span style="font-size:10.5pt;font-family:&quot;"></span></b>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;text-indent:21.0pt;">
+					<b><span style="font-size:12.5pt;font-family:&quot;">Post</span></b>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<b><span style="font-size:10.5pt;font-family:&quot;"><span>&nbsp;&nbsp;&nbsp;&nbsp; </span><span>&nbsp;&nbsp;</span></span></b><span style="font-family:&quot;color:#3F7F5F;">//</span><span style="font-family:宋体;color:#3F7F5F;">设置请求的字符集编码</span><span style="font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp; </span>request.setCharacterEncoding(</span><span style="font-family:&quot;color:#2A00FF;">"utf-8"</span><span style="font-family:&quot;color:black;">);</span><span style="font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp; </span></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-family:宋体;color:black;">硬编码</span><span style="font-family:&quot;color:black;">[</span><span style="font-family:宋体;color:#0000CC;">不常用</span><span style="font-family:&quot;color:black;">] --</span><span style="font-family:宋体;color:black;">重构字符串</span><span style="font-family:&quot;color:black;">: </span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-family:&quot;color:black;">[</span><span style="font-family:宋体;color:black;">适用于上面两种方式</span><span style="font-family:&quot;color:black;">,</span><b><span style="font-family:宋体;color:red;">注</span></b><b><span style="font-family:&quot;color:red;">:</span></b><b><span style="font-family:宋体;color:red;">不要与上面的配置一起使用</span></b><span style="font-family:&quot;color:black;">]</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-family:&quot;color:black;"><span>&nbsp;&nbsp; </span><span>&nbsp;&nbsp; </span></span><span style="font-size:11.0pt;font-family:&quot;color:#3F7F5F;">//</span><span style="font-size:11.0pt;font-family:宋体;color:#3F7F5F;">重构字符串</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp; </span></span><span style="font-size:12.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp; </span>String
+  newInfo = </span><b><span style="font-size:12.0pt;font-family:&quot;color:#7F0055;">new</span></b><span style="font-size:12.0pt;font-family:&quot;color:black;"> String(info.getBytes(</span><span style="font-size:12.0pt;font-family:&quot;color:#2A00FF;">"iso-8859-1"</span><span style="font-size:12.0pt;font-family:&quot;color:black;">),</span><span style="font-size:12.0pt;font-family:&quot;color:#2A00FF;">"UTF-8"</span><span style="font-size:12.0pt;font-family:&quot;color:black;">);</span>
+				</p>
+				<div style="border:none;padding:0cm 0cm 1.0pt 0cm;">
+					<p class="MsoNormal" align="left" style="text-align:left;">
+						<span style="font-size:12.0pt;font-family:&quot;color:black;"></span>
+					</p>
+				</div>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<b><span style="font-size:13.5pt;font-family:宋体;">服务器到客户端的乱码</span></b><b><span style="font-size:13.5pt;font-family:&quot;">:</span></b>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<b><span style="font-size:13.5pt;font-family:宋体;">默认编码为</span></b><b><span style="font-size:13.5pt;font-family:&quot;">iso-8859-1</span></b><b><span style="font-size:13.5pt;font-family:宋体;">英文编码</span></b><b><span style="font-size:13.5pt;font-family:&quot;"></span></b>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;text-indent:20.25pt;">
+					<span style="font-size:13.5pt;font-family:&quot;color:red;">response.setContentType("text/html;charset=UTF-8");</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;text-indent:15.75pt;">
+					<span style="font-size:10.5pt;font-family:&quot;color:red;"></span>
+				</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<h2 id='me="_Toc508175150"2.4理解Servlet的生命周期'>
+	<a name="_Toc508175150"></a><span>2.4 </span>理解Servlet的生命周期
+</h2>
+<p class="MsoNormal">
+	Servlet的生命周期由Servlet容器(如：Tomcat)控制
+</p>
+<p class="MsoNormal">
+	Servlet 生命周期经历了以下几个阶段:
+</p>
+<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%;border-collapse:collapse;border:none;">
+	<tbody>
+		<tr>
+			<td width="100%" valign="top" style="border:solid black 1.0pt;">
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:14.5pt;font-family:宋体;">构造</span><span style="font-size:14.5pt;font-family:&quot;"> </span><span style="font-size:14.5pt;font-family:Wingdings;"><span>à</span></span><span style="font-size:14.5pt;font-family:&quot;"> Servlet();</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:14.5pt;font-family:宋体;">初始化</span><span style="font-size:14.5pt;font-family:&quot;"> </span><span style="font-size:14.5pt;font-family:Wingdings;"><span>à</span></span><span style="font-size:14.5pt;font-family:&quot;"> init()<span>&nbsp; </span>,init(ServletConfig )</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:14.5pt;font-family:宋体;">服务</span><span style="font-size:14.5pt;font-family:&quot;"> </span><span style="font-size:14.5pt;font-family:Wingdings;"><span>à</span></span><span style="font-size:14.5pt;font-family:&quot;"> service() </span><span style="font-size:14.5pt;font-family:Wingdings;"><span>à</span></span><span style="font-size:14.5pt;font-family:&quot;"> </span><span style="font-size:14.5pt;font-family:宋体;">调用子类重写的</span><span style="font-size:14.5pt;font-family:&quot;"> doGet()</span><span style="font-size:14.5pt;font-family:宋体;">或</span><span style="font-size:14.5pt;font-family:&quot;">doPost()</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:14.5pt;font-family:宋体;">销毁</span><span style="font-size:14.5pt;font-family:&quot;"> </span><span style="font-size:14.5pt;font-family:Wingdings;"><span>à</span></span><span style="font-size:14.5pt;font-family:&quot;"> destory() </span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;">package
+  com.whos.servlet;</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;">import
+  java.io.IOException;</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;">import
+  java.io.PrintWriter;</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;">import
+  javax.servlet.ServletException;</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;">import
+  javax.servlet.ServletRequest;</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;">import
+  javax.servlet.ServletResponse;</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;">import
+  javax.servlet.http.HttpServlet;</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;">import
+  javax.servlet.http.HttpServletRequest;</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;">import
+  javax.servlet.http.HttpServletResponse;</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;">public
+  class <span style="color:#0000CC;">LifeCycleServlet</span> extends HttpServlet
+  {</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;"><span>&nbsp;&nbsp;&nbsp; </span></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;"><span>&nbsp;&nbsp;&nbsp; </span>public <span style="color:red;">LifeCycleServlet</span>()
+  {</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>System.out.println("1.</span><span style="font-size:10.5pt;font-family:宋体;">构造</span><span style="font-size:10.5pt;font-family:&quot;">servlet...");</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;"><span>&nbsp;&nbsp;&nbsp; </span>}</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;"><span>&nbsp;&nbsp;&nbsp; </span></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;"><span>&nbsp;&nbsp;&nbsp; </span>/**</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;"><span>&nbsp;&nbsp;&nbsp; </span><span>&nbsp;</span>* </span><span style="font-size:10.5pt;font-family:宋体;">初始化</span><span style="font-size:10.5pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;"><span>&nbsp;&nbsp;&nbsp; </span><span>&nbsp;</span>*/</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;"><span>&nbsp;&nbsp;&nbsp; </span>public void <span style="color:red;">init</span>(){</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>System.out.println("2.</span><span style="font-size:10.5pt;font-family:宋体;">初始化</span><span style="font-size:10.5pt;font-family:&quot;">init()...");</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;"><span>&nbsp;&nbsp;&nbsp; </span>}</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;"><span>&nbsp;&nbsp;&nbsp; </span></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;"><span>&nbsp;&nbsp;&nbsp; </span>public void <span style="color:red;">service</span>(ServletRequest
+  req, ServletResponse res)</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>throws ServletException,
+  IOException {</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;"><span>&nbsp;&nbsp;&nbsp; </span><b><span style="color:#0000CC;"><span>&nbsp;&nbsp;&nbsp; </span>super.service(req,
+  res); //</span></b></span><b><span style="font-size:10.5pt;font-family:宋体;color:#0000CC;">调用父类中被重写的方法</span></b><b><span style="font-size:10.5pt;font-family:&quot;color:#0000CC;"></span></b>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>System.out.println("3.</span><span style="font-size:10.5pt;font-family:宋体;">执行服务</span><span style="font-size:10.5pt;font-family:&quot;">service()...");</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;"><span>&nbsp;&nbsp;&nbsp; </span>}</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;"><span>&nbsp;&nbsp;&nbsp; </span></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;"><span>&nbsp;&nbsp;&nbsp; </span>public void <span style="color:red;">destroy</span>()
+  {</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>System.out.println("4.</span><span style="font-size:10.5pt;font-family:宋体;">销毁</span><span style="font-size:10.5pt;font-family:&quot;">servlet....");</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;"><span>&nbsp;&nbsp;&nbsp; </span>}</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;"><span>&nbsp;&nbsp;&nbsp; </span></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;"><span>&nbsp;&nbsp;&nbsp; </span>public void doGet(HttpServletRequest
+  request, HttpServletResponse response)</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>throws ServletException, IOException
+  {</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>System.out.println("</span><span style="font-size:10.5pt;font-family:宋体;">执行</span><span style="font-size:10.5pt;font-family:&quot;">doGet()...");</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;"><span>&nbsp;&nbsp;&nbsp; </span>}</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;"><span>&nbsp;&nbsp;&nbsp; </span>public void doPost(HttpServletRequest
+  request, HttpServletResponse response)</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>throws ServletException,
+  IOException {</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>System.out.println("</span><span style="font-size:10.5pt;font-family:宋体;">执行</span><span style="font-size:10.5pt;font-family:&quot;">doPost()...");</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;"><span>&nbsp;&nbsp;&nbsp; </span>}</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;"></span>
+				</p>
+				<div style="border:none;padding:0cm 0cm 1.0pt 0cm;">
+					<p class="MsoNormal" align="left" style="text-align:left;">
+						<span style="font-size:10.5pt;font-family:&quot;">} </span>
+					</p>
+				</div>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:teal;">&lt;</span><span style="font-size:11.0pt;font-family:&quot;color:#3F7F7F;background:silver;">servlet</span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&gt;</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&lt;</span><span style="font-size:11.0pt;font-family:&quot;color:#3F7F7F;">servlet-name</span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&gt;</span><span style="font-size:11.0pt;font-family:&quot;color:black;">LifeCycleServlet</span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&lt;/</span><span style="font-size:11.0pt;font-family:&quot;color:#3F7F7F;">servlet-name</span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&gt;</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&lt;</span><span style="font-size:11.0pt;font-family:&quot;color:#3F7F7F;">servlet-class</span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&gt;</span><span style="font-size:11.0pt;font-family:&quot;color:black;">com.whos.servlet.LifeCycleServlet</span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&lt;/</span><span style="font-size:11.0pt;font-family:&quot;color:#3F7F7F;">servlet-class</span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&gt;</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:11.0pt;font-family:&quot;color:#3F5FBF;">&lt;!--</span><span style="font-size:11.0pt;font-family:&quot;color:#0000CC;"> </span><span style="font-size:11.0pt;font-family:宋体;color:#0000CC;">启动</span><u><span style="font-size:11.0pt;font-family:&quot;color:#0000CC;">tomcat</span></u><span style="font-size:11.0pt;font-family:宋体;color:#0000CC;">容器时</span><span style="font-size:11.0pt;font-family:&quot;color:#0000CC;">,</span><span style="font-size:11.0pt;font-family:宋体;color:#0000CC;">载入</span><u><span style="font-size:11.0pt;font-family:&quot;color:#0000CC;">Servlet</span></u><span style="font-size:11.0pt;font-family:宋体;color:#0000CC;">实例</span><span style="font-size:11.0pt;font-family:&quot;color:#3F5FBF;"> --&gt;</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp; </span></span><span style="font-size:11.0pt;font-family:&quot;color:red;"><span>&nbsp;</span>&lt;!--&lt;load-on-startup&gt;0&lt;/load-on-startup&gt;
+  --&gt;</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp; </span></span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&lt;/</span><span style="font-size:11.0pt;font-family:&quot;color:#3F7F7F;background:silver;">servlet</span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&gt;</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp; </span></span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&lt;</span><span style="font-size:11.0pt;font-family:&quot;color:#3F7F7F;">servlet-mapping</span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&gt;</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&lt;</span><span style="font-size:11.0pt;font-family:&quot;color:#3F7F7F;">servlet-name</span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&gt;</span><span style="font-size:11.0pt;font-family:&quot;color:black;">LifeCycleServlet</span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&lt;/</span><span style="font-size:11.0pt;font-family:&quot;color:#3F7F7F;">servlet-name</span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&gt;</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;text-indent:27.75pt;">
+					<span style="font-size:11.0pt;font-family:&quot;color:teal;">&lt;</span><span style="font-size:11.0pt;font-family:&quot;color:#3F7F7F;">url-pattern</span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&gt;</span><span style="font-size:11.0pt;font-family:&quot;color:black;">/life</span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&lt;/</span><span style="font-size:11.0pt;font-family:&quot;color:#3F7F7F;">url-pattern</span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&gt;</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:teal;">&lt;/</span><span style="font-size:11.0pt;font-family:&quot;color:#3F7F7F;">servlet-mapping</span><span style="font-size:11.0pt;font-family:&quot;color:teal;">&gt;</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span></span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="margin-left:36.0pt;text-align:left;text-indent:-18.0pt;">
+					<span style="font-size:12.5pt;font-family:Wingdings;"><span>v<span>&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><b><span style="font-size:12.5pt;font-family:宋体;">当第一次开始调用某个</span></b><b><span style="font-size:12.5pt;font-family:&quot;">Servlet</span></b><b><span style="font-size:12.5pt;font-family:宋体;">的时候，系统就会为它创建一个实例，然后调用</span></b><b><span style="font-size:12.5pt;font-family:&quot;">init()</span></b><b><span style="font-size:12.5pt;font-family:宋体;">方法，主要是进行对该</span></b><b><span style="font-size:12.5pt;font-family:&quot;">Servlet</span></b><b><span style="font-size:12.5pt;font-family:宋体;">的一些初始化，如果此时服务器中已存在了这个实例，那么就省去了第一步的过程，直接使用该实例，只不过会创建一个新的线程，<span style="color:red;">每一个线程在创建的同时会调用</span></span></b><b><span style="font-size:12.5pt;font-family:&quot;color:red;">service()</span></b><b><span style="font-size:12.5pt;font-family:宋体;color:red;">方法</span></b><b><span style="font-size:12.5pt;font-family:宋体;">来根据<span style="color:red;">用户的请求类型决定调用</span></span></b><b><span style="font-size:12.5pt;font-family:&quot;color:red;">doGet()</span></b><b><span style="font-size:12.5pt;font-family:宋体;color:red;">或</span></b><b><span style="font-size:12.5pt;font-family:&quot;color:red;">doPost()</span></b><b><span style="font-size:12.5pt;font-family:宋体;color:red;">或是其它方法进行处理</span></b><b><span style="font-size:12.5pt;font-family:宋体;">，当所有的工作都做完，</span></b><b><span style="font-size:12.5pt;font-family:&quot;">Servlet</span></b><b><span style="font-size:12.5pt;font-family:宋体;">需要被从服务器中删除的时候，<span style="color:red;">服务器则会调用</span></span></b><b><span style="font-size:12.5pt;font-family:&quot;color:red;">destory()</span></b><b><span style="font-size:12.5pt;font-family:宋体;color:red;">方法</span></b><b><span style="font-size:12.5pt;font-family:宋体;">进行一些清理工作，如释放数据库连接，关闭打开的文件等等，之后将实例删除。</span></b><span style="font-size:12.5pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:10.5pt;font-family:&quot;"></span>
+				</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<h2 id='me="_Toc508175151"2.5Servlet与表单'>
+	<a name="_Toc508175151"></a><span>2.5 </span>Servlet与表单
+</h2>
+<p class="MsoNormal">
+	Servlet与表单是常见一种操作.
+</p>
+<p class="MsoNormal">
+	<br />
+</p>
+<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%;border-collapse:collapse;border:none;">
+	<tbody>
+		<tr>
+			<td width="100%" valign="top" style="border:solid black 1.0pt;">
+				<p class="MsoNormal" align="left" style="margin-left:36.0pt;text-align:left;text-indent:-18.0pt;">
+					<span style="font-size:12.5pt;font-family:Wingdings;"><span>v<span>&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><span style="font-size:12.5pt;font-family:宋体;">就如同</span><span style="font-size:12.5pt;font-family:&quot;">doGet()</span><span style="font-size:12.5pt;font-family:宋体;">方法用来获取用户提交的</span><span style="font-size:12.5pt;font-family:&quot;">get</span><span style="font-size:12.5pt;font-family:宋体;">信息进行处理一样，</span><span style="font-size:12.5pt;font-family:&quot;">HttpServlet</span><span style="font-size:12.5pt;font-family:宋体;">中还定义了</span><span style="font-size:12.5pt;font-family:&quot;">doPost()</span><span style="font-size:12.5pt;font-family:宋体;">方法来处理用户提交的</span><span style="font-size:12.5pt;font-family:&quot;">post</span><span style="font-size:12.5pt;font-family:宋体;">信息，而且两者的处理方式是一样的，接收请求，发出响应。</span><span style="font-size:12.5pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:12.5pt;font-family:宋体;">表<b>单作为网络中运用最广泛的应用之一，涉及到无数功能，最常见的有注册、登陆、留言、登记信息等等，下面我们用实例一步步的学习如何使用</b></span><b><span style="font-size:12.5pt;font-family:&quot;">Servlet</span></b><b><span style="font-size:12.5pt;font-family:宋体;">获取表单数据。</span></b><b><span style="font-size:12.5pt;font-family:&quot;"></span></b>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<b><span style="font-size:12.5pt;font-family:&quot;"></span></b>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;text-indent:6.25pt;">
+					<span style="font-size:12.5pt;font-family:&quot;">String request.<span style="color:red;">getParameter</span>(“</span><span style="font-size:12.5pt;font-family:宋体;">参数名</span><span style="font-size:12.5pt;font-family:&quot;">”)</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;text-indent:6.25pt;">
+					<span style="font-size:12.5pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span>public <a href="http://java.sun.com/j2se/1.4/docs/api/java/lang/String.html">String</a>[]<span>&nbsp; </span><span style="color:red;">getParameterValues</span>(<a href="http://java.sun.com/j2se/1.4/docs/api/java/lang/String.html">String</a>&nbsp;name) –</span><span style="font-family:宋体;">比如</span><span>: </span><span style="font-family:宋体;">复选框</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span>&lt;form&gt;</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span><span>&nbsp;&nbsp; </span>&lt;input type=”checkbox” name=”hobby” value=”</span><span style="font-family:宋体;">音乐</span><span>”&gt;</span><span style="font-family:宋体;">音乐</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;text-indent:21.0pt;">
+					<span>&lt;input type=”checkbox” name=”hobby” value=”</span><span style="font-family:宋体;">运动</span><span>”&gt;</span><span style="font-family:宋体;">运动</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;text-indent:21.0pt;">
+					<span>&lt;input type=”checkbox” name=”hobby” value=”</span><span style="font-family:宋体;">阅读</span><span>”&gt;</span><span style="font-family:宋体;">阅读</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span><span>&nbsp; </span><span>&nbsp;&nbsp;&nbsp;</span>….</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span>&lt;/form&gt;</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<b><i><span style="font-size:11.0pt;">Servlet</span></i></b><b><i><span style="font-size:11.0pt;font-family:宋体;">代码</span></i></b><b><i><span style="font-size:11.0pt;">: </span></i></b>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;">String[] hobbyArr = request.getParameterValues(</span><span style="font-size:11.0pt;font-family:&quot;color:#2A00FF;">"hobby"</span><span style="font-size:11.0pt;font-family:&quot;color:black;">);</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp; </span></span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>String hobbies=</span><span style="font-size:11.0pt;font-family:&quot;color:#2A00FF;">""</span><span style="font-size:11.0pt;font-family:&quot;color:black;">;</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><b><span style="font-size:11.0pt;font-family:&quot;color:#7F0055;">for</span></b><span style="font-size:11.0pt;font-family:&quot;color:black;">(String<span>&nbsp; </span>h : hobbyArr){</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>hobbies += h+</span><span style="font-size:11.0pt;font-family:&quot;color:#2A00FF;">" "</span><span style="font-size:11.0pt;font-family:&quot;color:black;">;</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>System.</span><i><span style="font-size:11.0pt;font-family:&quot;color:#0000C0;">out</span></i><span style="font-size:11.0pt;font-family:&quot;color:black;">.println(</span><span style="font-size:11.0pt;font-family:&quot;color:#2A00FF;">"</span><span style="font-size:11.0pt;font-family:宋体;color:#2A00FF;">爱好</span><span style="font-size:11.0pt;font-family:&quot;color:#2A00FF;">: "</span><span style="font-size:11.0pt;font-family:&quot;color:black;">+hobbies);</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:12.5pt;font-family:&quot;"></span>
+				</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<h2 id='me="_Toc508175152"2.6get与ot两种请求方式的区别'>
+	<a name="_Toc508175152"></a><span>2.6 get</span>与<span>post</span>两种请求方式的区别
+</h2>
+<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%;border-collapse:collapse;border:none;">
+	<tbody>
+		<tr>
+			<td width="100%" valign="top" style="border:solid black 1.0pt;">
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<b><span style="font-size:14.5pt;font-family:&quot;">1.Get</span></b>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:14.5pt;font-family:&quot;"><span>&nbsp;</span>1) </span><span style="font-size:14.5pt;font-family:宋体;">是表单省略</span><span style="font-size:14.5pt;font-family:&quot;">method</span><span style="font-size:14.5pt;font-family:宋体;">时</span><span style="font-size:14.5pt;font-family:&quot;">,</span><span style="font-size:14.5pt;font-family:宋体;color:#0000CC;">默认的请求方式</span><span style="font-size:14.5pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:14.5pt;font-family:&quot;"><span>&nbsp;</span>2) get</span><span style="font-size:14.5pt;font-family:宋体;">方式请求的数据是<span style="color:#0000CC;">明文显示在地址栏上的</span></span><span style="font-size:14.5pt;font-family:&quot;">,</span><span style="font-size:14.5pt;font-family:宋体;">不适合发送敏感数据</span><span style="font-size:14.5pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;text-indent:29.1pt;">
+					<b><span style="font-size:14.5pt;font-family:&quot;">/login<span style="color:red;">?</span>username=admin<span style="color:red;">&amp;</span>password=123….</span></b>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;text-indent:29.1pt;">
+					<b><span style="font-size:14.5pt;font-family:&quot;">/calc<span style="color:red;">?</span>num1=2<span style="color:red;">&amp;</span>num2=3<span style="color:red;">&amp;</span>hobby=%E9%98%85%E8%AF%BB</span></b>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;text-indent:29.1pt;">
+					<b><span style="font-size:14.5pt;font-family:&quot;">/</span></b><b><span style="font-size:14.5pt;font-family:宋体;">请求映射名</span></b><b><span style="font-size:14.5pt;font-family:&quot;">?</span></b><b><span style="font-size:14.5pt;font-family:宋体;">参数名</span></b><b><span style="font-size:14.5pt;font-family:&quot;">1=</span></b><b><span style="font-size:14.5pt;font-family:宋体;">参数值</span></b><b><span style="font-size:14.5pt;font-family:&quot;">1&amp;</span></b><b><span style="font-size:14.5pt;font-family:宋体;">参数名</span></b><b><span style="font-size:14.5pt;font-family:&quot;">2=</span></b><b><span style="font-size:14.5pt;font-family:宋体;">参数值</span></b><b><span style="font-size:14.5pt;font-family:&quot;">2&amp;….</span></b>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;text-indent:29.1pt;">
+					<b><span style="font-size:14.5pt;font-family:&quot;color:red;">URL</span></b><b><span style="font-size:14.5pt;font-family:宋体;color:red;">中不能出现空格</span></b><b><span style="font-size:14.5pt;font-family:&quot;color:red;">.</span></b>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;text-indent:7.25pt;">
+					<span style="font-size:14.5pt;font-family:&quot;">3) get</span><span style="font-size:14.5pt;font-family:宋体;">方式</span><span style="font-size:14.5pt;font-family:&quot;">url</span><span style="font-size:14.5pt;font-family:宋体;">地址栏最多只能有</span><span style="font-size:14.5pt;font-family:&quot;">255</span><span style="font-size:14.5pt;font-family:宋体;">个字符长度</span><span style="font-size:14.5pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<b><span style="font-size:12.5pt;font-family:&quot;"></span></b>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<b><span style="font-size:12.5pt;font-family:&quot;">2.POST</span></b>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:12.5pt;font-family:&quot;"><span>&nbsp;</span>1)</span><span style="font-size:12.5pt;font-family:宋体;color:red;">在表单中使用最多的方式</span><span style="font-size:12.5pt;font-family:&quot;">. </span><span style="font-size:12.5pt;font-family:宋体;">必须写上</span><span style="font-size:12.5pt;font-family:&quot;">method=”post”</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:12.5pt;font-family:&quot;"><span>&nbsp;</span>2)post</span><span style="font-size:12.5pt;font-family:宋体;">递交的含义</span><span style="font-size:12.5pt;font-family:&quot;">,</span><span style="font-size:12.5pt;font-family:宋体;color:red;">信息不是明文显示在地址栏上的</span><span style="font-size:12.5pt;font-family:&quot;">.</span><span style="font-size:12.5pt;font-family:宋体;">通过后台传递的较于</span><span style="font-size:12.5pt;font-family:&quot;">get</span><span style="font-size:12.5pt;font-family:宋体;">更安全的方式</span><span style="font-size:12.5pt;font-family:&quot;">.</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:12.5pt;font-family:&quot;"><span>&nbsp;</span>3)post</span><span style="font-size:12.5pt;font-family:宋体;">方式</span><span style="font-size:12.5pt;font-family:&quot;">url</span><span style="font-size:12.5pt;font-family:宋体;">地址栏字符长度不受限制</span><span style="font-size:12.5pt;font-family:&quot;">.</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<b><span style="font-size:12.5pt;font-family:&quot;"></span></b>
+				</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p class="MsoNormal">
+	<br />
+</p>
+<h2 id='me="_Toc508175153"2.7页面的跳转(重点)'>
+	<a name="_Toc508175153"></a><span>2.7</span>页面的跳转(重点)
+</h2>
+<p class="MsoNormal">
+	分为两种页面跳转<span>:</span>
+</p>
+<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%;border-collapse:collapse;border:none;">
+	<tbody>
+		<tr>
+			<td width="100%" valign="top" style="border:solid black 1.0pt;">
+				<p class="MsoNormal" align="left" style="margin-left:32.2pt;text-align:left;text-indent:-18.0pt;">
+					<b><span style="font-size:14.5pt;font-family:&quot;color:red;"><span>1&gt;<span> </span></span></span></b><b><span style="font-size:14.5pt;font-family:宋体;color:red;">服务器跳转</span></b><b><span style="font-size:14.5pt;font-family:&quot;color:red;"></span></b>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;text-indent:29.25pt;">
+					<span style="font-size:14.5pt;font-family:&quot;color:#0000CC;">|- </span><span style="font-size:14.5pt;font-family:宋体;color:#0000CC;">请求转发</span><span style="font-size:14.5pt;font-family:&quot;color:#0000CC;"> </span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:14.5pt;font-family:宋体;color:#0000CC;">步骤</span><span style="font-size:14.5pt;font-family:&quot;color:#0000CC;">: (1)</span><span style="font-size:14.5pt;font-family:宋体;color:#0000CC;">获得请求转发器对象</span><span style="font-size:14.5pt;font-family:&quot;color:#0000CC;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;text-indent:29.25pt;">
+					<span style="font-size:14.5pt;font-family:&quot;color:#0000CC;"><span>&nbsp;&nbsp; </span>(2)</span><span style="font-size:14.5pt;font-family:宋体;color:#0000CC;">使用该对象进行跳转</span><span style="font-size:14.5pt;font-family:&quot;color:#0000CC;">forward()</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;text-indent:29.25pt;">
+					<span style="font-size:12.5pt;font-family:&quot;color:#0000CC;">request.getRequestDispatcher("/main.jsp").forward(request,
+  response);</span>
+				</p>
+				<p class="MsoNormal" align="left" style="margin-left:32.2pt;text-align:left;text-indent:-18.0pt;">
+					<span style="font-size:10.5pt;font-family:&quot;color:red;"><span>2&gt;<span>&nbsp;&nbsp;&nbsp; </span></span></span><span style="font-size:14.5pt;font-family:宋体;color:red;">客户端跳转</span><span style="font-size:10.5pt;font-family:&quot;color:red;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="margin-left:18.0pt;text-align:left;">
+					<span style="font-size:14.5pt;font-family:&quot;color:#0000CC;"><span>&nbsp; </span>|-</span><span style="font-size:14.5pt;font-family:宋体;color:#0000CC;">请求重定向</span><span style="font-size:14.5pt;font-family:&quot;color:#0000CC;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:14.5pt;font-family:&quot;color:#0000CC;"><span>&nbsp; </span><span>&nbsp;</span></span><span style="font-family:&quot;color:#3F7F5F;">//</span><span style="font-family:宋体;color:#3F7F5F;">请求重定向</span><span style="font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="margin-left:18.0pt;text-align:left;">
+					<span style="font-family:&quot;color:black;"><span>&nbsp;&nbsp; </span>response.sendRedirect(</span><span style="font-family:&quot;color:#2A00FF;">"main.jsp"</span><span style="font-family:&quot;color:black;">);</span><span style="font-size:10.5pt;font-family:&quot;color:#0000CC;"></span>
+				</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p class="MsoNormal">
+	两种跳转的区别<span>:</span>
+</p>
+<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%;border-collapse:collapse;border:none;">
+	<tbody>
+		<tr>
+			<td width="100%" valign="top" style="border:solid black 1.0pt;">
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:14.5pt;font-family:宋体;color:red;">服务器跳转</span><span style="font-size:14.5pt;font-family:&quot;color:red;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="margin-left:39.75pt;text-align:left;text-indent:-18.0pt;">
+					<span style="font-size:14.5pt;font-family:&quot;color:#0000CC;"><span>1&gt;<span> </span></span></span><span style="font-size:14.5pt;font-family:宋体;color:#0000CC;">服务器跳转地址栏不变</span><span style="font-size:14.5pt;font-family:&quot;color:#0000CC;">,</span><span style="font-size:14.5pt;font-family:宋体;color:#0000CC;">依然后为请求的</span><span style="font-size:14.5pt;font-family:&quot;color:#0000CC;">servlet-url</span><span style="font-size:14.5pt;font-family:宋体;color:#0000CC;">信息</span><span style="font-size:14.5pt;font-family:&quot;color:#0000CC;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="margin-left:39.75pt;text-align:left;">
+					<span style="font-size:14.5pt;font-family:宋体;color:#0000CC;">而客户端地址栏改变为页面的地址</span><span style="font-size:14.5pt;font-family:&quot;color:#0000CC;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="margin-left:39.75pt;text-align:left;text-indent:-18.0pt;">
+					<span style="font-size:14.5pt;font-family:&quot;color:#0000CC;"><span>2&gt;<span> </span></span></span><span style="font-size:14.5pt;font-family:宋体;color:#0000CC;">服务器跳转可以在页面中访问</span><span style="font-size:14.5pt;font-family:宋体;color:red;">请求作用域</span><span style="font-size:14.5pt;font-family:宋体;color:#0000CC;">中的属性值</span><span style="font-size:14.5pt;font-family:&quot;color:#0000CC;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="margin-left:39.75pt;text-align:left;">
+					<span style="font-size:14.5pt;font-family:宋体;color:#0000CC;">而客户端跳转不能访问请求作用域中的属性</span><span style="font-size:14.5pt;font-family:&quot;color:#0000CC;">.</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:14.5pt;font-family:&quot;color:#0000CC;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>[</span><span style="font-size:14.5pt;font-family:宋体;color:red;">二次请求</span><span style="font-size:14.5pt;font-family:&quot;color:#0000CC;">]</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span></span><span style="font-size:14.5pt;font-family:&quot;color:#0000CC;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="margin-left:39.75pt;text-align:left;text-indent:-18.0pt;">
+					<span style="font-size:14.5pt;font-family:&quot;color:#0000CC;"><span>3&gt;<span> </span></span></span><span style="font-size:14.5pt;font-family:宋体;color:#0000CC;">服务器跳转只能在当前</span><span style="font-size:14.5pt;font-family:&quot;color:#0000CC;">web</span><span style="font-size:14.5pt;font-family:宋体;color:#0000CC;">应用中进行转发</span><span style="font-size:14.5pt;font-family:&quot;color:#0000CC;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="margin-left:39.75pt;text-align:left;">
+					<span style="font-size:14.5pt;font-family:宋体;color:#0000CC;">而客户端跳转可以是任意</span><span style="font-size:14.5pt;font-family:&quot;color:#0000CC;">URL</span><span style="font-size:14.5pt;font-family:宋体;color:#0000CC;">信息</span><span style="font-size:14.5pt;font-family:&quot;color:#0000CC;">.</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:14.5pt;font-family:&quot;color:red;"></span><span style="font-size:14.5pt;font-family:&quot;color:red;"></span>
+				</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p class="MsoNormal">
+	<b>附: </b><b>请求作用域scope</b>
+</p>
+<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%;border-collapse:collapse;border:none;">
+	<tbody>
+		<tr>
+			<td width="100%" valign="top" style="border:solid black 1.0pt;">
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:14.5pt;font-family:宋体;color:red;">服务器中的一段内存空间</span><span style="font-size:14.5pt;font-family:&quot;color:red;">,</span><span style="font-size:14.5pt;font-family:宋体;color:red;">时效性只能在一次请求过程中有效</span><span style="font-size:14.5pt;font-family:&quot;color:red;">!!!</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:14.5pt;font-family:&quot;color:#0000CC;">request.setAttribute(String
+  key,Object </span><span style="font-size:14.5pt;font-family:宋体;color:#0000CC;">对象</span><span style="font-size:14.5pt;font-family:&quot;color:#0000CC;">); //</span><span style="font-size:14.5pt;font-family:宋体;color:#0000CC;">添加</span><span style="font-size:14.5pt;font-family:&quot;color:#0000CC;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:14.5pt;font-family:&quot;color:#0000CC;">Object request.getAttribute(“key”);
+  //</span><span style="font-size:14.5pt;font-family:宋体;color:#0000CC;">获取</span><span style="font-size:14.5pt;font-family:&quot;color:#0000CC;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:14.5pt;font-family:&quot;color:#0000CC;">Void request.removeAttribute(“key”); </span><span style="font-size:14.5pt;font-family:宋体;color:#0000CC;">移除作用域中的对象</span><span style="font-size:14.5pt;font-family:&quot;color:#0000CC;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:14.5pt;font-family:&quot;color:#0000CC;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<b><span style="font-size:11.0pt;font-family:&quot;color:#7F0055;">if</span></b><span style="font-size:11.0pt;font-family:&quot;color:black;">(username.equals(</span><span style="font-size:11.0pt;font-family:&quot;color:#2A00FF;">"admin"</span><span style="font-size:11.0pt;font-family:&quot;color:black;">) &amp;&amp; password.equals(</span><span style="font-size:11.0pt;font-family:&quot;color:#2A00FF;">"123"</span><span style="font-size:11.0pt;font-family:&quot;color:black;">)){</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:11.0pt;font-family:&quot;color:#3F7F5F;">//</span><span style="font-size:11.0pt;font-family:宋体;color:#3F7F5F;">设置请求作用域属性</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>request.setAttribute(</span><span style="font-size:11.0pt;font-family:&quot;color:#2A00FF;">"username"</span><span style="font-size:11.0pt;font-family:&quot;color:black;">,</span><span style="font-size:11.0pt;font-family:&quot;color:#2A00FF;">"admin"</span><span style="font-size:11.0pt;font-family:&quot;color:black;">);</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>request.getRequestDispatcher(</span><span style="font-size:11.0pt;font-family:&quot;color:#2A00FF;">"/main.jsp"</span><span style="font-size:11.0pt;font-family:&quot;color:black;">).forward(request, response);</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}</span><b><span style="font-size:11.0pt;font-family:&quot;color:#7F0055;">else</span></b><span style="font-size:11.0pt;font-family:&quot;color:black;">{</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>String error=</span><span style="font-size:11.0pt;font-family:&quot;color:#2A00FF;">"</span><span style="font-size:11.0pt;font-family:宋体;color:#2A00FF;">用户名或密码错误</span><span style="font-size:11.0pt;font-family:&quot;color:#2A00FF;">!"</span><span style="font-size:11.0pt;font-family:&quot;color:black;">;</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:11.0pt;font-family:&quot;color:#3F7F5F;">//</span><span style="font-size:11.0pt;font-family:宋体;color:#3F7F5F;">设置请求作用域属性</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>request.setAttribute(</span><span style="font-size:11.0pt;font-family:&quot;color:#2A00FF;">"error"</span><span style="font-size:11.0pt;font-family:&quot;color:black;">,error);</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:11.0pt;font-family:&quot;color:#3F7F5F;">//</span><span style="font-size:11.0pt;font-family:宋体;color:#3F7F5F;">返回到登录页面</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>request.getRequestDispatcher(</span><span style="font-size:11.0pt;font-family:&quot;color:#2A00FF;">"/index.jsp"</span><span style="font-size:11.0pt;font-family:&quot;color:black;">).forward(request, response);</span><span style="font-size:11.0pt;font-family:&quot;"></span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:11.0pt;font-family:&quot;color:black;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}</span>
+				</p>
+				<p class="MsoNormal" align="left" style="text-align:left;">
+					<span style="font-size:14.5pt;font-family:&quot;color:red;"></span>
+				</p>
+			</td>
+		</tr>
+	</tbody>
+</table></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/914.html">EL & JSTL</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/916.html">数据建模</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#me="_Toc508175145"me="_Toc311835281"me="_Toc521309529"1.2本次预计讲解的知识点">me="_Toc508175145"me="_Toc311835281"me="_Toc521309529"1.2本次预计讲解的知识点</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#me="_Toc508175147"2.1Servlet简介">me="_Toc508175147"2.1Servlet简介</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#me="_Toc508175148"2.2Servlet的配置和运行">me="_Toc508175148"2.2Servlet的配置和运行</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#me="_Toc508175149"2.3乱码解决(重点)">me="_Toc508175149"2.3乱码解决(重点)</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#me="_Toc508175150"2.4理解Servlet的生命周期">me="_Toc508175150"2.4理解Servlet的生命周期</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#me="_Toc508175151"2.5Servlet与表单">me="_Toc508175151"2.5Servlet与表单</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#me="_Toc508175152"2.6get与ot两种请求方式的区别">me="_Toc508175152"2.6get与ot两种请求方式的区别</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#me="_Toc508175153"2.7页面的跳转(重点)">me="_Toc508175153"2.7页面的跳转(重点)</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

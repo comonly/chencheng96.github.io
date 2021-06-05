@@ -1,0 +1,230 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>stride，padding，kernel_size 和卷积前后特征图尺寸之间的关系_comonly.cn</title>
+<meta name="keywords" content="stride，padding，kernel_size 和卷积前后特征图尺寸之间的关系" />
+<meta name="description" content="众所周知，在定义卷积层的时候，我们一般会设置卷积核大小(kernel_size)，卷积步长 (stride)，特征图填充宽度 (padding)等参数。这些值的设置让卷积核可以从图片的第一个像素刚好扫描到最后一个像素，如下图所示
+
+ 
+
+	不难发现，经过卷积后的特征图尺寸等于卷积核滑动的次数 + 1，在这里等于 5。现在假设卷积前的特征图宽度为&nbsp;&nbsp;，卷积后输出的特征图宽度为&nbsp;&nbsp;，那么它们和上述设置的参数之间的关系是怎样的呢？首先可以确定的是padding之后" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">stride，padding，kernel_size 和卷积前后特征图尺寸之间的关系</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">sudit</li>
+          <li class="lmname"><a href="https://zhuanlan.zhihu.com/p/163017446" target="_blank">https://zhuanlan.zhihu.com/p/163017446</a></li>
+          <li class="timer">2020-12-06</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	机器学习算法分析
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>众所周知，在定义卷积层的时候，我们一般会设置卷积核大小(kernel_size)，卷积步长 (stride)，特征图填充宽度 (padding)等参数。这些值的设置让卷积核可以从图片的第一个像素刚好扫描到最后一个像素，如下图所示
+
+ 
+
+	不难发现，经过卷积后的特征图尺寸等于卷积核滑动的次数 + 1，在这里等于 5。现在假设卷积前的特征图宽度为&nbsp;&nbsp;，卷积后输出的特征图宽度为&nbsp;&nbsp;，那么它们和上述设置的参数之间的关系是怎样的呢？首先可以确定的是padding之后</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	众所周知，在定义卷积层的时候，我们一般会设置卷积核大小(kernel_size)，卷积步长 (stride)，特征图填充宽度 (padding)等参数。这些值的设置让卷积核可以从图片的第一个像素刚好扫描到最后一个像素，如下图所示
+</p>
+<img src="https://pic2.zhimg.com/80/v2-1b331ad30ebc83f12ad70e03800a4cf1_720w.jpg" width="1250" /> 
+<p>
+	不难发现，经过卷积后的特征图尺寸等于卷积核滑动的次数 + 1，在这里等于 5。现在假设卷积前的特征图宽度为&nbsp;<img src="https://www.zhihu.com/equation?tex=N" alt="[公式]" />&nbsp;，卷积后输出的特征图宽度为&nbsp;<img src="https://www.zhihu.com/equation?tex=M" alt="[公式]" />&nbsp;，那么它们和上述设置的参数之间的关系是怎样的呢？首先可以确定的是padding之后的矩阵宽度等于&nbsp;<img src="https://www.zhihu.com/equation?tex=N+%2B+2+%5Ctimes+padding" alt="[公式]" />&nbsp;。另一方面，卷积核的滑动次数等于&nbsp;<img src="https://www.zhihu.com/equation?tex=M-1" alt="[公式]" /> 
+</p>
+<img src="https://pic3.zhimg.com/80/v2-1fd81998132321a4686d98373f19f482_720w.jpg" width="1217" /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1925.html">tensorflow 中 sess.run() 只计算需要输出部分的图</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1927.html">机器学习中的损失函数</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://zhuanlan.zhihu.com/p/163017446" target="_blank">https://zhuanlan.zhihu.com/p/163017446</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

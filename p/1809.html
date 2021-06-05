@@ -1,0 +1,238 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>处理器栈增长方向、堆区增长方向、大小端、数组在内存中地址的分配上的区别_comonly.cn</title>
+<meta name="keywords" content="处理器栈增长方向、堆区增长方向、大小端、数组在内存中地址的分配上的区别" />
+<meta name="description" content="处理器栈的增长方向是与具体的处理器有关，首先要明白，栈区是用来存储局部变量、函数参数的区域，其操作上类似于数据结构中的栈，涉及的是变量间的先后入栈，其地址是升序还是降序的问题。
+
+
+	大小端则指的是变量内部，具体而言是是指的多字节变量在内部字节存储地址排序问题，也是由具体的cpu架构决定。比如X86是小端模式，arm的cpu是可以设置大头还是小头的，可由操作系统自己选(一般操作系统会依赖cpu架构否则效率会降低)。
+
+
+	而至于数组或者结构体在内存中的地址问题与处理器和大小端均无关系，比如定义" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">处理器栈增长方向、堆区增长方向、大小端、数组在内存中地址的分配上的区别</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">烂白菜的自述</li>
+          <li class="lmname"><a href="https://blog.csdn.net/u011116085/article/details/85271072" target="_blank">https://blog.csdn.net/u011116085/article/details/85271072</a></li>
+          <li class="timer">2020-10-04</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>处理器栈的增长方向是与具体的处理器有关，首先要明白，栈区是用来存储局部变量、函数参数的区域，其操作上类似于数据结构中的栈，涉及的是变量间的先后入栈，其地址是升序还是降序的问题。
+
+
+	大小端则指的是变量内部，具体而言是是指的多字节变量在内部字节存储地址排序问题，也是由具体的cpu架构决定。比如X86是小端模式，arm的cpu是可以设置大头还是小头的，可由操作系统自己选(一般操作系统会依赖cpu架构否则效率会降低)。
+
+
+	而至于数组或者结构体在内存中的地址问题与处理器和大小端均无关系，比如定义</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	处理器栈的增长方向是与具体的处理器有关，首先要明白，栈区是用来存储局部变量、函数参数的区域，其操作上类似于数据结构中的栈，涉及的是变量间的先后入栈，其地址是升序还是降序的问题。
+</p>
+<p>
+	大小端则指的是变量内部，具体而言是是指的多字节变量在内部字节存储地址排序问题，也是由具体的cpu架构决定。比如X86是小端模式，arm的cpu是可以设置大头还是小头的，可由操作系统自己选(一般操作系统会依赖cpu架构否则效率会降低)。
+</p>
+<p>
+	而至于数组或者结构体在内存中的地址问题与处理器和大小端均无关系，比如定义数组int a[10] ={0};其在内存中永远满足的是a[0]所在的地址是低地址，而高序号元素占用的是高地址空间！
+</p>
+<p>
+	<img alt="" src="https://img-blog.csdnimg.cn/20181227010951218.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTExMTYwODU=,size_16,color_FFFFFF,t_70" style="height:auto;" /> 
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1808.html">僵尸进程,孤儿进程,守护进程</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1810.html">编译原理 -- 编译的过程</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/u011116085/article/details/85271072" target="_blank">https://blog.csdn.net/u011116085/article/details/85271072</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

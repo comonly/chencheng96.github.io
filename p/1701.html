@@ -1,0 +1,357 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>阿里云重启需要注意的问题_comonly.cn</title>
+<meta name="keywords" content="阿里云重启需要注意的问题" />
+<meta name="description" content="mysql数据库数据可能会挂掉，重启前要手动关闭服务
+
+
+	
+
+
+	启动服务器后需要其实数据库，tomcat，solr
+
+
+	./solr start -force
+
+
+	./startup.sh
+
+
+	
+
+
+	数据库挂掉，重新安装（先删，后装）
+
+
+	http://comonly.cn/p/1114.html
+
+
+	数据库远程访问
+
+
+	修改root用户远程登录权限：
+想myuser使用mypassword从任何主机连接到mysql服务器的话
+m" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">阿里云重启需要注意的问题</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2020-04-27</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>mysql数据库数据可能会挂掉，重启前要手动关闭服务
+
+
+	
+
+
+	启动服务器后需要其实数据库，tomcat，solr
+
+
+	./solr start -force
+
+
+	./startup.sh
+
+
+	
+
+
+	数据库挂掉，重新安装（先删，后装）
+
+
+	http://comonly.cn/p/1114.html
+
+
+	数据库远程访问
+
+
+	修改root用户远程登录权限：
+想myuser使用mypassword从任何主机连接到mysql服务器的话
+m</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	<br />
+</p>
+<p>
+	mysql数据库数据可能会挂掉，重启前要手动关闭服务
+</p>
+<p>
+	<br />
+</p>
+<p>
+	启动服务器后需要其实数据库，tomcat，solr
+</p>
+<p>
+	./solr start -force
+</p>
+<p>
+	./startup.sh
+</p>
+<p>
+	<br />
+</p>
+<p>
+	数据库挂掉，重新安装（先删，后装）
+</p>
+<p>
+	<a href="http://comonly.cn/p/1114.html">http://comonly.cn/p/1114.html</a>
+</p>
+<p>
+	数据库远程访问
+</p>
+<p>
+	修改root用户远程登录权限：<br />
+想myuser使用mypassword从任何主机连接到mysql服务器的话<br />
+myuser是你的用户名，mypassword是你的密码<br />
+use mysql;<br />
+GRANT ALL PRIVILEGES ON *.* TO 'myuser'@'%' IDENTIFIED BY 'mypassword' WITH GRANT OPTION;<br />
+flush privileges;<br />
+quit<br />
+</p>
+<p>
+	默认情况下，mysql只允许本地登录，如果要开启远程连接，则需要修改/etc/mysql/mysql.conf.d/mysqld.cnf文件。<br />
+修改/etc/mysql/mysql.conf.d/mysqld.cnf<br />
+找到bind-address = 127.0.0.1这一行<br />
+改为bind-address = 0.0.0.0即可<br />
+</p>
+<p>
+	启动和关闭mysql服务器<br />
+启动service mysql start<br />
+关闭service mysql stop<br />
+重启service mysql reload<br />
+查看mysql服务器状态systemctl status mysql.service<br />
+查看mysql监听的端口netstat -tap | grep mysql<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	数据恢复
+</p>
+<p>
+	把ubuntu 上mysql数据 /var/lib/mysql 放到window上data目录，然后读取数据，如果有各种问题，可以直接复制表到另一个数据库连接中。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1700.html">陶博士2006（2016~2020）</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1702.html">Boost C++ Libraries</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="mm">
+							<h2 style="display:inline;color:#5BC648;">mm</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-04-27&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	sql&nbsp;
+</p>
+<p>
+	ch 16----
+</p>
+<p>
+	root xixg----
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#mm">mm</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

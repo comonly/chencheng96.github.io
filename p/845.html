@@ -1,0 +1,263 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>erp报表项目_comonly.cn</title>
+<meta name="keywords" content="erp报表项目" />
+<meta name="description" content="本项目采用的是当前主流三大框架 Spring，Strus2，hebernate整合进行开发。
+
+
+	首先 Strus是一个 mvc框架，主要采用 Servlet和 JSP技术来实现的。
+
+Spring提供了管理业务对象的一致方法并且鼓励了注入对接口编程而不是对类编程的良好习惯。并使用 IOC容器作为构建完关注所有架构层的完整解决方案是独一无二的。
+
+	Hibernate是一个开放源代码的对象关系映射框架，它对 JDBC进行了非常轻量级的对象封装，是的 java程序员可以随心所欲的适用对象编程" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">erp报表项目</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-02-08</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	工作相关
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>本项目采用的是当前主流三大框架 Spring，Strus2，hebernate整合进行开发。
+
+
+	首先 Strus是一个 mvc框架，主要采用 Servlet和 JSP技术来实现的。
+
+Spring提供了管理业务对象的一致方法并且鼓励了注入对接口编程而不是对类编程的良好习惯。并使用 IOC容器作为构建完关注所有架构层的完整解决方案是独一无二的。
+
+	Hibernate是一个开放源代码的对象关系映射框架，它对 JDBC进行了非常轻量级的对象封装，是的 java程序员可以随心所欲的适用对象编程</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	本项目采用的是当前主流三大框架 Spring，Strus2，hebernate整合进行开发。
+</p>
+<p>
+	首先 Strus是一个 mvc框架，主要采用 Servlet和 JSP技术来实现的。
+</p>
+Spring提供了管理业务对象的一致方法并且鼓励了注入对接口编程而不是对类编程的良好习惯。并使用 IOC容器作为构建完关注所有架构层的完整解决方案是独一无二的。<br />
+<p>
+	Hibernate是一个开放源代码的对象关系映射框架，它对 JDBC进行了非常轻量级的对象封装，是的 java程序员可以随心所欲的适用对象编程思维来操控数据库。
+</p>
+<p>
+	首先将项目分为 4层，Wbe层，Service层，Dao层，持久层。前端用的是 easyui框架。调用关系是 JSP——&gt;Action——&gt;Service——&gt;DAO——&gt;Hibernate。Hibernate负责持久层，完成数据库的 CRUD操作：
+</p>
+<p>
+	Hibernate有一组 hbm.xml文件和 PO，是与数据库中的表相对应的，然后定义 DAO，这些是与数据库打交道的类。在 hibernate.cfg.xml中配置一些属性，Oracle数据库方言，显示 sql语句方便后台查看，注入实体层对应的映射文件（hbm.xml），本项目目前只有两张表所以建两个实体类对应两个 hbm.xml文件。
+</p>
+<p>
+	Spring负责业务层管理，即 Service： Service为 Action提供统一的调用接口，封装持久层的 DAO，并集成 Hibernate，Spring可对 JavaBean和事物进行统一管理。Spring对应一个applicationContext.xml文 件 ， 里 面 注 入 数 据 源 用 的 是 c3p0 连 接 池 ， 引 用 这 个LocalSessionFactoryBean得到 sessionfactory。创建事务管理器,管理 sessionFactory(因为所有的 session都是从 sessionFactory获取的)
+</p>
+<p>
+	Struts负责 Web层
+</p>
+ActionFormBean接收网页中表单提交的数据，然后通过 Action进行处理，再 Forward到对应的网页，在 Struts.xml中定义了，ActionServlet会加载进来。前台页面使用 jquery-easyui的 Layout布局分为北，西，中。里面使用 div进行细致的布局。
+<p>
+	本项目的功能一：
+</p>
+<p>
+	显示出货表的信息，因为要在一个页面上显示两张表的部分字段，有两张表所以要进行关联，我使用的多对一，需要在多的 hbm.xml文件里面加配置相关属性，在多的实体类里面加单一类的对象。
+</p>
+<p>
+	功能二：
+</p>
+根据编号查询只需将前台传入的参数从后台获取然后使用 hql语句进行查询在返回 list转换json给前台解析就 Ok了。<br />
+功能三：<br />
+根据日期查询需要将查询的结果在前台的日期格式 easyui进行解析不然格式错误。使用 new data（）.toLocaleString().substring()进行相应截取就可以了。<br />
+功能四：<br />
+将当前保表信息导出 excel，使用的 ApachePOI函式库进行开发，将 easyui里面的 title信息传给对应的 action，然后将 title信息传给创建的行进行循环就可以得到表头，在将信息表身信息通过数据库查询得到的 list集合循环放入通过 poi创建的行里面的单元格，获取输出流，写入 excel并关闭就可以了。<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/844.html">C++基本语法</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/846.html">c++面向对象程序设计-类和对象</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

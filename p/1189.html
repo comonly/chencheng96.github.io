@@ -1,0 +1,228 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>AlexNet网络_comonly.cn</title>
+<meta name="keywords" content="AlexNet网络" />
+<meta name="description" content="论文：《ImageNet Classification with Deep Convolutional Neural Networks》
+
+第一个典型的CNN是LeNet5网络结构，但是第一个引起大家注意的网络却是AlexNet，也就是文章《ImageNet Classification with Deep Convolutional Neural Networks》介绍的网络结构。这篇文章的网络是在2012年的ImageNet竞赛中取得冠军的一个模型整理后发表的文章。作者是多伦多大学的Alex Kr" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">AlexNet网络</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">小猪嘎嘎</li>
+          <li class="lmname"><a href="https://blog.csdn.net/luoluonuoyasuolong/article/details/81750190" target="_blank">https://blog.csdn.net/luoluonuoyasuolong/article/details/81750190</a></li>
+          <li class="timer">2020-11-20</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	机器学习算法分析
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>论文：《ImageNet Classification with Deep Convolutional Neural Networks》
+
+第一个典型的CNN是LeNet5网络结构，但是第一个引起大家注意的网络却是AlexNet，也就是文章《ImageNet Classification with Deep Convolutional Neural Networks》介绍的网络结构。这篇文章的网络是在2012年的ImageNet竞赛中取得冠军的一个模型整理后发表的文章。作者是多伦多大学的Alex Kr</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 论文：《ImageNet Classification with Deep Convolutional Neural Networks》<br />
+<br />
+第一个典型的CNN是LeNet5网络结构，但是第一个引起大家注意的网络却是AlexNet，也就是文章《ImageNet Classification with Deep Convolutional Neural Networks》介绍的网络结构。这篇文章的网络是在2012年的ImageNet竞赛中取得冠军的一个模型整理后发表的文章。作者是多伦多大学的Alex Krizhevsky等人。Alex Krizhevsky其实是Hinton的学生，这个团队领导者是Hinton，那么Hinton是谁呢？这就要好好说说了，网上流行说 Hinton， LeCun和Bengio是神经网络领域三巨头，LeCun就是LeNet5作者(Yann LeCun)，昨天的文章就提到了这个人。而今天的主角虽然不是Hinton，但却和他有关系，这篇的论文第一作者是Alex，所以网络结构称为AlexNet。这篇论文很有意思，因为我读完这篇论文之后，没有遇到比较难以理解的地方，遇到的都是之前学过的概念，比如Relu，dropout。之前学的时候只知道Relu是怎么一回事，今天才知道它真正的来源。这篇文章在2012年发表，文章中的模型参加的竞赛是ImageNet LSVRC-2010，该ImageNet数据集有1.2 million幅高分辨率图像，总共有1000个类别。测试集分为top-1和top-5，并且分别拿到了37.5%和17%的error rates。这样的结果在当时已经超过了之前的工艺水平。AlexNet网络结构在整体上类似于LeNet，都是先卷积然后在全连接。但在细节上有很大不同。AlexNet更为复杂。AlexNet有60 million个参数和65000个 神经元，五层卷积，三层全连接网络，最终的输出层是1000通道的softmax。AlexNet利用了两块GPU进行计算，大大提高了运算效率，并且在ILSVRC-2012竞赛中获得了top-5测试的15.3%error rate， 获得第二名的方法error rate 是 26.2%，可以说差距是非常的大了，足以说明这个网络在当时给学术界和工业界带来的冲击之大。<br />
+<br />
+一些背景<br />
+在计算机视觉领域object detection &amp; recognition 通常用机器学习的方法来解决。为了提高识别的效果，我们可以通过收集更多的可训练的数据来让模型的泛化性能提高。目前，在以一万为单位的数量级层面的数据(称为简单的识别任务)已经获得了非常好的性能，例如：MNIST 手写数字识别任务，最好的性能已经达到了&lt;0.3%的误差。但是现实中的物体存在相当多的变化属性，所以学习识别它们需要更多的数据。事实上，小的图像训练数据有很多的缺点，无论以我们的直觉想还是理论证明都是有依据的，理论上论文《Why is real-world visual object recognition hard?》给出了研究方法。随着互联网技术的发展，以及智能手机的普及图像数据获取可以说越来越容易。所以就有组织去收集这些现实中事物的图像并进行标记和分割。例如：LabelMe(Labelme: a database and web-based tool for image annotation. )，包含了成百上千的全分割图像。 ImageNet(ImageNet: A Large-Scale Hierarchical Image Database. I),包含15 million 标记的高分辨率图像，包含超过了22000种现实中的事物。<br />
+<br />
+文章中说该模型有5层卷积，去掉任意一层都会使结果不好，所以这个网络的深度似乎是很重要的，这样的话难免引起我们的思考，记得不知道哪位大神在一篇论文中证明了，神经网络可以模拟任意多项式，只要神经元数量足够多，并且和深度关系不大。但这里的实验却表示深度会对网络的性能有影响。<br />
+<br />
+文章中还提到了，他们用5-6天训练了这个模型，并且限制了网络的大小，因为现有的硬件智能允许那么大的内存，用更好的设备还可以获得更好的效果。<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1188.html">直线检测-Radon变换、Hough变换</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1190.html">卷积神经网络CNN经典模型整理Lenet，Alexnet，Googlenet，VGG，Deep Residual Learning</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/luoluonuoyasuolong/article/details/81750190" target="_blank">https://blog.csdn.net/luoluonuoyasuolong/article/details/81750190</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

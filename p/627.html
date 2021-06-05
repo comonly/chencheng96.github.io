@@ -1,0 +1,451 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>链接对象,锚对象—JavaScript_comonly.cn</title>
+<meta name="keywords" content="链接对象,锚对象—JavaScript" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">链接对象,锚对象—JavaScript</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-03-12</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">JavaScript,链接对象,锚对象</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	JavaScript会自动创建一个links[]数组，数组中的每个元素对应网页中的&lt;a&gt;标签。&lt;area&gt;标签也可以在document对象的links[]数组中创建链接对象。
+</p>
+<p>
+	链接对象（link）表示URL，还有location对象的所有属性。引用方式：document.links[i]
+</p>
+<h2 id='链接对象的属性'>
+	链接对象的属性
+</h2>
+<p>
+	链接对象引用的是网页文档的超级链接，包括&lt;a&gt;和&lt;/a&gt;标签之间的所有内容。
+</p>
+<table style="margin:0px;padding:0px;border:1px solid #BBBBBB;width:645px;border-collapse:collapse;">
+	<tbody>
+		<tr>
+			<td style="border:1px solid #BBBBBB;">
+				属 性
+			</td>
+			<td style="border:1px solid #BBBBBB;">
+				说 明
+			</td>
+		</tr>
+		<tr>
+			<td style="border:1px solid #BBBBBB;">
+				hash
+			</td>
+			<td style="border:1px solid #BBBBBB;">
+				链接URL中锚的部分并包括“#”符号
+			</td>
+		</tr>
+		<tr>
+			<td style="border:1px solid #BBBBBB;">
+				host
+			</td>
+			<td style="border:1px solid #BBBBBB;">
+				链接URL中的主机名称和端口号
+			</td>
+		</tr>
+		<tr>
+			<td style="border:1px solid #BBBBBB;">
+				hostname
+			</td>
+			<td style="border:1px solid #BBBBBB;">
+				链接URL中的主机名称
+			</td>
+		</tr>
+		<tr>
+			<td style="border:1px solid #BBBBBB;">
+				href
+			</td>
+			<td style="border:1px solid #BBBBBB;">
+				完整的链接URL
+			</td>
+		</tr>
+		<tr>
+			<td style="border:1px solid #BBBBBB;">
+				pathname
+			</td>
+			<td style="border:1px solid #BBBBBB;">
+				链接URL中的路径名部分
+			</td>
+		</tr>
+		<tr>
+			<td style="border:1px solid #BBBBBB;">
+				port
+			</td>
+			<td style="border:1px solid #BBBBBB;">
+				链接URL中的端口号
+			</td>
+		</tr>
+		<tr>
+			<td style="border:1px solid #BBBBBB;">
+				protocol
+			</td>
+			<td style="border:1px solid #BBBBBB;">
+				链接URL中的协议部分并包括“：”
+			</td>
+		</tr>
+		<tr>
+			<td style="border:1px solid #BBBBBB;">
+				search
+			</td>
+			<td style="border:1px solid #BBBBBB;">
+				链接URL中的条件部分并包括“”符号
+			</td>
+		</tr>
+		<tr>
+			<td style="border:1px solid #BBBBBB;">
+				target
+			</td>
+			<td style="border:1px solid #BBBBBB;">
+				链接的目标窗口打开方式
+			</td>
+		</tr>
+		<tr>
+			<td style="border:1px solid #BBBBBB;">
+				text
+			</td>
+			<td style="border:1px solid #BBBBBB;">
+				是Netscape浏览器支持的属性，主要用来显示链接对象中的超级链接文字，这个属性是只读的，不能修改
+			</td>
+		</tr>
+		<tr>
+			<td style="border:1px solid #BBBBBB;">
+				innerText
+			</td>
+			<td style="border:1px solid #BBBBBB;">
+				IE浏览器支持的属性，等同于text
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	<br />
+&lt;a href="#1"&gt;the1&lt;/a&gt;<br />
+&lt;a href="#2"&gt;the2&lt;/a&gt;<br />
+&lt;a href="#3"&gt;the3&lt;/a&gt;<br />
+&lt;a href="#4"&gt;the4&lt;/a&gt;&lt;/br&gt;<br />
+&lt;script type="text/javascript"&gt;<br />
+for(var i=0;i&lt;document.links.length;i++){document.write(document.links[i].href+"&lt;/br&gt;");} //显示网页中所有链接<br />
+&lt;/script&gt;
+</p>
+<p>
+	复制链接<a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank"><span style="background-color:#FFE500;">在线测试运行效果</span></a> 
+</p>
+<h2 id='链接对象的事件'>
+	链接对象的事件
+</h2>
+<p>
+	<table bordercolor="#999999" style="width:700px;" border="1" cellspacing="0" cellpadding="1">
+		<tbody>
+			<tr>
+				<td>
+					&nbsp;事件
+				</td>
+				<td>
+					说明&nbsp;
+				</td>
+				<td>
+					事件&nbsp;
+				</td>
+				<td>
+					说明&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td>
+					click
+				</td>
+				<td>
+					在链接单击鼠标左键时激发的事件
+				</td>
+				<td>
+					mousedown
+				</td>
+				<td>
+					在链接上按下鼠标键时激发的事件
+				</td>
+			</tr>
+			<tr>
+				<td>
+					dbclick
+				</td>
+				<td>
+					在链接上双击鼠标时激发的事件
+				</td>
+				<td>
+					mouseup
+				</td>
+				<td>
+					在链接上释放鼠标键时激发的事件
+				</td>
+			</tr>
+			<tr>
+				<td>
+					keydown
+				</td>
+				<td>
+					按下键盘上的键时激发的事件
+				</td>
+				<td>
+					mouseover
+				</td>
+				<td>
+					把鼠标移动到链接上时激发的事件
+				</td>
+			</tr>
+			<tr>
+				<td>
+					keypress
+				</td>
+				<td>
+					按下并释放键盘上的键时激发的事件
+				</td>
+				<td>
+					mousemove
+				</td>
+				<td>
+					在链接上移动鼠标时激发的事件
+				</td>
+			</tr>
+			<tr>
+				<td>
+					keyup
+				</td>
+				<td>
+					释放键盘上的键时激发的事件
+				</td>
+				<td>
+					mouseout
+				</td>
+				<td>
+					把鼠标从链接上移开时激发的事件
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</p>
+<h2 id='锚对象'>
+	锚对象
+</h2>
+<p>
+	只有在&lt;a&gt;标签中才能创建一个锚，所以锚对象定义的唯一属性是name。加载文档时会自动创建一个anchors[]数组。anchor[]数组中的元素就是网页上的锚。调用方式：document.anchors[i]。
+</p>
+<p>
+	锚对象的属性
+</p>
+<p>
+	name：返回锚的名称，就是&lt;a&gt;标签的name属性值
+</p>
+<p>
+	text：Netscape浏览器支持的属性，主要用来显示链接对象中的超级链接文字，这个属性是只读的
+</p>
+<p>
+	innerText：IE浏览器支持的，等同于text
+</p>
+<p>
+	锚对象和链接对象都是引用&lt;a&gt;标签。&lt;a&gt;标签中必须有href属性才能创建链接对象，必须有name属性才能创建锚对象。如果两种属性都有，可以同时创建两个对象。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/626.html">图像对象—JavaScript</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/628.html">cookie—JavaScript</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#链接对象的属性">链接对象的属性</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#链接对象的事件">链接对象的事件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#锚对象">锚对象</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

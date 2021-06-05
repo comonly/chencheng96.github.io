@@ -1,0 +1,412 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>nodejs-http模块_comonly.cn</title>
+<meta name="keywords" content="nodejs-http模块" />
+<meta name="description" content="见评论" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">nodejs-http模块</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-08-16</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	nodejs
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>见评论</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 见评论</div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/944.html">nodejs基本汇总</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/946.html">WebSocket实现实时web服务端与客户端通信【待处理】</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="获取GET请求内容及URL参数">
+							<h2 style="display:inline;color:#5BC648;">获取GET请求内容及URL参数</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-08-16&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><pre class="prettyprint lang-js">//获取GET请求
+var http = require('http');
+var url = require('url'); var util = require('util');
+http.createServer(function(req, res){
+    res.writeHead(200, {'Content-Type': 'text/plain; charset=utf-8'});
+    res.end(util.inspect(url.parse(req.url, true)));
+}).listen(3000);
+
+//获取URL参数
+var http = require('http');
+var url = require('url');
+var util = require('util');
+http.createServer(function(req, res){
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+    // 解析 url 参数
+    var params = url.parse(req.url, true).query;
+    res.write("网站名：" + params.name);
+    res.write("\n");
+    res.write("网站 URL：" + params.url);
+    res.end();
+}).listen(3000);</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="获取 POST 请求内容">
+							<h2 style="display:inline;color:#5BC648;">获取 POST 请求内容</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-08-16&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span>POST 请求的内容全部的都在请求体中，http.ServerRequest 并没有一个属性内容为请求体，原因是等待请求体传输可能是一件耗时的工作。<br />
+<p>
+	比如上传文件，而很多时候我们可能并不需要理会请求体的内容，恶意的POST请求会大大消耗服务器的资源，所以 node.js 默认是不会解析请求体的，当你需要的时候，需要手动来做。
+</p>
+<pre class="prettyprint lang-js">//基本语法
+var http = require('http');
+var querystring = require('querystring');
+http.createServer(function(req, res){
+    // 定义了一个post变量，用于暂存请求体的信息 var post = '';     
+    // 通过req的data事件监听函数，每当接受到请求体的数据，就累加到post变量中
+    req.on('data', function(chunk){    
+        post += chunk;
+    });
+    // 在end事件触发后，通过querystring.parse将post解析为真正的POST请求格式，然后向客户端返回。
+    req.on('end', function(){    
+        post = querystring.parse(post);
+        res.end(util.inspect(post));
+    });
+}).listen(3000);</pre>
+通过POST提交表单并输出数据
+<pre class="prettyprint lang-js">var http = require('http');
+var querystring = require('querystring');
+ 
+var postHTML = 
+  '&lt;html&gt;&lt;head&gt;&lt;meta charset="utf-8"&gt;&lt;title&gt;菜鸟教程 Node.js 实例&lt;/title&gt;&lt;/head&gt;' +
+  '&lt;body&gt;' +
+  '&lt;form method="post"&gt;' +
+  '网站名： &lt;input name="name"&gt;&lt;br&gt;' +
+  '网站 URL： &lt;input name="url"&gt;&lt;br&gt;' +
+  '&lt;input type="submit"&gt;' +
+  '&lt;/form&gt;' +
+  '&lt;/body&gt;&lt;/html&gt;';
+ 
+http.createServer(function (req, res) {
+  var body = "";
+  req.on('data', function (chunk) {
+    body += chunk;
+  });
+  req.on('end', function () {
+    // 解析参数
+    body = querystring.parse(body);
+    // 设置响应头部信息及编码
+    res.writeHead(200, {'Content-Type': 'text/html; charset=utf8'});
+    if(body.name &amp;&amp; body.url) { // 输出提交的数据
+        res.write("网站名：" + body.name);
+        res.write("&lt;br&gt;");
+        res.write("网站 URL：" + body.url);
+    } else {  // 输出表单
+        res.write(postHTML);
+    }
+    res.end();
+  });
+}).listen(3000);</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id=" HTTP 服务器架构(使用 8080 端口)">
+							<h2 style="display:inline;color:#5BC648;"> HTTP 服务器架构(使用 8080 端口)</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-08-16&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><pre class="prettyprint lang-js">var http = require('http');
+var fs = require('fs');
+var url = require('url');
+// 创建服务器
+http.createServer( function (request, response) {  
+   // 解析请求，包括文件名
+   var pathname = url.parse(request.url).pathname;
+   // 输出请求的文件名
+   console.log("Request for " + pathname + " received.");
+   // 从文件系统中读取请求的文件内容
+   fs.readFile(pathname.substr(1), function (err, data) {
+      if (err) {
+         console.log(err);
+         // HTTP 状态码: 404 : NOT FOUND
+         // Content Type: text/plain
+         response.writeHead(404, {'Content-Type': 'text/html'});
+      }else{             
+         // HTTP 状态码: 200 : OK
+         // Content Type: text/plain response.writeHead(200, {'Content-Type': 'text/html'});    
+         // 响应文件内容
+         response.write(data.toString());        
+      }
+      //  发送响应数据
+      response.end();
+   });   
+}).listen(8080);
+// 控制台会输出以下信息
+console.log('Server running at http://127.0.0.1:8080/');</pre>
+<p>
+	同目录下的index.html
+</p>
+<pre class="prettyprint lang-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"&gt;
+&lt;title&gt;菜鸟教程(runoob.com)&lt;/title&gt; &lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;我的第一个标题&lt;/h1&gt;
+    &lt;p&gt;我的第一个段落。&lt;/p&gt; &lt;/body&gt;
+&lt;/html&gt;</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="Node 创建 Web 客户端">
+							<h2 style="display:inline;color:#5BC648;">Node 创建 Web 客户端</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-08-16&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><pre class="prettyprint lang-js">var http = require('http');
+// 用于请求的选项
+var options = {
+   host: 'localhost',
+   port: '8080',
+   path: '/index.html'  
+};
+// 处理响应的回调函数
+var callback = function(response){
+   // 不断更新数据
+   var body = '';
+   response.on('data', function(data) {
+      body += data; });
+   response.on('end', function() {
+      // 数据接收完成
+      console.log(body);
+   });
+}
+// 向服务端发送请求
+var req = http.request(options, callback);
+req.end();</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#获取GET请求内容及URL参数">获取GET请求内容及URL参数</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#获取 POST 请求内容">获取 POST 请求内容</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="# HTTP 服务器架构(使用 8080 端口)"> HTTP 服务器架构(使用 8080 端口)</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Node 创建 Web 客户端">Node 创建 Web 客户端</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

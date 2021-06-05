@@ -1,0 +1,243 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>tensorflow冻结层的方法_comonly.cn</title>
+<meta name="keywords" content="tensorflow冻结层的方法" />
+<meta name="description" content="最近在搞faster-rcnn的改动，网上看到很多人在做的一些改进，其中就包括冻结Bn等等方式，于是自己也就查了一下tensorflow里面冻结层的方法，现在总结如下：
+1、比如使用一个VGG的前面提取特征的部分，而微调其全连层，或者将其全连层更换为使用convolution来完成，可以使用TensorFlow的stop_gradient函数，将模型的一部分进行冻结。
+
+2、采用get_collection：
+#定义优化算子
+optimizer = tf.train.AdamOptimizer(" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">tensorflow冻结层的方法</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">gbyy42299</li>
+          <li class="lmname"><a href="https://blog.csdn.net/gbyy42299/article/details/80970513" target="_blank">https://blog.csdn.net/gbyy42299/article/details/80970513</a></li>
+          <li class="timer">2020-12-18</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	机器学习算法分析
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>最近在搞faster-rcnn的改动，网上看到很多人在做的一些改进，其中就包括冻结Bn等等方式，于是自己也就查了一下tensorflow里面冻结层的方法，现在总结如下：
+1、比如使用一个VGG的前面提取特征的部分，而微调其全连层，或者将其全连层更换为使用convolution来完成，可以使用TensorFlow的stop_gradient函数，将模型的一部分进行冻结。
+
+2、采用get_collection：
+#定义优化算子
+optimizer = tf.train.AdamOptimizer(</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 最近在搞faster-rcnn的改动，网上看到很多人在做的一些改进，其中就包括冻结Bn等等方式，于是自己也就查了一下tensorflow里面冻结层的方法，现在总结如下：<br />
+1、比如使用一个VGG的前面提取特征的部分，而微调其全连层，或者将其全连层更换为使用convolution来完成，可以使用TensorFlow的stop_gradient函数，将模型的一部分进行冻结。<br />
+<br />
+2、采用get_collection：<br />
+#定义优化算子<br />
+optimizer = tf.train.AdamOptimizer( 1e-3)<br />
+#选择待优化的参数<br />
+output_vars = tf.get_collection(tf.GraphKyes.TRAINABLE_VARIABLES, scope= 'outpt')<br />
+train_step = optimizer.minimize(loss_score,var_list = output_vars)<br />
+把需要更新梯度的层放在get_collection这个函数里面，不需要更新的不放进去。<br />
+<p>
+	<br />
+</p>
+<p>
+	通过 with tf.name_scope('training') 限制变量的“作用域”
+</p>
+<p>
+	然后在var_list指定该作用域中的变量，训练时只更新作用域中的变量。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1933.html">Mask_RCNN:ValueError: Dimension 1 in both shapes must be equal, but are 8 and 324.</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1935.html">微信公众平台网页打不开，打开速度太慢</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/gbyy42299/article/details/80970513" target="_blank">https://blog.csdn.net/gbyy42299/article/details/80970513</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

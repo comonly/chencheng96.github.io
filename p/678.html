@@ -1,0 +1,561 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>recordset记录集操作方法_comonly.cn</title>
+<meta name="keywords" content="recordset记录集操作方法" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">recordset记录集操作方法</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">哈欠</li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-04-14</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	数据库
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">recordset,操作</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <span>Recordset记录集对象常用属性见表。</span> 
+<p>
+	<table class="ke-zeroborder">
+		<tbody>
+			<tr>
+				<td>
+					属性
+				</td>
+				<td>
+					说明
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Source
+				</td>
+				<td>
+					指示记录集对象中数据的来源（命令对象名或SQL语句或表名）
+				</td>
+			</tr>
+			<tr>
+				<td>
+					ActiveConnection
+				</td>
+				<td>
+					连接对象名或包含数据库的连接信息的字符串
+				</td>
+			</tr>
+			<tr>
+				<td>
+					CursorType
+				</td>
+				<td>
+					记录集中的指针类型，可选，见表6-16
+				</td>
+			</tr>
+			<tr>
+				<td>
+					LockType
+				</td>
+				<td>
+					锁定类型，可选，见表6-17
+				</td>
+			</tr>
+			<tr>
+				<td>
+					MaxRecors
+				</td>
+				<td>
+					控制从服务器获取的记录集的最大记录数
+				</td>
+			</tr>
+			<tr>
+				<td>
+					CursorLocation
+				</td>
+				<td>
+					控制数据处理是在客户端还是在服务器端
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Filter
+				</td>
+				<td>
+					控制要显示的内容
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Bof
+				</td>
+				<td>
+					记录集的开头
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Eof
+				</td>
+				<td>
+					记录集的结尾
+				</td>
+			</tr>
+			<tr>
+				<td>
+					RecordCount
+				</td>
+				<td>
+					记录集总数
+				</td>
+			</tr>
+			<tr>
+				<td>
+					PageSize
+				</td>
+				<td>
+					分页显示时每一页的记录数
+				</td>
+			</tr>
+			<tr>
+				<td>
+					PageCount
+				</td>
+				<td>
+					分页显示时数据页的总页数
+				</td>
+			</tr>
+			<tr>
+				<td>
+					AbsolutePage
+				</td>
+				<td>
+					当前指针所在的数据页
+				</td>
+			</tr>
+			<tr>
+				<td>
+					AbsolutePosition
+				</td>
+				<td>
+					当前指针所在的记录行
+				</td>
+			</tr>
+		</tbody>
+	</table>
+<span><span style="line-height:normal;"><br />
+</span></span> 
+</p>
+<p>
+	Recordset记录集对象常用属性具体说明如下。<br />
+1．Source：用于设置数据库的查询信息，查询信息可以是命令对象名或SQL语句或表名，语法如下：<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rs.Source=查询信息
+</p>
+<p>
+	2．ActiveConnection：用于设置数据库的连接信息，连接信息可以是连接对象名或包含数据库的连接信息的字符串，语法如下：<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rs.ActiveConnection=连接信息
+</p>
+<p>
+	3．CursorType：用于设置记录集指针类型，取值参见表6-17，语法如下：<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rs.CursorType=值
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;默认为0，即指针只能前移。如果要让指针自由移动，一般设为键盘指针1。
+</p>
+<p>
+	4． LockType：用于设置记录集的锁定类型。取值参见表6-18，语法如下：<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rs.LockType=值<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;默认为1，只读属性。如果要利用记录集对象进行添加、删除、更新等操作，只能由一个用户修改，一般需要设置其属性为2。
+</p>
+<p>
+	5．MaxRecors：用于设定从服务器上得到的最大记录数，语法如下：<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rs.MaxRecors=最大记录数
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通常这种方法不常用，而是使用SQL语句来指定所得到的最大记录数，”Select Top 整数…”。
+</p>
+<p>
+	6．CursorLocation：用于设置数据处理是在客户端还是在服务器端。取值参见表6-21，语法如下：<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rs.CursorLocation =值
+</p>
+<table class="ke-zeroborder">
+	<tbody>
+		<tr>
+			<td colspan="3" style="border:1px dotted #AAAAAA;">
+				表6-21 CursorLocation参数值
+			</td>
+		</tr>
+		<tr>
+			<td style="border:1px dotted #AAAAAA;">
+				参数
+			</td>
+			<td style="border:1px dotted #AAAAAA;">
+				值
+			</td>
+			<td style="border:1px dotted #AAAAAA;">
+				说明
+			</td>
+		</tr>
+		<tr>
+			<td style="border:1px dotted #AAAAAA;">
+				AdUseClient
+			</td>
+			<td style="border:1px dotted #AAAAAA;">
+				1
+			</td>
+			<td style="border:1px dotted #AAAAAA;">
+				客户端处理
+			</td>
+		</tr>
+		<tr>
+			<td style="border:1px dotted #AAAAAA;">
+				AdUseServer
+			</td>
+			<td style="border:1px dotted #AAAAAA;">
+				2
+			</td>
+			<td style="border:1px dotted #AAAAAA;">
+				服务器端处理
+			</td>
+		</tr>
+		<tr>
+			<td style="border:1px dotted #AAAAAA;">
+				AdUseClientBatch
+			</td>
+			<td style="border:1px dotted #AAAAAA;">
+				3
+			</td>
+			<td style="border:1px dotted #AAAAAA;">
+				动态处理，在客户端处理，处理时连接切断，处理完毕重新连接
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;有的时候，为了减轻服务器的工作负担，可以根据情况的需要，设置在客户端处理。
+</p>
+<p>
+	7．Filter：用于设置要显示的内容。取值参见表6-22，语法如下：<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rs.Filter =值
+</p>
+<p>
+	<table class="ke-zeroborder">
+		<tbody>
+			<tr>
+				<td colspan="3" style="border:1px dotted #AAAAAA;">
+					表6-22 Filter参数值
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px dotted #AAAAAA;">
+					参数
+				</td>
+				<td style="border:1px dotted #AAAAAA;">
+					值
+				</td>
+				<td style="border:1px dotted #AAAAAA;">
+					说明
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px dotted #AAAAAA;">
+					AdFilterNone
+				</td>
+				<td style="border:1px dotted #AAAAAA;">
+					0
+				</td>
+				<td style="border:1px dotted #AAAAAA;">
+					显示所有数据
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px dotted #AAAAAA;">
+					AdFilterpendRecords
+				</td>
+				<td style="border:1px dotted #AAAAAA;">
+					1
+				</td>
+				<td style="border:1px dotted #AAAAAA;">
+					只显示没有修改过的数据
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px dotted #AAAAAA;">
+					AdFilterAffectedRecords
+				</td>
+				<td style="border:1px dotted #AAAAAA;">
+					2
+				</td>
+				<td style="border:1px dotted #AAAAAA;">
+					只显示最近修改过的数据
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px dotted #AAAAAA;">
+					AdFilterFetchedRecords
+				</td>
+				<td style="border:1px dotted #AAAAAA;">
+					3
+				</td>
+				<td style="border:1px dotted #AAAAAA;">
+					只显示暂存于客户端缓存中的数据
+				</td>
+			</tr>
+		</tbody>
+	</table>
+<span><span style="line-height:normal;"><br />
+</span></span> 
+</p>
+<p>
+	8．Bof：用于判断当前记录指针是否在记录集的开头，如在开头，返回True，否则返回Falsh。如果记录集为空，也返回True。
+</p>
+<p>
+	9．EOF：用于判断当前记录指针是否在记录集的结尾，如在结尾，返回True，否则返回Flash。如果记录集为空，也返回True。<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;记录集有两个特殊位置：Bof和 EOF。Bof表示记录集的开头，位于第一条记录之前；EOF表示记录集结尾，位于最后一条记录之后。Bof 为 True，当前指针指到 RecordSet 的第一条记录； Eof 为 True，当前指标指到 RecordSet 的最后一条记录。如果记录集不为空，指针可以在Bof、所有记录和Eof移动。如果记录集为空，此时指针同时指向Bof和 Eof，它们的值均为True。<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;具体判断如下：若当前记录的位置是在一个 Recordset 对象第一行记录之前时， Bof 属性返回 True，反之则返回 False。；若当前记录的位置是在一个 Recordset 对象最后一行记录之后时，Eof 属性返回 True，反之则返回 False；Bof 与 Eof 都为 False，表示指标位于 RecordSet 的当中；Bof 与 Eof 都为 True，在 RecordSet 里没有任何记录。<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;从以上可知，通过检验 Bof 与 Eof 属性，可以得知当前指针所指向的 RecordSet 的位置，使用 Bof 与 Eof 属性，可以得知一个 Recordset 对象是否包含有记录或者得知移动记录行是否已经超出该 Recordset 对象的范围。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	判断记集录是否为空的代码如下：<br />
+&lt; %<br />
+if not rs.bof and rs.eof then ' 如果不是开头，也不是结尾，则执行<br />
+…<br />
+End if<br />
+%&gt;
+</p>
+<p>
+	<br />
+循环输出记录集记录的代码如下：<br />
+&lt; %<br />
+Do while not rs.eof ' 如果没有到达记录集未尾，则循环输出下面的记录<br />
+…<br />
+Rs.MoveNext<br />
+Loop<br />
+%&gt;
+</p>
+<p>
+	<br />
+10．RecordCount：用于返回记录集中的记录总数。我们常用 RecordCount 属性来找出一个 Recordset 对象包括多少条记录。例如：<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt; % Rsponse.Write rs.RecordCount %&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;要注意的是，使用RecordCount必须设置指针类型为键盘指针1或是静态指针3。
+</p>
+<p>
+	11．PageCount：用于设置分页显示时数据页的总数。使用 PageCount 属性，决定 Recordset 对象包括多少“页”的数据。这里的“页”是指数据记录的集合，大小等于 PageSize 属性的设定，即使最后一页的记录数比 PageSize 的值少，最后一页也算是 PageCount 的一页。
+</p>
+<p>
+	12． PageSize 属性：用于设置分页时每一页所显示的记录数。PageSize 属性是决定 ADO 存取数据库时如何分页显示的关键，使用它就可以决定多少记录组成一个逻辑上的“1页”。
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第10、11、12条属性通常是用于分页显示
+</p>
+<p>
+	<br />
+</p>
+<p>
+	13．AbsolutePage：用于设置当前指针位于哪一页。语法如下：<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rs.AbsolutePage =整数值
+</p>
+<p>
+	14．AbsolutePosition：用于设置当前指针所在的记录行。语法如下：<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rs.AbsolutePosition =整数值
+</p>
+<p>
+	<br />
+后面的这些属性使用时，一般需要设置指针类型为键盘指针。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/677.html">数据库的命脉——记录集</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/679.html">js Dom对象的属性与方法</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

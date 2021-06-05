@@ -1,0 +1,362 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>webuploader与uploadify合体的上传插件_comonly.cn</title>
+<meta name="keywords" content="webuploader与uploadify合体的上传插件" />
+<meta name="description" content="这是我参考webuploader与uploadify修改的上传插件，包含两个上传项目。
+
+
+	第一个：根据uploadify(由swfupload改装)改装而成；第二个：在webuploader的基础上进行了集成。
+主要是在配置文件、布局样式以及调用方式上作了改进，相当于独立的项目，您只需要把相关的项目目录放在根目录下就可以立即运行，不过目前我提供的只是php版本，如果大家有需要，我后期可以提供java(servlet)版本。这里是这两个项目的显示效果，样式基本一致。之前用ckfinder时在很多" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">webuploader与uploadify合体的上传插件</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">任宇的个人网站</li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2016-04-11</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">网页技术</a></div>
+      
+      
+        <div class="news_about"><strong>简介</strong>这是我参考webuploader与uploadify修改的上传插件，包含两个上传项目。
+
+
+	第一个：根据uploadify(由swfupload改装)改装而成；第二个：在webuploader的基础上进行了集成。
+主要是在配置文件、布局样式以及调用方式上作了改进，相当于独立的项目，您只需要把相关的项目目录放在根目录下就可以立即运行，不过目前我提供的只是php版本，如果大家有需要，我后期可以提供java(servlet)版本。这里是这两个项目的显示效果，样式基本一致。之前用ckfinder时在很多</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p style="color:#666666;font-family:Podkova, 微软雅黑, Arial, Tahoma, Verdana, Helvetica, sans-serif;font-size:14px;">
+	这是我参考webuploader与uploadify修改的上传插件，包含两个上传项目。
+</p>
+<p style="color:#666666;font-family:Podkova, 微软雅黑, Arial, Tahoma, Verdana, Helvetica, sans-serif;font-size:14px;">
+	第一个：根据uploadify(由swfupload改装)改装而成；第二个：在webuploader的基础上进行了集成。<br />
+主要是在配置文件、布局样式以及调用方式上作了改进，相当于独立的项目，您只需要把相关的项目目录放在根目录下就可以立即运行，不过目前我提供的只是php版本，如果大家有需要，我后期可以提供java(servlet)版本。这里是这两个项目的显示效果，样式基本一致。之前用ckfinder时在很多不便，特别是上传完后回调都没有，它的代码又极其复杂，还不如改其它上传插件。所以这两个项目中，在完成上传后与点击文件事件中都包含了回调功能，弥补了ckfinder的缺陷，样式上也绝对是上档次的。事实上，两个项目有很多相同的地方，处理上传的方式也基本相同，后台文件基本可以互换，不过要作出说明的是，webuploader处理上传时文件名与储存的文件名是相同的，不作处理，所以有同名文件会覆盖；upload项目是会根据年/月/日生成目录，文件名也是MD5字符串，不存在覆盖。<br />
+以下是对这两个上传项目的相关说明-<br />
+<strong>webuploader插件：</strong><a target="_blank" href="http://www.hidoger.com/Demos/2014/10/webuploader/index.php"><span style="color:#FF0000;"><strong>全屏查看</strong></span></a> <a target="_blank" href="http://www.hidoger.com/Demos/2014/10/webuploader/index.html"><strong><span style="color:#FF0000;">弹框查看</span></strong></a> <a target="_blank" href="http://www.hidoger.com/show/index/cid/11/id/28.html"><strong><span style="color:#FF0000;">点击下载</span></strong></a><br />
+1.webuploader项目只提供了上传功能，这里集成了上传、管理、搜索的功能，使用起来更加方便<br />
+2.修复了在IE低版本中session丢失的bug<br />
+3.原本在IE低版本中样式有些区别，这里样式得到了统一<br />
+4.调用方式上做了封装，对外只提供4个常用配置项，所以在对外调用上是统一的，如果有特殊需要，可以在源文件中修改<br />
+5.配置文件采用服务端配置<br />
+6.提供两种对外的页面调用方式，一种是iframe，一种是直接访问index.php<br />
+它还有一个好处就是在未上传时就能生成缩略图，非常的人性化<br />
+以下是目录结构<br />
+webuploader&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --项目目录<br />
+--css&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --样式目录<br />
+--images&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --样式相关图片目录<br />
+--js&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --js目录<br />
+--uploads&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --上传后文件存储的默认目录，可以在配置文件中设置<br />
+--webuploader&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --webuploader目录，自带的js与flash目录<br />
+--action.php&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --处理获取文件列表与删除文件的文件<br />
+--config.php&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --配置文件<br />
+--fileupload.php&nbsp;&nbsp;&nbsp; --处理文件上传的文件<br />
+--frame.php&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --用作iframe调用的文件<br />
+--index.html&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --展示用iframe调用的文件<br />
+--index.php&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --展示直接调用的文件<br />
+--preview.php&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --低版本中生成预览图的文件<br />
+在上页面的文件中，调用index.html与index.php即可，其中index.php是用作直接访问的，即在浏览中中输入该地址，适合在window.open中使用；index.html在这里是作iframe演示，如果想要在某个页面以弹出框形式调用，这种文件最好不过了，把index.html页面中的css与js放在要显示的页面，特别是hidoger.fileManager.show这段内容，这个是显示弹出框调用的，如果要在某个页面要点击上传按钮显示上传框，可以这样做：<br />
+$('#upload').click(function(){<br />
+hidoger.fileManager.show({<br />
+type : 'Images',//可填值 'Files', 'Images', 'Flash'<br />
+//选中一个文件时调用<br />
+callback : function(fileUrl, name, allFiles){},<br />
+<br />
+//上传时需要的额外额外数据<br />
+additionalData : {domain : 'hidoger'},<br />
+//上传完成<br />
+complete : function(file){}<br />
+});<br />
+});<br />
+<strong>upload插件：</strong><a target="_blank" href="http://www.hidoger.com/Demos/2014/10/upload/index.php"><span style="color:#FF0000;"><strong>全屏查看</strong></span></a> <a target="_blank" href="http://www.hidoger.com/Demos/2014/10/upload/index.html"><strong><span style="color:#FF0000;">弹框查看</span></strong></a> <a target="_blank" href="http://www.hidoger.com/show/index/cid/11/id/28.html"><strong><span style="color:#FF0000;">点击下载</span></strong></a><br />
+1.uploadify功能过于简单，只有上传功能，不能单独拿出来使用，这里集成了上传、管理、搜索的功能，使用起来更加方便<br />
+2.修复了在session丢失的bug<br />
+3.样式过于简单，且在有些浏览器中存在错位，这里进行统一后，再也不用担心了<br />
+4.调用方式上做了封装，对外只提供4个常用配置项，所以在对外调用上是统一的，如果有特殊需要，可以在源文件中修改<br />
+5.配置文件采用服务端配置<br />
+6.提供两种对外的页面调用方式，一种是iframe，一种是直接访问index.php<br />
+7.未上传时会显示相应文件类型的图标<br />
+以下是目录结构<br />
+upload&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; --项目目录<br />
+--css&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --样式目录<br />
+--images&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --样式相关图片目录<br />
+--js&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --js目录<br />
+--uploads&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --上传后文件存储的默认目录，可以在配置文件中设置<br />
+--action.php&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --处理获取文件列表与删除文件的文件<br />
+--config.php&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --配置文件<br />
+--frame.php&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --用作iframe调用的文件<br />
+--index.html&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --展示用iframe调用的文件<br />
+--index.php&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --展示直接调用的文件<br />
+--upload.php&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --处理文件上传的文件<br />
+在上页面的文件中，调用index.html与index.php即可，其中index.php是用作直接访问的，即在浏览中中输入该地址，适合在window.open中使用；index.html在这里是作iframe演示，如果想要在某个页面以弹出框形式调用，这种文件最好不过了，把index.html页面中的css与js放在要显示的页面，特别是hidoger.fileManager.show这段内容，这个是显示弹出框调用的，如果要在某个页面要点击上传按钮显示上传框，可以这样做：<br />
+$('#upload').click(function(){<br />
+hidoger.fileManager.show({<br />
+type : 'Images',//可填值 'Files', 'Images', 'Flash'<br />
+//选中一个文件时调用<br />
+callback : function(fileUrl, name, allFiles){},<br />
+<br />
+//上传时需要的额外额外数据<br />
+additionalData : {domain : 'hidoger'},<br />
+//上传完成<br />
+complete : function(file){}<br />
+});<br />
+});<br />
+其它的就不作解释了，文件中已经有很多注释了，相信大家可以自己进行相关配置与修改，下面是页面中的显示效果图
+</p>
+<p style="color:#666666;font-family:Podkova, 微软雅黑, Arial, Tahoma, Verdana, Helvetica, sans-serif;font-size:14px;">
+	<br />
+</p>
+<p style="color:#666666;font-family:Podkova, 微软雅黑, Arial, Tahoma, Verdana, Helvetica, sans-serif;font-size:14px;">
+	插件初始化状态
+</p>
+<p style="color:#666666;font-family:Podkova, 微软雅黑, Arial, Tahoma, Verdana, Helvetica, sans-serif;font-size:14px;">
+	<img src="http://www.hidoger.com/uploads/img1/20141009/5436276bee78d.jpg" /> 
+</p>
+<p style="color:#666666;font-family:Podkova, 微软雅黑, Arial, Tahoma, Verdana, Helvetica, sans-serif;font-size:14px;">
+	<br />
+</p>
+<p style="color:#666666;font-family:Podkova, 微软雅黑, Arial, Tahoma, Verdana, Helvetica, sans-serif;font-size:14px;">
+	选择图片完成后的状态
+</p>
+<p style="color:#666666;font-family:Podkova, 微软雅黑, Arial, Tahoma, Verdana, Helvetica, sans-serif;font-size:14px;">
+	<img src="http://www.hidoger.com/uploads/img1/20141009/543627e7b6468.jpg" /> 
+</p>
+<p style="color:#666666;font-family:Podkova, 微软雅黑, Arial, Tahoma, Verdana, Helvetica, sans-serif;font-size:14px;">
+	<br />
+</p>
+<p style="color:#666666;font-family:Podkova, 微软雅黑, Arial, Tahoma, Verdana, Helvetica, sans-serif;font-size:14px;">
+	上传成功状态：
+</p>
+<p style="color:#666666;font-family:Podkova, 微软雅黑, Arial, Tahoma, Verdana, Helvetica, sans-serif;font-size:14px;">
+	<img src="http://www.hidoger.com/uploads/img1/20141009/5436279d481a2.jpg" /> 
+</p>
+<p style="color:#666666;font-family:Podkova, 微软雅黑, Arial, Tahoma, Verdana, Helvetica, sans-serif;font-size:14px;">
+	显示列表里面的图片
+</p>
+<p style="color:#666666;font-family:Podkova, 微软雅黑, Arial, Tahoma, Verdana, Helvetica, sans-serif;font-size:14px;">
+	<img src="http://www.hidoger.com/uploads/img1/20141009/543627f817dfb.jpg" /> 
+</p>
+<p style="color:#666666;font-family:Podkova, 微软雅黑, Arial, Tahoma, Verdana, Helvetica, sans-serif;font-size:14px;">
+	<br />
+</p>
+<p style="color:#666666;font-family:Podkova, 微软雅黑, Arial, Tahoma, Verdana, Helvetica, sans-serif;font-size:14px;">
+	选择服务端图片：
+</p>
+<p style="color:#666666;font-family:Podkova, 微软雅黑, Arial, Tahoma, Verdana, Helvetica, sans-serif;font-size:14px;">
+	<img src="http://www.hidoger.com/uploads/img1/20141009/5436279458248.jpg" /> 
+</p>
+<p style="color:#666666;font-family:Podkova, 微软雅黑, Arial, Tahoma, Verdana, Helvetica, sans-serif;font-size:14px;">
+	搜索条件下显示图片
+</p>
+<p style="color:#666666;font-family:Podkova, 微软雅黑, Arial, Tahoma, Verdana, Helvetica, sans-serif;font-size:14px;">
+	<img src="http://www.hidoger.com/uploads/img1/20141009/543627a51d9cd.jpg" /> 
+</p>
+<p style="color:#666666;font-family:Podkova, 微软雅黑, Arial, Tahoma, Verdana, Helvetica, sans-serif;font-size:14px;">
+	<br />
+</p>
+<p style="color:#666666;font-family:Podkova, 微软雅黑, Arial, Tahoma, Verdana, Helvetica, sans-serif;font-size:14px;">
+	全屏模式下的状态
+</p>
+<p style="color:#666666;font-family:Podkova, 微软雅黑, Arial, Tahoma, Verdana, Helvetica, sans-serif;font-size:14px;">
+	<img src="http://www.hidoger.com/uploads/img1/20141009/5436277bdab9d.jpg" /> 
+</p>
+<p style="color:#666666;font-family:Podkova, 微软雅黑, Arial, Tahoma, Verdana, Helvetica, sans-serif;font-size:14px;">
+	<br />
+</p>
+<p style="color:#666666;font-family:Podkova, 微软雅黑, Arial, Tahoma, Verdana, Helvetica, sans-serif;font-size:14px;">
+	<a href="http://www.hidoger.com/">任宇的个人网站</a> 
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/282.html">每个抖腿的人，心里都有一台缝纫机</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/286.html">ASPjpeg组件使用方法</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

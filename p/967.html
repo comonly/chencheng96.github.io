@@ -1,0 +1,352 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Java，Android等发送HTTP请求及接收_comonly.cn</title>
+<meta name="keywords" content="Java，Android等发送HTTP请求及接收" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Java，Android等发送HTTP请求及接收</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">java 常见几种发送http请求案例——较全参考</li>
+          <li class="lmname"><a href="https://blog.csdn.net/u010197591/article/details/51441399" target="_blank">https://blog.csdn.net/u010197591/article/details/51441399</a></li>
+          <li class="timer">2018-09-08</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	计算机基础-网络等
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 主体待处理</div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/966.html">长尾关键词</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/968.html">flex项目</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/u010197591/article/details/51441399" target="_blank">https://blog.csdn.net/u010197591/article/details/51441399</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="参考资料">
+							<h2 style="display:inline;color:#5BC648;">参考资料</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-09-08&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	Java发送http请求(get 与post方法请求)：http://bijian1013.iteye.com/blog/2166855
+</p>
+<p>
+	java发送http的get、post请求：http://www.cnblogs.com/zhuawang/archive/2012/12/08/2809380.html
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="HttpURLConnection的POST和GET方法">
+							<h2 style="display:inline;color:#5BC648;">HttpURLConnection的POST和GET方法</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-10-01&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	转：//http://bijian1013.iteye.com/blog/2166855
+</p>
+<p>
+	注意：通过BufferedReader 读取远程返回的数据时，必须设置读取编码，否则中文会乱码！
+</p>
+<p>
+	HttpURLConnection.connect函数，实际上只是建立了一个与服务器的tcp连接，并没有实际发送http请求。无论是post还是get，http请求实际上直到HttpURLConnection.getInputStream()这个函数里面才正式发送出去。
+</p>
+<p>
+	在readContentFromPost() 中，顺序是重中之重，对connection对象的一切配置（那一堆set函数）都必须要在connect()函数执行之前完成。而对 outputStream的写操作，又必须要在inputStream的读操作之前。这些顺序实际上是由http请求的格式决定的。
+</p>
+<p>
+	http 请求实际上由两部分组成，一个是http头，所有关于此次http请求的配置都在http头里面定义，一个是正文content，在connect()函数里面，会根据HttpURLConnection对象的配置值生成http头，因此在调用connect函数之前，就必须把所有的配置准备好。
+</p>
+<p>
+	紧接着http头的是http请求的正文，正文的内容通过outputStream写入，实际上outputStream不是一个网络流，充其量是个字符串流，往里面写入的东西不会立即发送到网络，而是在流关闭后，根据输入的内容生成http正文。
+</p>
+<p>
+	至此，http请求的东西已经准备就绪。在getInputStream()函数调用的时候，就会把准备好的http请求正式发送到服务器了，然后返回一个输入流，用于读取服务器对于此次http请求的返回信息。由于http请求在getInputStream的时候已经发送出去了（包括http头和正文），因此在getInputStream()函数之后对connection对象进行设置（对http头的信息进行修改）或者写入 outputStream（对正文进行修改）都是没有意义的了，执行这些操作会导致异常的发生。
+</p>
+<pre class="prettyprint lang-java">public static final String GET_URL = "http://localhost:8080/SpringMVC/greeting";
+public static final String POST_URL = "http://localhost:8080/SpringMVC/greeting";
+public static void readContentFromGet() throws IOException {
+	
+	// 拼凑get请求的URL字串，使用URLEncoder.encode对特殊和不可见字符进行编码
+	String getURL = GET_URL + "?name=" + URLEncoder.encode("zhangshan", "utf-8");
+	URL getUrl = new URL(getURL); // 根据拼凑的URL，打开连接，URL.openConnection函数会根据URL的类型，
+	// 返回不同的URLConnection子类的对象，这里URL是一个http，因此实际返回的是HttpURLConnection
+	HttpURLConnection connection = (HttpURLConnection) getUrl.openConnection();
+	// 进行连接，但是实际上get request要在下一句的connection.getInputStream()函数中才会真正发到服务器
+	connection.connect();
+	// 取得输入流，并使用Reader读取
+	BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"));// 设置编码,否则中文乱码
+	System.out.println("=============================");
+	System.out.println("Contents of get request");
+	System.out.println("=============================");
+	String lines;
+	while ((lines = reader.readLine()) != null) {
+		// lines = new String(lines.getBytes(), "utf-8");
+		System.out.println(lines);
+	}
+	reader.close();
+	// 断开连接
+	connection.disconnect();
+	System.out.println("=============================");
+	System.out.println("Contents of get request ends");
+	System.out.println("=============================");
+}
+
+public static void readContentFromPost() throws IOException {
+	
+	// Post请求的url，与get不同的是不需要带参数
+	URL postUrl = new URL(POST_URL);
+	// 打开连接
+	HttpURLConnection connection = (HttpURLConnection) postUrl.openConnection();
+	// Output to the connection. Default is false, set to true because post method must write something to the connection
+	// 设置是否向connection输出，因为这个是post请求，参数要放在http正文内，因此需要设为true
+	connection.setDoOutput(true);
+	// Read from the connection. Default is true.
+	connection.setDoInput(true);
+	// Set the post method. Default is GET
+	connection.setRequestMethod("POST");
+	// Post cannot use caches
+	// Post 请求不能使用缓存
+	connection.setUseCaches(false);
+	
+	// This method takes effects to every instances of this class.URLConnection.setFollowRedirects是static函数，作用于所有的URLConnection对象。
+	// connection.setFollowRedirects(true);
+
+	// This methods only takes effacts to this instance.URLConnection.setInstanceFollowRedirects是成员函数，仅作用于当前函数
+	connection.setInstanceFollowRedirects(true);
+	// Set the content type to urlencoded,because we will write some URL-encoded content to the connection. Settings above must be set before connect!
+	// 配置本次连接的Content-type，配置为application/x-www-form-urlencoded的意思是正文是urlencoded编码过的form参数，下面我们可以看到我们对正文内容使用URLEncoder.encode进行编码
+	connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+	// 连接，从postUrl.openConnection()至此的配置必须要在connect之前完成，
+	// 要注意的是connection.getOutputStream会隐含的进行connect。
+	connection.connect();
+	DataOutputStream out = new DataOutputStream(connection.getOutputStream());
+	// The URL-encoded contend
+	// 正文，正文内容其实跟get的URL中'?'后的参数字符串一致
+	String content = "name=" + URLEncoder.encode("张三", "utf-8");
+	// DataOutputStream.writeBytes将字符串中的16位的unicode字符以8位的字符形式写道流里面
+	out.writeBytes(content);
+	out.flush();
+	out.close();// flush and close
+	BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"));// 设置编码,否则中文乱码
+	String line = "";
+	System.out.println("=============================");
+	System.out.println("Contents of post request");
+	System.out.println("=============================");
+	while ((line = reader.readLine()) != null) {
+		// line = new String(line.getBytes(), "utf-8");
+		System.out.println(line);
+	}
+	System.out.println("=============================");
+	System.out.println("Contents of post request ends");
+	System.out.println("=============================");
+	reader.close();
+	connection.disconnect();
+}</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#参考资料">参考资料</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#HttpURLConnection的POST和GET方法">HttpURLConnection的POST和GET方法</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

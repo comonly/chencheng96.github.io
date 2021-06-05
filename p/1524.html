@@ -1,0 +1,280 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>C++字节对齐在编码中需要注意的内容  优化代码结构，编程过程中避免踩坑_comonly.cn</title>
+<meta name="keywords" content="C++字节对齐在编码中需要注意的内容  优化代码结构，编程过程中避免踩坑" />
+<meta name="description" content="1. 缘起
+
+&nbsp; &nbsp; 改bug改了n久
+
+2. 字节对齐的基本规则
+
+&nbsp; &nbsp; 首先，每种类型的变量的默认对齐长度都是自己的变量长度，比如：char占一个字节，那么对齐长度就是一个字节，int占四个字节，对齐长度就是四个字节，double占八个字节，对齐长度就是8。int的对齐长度为4的实际意义是，int变量必须存储在四的倍数的地址上。
+&nbsp; &nbsp; 那么对于struct{char b; int a}，其长度是8，因为b虽然只占用1个字节，" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">C++字节对齐在编码中需要注意的内容  优化代码结构，编程过程中避免踩坑</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-10-31</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>1. 缘起
+
+&nbsp; &nbsp; 改bug改了n久
+
+2. 字节对齐的基本规则
+
+&nbsp; &nbsp; 首先，每种类型的变量的默认对齐长度都是自己的变量长度，比如：char占一个字节，那么对齐长度就是一个字节，int占四个字节，对齐长度就是四个字节，double占八个字节，对齐长度就是8。int的对齐长度为4的实际意义是，int变量必须存储在四的倍数的地址上。
+&nbsp; &nbsp; 那么对于struct{char b; int a}，其长度是8，因为b虽然只占用1个字节，</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 1. 缘起<br />
+<br />
+&nbsp; &nbsp; 改bug改了n久<br />
+<br />
+2. 字节对齐的基本规则<br />
+<br />
+&nbsp; &nbsp; 首先，每种类型的变量的默认对齐长度都是自己的变量长度，比如：char占一个字节，那么对齐长度就是一个字节，int占四个字节，对齐长度就是四个字节，double占八个字节，对齐长度就是8。int的对齐长度为4的实际意义是，int变量必须存储在四的倍数的地址上。<br />
+&nbsp; &nbsp; 那么对于struct{char b; int a}，其长度是8，因为b虽然只占用1个字节，但是a必须从4的倍数开始存储，因此b后面的3个字节都废掉了。因此一共需要8个字节才能把b和a存下来。<br />
+&nbsp; &nbsp; 那么对于struct{int a; char b}，其长度还是8！晕菜了！原因如下：<br />
+&nbsp; &nbsp; 字节对齐的细节和编译器实现相关，但一般而言，满足三个准则：<br />
+&nbsp; &nbsp;1) 结构体变量的首地址能够被其最宽基本类型成员的大小所整除。<br />
+&nbsp; &nbsp;2) 结构体每个成员相对于结构体首地址的偏移量（offset）都是成员大小的整数倍，如有需要编译器会在成员之间加上填充字节（internal adding）；<br />
+&nbsp; &nbsp;3) 结构体的总大小为结构体最宽基本类型成员大小的整数倍，如有需要编译器会在最末一个成员之后加上填充字节（trailing padding）。<br />
+&nbsp; &nbsp;规则1是控制结构体变量的首地址的，与结构体变量的长度没关系。<br />
+&nbsp; &nbsp;规则2是控制结构体内每个变量的相对地址的，与结构体变量的长度有关系。<br />
+&nbsp; &nbsp;规则3是控制结构体总体长度的，与结构体变量的长度有关系。<br />
+&nbsp; &nbsp;正是由于第三条规则，结构体的长度必须是其最长的变量长度的整数倍，因此在上面的例子中，必须是4的整数倍，因此，是8。<br />
+&nbsp; &nbsp;如果结构体里面嵌套结构体就要注意了，结构体变量的起始地址只是其内部最宽的基本类型的整数倍，而非结构体自身的整数倍，外面结构体的长度，也仅仅是里面最宽的基本类型的长度倍数。<br />
+&nbsp; &nbsp;比如：&nbsp;<br />
+<br />
+struct S1 {<br />
+&nbsp; char c;&nbsp; // 1个字节<br />
+&nbsp; int i;&nbsp; &nbsp;// 前面空3个字节，占用4个字节<br />
+}; // 刚好8个字节，是4的倍数&nbsp;<br />
+struct S2 {&nbsp;<br />
+&nbsp; char c1; // 1个字节<br />
+&nbsp; S1 s;&nbsp; // 前面空3个字节，而不是空7个字节，占用8个字节<br />
+&nbsp; char c2; // 占用1个字节&nbsp;<br />
+}; // 一共13个字节，要成为4的倍数，后面增加3个字节，成为16个字节<br />
+3. 字节对齐的原因<br />
+<br />
+&nbsp; &nbsp;·效率原因，某些平台每次都是从偶地址读数据，如果一个int型（假设为32位系统）如果存放在偶地址开始的地方，那么一个读周期就可以读出这32bit，而如果存放在奇地址开始的地方，就需要2个读周期，并对两次读出的结果的高低字节进行拼凑才能得到该32bit数据。显然在读取效率上下降很多。<br />
+<br />
+4. 字节对齐的隐患<br />
+<br />
+&nbsp; &nbsp;·不合理设置变量定义的顺序，可能浪费内存&nbsp; &nbsp;<br />
+<br />
+struct S1 { // 长度为16<br />
+&nbsp; &nbsp; char a;<br />
+&nbsp; &nbsp; int b;<br />
+&nbsp; &nbsp; char c;<br />
+&nbsp; &nbsp; int d;<br />
+}<br />
+struct S2 { // 长度为12<br />
+&nbsp; &nbsp; char a;<br />
+&nbsp; &nbsp; char c;<br />
+&nbsp; &nbsp; int b;<br />
+&nbsp; &nbsp; int d;&nbsp; &nbsp;<br />
+}<br />
+&nbsp; &nbsp;·更多的是在对地址运算时，没有考虑的字节对齐问题<br />
+<br />
+char a;<br />
+int b;<br />
+int *pb = &amp;a+1; //这样a的地址加1，并不是b的地址，实际上，这行代码，在编译时就出现了ERROR，因为不能把char *的地址赋值给int *的变量<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1523.html">C++ 字节对齐举例</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1525.html">C++字节对齐可能导致的堆栈内存异常的错误CRT detected that the application wrote to memory after end of heap buffer</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

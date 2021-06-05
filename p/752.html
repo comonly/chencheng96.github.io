@@ -1,0 +1,277 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>imacros调用文件CSV和数据库_comonly.cn</title>
+<meta name="keywords" content="imacros调用文件CSV和数据库" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">imacros调用文件CSV和数据库</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-06-02</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	电脑配置设置  软件使用 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">imacros,CSV,数据库</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='tyle="lie-height:1.5;"调用cv文件'>
+	<span style="line-height:1.5;">调用csv文件</span> 
+</h2>
+<p>
+	iMacros让您指定文本文件， CSV文件作为输入。<br />
+例如这样一个csv文件：<br />
+“ARTIST” , “ALBUM TITLE” , “PRICE”<br />
+“Beatles”, “Abbey Road”, “13.49″<br />
+“Beatles”, “The Beatles 1,2,3″ , “25.49″<br />
+“Mozart” , “Symphonies No.40 &amp; 41″, “9.98″<br />
+“Mozart”, “Requiem”, “7.50″<br />
+这个文件的文件名为OnlineAuction.csv<br />
+<br />
+我们现在需要告诉iMacros宏如何找到这个数据输入文件。为此，我们使用内置的变量!DATASOURCE<br />
+SET !DATASOURCE OnlineAuction.csv &nbsp; &nbsp;&nbsp;默认路径是iMacros数据路径下的datasources文件夹。<br />
+SET !DATASOURCE_COLUMNS 3 &nbsp; &nbsp; 设置iMacrosCSV文件有多少列，此数字必须完全匹配输入文件的列数<br />
+SET !LOOP 2&nbsp; &nbsp;既然我们要插入的所有数据集，我们需要的宏循环来控制（不要？）<br />
+SET !DATASOURCE_LINE {{!LOOP}} &nbsp; &nbsp; &nbsp;&nbsp;来设置读取文件的第几行。<br />
+<br />
+现在，我们已经把准备工作都做好了。接下来我们要读取出对应的数据。<br />
+TAG TYPE=INPUT:TEXT FORM=Listing ATTR=NAME:Name CONTENT={{!COL1}} &nbsp; &nbsp; {{!COL1}} 代表的是读取出对应的第一列数据<br />
+TAG TYPE=INPUT:TEXT FORM=Listing ATTR=NAME:Album CONTENT={{!COL2}}<br />
+TAG TYPE=INPUT:TEXT FORM=Listing ATTR=NAME:Price CONTENT={{!COL3}}
+</p>
+<h2 id='调用数据库文件'>
+	调用数据库文件
+</h2>
+<span style="color:#E53333;">这个例子只适用于专业版。</span><br />
+iMacros可以直接从数据库读取数据。<br />
+这个例子中的代码Visual Basic脚本连接到Microsoft Access数据库：（ps：实际使用待测试）<br />
+‘ open database<br />
+set rs = CreateObject(“ADODB.Connection”)<br />
+rs.Open(“DRIVER={Microsoft Access Driver (*.mdb)}; DBQ=” _&amp; mypath &amp; “IIM-TEST-SUBMIT.MDB”)<br />
+‘ use SQL to select information<br />
+sql = “select * from table1″<br />
+set rs = rs.Execute(sql)<br />
+‘ start iMacros<br />
+set iim1= CreateObject (“iMacros”)<br />
+iret = iim1.iimInit<br />
+iret = iim1.iimDisplay(“Submitting Data from MS ACCESS”)<br />
+‘ loop through result dataset<br />
+do until rs.eof<br />
+‘Set the variable<br />
+iret = iim1.iimSet(“-var_FNAME”, rs.fields(0))<br />
+iret = iim1.iimSet(“-var_LNAME”, rs.fields(1))<br />
+iret = iim1.iimSet(“-var_ADDRESS”, rs.fields(2))<br />
+iret = iim1.iimSet(“-var_CITY”, rs.fields(3))<br />
+iret = iim1.iimSet(“-var_ZIP”, rs.fields(4))<br />
+iret = iim1.iimSet(“-var_STATE-ID”, rs.fields(5))<br />
+iret = iim1.iimSet(“-var_COUNTRY-ID”, rs.fields(6))<br />
+iret = iim1.iimSet(“-var_EMAIL”, rs.fields(7))<br />
+‘Run the macro<br />
+‘Note: This is the SAME macro, as in the FILE-2-WEB-METHOD2.VBS example script!!!<br />
+iret = iim1.iimPlay(“wsh-submit-2-web”)<br />
+If iret &lt; 0 Then<br />
+MsgBox iim1.iimGetLastError()<br />
+End If<br />
+rs.movenext<br />
+loop<br />
+iret = iim1.iimDisplay(“Done!”)<br />
+iret = iim1.iimExit<br />
+WScript.Quit(0)
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/749.html">ESFramework 使用技巧 －－ 部署P2P服务器</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/760.html">怎样在网页中插入音乐,HTML5 标签audio添加网页背景音乐代码</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#tyle="lie-height:1.5;"调用cv文件">tyle="lie-height:1.5;"调用cv文件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#调用数据库文件">调用数据库文件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

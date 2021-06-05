@@ -1,0 +1,360 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>文本框—JavaScript_comonly.cn</title>
+<meta name="keywords" content="文本框—JavaScript" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">文本框—JavaScript</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-03-13</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">JavaScript,文本框</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	文本框分为单行文本框（包括密码框）和多行文本框两种。
+</p>
+<h2 id='文本框对象属性'>
+	文本框对象属性
+</h2>
+<p>
+	文本框对象（text对象），多行文本框对象（textarea对象），密码对象（password对象）。
+</p>
+<blockquote>
+	<p>
+		accesskey：返回或设置文本框的快捷键
+	</p>
+	<p>
+		defaultvalue：返回或设置文本框的初始文本。对于单行文本，由input标签的value属性值决定；对于多行文本，该属性值由&lt;text&gt;和&lt;/text&gt;标签之间的文本决定
+	</p>
+	<p>
+		disabled：返回或设置文本框是否被禁用，属性值为布尔值
+	</p>
+	<p>
+		form<span>：返回包含文本框元素的form对象的引用</span> 
+	</p>
+	<p>
+		id<span>：返回或设置文本框的id属性</span> 
+	</p>
+	<p>
+		maxlength<span>：返回或设置文本框可输入文字的最大字符数</span> 
+	</p>
+	<p>
+		name<span>：返回或设置文本框名称</span> 
+	</p>
+	<p>
+		readonly<span>：返回或设置文本框是否为只读，属性值为布尔值</span> 
+	</p>
+	<p>
+		size<span>：返回或设置单行文本框和密码框的宽度大小</span> 
+	</p>
+	<p>
+		tabindex<span>：返回或设置文本框的Tab键顺序</span> 
+	</p>
+	<p>
+		type<span>：返回或设置文本框类型，单行文本框返回text，多行返回textarea，密码框返回password</span> 
+	</p>
+	<p>
+		value<span>：返回或设置文本框的值</span> 
+	</p>
+	<p>
+		rows<span>：返回或设置多行文本框的高度</span> 
+	</p>
+	<p>
+		cols<span>：返回或设置多行文本框的宽度</span> 
+	</p>
+</blockquote>
+<h2 id='文本框对象方法'>
+	文本框对象方法
+</h2>
+<blockquote>
+	<p>
+		blur()：将焦点从文本框移开
+	</p>
+	<p>
+		click()：模拟文本框被鼠标点击
+	</p>
+	<p>
+		focus()：将焦点赋给文本框
+	</p>
+	<p>
+		select()：选中文本框中的文字
+	</p>
+</blockquote>
+<h2 id='文本框对象事件'>
+	文本框对象事件
+</h2>
+<p>
+	三种文本框对象响应的事件是相同的。
+</p>
+<blockquote>
+	<p>
+		blur：当焦点从文本框移开时激发的事件
+	</p>
+	<p>
+		change：当文本框中的内容改变时激发的事件
+	</p>
+	<p>
+		click：单击文本框时激发的事件
+	</p>
+	<p>
+		dbclick：双击文本框时激发的事件
+	</p>
+	<p>
+		focus：当焦点赋给文本框时激发的事件
+	</p>
+	<p>
+		keydown：用户按下键盘键时激发的事件
+	</p>
+	<p>
+		keypress：按下并释放键盘键时所激发的事件
+	</p>
+	<p>
+		keyup：释放键盘时所激发的事件
+	</p>
+	<p>
+		mousedown：按下鼠标键（并没有释放）时所激发的事件
+	</p>
+	<p>
+		mousemove：移动鼠标时激发的事件
+	</p>
+	<p>
+		mouseover：鼠标从文本框对象上移开时所激发的事件
+	</p>
+	<p>
+		mouseup：释放鼠标键时所激发的事件
+	</p>
+	<p>
+		mouseout：鼠标从文本框对象上移开时激发的事件
+	</p>
+	<p>
+		select：选中文本时所激发的事件
+	</p>
+	<p>
+		selectstart：当文本框中的文字开始被选中时激发的事件
+	</p>
+</blockquote>
+<h2 id='自动选择文本框中的文字'>
+	自动选择文本框中的文字
+</h2>
+<p>
+	使用文本框的select()方法和mouseover事件相结合，可以在鼠标经过的文本框时自动选中文本框的内容，然后将文本框中的文字内容清除，方便用户输入。
+</p>
+<p>
+	&lt;script type="text/javascript"&gt;<br />
+function cleartext(tb){<br />
+tb.focus();<br />
+if(tb.value==tb.defaultValue)tb.value="";<br />
+}<br />
+function test(tb){<br />
+if(tb.value.length&lt;=6)tb.value="输入错误，请输入大于6个字符";<br />
+}<br />
+&lt;/script&gt;<br />
+&lt;form action="" method="post" name="forme1"&gt;<br />
+姓名：&lt;input type="text" name="name" onmouseover="cleartext(this)" value="请在这输入"/&gt;<br />
+&lt;input type="submit" name="submit" &nbsp;value="提交"/&gt;<br />
+&lt;input type="reset" name="reset" value="重置"/&gt;<br />
+&lt;/form&gt;
+</p>
+<p>
+	复制代码<a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank"><span style="background-color:#FFE500;">在线测试运行效果</span></a> 
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/630.html">表单对象的应用—JavaScript</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/632.html">按钮—JavaScript</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#文本框对象属性">文本框对象属性</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#文本框对象方法">文本框对象方法</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#文本框对象事件">文本框对象事件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#自动选择文本框中的文字">自动选择文本框中的文字</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

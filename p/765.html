@@ -1,0 +1,232 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>jsp页面输出的内容被截断_comonly.cn</title>
+<meta name="keywords" content="jsp页面输出的内容被截断" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">jsp页面输出的内容被截断</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">lx19860203</li>
+          <li class="lmname"><a href="http://m.blog.csdn.net/lx19860203/article/details/38976299" target="_blank">http://m.blog.csdn.net/lx19860203/article/details/38976299</a></li>
+          <li class="timer">2017-07-03</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	javaweb---jsp asp数据库框架
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">jsp,截断</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> jsp页面输出的内容被截断<br />
+应该是输出内容大小超出了buffer的最大值<br />
+可以加入 buffer="none"解决。<br />
+加入到这里 &lt;%@ page contentType=”text/html;charset=UTF-8″buffer="none"%&gt;<br />
+<br />
+最近总是碰到在jsp页面中输出数据时，页面显示不全的问题，一些html标记也被截断，而当我减少输出的数据时却没有问题，后来才知道是jsp缓存大小在作怪，这个问题困扰了我大半天，终于找到解决方案了。<br />
+在jsp页面中，默认是autoFlush=”true”，也就是<br />
+&nbsp; &nbsp; &nbsp;&lt;%@ page contentType=”text/html;charset=UTF-8″ autoFlush=”true”%&gt;<br />
+但通常情况下只用写成&lt;%@ page contentType=”text/html;charset=UTF-8″%&gt;就默认为autoFlush=”true”。<br />
+那么当jsp页面中要输出的数据很多时，比如从数据库中取出了上百条记录在jsp页面显示时，会出现jsp页面显示不全，一些html标记被截断的现象，比如对一个普通的html标记：<br />
+&nbsp; &nbsp; &nbsp;&lt;input type="hidden" name="qd45 " id="qd45 " value="1"/&gt; 可能会截断成&lt;input ty<br />
+&nbsp;<br />
+解决这种现象的方法如下：<br />
+将autoFlush设为false，也就是：<br />
+&nbsp; &nbsp; &lt;%@ page contentType=”text/html;charset=UTF-8″ autoFlush=”false”%&gt;<br />
+但也可能出现错误，这个时候很可能会报java.io.IOException: Error: JSP Buffer overflow的错误，表示jsp缓存大小不够，所以就必须设置增大jsp的缓存大小，也就是如buffer=”300kb”，完整的如：<br />
+&nbsp; &nbsp; &lt;%@ page contentType=”text/html;charset=UTF-8″ autoFlush=”false” buffer=”300kb”%&gt;<br />
+另外要注意的是：buffer的值设置的如果不够大，那么在显示数据的时候，由于没有足够的缓存会抛出一些异常，比如NullPointer错误等，这个时候并不是你程序出了错，只要将buffer值再设置得大一些到不再出错即可。<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/764.html">JSP向ACCESS插入记录的报SQL语法错误</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/766.html">jsp中的中文插入到access数据库后为乱码是怎么回事?</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="http://m.blog.csdn.net/lx19860203/article/details/38976299" target="_blank">http://m.blog.csdn.net/lx19860203/article/details/38976299</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

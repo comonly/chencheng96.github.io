@@ -1,0 +1,846 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Python文件处理_comonly.cn</title>
+<meta name="keywords" content="Python文件处理" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Python文件处理</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-02-26</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	python  perl
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">Python</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='二进制数据的读写'>
+	二进制数据的读写
+</h2>
+<p>
+	创建自定义的二进制文件时，创建一个用于标识文件类型的魔数以及用于标识文件格式版本的版本号是有用的。对原始二进制数据可以采用压缩方式存储（读取是也要相对应），需要导入gzip模块。当然可以直接采用Python内置的open方式打开文件进行存取。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	随机存取二进制文件
+</p>
+<h2 id='文本文件的读写'>
+	文本文件的读写
+</h2>
+<p>
+	可以使用正则表达式分析文本
+</p>
+<p>
+	<br />
+</p>
+<h2 id='写入与分析XML文件'>
+	写入与分析XML文件
+</h2>
+<p>
+	Python提供了3种写入XML文件的方法
+</p>
+<ol>
+	<li>
+		手动写入XML文件
+	</li>
+	<li>
+		创建元素树并使用其write()方法
+	</li>
+	<li>
+		创建DOM并使用其write()方法
+	</li>
+</ol>
+<p>
+	<br />
+</p>
+<p>
+	XML文件的读入与分析有4种方法
+</p>
+<ol>
+	<li>
+		人工读入并分析
+	</li>
+	<li>
+		使用元素树
+	</li>
+	<li>
+		DOM（文档对象模型）
+	</li>
+	<li>
+		SAX分析器读入并分析XML文件
+	</li>
+</ol></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/860.html">Python面向对象</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/862.html">Python进程与线程</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="">
+							<h2 style="display:inline;color:#5BC648;"></h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-02-26&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><h4>
+	带可选压缩的原始二进制数据的读写
+</h4>
+<pre class="prettyprint lang-py">import gzip
+
+GZIP_MAGIC=b"x1F\X8B"   #魔数表示采用gzip压缩文件
+MAGIC=b"AIB\X00"  #魔数表示普通文件,len(MAGIC)==len(GZIP_MAGIC)==7
+FORMAT_VERSION=b"\X00\X01" #len(FORMAT_VERSION)==8
+
+def write(filename,compress): #compress表示是否以压缩文件形式存储二进制数据
+   fh=None
+   try:
+      if compress:
+         fh=gzip.open(filename,"wb")
+         fh.write(GZIP_MAGIC)
+      else:
+         fh=open(filename,"wb")
+         fh.write(MAGIC)
+      fh.write(FORMAT_VERSION)   #写入文件版本号
+      fh.write(b"as12") #写入其他数据，必须是二进制数据！
+   except Exception as err:   #打印出异常信息
+      print(err)
+      return False
+   finally: #不过是否正确写入最后都关闭文件
+      if fh is not None:
+         fh.close()
+   return True
+
+def read(filename):
+   fh=None
+   try:
+      fh=open(filename,"rb")
+      magic=fh.read(len(MAGIC))
+      if magic!=MAGIC:
+         fh.close    #用压缩的方式重新打开文件
+         fh=gzip.open(filename,"rb")
+         magic=fh.read(len(GZIP_MAGIC))
+         if magic!=GZIP_MAGIC:
+            raise ValueError("invalid .aib file format GZIP_MAGIC")
+         else:
+            print("GZIP_MAGIC right")
+      else:
+         fh.seek(0)     #用默认方式把指针移至最开始位置。
+         if magic!=MAGIC:  #判断魔数是否正确
+            raise ValueError("invalid .aib file format")
+         else:
+            print("MAGIC right")
+      version=fh.read(len(FORMAT_VERSION))      #查看该版本号文件能否使用
+      if version&gt;FORMAT_VERSION:
+         raise ValueError("unrecognized .aib file version")
+      else:
+         print("recognized .aib file version "+str(version))
+   except Exception as err:   #打印出异常信息
+      print(err)
+      return False
+   finally:
+      if fh is not None:
+         fh.close()
+   return True
+
+if write("a.txt",True):
+   print("success")
+else:
+   print("failed")
+read("a.txt")</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="">
+							<h2 style="display:inline;color:#5BC648;"></h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-02-26&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><h4>
+	文本文件的读写
+</h4>
+<pre class="prettyprint lang-py">def write(filename): #compress表示是否以压缩文件形式存储二进制数据
+   fh=None
+   try:
+      fh=open(filename,"w",encoding="utf8")
+      fh.write("count\ncount2")
+   except Exception as err:   #打印出异常信息
+      print(err)
+      return False
+   finally: #不管是否正确写入最后都关闭文件
+      if fh is not None:
+         fh.close()
+   return True
+
+def read(filename):
+   fh=None
+   try:
+      fh=open(filename,encoding="utf8")
+      print(fh.read(7))    #7指定读取字符的个数
+      print(fh.read())  #读取文本剩余部分
+   except Exception as err:   #打印出异常信息
+      print(err)
+      return False
+   finally:
+      if fh is not None:
+         fh.close()
+   return True
+
+if write("a.txt"):
+   print("success")
+else:
+   print("failed")
+read("a.txt")
+
+输出结果：
+success
+count
+c
+ount2</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="">
+							<h2 style="display:inline;color:#5BC648;"></h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-02-26&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><h4>
+	写入与分析XML文件——通过元素树写入和读取元素
+</h4>
+<pre class="prettyprint lang-py">import xml.etree.ElementTree
+def export_xml_etree(filename):
+   root=xml.etree.ElementTree.Element("incidents")
+   
+   element=xml.etree.ElementTree.Element("incident",id="001",date="2018-2-26")
+   port=xml.etree.ElementTree.SubElement(element,"in_1_first")
+   port.text="incident__in_1_first__success!"   #标签内的叙事性文本
+   port=xml.etree.ElementTree.SubElement(element,"in_1_2ed")
+   port.text="incident__in_2_2ed__success!"
+   root.append(element)
+   
+   element=xml.etree.ElementTree.Element("incident",id="002",date="2018-2-27")
+   #指定标签的继承关系，名称，以及内部属性
+   port=xml.etree.ElementTree.SubElement(element,"in_2_1")
+   port.text="incident__in_2_1__success!"
+
+   portsub=xml.etree.ElementTree.SubElement(port,"in_2_1_sub",id="002_in_2_1_sub")
+   #改标签名字为"in_2_1_sub"，位置在port（父标签程序中的标记而不是标签名"in_2_1"）之下
+   portsub.text="incident__in_2_1__in_2_1_sub__success!"
+   root.append(element)
+   
+   tree=xml.etree.ElementTree.ElementTree(root)
+   try:
+      tree.write(filename,"UTF-8")
+   except:
+      return False
+   return True
+
+def import_xml_etree(filename):
+   try:
+      tree=xml.etree.ElementTree.parse(filename)#获取元素树
+   except(EnvironmentError,
+          xml.parsers.expat.ExpatError)as err:
+      print("{0}:import error:{1}".format(
+         os.path.basename(sys.argv[0]),err))
+      return False
+   for everyelement in tree.findall("incident"):#对每个&lt;incident&gt;进行迭代处理
+      try:
+#         data={}    #属性多时循环获取属性值
+#         for _ in("id","date"):
+#            data[_]=everyelement.get(_)
+         print(everyelement.get("date"))  #获得everyelement（某个&lt;incident&gt;）的属性值
+         print(everyelement.get("id"))
+
+         porttext=everyelement.find("in_2_1")   #在everyelement（某个&lt;incident&gt;）中寻找&lt;in_2_1"&gt;
+         print(porttext.text.strip() if porttext is not None else "") #如果&lt;in_2_1"&gt;有叙述性文本输出
+         print(porttext[0].text if porttext is not None else "") #获取&lt;in_2_1_sub&gt;中的文本描述
+         print(porttext.find("in_2_1_sub").get("id") if porttext is not None else "")
+         #获取&lt;in_2_1_sub&gt;中的属性"id"的值
+         #porttext[0]与porttext.find("in_2_1_sub")作用相同。
+         
+      except(ValueError,LookupError)as err:     #,IncidentError
+         print()
+         return False
+      
+export_xml_etree("a.xml")
+import_xml_etree("a.xml")
+
+程序运行结果：
+2018-2-26
+001
+
+
+
+2018-2-27
+002
+incident__in_2_1__success!
+incident__in_2_1__in_2_1_sub__success!
+002_in_2_1_sub
+
+产生的a.xml文件(没有分级格式，全在一行，下面经编辑过的)：
+&lt;incidents&gt;
+&lt;incident date="2018-2-26" id="001"&gt;
+&lt;in_1_first&gt;incident__in_1_first__success!&lt;/in_1_first&gt;
+&lt;in_1_2ed&gt;incident__in_2_2ed__success!&lt;/in_1_2ed&gt;
+&lt;/incident&gt;
+
+&lt;incident date="2018-2-27" id="002"&gt;
+
+&lt;in_2_1&gt;incident__in_2_1__success!
+&lt;in_2_1_sub id="002_in_2_1_sub"&gt;incident__in_2_1__in_2_1_sub__success!
+&lt;/in_2_1_sub&gt;
+&lt;/in_2_1&gt;
+
+&lt;/incident&gt;
+&lt;/incidents&gt;</pre>
+<p>
+	生成xml文件时没有第一行的描述行！！！！！
+</p>
+<p>
+	使用元素树写入XML数据分为两个阶段：先要创建用于表示XML数据的元素树；之后将元素树写入文件中。<br />
+读取XML文件首先要读入并分析，然后对生成的元素树进行遍历。<br />
+准备好元素树后，可以使用xml.etree.ElementTree.findall()方法对每个标签进行处理。并以xml.etree.Element对象的形式返回。xml.etree.Element.find()方法可以寻找属性以及描述性文本元素。若某文本元素不包含文本，text属性为None，在读取时要进行考虑（一般通过一个判断语句）。
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="">
+							<h2 style="display:inline;color:#5BC648;"></h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-02-27&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><h4>
+	写入与分析XML文件——DOM
+</h4>
+<p>
+	DOM是一种用于表示与操纵内存中XML文档的标准API。
+</p>
+<pre class="prettyprint lang-py">import xml.dom.minidom
+def export_xml_dom(filename):
+   dom=xml.dom.minidom.getDOMImplementation()
+   tree=dom.createDocument(None,"incidents",None)
+   root=tree.documentElement
+   
+   element=tree.createElement("incident") #创建数据项
+   element.setAttribute("id","001") #设置数据项的属性
+   element.setAttribute("date","2018-2-26") #设置数据项的属性
+
+   text_element=tree.createTextNode("text")#创建文本元素来存放文本
+   element.appendChild(text_element)#对element添加文本描述。
+   root.appendChild(element)
+
+   text_element=tree.createTextNode("text")#创建文本元素来存放文本
+   name_element=tree.createElement("name")#创建一个子标签
+   name_element.setAttribute("id","001001")#每个标签都可以设置数据项属性
+   name_element.appendChild(text_element)#绑定叙述性文本
+   element.appendChild(name_element)#子标签绑定到根上。
+   root.appendChild(element)
+
+
+   fh=None
+   try:
+      fh=open(filename,"w",encoding="utf8")
+      tree.writexml(fh,encoding="UTF-8")
+      return True
+   finally:
+      pass
+  
+
+def import_xml_dom(filename):
+   try:
+      dom=xml.dom.minidom.parse(filename)#获取DOM
+   except(EnvironmentError,
+          xml.parsers.expat.ExpatError)as err:
+      print("{0}:import error:{1}".format(
+         os.path.basename(sys.argv[0]),err))
+      return False
+   for everyelement in dom.getElementsByTagName("incident"):#对每个&lt;incident&gt;进行迭代处理
+      try:
+         print(everyelement.getAttribute("date"))  #获得everyelement（某个&lt;incident&gt;）的属性值
+         print(everyelement.getAttribute("id"))
+
+         porttext=everyelement.getElementsByTagName("name")   #在incident中寻找&lt;name&gt;
+         print(porttext)#为一个数组
+         print(porttext[0])#某一确定的
+         print(porttext[0].getAttribute("id"))  #获取&lt;name&gt;的id属性
+
+         text=[]     #无效的连接方式
+         for node in porttext:
+            if node.nodeType==node.TEXT_NODE:
+               text.append(node.data)
+        # text="".join(text).strip()
+         
+         print(text)  #获取&lt;name&gt;的描述性文本
+
+         
+      except(ValueError,LookupError)as err:     #,IncidentError
+         print()
+         return False
+      
+export_xml_dom("a.xml")
+import_xml_dom("a.xml")
+
+运行结果：
+2018-2-26
+001
+[&lt;DOM Element: name at 0x221c4095cc0&gt;]
+&lt;DOM Element: name at 0x221c4095cc0&gt;
+001001
+[]
+
+生成的a.xml文件：
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;incidents&gt;
+&lt;incident date="2018-2-26" id="001"&gt;text&lt;name id="001001"&gt;text&lt;/name&gt;
+&lt;/incident&gt;
+&lt;/incidents&gt;</pre>
+<p>
+	对xml文件读取时无法获得描述性文本的内容！！！！！
+</p>
+<p>
+	dom.createDocument(None,"incidents",None)的第一个参数是命名空间URI，第二个参数是一个限定名（根元素的标签名），第三个参数是文档类型。
+</p>
+使用DOM与元素树之间真正较大的区别是对于文本节点的处理，使用xml.dom.Element.getElementsByTagName()方法获取给定标签的子元素</span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="">
+							<h2 style="display:inline;color:#5BC648;"></h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-02-27&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><h3>
+	Python 中文件对象的属性和方法简介
+</h3>
+<table cellpadding="1" border="1" bordercolor="#000000" cellspacing="0">
+	<tbody>
+		<tr>
+			<th>
+				语法
+			</th>
+			<th>
+				描述
+			</th>
+		</tr>
+	</tbody>
+	<tbody>
+		<tr>
+			<td>
+				f.close()
+			</td>
+			<td>
+				关闭文件对象f，并将属性f.closed设置为True
+			</td>
+		</tr>
+		<tr>
+			<td>
+				f.closed
+			</td>
+			<td>
+				文件已关闭，则返回True
+			</td>
+		</tr>
+		<tr>
+			<td>
+				f.encoding
+			</td>
+			<td>
+				bytes与str之间进行转换时使用的编码
+			</td>
+		</tr>
+		<tr>
+			<td>
+				f.fileno()
+			</td>
+			<td>
+				返回底层文件的文件描述符（只对那些有文件描述符的文件对象是可用的）
+			</td>
+		</tr>
+		<tr>
+			<td>
+				f.flush()
+			</td>
+			<td>
+				清空文件对象f，并将缓存中的内容写入磁盘（如果有）
+			</td>
+		</tr>
+		<tr>
+			<td>
+				f.isatty()
+			</td>
+			<td>
+				如果文件对象与控制台关联，就返回True（只有在文件对象应用了真正的文件时才是可用的）
+			</td>
+		</tr>
+		<tr>
+			<td>
+				f.mode
+			</td>
+			<td>
+				文件对象打开时使用的模式
+			</td>
+		</tr>
+		<tr>
+			<td>
+				f.name
+			</td>
+			<td>
+				文件对象f的文件名（如果有）
+			</td>
+		</tr>
+		<tr>
+			<td>
+				f.newlines
+			</td>
+			<td>
+				文件文件f中的换行字符串的类型
+			</td>
+		</tr>
+		<tr>
+			<td>
+				f.__next__()
+			</td>
+			<td>
+				返回文件对象f的下一行，大多数情况下，这种方法是隐式地使用的，比如对f中的行返回n个字节，而不移动文件指针的位置
+			</td>
+		</tr>
+		<tr>
+			<td>
+				f.peek(n)
+			</td>
+			<td>
+				返回n个字节，而不移动文件指针的位置
+			</td>
+		</tr>
+		<tr>
+			<td>
+				f.read(count)
+			</td>
+			<td>
+				从文件对象f中读取至多count个字节，如果没有指定count，就读取从当前文件指针直至最后的每个字节。以二进制模式读时，返回bytes对象；以文本模式读时，返回str对象。如果没有要读的内容（已到文件结尾），就返回一个空的bytes或str对象
+			</td>
+		</tr>
+		<tr>
+			<td>
+				f.readable()
+			</td>
+			<td>
+				如果f已经打开等待读取，就返回True
+			</td>
+		</tr>
+		<tr>
+			<td>
+				f.readinto(ba)
+			</td>
+			<td>
+				将至多len(ba)个字节读入到bytearray ba中，并返回读入的字节数——如果在文件结尾，就为0（只有在二进制模式时才是可用的
+			</td>
+		</tr>
+		<tr>
+			<td>
+				f.readline(count)
+			</td>
+			<td>
+				读取下一行（如果指定count，并且在\n字符前满足这一数值，那么至多读入count个字节），包括\n
+			</td>
+		</tr>
+		<tr>
+			<td>
+				f.readlines(sizehint)
+			</td>
+			<td>
+				读入到文件结尾之前的所有行，并以列表形式返回。如果给定sizehint，那么至多读入大概sizehint个字节（如果底层文件对象支持）（这里有点问题，os有一属性DEFAULT_BUFFER_SIZE,其大小为8192（8K）字节，readlines()函数在每次读入的大小大约为DEFAULT_BUFFER_SIZE的一个近似值，并不是读入所有内容。）
+			</td>
+		</tr>
+		<tr>
+			<td>
+				f.seek(offset,whence)
+			</td>
+			<td>
+				如果没有给定whence，或其为os.SEEK_SET,就按给定的offset移动文件指针(并作为下一次读、写的起点）；如果whence为os.SEEK_CUR,就相对于当前文件指针位置将其移动offset(可以为负值)个位置(whence为os.SEEK_END,则是相对文件结尾).在追加”a”模式下,写入总是在结尾处进行的,而不管文件指针在何处.在文本模式下,只应该使用tell()方法的返回值作为offset
+			</td>
+		</tr>
+		<tr>
+			<td>
+				f.seekable()
+			</td>
+			<td>
+				如果f支持随机存取，就返回True
+			</td>
+		</tr>
+		<tr>
+			<td>
+				f.tell()
+			</td>
+			<td>
+				返回当前指针位置（相对文件起始处）
+			</td>
+		</tr>
+		<tr>
+			<td>
+				f.truncate(size)
+			</td>
+			<td>
+				截取文件到当前文件指针所在位置，如果给定size，就到size大小处
+			</td>
+		</tr>
+		<tr>
+			<td>
+				f.writable()
+			</td>
+			<td>
+				如果f是为写操作而打开的，就返回True
+			</td>
+		</tr>
+		<tr>
+			<td>
+				f.write(s)
+			</td>
+			<td>
+				将bytes/bytearray对象s写入到文件（该文件以二进制模式打开），或者将str对象s写入到文件（该文件以文本模式打开）
+			</td>
+		</tr>
+		<tr>
+			<td>
+				f.writelines(seq)
+			</td>
+			<td>
+				将对象序列（对文本文件而言是字符串，对二进制文件而言是字节字符串）写入到文件）
+			</td>
+		</tr>
+	</tbody>
+</table></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#二进制数据的读写">二进制数据的读写</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#文本文件的读写">文本文件的读写</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#写入与分析XML文件">写入与分析XML文件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,301 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>[Spring cloud 一步步实现广告系统] 21. 系统错误汇总_comonly.cn</title>
+<meta name="keywords" content="[Spring cloud 一步步实现广告系统] 21. 系统错误汇总" />
+<meta name="description" content="[Spring cloud 一步步实现广告系统] 21. 系统错误汇总" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">[Spring cloud 一步步实现广告系统] 21. 系统错误汇总</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">zhangpan0614</li>
+          <li class="lmname"><a href="https://blog.51cto.com/1917331/2430847" target="_blank">https://blog.51cto.com/1917331/2430847</a></li>
+          <li class="timer">2019-08-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>[Spring cloud 一步步实现广告系统] 21. 系统错误汇总</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <div class="con artical-content editor-preview-side"><h1>广告系统学习过程中问题答疑</h1>
+<h2 id='客园'>博客园</h2>
+<h3><a href="https://www.cnblogs.com/zhangpan1244/p/11248030.html#4324235" rel="nofollow" style="color: rgb(66, 133, 244);">Eureka集群启动报错</a></h3>
+<p><strong>Answer</strong></p>
+<p>因为Eureka在集群启动过程中，会连接集群中其他的机器进行数据同步，在这个过程中，如果别的服务还没有启动完成，就会出现<code>Connection refused: connect</code>error，当其他节点启动完成之后，报错就会消失。</p>
+<h3>AdSearch 服务启动报错</h3>
+<pre><code class="language-bash hljs">2019-08-16 10:27:57.038 ERROR 73180 --- [           main] o.s.boot.SpringApplication               : Application run failed
+
+java.lang.IllegalStateException: Failed to introspect Class [org.springframework.boot.autoconfigure.kafka.KafkaAnnotationDrivenConfiguration] from ClassLoader [sun.misc.Launcher<span class="hljs-variable">$AppClassLoader</span>@18b4aac2]
+    at org.springframework.util.ReflectionUtils.getDeclaredFields(ReflectionUtils.java:760) ~[spring-core-5.1.7.RELEASE.jar:5.1.7.RELEASE]
+    at org.springframework.util.ReflectionUtils.doWithFields(ReflectionUtils.java:725) ~[spring-core-5.1.7.RELEASE.jar:5.1.7.RELEASE]
+    at org.springframework.util.ReflectionUtils.doWithFields(ReflectionUtils.java:710) ~[spring-core-5.1.7.RELEASE.jar:5.1.7.RELEASE]
+    at org.springframework.boot.test.mock.mockito.DefinitionsParser.parse(DefinitionsParser.java:62) ~[spring-boot-test-2.1.5.RELEASE.jar:2.1.5.RELEASE]
+    at org.springframework.boot.test.mock.mockito.MockitoPostProcessor.postProcessBeanFactory(MockitoPostProcessor.java:141) ~[spring-boot-test-2.1.5.RELEASE.jar:2.1.5.RELEASE]
+    at org.springframework.boot.test.mock.mockito.MockitoPostProcessor.postProcessBeanFactory(MockitoPostProcessor.java:133) ~[spring-boot-test-2.1.5.RELEASE.jar:2.1.5.RELEASE]
+    at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:286) ~[spring-context-5.1.7.RELEASE.jar:5.1.7.RELEASE]
+    at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:174) ~[spring-context-5.1.7.RELEASE.jar:5.1.7.RELEASE]
+    at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:705) ~[spring-context-5.1.7.RELEASE.jar:5.1.7.RELEASE]
+    at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:531) ~[spring-context-5.1.7.RELEASE.jar:5.1.7.RELEASE]
+    at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:775) ~[spring-boot-2.1.5.RELEASE.jar:2.1.5.RELEASE]
+    at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397) ~[spring-boot-2.1.5.RELEASE.jar:2.1.5.RELEASE]
+    at org.springframework.boot.SpringApplication.run(SpringApplication.java:316) ~[spring-boot-2.1.5.RELEASE.jar:2.1.5.RELEASE]
+    at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:127) [spring-boot-test-2.1.5.RELEASE.jar:2.1.5.RELEASE]
+    at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99) [spring-test-5.1.7.RELEASE.jar:5.1.7.RELEASE]
+    at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117) [spring-test-5.1.7.RELEASE.jar:5.1.7.RELEASE]
+    at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108) [spring-test-5.1.7.RELEASE.jar:5.1.7.RELEASE]
+    at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:118) [spring-test-5.1.7.RELEASE.jar:5.1.7.RELEASE]
+    at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:83) [spring-test-5.1.7.RELEASE.jar:5.1.7.RELEASE]
+    at org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener.prepareTestInstance(SpringBootDependencyInjectionTestExecutionListener.java:44) [spring-boot-test-autoconfigure-2.1.5.RELEASE.jar:2.1.5.RELEASE]
+    at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246) [spring-test-5.1.7.RELEASE.jar:5.1.7.RELEASE]
+    at org.springframework.test.context.junit4.SpringJUnit4Cla***unner.createTest(SpringJUnit4Cla***unner.java:227) [spring-test-5.1.7.RELEASE.jar:5.1.7.RELEASE]
+    at org.springframework.test.context.junit4.SpringJUnit4Cla***unner<span class="hljs-variable">$1</span>.runReflectiveCall(SpringJUnit4Cla***unner.java:289) [spring-test-5.1.7.RELEASE.jar:5.1.7.RELEASE]
+    at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+    at org.springframework.test.context.junit4.SpringJUnit4Cla***unner.methodBlock(SpringJUnit4Cla***unner.java:291) [spring-test-5.1.7.RELEASE.jar:5.1.7.RELEASE]
+    at org.springframework.test.context.junit4.SpringJUnit4Cla***unner.runChild(SpringJUnit4Cla***unner.java:246) [spring-test-5.1.7.RELEASE.jar:5.1.7.RELEASE]
+    at org.springframework.test.context.junit4.SpringJUnit4Cla***unner.runChild(SpringJUnit4Cla***unner.java:97) [spring-test-5.1.7.RELEASE.jar:5.1.7.RELEASE]
+    at org.junit.runners.ParentRunner<span class="hljs-variable">$3</span>.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+    at org.junit.runners.ParentRunner<span class="hljs-variable">$1</span>.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+    at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+    at org.junit.runners.ParentRunner.access<span class="hljs-variable">$000</span>(ParentRunner.java:58) [junit-4.12.jar:4.12]
+    at org.junit.runners.ParentRunner<span class="hljs-variable">$2</span>.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+    at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-5.1.7.RELEASE.jar:5.1.7.RELEASE]
+    at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) [spring-test-5.1.7.RELEASE.jar:5.1.7.RELEASE]
+    at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+    at org.springframework.test.context.junit4.SpringJUnit4Cla***unner.run(SpringJUnit4Cla***unner.java:190) [spring-test-5.1.7.RELEASE.jar:5.1.7.RELEASE]
+    at org.junit.runner.JUnitCore.run(JUnitCore.java:137) [junit-4.12.jar:4.12]
+    at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68) [junit-rt.jar:na]
+    at com.intellij.rt.execution.junit.IdeaTestRunner<span class="hljs-variable">$Repeater</span>.startRunnerWithArgs(IdeaTestRunner.java:47) [junit-rt.jar:na]
+    at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242) [junit-rt.jar:na]
+    at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70) [junit-rt.jar:na]
+Caused by: java.lang.NoClassDefFoundError: Lorg/springframework/kafka/listener/AfterRollbackProcessor;
+    at java.lang.Class.getDeclaredFields0(Native Method) ~[na:1.8.0_171]
+    at java.lang.Class.privateGetDeclaredFields(Class.java:2583) ~[na:1.8.0_171]
+    at java.lang.Class.getDeclaredFields(Class.java:1916) ~[na:1.8.0_171]
+    at org.springframework.util.ReflectionUtils.getDeclaredFields(ReflectionUtils.java:755) ~[spring-core-5.1.7.RELEASE.jar:5.1.7.RELEASE]
+    ... 40 common frames omitted
+Caused by: java.lang.ClassNotFoundException: org.springframework.kafka.listener.AfterRollbackProcessor
+    at java.net.URLClassLoader.findClass(URLClassLoader.java:381) ~[na:1.8.0_171]
+    at java.lang.ClassLoader.loadClass(ClassLoader.java:424) ~[na:1.8.0_171]
+    at sun.misc.Launcher<span class="hljs-variable">$AppClassLoader</span>.loadClass(Launcher.java:349) ~[na:1.8.0_171]
+    at java.lang.ClassLoader.loadClass(ClassLoader.java:357) ~[na:1.8.0_171]
+    ... 44 common frames omitted
+
+2019-08-16 10:27:57.119  INFO 73180 --- [           main] trationDelegate<span class="hljs-variable">$BeanPostProcessorChecker</span> : Bean <span class="hljs-string">'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration'</span> of <span class="hljs-built_in">type</span> [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$<span class="hljs-variable">$EnhancerBySpringCGLIB</span>$<span class="hljs-variable">$2c3f141a</span>] is not eligible <span class="hljs-keyword">for</span> getting processed by all BeanPostProcessors (<span class="hljs-keyword">for</span> example: not eligible <span class="hljs-keyword">for</span> auto-proxying)</code></pre>
+<p>查看这个错误，是在加载<code>org.springframework.kafka.listener.AfterRollbackProcessor</code>的时候，没有找到对应的class，可是我们明明添加了依赖呀？</p>
+<pre><code class="language-xml hljs">  <span class="hljs-comment">&lt;!-- kafka 依赖 --&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.kafka<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-kafka<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.1.5.RELEASE<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></code></pre>
+<p>ok, 我们来查询，首先，在实际工作中，大家为了最快的解决问题，必须借助搜索引擎的力量，作为一个合格的程序猿，尽量少baidu....我一般习惯https://cn.bing.com/ ,搜索相关报错，可以看到第一个就是程序界的错误大佬，</p>
+<p><code>stackworkflow</code><a href="https://stackoverflow.com/questions/53808053/spring-kafka-error-caused-by-java-lang-classnotfoundexception-org-springframew" rel="nofollow" style="color: rgb(66, 133, 244);">解决bug传送门</a> .</p>
+<p>说的非常清楚：</p>
+<blockquote>
+<p>Spring for Apache Kafka <code>2.0.x</code> is not compatible with Spring Boot <code>2.1.x</code>. You have to use <code>Spring-Kafka 2.2.x</code>. More over would be better to just rely on the dependency from Spring Boot per se. please, see <a href="https://start.spring.io/" rel="nofollow" style="color: rgb(66, 133, 244);">https://start.spring.io/</a> for more info how properly start the project for Spring Boot.</p>
+<p>And please, don’t duplicate your question in different places if that was not asked.</p>
+</blockquote>
+<p>错误说明，在<code>org.springframework.kafka</code>,因为我们使用的springboot 版本是<code>2.1.5.RELEASE</code>，所以版本存在差异化，因此我们修改版本为:</p>
+<pre><code class="language-xml hljs"> <span class="hljs-comment">&lt;!-- kafka 依赖 --&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.kafka<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-kafka<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.2.8.RELEASE<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></code></pre>
+<p>再次启动，一切ok。</p>
+<p><img src="https://i.loli.net/2019/08/19/VYwEHRNoM27u5jf.png" alt="UTOOLS1566187360679.png" style="cursor: pointer;"></p></div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1995.html">PC机PCI-E3.0接口速率计算</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1997.html">kubectl 命令梳理</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.51cto.com/1917331/2430847" target="_blank">https://blog.51cto.com/1917331/2430847</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#客园">客园</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

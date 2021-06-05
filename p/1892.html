@@ -1,0 +1,324 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>tensorflow 中with作用区域的使用 variable_scope、name_scope、Session_comonly.cn</title>
+<meta name="keywords" content="tensorflow 中with作用区域的使用 variable_scope、name_scope、Session" />
+<meta name="description" content="tensorflow变量作用域tf.variable_scope介绍&nbsp;https://blog.csdn.net/weixin_41793877/article/details/86628060
+
+
+	tensorflow中的“tf.name_scope()”有什么用？ https://www.jianshu.com/p/635d95b34e14
+
+
+	Tensorflow中with tf.Session() as sess用法详解 https://blog.csdn.net/www" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">tensorflow 中with作用区域的使用 variable_scope、name_scope、Session</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2020-11-13</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	机器学习算法分析
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>tensorflow变量作用域tf.variable_scope介绍&nbsp;https://blog.csdn.net/weixin_41793877/article/details/86628060
+
+
+	tensorflow中的“tf.name_scope()”有什么用？ https://www.jianshu.com/p/635d95b34e14
+
+
+	Tensorflow中with tf.Session() as sess用法详解 https://blog.csdn.net/www</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	tensorflow变量作用域tf.variable_scope介绍&nbsp;<a href="https://blog.csdn.net/weixin_41793877/article/details/86628060" target="_blank">https://blog.csdn.net/weixin_41793877/article/details/86628060</a>
+</p>
+<p>
+	tensorflow中的“tf.name_scope()”有什么用？ <a href="https://www.jianshu.com/p/635d95b34e14" target="_blank">https://www.jianshu.com/p/635d95b34e14</a>
+</p>
+<p>
+	Tensorflow中with tf.Session() as sess用法详解 <a href="https://blog.csdn.net/wwwlyj123321/article/details/86064772" target="_blank">https://blog.csdn.net/wwwlyj123321/article/details/86064772</a>
+</p>
+<p>
+	<br />
+</p>
+<h2 id='withtf.me_coe('dtet'):'>
+	with tf.name_scope('dataset'):
+</h2>
+<p>
+	&nbsp;这种独特的机制来共享变量
+</p>
+<p>
+	tf.get_variable(&lt;name&gt;, &lt;shape&gt;, &lt;initializer&gt;) 创建或返回给定名称的变量<br />
+tf.variable_scope(&lt;scope_name&gt;) 管理传给get_variable()的变量名称的作用域
+</p>
+<div>
+	<br />
+</div>
+<p>
+	当tf.get_variable_scope().reuse == False，调用该函数会创建新的变量。
+</p>
+<p>
+	当tf.get_variable_scope().reuse == True，调用该函数会重用已经创建的变量。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<h2 id='withtf.vrible_coe('geertor',reue=Noe)'>
+	with tf.variable_scope('generator', reuse=None)
+</h2>
+<p>
+	命名空间的实际作用
+</p>
+<p>
+	（1）在某个tf.name_scope()指定的区域中定义的所有对象及各种操作，他们的<span style="color:#E53333;">“name”属性</span>上会增加该命名区的区域名，用以区别对象属于哪个区域；<br />
+（2）将不同的对象及操作放在由tf.name_scope()指定的区域中，便于在tensorboard中展示清晰的逻辑关系图，这点在复杂关系图中特别重要。
+</p>
+<p>
+	name_scope()只决定“对象”属于哪个范围，并不会对“对象”的“作用域”产生任何影响。
+</p>
+<p>
+	tf.name_scope('cgx_scope')语句重复执行几次，就会生成几个独立的命名空间，尽管表面上看起来都是“cgx_scope”，实际上tensorflow在每一次执行相同语句都会在后面加上“_序数”，加以区别。
+</p>
+<p>
+	通过重命名的方式可以将不同位置定义对象指定到相同的name_scope中。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<h2 id='withtf.Seio(cofig=cofig)e'>
+	with tf.Session(config=config) as sess
+</h2>
+<p>
+	<br />
+# Build a graph.<br />
+a = tf.constant([1.0, 2.0])<br />
+b = tf.constant([3.0, 4.0])<br />
+c = a * b<br />
+&nbsp;<br />
+# Launch the graph in a session.<br />
+sess = tf.Session()<br />
+&nbsp;<br />
+# Evaluate the tensor 'c'.<br />
+print sess.run(c)
+</p>
+<div>
+	<br />
+</div>
+<p>
+	通过with上下文推出后自动释放
+</p>
+# Build a graph.<br />
+a = tf.constant([1.0, 2.0])<br />
+b = tf.constant([3.0, 4.0])<br />
+c = a * b<br />
+&nbsp;<br />
+with tf.Session() as sess:<br />
+&nbsp; &nbsp; print sess.run(c)<br />
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1891.html">TensorBoard的使用 -- 在windows环境和linux环境下启动  summary</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1893.html">python 机器学习中常用的数据处理方法</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#withtf.me_coe('dtet'):">withtf.me_coe('dtet'):</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#withtf.vrible_coe('geertor',reue=Noe)">withtf.vrible_coe('geertor',reue=Noe)</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#withtf.Seio(cofig=cofig)e">withtf.Seio(cofig=cofig)e</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

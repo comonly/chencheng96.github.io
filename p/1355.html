@@ -1,0 +1,304 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Windows用于播放音乐的API函数(方法)PlaySound_comonly.cn</title>
+<meta name="keywords" content="Windows用于播放音乐的API函数(方法)PlaySound" />
+<meta name="description" content="PlaySound是Windows用于播放音乐的API函数(方法)。在vs2010以上版本需要加入#pragma comment(lib, "winmm.lib")才能使用PlaySound。
+
+	PlaySound函数原型为
+
+
+BOOL PlaySound(LPCSTR pszSound, HMODULE hmod,DWORD fdwSound)
+
+
+	PlaySound参数，pszSound是指定了要播放声音的字符串，该参数可以是WAVE文件的名字，或是WAV资源的名字，或是内存中声" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Windows用于播放音乐的API函数(方法)PlaySound</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-08-29</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>PlaySound是Windows用于播放音乐的API函数(方法)。在vs2010以上版本需要加入#pragma comment(lib, "winmm.lib")才能使用PlaySound。
+
+	PlaySound函数原型为
+
+
+BOOL PlaySound(LPCSTR pszSound, HMODULE hmod,DWORD fdwSound)
+
+
+	PlaySound参数，pszSound是指定了要播放声音的字符串，该参数可以是WAVE文件的名字，或是WAV资源的名字，或是内存中声</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> PlaySound是Windows用于播放音乐的API函数(方法)。在vs2010以上版本需要加入#pragma comment(lib, "winmm.lib")才能使用PlaySound。<br />
+<p>
+	PlaySound函数原型为
+</p>
+<p>
+<pre class="prettyprint lang-cpp">BOOL PlaySound(LPCSTR pszSound, HMODULE hmod,DWORD fdwSound)</pre>
+</p>
+<p>
+	PlaySound参数，pszSound是指定了要播放声音的字符串，该参数可以是WAVE文件的名字，或是WAV资源的名字，或是内存中声音数据的指针，或是在系统注册表WIN.INI中定义的系统事件声音。如果该参数为NULL则停止正在播放的声音。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	需要引入的头：
+</p>
+<p>
+<pre class="prettyprint lang-cpp">#include &lt;mmsystem.h&gt;
+#pragma comment(lib, "WINMM.LIB")</pre>
+函数调用各参数含义：
+</p>
+<p>
+	pszSound用来指定要播放的文件，可以是资源名或者音乐文件的路径，若为空（NULL）则停止正在播放的声音。注意该参数的类型为LPCSTR，可以通过_T("音频地址")作为参数。
+</p>
+<p>
+	hmod一般设置为空（NULL），除非你要指向资源标识符（即fdwSound被定义为SND_RESOURCE）。
+</p>
+<p>
+	fdwSound用来指定播放模式（播放模式可以选择多种多个参数通过|操作符连接起来），参数如下：
+</p>
+<p>
+	<br />
+</p>
+<p>
+	SND_APPLICATION<br />
+用应用程序指定的关联来播放声音。<br />
+<br />
+SND_ALIAS<br />
+pszSound参数指定了注册表或WIN.INI中的系统事件的别名。<br />
+<br />
+SND_ALIAS_ID<br />
+pszSound参数指定了预定义的声音标识符。<br />
+<br />
+SND_ASYNC<br />
+用异步方式播放声音，PlaySound函数在开始播放后立即返回。<br />
+<br />
+SND_FILENAME<br />
+pszSound参数指定了WAVE文件名。<br />
+<br />
+SND_LOOP<br />
+重复播放声音，必须与SND_ASYNC标志一块使用。<br />
+<br />
+SND_MEMORY<br />
+播放载入到内存中的声音，此时pszSound是指向声音数据的指针。<br />
+<br />
+SND_NODEFAULT<br />
+不播放缺省声音，若无此标志，则PlaySound在没找到声音时会播放缺省声音。<br />
+<br />
+SND_NOSTOP<br />
+PlaySound不打断原来的声音播出并立即返回FALSE。<br />
+<br />
+SND_NOWAIT<br />
+如果驱动程序正忙则函数就不播放声音并立即返回。<br />
+<br />
+SND_PURGE<br />
+停止所有与调用任务有关的声音。若参数pszSound为NULL，就停止所有的声音，否则，停止pszSound指定的声音。<br />
+<br />
+SND_RESOURCE<br />
+pszSound参数是WAVE资源的标识符，这时要用到hmod参数。<br />
+<br />
+SND_SYNC<br />
+同步播放声音，在播放完后PlaySound函数才返回。<br />
+<br />
+SND_SYSTEM<br />
+如果是背景窗口,当这个标志被设置，声音是分配到音频会议系统通知的声音。系统音量控制程序(sndvol)显示音量滑块控制系统通知的声音。设置该标志将下控制音量滑块。如果没有设置该标志，声音是分配到默认的音频会议的应用进程。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1354.html">查看dll中接口</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1356.html">C++头文件包含顺序</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,430 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>【待补充】C++类、容器、对象初始化时机 C++中map等容器在使用前需要初始化，不止赋值为null _comonly.cn</title>
+<meta name="keywords" content="【待补充】C++类、容器、对象初始化时机 C++中map等容器在使用前需要初始化，不止赋值为null " />
+<meta name="description" content="Map map = new HashMap();之后才能进行后续添加内容等操作
+
+
+	
+
+
+	
+
+
+	类定义的
+
+
+	
+
+
+	即上述关于类的定义正确与否？
+
+
+	一般而言，类中的数据成员在定义类的时候是不能初始化的。
+
+
+	这是一个可以值得探讨的话题，每个人的解释都不一样，大部分人都认为这是编译语法的规定，那么有没有考虑为什么会有这个规定呢?
+
+
+	个人认为可能的原因有：
+
+
+	（1）类只是一个抽象类型，并不是实体的东西，利用这个抽象类型会实例化成不同" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">【待补充】C++类、容器、对象初始化时机 C++中map等容器在使用前需要初始化，不止赋值为null </h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-08-21</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>Map map = new HashMap();之后才能进行后续添加内容等操作
+
+
+	
+
+
+	
+
+
+	类定义的
+
+
+	
+
+
+	即上述关于类的定义正确与否？
+
+
+	一般而言，类中的数据成员在定义类的时候是不能初始化的。
+
+
+	这是一个可以值得探讨的话题，每个人的解释都不一样，大部分人都认为这是编译语法的规定，那么有没有考虑为什么会有这个规定呢?
+
+
+	个人认为可能的原因有：
+
+
+	（1）类只是一个抽象类型，并不是实体的东西，利用这个抽象类型会实例化成不同</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	Map map = new HashMap();之后才能进行后续添加内容等操作
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<div>
+	类定义的
+</div>
+<div>
+	<br />
+</div>
+<div>
+	即上述关于类的定义正确与否？
+</div>
+<div>
+	一般而言，类中的数据成员在定义类的时候是不能初始化的。
+</div>
+<div>
+	这是一个可以值得探讨的话题，每个人的解释都不一样，大部分人都认为这是编译语法的规定，那么有没有考虑为什么会有这个规定呢?
+</div>
+<div>
+	个人认为可能的原因有：
+</div>
+<div>
+	（1）类只是一个抽象类型，并不是实体的东西，利用这个抽象类型会实例化成不同的个体，每个个体的特征（数据成员）都不一样，如果在类定义中将特征初始化了，岂不是破坏了抽象性，做了一个面向都一样的模子？
+</div>
+<div>
+	（2）类的定义实际相当与类型声明，并没有分配存储空间，初始化的数据哪里放? 类实例化以后才会有实体存储地址及空间。
+</div>
+<div>
+	<br />
+</div>
+<div>
+	<br />
+</div>
+<div>
+	所以：
+</div>
+<div>
+	1、一般的数据成员可以在构造函数中初始化。（构造初始化列表初始化和构造函数体内赋值初始化）
+</div>
+<div>
+	2、const数据成员必须在构造函数的初始化列表中初始化（道理很简单，const成员第一次数据初始化就是发生在类构造数据初始化时，一旦过了此时就会出现问题）。
+</div>
+<div>
+	3、static要在类的定义外面初始化。
+</div>
+<div>
+	4、数组成员是不能在初始化列表里初始化的，不能给数组指定明显的初始化。
+</div>
+<div>
+	---------------------
+</div>
+<div>
+	作者：Tsinting
+</div>
+<div>
+	来源：CSDN
+</div>
+<div>
+	原文：https://blog.csdn.net/tsinting/article/details/60583874
+</div>
+<div>
+	版权声明：本文为博主原创文章，转载请附上博文链接！
+</div>
+<div>
+	<br />
+</div>
+<div>
+	<br />
+</div>
+<div>
+	<br />
+</div>
+<div>
+	函数内的局部变量是在函数体执行前分配空间。函数执行完毕后回收空间。
+</div>
+<div>
+	<br />
+</div>
+<div>
+	静态变量是在程序运行时分配空间。程序结束时回收空间。
+</div>
+<div>
+	<br />
+</div>
+<div>
+	使用new或者malloc创建的变量是在调用new，malloc函数的时候进行分配。调用delete，free函数的时候进行回收。
+</div>
+<div>
+	<br />
+</div>
+<div>
+	<br />
+</div>
+<div>
+	<br />
+</div>
+<div>
+	相当于全局变量，在声明类对象之前创建。是的，所有的此类对象共用此一个静态成员变量。
+</div>
+<div>
+	<br />
+</div>
+<div>
+	并且在类的外面进行定义。
+</div>
+<div>
+	<br />
+</div>
+<div>
+	#include
+</div>
+<div>
+	using namespace std;
+</div>
+<div>
+	class m_clock
+</div>
+<div>
+	{
+</div>
+<div>
+	public:
+</div>
+<div>
+	static int s;
+</div>
+<div>
+	private:
+</div>
+<div>
+	int h,m;
+</div>
+<div>
+	};
+</div>
+<div>
+	int m_clock::s=9;
+</div>
+<div>
+</div>
+<div>
+</div>
+<div>
+	int main()
+</div>
+<div>
+	{
+</div>
+<div>
+	cout&lt;&lt; m_clock::s&lt;<endl;< div="">
+	<div>
+		return 0;
+	</div>
+	<div>
+		}
+	</div>
+</endl;<>
+</div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1198.html">windows下C++开发新版本vs使用旧版本vs编译的静态库动态库(项目vs版本升级)</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1200.html">无法打开文件“atlsd.lib”</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

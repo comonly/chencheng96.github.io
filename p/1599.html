@@ -1,0 +1,436 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>c++中类的成员变量的继承 类的继承及关键字的作用_comonly.cn</title>
+<meta name="keywords" content="c++中类的成员变量的继承 类的继承及关键字的作用" />
+<meta name="description" content="三种属性能力的强弱：public&lt;protected&lt;private
+
+
+	
+
+
+	
+
+
+	父类 protected
+
+
+	子类 set\get方法 使用父类的变量。
+
+
+	
+
+
+	
+
+
+	类成员中，private、protected和public
+类成员变量或函数前加上关键字private、protected和public的含义如下：
+public: 表示该成员允许被任意实体访问
+protected: 表示该成员只允许被本类和子类的成员访问
+" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">c++中类的成员变量的继承 类的继承及关键字的作用</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-12-17</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>三种属性能力的强弱：public&lt;protected&lt;private
+
+
+	
+
+
+	
+
+
+	父类 protected
+
+
+	子类 set\get方法 使用父类的变量。
+
+
+	
+
+
+	
+
+
+	类成员中，private、protected和public
+类成员变量或函数前加上关键字private、protected和public的含义如下：
+public: 表示该成员允许被任意实体访问
+protected: 表示该成员只允许被本类和子类的成员访问
+</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	三种属性能力的强弱：public&lt;protected&lt;private
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	父类 protected
+</p>
+<p>
+	子类 set\get方法 使用父类的变量。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	类成员中，private、protected和public<br />
+类成员变量或函数前加上关键字private、protected和public的含义如下：<br />
+public: 表示该成员允许被任意实体访问<br />
+protected: 表示该成员只允许被本类和子类的成员访问<br />
+private: 表示该成员只允许本类的成员访问<br />
+<br />
+概括如下表所示：
+</p>
+<p>
+	<table style="margin:0px;padding:0px;background-color:#FFFFFF;width:961.818px;text-align:center;color:rgba(0, 0, 0, 0.75);font-family:-apple-system, &quot;font-size:14px;">
+		<tbody>
+			<tr>
+			</tr>
+		</tbody>
+		<tbody>
+			<tr>
+				<th style="border:1px solid #DDDDDD;color:#4F4F4F;vertical-align:middle;background-color:#EFF3F5;">
+					关键字
+				</th>
+				<th style="border:1px solid #DDDDDD;color:#4F4F4F;vertical-align:middle;background-color:#EFF3F5;">
+					类内访问
+				</th>
+				<th style="border:1px solid #DDDDDD;color:#4F4F4F;vertical-align:middle;background-color:#EFF3F5;">
+					子类访问
+				</th>
+				<th style="border:1px solid #DDDDDD;color:#4F4F4F;vertical-align:middle;background-color:#EFF3F5;">
+					类外访问
+				</th>
+			</tr>
+		</tbody>
+		<tbody>
+			<tr>
+				<td style="border:1px solid #DDDDDD;font-size:14px;color:#4F4F4F;vertical-align:middle;">
+					public
+				</td>
+				<td style="border:1px solid #DDDDDD;font-size:14px;color:#4F4F4F;vertical-align:middle;">
+					√
+				</td>
+				<td style="border:1px solid #DDDDDD;font-size:14px;color:#4F4F4F;vertical-align:middle;">
+					√
+				</td>
+				<td style="border:1px solid #DDDDDD;font-size:14px;color:#4F4F4F;vertical-align:middle;">
+					√
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #DDDDDD;font-size:14px;color:#4F4F4F;vertical-align:middle;">
+					protected
+				</td>
+				<td style="border:1px solid #DDDDDD;font-size:14px;color:#4F4F4F;vertical-align:middle;">
+					√
+				</td>
+				<td style="border:1px solid #DDDDDD;font-size:14px;color:#4F4F4F;vertical-align:middle;">
+					√
+				</td>
+				<td style="border:1px solid #DDDDDD;font-size:14px;color:#4F4F4F;vertical-align:middle;">
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #DDDDDD;font-size:14px;color:#4F4F4F;vertical-align:middle;">
+					private
+				</td>
+				<td style="border:1px solid #DDDDDD;font-size:14px;color:#4F4F4F;vertical-align:middle;">
+					√
+				</td>
+				<td style="border:1px solid #DDDDDD;font-size:14px;color:#4F4F4F;vertical-align:middle;">
+				</td>
+			</tr>
+		</tbody>
+	</table>
+<br />
+类继承时，private、protected和public<br />
+派生类继承基类的继承方式有三种：public、protected和private。在未指定的情况下编译器会默认继承方式为protected或private方式。<br />
+<br />
+public继承方式 —— class derived : public base<br />
+基类中所有public成员在派生类中为public属性；<br />
+基类中所有protected成员在派生类中为protected属性；<br />
+基类中所有private成员在派生类中不可访问。<br />
+具体示例可以参考上一节中的例1，在此就不再重新举例了。<br />
+protected继承方式 —— class derived : protectedbase<br />
+基类中的所有public成员在派生类中为protected属性；<br />
+基类中的所有protected成员在派生类中为protected属性；<br />
+基类中的所有private成员在派生类中仍然不可访问。<br />
+private继承方式 —— class derived : private base<br />
+基类中的所有public成员在派生类中均为private属性；<br />
+基类中的所有protected成员在派生类中均为private属性；<br />
+基类中的所有private成员在派生类中均不可访问。<br />
+不同继承方式下，基类成员在派生类中的属性转换关系，概括如下：<br />
+<br />
+	<table cellpadding="1" cellspacing="1" border="1" bordercolor="#E53333">
+		<tbody>
+			<tr>
+				<th>
+					<span>基类成员属性</span>
+				</th>
+				<th>
+					public继承方式
+				</th>
+				<th>
+					protected继承方式
+				</th>
+				<th>
+					private继承方式
+				</th>
+			</tr>
+		</tbody>
+		<tbody>
+			<tr>
+				<td>
+					<span>public </span>
+				</td>
+				<td>
+					public
+				</td>
+				<td>
+					<span>-&gt; protected</span>
+				</td>
+				<td>
+					<span> -&gt; private</span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span>protected</span>
+				</td>
+				<td>
+					protected
+				</td>
+				<td>
+					protected<span id="__kindeditor_bookmark_start_35__"></span>
+				</td>
+				<td>
+					<span> -&gt; private</span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span>private </span>
+				</td>
+				<td>
+					<span> -&gt; 不可访问</span>
+				</td>
+				<td>
+					<span> -&gt; 不可访问</span>
+				</td>
+				<td>
+					<span> -&gt; 不可访问</span>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1598.html">C++ delete 指向子类的父类指针时析构函数调用？</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1600.html">c++中set、list、vector、map的使用场景</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

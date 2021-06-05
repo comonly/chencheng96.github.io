@@ -1,0 +1,306 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>vue项目开发中devServer.proxy使用vue.config.js中devServer配置_comonly.cn</title>
+<meta name="keywords" content="vue项目开发中devServer.proxy使用vue.config.js中devServer配置" />
+<meta name="description" content="如果你的前端应用和后端 API 服务器没有运行在同一个主机上，你需要在开发环境下将 API 请求代理到 API 服务器。可以通过 *.config.js 中的 devServer.proxy 选项来配置。
+
+	
+
+
+	这里写你调用接口的基础路径，来解决跨域，如果设置了代理，那你本地开发环境的axios的baseUrl要写为''，即空字符串
+
+只有一个接口ip端口时
+
+devServer: {
+open: false,
+// 跨域
+proxy: {
+'/nuojinadm/': {" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">vue项目开发中devServer.proxy使用vue.config.js中devServer配置</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">idomyway</li>
+          <li class="lmname"><a href="http://www.cppcns.com/wangluo/javascript/283286.html" target="_blank">http://www.cppcns.com/wangluo/javascript/283286.html</a></li>
+          <li class="timer">2020-03-18</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>如果你的前端应用和后端 API 服务器没有运行在同一个主机上，你需要在开发环境下将 API 请求代理到 API 服务器。可以通过 *.config.js 中的 devServer.proxy 选项来配置。
+
+	
+
+
+	这里写你调用接口的基础路径，来解决跨域，如果设置了代理，那你本地开发环境的axios的baseUrl要写为''，即空字符串
+
+只有一个接口ip端口时
+
+devServer: {
+open: false,
+// 跨域
+proxy: {
+'/nuojinadm/': {</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 如果你的前端应用和后端 API 服务器没有运行在同一个主机上，你需要在开发环境下将 API 请求代理到 API 服务器。可以通过 *.config.js 中的 devServer.proxy 选项来配置。<br />
+<p>
+	<br />
+</p>
+<p>
+	这里写你调用接口的基础路径，来解决跨域，如果设置了代理，那你本地开发环境的axios的baseUrl要写为''，即空字符串<br />
+<br />
+只有一个接口ip端口时<br />
+<br />
+devServer: {<br />
+open: false,<br />
+// 跨域<br />
+proxy: {<br />
+'/nuojinadm/': {<br />
+target: 'http://192.168.0.11/',<br />
+changeOrigin: true<br />
+}<br />
+}<br />
+}<br />
+2、设置axios中的baseUrl 与proxy端口一致<br />
+<br />
+baseUrl: {<br />
+dev: '/nuojinadm/',<br />
+pro: '/nuojinadm/'<br />
+}<br />
+当有多个ip端口的接口时<br />
+<br />
+devServer: {<br />
+open: false,<br />
+port: 8801, // 自定义修改8080端口<br />
+// 代理跨域<br />
+proxy: {<br />
+'/proxy1/adm/': {<br />
+target: 'http://192.168.0.xx:xxxx/',<br />
+changeOrigin: true<br />
+},<br />
+'/proxy2/adm/': {<br />
+target: 'http://192.168.0.xx:xxxx/',<br />
+changeOrigin: true<br />
+},<br />
+'/httpsProxy3/config/': {<br />
+target: 'https://xx.xx.com',<br />
+secure: false, // https协议才设置<br />
+changeOrigin: true<br />
+}<br />
+}<br />
+}<br />
+2、设置axios中的baseUrl 设置为空<br />
+<br />
+baseUrl: {<br />
+dev: '/',<br />
+pro: '/'<br />
+}<br />
+3、在每个request（axios）页面中<br />
+<br />
+const proxyxxx= '/xxx/xxx'<br />
+&nbsp;<br />
+export const getBannerList = params =&gt; {<br />
+return axios.request({<br />
+url: `${proxyxxx}/banner/v1/banner/${params.pageSize}/${params.pageNum}`,<br />
+params,<br />
+method: 'get'<br />
+})<br />
+}<br />
+以上这篇vue - vue.config.js中devServer配置方式就是小编分享给大家的全部内容了，希望能给大家一个参考，也希望大家多多支持我们。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1675.html">vue中的.sync修饰符</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1677.html">hah</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="http://www.cppcns.com/wangluo/javascript/283286.html" target="_blank">http://www.cppcns.com/wangluo/javascript/283286.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

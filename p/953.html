@@ -1,0 +1,621 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>MongoDB查询有关操作_comonly.cn</title>
+<meta name="keywords" content="MongoDB查询有关操作" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">MongoDB查询有关操作</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">runoob</li>
+          <li class="lmname"><a href="http://www.runoob.com/mongodb/mongodb-sort.html" target="_blank">http://www.runoob.com/mongodb/mongodb-sort.html</a></li>
+          <li class="timer">2018-08-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	数据库
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='比较查询'>
+	比较查询
+</h2>
+<p>
+	MongoDB与RDBMS Where语句比较
+</p>
+<table border="1" cellpadding="0" cellspacing="0" bordercolor="#000000">
+	<tbody>
+		<tr>
+			<th>
+				操作
+			</th>
+			<th>
+				格式
+			</th>
+			<th>
+				范例
+			</th>
+			<th>
+				RDBMS中的类似语句
+			</th>
+		</tr>
+	</tbody>
+	<tbody>
+		<tr>
+			<td>
+				等于
+			</td>
+			<td>
+				{:}
+			</td>
+			<td>
+				db.col.find({"by":"菜鸟"}).pretty()
+			</td>
+			<td>
+				where by = '菜鸟'
+			</td>
+		</tr>
+		<tr>
+			<td>
+				小于
+			</td>
+			<td>
+				{:{$lt:}}
+			</td>
+			<td>
+				db.col.find({"likes":{$lt:50}}).pretty()
+			</td>
+			<td>
+				where likes &lt; 50
+			</td>
+		</tr>
+		<tr>
+			<td>
+				小于或等于
+			</td>
+			<td>
+				{:{$lte:}}
+			</td>
+			<td>
+				db.col.find({"likes":{$lte:50}}).pretty()
+			</td>
+			<td>
+				where likes &lt;= 50
+			</td>
+		</tr>
+		<tr>
+			<td>
+				大于
+			</td>
+			<td>
+				{:{$gt:}}
+			</td>
+			<td>
+				db.col.find({"likes":{$gt:50}}).pretty()
+			</td>
+			<td>
+				where likes &gt; 50
+			</td>
+		</tr>
+		<tr>
+			<td>
+				大于或等于
+			</td>
+			<td>
+				{:{$gte:}}
+			</td>
+			<td>
+				db.col.find({"likes":{$gte:50}}).pretty()
+			</td>
+			<td>
+				where likes &gt;= 50
+			</td>
+		</tr>
+		<tr>
+			<td>
+				不等于
+			</td>
+			<td>
+				{:{$ne:}}
+			</td>
+			<td>
+				db.col.find({"likes":{$ne:50}}).pretty()
+			</td>
+			<td>
+				where likes != 50
+			</td>
+		</tr>
+	</tbody>
+</table>
+<h2 id='AND条件'>
+	AND 条件
+</h2>
+<p>
+	<span>MongoDB 的 find() 方法可以传入多个键(key)，每个键(key)以逗号隔开，即常规 SQL 的 AND 条件。</span><span>语法格式如下：</span> 
+</p>
+<span>&gt;db.col.find({key1:value1, key2:value2}).pretty()</span> 
+<h2 id='OR条件'>
+	OR 条件
+</h2>
+<p>
+	MongoDB OR 条件语句使用了关键字 $or,语法格式如下：<br />
+&gt;db.col.find(<br />
+{<br />
+$or: [<br />
+{key1: value1}, {key2:value2}<br />
+]<br />
+}<br />
+).pretty()
+</p>
+<h2 id='AND和OR联合使用'>
+	AND 和 OR 联合使用
+</h2>
+<p>
+	<span>以下实例演示了 AND 和 OR 联合使用，类似常规 SQL 语句为： 'where likes&gt;50 AND (by = '菜鸟' OR title = 'MongoDB')'</span> 
+</p>
+<span>&gt;db.col.find({"likes": {$gt:50}, $or: [{"by": "菜鸟"},{"title": "MongoDB"}]}).pretty()</span><br />
+<h2 id='tye操作符'>
+	type 操作符
+</h2>
+<p>
+	<span>$type操作符是基于BSON类型来检索集合中匹配的数据类型，并返回结果。</span><span>MongoDB 中可以使用的类型如下表所示：</span> 
+</p>
+<table border="1" cellpadding="0" cellspacing="0" bordercolor="#000000">
+	<tbody>
+		<tr>
+			<th>
+				类型
+			</th>
+			<th>
+				数字
+			</th>
+			<th>
+				备注
+			</th>
+		</tr>
+		<tr>
+			<td>
+				Double
+			</td>
+			<td>
+				1
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				String
+			</td>
+			<td>
+				2
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Object
+			</td>
+			<td>
+				3
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Array
+			</td>
+			<td>
+				4
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Binary data
+			</td>
+			<td>
+				5
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Undefined
+			</td>
+			<td>
+				6
+			</td>
+			<td>
+				已废弃。
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Object id
+			</td>
+			<td>
+				7
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Boolean
+			</td>
+			<td>
+				8
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Date
+			</td>
+			<td>
+				9
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Null
+			</td>
+			<td>
+				10
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Regular Expression
+			</td>
+			<td>
+				11
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				JavaScript
+			</td>
+			<td>
+				13
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Symbol
+			</td>
+			<td>
+				14
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				JavaScript (with scope)
+			</td>
+			<td>
+				15
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				32-bit integer
+			</td>
+			<td>
+				16
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Timestamp
+			</td>
+			<td>
+				17
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				64-bit integer
+			</td>
+			<td>
+				18
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Min key
+			</td>
+			<td>
+				255
+			</td>
+			<td>
+				Query with&nbsp;-1.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Max key
+			</td>
+			<td>
+				127
+			</td>
+			<td>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	如果想获取 "col" 集合中 title 为 String 的数据，你可以使用以下命令：<br />
+db.col.find({"title" : {$type : 2}})或db.col.find({"title" : {$type : 'string'}})
+</p>
+<h2 id='Limit与Ski方法'>
+	Limit与Skip方法
+</h2>
+<h4>
+	<span>Limit() 方法</span> 
+</h4>
+<p>
+	<span>如果你需要在MongoDB中读取指定数量的数据记录，可以使用MongoDB的Limit方法，limit()方法接受一个数字参数，该参数指定从MongoDB中读取的记录条数。</span><span>limit()方法基本语法如下所示：</span> 
+</p>
+<p>
+	<span>&gt;db.COLLECTION_NAME.find().limit(NUMBER)</span> 
+</p>
+<p>
+	注：如果你们没有指定limit()方法中的参数则显示集合中的所有数据。
+</p>
+<h4>
+	Skip() 方法
+</h4>
+我们除了可以使用limit()方法来读取指定数量的数据外，还可以使用skip()方法来跳过指定数量的数据，skip方法同样接受一个数字参数作为跳过的记录条数。skip() 方法脚本语法格式如下：
+<p>
+	&gt;db.COLLECTION_NAME.find().limit(NUMBER).skip(NUMBER)
+</p>
+<p>
+	以下实例只会显示第二条文档数据
+</p>
+<p>
+	&gt;db.col.find({},{"title":1,_id:0}).limit(1).skip(1)
+</p>
+<p>
+	注:skip()方法默认参数为 0 。
+</p>
+<h2 id='排序ort()方法'>
+	排序sort() 方法
+</h2>
+<p>
+	<span>sort() 方法可以通过参数指定排序的字段，并使用 1 和 -1 来指定排序的方式，其中 1 为升序排列，而 -1 是用于降序排列。</span><span>sort()方法基本语法如下所示：</span> 
+</p>
+<p>
+	<span>&gt;db.COLLECTION_NAME.find().sort({KEY:1})</span> 
+</p>
+<h2 id='其他常用语法'>
+	<span>其他常用语法</span> 
+</h2>
+<p>
+	<span>满足条件的条数count：&gt;</span>db.LABELNET.count({"age":30});
+</p>
+<p>
+	得到所有key的value（去掉重复的）distinct：&gt; db.LABELNET.distinct("age");
+</p>
+<p>
+	<span></span>查看集合的数据大小dataSize注意S大写：&gt; db.LABELNET.dataSize();
+</p>
+<p>
+	查看集合状态stats：&gt; db.LABELNET.stats();
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/952.html">MongoDB结构及命令行操作</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/954.html">Fiddler 抓包工具总结</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="http://www.runoob.com/mongodb/mongodb-sort.html" target="_blank">http://www.runoob.com/mongodb/mongodb-sort.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#比较查询">比较查询</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#AND条件">AND条件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#OR条件">OR条件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#AND和OR联合使用">AND和OR联合使用</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#tye操作符">tye操作符</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Limit与Ski方法">Limit与Ski方法</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#排序ort()方法">排序ort()方法</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#其他常用语法">其他常用语法</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

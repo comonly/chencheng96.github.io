@@ -1,0 +1,373 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>C用户自己建立的数据类型（结构体）_comonly.cn</title>
+<meta name="keywords" content="C用户自己建立的数据类型（结构体）" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">C用户自己建立的数据类型（结构体）</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-02-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	c c++
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='结构体的定义，初始化与引用'>
+	结构体的定义，初始化与引用
+</h2>
+<pre class="prettyprint lang-cpp">#include&lt;stdio.h&gt;
+struct Data	//定义结构体类型变量
+{
+	int month;
+	int day;
+	int year;
+};
+
+void main()
+{
+	struct Data
+	//定义结构体类型变量，同时定义一个struct Data类型变量stu2，这里也可以省略Data
+	{
+		int month;
+		int day;
+		int year;
+	}stu2;	//声明一个变量（stu2）必须在函数中。
+	struct Data stu1;
+	stu1.month=2;
+	stu2.month=3;
+	//若day没有定义，编译不会报错，但是会输出一个奇怪的值
+	printf("stu1'mouth：%d\nday：%d\n",stu1.month,stu1.day);
+	//可以把void类型的指针存放的地址赋值给合适类型的指针
+	printf("stu2'mouth：%d\n",stu2.month);
+}</pre>
+<h4>
+	同类的结构体变量可以互相赋值
+</h4>
+<pre class="prettyprint lang-cpp">#include&lt;stdio.h&gt;
+struct Data	//定义结构体类型变量
+{
+	int month;
+	int day;
+	int year;
+};
+void main()
+{
+	struct Data stu1,stu2;
+	stu1.month=3;
+	scanf("%d",&amp;stu1.day);	//可以引用结构体变量成员的地址
+	stu2=stu1;
+	printf("%d-%d\n",stu2.month,stu2.day);
+}</pre>
+<h4>
+	使用结构体数组与结构体指针
+</h4>
+<pre class="prettyprint lang-cpp">#include&lt;stdio.h&gt;
+struct Data	//定义结构体类型变量
+{
+	int month;
+	int day;
+	int year;
+};
+void main()
+{
+	//初始化结构体数组的一种方法
+	struct Data stu1[3]={2,2,2016,3,3,2017,4,4,2018};
+	struct Data *p,*p2;	//定义结构体指针
+	p=stu1;
+	p2=&amp;stu1[0];
+	//对于数组指针变量，只能用-&gt;不能用.
+	printf("stu2'time：%d-%d-%d\n",stu1[1].year,(p+1)-&gt;month,(p+1)-&gt;day);
+	//对于一项的结构体可以用地址-&gt;取值，也可以用*p2表示stu1[0]
+	printf("stu2'time：%d-%d-%d\n",(*p2).year,p2-&gt;month,p2-&gt;day);
+}</pre>
+<h4>
+	用结构体建立动态链表
+</h4>
+<pre class="prettyprint lang-cpp">#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+#define LEN sizeof(struct Student)
+struct Student	//定义结构体类型变量
+{
+	long num;
+	float score;
+	struct Student *next;
+};
+int n;
+struct Student*creat(void)
+{
+	//返回一个指向链表表头的指针
+	struct Student *head;
+	struct Student *p1,*p2;
+	n=0;
+	p1=p2=(struct Student*)malloc(LEN);
+	scanf("%ld %f",&amp;p1-&gt;num,&amp;p1-&gt;score);
+	head=NULL;
+	while(p1-&gt;num!=0)
+	{
+		n++;
+		if(n==1)head=p1;
+		else p2-&gt;next=p1;
+		p2=p1;
+		p1=(struct Student*)malloc(LEN);
+		scanf("%ld %f",&amp;p1-&gt;num,&amp;p1-&gt;score);
+	}
+	p2-&gt;next=NULL;
+	free(p1);	//最后一个p1用来做终止条件，所以在这里释放内存。
+	return(head);
+}
+void main()
+{
+	struct Student *pt;
+	pt=creat();
+	printf("\nnum:%ld\nscore:%5.1f\n",pt-&gt;num,pt-&gt;score);
+}</pre>
+<h2 id='共用体'>
+	共用体
+</h2>
+<p>
+	用一段内存单元存放不同类型的变量。没一瞬间共用体只能存放其中的一个成员。同类型的共用体变量也可以互相赋值。
+</p>
+<pre class="prettyprint lang-cpp">#include&lt;stdio.h&gt;
+union Data
+{
+	int i;
+	char c;
+	float f;
+};	//;不要忘了
+void main()
+{
+	union Data co;
+	co.i=48;
+	printf("co.i=%d,co.c=%c,co.f=%f\n",co.i,co.c,co.f);
+}</pre>
+<h2 id='枚举'>
+	枚举
+</h2>
+<pre class="prettyprint lang-cpp">#include&lt;stdio.h&gt;
+enum Color{red,black,write,orange};
+//声明一个枚举类型的变量,{}内的是枚举常量不能进行赋值
+void main()
+{
+	//枚举变量的赋值其实是赋值给一个整型值。
+	enum Color colorOne=red;	//	相当于colorOne=0;
+	//enum Color相当于int型的变量
+	printf("%d\n",colorOne);
+}</pre>
+<h2 id='tyedef声明新类型名'>
+	typedef声明新类型名
+</h2>
+<p>
+	简单的说，就是定义一个变量，用typedef声明，那么定义的变量名便可以去用来声明相同的变量。与#define不同，<span>#define仅仅是简单的字符串替换。</span>
+</p>
+<p>
+	用新类型名代替原有类型名
+</p>
+<pre class="prettyprint lang-cpp">typedef int numberInt;//指定用numberInt代表int类型 int a;
+numberInt a; //相同的效果</pre>
+命名一个新类型名代表结构体<br />
+<pre class="prettyprint lang-cpp">typedef struct
+{
+	int month;
+	int day;
+	int year;
+}Date;
+Date da1;	//声明一个结构体变量</pre>
+命名一个新类型名代表数组类型<br />
+<pre class="prettyprint lang-cpp">typedef int Num[100];
+Num a; //相当于定义了一个数组名为a的一维数组，长度为100。</pre></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/853.html">C数组指针</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/855.html">C对文件的输入输出</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#结构体的定义，初始化与引用">结构体的定义，初始化与引用</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#共用体">共用体</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#枚举">枚举</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#tyedef声明新类型名">tyedef声明新类型名</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

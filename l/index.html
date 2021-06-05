@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta content="comonly.cn对外接口临时页面，新页面路径为：i h a v e d r m">
+    <title>临时页面——comonly.cn</title>
+</head>
+
+<body>
+        <div>
+            站点升级中！本页暂无数据~, 还有 <span id = "time" style="color:#F00">6</span> 秒返回首页，
+            <a href="/">立即返回首页</a>
+        </div>
+        <div style="height: 500px;"></div>
+        <div>
+                <script type="text/javascript">
+                    (function(win,doc){
+                        var s = doc.createElement("script"), h = doc.getElementsByTagName("head")[0];
+                        if (!win.alimamatk_show) {
+                            s.charset = "gbk";
+                            s.async = true;
+                            s.src = "https://alimama.alicdn.com/tkapi.js";
+                            h.insertBefore(s, h.firstChild);
+                        };
+                        var o = {
+                            pid: "mm_107891750_283950244_78042400446",/*推广单元ID，用于区分不同的推广渠道*/
+                            appkey: "",/*通过TOP平台申请的appkey，设置后引导成交会关联appkey*/
+                            unid: "",/*自定义统计字段*/
+                            type: "click" /* click 组件的入口标志 （使用click组件必设）*/
+                        };
+                        win.alimamatk_onload = win.alimamatk_onload || [];
+                        win.alimamatk_onload.push(o);
+                    })(window,document);
+                </script>
+                </div>
+        <div>
+                <script charset="gbk" src="http://p.tanx.com/ex?i=mm_107891750_283950244_78035250442"></script>
+        </div>
+</body>
+
+<script type="text/javascript">
+
+    var int=self.setInterval("clock()",1000);
+    var time = 6;
+    function clock(){
+        time = time - 1;
+        x = document.getElementById("time");  // 找到元素
+        x.innerHTML = time;    // 改变内容
+
+        if(time==0){
+            window.location.href="/"; 
+        }
+
+    }
+    
+</script>
+
+</html>

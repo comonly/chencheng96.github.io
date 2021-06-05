@@ -1,0 +1,274 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>流套接字、数据报套接字和原始套接字_comonly.cn</title>
+<meta name="keywords" content="流套接字、数据报套接字和原始套接字" />
+<meta name="description" content="套接字的类型
+
+A.流套接字(SOCK_STREAM)
+
+	用于提供面向连接、可靠的数据传输服务，其使用传输层的TCP协议
+
+
+B.数据报套接字(SOCK_DGRAM)
+
+	用于提供一个无连接、不可靠的服务，其使用传输层上的UDP协议
+
+
+	
+
+
+	C.原始套接字(SOCK_RAM)
+
+
+	原始套接字是相对表中套接字(即前面两种套接字)而言的。它与标准套接字的区别是原始套接字可以读写内核没有处理的IP数据包，流套接字只能读取TCP协议的数据，数据报套接字只能读取UDP协" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">流套接字、数据报套接字和原始套接字</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-09-08</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>套接字的类型
+
+A.流套接字(SOCK_STREAM)
+
+	用于提供面向连接、可靠的数据传输服务，其使用传输层的TCP协议
+
+
+B.数据报套接字(SOCK_DGRAM)
+
+	用于提供一个无连接、不可靠的服务，其使用传输层上的UDP协议
+
+
+	
+
+
+	C.原始套接字(SOCK_RAM)
+
+
+	原始套接字是相对表中套接字(即前面两种套接字)而言的。它与标准套接字的区别是原始套接字可以读写内核没有处理的IP数据包，流套接字只能读取TCP协议的数据，数据报套接字只能读取UDP协</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 套接字的类型<br />
+<br />
+A.流套接字(SOCK_STREAM)<br />
+<p>
+	用于提供面向连接、可靠的数据传输服务，其使用传输层的TCP协议
+</p>
+<br />
+B.数据报套接字(SOCK_DGRAM)<br />
+<p>
+	用于提供一个无连接、不可靠的服务，其使用传输层上的UDP协议
+</p>
+<p>
+	<br />
+</p>
+<p>
+	C.原始套接字(SOCK_RAM)
+</p>
+<p>
+	原始套接字是相对表中套接字(即前面两种套接字)而言的。它与标准套接字的区别是原始套接字可以读写内核没有处理的IP数据包，流套接字只能读取TCP协议的数据，数据报套接字只能读取UDP协议的数据。所以要访问其他协议的数据必须使用原始套接字。原始套接字（SOCK_RAW）是一种不同于 SOCK_STREAM、SOCK_DGRAM 的套接字，它实现于系统核心。原始套接字使进程可以读与写 ICMP、IGMP 等网络报文；也可以处理特殊的 IPv4 报文；进程还可以通过设置 IP_HDRINCL 套接字选项由用户自行构造 IP 首部。原始套接字可以用来自行组装 IP 数据报，然后将数据报发送到其他终端。但是只有管理员权限才能使用原始套接字，可防止普通用户往网络写入它们自行构造的 IP 数据报。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	基于字节流套接字（SOCK_STREAM）和数据报套接字（SOCK_DGRAM）不可以访问传输层协议，只是对应用层的报文进行操作，传输层的数据报格式都是由系统提供的协议栈实现，用户只需要填充相应的应用层报文，由系统完成底层报文首部的填充并发送。原始套接字（SOCK_RAW）可以访问位于基层的传输层协议，原始套接字没有端口号。<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1420.html">软件下载链接 含工具类  镜像网站</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1422.html">原始套接字编程实现ping命令程序</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

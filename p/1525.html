@@ -1,0 +1,385 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>C++字节对齐可能导致的堆栈内存异常的错误CRT detected that the application wrote to memory after end of heap buffer_comonly.cn</title>
+<meta name="keywords" content="C++字节对齐可能导致的堆栈内存异常的错误CRT detected that the application wrote to memory after end of heap buffer" />
+<meta name="description" content="CRT detected that the application wrote to memory after end of heap buffer
+
+	
+
+
+	
+
+
+	查看是否定义字节对齐大小
+
+
+	#pragma pack(2)
+
+
+	
+
+
+	
+
+
+	
+
+
+	
+
+
+	问题起源及解决历程。
+
+
+	
+
+
+	某函数运行结束，在出口时挂掉。
+
+
+	函数内部定义的一个结构体，注释掉后函数正常运行。&nbsp; &nbsp; 问题定位
+
+
+" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">C++字节对齐可能导致的堆栈内存异常的错误CRT detected that the application wrote to memory after end of heap buffer</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-10-31</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>CRT detected that the application wrote to memory after end of heap buffer
+
+	
+
+
+	
+
+
+	查看是否定义字节对齐大小
+
+
+	#pragma pack(2)
+
+
+	
+
+
+	
+
+
+	
+
+
+	
+
+
+	问题起源及解决历程。
+
+
+	
+
+
+	某函数运行结束，在出口时挂掉。
+
+
+	函数内部定义的一个结构体，注释掉后函数正常运行。&nbsp; &nbsp; 问题定位
+
+
+</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> CRT detected that the application wrote to memory after end of heap buffer<br />
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	查看是否定义字节对齐大小
+</p>
+<p>
+	#pragma pack(2)
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	问题起源及解决历程。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	某函数运行结束，在出口时挂掉。
+</p>
+<p>
+	函数内部定义的一个结构体，注释掉后函数正常运行。&nbsp; &nbsp; 问题定位
+</p>
+<p>
+	<br />
+</p>
+<p>
+	{
+</p>
+<p>
+	该结构体在其他函数中调用时是正常的。
+</p>
+<p>
+	在结构体定义的地方，复制一遍结构体，然后重新命名，再到主函数中调用。没有异常产生（仅限于定义一个结构体对象，而不使用）&nbsp; &nbsp; 未知原因，定义后析构程序没有异常？！
+</p>
+<p>
+	<span>}</span>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	尝试寻找结构体内部定义的问题。运行程序，观察内存变化，没有找到原因：
+</p>
+对结构体及其内部嵌套定义构造函数，初始化值。
+<p>
+	现象：局部变量（结构体）内部数据，有时正常，有时错误。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	考虑字节对齐问题，寻找头文件及文件中是否有定义对齐大小。
+</p>
+<p>
+	未发现。
+</p>
+<p>
+	手动创建变量，补足结构体中对齐大小。问题依旧存在。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	搜索整个文件夹中<span>pack内容，最后找的一个文件中定义过字节对齐大小。</span>
+</p>
+<p>
+	<span>在出问题文件中发现又对上述包含字节对齐文件的引用。</span>
+</p>
+<p>
+	<span><br />
+</span>
+</p>
+<p>
+	<span>去掉引用。</span>
+</p>
+<p>
+	<span><br />
+</span>
+</p>
+<p>
+	<span>问题解决</span>
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1524.html">C++字节对齐在编码中需要注意的内容  优化代码结构，编程过程中避免踩坑</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1526.html">C/C++内存泄漏及检测_CrtCheckMemory</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

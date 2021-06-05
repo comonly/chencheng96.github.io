@@ -1,0 +1,286 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>v,c,b,m,r 表示层、控制层、业务逻辑层、数据访问层_comonly.cn</title>
+<meta name="keywords" content="v,c,b,m,r 表示层、控制层、业务逻辑层、数据访问层" />
+<meta name="description" content="表示层（web层）、控制层（最简单——分流子类《判断分流的依据还是从业务层获得》Controller（如Struts2的Action 或Spring mvc 的Controller））、业务逻辑层（biz 或者services）、数据访问层（dao）、信息资源层
+
+如果你会像spring这样的框架，你会了解面向接口编程，表示层调用控制层，控制层调用业务层，业务层调用数据访问层。
+
+	
+
+
+	view层：&nbsp; &nbsp; 结合control层，显示前台页面。
+control层：业务" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">v,c,b,m,r 表示层、控制层、业务逻辑层、数据访问层</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-09-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	java框架-spring等
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>表示层（web层）、控制层（最简单——分流子类《判断分流的依据还是从业务层获得》Controller（如Struts2的Action 或Spring mvc 的Controller））、业务逻辑层（biz 或者services）、数据访问层（dao）、信息资源层
+
+如果你会像spring这样的框架，你会了解面向接口编程，表示层调用控制层，控制层调用业务层，业务层调用数据访问层。
+
+	
+
+
+	view层：&nbsp; &nbsp; 结合control层，显示前台页面。
+control层：业务</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	<img src="/File/ForKindEditor/image/20180919205504_773.jpg" alt="" /> 
+</p>
+<p>
+	<br />
+</p>
+<p>
+	表示层（web层）、控制层（最简单——分流子类《判断分流的依据还是从业务层获得》Controller（如Struts2的Action 或Spring mvc 的Controller））、业务逻辑层（biz 或者services）、数据访问层（dao）、信息资源层
+</p>
+如果你会像spring这样的框架，你会了解面向接口编程，表示层调用控制层，控制层调用业务层，业务层调用数据访问层。<br />
+<p>
+	<br />
+</p>
+<p>
+	view层：&nbsp; &nbsp; 结合control层，显示前台页面。<br />
+control层：业务模块流程控制，调用service层接口。<br />
+service层：业务操作实现类，调用dao层接口。<br />
+dao层：&nbsp; &nbsp; &nbsp;数据业务处理，持久化操作<br />
+model层： pojo，OR maping，持久层
+</p>
+web层负责前端展示和用户请求的处理。<br />
+<p>
+	Action是一个控制器。让控制器有了业务逻辑的功能直接操作DAO组件不合适，控制器不能管得太多，应该只负责把用户请求发送到业务逻辑组件。action的底层实现就是servlet。Action是一个控制器（structs）。action 是业务层的一部分，是一个管理器（总开关）（作用是取调转）（取出前台界面的数据，调用service方法，转发到下一个action或者页面）
+</p>
+<p>
+	Service 做相应的业务逻辑处理 。业务逻辑层一般应用中会有一层service抽象，实现核心业务逻辑，事务控制也在这一层实现。可以在service层调用不同的dao方法组合完成复杂的业务逻辑，而且不会简单的调用dao的，需要做复杂处理的。service它会调用多个dao里面多个方法的时候的，事务管理方面也是要用到的。Service 做相应的业务逻辑处理。
+</p>
+<p>
+	Dao主要做数据库的交互工作（hibernate），重点负责数据库访问，完成持久化功能。 Modle是模型存放你的实体类，一般是实体对象(把现实的的事物变成java中的对象)作用是一暂时存储数据方便持久化（存入数据库或者写入文件）二是作为类封装一些数据来在不同的层以及各种java对象中使用。
+</p>
+信息资源层主要服务资源的存储。<br />
+<br />
+在service里直接调用dao，service里面就new一个dao类对象，调用，其他有意义的事没做，也不明白有这个有什么用，参加工作久了以后就会知道，业务才是工作中的重中之重。我们都知道，标准主流现在的编程方式都是采用MVC综合设计模式，MVC本身不属于设计模式的一种，它描述的是一种结构，最终目的达到解耦，解耦说的意思是你更改某一层代码，不会影响我其他层代码。初期也许都是new对象去调用下一层，比如你在业务层new一个DAO类的对象，调用DAO类方法访问数据库，这样写是不对的，因为在业务层中是不应该含有具体对象，最多只能有引用，如果有具体对象存在，就耦合了。当那个对象不存在，我还要修改业务的代码，这不符合逻辑。好比主板上内存坏了，我换内存，没必要连主板一起换。我不用知道内存是哪家生产，不用知道多大容量，只要是内存都可以插上这个接口使用。这就是MVC的意义。在各层中不要含有其他层的new的具体对象，最多只能有引用。<br />
+<br />
+参考//service层是多余的吗？求各位水友指点迷津//https://bbs.csdn.net/topics/391948706在开发java web项目中，service层的存在总是重用dao层的方法，可以直接去掉service直接使用dao层吗？<br />
+<br />
+Action主要的功能就是组织service的，比如你要做权限验证，那么请求会被Action获取，那么如何验证呢？Action可不管他要问service该怎么办。当得到service返回的结果后根据结果判断下一跳是哪里（如果验证用户存在且密码正确则跳转到登录成功的页面，反之则回跳到登录页面）<br />
+现在轮到service了，service是管理业务的，延续上面的例子的话，action问这个用户是否合法有效的时候sevice就去调用dao层，看dao能不能找到相应的记录，当业务收到dao的结果后就根据得到的记录回答action的问题“用户是否合法有效”<br />
+最后就是dao了，作为工作于最“基层”的部分，dao层只去实现增删查改，甚至这些增删查改之间有什么关系？dao一概不问，爱谁是谁。dao很倔强，它只保证和数据库的关系良好。<br />
+归纳一下，Action就是管理业务（servcie）调度和管理跳转的。service是管理具体的功能的，这个很容易和Action混淆，你可以这样理解，Action只负责管理，而service负责实施，dao只完成增删查改，当然你可以1-n，n-n，1-1关联，模糊 、动态 、子查询都可以。但是无论多么复杂的dao，它只是封装增删查改。至于增删查改如何实现一个功能，dao层是不管的。<br />
+总结这三者，可以举个例子，action像是服务员，顾客点什么菜，菜上给几号桌，都是action的职责；sevice是厨师，action送来的菜单上的菜全是service做的；dao是厨房的小工，和原材料打交道的事情全是它管。所以小工（dao）的工作是要满足厨师（service）的要求，厨师要满足服务员（action）转达的客户（页面用户）的要求，服务员自然就是为客户服务喽。<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/976.html">邮件服务器介绍</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/978.html">Android—控件Spinner实现下拉列表及监听</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="图片来源">
+							<h2 style="display:inline;color:#5BC648;">图片来源</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-09-19&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span>https://blog.csdn.net/zdwzzu2006/article/details/6086829</span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#图片来源">图片来源</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

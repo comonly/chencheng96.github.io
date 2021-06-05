@@ -1,0 +1,380 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>稀疏特征(Sparse Features) 稀疏表示(Sparse Representations)_comonly.cn</title>
+<meta name="keywords" content="稀疏特征(Sparse Features) 稀疏表示(Sparse Representations)" />
+<meta name="description" content="1.什么是稀疏表示：
+
+
+	用较少的基本信号的线性组合来表达大部分或者全部的原始信号。
+
+
+	其中，这些基本信号被称作原子，是从过完备字典中选出来的；而过完备字典则是由个数超过信号维数的原子聚集而来的。可见，任一信号在不同的原子组下有不同的稀疏表示。
+
+
+	假设我们用一个M*N的矩阵表示数据集X，每一行代表一个样本，每一列代表样本的一个属性，一般而言，该矩阵是稠密的，即大多数元素不为0。 稀疏表示的含义是，寻找一个系数矩阵A（K*N）以及一个字典矩阵B（M*K），使得B*A尽可能的还原X" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">稀疏特征(Sparse Features) 稀疏表示(Sparse Representations)</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">彼岸花杀是条狗</li>
+          <li class="lmname"><a href="https://www.cnblogs.com/yifdu25/p/8128028.html" target="_blank">https://www.cnblogs.com/yifdu25/p/8128028.html</a></li>
+          <li class="timer">2020-11-17</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	机器学习算法分析
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>1.什么是稀疏表示：
+
+
+	用较少的基本信号的线性组合来表达大部分或者全部的原始信号。
+
+
+	其中，这些基本信号被称作原子，是从过完备字典中选出来的；而过完备字典则是由个数超过信号维数的原子聚集而来的。可见，任一信号在不同的原子组下有不同的稀疏表示。
+
+
+	假设我们用一个M*N的矩阵表示数据集X，每一行代表一个样本，每一列代表样本的一个属性，一般而言，该矩阵是稠密的，即大多数元素不为0。 稀疏表示的含义是，寻找一个系数矩阵A（K*N）以及一个字典矩阵B（M*K），使得B*A尽可能的还原X</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	1.什么是稀疏表示：
+</p>
+<p>
+	用较少的基本信号的线性组合来表达大部分或者全部的原始信号。
+</p>
+<p>
+	其中，这些基本信号被称作原子，是从过完备字典中选出来的；而过完备字典则是由个数超过信号维数的原子聚集而来的。可见，任一信号在不同的原子组下有不同的稀疏表示。
+</p>
+<p>
+	假设我们用一个M*N的矩阵表示数据集X，每一行代表一个样本，每一列代表样本的一个属性，一般而言，该矩阵是稠密的，即大多数元素不为0。 稀疏表示的含义是，寻找一个系数矩阵A（K*N）以及一个字典矩阵B（M*K），使得B*A尽可能的还原X，且A尽可能的稀疏。A便是X的稀疏表示。
+</p>
+<p>
+	<a href="http://images2017.cnblogs.com/blog/1303172/201712/1303172-20171227224835113-1469079856.png"><img title="image" src="https://images2017.cnblogs.com/blog/1303172/201712/1303172-20171227224837175-2042097082.png" alt="image" width="900" height="646" border="0" style="height:auto;" /></a> 
+</p>
+<p>
+	南大周志华老师写的《<a href="http://lib.csdn.net/base/2">机器学习</a>》这本书上原文：“为普通稠密表达的样本找到合适的字典，将样本转化为合适的稀疏表达形式，从而使学习任务得以简化，模型复杂度得以降低，通常称为‘字典学习’（dictionary learning），亦称‘稀疏编码’（sparse coding）”块内容。
+</p>
+<p>
+	表达为优化问题的话，字典学习的最简单形式为：<br />
+<img title="" src="http://img.blog.csdn.net/20160224153636985" alt="字典学习表达式" style="height:auto;" /><br />
+其中xi为第i个样本，B为字典矩阵，αi为xi的稀疏表示，λ为大于0参数。&nbsp;
+</p>
+<p>
+	•寻找少量重要的系数来表示原始信号的技术被称作Sparse Coding（稀疏编码或稀疏分解）；
+</p>
+<p>
+	•从任意一个字典中为原始信号寻找最稀疏的表示常用的方法分类两类：
+</p>
+<p>
+	①贪婪算法，比如匹配追踪（MP）、正交匹配追踪（OMP）、弱匹配追踪（WMP）、阈值方法等；
+</p>
+<p>
+	②松弛算法，比如迭代加权最小二乘（Iterative-Reweighed-Least-Squares，IRLS）、基追踪（BP）等。
+</p>
+<p>
+	其中，贪婪算法的特点是速度快，精度相对较低；松弛算法是精度高，但速度慢。
+</p>
+<p>
+	•穷举法——NP难：
+</p>
+<p>
+	假设 的非零项数目为L(sparse level)，先令L=1，字典里的每一个原子（列向量）尝试一遍，看是否满足终止条件，共有K种组合。如果没有满足，再令L=2，再次尝试，共有K(K-1)/2种组合。还没有满足条件的，则令L=3……组合的数目呈指数增长，于是遇到了NP难问题。
+</p>
+<p>
+	•贪婪算法——Matching Pursuit
+</p>
+<p>
+	第一步，找到最接近X的原子，等效于 向量上仅取一个非零项，求出最接近的原子，保留下来；
+</p>
+<p>
+	第二步，计算误差是否满足要求，如果满足，算法停止，否则，计算出残差信号，和第一步类似，找到最接近残差向量的原子，保留下来；
+</p>
+<p>
+	第三步，调整已选向量的系数，使得 最接近X，重复第二步。
+</p>
+<p>
+	•松弛算法——Basis Pursuit，将L0问题转化为L1问题，解决的方法有很多，比如内点法、迭代收缩法等。事实上，它可以化成一个线性规划的问题，用MATLAB很容易解。
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 上式中第一个累加项说明了字典学习的第一个目标是字典矩阵与稀疏表示的线性组合尽可能的还原样本；第二个累加项说明了αi应该尽可能的稀疏。之所以用L1范式是因为L1范式正则化更容易获得稀疏解。具体原因参看该书11.4章或移步<a href="http://blog.csdn.net/zouxy09/article/details/24971995/">机器学习中的范数规则化之（一）L0、L1与L2范数</a>。字典学习便是学习出满足上述最优化问题的字典B以及样本的稀疏表示A（A{α1，α2，…，αi}）。L1正则化常用于稀疏，可以获得稀疏解。如下图表示，L1正则化交点在轴上，所得的解一般只是在某个轴上有实数，另外的轴为0，从而最终得到稀疏解。
+</p>
+<p>
+	<img src="http://img.blog.csdn.net/20170425210939876?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvVG91Y2hfRHJlYW0=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="" style="height:auto;" /> 
+</p>
+<p>
+	2.字典学习：
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 寻找字典的过程称为字典学习。字典学习的一个假设是字典对于指定信号具有稀疏表示。因此，选择字典的原则就是能够稀疏地表达信号。
+</p>
+<p>
+	两种方法来设计字典:
+</p>
+<p>
+	•从已知的变换基中选取，比如 DCT 、小波基等，这种方法很通用，但是不能自适应于信号。
+</p>
+<p>
+	学习字典，即通过训练和学习大量的与目标数据相似的数据来获得。这里，我们介绍一种叫K-SVD的方法
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 字典学习算法理论包含两个阶段：字典构建阶段（Dictionary Generate）和利用字典（稀疏的）表示样本阶段（Sparse coding with a precomputed dictionary）。这两个阶段（如下图）的每个阶段都有许多不同算法可供选择，每种算法的诞生时间都不一样，以至于稀疏字典学习的理论提出者已变得不可考。笔者尝试找了Wikipedia和Google Scolar都无法找到这一系列理论的最早发起人。
+</p>
+<p>
+	<img src="https://images2015.cnblogs.com/blog/808068/201610/808068-20161012222200109-1848074195.png" alt="技术分享" style="height:auto;" /> 
+</p>
+<p>
+	出处：http://www.mamicode.com/info-detail-1568956.html
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 字典学习的第一个好处——它实质上是对于庞大数据集的一种降维表示。第二，正如同字是句子最质朴的特征一样，字典学习总是尝试学习蕴藏在样本背后最质朴的特征（假如样本最质朴的特征就是样本最好的特征）.稀疏表示的本质：用尽可能少的资源表示尽可能多的知识，这种表示还能带来一个附加的好处，即计算速度快。我们希望字典里的字可以尽能的少，但是却可以尽可能的表示最多的句子。这样的字典最容易满足稀疏条件。也就是说，这个“字典”是这个“稀疏”私人订制的。
+</p>
+<p>
+	稀疏表达有两点好处：<br />
+1) 省空间；<br />
+2) 奥卡姆剃刀说：如果两个模型的解释力相同，选择较简洁的那个。稀疏表达就符合这一点。
+</p>
+<h2 id='HowtofidthedictioryD?——K-SVD'>
+	How to find the dictionary D?——K-SVD
+</h2>
+<p>
+	假设现在有原始信号矩阵 ， 该矩阵的每一行表示一个信号或者一张图片， D 矩阵是字典矩阵，右下方是 稀疏解矩阵S，红色的点表示非零项。
+</p>
+<p>
+	<a href="http://images2017.cnblogs.com/blog/1303172/201712/1303172-20171227224838113-1038850320.png"><img title="image" src="https://images2017.cnblogs.com/blog/1303172/201712/1303172-20171227224839097-684553089.png" alt="image" width="900" height="456" border="0" style="height:auto;" /></a> 
+</p>
+<p>
+	Step 1: Initialize. 在 矩阵中随机挑选一些行向量(一些原图），填满矩阵 D，并归一化每一列。
+</p>
+<p>
+	Step 2: Sparse Coding. 用松弛或者贪婪法进行稀疏编码，使得
+</p>
+<p>
+	<a href="http://images2017.cnblogs.com/blog/1303172/201712/1303172-20171227224840456-1065179299.gif"><img title="image" src="https://images2017.cnblogs.com/blog/1303172/201712/1303172-20171227224841566-571587779.gif" alt="image" width="610" height="89" border="0" style="height:auto;" /></a> 
+</p>
+<p>
+	得到稀疏表示 构成稀疏矩阵S的第i行。
+</p>
+<h2 id='Whtrererereettioroximtiogoodfor?'>
+	What are sparse representations/approximations good for?
+</h2>
+<p>
+	•稀疏性是DFT、WT和SVD分解得以广泛利用的原因之一，这些变换的目的都是为了反映信号的确定性结构，并用紧凑的或稀疏的表示来表征这些结构；
+</p>
+<p>
+	•稀疏表示的思想为模式分类方法建立了基础，比如SVM和RVM，其中稀疏性直接与估计函数（estimator）的学习能力有关。
+</p>
+<p>
+	•稀疏表示解决的问题主要集中在：
+</p>
+<p>
+	•图像去噪（Denoise），代表性paper：<a href="http://www.cs.technion.ac.il/~elad/publications/journals/2005/KSVD_Denoising_IEEE_TIP.pdf">Image&nbsp;</a><a href="http://www.cs.technion.ac.il/~elad/publications/journals/2005/KSVD_Denoising_IEEE_TIP.pdf">Denoise</a><a href="http://www.cs.technion.ac.il/~elad/publications/journals/2005/KSVD_Denoising_IEEE_TIP.pdf">&nbsp;Via Sparse and Redundant Representations Over Learned Dictionaries</a>(Elad M. and Aharon M. IEEE Trans. on Image Processing,Dec,2006);<a href="http://www.cs.technion.ac.il/~elad/publications/journals/2007/VideoDenoising_IEEETIP.pdf">Image Sequence&nbsp;</a><a href="http://www.cs.technion.ac.il/~elad/publications/journals/2007/VideoDenoising_IEEETIP.pdf">Denoising</a><a href="http://www.cs.technion.ac.il/~elad/publications/journals/2007/VideoDenoising_IEEETIP.pdf">&nbsp;Via Sparse and Redundant Representations</a>(Protter M. and Elad M.IEEE Trans. on Image Processing,Jan,2009)；
+</p>
+<p>
+	•超分辨率重建（Super-Resolution OR Scale-Up），代表性paper：<a href="http://yima.csl.illinois.edu/psfile/SR-TIP-Final2.pdf">Image Super-Resolution via Sparse Representation</a>（Jianchao Yang, John Wright, Thomas Huang, and Yi Ma，IEEE Transactions on Image Processing, Nov,2010）,<a href="http://www.cs.technion.ac.il/~elad/publications/conferences/2010/Amir_Adler_ECCV_2010.pdf">A Shrinkage Learning Approach for Single Image Super-Resolution with&nbsp;</a><a href="http://www.cs.technion.ac.il/~elad/publications/conferences/2010/Amir_Adler_ECCV_2010.pdf">Overcomplete</a><a href="http://www.cs.technion.ac.il/~elad/publications/conferences/2010/Amir_Adler_ECCV_2010.pdf">&nbsp;Representations</a>( A. Adler, Y. Hel-Or, and M. Elad,ECCV,Sep,2010);
+</p>
+<p>
+	另外还有inpaintting，deblurring，compression等等..更多应用参考Elad M的书。
+</p>
+<p>
+	<a href="http://images2017.cnblogs.com/blog/1303172/201712/1303172-20171227224843097-675975878.png"><img title="image" src="https://images2017.cnblogs.com/blog/1303172/201712/1303172-20171227224844113-1390903673.png" alt="image" width="900" height="559" border="0" style="height:auto;" /></a> 
+</p>
+<p>
+	<a href="http://images2017.cnblogs.com/blog/1303172/201712/1303172-20171227224844894-1286792750.png"><img title="image" src="https://images2017.cnblogs.com/blog/1303172/201712/1303172-20171227224845738-20737776.png" alt="image" width="900" height="652" border="0" style="height:auto;" /></a> 
+</p>
+<p>
+	&nbsp;
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1177.html">pix2pix 生成对抗网络</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1179.html">机器学习中的范数规则化  L0、L1与L2范数</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.cnblogs.com/yifdu25/p/8128028.html" target="_blank">https://www.cnblogs.com/yifdu25/p/8128028.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#HowtofidthedictioryD?——K-SVD">HowtofidthedictioryD?——K-SVD</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Whtrererereettioroximtiogoodfor?">Whtrererereettioroximtiogoodfor?</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

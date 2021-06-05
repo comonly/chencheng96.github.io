@@ -1,0 +1,248 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>MMU内存管理单元 - 虚拟地址到物理地址转换_comonly.cn</title>
+<meta name="keywords" content="MMU内存管理单元 - 虚拟地址到物理地址转换" />
+<meta name="description" content="MMU的主要作用：虚拟地址到物理地址的转换；访问权限控制；设置虚拟存储空间的缓冲。
+虚拟存储器：程序一般存于掉电不丢失的硬盘中，但是硬盘读写速度慢。所以系统上电后一般只在ROM中完成小部分硬件初始化程序，并把程序搬运到内存中。然后，从内存中开始执行程序。但是，内存有限，不能一次性把所有代码加载到内存中，所以只把当前用到的一部分代码加载过来，把没用到的搬回磁盘。此时的效果等同于把所有程序加载到内存中，用户看来系统具有的内存比实际内存大的多。对于32位的CPU系统中虚拟地址空间有4GB大小，而嵌入式系统中的" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">MMU内存管理单元 - 虚拟地址到物理地址转换</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">张勇1234</li>
+          <li class="lmname"><a href="https://blog.csdn.net/qq_23084801/article/details/75050061" target="_blank">https://blog.csdn.net/qq_23084801/article/details/75050061</a></li>
+          <li class="timer">2020-10-16</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>MMU的主要作用：虚拟地址到物理地址的转换；访问权限控制；设置虚拟存储空间的缓冲。
+虚拟存储器：程序一般存于掉电不丢失的硬盘中，但是硬盘读写速度慢。所以系统上电后一般只在ROM中完成小部分硬件初始化程序，并把程序搬运到内存中。然后，从内存中开始执行程序。但是，内存有限，不能一次性把所有代码加载到内存中，所以只把当前用到的一部分代码加载过来，把没用到的搬回磁盘。此时的效果等同于把所有程序加载到内存中，用户看来系统具有的内存比实际内存大的多。对于32位的CPU系统中虚拟地址空间有4GB大小，而嵌入式系统中的</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	MMU的主要作用：虚拟地址到物理地址的转换；访问权限控制；设置虚拟存储空间的缓冲。<br />
+虚拟存储器：程序一般存于掉电不丢失的硬盘中，但是硬盘读写速度慢。所以系统上电后一般只在ROM中完成小部分硬件初始化程序，并把程序搬运到内存中。然后，从内存中开始执行程序。但是，内存有限，不能一次性把所有代码加载到内存中，所以只把当前用到的一部分代码加载过来，把没用到的搬回磁盘。此时的效果等同于把所有程序加载到内存中，用户看来系统具有的内存比实际内存大的多。对于32位的CPU系统中虚拟地址空间有4GB大小，而嵌入式系统中的实际物理地址空间可能远小于此。<br />
+<img src="https://img-blog.csdn.net/20170713093848156?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjMwODQ4MDE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" title="" /> 
+</p>
+<p>
+	把虚拟地址空间分成一个个固定大小的块，每一块为一页。物理地址空间也分为同样大小的页。MMU要实现虚拟地址到物理地址的映射，CPU核发出虚拟地址VA；VA被转换为变换后的虚拟地址MVA给MMU；MMU把MVA转换成物理地址PA。<br />
+页表：位于内存中，页表的基地址存于CP15的C2寄存器中，表中每一行（叫一个地址变换条目entry）对应于虚拟存储空间的一个页，这个entry包含虚拟内存块和物理块地址的对应关系、该页的权限、该页的缓冲特性。<br />
+TLB（快表）：CPU和内存速度级别相差较大，每次到内存中查表代价较大。根据程序局部性原理，把当前访问需要的条目存放在一个和CPU中寄存器速度差不多16字左右的TLB中。MMU把存储空间分为16个域，PC15中C3每两位控制一个域的访问权限。<br />
+ARM支持的存储块：段1MB；大页64KB（可分为16KB子页）；小页4KB（可分为1KB子页）；极小页1KB(只能保存在细页表中)。<br />
+大致过程：<br />
+1）根据VA和C2找到一级页表条目<br />
+2）若是段描述符，返回物理地址<br />
+3）若该条目是二级页表描述符，继续根据虚拟地址找下一个条目<br />
+4）找到第二个页描述符，返回物理地址
+</p>
+一级页表描述符
+<p>
+	<img src="https://img-blog.csdn.net/20170713103312158?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjMwODQ4MDE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="一级页表描述符" title="" /> 
+</p>
+<p>
+	[1:0]=01粗页表：256行，占内存1KB，每个条目表示4KB空间；[31:10]是二级页表地址。如：粗页表+大页，因为指向物理空间只能为1MB，所以256/16*64K或64/4；连续16个条目保存同一大页描述符。<br />
+C2[31:14]+MVA[31:20]+0b00-&gt;粗页描述符；<br />
+粗页描述符[31:10]+MVA[19:12]+0b00-&gt;大页描述符；<br />
+大页描述符[31:16]+MVA[15:0]-&gt;PA<br />
+[1:0]=10段，[31:20]一块1MB物理地址空间的起始地址。MVA[19:0]在这块中寻址。<br />
+P15的C2[31:14]+MVA[31:20]+0b00——&gt;段描述符。<br />
+段描述符[31:20]+MVA[19:0]–&gt;PA。<br />
+[1:0]=11细页表，1024行，每个条目表示1KB空间；[31:12]是二级页表地址；细页表+大页，1024/64*64K或64/1，每个条目表示1KB，连续64个条目保存同一大页描述符<br />
+二级页表描述符<br />
+<img src="https://img-blog.csdn.net/20170713104024045?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjMwODQ4MDE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="二级页表描述符" title="" /> 
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1858.html">C++编译期多态与运行期多态</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1860.html">局部性原理 时间局部性和空间局部性</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/qq_23084801/article/details/75050061" target="_blank">https://blog.csdn.net/qq_23084801/article/details/75050061</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

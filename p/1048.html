@@ -1,0 +1,352 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>jsp生成静态页面——自动生成全部html文件_comonly.cn</title>
+<meta name="keywords" content="jsp生成静态页面——自动生成全部html文件" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">jsp生成静态页面——自动生成全部html文件</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-01-13</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	javaweb---jsp asp数据库框架
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">jsp,html,静态化</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='生成html页面的主要代码'>
+	生成html页面的主要代码
+</h2>
+<pre class="prettyprint lang-java">package vip.chencheng.blogstatic;
+
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.WriteListener;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletResponseWrapper;
+
+/**
+ * 创建HTML静态页面 
+ * 
+ */
+public class CreateStaticHTMLPage {
+    /**
+     * 生成静态HTML页面的方法
+     * 
+     * @param request
+     *            请求对象
+     * @param response
+     *            响应对象
+     * @param servletContext
+     *       Servlet上下文
+     * @param fileName
+     *            文件名称
+     * @param fileFullPath
+     *            文件完整路径
+     * @param jspPath
+     *            需要生成静态文件的JSP路径(相对即可)
+     * @throws IOException
+     * @throws ServletException
+     */
+    public void create(HttpServletRequest request, HttpServletResponse response,
+            ServletContext servletContext, String fileName, String fileFullPath, String jspPath)
+                    throws ServletException, IOException {
+        //response.setContentType("text/html;charset=gb2312");// 设置HTML结果流编码(即HTML文件编码)
+        RequestDispatcher rd = servletContext.getRequestDispatcher(jspPath);// 得到JSP资源
+        final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();// 用于从ServletOutputStream中接收资源
+        final ServletOutputStream servletOuputStream = new ServletOutputStream() {// 用于从HttpServletResponse中接收资源
+            public void write(byte[] b, int off, int len) {
+                byteArrayOutputStream.write(b, off, len);
+            }
+            public void write(int b) {
+                byteArrayOutputStream.write(b);
+            }
+			@Override
+			public boolean isReady() {
+				return false;
+			}
+			@Override
+			public void setWriteListener(WriteListener arg0) {
+				
+			}
+        };
+        final PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(byteArrayOutputStream));// 把转换字节流转换成字符流
+        HttpServletResponse httpServletResponse = new HttpServletResponseWrapper(response) {// 用于从response获取结果流资源(重写了两个方法)
+            public ServletOutputStream getOutputStream() {
+                return servletOuputStream;
+            }
+            public PrintWriter getWriter() {
+                return printWriter;
+            }
+        };
+        rd.include(request, httpServletResponse);// 发送结果流
+        printWriter.flush();// 刷新缓冲区，把缓冲区的数据输出
+        FileOutputStream fileOutputStream = new FileOutputStream(fileFullPath);
+        byteArrayOutputStream.writeTo(fileOutputStream);// 把byteArrayOuputStream中的资源全部写入到fileOuputStream中
+        fileOutputStream.close();// 关闭输出流，并释放相关资源
+    }
+}</pre>
+<h2 id='调用方法'>
+	调用方法
+</h2>
+<pre class="prettyprint lang-java">String fileName = pnumber + ".html";//文件名
+String filePath = "G:\\githubn\\chub.io\\passage\\" + fileName; //文件保存路径，包含文件名
+File chapterFile = new File(filePath);
+if (chapterFile.exists()) {
+    System.out.println("html页面存在");
+    //response.sendRedirect(fileName);   //需要显示页面，如果生成文件保存在运行项目目录下，可以重定向到生成的文件
+    return;
+}
+//上一部分可以放在逻辑操作前，因为如果已经存在生成静态文件就不需继续下去了。
+try {
+	new CreateStaticHTMLPage().create(request, response, getServletContext(), fileName, filePath,
+	        "/jsp/passage/passageDetail.jsp");
+        //调用上述接口生成静态页面
+	return;
+} catch (ServletException e1) {
+} catch (IOException e1) {}</pre>
+<p>
+	文件路径可以按如下方式获取，这样做可以将生成的静态文件放在服务器运行项目下，重定向可以访问。
+</p>
+<pre class="prettyprint lang-java"> String fileName = "article_" + request.getParameter("punmber") + ".html";
+ String filePath = getServletContext().getRealPath("/") + fileName;</pre>
+<h2 id='批量生成html静态页面'>
+	批量生成html静态页面
+</h2>
+<pre class="prettyprint lang-java">//通过数据库获取全部记录
+static void generDetail() {
+	Statement stmt = null;
+	ResultSet rs = null;
+	String sql="select Pnumber from pass_passage";
+	Connection conn=DBUtilConnection.getConnectionImportData();
+	try {
+		stmt = conn.createStatement();
+		rs = stmt.executeQuery(sql);
+		while (rs.next()) {
+			rs.getInt(1);
+			readContentFromGet("http://localhost:8080/blogstatic/passage/passDetail/"+rs.getInt(1));
+		}
+		
+	} catch (Exception e) {
+		System.out.println(e);
+	}finally{
+		DBUtilConnection.closeAll(rs, stmt, null, conn);
+	}
+}
+
+//发送get请求，生成对应的html页面，这里只为了生成静态页面，对于网页响应可以不处理
+public static void readContentFromGet(String getURL) throws IOException {
+	URL getUrl = new URL(getURL); 
+	HttpURLConnection connection = (HttpURLConnection) getUrl.openConnection();
+	connection.connect();
+	BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"));// 设置编码,否则中文乱码
+
+	System.out.println(getURL);
+	
+	reader.close();
+	connection.disconnect();
+}</pre></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1047.html">Access数据库数据转存到MySql数据库中</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1049.html">@Autowired注解实例化对象与new的区别——spring mvc</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#生成html页面的主要代码">生成html页面的主要代码</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#调用方法">调用方法</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#批量生成html静态页面">批量生成html静态页面</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

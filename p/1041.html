@@ -1,0 +1,249 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Java获取系统时间日期存储到数据库Timestamp时间限制_comonly.cn</title>
+<meta name="keywords" content="Java获取系统时间日期存储到数据库Timestamp时间限制" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Java获取系统时间日期存储到数据库Timestamp时间限制</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-01-06</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	java-含工具类
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">timestamp,时间范围</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 由于Java中没有datetime数据类型，timestamp类型数据在数据库中只能存储到2038年，数据库中存完整的时间日期可以使用datetime。本文主要探索在Java中使用Timestamp类型时间插入到数据库字段类型为datetime的可行性。关于Java中util和sql时间日期的数据的转换可以参考：<a href="/common_url/id/1042" target="_blank">[id1042]</a><br />
+操作环境：jdk1.8、mysql5.7.23<br />
+初始化数据，将数据库Timestamp类型数据取值范围外的数据写入数据库
+<pre class="prettyprint lang-java">String strDate="2050年01月07日 08:09:10";
+java.util.Date date = null;
+SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+try {
+	date = simpleDateFormat.parse(strDate);
+	System.out.println(date);
+} catch (ParseException e) {
+	e.printStackTrace();
+}</pre>
+<h2 id='数据库字段数据类型为timetm'>
+	数据库字段数据类型为timestamp
+</h2>
+<pre class="prettyprint lang-java">//时间转为java.sql.Timestamp类型，Java中使用Timestamp
+java.sql.Timestamp ctime = new java.sql.Timestamp(date.getTime());&nbsp; &nbsp;
+pstmt.setTimestamp(1, ctime);    //向数据库写入时间
+//报错：Data truncation: Incorrect datetime value: '2050-01-07 08:09:10' for column 'haha' at row 1
+
+//Java中使用Date
+java.sql.Date ctime = new java.sql.Date(date.getTime());&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
+pstmt.setDate(1, ctime);
+//报错：Data truncation: Incorrect datetime value: '2050-01-07' for column 'haha' at row 1</pre>
+<h2 id='数据库字段数据类型为dtetime'>
+	数据库字段数据类型为datetime
+</h2>
+<pre class="prettyprint lang-java">//Java中使用java.sql.Date
+Date ctime = new java.sql.Date(date.getTime());&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
+pstmt.setDate(1, ctime);
+//数据库中存入：2050-01-07 00:00:00
+
+//Java中使用java.sql.Timestamp
+Timestamp ctime = new java.sql.Timestamp(date.getTime());
+pstmt.setTimestamp(1, ctime);
+//数据库中存入：2050-01-07 08:09:10</pre>
+结论：可以在数据库中使用datetime数据类型，Java中使用Timestamp获取数据并向数据库中存储。<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1040.html">面向浏览器端的实时推送服务器  node-pusher</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1042.html">Java中获取时间以及java.util和java.sql之间时间日期的转换</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#数据库字段数据类型为timetm">数据库字段数据类型为timetm</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#数据库字段数据类型为dtetime">数据库字段数据类型为dtetime</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

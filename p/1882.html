@@ -1,0 +1,402 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Mysql:为什么用limit时，offset很大会影响性能_comonly.cn</title>
+<meta name="keywords" content="Mysql:为什么用limit时，offset很大会影响性能" />
+<meta name="description" content="首先说明一下MySQL的版本：
+
+mysql&gt; select version();
++-----------+
+| version() |
++-----------+
+| 5.7.17&nbsp; &nbsp; |
++-----------+
+1 row in set (0.00 sec)
+表结构：
+
+mysql&gt; desc test;
++--------+---------------------+------+-----+---------+------------" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Mysql:为什么用limit时，offset很大会影响性能</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">ldsweely</li>
+          <li class="lmname"><a href="https://www.cnblogs.com/ldsweely/p/11987968.html" target="_blank">https://www.cnblogs.com/ldsweely/p/11987968.html</a></li>
+          <li class="timer">2020-10-23</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>首先说明一下MySQL的版本：
+
+mysql&gt; select version();
++-----------+
+| version() |
++-----------+
+| 5.7.17&nbsp; &nbsp; |
++-----------+
+1 row in set (0.00 sec)
+表结构：
+
+mysql&gt; desc test;
++--------+---------------------+------+-----+---------+------------</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 首先说明一下MySQL的版本：<br />
+<br />
+mysql&gt; select version();<br />
++-----------+<br />
+| version() |<br />
++-----------+<br />
+| 5.7.17&nbsp; &nbsp; |<br />
++-----------+<br />
+1 row in set (0.00 sec)<br />
+表结构：<br />
+<br />
+mysql&gt; desc test;<br />
++--------+---------------------+------+-----+---------+----------------+<br />
+| Field&nbsp; | Type&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | Null | Key | Default | Extra&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |<br />
++--------+---------------------+------+-----+---------+----------------+<br />
+| id&nbsp; &nbsp; &nbsp;| bigint(20) unsigned | NO&nbsp; &nbsp;| PRI | NULL&nbsp; &nbsp; | auto_increment |<br />
+| val&nbsp; &nbsp; | int(10) unsigned&nbsp; &nbsp; | NO&nbsp; &nbsp;| MUL | 0&nbsp; &nbsp; &nbsp; &nbsp;|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |<br />
+| source | int(10) unsigned&nbsp; &nbsp; | NO&nbsp; &nbsp;|&nbsp; &nbsp; &nbsp;| 0&nbsp; &nbsp; &nbsp; &nbsp;|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |<br />
++--------+---------------------+------+-----+---------+----------------+<br />
+3 rows in set (0.00 sec)<br />
+id为自增主键，val为非唯一索引。<br />
+<br />
+灌入大量数据，共500万：<br />
+<br />
+set session unquie_checks=false<br />
+<br />
+set session autocommit=false<br />
+<br />
+CREATE DEFINER=`root`@`localhost` PROCEDURE `zqtest`()<br />
+begin<br />
+declare i int default 0;<br />
+set i=0;<br />
+start transaction;<br />
+while i&lt;3000000 do<br />
+&nbsp; &nbsp; insert into test(val,source) values(4,4);<br />
+set i=i+1;<br />
+end while;<br />
+commit;<br />
+end<br />
+<br />
+call zqtest()<br />
+<br />
+mysql&gt; select count(*) from test;<br />
++----------+<br />
+| count(*) |<br />
++----------+<br />
+|&nbsp; 5242882 |<br />
++----------+<br />
+1 row in set (4.25 sec)<br />
+我们知道，当limit offset rows中的offset很大时，会出现效率问题：<br />
+<br />
+mysql&gt; select * from test where val=4 limit 300000,5;<br />
++---------+-----+--------+<br />
+| id&nbsp; &nbsp; &nbsp; | val | source |<br />
++---------+-----+--------+<br />
+| 3327622 |&nbsp; &nbsp;4 |&nbsp; &nbsp; &nbsp; 4 |<br />
+| 3327632 |&nbsp; &nbsp;4 |&nbsp; &nbsp; &nbsp; 4 |<br />
+| 3327642 |&nbsp; &nbsp;4 |&nbsp; &nbsp; &nbsp; 4 |<br />
+| 3327652 |&nbsp; &nbsp;4 |&nbsp; &nbsp; &nbsp; 4 |<br />
+| 3327662 |&nbsp; &nbsp;4 |&nbsp; &nbsp; &nbsp; 4 |<br />
++---------+-----+--------+<br />
+5 rows in set (15.98 sec)<br />
+为了达到相同的目的，我们一般会改写成如下语句：<br />
+<br />
+mysql&gt; select * from test a inner join (select id from test where val=4 limit 300000,5) b on a.id=b.id;<br />
++---------+-----+--------+---------+<br />
+| id&nbsp; &nbsp; &nbsp; | val | source | id&nbsp; &nbsp; &nbsp; |<br />
++---------+-----+--------+---------+<br />
+| 3327622 |&nbsp; &nbsp;4 |&nbsp; &nbsp; &nbsp; 4 | 3327622 |<br />
+| 3327632 |&nbsp; &nbsp;4 |&nbsp; &nbsp; &nbsp; 4 | 3327632 |<br />
+| 3327642 |&nbsp; &nbsp;4 |&nbsp; &nbsp; &nbsp; 4 | 3327642 |<br />
+| 3327652 |&nbsp; &nbsp;4 |&nbsp; &nbsp; &nbsp; 4 | 3327652 |<br />
+| 3327662 |&nbsp; &nbsp;4 |&nbsp; &nbsp; &nbsp; 4 | 3327662 |<br />
++---------+-----+--------+---------+<br />
+5 rows in set (0.38 sec)<br />
+时间相差很明显。<br />
+<br />
+为什么会出现上面的结果？我们看一下select * from test where val=4 limit 300000,5;的查询过程：<br />
+<br />
+查询到索引叶子节点数据。<br />
+<br />
+根据叶子节点上的主键值去聚簇索引上查询需要的全部字段值。<br />
+<br />
+类似于下面这张图：<br />
+<br />
+<br />
+像上面这样，需要查询300005次索引节点，查询300005次聚簇索引的数据，最后再将结果过滤掉前300000条，取出最后5条。MySQL耗费了大量随机I/O在查询聚簇索引的数据上，而有300000次随机I/O查询到的数据是不会出现在结果集当中的。<br />
+肯定会有人问：既然一开始是利用索引的，为什么不先沿着索引叶子节点查询到最后需要的5个节点，然后再去聚簇索引中查询实际数据。这样只需要5次随机I/O，类似于下面图片的过程：<br />
+<br />
+其实我也想问这个问题。<br />
+<br />
+证实<br />
+下面我们实际操作一下来证实上述的推论：<br />
+<br />
+为了证实select * from test where val=4 limit 300000,5是扫描300005个索引节点和300005个聚簇索引上的数据节点，我们需要知道MySQL有没有办法统计在一个sql中通过索引节点查询数据节点的次数。我先试了Handler_read_*系列，很遗憾没有一个变量能满足条件。<br />
+<br />
+我只能通过间接的方式来证实：<br />
+<br />
+InnoDB中有buffer pool。里面存有最近访问过的数据页，包括数据页和索引页。所以我们需要运行两个sql，来比较buffer pool中的数据页的数量。<br />
+<br />
+预测结果是运行select * from test a inner join (select id from test where val=4 limit 300000,5) b on a.id=b.id;之后，buffer pool中的数据页的数量远远少于select * from test where val=4 limit 300000,5;对应的数量，因为前一个sql只访问5次数据页，而后一个sql访问300005次数据页。<br />
+<br />
+select * from test where val=4 limit 300000,5<br />
+mysql&gt; select index_name,count(*) from information_schema.INNODB_BUFFER_PAGE where INDEX_NAME in('val','primary') and TABLE_NAME like '%test%' group by index_name;<br />
+Empty set (0.04 sec)<br />
+可以看出，目前buffer pool中没有关于test表的数据页。<br />
+<br />
+mysql&gt; select * from test where val=4 limit 300000,5;<br />
++---------+-----+--------+<br />
+| id&nbsp; &nbsp; &nbsp; | val | source |<br />
++---------+-----+--------+<br />
+| 3327622 |&nbsp; &nbsp;4 |&nbsp; &nbsp; &nbsp; 4 |<br />
+| 3327632 |&nbsp; &nbsp;4 |&nbsp; &nbsp; &nbsp; 4 |<br />
+| 3327642 |&nbsp; &nbsp;4 |&nbsp; &nbsp; &nbsp; 4 |<br />
+| 3327652 |&nbsp; &nbsp;4 |&nbsp; &nbsp; &nbsp; 4 |<br />
+| 3327662 |&nbsp; &nbsp;4 |&nbsp; &nbsp; &nbsp; 4 |<br />
++---------+-----+--------+<br />
+5 rows in set (26.19 sec)<br />
+<br />
+mysql&gt; select index_name,count(*) from information_schema.INNODB_BUFFER_PAGE where INDEX_NAME in('val','primary') and TABLE_NAME like '%test%' group by index_name;<br />
++------------+----------+<br />
+| index_name | count(*) |<br />
++------------+----------+<br />
+| PRIMARY&nbsp; &nbsp; |&nbsp; &nbsp; &nbsp;4098 |<br />
+| val&nbsp; &nbsp; &nbsp; &nbsp; |&nbsp; &nbsp; &nbsp; 208 |<br />
++------------+----------+<br />
+2 rows in set (0.04 sec)<br />
+可以看出，此时buffer pool中关于test表有4098个数据页，208个索引页。<br />
+<br />
+select * from test a inner join (select id from test where val=4 limit 300000,5) b on a.id=b.id<br />
+为了防止上次试验的影响，我们需要清空buffer pool，重启mysql。<br />
+<br />
+mysqladmin shutdown<br />
+/usr/local/bin/mysqld_safe &amp;<br />
+mysql&gt; select index_name,count(*) from information_schema.INNODB_BUFFER_PAGE where INDEX_NAME in('val','primary') and TABLE_NAME like '%test%' group by index_name;<br />
+Empty set (0.03 sec)<br />
+运行sql：<br />
+<br />
+mysql&gt; select * from test a inner join (select id from test where val=4 limit 300000,5) b on a.id=b.id;<br />
++---------+-----+--------+---------+<br />
+| id&nbsp; &nbsp; &nbsp; | val | source | id&nbsp; &nbsp; &nbsp; |<br />
++---------+-----+--------+---------+<br />
+| 3327622 |&nbsp; &nbsp;4 |&nbsp; &nbsp; &nbsp; 4 | 3327622 |<br />
+| 3327632 |&nbsp; &nbsp;4 |&nbsp; &nbsp; &nbsp; 4 | 3327632 |<br />
+| 3327642 |&nbsp; &nbsp;4 |&nbsp; &nbsp; &nbsp; 4 | 3327642 |<br />
+| 3327652 |&nbsp; &nbsp;4 |&nbsp; &nbsp; &nbsp; 4 | 3327652 |<br />
+| 3327662 |&nbsp; &nbsp;4 |&nbsp; &nbsp; &nbsp; 4 | 3327662 |<br />
++---------+-----+--------+---------+<br />
+5 rows in set (0.09 sec)<br />
+<br />
+mysql&gt; select index_name,count(*) from information_schema.INNODB_BUFFER_PAGE where INDEX_NAME in('val','primary') and TABLE_NAME like '%test%' group by index_name;<br />
++------------+----------+<br />
+| index_name | count(*) |<br />
++------------+----------+<br />
+| PRIMARY&nbsp; &nbsp; |&nbsp; &nbsp; &nbsp; &nbsp; 5 |<br />
+| val&nbsp; &nbsp; &nbsp; &nbsp; |&nbsp; &nbsp; &nbsp; 390 |<br />
++------------+----------+<br />
+2 rows in set (0.03 sec)<br />
+我们可以看明显的看出两者的差别：第一个sql加载了4098个数据页到buffer pool，而第二个sql只加载了5个数据页到buffer pool。符合我们的预测。也证实了为什么第一个sql会慢：读取大量的无用数据行（300000），最后却抛弃掉。<br />
+<br />
+而且这会造成一个问题：加载了很多热点不是很高的数据页到buffer pool，会造成buffer pool的污染，占用buffer pool的空间。<br />
+<br />
+遇到的问题<br />
+为了在每次重启时确保清空buffer pool，我们需要关闭innodb_buffer_pool_dump_at_shutdown和innodb_buffer_pool_load_at_startup，这两个选项能够控制数据库关闭时dump出buffer pool中的数据和在数据库开启时载入在磁盘上备份buffer pool的数据。<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1881.html">i++和++i是否为原子操作</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1883.html">为什么要重载new?</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.cnblogs.com/ldsweely/p/11987968.html" target="_blank">https://www.cnblogs.com/ldsweely/p/11987968.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

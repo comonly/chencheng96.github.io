@@ -1,0 +1,438 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>B-树、B+树、B*树介绍_comonly.cn</title>
+<meta name="keywords" content="B-树、B+树、B*树介绍" />
+<meta name="description" content="B树
+
+
+	B-树就是B树（可能有部分人会习惯上把B-树读为B减树，其实并不存在B减树，只是读法上的不同而已），B就是balanced，平衡的意思。B-树就是指的B树，特此说明一下。
+先介绍一下二叉搜索树。
+
+
+	
+		顾名思义，二叉搜索树，即指最多拥有两个叉，这里的叉即为所有非叶子结点的儿子（Left和Right）；
+	
+	
+		所有的结点存储一个关键字；
+	
+	
+		非叶子结点的左指针指向小于其关键字的结点，右指针指向对于其关键字的结点，结构如下图：
+ 
+	
+
+
+" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">B-树、B+树、B*树介绍</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">Zzzzzzzz_hu</li>
+          <li class="lmname"><a href="https://blog.csdn.net/A_zhangq/article/details/99662693" target="_blank">https://blog.csdn.net/A_zhangq/article/details/99662693</a></li>
+          <li class="timer">2020-09-30</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	数据结构 算法
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>B树
+
+
+	B-树就是B树（可能有部分人会习惯上把B-树读为B减树，其实并不存在B减树，只是读法上的不同而已），B就是balanced，平衡的意思。B-树就是指的B树，特此说明一下。
+先介绍一下二叉搜索树。
+
+
+	
+		顾名思义，二叉搜索树，即指最多拥有两个叉，这里的叉即为所有非叶子结点的儿子（Left和Right）；
+	
+	
+		所有的结点存储一个关键字；
+	
+	
+		非叶子结点的左指针指向小于其关键字的结点，右指针指向对于其关键字的结点，结构如下图：
+ 
+	
+
+
+</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h1>
+	B树
+</h1>
+<p>
+	B-树就是B树（可能有部分人会习惯上把B-树读为B减树，其实并不存在B减树，只是读法上的不同而已），B就是balanced，平衡的意思。B-树就是指的B树，特此说明一下。<br />
+先介绍一下二叉搜索树。
+</p>
+<ol>
+	<li>
+		顾名思义，二叉搜索树，即指最多拥有两个叉，这里的叉即为所有非叶子结点的儿子（Left和Right）；
+	</li>
+	<li>
+		所有的结点存储一个关键字；
+	</li>
+	<li>
+		非叶子结点的左指针指向小于其关键字的结点，右指针指向对于其关键字的结点，结构如下图：<br />
+<img src="https://img-blog.csdnimg.cn/20190815201622995.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0Ffemhhbmdx,size_16,color_FFFFFF,t_70" alt="" width="794" height="467" title="" align="" /> 
+	</li>
+</ol>
+<p>
+	二叉搜索树的搜索，从根结点开始，如果查询的关键字与结点关键字相等，则该结点为查询的结点，如果查询关键字比结点关键字小，则进入左子树，反之则进入右子树；如果左子树为空或者右子树为空，则返回查找不到响应的关键字；<br />
+如果二叉搜索树的所有叶子结点的左右子树的树木保持一个平衡即左右子树个数大致相等的话，其搜索则更接近与二分查找；但是它相比连续内存空的二分查找的优点是：改变二叉搜索树的结构（添加或者删除）不需要大段的移动数据，甚至通常都是常数开销；<br />
+如下图：<br />
+红色字体代表插入数据，搜索二叉树在插入结点时，只要根据插入数据的大小查找出他应该插入的位置即可，然而当在一个有序数组插入一个数据的时候，需要查询出他的位置，然后将其添加，后面的数据索引加一，这样的一个完整操作，相比下来二叉树的优点很明显了。
+</p>
+<p>
+	<img src="https://img-blog.csdnimg.cn/2019081520332564.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0Ffemhhbmdx,size_16,color_FFFFFF,t_70" alt="" width="800" height="348" title="" align="" /><br />
+但是，当一个二叉树经历多次删除操作后，他就可能变换结构，如下图：<br />
+<img src="https://img-blog.csdnimg.cn/20190815204459840.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0Ffemhhbmdx,size_16,color_FFFFFF,t_70" alt="" width="800" height="367" title="" align="" /> 
+</p>
+<p>
+	右边也是一个搜索二叉树，只不过不在平衡了，他的搜索功能也变成了线性的，同样的关键字可能导致不同的树结构索引，所以，在使用搜索二叉树时，还要烤炉尽可能让B树保持左图的结构，避免和右图类似，这也有事所谓的平衡问题了。
+</p>
+<p>
+	实际使用的二叉搜索树都是在原二叉搜索树的基础上加上平衡算法，即平衡二叉树；如何保持B树节点分布均匀的平衡算法就是平衡二叉树的关键所在，平衡算法是一种在二叉搜索树的插入和删除结点时的一种策略。即：在插入或删除的同时保持二叉搜索树的平衡。
+</p>
+<p>
+	B树（B-树），是一种多路搜索树（并非二叉的）：
+</p>
+<ol>
+	<li>
+		定义任意非叶子节点最多可以有M个儿子节点；且M&gt;2；
+	</li>
+	<li>
+		则根节点的儿子数为：[2，M]；
+	</li>
+	<li>
+		除根节点为的非叶子节点的儿子书为[M/2，M]；
+	</li>
+	<li>
+		每个结点存放至少M/2 - 1 （去上整）且至多M -1 个关键字；（至少为2）；
+	</li>
+	<li>
+		非叶子结点的关键字个数 = 指向子节点的指针书 -1；
+	</li>
+	<li>
+		非叶子节点的关键字：K[1],K[2],K[3],…,K[M-1;且K[i] &lt; K[i +1];
+	</li>
+	<li>
+		非叶子结点的指针：P[1], P[2], …, P[M]；其中P[1]指向关键字小于K[1]的子树，P[M]指向关键字大于K[M-1]的子树，其它P[i]指向关键字属于(K[i-1], K[i])的子树；
+	</li>
+	<li>
+		所有叶子结点位于同一层；
+	</li>
+</ol>
+<p>
+	如(M = 3)
+</p>
+<p>
+	<img src="https://img-blog.csdnimg.cn/20190815211241789.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0Ffemhhbmdx,size_16,color_FFFFFF,t_70" alt="" width="800" height="347" title="" align="" /><br />
+B-树的搜索，从根结点开始，对结点内的关键字（有序）序列进行二分查找，如果
+</p>
+<p>
+	命中则结束，否则进入查询关键字所属范围的儿子结点；重复，直到所对应的儿子指针为
+</p>
+<p>
+	空，或已经是叶子结点；
+</p>
+<p>
+	B-树的特性：
+</p>
+<ol>
+	<li>
+		关键字集合分布在整颗树中；
+	</li>
+	<li>
+		任何一个关键字出现且只出现在一个结点中；
+	</li>
+	<li>
+		搜索有可能在非叶子结点结束；
+	</li>
+	<li>
+		其搜索性能等价于在关键字全集内做一次二分查找；
+	</li>
+	<li>
+		自动层次控制；
+	</li>
+</ol>
+<h1>
+	<a></a><a></a><a></a>B+树
+</h1>
+<p>
+	B+树是B-树的变体，也是一种多路搜索树：
+</p>
+<p>
+	1.其定义基本与B-树同，除了：
+</p>
+<p>
+	2.<s>非叶子结点的子树指针与关键字个数相同；</s>
+</p>
+<p>
+	3.非叶子结点的子树指针P[i]，指向关键字值属于[K[i], K[i+1])的子树（B-树是开区间）；
+</p>
+<p>
+	5.为所有叶子结点增加一个链指针；
+</p>
+<p>
+	6.所有关键字都在叶子结点出现；
+</p>
+<p>
+	如：（M=3）<br />
+<img src="https://images2015.cnblogs.com/blog/990532/201701/990532-20170117135548927-1999158500.png" alt="" width="795" height="289" title="" align="" /><br />
+B+的搜索与B-树也基本相同，区别是B+树只有达到叶子结点才命中（B-树可以在
+</p>
+<p>
+	非叶子结点命中），其性能也等价于在关键字全集做一次二分查找；
+</p>
+<p>
+	B+树的特性：
+</p>
+<p>
+	1.所有关键字都出现在叶子结点的链表中（稠密索引），且链表中的关键字恰好是有序的；
+</p>
+<p>
+	2.不可能在非叶子结点命中；
+</p>
+<p>
+	3.非叶子结点相当于是叶子结点的索引（稀疏索引），叶子结点相当于是存储（关键字）数据的数据层；
+</p>
+<h1>
+	<a></a><a></a><a></a>B*树
+</h1>
+<p>
+	B树是B+树一种变形，它是在B+树的基础上，将索引层以指针连接起来，使搜索取值更加快捷。<br />
+如下图（M = 3）<br />
+<img src="https://img-blog.csdnimg.cn/20190817142644325.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0Ffemhhbmdx,size_16,color_FFFFFF,t_70" alt="" width="800" height="489" title="" align="" /><br />
+但是B*树又在B+树的基础上产生了一系列的变化，如下：
+</p>
+<ol>
+	<li>
+		B*树定义了非叶子结点关键字个数至少为(2/3)*M，即块的最低使用率为2/3代替B+树的1/2）；
+	</li>
+	<li>
+		B+树的分裂：当一个结点满时，分配一个新的结点，并将原结点中1/2的数据复制到新结点，最后在父结点中增加新结点的指针；B+树的分裂只影响原结点和父结点，而不会影响兄弟结点，所以它不需要指向兄弟的指针；
+	</li>
+	<li>
+		*树的分裂：当一个结点满时，如果它的下一个兄弟结点未满，那么将一部分数据移到兄弟结点中，再在原结点插入关键字，最后修改父结点中兄弟结点的关键字（因为兄弟结点的关键字范围改变了）；如果兄弟也满了，则在原结点与兄弟结点之间增加新结点，并各复制1/3的数据到新结点，最后在父结点增加新结点的指针；
+	</li>
+</ol>
+<p>
+	所以B*树相对于B+树，空间利用率上有所提高，查询速率也有所提高。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	总结：
+</p>
+<ol>
+	<li>
+		<p>
+			二叉搜索树：二叉树，每个结点只存储一个关键字且值大于左子树，小于右子树。
+		</p>
+	</li>
+	<li>
+		<p>
+			B（B-）树：多路搜索树，每个结点存储M/2到M个关键字，非叶子结点存储指向关键字范围的子结点； 所有关键字在整颗树中出现，且只出现一次，非叶子结点可以命中；
+		</p>
+	</li>
+	<li>
+		B+树：在B-树基础上，为叶子结点增加链表指针，所有关键字都在叶子结点中出现，非叶子结点作为叶子结点的索引；B+树总是到叶子结点才命中；
+	</li>
+	<li>
+		B*树：在B+树基础上，为非叶子结点也增加链表指针，将结点的最低利用率从1/2提高到2/3；
+	</li>
+</ol></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1153.html">异常ip</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1155.html">线索二叉树</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/A_zhangq/article/details/99662693" target="_blank">https://blog.csdn.net/A_zhangq/article/details/99662693</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

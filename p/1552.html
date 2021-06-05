@@ -1,0 +1,353 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>C++ socket编程 绑定端口 接收处理数据_comonly.cn</title>
+<meta name="keywords" content="C++ socket编程 绑定端口 接收处理数据" />
+<meta name="description" content="C语言SOCKET编程 较详细&nbsp; https://blog.csdn.net/sehanlingfeng/article/details/78468220
+
+
+	C++学习笔记之SOCKET编程 具体的一个实例 https://www.cnblogs.com/WIT-Evan/p/7289732.html
+
+
+
+	
+
+
+
+	
+
+
+	
+
+ 
+追问
+C++ SOCKET编程两个线程通讯互传数据怎么做,这两个线程间的数据需要互传，就是一个收的要给另一个发，一个发的要" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">C++ socket编程 绑定端口 接收处理数据</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-11-21</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>C语言SOCKET编程 较详细&nbsp; https://blog.csdn.net/sehanlingfeng/article/details/78468220
+
+
+	C++学习笔记之SOCKET编程 具体的一个实例 https://www.cnblogs.com/WIT-Evan/p/7289732.html
+
+
+
+	
+
+
+
+	
+
+
+	
+
+ 
+追问
+C++ SOCKET编程两个线程通讯互传数据怎么做,这两个线程间的数据需要互传，就是一个收的要给另一个发，一个发的要</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	<br />
+</p>
+<p>
+	<stdio.h><winsock2.h><process.h>C语言SOCKET编程 较详细&nbsp; <a href="https://blog.csdn.net/sehanlingfeng/article/details/78468220">https://blog.csdn.net/sehanlingfeng/article/details/78468220</a></process.h></winsock2.h></stdio.h>
+</p>
+<p>
+	<stdio.h><winsock2.h><process.h>C++学习笔记之SOCKET编程 具体的一个实例 <a href="https://www.cnblogs.com/WIT-Evan/p/7289732.html">https://www.cnblogs.com/WIT-Evan/p/7289732.html</a><span id="__kindeditor_bookmark_start_21__"></span><br />
+</process.h></winsock2.h></stdio.h>
+</p>
+<p>
+	<stdio.h><winsock2.h><process.h><br />
+</process.h></winsock2.h></stdio.h>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<stdio.h><winsock2.h><process.h> <br />
+追问<br />
+C++ SOCKET编程两个线程通讯互传数据怎么做,这两个线程间的数据需要互传，就是一个收的要给另一个发，一个发的要给另一个收，想不明白应该怎么做了</process.h></winsock2.h></stdio.h>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1551.html">git merge后 丢失文件 以及 代码 分支回退后出现的问题 Git 合并时 --no-ff 的作用</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1553.html">C++ 程序崩溃时生成Dump文件</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="多进程监听 绑定端口">
+							<h2 style="display:inline;color:#5BC648;">多进程监听 绑定端口</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-08-11&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><br />
+<p>
+	这个是windows平台的，创建两个线程，分别处理两个监听端口，端口通过参数传进去
+</p>
+<p>
+	<br />
+</p>
+<p>
+	#include &lt;stdio.h&gt;<br />
+#include &lt;Winsock2.h&gt;<br />
+#include &lt;process.h&gt;<br />
+&nbsp;<br />
+#pragma comment (lib, "Ws2_32.lib")<br />
+&nbsp;<br />
+unsigned int __stdcall listeningThread(void *param)<br />
+{<br />
+&nbsp; &nbsp; SOCKET sockSrv = socket(AF_INET, SOCK_STREAM, 0);<br />
+&nbsp; &nbsp; SOCKADDR_IN addrSrv;<br />
+&nbsp; &nbsp; addrSrv.sin_addr.S_un.S_addr = htonl(INADDR_ANY);<br />
+&nbsp; &nbsp; addrSrv.sin_family = AF_INET;<br />
+&nbsp; &nbsp; addrSrv.sin_port = htons((int)param);<br />
+&nbsp;<br />
+&nbsp; &nbsp; int ret = bind(sockSrv, (SOCKADDR*) &amp;addrSrv, sizeof(SOCKADDR));<br />
+&nbsp; &nbsp; ret = listen(sockSrv, 5);<br />
+&nbsp; &nbsp; SOCKADDR_IN addrClient;<br />
+&nbsp; &nbsp; int len = sizeof(SOCKADDR);<br />
+&nbsp; &nbsp; while (1)<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; SOCKET sockConn = accept(sockSrv, (SOCKADDR*) &amp;addrClient, &amp;len);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; char sendBuf [] = "Hello World !";<br />
+&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; send(sockConn, sendBuf, strlen(sendBuf) + 1, 0);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; char recvBuf[50];<br />
+&nbsp; &nbsp; &nbsp; &nbsp; recv(sockConn, recvBuf, 50, 0);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; printf("%s\n", recvBuf);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; closesocket(sockConn);<br />
+&nbsp; &nbsp; }<br />
+&nbsp; &nbsp; return 0;<br />
+}<br />
+void main()<br />
+{<br />
+&nbsp; &nbsp; WORD wVersionRequested;<br />
+&nbsp; &nbsp; WSADATA wsaData;<br />
+&nbsp; &nbsp; int err;<br />
+&nbsp;<br />
+&nbsp; &nbsp; wVersionRequested = MAKEWORD(2, 2);<br />
+&nbsp;<br />
+&nbsp; &nbsp; err = WSAStartup(wVersionRequested, &amp;wsaData);<br />
+&nbsp; &nbsp; if (err != 0) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; return;<br />
+&nbsp; &nbsp; }<br />
+&nbsp;<br />
+&nbsp; &nbsp; _beginthreadex(NULL, 0, listeningThread, (void *) 8120, 0, NULL);<br />
+&nbsp; &nbsp; _beginthreadex(NULL, 0, listeningThread, (void *) 8121, 0, NULL);<br />
+&nbsp; &nbsp; Sleep(INFINITE);<br />
+}<br />
+</p>
+<p>
+	<br />
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#多进程监听 绑定端口">多进程监听 绑定端口</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

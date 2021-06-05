@@ -1,0 +1,432 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>语句—JavaScript_comonly.cn</title>
+<meta name="keywords" content="语句—JavaScript" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">语句—JavaScript</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-03-10</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">JavaScript,语句</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h1>
+	选择语句
+</h1>
+<h3>
+	<em>if语句</em>
+</h3>
+<p>
+	if(逻辑表达式){语句块}else{语句块}，if语句可以嵌套。
+</p>
+<p>
+	&lt;script type="text/javascript"&gt;<br />
+var d=new Date();&nbsp;&nbsp; //创建一个日期对象<br />
+var hour=d.getHours(); //调用getHours()方法，获得当前计算机时间，保持在变量hour中<br />
+if(hour&gt;5&amp;&amp;hour&lt;12){window.alert("早上好！");}<br />
+else if(hour&gt;12&amp;&amp;hour&lt;=18){window.alert("下午好！");}<br />
+else{window.alert("晚上好！");}<br />
+&lt;/script&gt;
+</p>
+<p>
+	复制上述代码<a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank"><span style="background-color:#FFE500;">进入在线</span><span style="background-color:#FFE500;">测试</span></a> 
+</p>
+<h3>
+	<em>switch语句</em>
+</h3>
+<p>
+	多分支选择语句，先计算变量的值，然后再与常量表达式比较，如果相同则执行该语句。如果都不相同，则执行default后的语句块。
+</p>
+<p>
+	switch(变量)
+</p>
+<p>
+	{
+</p>
+<p>
+	case 常量表达式1: 语句块1; break;
+</p>
+<p>
+	case 常量表达式2:语句块2; break;
+</p>
+<p>
+	...
+</p>
+<p>
+	default: 语句块;
+</p>
+<p>
+	}
+</p>
+<p>
+	<br />
+</p>
+<h1>
+	循环语句
+</h1>
+<h3>
+	<em><strong>while语句</strong></em>
+</h3>
+<p>
+	先判断，后执行
+</p>
+<p>
+	while(逻辑表达式){语句块}
+</p>
+<h3>
+	<em>do...while语句</em>
+</h3>
+<p>
+	先执行循环体再判断循环条件，尽量不要使用
+</p>
+<p>
+	do{语句块}while(逻辑表达式)
+</p>
+<h3>
+	<em>for语句</em>
+</h3>
+<p>
+	for(循环变量初始化;循环条件;循环变量增值;){语句块}
+</p>
+<h3>
+	<em>for...in语句</em>
+</h3>
+<p>
+	可以遍历对象中的所有属性或数组中的所有元素，也常用来为对象的所有属性赋值。
+</p>
+<p>
+	for(变量 in 对象){语句块}
+</p>
+<p>
+	&lt;script type="text/javascript"&gt;<br />
+var arr=["java",100,true];<br />
+var i;<br />
+for(i in arr){window.alert("数组中元素的值分别是"+arr[i]);}<br />
+&lt;/script&gt;
+</p>
+<p>
+	复制上述代码<a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank"><span style="background-color:#FFE500;">进入在线</span><span style="background-color:#FFE500;">测试</span></a> 
+</p>
+<p>
+	<br />
+</p>
+<h1>
+	跳转语句
+</h1>
+<h3>
+	<em>break语句</em>
+</h3>
+<p>
+	跳出循环体或结束switch语句。在嵌套的循环语句中，break语句只能跳出离该语句最近一层的循环语句，而不是所有循环语句。
+</p>
+<p>
+	break语句也可以通过借助标签语句跳转到一个指定的循环之外
+</p>
+<p>
+	&lt;script type="text/javascript"&gt;<br />
+out: //标签语句<br />
+for(var i=0;i&lt;4;i++){
+</p>
+<blockquote>
+	<p>
+		document.write("循环开始&lt;/br&gt;");
+	</p>
+	<p>
+		document.write("变量i的值是："+i+"&lt;/br&gt;");
+	</p>
+	<p>
+		for(var j=0;j&lt;10;j++){
+	</p>
+</blockquote>
+<blockquote>
+	<blockquote>
+		<p>
+			document.write(" 变量j的值是："+j+"&lt;/br&gt;");
+		</p>
+	</blockquote>
+	<blockquote>
+		<p>
+			if(j==1){break out;};
+		</p>
+	</blockquote>
+</blockquote>
+<blockquote>
+	<p>
+		}
+	</p>
+</blockquote>
+<p>
+	}<br />
+document.write("最终变量i的值是："+i+",j的值是："+j);<br />
+&lt;/script&gt;
+</p>
+<p>
+	复制上述代码<a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank"><span style="background-color:#FFE500;">进入在线</span><span style="background-color:#FFE500;">测试</span></a>
+</p>
+<h3>
+	<em>continue语句</em>
+</h3>
+<p>
+	作用是结束本次循环,跳过循环体中下面尚未执行的语句，接着进行下一次是否循环的判断。
+</p>
+<p>
+	continue语句只结束本次循环，而不是终止整个循环的执行；而break语句则是结束整个循环过程，不再判断执行循环的条件是否成立。
+</p>
+<p>
+	&lt;script type="text/javascript"&gt;<br />
+for(var j=0;j&lt;=5;j++){<br />
+if(j==3){continue;}; &nbsp;//终止本次循环，继续下一次循环的判断<br />
+document.write(j);<br />
+}<br />
+&lt;/script&gt;
+</p>
+<p>
+	<span>复制上述代码</span><a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank"><span style="background-color:#FFE500;">进入在线</span><span style="background-color:#FFE500;">测试</span></a> 
+</p>
+<p>
+	<br />
+</p>
+<h1>
+	异常处理语句
+</h1>
+<h3>
+	<em>throw语句</em>
+</h3>
+<p>
+	抛出一个异常，通知发生了异常情况或错误。只是抛出一个异常，但对这个异常并不处理。
+</p>
+<p>
+	<em>throw 表达式;</em>
+</p>
+<p>
+	&lt;script type="text/javascript"&gt;<br />
+var a=10;<br />
+if(a&gt;10){throw new Error("错误，a的值不能大于10");}<br />
+&lt;/script&gt;
+</p>
+<p>
+	复制上述代码<a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank"><span style="background-color:#FFE500;">进入在线</span><span style="background-color:#FFE500;">测试</span></a>
+</p>
+<h3>
+	<em>try...catch...finally语句</em>
+</h3>
+<p>
+	<em>try{语句块}catch(e){语句块}finally{语句块}</em> 
+</p>
+<p>
+	用来处理抛出的异常
+</p>
+<p>
+	<span>&lt;script type="text/javascript"&gt;<br />
+var x=window.prompt("请输入1~5之间的整数","") //弹出一个输入窗口，等待输入，并把这个值赋给变量x<br />
+try{if(x&gt;5){throw "Err1"}else if(x&lt;1){throw "Err2"}<br />
+}<br />
+catch(er){if(er=="Err1"){window.alert("输入的整数大于5");}<br />
+if(er=="Err2"){window.alert("输入的整数小于1");}<br />
+}<br />
+finally{}<br />
+&lt;/script&gt;</span> 
+</p>
+<p>
+	<span>复制上述代码</span><a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank"><span style="background-color:#FFE500;">进入在线</span><span style="background-color:#FFE500;">测试</span></a> 
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/600.html">操作符的优先级—JavaScript</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/602.html">函数—JavaScript</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

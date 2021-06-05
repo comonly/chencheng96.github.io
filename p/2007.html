@@ -1,0 +1,215 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>如何预防网站http劫持问题？_comonly.cn</title>
+<meta name="keywords" content="如何预防网站http劫持问题？" />
+<meta name="description" content="如何检测网站劫持？　　IIS7网站监控　　检测网站是否被劫持、DNS污染检测、网站打开速度检测等信息。　　如何防范HTTP劫持呢？　　根据对抗HTTP劫持的时机来分类，可以主要分为三类　　事前加密　　事中规避　　事后屏蔽　　那么接下来，让我们一个个的来说　　事前加密　　HTTPS　　很大一部分HTTP劫持，主要的原因就是在传输数据时都是明文的，使用了HTTPS后，会在HTTP协议之上加上TLS" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">如何预防网站http劫持问题？</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">加油睡觉吧</li>
+          <li class="lmname"><a href="https://blog.51cto.com/14498873/2430785" target="_blank">https://blog.51cto.com/14498873/2430785</a></li>
+          <li class="timer">2019-08-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>如何检测网站劫持？　　IIS7网站监控　　检测网站是否被劫持、DNS污染检测、网站打开速度检测等信息。　　如何防范HTTP劫持呢？　　根据对抗HTTP劫持的时机来分类，可以主要分为三类　　事前加密　　事中规避　　事后屏蔽　　那么接下来，让我们一个个的来说　　事前加密　　HTTPS　　很大一部分HTTP劫持，主要的原因就是在传输数据时都是明文的，使用了HTTPS后，会在HTTP协议之上加上TLS</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <div class="con artical-content editor-preview-side"><p>　　如何检测网站劫持？<br>　　IIS7网站监控<br>　　检测网站是否被劫持、DNS污染检测、网站打开速度检测等信息。<br>　　如何防范HTTP劫持呢？<br>　　根据对抗HTTP劫持的时机来分类，可以主要分为三类<br>　　事前加密<br>　　事中规避<br>　　事后屏蔽<br>　　那么接下来，让我们一个个的来说<br>　　事前加密<br>　　HTTPS<br>　　很大一部分HTTP劫持，主要的原因就是在传输数据时都是明文的，使用了HTTPS后，会在HTTP协议之上加上TLS进行保护，使得传输的数据进行加密，但是使用HTTPS，一定要注意规范，必须要全站使用HTTPS，否则只要有一个地方没有使用HTTPS，明文传输就很有可能会被HTTP劫持了<br>　　但是相应的，全部使用HTTPS，也会带来一些问题：<br>　　性能可能有所降低，因为多了TLS握手所带来的2次RTT延时（但是基于HTTPS之上的HTTP2可以更有效的提升性能）<br>　　由于运营商可能会使用DNS劫持，在DNS劫持之下，HTTPS的服务完全用不了了，所以会导致白屏<br>　　加密代理<br>　　加密代理的原理就是在用户侧和目标web服务器之间增加一个代理服务器，在用户和代理之间会经过运营商的节点，这里使用各种加密手段保证安全，在代理服务器与web服务之间使用HTTP请求，只需确认代理与web服务之间不会被HTTP劫持就可以避开HTTP劫持<br>　　事中加密<br>　　拆分HTTP请求数据包<br>　　在HTTP劫持的步骤中，第一步是标记TCP连接，因此只要躲过了标识，那么后续的运营商篡改就不会存在了，有一种方式就是拆分HTTP请求<br>　　拆分数据包就是把HTTP请求的数据包拆分成多个，运营商的旁路设备由于没有完整的TCP/IP协议栈，所以就不会被标志，而目标web服务器是有完整的TCP/IP协议栈，能接收到的数据包拼成完整的HTTP请求，不影响服务<br>　　事后屏蔽<br>　　通过浏览器Api，根据若干规则去匹配DOM中的节点，对匹配到的节点作拦截和隐藏<br>　　CSP（内容安全策略），DOM事件监听等。<br>　　CSP是浏览器附加的一层安全层，用于对抗跨站脚本与数据注入，运营商植入内容性质与数据注入类似，因此，可以用CSP对抗运营商劫持。通过在HTTP响应头或meta标签设置好规则，支持拦截和上报劫持信息的功能。<br>　　DOM事件监听主要是监听DOMNodeInserted、DOMContentLoaded、DOMAttrModified等事件，可以在前端DOM结构发生变化时触发回调，这时补充一些检测逻辑，即可判断是不是业务的正常UI逻辑，如果不是，即可认为是来自劫持<br>　　</p></div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/2006.html">Windows Server 2012 R2 配置域用户的配置文件</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/2008.html">eclipse下载与安装</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.51cto.com/14498873/2430785" target="_blank">https://blog.51cto.com/14498873/2430785</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,630 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>互斥量和信号量的区别_comonly.cn</title>
+<meta name="keywords" content="互斥量和信号量的区别" />
+<meta name="description" content="互斥量和信号量的区别
+
+
+	1.&nbsp;互斥量用于线程的互斥，信号量用于线程的同步。
+
+
+	这是互斥量和信号量的根本区别，也就是互斥和同步之间的区别。
+
+
+	互斥：是指某一资源同时只允许一个访问者对其进行访问，具有唯一性和排它性。但互斥无法限制访问者对资源的访问顺序，即访问是无序的。
+
+
+	同步：是指在互斥的基础上（大多数情况），通过其它机制实现访问者对资源的有序访问。在大多数情况下，同步已经实现了互斥，特别是所有写入资源的情况必定是互斥的。少数情况是指可以允许多个访问者同时访" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">互斥量和信号量的区别</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">虚心学习进步</li>
+          <li class="lmname"><a href="https://blog.csdn.net/qq_34793133/article/details/80087727" target="_blank">https://blog.csdn.net/qq_34793133/article/details/80087727</a></li>
+          <li class="timer">2020-10-16</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>互斥量和信号量的区别
+
+
+	1.&nbsp;互斥量用于线程的互斥，信号量用于线程的同步。
+
+
+	这是互斥量和信号量的根本区别，也就是互斥和同步之间的区别。
+
+
+	互斥：是指某一资源同时只允许一个访问者对其进行访问，具有唯一性和排它性。但互斥无法限制访问者对资源的访问顺序，即访问是无序的。
+
+
+	同步：是指在互斥的基础上（大多数情况），通过其它机制实现访问者对资源的有序访问。在大多数情况下，同步已经实现了互斥，特别是所有写入资源的情况必定是互斥的。少数情况是指可以允许多个访问者同时访</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	互斥量和信号量的区别
+</p>
+<p>
+	1.&nbsp;互斥量用于线程的互斥，信号量用于线程的同步。
+</p>
+<p>
+	这是互斥量和信号量的根本区别，也就是互斥和同步之间的区别。
+</p>
+<p>
+	互斥：是指某一资源同时只允许一个访问者对其进行访问，具有唯一性和排它性。但互斥无法限制访问者对资源的访问顺序，即访问是无序的。
+</p>
+<p>
+	同步：是指在互斥的基础上（大多数情况），通过其它机制实现访问者对资源的有序访问。在大多数情况下，同步已经实现了互斥，特别是所有写入资源的情况必定是互斥的。少数情况是指可以允许多个访问者同时访问资源
+</p>
+<p>
+	2.&nbsp;互斥量值只能为0/1，信号量值可以为非负整数。
+</p>
+<p>
+	也就是说，一个互斥量只能用于一个资源的互斥访问，它不能实现多个资源的多线程互斥问题。信号量可以实现多个同类资源的多线程互斥和同步。当信号量为单值信号量是，也可以完成一个资源的互斥访问。
+</p>
+<p>
+	3.&nbsp;互斥量的加锁和解锁必须由同一线程分别对应使用，信号量可以由一个线程释放，另一个线程得到。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	互斥量(Mutex)
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	互斥量表现互斥现象的数据结构，也被当作二元信号灯。一个互斥基本上是一个多任务敏感的二元信号，它能用作同步多任务的行为，它常用作保护从中断来的临界段代码并且在共享同步使用的资源。
+</p>
+<p>
+	<a href="http://byfiles.storage.msn.com/y1pYy83o5LidGJQU9j2Rag1WHAZJGg3O_wydj34X-AwCHkMsgiEmGzRUfagoylhc-99?PARTNER=WRITER"></a><a href="http://byfiles.storage.msn.com/y1p6lpGv5SX5xJRmHhLnKdGrzpf22zMFyF3XBaeDJUpCv7W6UcYbxqu9co5aN_x65ll?PARTNER=WRITER"><img title="clip_image001" src="http://byfiles.storage.msn.com/y1p992HQU6JERr2eO3fxtFRRqmyIZBVYsfqkDAJKnK66kjPt8fEyZMs5OiOzSnueSlmXwP8b97OaDEDwe0PUlQXTQ?PARTNER=WRITER" border="0" alt="clip_image001" width="447" height="287" style="height:auto;" /></a> 
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	Mutex本质上说就是一把锁，提供对资源的独占访问，所以Mutex主要的作用是用于互斥。Mutex对象的值，只有0和1两个值。这两个值也分别代表了Mutex的两种状态。值为0, 表示锁定状态，当前对象被锁定，用户进程/线程如果试图Lock临界资源，则进入排队等待；值为1，表示空闲状态，当前对象为空闲，用户进程/线程可以Lock临界资源，之后Mutex值减1变为0。
+</p>
+<p>
+	Mutex可以被抽象为四个操作：
+</p>
+<p>
+	- 创建 Create
+</p>
+<p>
+	- 加锁 Lock
+</p>
+<p>
+	- 解锁 Unlock
+</p>
+<p>
+	- 销毁 Destroy
+</p>
+<p>
+	Mutex被创建时可以有初始值，表示Mutex被创建后，是锁定状态还是空闲状态。在同一个线程中，为了防止死锁，系统不允许连续两次对Mutex加锁(系统一般会在第二次调用立刻返回)。也就是说，加锁和解锁这两个对应的操作，需要在同一个线程中完成。
+</p>
+<p>
+	不同操作系统中提供的Mutex函数:
+</p>
+<div>
+	<table border="1">
+		<tbody>
+			<tr>
+				<td>
+					<p>
+						动作/系统
+					</p>
+				</td>
+				<td>
+					<p>
+						Win32
+					</p>
+				</td>
+				<td>
+					<p>
+						Linyx
+					</p>
+				</td>
+				<td>
+					<p>
+						Solaris
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>
+						创建
+					</p>
+				</td>
+				<td>
+					<p>
+						CreateMutex
+					</p>
+				</td>
+				<td>
+					<p>
+						pthread_mutex_init
+					</p>
+				</td>
+				<td>
+					<p>
+						mutex_init
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>
+						加锁
+					</p>
+				</td>
+				<td>
+					<p>
+						WaitForSingleObject
+					</p>
+				</td>
+				<td>
+					<p>
+						pthread_mutex_lock
+					</p>
+				</td>
+				<td>
+					<p>
+						mutex_lock
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>
+						解锁
+					</p>
+				</td>
+				<td>
+					<p>
+						ReleaseMutex
+					</p>
+				</td>
+				<td>
+					<p>
+						pthread_mutex_unlock
+					</p>
+				</td>
+				<td>
+					<p>
+						mutex_unlock
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>
+						销毁
+					</p>
+				</td>
+				<td>
+					<p>
+						CloseHandle
+					</p>
+				</td>
+				<td>
+					<p>
+						pthread_mutex_destroy
+					</p>
+				</td>
+				<td>
+					<p>
+						mutex_destroy
+					</p>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<p>
+	&nbsp;
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	死锁主要发生在有多个依赖锁存在时, 会在一个线程试图以与另一个线程相反顺序锁住互斥量时发生. 如何避免死锁是使用互斥量应该格外注意的东西。
+</p>
+<p>
+	总体来讲, 有几个不成文的基本原则:
+</p>
+<p>
+	对共享资源操作前一定要获得锁。
+</p>
+<p>
+	完成操作以后一定要释放锁。
+</p>
+<p>
+	尽量短时间地占用锁。
+</p>
+<p>
+	如果有多锁, 如获得顺序是ABC连环扣, 释放顺序也应该是ABC。
+</p>
+<p>
+	线程错误返回时应该释放它所获得的锁。
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	也许还有读者好奇，“挂起等待”和“唤醒等待线程”的操作如何实现？每个Mutex有一个等待队列，一个线程要在Mutex上挂起等待，首先在把自己加入等待队列中，然后置线程状态为睡眠，然后调用调度器函数切换到别的线程。一个线程要唤醒等待队列中的其它线程，只需从等待队列中取出一项，把它的状态从睡眠改为就绪，加入就绪队列，那么下次调度器函数执行时就有可能切换到被唤醒的线程。
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	一般情况下，如果同一个线程先后两次调用lock，在第二次调用时，由于锁已经被占用，该线程会挂起等待别的线程释放锁，然而锁正是被自己占用着的，该线程又被挂起而没有机会释放锁，因此就永远处于挂起等待状态了，这叫做死锁（Deadlock）。另一种典型的死锁情形是这样：线程A获得了锁1，线程B获得了锁2，这时线程A调用lock试图获得锁2，结果是需要挂起等待线程B释放锁2，而这时线程B也调用lock试图获得锁1，结果是需要挂起等待线程A释放锁1，于是线程A和B都永远处于挂起状态了。不难想象，如果涉及到更多的线程和更多的锁，有没有可能死锁的问题将会变得复杂和难以判断。
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	信号量
+</p>
+<p>
+	信号量(Semaphore)，有时被称为信号灯，是在多线程环境下使用的一种设施, 它负责协调各个线程, 以保证它们能够正确、合理的使用公共资源。
+</p>
+<p>
+	信号量可以分为几类：
+</p>
+<p>
+	² 二进制信号量(binary semaphore)：只允许信号量取0或1值，其同时只能被一个线程获取。
+</p>
+<p>
+	² 整型信号量（integer semaphore)：信号量取值是整数，它可以被多个线程同时获得，直到信号量的值变为0。
+</p>
+<p>
+	² 记录型信号量（record semaphore)：每个信号量s除一个整数值value（计数）外，还有一个等待队列List，其中是阻塞在该信号量的各个线程的标识。当信号量被释放一个，值被加一后，系统自动从等待队列中唤醒一个等待中的线程，让其获得信号量，同时信号量再减一。
+</p>
+<p>
+	信号量通过一个计数器控制对共享资源的访问，信号量的值是一个非负整数，所有通过它的线程都会将该整数减一。如果计数器大于0，则访问被允许，计数器减1；如果为0，则访问被禁止，所有试图通过它的线程都将处于等待状态。
+</p>
+<p>
+	计数器计算的结果是允许访问共享资源的通行证。因此，为了访问共享资源，线程必须从信号量得到通行证， 如果该信号量的计数大于0，则此线程获得一个通行证，这将导致信号量的计数递减，否则，此线程将阻塞直到获得一个通行证为止。当此线程不再需要访问共享资源时，它释放该通行证，这导致信号量的计数递增，如果另一个线程等待通行证，则那个线程将在那时获得通行证。
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	Semaphore可以被抽象为五个操作：
+</p>
+<p>
+	- 创建 Create
+</p>
+<p>
+	- 等待 Wait：
+</p>
+<p>
+	线程等待信号量，如果值大于0，则获得，值减一；如果只等于0，则一直线程进入睡眠状态，知道信号量值大于0或者超时。
+</p>
+<p>
+	-释放 Post
+</p>
+<p>
+	执行释放信号量，则值加一；如果此时有正在等待的线程，则唤醒该线程。
+</p>
+<p>
+	-试图等待 TryWait
+</p>
+<p>
+	如果调用TryWait，线程并不真正的去获得信号量，还是检查信号量是否能够被获得，如果信号量值大于0，则TryWait返回成功；否则返回失败。
+</p>
+<p>
+	-销毁 Destroy
+</p>
+<p>
+	信号量，是可以用来保护两个或多个关键代码段，这些关键代码段不能并发调用。在进入一个关键代码段之前，线程必须获取一个信号量。如果关键代码段中没有任何线程，那么线程会立即进入该框图中的那个部分。一旦该关键代码段完成了，那么该线程必须释放信号量。其它想进入该关键代码段的线程必须等待直到第一个线程释放信号量。为了完成这个过程，需要创建一个信号量，然后将Acquire Semaphore VI以及Release Semaphore VI分别放置在每个关键代码段的首末端。确认这些信号量VI引用的是初始创建的信号量。
+</p>
+<div>
+	<table border="1">
+		<tbody>
+			<tr>
+				<td>
+					<p>
+						动作/系统
+					</p>
+				</td>
+				<td>
+					<p>
+						Win32
+					</p>
+				</td>
+				<td>
+					<p>
+						POSIX
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>
+						创建
+					</p>
+				</td>
+				<td>
+					<p>
+						CreateSemaphore
+					</p>
+				</td>
+				<td>
+					<p>
+						sem_init
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>
+						等待
+					</p>
+				</td>
+				<td>
+					<p>
+						WaitForSingleObject
+					</p>
+				</td>
+				<td>
+					<p>
+						sem _wait
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>
+						释放
+					</p>
+				</td>
+				<td>
+					<p>
+						ReleaseMutex
+					</p>
+				</td>
+				<td>
+					<p>
+						sem _post
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>
+						试图等待
+					</p>
+				</td>
+				<td>
+					<p>
+						WaitForSingleObject
+					</p>
+				</td>
+				<td>
+					<p>
+						sem _trywait
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>
+						销毁
+					</p>
+				</td>
+				<td>
+					<p>
+						CloseHandle
+					</p>
+				</td>
+				<td>
+					<p>
+						sem_destroy
+					</p>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1855.html">Hibernate 数据库映射 ORM：Object/Relationship Mapping  对象/关系映射</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1857.html">redis单线程为什么能做到高性能 和 io多路复用</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/qq_34793133/article/details/80087727" target="_blank">https://blog.csdn.net/qq_34793133/article/details/80087727</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

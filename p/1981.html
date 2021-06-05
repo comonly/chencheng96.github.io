@@ -1,0 +1,215 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>安全-修改时间和同步时间-从零开始学RouterOS系列18_comonly.cn</title>
+<meta name="keywords" content="安全-修改时间和同步时间-从零开始学RouterOS系列18" />
+<meta name="description" content="本章教程的作用：时间的准确性对Router OS的日志，文件备份和内网的调度任务来说都是很有用的。所以我们要知道如何使用网络时间同步SNTP和手工修改时间、时区。一、手工修改时间打开winbox，点击Sysetm>Clock先修改时区Time Zone Name，选择重庆。再修改时间和日期配置完成后点击OK，此时我们的手工修改时间就完成了。二、使用SNTP自动同步时间。在一些企业里面，我能我" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">安全-修改时间和同步时间-从零开始学RouterOS系列18</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">sporenet</li>
+          <li class="lmname"><a href="https://blog.51cto.com/13796759/2430872" target="_blank">https://blog.51cto.com/13796759/2430872</a></li>
+          <li class="timer">2019-08-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>本章教程的作用：时间的准确性对Router OS的日志，文件备份和内网的调度任务来说都是很有用的。所以我们要知道如何使用网络时间同步SNTP和手工修改时间、时区。一、手工修改时间打开winbox，点击Sysetm>Clock先修改时区Time Zone Name，选择重庆。再修改时间和日期配置完成后点击OK，此时我们的手工修改时间就完成了。二、使用SNTP自动同步时间。在一些企业里面，我能我</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <div class="con editor-preview-side" id="result"><p>本章教程的作用：时间的准确性对Router OS的日志，文件备份和内网的调度任务来说都是很有用的。所以我们要知道如何使用网络时间同步SNTP和手工修改时间、时区。</p><h4><b>一、手工修改时间</b><b></b></h4><p>打开winbox，点击Sysetm&gt;Clock</p><p><a href="https://s1.51cto.com/images/blog/201908/19/ae09486a4161dea0028cd5aab9db7eb3.jpg?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" style="color: rgb(66, 133, 244);"><img width="521" height="409" title="wpsB4EC.tmp" style="margin: 0px; background-image: none; cursor: pointer;" alt="wpsB4EC.tmp" src="https://s1.51cto.com/images/blog/201908/19/4a4d161359c4ea5dde9a30afb929a90b.jpg?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" border="0"></a></p><p>先修改时区Time Zone Name，选择重庆。</p><p><a href="https://s1.51cto.com/images/blog/201908/19/41941cb8f9fe43fbbcb705a9a56b9c95.jpg?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" style="color: rgb(66, 133, 244);"><img width="528" height="465" title="wpsB4ED.tmp" style="margin: 0px; background-image: none; cursor: pointer;" alt="wpsB4ED.tmp" src="https://s1.51cto.com/images/blog/201908/19/e2cc6d9398db8ada63d65c2d4485b8c9.jpg?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" border="0"></a></p><p>再修改时间和日期</p><p><a href="https://s1.51cto.com/images/blog/201908/19/2a22d0d4555b2f1feb1e1a00ca1cc8e3.jpg?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" style="color: rgb(66, 133, 244);"><img width="526" height="260" title="wpsB4EE.tmp" style="margin: 0px; background-image: none; cursor: pointer;" alt="wpsB4EE.tmp" src="https://s1.51cto.com/images/blog/201908/19/65dc15722d99629e5042af6db348eada.jpg?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" border="0"></a></p><p>配置完成后点击OK，此时我们的手工修改时间就完成了。</p><h4><b>二、使用</b><b>SNTP自动同步时间。</b><b></b></h4><p>在一些企业里面，我能我们有自建的SNTP服务器，用于给所有的域电脑、服务器和路由器去同步时间。如果没有，也可以借助公网的SNTP服务器进行SNTP授时服务器。自建的NTP服务器和公网的NTP服务器都是一样的操作，这里面我们使用公网的SNTP作为授时服务器。</p><p>打开百度，搜索NTP服务器，一般第一个就是了。</p><p><a href="https://s1.51cto.com/images/blog/201908/19/79a55bf0a9a5baf9ac6dcb264f5adbc2.jpg?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" style="color: rgb(66, 133, 244);"><img width="696" height="254" title="wpsB4EF.tmp" style="margin: 0px; background-image: none; cursor: pointer;" alt="wpsB4EF.tmp" src="https://s1.51cto.com/images/blog/201908/19/a72da8b76e0d7b9a6fff33a71ba6388b.jpg?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" border="0"></a></p><p>点击“池”，即可看到服务器地址</p><p><a href="https://s1.51cto.com/images/blog/201908/19/8fc7777f43becfad311006dc0157269a.jpg?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" style="color: rgb(66, 133, 244);"><img width="696" height="452" title="wpsB4F0.tmp" style="margin: 0px; background-image: none; cursor: pointer;" alt="wpsB4F0.tmp" src="https://s1.51cto.com/images/blog/201908/19/ee88bb10f908f694795a749955e45f5d.jpg?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" border="0"></a></p><p>这里面我们复制其中的一个IP，如118.24.4.66，然后打开winbox的System&gt;SNTP Client</p><p><a href="https://s1.51cto.com/images/blog/201908/19/097c0c74bd31970b95bbb438dd89c10b.jpg?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" style="color: rgb(66, 133, 244);"><img width="440" height="544" title="wpsB4F1.tmp" style="margin: 0px; background-image: none; cursor: pointer;" alt="wpsB4F1.tmp" src="https://s1.51cto.com/images/blog/201908/19/0d74a3d8b18b70f306d8c3bf9d1ddda5.jpg?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" border="0"></a></p><p>启用，然后在Primary NTP Server 粘贴刚复制的IP，点击OK即可。</p><p><a href="https://s1.51cto.com/images/blog/201908/19/5d59edb7e4050a1f17ff2d1ebc604875.jpg?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" style="color: rgb(66, 133, 244);"><img width="412" height="435" title="wpsB501.tmp" style="margin: 0px; background-image: none; cursor: pointer;" alt="wpsB501.tmp" src="https://s1.51cto.com/images/blog/201908/19/51805fab1d11b901784eb4627b66116b.jpg?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" border="0"></a></p><p>同理，我们还可以添加一个备用的NTP服务器。如下图：</p><p><a href="https://s1.51cto.com/images/blog/201908/19/bd3f6c27d02bfe1281878627a42972c3.jpg?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" style="color: rgb(66, 133, 244);"><img width="417" height="434" title="wpsB502.tmp" style="background-image: none; cursor: pointer;" alt="wpsB502.tmp" src="https://s1.51cto.com/images/blog/201908/19/198a0084a0299d2e404fc8d30a3ac0e7.jpg?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" border="0"></a></p><p>以上就是Router OS 路由器的时间同步方式了，内网的话直接在这两个位置填写内网的NTP服务器即可。</p></div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1980.html">在大公司做凤尾，还是在小公司做鸡头？</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1982.html">说MGR - MGR重点参数说明</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.51cto.com/13796759/2430872" target="_blank">https://blog.51cto.com/13796759/2430872</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

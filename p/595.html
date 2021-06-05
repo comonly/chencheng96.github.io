@@ -1,0 +1,335 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>数据类型—JavaScript_comonly.cn</title>
+<meta name="keywords" content="数据类型—JavaScript" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">数据类型—JavaScript</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-03-06</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">数据,Javascript</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	基本数据类型：Undefined,Null,Boolean,Number,String。
+</p>
+<h1>
+	数字（Number）类型
+</h1>
+<p>
+	所有数字类型都是用浮点型来表示，有效范围大约是10<sup>-308</sup>~10<sup>308</sup>
+</p>
+<blockquote>
+	<p>
+		<sup>最小的值保存在Number.MIN_VaLUE中，这个值是5e-324。最大值保存在Number.MAX_VALUE中，这个值是1.79769313148623157e+308。</sup>
+	</p>
+	<p>
+		<sup>数字大于最大值时，JavaScript就会输出Infinity，即正无穷。<span style="line-height:15px;">数字小于最小值时，JavaScript就会输出-Infinity，即负无穷。</span></sup>
+	</p>
+	<p>
+		<sup>NaN是一个特殊数值，进行数学运算产生未知的结果或错误，JavaScript就返回NaN。这时会继续运行下一行代码，而不会停止代码。</sup>
+	</p>
+	<p>
+		<sup>isNaN()函数判断运算结果是不是NaN。在接收到一个值之后会把这个值转换成数值，如果能转换成数值（字符串和布尔型也可以转换），则返回false，如果不能转换为数值则返回true。</sup>
+	</p>
+</blockquote>
+<p>
+	<sup>&lt;script type="text/javascript"&gt;<br />
+</sup>
+</p>
+<blockquote>
+	<p>
+		<sup>window.alert(isNaN(NaN)); &nbsp;//返回true</sup>
+	</p>
+	<p>
+		<sup>window.alert(isNaN(5)); &nbsp;//返回false</sup>
+	</p>
+	<p>
+		<sup>window.alert(isNaN("5")); &nbsp;//返回false,转换成数值5</sup>
+	</p>
+	<p>
+		<sup>window.alert(isNaN("red")); &nbsp;//返回true,不能转换成数值</sup>
+	</p>
+	<p>
+		<sup>window.alert(isNaN(true)); &nbsp;//返回false,被转换为1</sup>
+	</p>
+	<p>
+		<sup>window.alert(isNaN(false)); &nbsp;//返回false,被转换为0</sup>
+	</p>
+</blockquote>
+<p>
+	<sup>&lt;/script&gt;<br />
+</sup>
+</p>
+<p>
+	<sup><span style="background-color:#FFE500;"><a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank">在线测试运行效果</a></span></sup>
+</p>
+<h1>
+	布尔（Boolean）类型
+</h1>
+<p>
+	只有两个值，一般通过比较得来：x==10,若x=10则返回false，若不等于10则返回true。
+</p>
+<h1>
+	字符串（String）类型
+</h1>
+<p>
+	字符串可以用单引号或者双引号引起来。
+</p>
+<p>
+	var x="javascript";
+</p>
+<h1>
+	Undefined类型
+</h1>
+<p>
+	当定义一个变量但没有赋值时，这个变量就是underfined.
+</p>
+<h1>
+	Null类型
+</h1>
+<p>
+	只有一个值，表示一个空对象指针，不代表0或空字符串
+</p>
+<h1>
+	数据类型转换
+</h1>
+<p>
+	自动转换
+</p>
+<p>
+	转换成字符串
+</p>
+<p>
+	转换成数字类型
+</p>
+<p>
+	转换成布尔(Boolean)类型
+</p>
+<p>
+	其他常用方法
+</p>
+<p>
+	具体参考：<a href="http://www.iyaka.cn/blog/14_596.html" target="_blank">http://www.iyaka.cn/blog/14_596.html</a>
+</p>
+<h1>
+	复合数据类型
+</h1>
+<p>
+	对象
+</p>
+<p>
+	一些数据和功能的集合，这些数据可以是字符串类型，数字类型和布尔类型，可以通过执行new操作符来创建，
+</p>
+<p>
+	var ob=new Object();
+</p>
+<p>
+	然后可以给对象实例ob添加属性和方法。
+</p>
+<p>
+	数组
+</p>
+<p>
+	数据的集合，在数组中为每一个数据编了一个号，这个号称为数组的下标，下标是从0开始的。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/594.html">JavaScript基础</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/596.html">数据类型转换—JavaScript</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

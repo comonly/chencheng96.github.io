@@ -1,0 +1,265 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>jsp ResultSet用法_comonly.cn</title>
+<meta name="keywords" content="jsp ResultSet用法" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">jsp ResultSet用法</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-07-03</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	javaweb---jsp asp数据库框架
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">jsp,next,first,last</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 1，如何获得ResultSet的结构<br />
+ResultSetMetaData rsmd=rs.getMetaData();<br />
+cn=rsmd.getColumnCount();<br />
+for(int ik=1;ik&lt;=rsmd.getColumnCount();ik++)<br />
+&nbsp; &nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; hu1.append(rsmd.getColumnName(ik)+"\t");//+rsmd.getColumnTypeName(ik)+"\t"+rsmd.getColumnType(ik)+"\n");<br />
+<p>
+	&nbsp; &nbsp; &nbsp; }
+</p>
+<p>
+	<br />
+</p>
+2，ResultSet类的主要成员方法及其含义 方 法 含 义&nbsp;<br />
+boolean absolute(int row) 将指针移动到结果集对象的某一行<br />
+void afterLast() 将指针移动到结果集对象的末尾<br />
+void beforeFirst() 将指针移动到结果集对象的头部<br />
+boolean first() 将指针移动到结果集对象的第一行<br />
+Array getArray(int row) 获取结果集中的某一行并将其存入一个数组<br />
+boolean getBoolean(int columnIndex) 获取当前行中某一列的值，返回一个布尔型值<br />
+byte getByte(int columnIndex) 获取当前行中某一列的值，返回一个字节型值<br />
+short getShort(int columnIndex) 获取当前行中某一列的值，返回一个短整型值<br />
+int getInt(int columnIndex) 获取当前行中某一列的值，返回一个整型值<br />
+long getLong(int columnIndex) 获取当前行中某一列的值，返回一个长整型值<br />
+double getDouble(int columnIndex) 获取当前行中某一列的值，返回一个双精度型值<br />
+float getFloat(int columnIndex) 获取当前行中某一列的值，返回一个浮点型值<br />
+String getString(int columnIndex) 获取当前行中某一列的值，返回一个字符串<br />
+Date getDate(int columnIndex) 获取当前行中某一列的值，返回一个日期型值<br />
+Object getObject(int columnIndex) 获取当前行中某一列的值，返回一个对象<br />
+Statement getStatement() 获得产生该结果集的Statement对象<br />
+URL getURL(int columnIndex) 获取当前行中某一列的值，返回一个java.net.URL型值<br />
+boolean isBeforeFirst() 判断指针是否在结果集的头部<br />
+boolean isAfterLast() 判断指针是否在结果集的末尾<br />
+boolean isFirst() 判断指针是否在结果集的第一行<br />
+boolean isLast() 判断指针是否在结果集的最后一行<br />
+boolean last() 将指针移动到结果集的最后一行<br />
+boolean next() 将指针移动到当前行的下一行<br />
+<p>
+	boolean previous() 将指针移动到当前行的前一行本文
+</p>
+<p>
+	<br />
+</p>
+rs.next();//向后滚动<br />
+rs.getRow();//得到当前行号<br />
+rs.absolute(n);//光标定位到n行<br />
+rs.relative(int n);//相对移动n行<br />
+rs.first();//将光标定位到结果集中第一行。<br />
+rs.last();//将光标定位到结果集中最后一行。<br />
+rs.beforeFirst()//将光标定位到结果集中第一行之前。<br />
+rs.afterLast();//将光标定位到结果集中最后一行之后。<br />
+rs.moveToInsertRow()；//光标移到插入行<br />
+rs.moveToCurrentRow();//光标移回到调用<br />
+rs.moveToInsertRow()方法前光标所在行<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/766.html">jsp中的中文插入到access数据库后为乱码是怎么回事?</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/768.html">如何将Powerpoint转换成Word格式</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

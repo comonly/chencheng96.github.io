@@ -1,0 +1,215 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Docker最佳实战，容器级虚拟化_comonly.cn</title>
+<meta name="keywords" content="Docker最佳实战，容器级虚拟化" />
+<meta name="description" content="Docker最佳实战，容器级虚拟化" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Docker最佳实战，容器级虚拟化</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">mnsj1188</li>
+          <li class="lmname"><a href="https://blog.51cto.com/14485508/2430866" target="_blank">https://blog.51cto.com/14485508/2430866</a></li>
+          <li class="timer">2019-08-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>Docker最佳实战，容器级虚拟化</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <div class="con editor-preview-side" id="result"><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);"><span>普通虚拟机将整个操作系统运行在虚拟的硬件平台上<span>,&nbsp;<span>进而提供完整的运行环境供应用程序运行<span>,&nbsp;<span>而<span>Docker<span>则直接在宿主平台上加载运行应用程序<span>.&nbsp;<span>本质上他在底层使用<span>LXC<span>启动一个<span>Linux Container,<span>通过<span>cgroup<span>等机制对不同的<span>container<span>内运行的应用程序进行隔离<span>,<span>权限管理和<span>quota<span>分配等</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);"><span>每个<span>container<span>拥有自己独立的各种命名空间<span>(<span>亦即资源<span>)<span>包括<span>:</span></span></span></span></span></span></span></span></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;<span>PID<span>&nbsp;<span>进程<span>, MNT<span>&nbsp;<span>文件系统<span>, NET<span>&nbsp;<span>网络<span>, IPC<span>&nbsp;<span>, UTS<span>&nbsp;<span>主机名<span>&nbsp;<span>等</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;<span><strong>与</strong><span><strong>LXC</strong><span><strong>有什么不同</strong></span></span></span></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);"><span>基本上你可以认为目前的<span>Docker<span>是<span>LXC<span>的一个高级封装<span>,<span>提供了各种辅助工具和标准接口方便你使用<span>LXC,<span>你可以依靠<span>LXC<span>和各种脚本实现与<span>docker<span>类似的功能，就像你不使用<span>APT/yum<span>等工具也可以自己搞定软件包安装一样，你使用他们的关键原因是方便易用！</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);"><span>实际使用中，你一般不用关心底层<span>LXC<span>的细节<span>,<span>同时也不排将来<span>docker<span>实现基于非<span>LXC<span>方案的可能性</span></span></span></span></span></span></span></span></span></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);"><span>在<span>LXC<span>的基础上<span>, Docker<span>额外提供的<span>Feature<span>包括：标准统一的打包部署运行方案，<span>&nbsp;<span>历史版本控制，<span>&nbsp;Image<span>的重用，<span>Image<span>共享发布等等</span></span></span></span></span></span></span></span></span></span></span></span></span></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);"><span><strong>Container</strong><span><strong>构建方案</strong></span></span></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);"><span>除了<span>LXC<span>，<span>Docker<span>的核心思想就体现在它的运行容器构建方案上</span></span></span></span></span></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);"><img src="http://img.blog.csdn.net/20140306094901265" alt="" style="cursor: pointer;"></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);"><span>为了最大化重用<span>Image<span>，加快运行速度，减少内存和磁盘<span>footprint, Docker container<span>运行时所构造的运行环境，实际上是由具有依赖关系的多个<span>Layer<span>组成的。例如一个<span>apache<span>的运行环境可能是在基础的<span>rootfs image<span>的基础上，叠加了包含例如<span>Emacs<span>等各种工具的<span>image<span>，再叠加包含<span>apache<span>及其相关依赖<span>library<span>的<span>image<span>，这些<span>image<span>由<span>AUFS<span>文件系统加载合并到统一路径中，以只读的方式存在，最后再叠加加载一层可写的空白的<span>Layer<span>用作记录对当前运行环境所作的修改。</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);"><span>有了层级化的<span>Image<span>做基础，理想中，不同的<span>APP<span>就可以既可能的共用底层文件系统，相关依赖工具等，同一个<span>APP<span>的不同实例也可以实现共用绝大多数数据，进而以<span>copy on write<span>的形式维护自己的那一份修改过的数据等</span></span></span></span></span></span></span></span></span></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">历史和生态环境</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);"><span>Docker<span>项目从启动到现在不过一年多时间，发展势头还是很迅猛的</span></span></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);"><span>2013.01&nbsp;<span>做为<span>dotcloud<span>内部项目开始启动</span></span></span></span></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);"><span>2013.03.27&nbsp;<span>正式作为<span>public<span>项目发布</span></span></span></span></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);"><span>2014.1<span>&nbsp;<span>被<span>BLACK DUCK&nbsp;<span>评选为<span>2013<span>年<span>10<span>大开源新项目“<span>TOP 10 OPEN SOURCE ROOKIE OF THE YEAR<span>”</span></span></span></span></span></span></span></span></span></span></span></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">目前的状态&nbsp;( 2014.3 )</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">Docker 0.8.1</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">10000+ github stars(top 50)</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">350+ contributors</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">1500+ fork</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);"><img src="http://img.blog.csdn.net/20140306094922218" alt="" style="cursor: pointer;"></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);"><span>具体应用方面，可以看到百度至少在<span>2013<span>年<span>10<span>月份就已经成功使用<span>Docker<span>支持其<span>BAE<span>平台的<span>Paas<span>服务</span></span></span></span></span></span></span></span></span></span></span></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">安装运行和使用</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);"><span>Docker<span>虽然是号称<span>build once<span>，<span>&nbsp;runeverywhere<span>。但是实际上还是受其引擎依赖关系的限制的，目前的版本具体来说对系统要求：</span></span></span></span></span></span></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><ul style="list-style-type:none;" class="list-paddingleft-2"><li><p><span>Linux Kernel 3.8+</span></p></li><li><p><span>LXC&nbsp;<span>support</span></span></p></li><li><p><span>64bit&nbsp;<span>OS</span></span></p></li><li><p>AUFS</p></li></ul><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);"><span>以上要求，以<span>ubuntu<span>为例，需要<span>12.04&nbsp;<span>配合<span>&nbsp;3.8kernel<span>升级，<span>&nbsp;<span>或者<span>&nbsp;ubuntu 13.04+</span></span></span></span></span></span></span></span></span></span></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);"><span>在<span>ubuntu12.04<span>上，基本安装步骤如下</span></span></span></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">sudoapt-get update sudo apt-get install linux-image-generic-lts-raringlinux-headers-generic-lts-raring</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">sudoapt-key adv --keyserver keyserver.ubuntu.com --recv-keys36A1D7869245C8950F966E92D8576A8BA88D21E9</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">sudosh -c "echo deb&nbsp;<a href="http://get.docker.io/ubuntu" style="color: rgb(66, 133, 244);">http://get.docker.io/ubuntu</a>docker main\ &gt; /etc/apt/sources.list.d/docker.list"</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">sudoapt-get update</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">sudoapt-get install lxc-docker</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);"><span>如果你在安装之前想要先体验一下<span>docker<span>的基本操作命令等的话，<span>&nbsp;<span>可以尝试一下这个在线的<span>live<span>教程<span>&nbsp;<a href="https://www.docker.io/gettingstarted/#h_tutorial" style="color: rgb(66, 133, 244);"><span>https://www.docker.io/gettingstarted/#h_tutorial</span></a></span></span></span></span></span></span></span></span></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">常用命令</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);"><span>分类列一下常用的<span>CLI<span>命令</span></span></span></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><ul style="list-style-type:none;" class="list-paddingleft-2"><li><p>仓库相关</p></li></ul><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">search/ pull / push / login etc.</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);"><span>例：docker pull ubuntu<span>&nbsp;<span>从仓库下载<span>ubuntuimage</span></span></span></span></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><ul style="list-style-type:none;" class="list-paddingleft-2"><li><p><span>Images<span>&nbsp;<span>操作相关</span></span></span></p></li></ul><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">images/ rmi / build / export&nbsp; / import / save /load etc.</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);"><span>例：docker images -t<span>&nbsp;<span>以树形结构列出当前本地<span>Image</span></span></span></span></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><ul style="list-style-type:none;" class="list-paddingleft-2"><li><p>运行相关</p></li></ul><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);"><span>run / start / stop / restart / attach /kill etc.</span></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);"><span>docker run -i -t ubuntu /bin/bash<span>&nbsp;&nbsp;<span>启动<span>ubuntu image<span>，并交互式的运行<span>shell</span></span></span></span></span></span></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><ul style="list-style-type:none;" class="list-paddingleft-2"><li><p>杂项</p></li></ul><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);"><span>Docker diff&nbsp; / commit</span></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">Dockerinfo / ps / inspect / port / logs / top / history etc.</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);"><span>具体<span>docker<span>命令的使用参见<span>&nbsp;<a href="http://docs.docker.io/en/latest/reference/commandline/" style="color: rgb(66, 133, 244);"><span>http://docs.docker.io/en/latest/reference/commandline/</span></a></span></span></span></span></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">常见问题</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><ul style="list-style-type:none;" class="list-paddingleft-2"><li><p><span>使用<span>Non root&nbsp;<span>用户</span></span></span></p></li></ul><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);"><span>目前版本的<span>docker<span>由于使用<span>Socket<span>进行通讯，因此需要<span>root<span>用户权限<span>&nbsp;sudo xxx<span>，或者将需要使用<span>Dockerclient<span>的用户加入<span>docker<span>用户组</span></span></span></span></span></span></span></span></span></span></span></span></span></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">sudogpasswd -a ${USER} docker</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><ul style="list-style-type:none;" class="list-paddingleft-2"><li><p>网络相关问题</p></li></ul><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);"><span>当你在网关背后需要通过代理连接<span>docker<span>的<span>index<span>数据库时，可以手动加上<span>http_proxy<span>环境变量来启动<span>dockerdaemon</span></span></span></span></span></span></span></span></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);"><span>HTTP_PROXY=<a href="/" style="color: rgb(66, 133, 244);"><span>http://proxy_server:<span>port</span></span></a><span>&nbsp;docker -d &amp;</span></span></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);"><span>更好的做法是修改<span>/etc/default/docker ( on ubuntu ),&nbsp;<span>添加<span>&nbsp;<span>exporthttp_proxy=<span>proxy_server:port</span></span></span></span></span></span></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);"><span>同样，<span>docker container&nbsp;<span>如果无法自动正确的从<span>host<span>环境中获得<span>DNS<span>的配置，则需要手动指定<span>DNS<span>服务器地址，这可以通过<span>&nbsp;docker -run --dns=xxx<span>来实现，也可以修改<span>/etc/default/docker&nbsp;<span>添加例如<span>&nbsp;<span>DOCKER_OPTS="-dns&nbsp;<span>8.8.8.8<span>"</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><ul style="list-style-type:none;" class="list-paddingleft-2"><li><p>特权模式</p></li></ul><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);"><span>在正常情况下<span>&nbsp;<span>在<span>container<span>内部你没有权限操作<span>device<span>设备，而当前版本中，<span>container<span>内部部分文件例如<span>/etc/hosts;/etc/hostname; /etc/resolve.conf<span>等文件是动态通过<span>mount<span>动态以只读的形式加载上来的，理论上说你应该找到合适的方法去保证这些自动生成并加载的文件的正确性<span>&nbsp;(<span>例如<span>&nbsp;<span>通过<span>--dns&nbsp;<span>设置<span>&nbsp;resolve.conf )<span>，但是如果由于特殊原因你需要手动修改，那么你可以通过特权模式启动<span>&nbsp;docker client&nbsp;<span>：<span>&nbsp;docker run --privileged&nbsp;<span>，然后你可以卸载这些文件，自己再创建新的版本</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><ul style="list-style-type:none;" class="list-paddingleft-2"><li><p>过多的层级依赖关系</p></li></ul><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);"><span>以<span>Layer<span>的方式实现<span>APP<span>和相关<span>library<span>的<span>cheap reuse<span>和<span>fast update<span>是<span>Docker<span>的关键所在，不过受目前<span>AUFS<span>文件系统的限制，默认<span>Layer<span>的层级最多只能达到<span>127<span>（曾经只有<span>42<span>），在实际使用中有多种情况可能导致你的<span>container<span>的层级关系快速增长到这个极限值，撇开这么多<span>layer<span>叠加以后<span>AUFS<span>的效率不谈，更多情况下是你无法再更新构建你的<span>image<span>了</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><ol style="padding-left:40px;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);" class="list-paddingleft-2"><li><p><span>使用<span>Dockerfile<span>构建<span>Image<span>时，每条指令都会给最终的<span>Image<span>增加一层<span>layer<span>依赖关系.</span></span></span></span></span></span></span></span></span></p></li><li><p><span>以修改，提交，再修改再提交的方式不停的调整，更新你的<span>Image</span></span></p></li><li><p><span>从仓库中下载的别人的<span>Image<span>已经包含众多的层级依赖关系，而你需要进一步更新以创建你自己的版本</span></span></span></p></li></ol><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);"><span>前两者在一定程度上还是你自己可能把控的，最后一种情况就没办法了。这个问题最终必将影响<span>Docker<span>的实际可用性，目前的解决方案包括：</span></span></span></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><ul style="list-style-type:none;" class="list-paddingleft-2"><li><p><span>使用<span>Dockerfile<span>时<span>,<span>尽可能合并多个操作：例如使用<span>&nbsp;"&amp;&amp;"&nbsp;<span>或<span>&nbsp;";"&nbsp;<span>合并运行多个<span>shell<span>命令；将多个<span>shell<span>命令写成脚本，在<span>dockerfile<span>中添加并运行这个脚本</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></p></li><li><p><span>通过<span>Export<span>再<span>Import Image<span>，丢弃所有历史信息和依赖关系，创建一个全新的<span>image</span></span></span></span></span></span></p></li></ul><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">将来可能的解决方案包括：</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><ul style="list-style-type:none;" class="list-paddingleft-2"><li><p><span>在<span>Dockerfile<span>中添加对多步操作的合并提交的支持</span></span></span></p></li><li><p><span>外部的<span>image Flat<span>工具的支持，目标是能够保留历史信息等</span></span></span></p></li><li><p><span>非<span>AUFS<span>的其它<span>Storage<span>解决方案</span></span></span></span></span></p></li></ul><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">Future development</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);"><span>虽然<span>Docker<span>目前默认使用<span>LXC<span>和<span>AUFS<span>，但是<span>Docker<span>的核心思想本身，并不强制绑定这两者，<span>0.8<span>版本已经可以使用<span>BTRFS<span>，而整个<span>Docker<span>框架也改成了插件式的架构，便于添加替换各个功能模块</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;<img src="http://img.blog.csdn.net/20140306095014562" alt="" style="cursor: pointer;"></p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);">&nbsp;</p><p style="margin:10px auto;color:rgb(75,75,75);font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13px;white-space:normal;background-color:rgb(255,255,255);"><span>例如更多的<span>Storage<span>方案的支持，规避<span>AUFS<span>当前的问题，除了<span>LXC<span>以外更多的虚拟化方案等</span></span></span></span></span></span></span></p><p><br></p></div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1985.html">kubernetes(K8s)，体系架构，集群解决方案</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1987.html">shell训练day 4 8.16</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.51cto.com/14485508/2430866" target="_blank">https://blog.51cto.com/14485508/2430866</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

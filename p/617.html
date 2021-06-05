@@ -1,0 +1,624 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>window对象—JavaScript_comonly.cn</title>
+<meta name="keywords" content="window对象—JavaScript" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">window对象—JavaScript</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-03-12</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">JavaScript,window对象</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <span style="line-height:1.5;">window对象是一个全局对象，是所有对象的顶级对象，有自己的属性，方法和事件。</span><br />
+<span style="line-height:1.5;">每个浏览器窗口以及窗口中的框架都是由window对象表示的。通过window对象可以控制窗口大小，位置，弹出对话框，打开和关闭窗口，显示地址栏，工具栏和状态栏等。</span><br />
+<p>
+	window对象属于客户端对象，不需要使用new操作符来创建对象，直接调用属性和方法。通过“.”来调用属性和方法。
+</p>
+<p>
+	<em>window.属性</em> 
+</p>
+<p>
+	<em>window.方法()</em> 
+</p>
+<h2 id='widow对象的属性'>
+	window对象的属性
+</h2>
+<p>
+	<table class="dataintable" style="margin:10px 0px 0px;padding:0px;border:1px solid #AAAAAA;width:709px;">
+		<tbody>
+			<tr>
+				<th style="border:1px solid #AAAAAA;vertical-align:baseline;">
+					属性
+				</th>
+				<th style="border:1px solid #AAAAAA;vertical-align:baseline;">
+					描述
+				</th>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					closed
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					返回窗口是否已被关闭。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					defaultStatus
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					设置或返回窗口状态栏中的默认文本。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					document
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					对 Document 对象的只读引用。请参阅&nbsp;Document 对象。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					history
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					对 History 对象的只读引用。请参数&nbsp;History 对象。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					innerheight
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					返回窗口的文档显示区的高度。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					innerwidth
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					返回窗口的文档显示区的宽度。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					length
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					设置或返回窗口中的框架数量。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					location
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					用于窗口或框架的 Location 对象。请参阅&nbsp;Location 对象。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					name
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					设置或返回窗口的名称。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					Navigator
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					对 Navigator 对象的只读引用。请参数&nbsp;Navigator 对象。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					opener
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					返回对创建此窗口的窗口的引用。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					outerheight
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					返回窗口的外部高度。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					outerwidth
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					返回窗口的外部宽度。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					pageXOffset
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					设置或返回当前页面相对于窗口显示区左上角的 X 位置。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					pageYOffset
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					设置或返回当前页面相对于窗口显示区左上角的 Y 位置。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					parent
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					返回父窗口。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					Screen
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					对 Screen 对象的只读引用。请参数&nbsp;Screen 对象。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					self
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					返回对当前窗口的引用。等价于 Window 属性。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					status
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					设置窗口状态栏的文本。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					top
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					返回最顶层的先辈窗口。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					window
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					window 属性等价于 self 属性，它包含了对窗口自身的引用。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					<ul>
+						<li>
+							screenLeft
+						</li>
+						<li>
+							screenTop
+						</li>
+						<li>
+							screenX
+						</li>
+						<li>
+							screenY
+						</li>
+					</ul>
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					只读整数。声明了窗口的左上角在屏幕上的的 x 坐标和 y 坐标。IE、Safari 和 Opera 支持 screenLe
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</p>
+<h2 id='widow对象的方法'>
+	window对象的方法
+</h2>
+<p>
+	<table class="dataintable" style="margin:10px 0px 0px;padding:0px;border:1px solid #AAAAAA;width:709px;">
+		<tbody>
+			<tr>
+				<th style="border:1px solid #AAAAAA;vertical-align:baseline;">
+					方法
+				</th>
+				<th style="border:1px solid #AAAAAA;vertical-align:baseline;">
+					描述
+				</th>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					alert()
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					显示带有一段消息和一个确认按钮的警告框。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					blur()
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					把键盘焦点从顶层窗口移开。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					clearInterval()
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					取消由 setInterval() 设置的 timeout。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					clearTimeout()
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					取消由 setTimeout() 方法设置的 timeout。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					close()
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					关闭浏览器窗口。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					confirm()
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					显示带有一段消息以及确认按钮和取消按钮的对话框。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					createPopup()
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					创建一个 pop-up 窗口。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					focus()
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					把键盘焦点给予一个窗口。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					moveBy()
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					可相对窗口的当前坐标把它移动指定的像素。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					moveTo()
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					把窗口的左上角移动到一个指定的坐标。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					open()
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					打开一个新的浏览器窗口或查找一个已命名的窗口。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					print()
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					打印当前窗口的内容。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					prompt()
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					显示可提示用户输入的对话框。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					resizeBy()
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					按照指定的像素调整窗口的大小。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					resizeTo()
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					把窗口的大小调整到指定的宽度和高度。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					scrollBy()
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					按照指定的像素值来滚动内容。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					scrollTo()
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					把内容滚动到指定的坐标。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					setInterval()
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					按照指定的周期（以毫秒计）来调用函数或计算表达式。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					setTimeout()
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					在指定的毫秒数后调用函数或计算表达式。
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</p>
+<h2 id='widow对象的事件'>
+	window对象的事件
+</h2>
+<ul>
+	<li>
+		blur：当窗口失去焦点时的事件
+	</li>
+	<li>
+		error：执行JavaScript代码产生错误时的事件
+	</li>
+	<li>
+		focus：当窗口得到焦点时的事件
+	</li>
+	<li>
+		onload：载入网页时的事件
+	</li>
+	<li>
+		resize：调整窗口大小的事件
+	</li>
+	<li>
+		onunload：卸载网页时的事件
+	</li>
+	<li>
+		move：移动窗口的事件
+	</li>
+</ul></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/616.html">事件驱动与事件处理—JavaScript</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/618.html">window对象事件—JavaScript</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#widow对象的属性">widow对象的属性</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#widow对象的方法">widow对象的方法</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#widow对象的事件">widow对象的事件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

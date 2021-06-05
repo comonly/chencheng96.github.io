@@ -1,0 +1,336 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>jspsmartupload组件的使用——文件上传（实例）_comonly.cn</title>
+<meta name="keywords" content="jspsmartupload组件的使用——文件上传（实例）" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">jspsmartupload组件的使用——文件上传（实例）</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-01-08</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">jspsmartupload,jsp</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> jspsmartupload不仅可以上传图片，同样可以上传其他文件，下面代码可以不加修改的使用。把下载后的jspsmartupload.jar，放到apache服务器的lib目录一般放在项目的lib目录下。
+<p>
+	在本项目中上传头像用到了文件上传的模块。因为在上传中需要不刷新页面，考虑到ajax在上传文件的局限性，这里采用了隐藏窗口的方式来实现无刷新上传图片。主要分为前端的显示和后端对上传信息的处理。这里分别进行说明。
+</p>
+<h2 id='前端显示'>
+	前端显示
+</h2>
+<h3>
+	布局处理
+</h3>
+<p>
+	iframe用来接收请求信息，所以开始是隐藏的，在提交表单数据后，由后端servlet返回数据，然后在页面进行显示。
+</p>
+<pre class="prettyprint lang-js">&lt;!-- 隐藏窗口用来异步提交 --&gt;
+&lt;iframe name="mainFrame" id="mainFrame" class="popupFloat" style="display:none; top: 155px; left: 300px; width: 380px; "&gt;
+&lt;/iframe&gt;
+
+&lt;div id="upLoadImg" class="popupFloat" style="display:none; top: 155px; left: 300px; width: 380px; "&gt;
+   &lt;!-- 上传图片，仿异步提交 --&gt;
+   &lt;a href="javascript:void(0)" onclick="closeFloat('upLoadImg')"&gt; X&lt;/a&gt;
+   &lt;div&gt;
+      &lt;!--实际表单部分，在下面进行说明--&gt;
+   &lt;/div&gt;
+&lt;/div&gt;
+
+//显示浮窗
+function openFloatupLoadImg(){
+   document.getElementById('upLoadImg').style.display='';
+}
+//关闭悬浮窗
+function closeFloat(idname){
+   document.getElementById(idname).style.display="none";
+}
+//打开反馈框头像上传后的，并关掉上传框
+function viewnamemainFrame(){
+   document.getElementById('mainFrame').style.display='';
+   closeFloat('upLoadImg');
+}
+</pre>
+<p>
+	在实际操作中，想通过显示的iframe中的某事件调用父窗口定义的方法（这里是设置该iframe的显示属性为none），发现直接调用不能实现需要的效果。在实际使用中需要window.parent.AFUN();来调用父窗口的方法，其中AFUN()为父窗口js函数的函数名。
+</p>
+<h3>
+	表单格式
+</h3>
+<p>
+	表单处理部分设置target="mainFrame"跳转到本页的mainFrame框架中，避免了页面的刷新。需要注意的是，因为有文件上传的请求，所以要设置enctype="multipart/form-data"与method="post"配合使用才能上传文件。
+</p>
+<pre class="prettyprint lang-html">&lt;form action="/graduation_project/member/${memberOutForUrlInfo.mnumber }/upLoadImg" target="mainFrame" method="post" enctype="multipart/form-data"&gt;
+&lt;table width="400"align="center"border="0"cellpadding="4"cellspacing="1"&gt;
+&lt;tr&gt;&lt;td&gt;照片：&lt;/td&gt;&lt;td&gt;&lt;input type="file" name="upfile"/&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td colspan="2"&gt;&lt;input onclick="viewnamemainFrame()" type="submit" value="提交"/&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/form&gt;</pre>
+<p>
+	HTML表单如何打包数据文件是由enctype这个属性决定的。enctype有以下几种取值：
+</p>
+<ol>
+	<li>
+		application/x-www-form-urlencoded在发送前编码所有字符（默认）（空格被编码为’+’，特殊字符被编码为ASCII十六进制字符）
+	</li>
+	<li>
+		multipart/form-data 不对字符编码。在使用包含文件上传控件的表单时，必须使用该值。
+	</li>
+	<li>
+		text/plain 空格转换为 “+” 加号，但不对特殊字符编码。
+	</li>
+</ol>
+默认enctype=application/x-www-form-urlencoded，所以表单的内容会按URL规则编码，然后根据表单的提交方法：<br />
+<ol>
+	<li>
+		method=’get’ 编码后的表单内容附加在请求连接后
+	</li>
+	<li>
+		method=’post’ 编码后的表单内容作为post请求的正文内容
+	</li>
+</ol>
+<h2 id='后端（ervlet）数据处理'>
+	后端（servlet）数据处理
+</h2>
+<h3>
+	处理提交的数据
+</h3>
+<pre class="prettyprint lang-js">//取得整个web应用的物理根路径（注意不是jsp项目根路径）
+String root = request.getSession().getServletContext().getRealPath("/");
+String savePath = root + "img\\userHead\\";
+//设置上传文件的保存路径（绝对路径/物理路径）
+SmartUpload mySmartUpload = new SmartUpload();
+//声明SmartUpload类对象
+String fileAfter="";  //获取上传文件的后缀
+int state=1;
+try {
+mySmartUpload.initialize(getServletConfig(),request,response);
+//初始化的方法必须先执行。参数：config,request,response都是jsp内置对象
+mySmartUpload.upload();    //上传文件数据
+
+String fileName = mySmartUpload.getFiles().getFile(0).getFileName();
+//取得文件名(因为只上传一个文件，所以用getFile(0))
+//需要注意的是getFile()必须在upload()之后才能进行！
+fileAfter=fileName.split("\\.")[1];//获取后缀，.前面需要加上\\
+
+mySmartUpload.getFiles().getFile(0).saveAs(savePath+mnumber+ "."+fileAfter) ; 
+//保存上传文件，以指定名字命名
+//mySmartUpload.save(savePath)
+//将全部上传文件保存到指定目录下，以默认名字，自己不能指定
+
+String upDataBase ="/graduation_project/img/userHead/"+mnumber+ "."+fileAfter;
+//上传至数据库的路径,将图片地址保存到数据库
+
+//处理数据库请求相关
+MemberDao memberDao=new MemberDao();
+memberDao.updateUserImage(mnumber,upDataBase);
+//将数据保存到数据库。</pre>
+<h3>
+	返回内容
+</h3>
+<pre class="prettyprint lang-js">PrintWriter out= response.getWriter();
+out.print("&lt;a href=\"javascript:void(0)\" onclick=\"window.parent.closeFloat('mainFrame');\"&gt; X&lt;/a&gt;&lt;br&gt;");
+if(state==0){
+   out.println("上传成功！");
+   out.print("新头像为:&lt;br&gt; &lt;img src=\"" + upDataBase + "\" width=\"88\"  height=\"100\"/&gt;&lt;br&gt;");
+}else{
+   out.print("更新头像信息失败，请重试！尽量使用英文命名的图片上传！");
+}</pre></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/811.html">JSP页面中使用中文名图片</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/813.html">jsp使用kindeditor的上传路径,图片空间路径配置以及引用</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#前端显示">前端显示</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#后端（ervlet）数据处理">后端（ervlet）数据处理</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

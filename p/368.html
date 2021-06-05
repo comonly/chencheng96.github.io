@@ -1,0 +1,442 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>dreamweaver制作asp动态网页之向数据库增加记录_comonly.cn</title>
+<meta name="keywords" content="dreamweaver制作asp动态网页之向数据库增加记录" />
+<meta name="description" content="用dreamweaver制作asp动态网页时如何向数据库里边添加记录。前提是已经搭建好asp的运行环境IIS，并且用数据源连接了数据库，具体方法见我分享的前几个百度经验。我以创建一个个人信息登记页面为例介绍。
+
+
+	
+		
+			
+				打开dreamweaver，点击菜单栏的：文件--&gt;新建。
+			
+		
+	
+	
+		
+			
+				在弹出的界面中选择ASP VBScript，然后点击“创建”按钮。
+			
+		
+	
+	
+		
+			按Ctrl+S保存刚" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">dreamweaver制作asp动态网页之向数据库增加记录</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2016-05-01</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	ide -- myeclipse相关
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">网页技术</a></div>
+      
+      
+        <div class="news_about"><strong>简介</strong>用dreamweaver制作asp动态网页时如何向数据库里边添加记录。前提是已经搭建好asp的运行环境IIS，并且用数据源连接了数据库，具体方法见我分享的前几个百度经验。我以创建一个个人信息登记页面为例介绍。
+
+
+	
+		
+			
+				打开dreamweaver，点击菜单栏的：文件--&gt;新建。
+			
+		
+	
+	
+		
+			
+				在弹出的界面中选择ASP VBScript，然后点击“创建”按钮。
+			
+		
+	
+	
+		
+			按Ctrl+S保存刚</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	用dreamweaver制作asp动态网页时如何向数据库里边添加记录。前提是已经搭建好asp的运行环境IIS，并且用数据源连接了数据库，具体方法见我分享的前几个百度经验。我以创建一个个人信息登记页面为例介绍。
+</p>
+<ol>
+	<li>
+		<div>
+			<p>
+				打开dreamweaver，点击菜单栏的：文件--&gt;新建。
+			</p>
+		</div>
+	</li>
+	<li>
+		<div>
+			<p>
+				在弹出的界面中选择ASP VBScript，然后点击“创建”按钮。
+			</p>
+		</div>
+	</li>
+	<li>
+		<p>
+			按Ctrl+S保存刚刚新建的网页，保存在你创建的测试服务器（见我前几个分享的百度经验）的文件夹里边，并且后缀一定是asp。
+		</p>
+	</li>
+	<li>
+		<p>
+			把鼠标指针放在页面内，点击菜单栏的：插入--&gt;表单--&gt;表单。
+		</p>
+	</li>
+	<li>
+		<p>
+			把鼠标指针放在表单内，输入“姓名：”，然后点击菜单栏：插入--&gt;表单--&gt;文本域。操作如图。
+		</p>
+	</li>
+	<li>
+		<p>
+			鼠标点中刚刚添加的文本框，在下方重命名文本框的名字。操作如图。
+		</p>
+	</li>
+	<li>
+		<div>
+			<p>
+				把鼠标指针放在刚刚添加的文本域内，按回车，输入“性别：”，然后点击菜单栏：插入--&gt;表单--&gt;单选按钮，然后再单选按钮后边添加文字“男”。
+			</p>
+		</div>
+	</li>
+	<li>
+		<p>
+			按照上一步，添加一个单选按钮，后边添加文字为“女”。
+		</p>
+	</li>
+	<li>
+		<div>
+			<p>
+				鼠标点击选中刚刚添加的第一个单选按钮，在下方属性面板中命名为“xingbie”。同样选中第二个单选按钮，在下方属性面板中也命名为“xingbie”。注意：两个单选按钮名字一定要一样，否则就不是单选而是两个都可以选了。
+			</p>
+		</div>
+	</li>
+	<li>
+		<div>
+			<p>
+				回车：输入文字“个人简介”，回车，然后点击菜单栏：插入--&gt;表单--&gt;文本区域。
+			</p>
+		</div>
+	</li>
+	<li>
+		<div>
+			<p>
+				点中添加的文本区域，然后再下方的属性面板中可以改变它的长和宽。
+			</p>
+		</div>
+	</li>
+	<li>
+		<div>
+			<p>
+				回车，点击菜单栏：插入--&gt;表单--&gt;按钮。
+			</p>
+		</div>
+	</li>
+	<li>
+		<div>
+			<p>
+				鼠标点中刚刚添加的按钮，然后再下方的属性面板中可以改变按钮上所显示的文字。如图。
+			</p>
+		</div>
+	</li>
+	<li>
+		<div>
+			<p>
+				点击打开的Access数据库菜单栏的：创建--&gt;表。按Ctrl+S，在弹出的界面输入要保存的数据表的名字。如图。
+			</p>
+		</div>
+	</li>
+	<li>
+		<div>
+			<p>
+				点击菜单栏的：开始--&gt;视图，切换到视图模式。
+			</p>
+		</div>
+	</li>
+	<li>
+		<div>
+		</div>
+		<div>
+			<p>
+				在表里边假如如图所示几个字段：xingming、xingbie、gerenjianjie。其中xingming和性别的数据类型是文本，而gerenjianjie的数据类型是备注（备注类型没有字数限制而文本类型最多只能输入255个字节）。保存，然后退出。
+			</p>
+		</div>
+	</li>
+	<li>
+		<div>
+		</div>
+		<div>
+			<p>
+				回到Dreamweaver，点击菜单栏：窗口--&gt;绑定，打开绑定面板。
+			</p>
+		</div>
+	</li>
+	<li>
+		<div>
+		</div>
+		<div>
+			<p>
+				点击菜单栏：窗口--&gt;服务器行为，打开服务器行为面板。
+			</p>
+		</div>
+	</li>
+	<li>
+		<div>
+		</div>
+		<div>
+			<p>
+				先连接数据库。如果数据库已经连接好了，那么在数据库面板里边右键单击，选择刷新。
+			</p>
+		</div>
+	</li>
+	<li>
+		<div>
+		</div>
+		<div>
+			<p>
+				选择绑定面板，选怎文档类型为ASP VBSCript。
+			</p>
+		</div>
+	</li>
+	<li>
+		<div>
+		</div>
+		<div>
+			<p>
+				在绑定面板中，点击“+”，选择“记录集（查询）。在弹出的界面中选择我们刚刚在数据库里边创建的表。如图。
+			</p>
+		</div>
+	</li>
+	<li>
+		<div>
+		</div>
+		<div>
+			<p>
+				鼠标指针放到表单里边，切换到服务器行为面板，点击“+”，选择“插入记录”。
+			</p>
+		</div>
+	</li>
+	<li>
+		<div>
+		</div>
+		<div>
+			<p>
+				弹出如图所示界面，按照如图所示界面，进行设置（面板上的文字大家应该一看就懂，所以不做过多说明），然后点击确定。
+			</p>
+		</div>
+	</li>
+	<li>
+		<div>
+		</div>
+		<div>
+			<p>
+				这时，增加记录的功能就做好了。按F12在浏览器中输入以下数据，然后点击添加按钮。
+			</p>
+		</div>
+	</li>
+	<li>
+		<div>
+		</div>
+		<div>
+			<p>
+				然后回到dreamweaver的数据库面板查看一下数据。大功告成。
+			</p>
+		</div>
+	</li>
+</ol></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/366.html">every one 权限设置方法</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/370.html">studying9 网站实现QQ登录功能</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

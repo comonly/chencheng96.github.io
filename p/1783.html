@@ -1,0 +1,319 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>MQ解决消息重发--做到幂等性_comonly.cn</title>
+<meta name="keywords" content="MQ解决消息重发--做到幂等性" />
+<meta name="description" content="一、MQ消息发送
+
+
+	 
+
+
+	1、发送端MQ-client(消息生产者：Producer)将消息发送给MQ-server；
+
+
+	2、MQ-server将消息落地；
+
+
+	3、MQ-server回ACK给MQ-client（Producer）；
+
+
+	4、MQ-server将消息发送给消息接受端MQ-client(消息消费者：Customer)；
+
+
+	5、MQ-client（Customer）消费接受到消息后发送ACK给MQ-server；
+
+
+	6、MQ-" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">MQ解决消息重发--做到幂等性</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">柳絮拂面</li>
+          <li class="lmname"><a href="https://www.cnblogs.com/zhangxianming/p/8724590.html" target="_blank">https://www.cnblogs.com/zhangxianming/p/8724590.html</a></li>
+          <li class="timer">2020-10-03</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>一、MQ消息发送
+
+
+	 
+
+
+	1、发送端MQ-client(消息生产者：Producer)将消息发送给MQ-server；
+
+
+	2、MQ-server将消息落地；
+
+
+	3、MQ-server回ACK给MQ-client（Producer）；
+
+
+	4、MQ-server将消息发送给消息接受端MQ-client(消息消费者：Customer)；
+
+
+	5、MQ-client（Customer）消费接受到消息后发送ACK给MQ-server；
+
+
+	6、MQ-</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	一、MQ消息发送
+</p>
+<p>
+	<img src="https://images2018.cnblogs.com/blog/1008084/201804/1008084-20180405213526395-914953960.png" alt="" style="height:auto;" /> 
+</p>
+<p>
+	1、发送端MQ-client(消息生产者：Producer)将消息发送给MQ-server；
+</p>
+<p>
+	2、MQ-server将消息落地；
+</p>
+<p>
+	3、MQ-server回ACK给MQ-client（Producer）；
+</p>
+<p>
+	4、MQ-server将消息发送给消息接受端MQ-client(消息消费者：Customer)；
+</p>
+<p>
+	5、MQ-client（Customer）消费接受到消息后发送ACK给MQ-server；
+</p>
+<p>
+	6、MQ-server将落地消息删除
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	二、消息重复发送原因
+</p>
+<p>
+	为了保证消息必达，MQ使用了消息超时、重传、确认机制。使得消息可能被重复发送，如上图中，由于网络不可达原因：3和5中断，可能导致消息重发。消息生产者a收不到MQ-server的ACK，重复向MQ-server发送消息。MQ-server收不到消息消费者c的ACK，重复向消息消费者c发消息。
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	三、消息重复发送产生的后果
+</p>
+<p>
+	举个例子：购买会员卡，上游支付系统负责给用户扣款，下游系统负责给用户发卡，通过MQ异步通知。不管是上半场的ACK丢失，导致MQ收到重复的消息，还是下半场ACK丢失，导致购卡系统收到重复的购卡通知，都可能出现，上游扣了一次钱，下游发了多张卡。
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	四、MQ内部如何做到幂等性的
+</p>
+<p>
+	对于每条消息，MQ内部生成一个全局唯一、与业务无关的消息ID：inner-msg-id。当MQ-server接收到消息时，先根据inner-msg-id判断消息是否重复发送，再决定是否将消息落地到DB中。这样，有了这个inner-msg-id作为去重的依据就能保证一条消息只能一次落地到DB。
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	五、消息消费者应当如何做到幂等性
+</p>
+<p>
+	1、对于非幂等性业务且要求实现幂等性业务：生成一个唯一ID标记每一条消息，将消息处理成功和去重日志通过事物的形式写入去重表。
+</p>
+<p>
+	2、对于非幂等性业务可不实现幂等性的业务：权衡去重所花的代价决定是否需要实现幂等性，如：购物会员卡成功，向用户发送通知短信，发送一次或者多次影响不大。不做幂等性可以省掉写去重日志的操作。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1782.html">当一个8192B的UDP数据报通过以太网传送时，导致分片，问需要分成几个数据报片？每个数据报片的长度</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1784.html">c++ 模板函数 拖尾返回类型</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.cnblogs.com/zhangxianming/p/8724590.html" target="_blank">https://www.cnblogs.com/zhangxianming/p/8724590.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

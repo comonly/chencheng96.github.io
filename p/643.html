@@ -1,0 +1,338 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Response对象—ASP_comonly.cn</title>
+<meta name="keywords" content="Response对象—ASP" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Response对象—ASP</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-03-22</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	javaweb---jsp asp数据库框架
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">Response对象,ASP</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h1 style="color:#000000;text-indent:0px;font-family:" sans="" serif",="" tahoma,="" verdana,="" helvetica;font-style:normal;"=""> <a>Response对象</a> 
+	</h1>
+<h2 sans="" serif",="" tahoma,="" verdana,="" helvetica;font-style:normal;"=""> <a>Response对象的方法</a> 
+		</h2>
+		<p>
+			<a>Write方法：向客户端浏览器以字符串形式输出数据。不仅可以输出经服务器处理的数据，而且可以动态地将HTML脚本写入客户端浏览器。</a> 
+		</p>
+		<p>
+			<a>&nbsp; &nbsp;&lt;% Response.Write "test" %&gt;可以简写为</a><a>&lt;%="test" %&gt;</a> 
+		</p>
+		<p>
+			<a>BinaryWrite方法：在不进行任何字符转化的情况下，把数据直接写入客户端浏览器。</a> 
+		</p>
+		<p>
+			<a>Redirect方法：重定向，尝试链接到其他URL</a> 
+		</p>
+		<p>
+			<a>&nbsp; &nbsp;&lt;% Response.rediret "test.asp" %&gt; 终止当前页面的执行，直接跳转到指定页面。 </a> 
+		</p>
+		<p>
+			<a>Flush方法：立即发送缓冲器中的输出</a> 
+		</p>
+		<p>
+			<a>&nbsp; &nbsp;Response.Flush()，可以用来将一个较长页面的成分分别发送到客户端，经常与Response的Clear,End方法配合使用。</a> 
+		</p>
+		<p>
+			<a>Clear方法：删除缓冲器中的输出</a> 
+		</p>
+		<p>
+			<a>&nbsp; &nbsp;Response.Clear()，当Response的buffer属性设置为"True"时，Response对象的Clear能够将iis响应缓冲区中已经缓存的页面删除。不删除HTTP响应标题，可用来终止部分已经完成的页面。</a> 
+		</p>
+		<p>
+			<a>End方法：停止服务器脚本返回处理结果</a> 
+		</p>
+		<p>
+			<a>&nbsp; &nbsp;</a><a>Response.End()，</a>停止ASP页面脚本的处理，终止当前页面的任何处理，并返回当前建立的内容。
+		</p>
+		<p>
+			<a>AddHeader方法：设置HTTP标题</a> 
+		</p>
+		<p>
+			<a>&nbsp; &nbsp;</a><a>Response.</a><a>AddHeader</a>("name","content")，为客户端浏览器增加一个标题，一但增加则不能删除。
+		</p>
+		<p>
+			<a>AppendToLog方法：在web服务器日志条目后添加字符串。</a> 
+		</p>
+		<p>
+			<a>&nbsp; &nbsp;Response.AppendToLog string，每次调用该方法都会在当前条目中添加指定的字符串。字符串中不能包含逗号，因为IIS日志中的字段由逗号分隔。</a>
+		</p>
+<h2 sans="" serif",="" tahoma,="" verdana,="" helvetica;font-style:normal;"=""> <a>Response对象的属性</a> 
+	</h2>
+	<p>
+		<a>Buffer属性：值为Boolean类型，标明页面输出是否被缓冲。</a> 
+	</p>
+	<p>
+		<a>&nbsp; &nbsp;&lt;% response.Buffer=true%&gt;设置HTML输出流何时发送到客户端浏览器。默认情况下是打开的。</a> 
+	</p>
+	<p>
+		<a>CacheControl属性：值为Public或Private，决定代理服务器是否能够高速缓存页面</a> 
+	</p>
+	<p>
+		<a>&nbsp; &nbsp;</a><a>&lt;% response.CacheControl=Public %&gt;</a>允许服务器缓存网页，默认放弃缓存
+	</p>
+	<p>
+		<a>ContentType属性：指明浏览器以何种类型显示数据</a> 
+	</p>
+	<p>
+		<a>&nbsp; &nbsp;该方法可以将在数据库中存储的二进制流（word，excel文件等）写入到浏览器。</a> 
+	</p>
+	<p>
+		<a>Charset属性：将字符集的名称写入到响应服务器的HTTPContent-Type标题中。</a> 
+	</p>
+	<p>
+		<a>&nbsp; &nbsp;&lt;% Response.Charset="gb2312"%&gt;将字符集名称附加到Response对象中的content—type标题的后面，默认为“content-type:text/html;”</a> 
+	</p>
+	<p>
+		<a>Expires属性：指定浏览器中页面的有效时间</a> 
+	</p>
+	<p>
+		<a>&nbsp; &nbsp;&lt;% response.Expires=1 %&gt;指定了在浏览器上缓冲存储的页面距过期还有1min时间。</a> 
+	</p>
+	<p>
+		<a>ExpiresAbsolute属性：值为Date/Time类型，指出某页面过期时间</a> 
+	</p>
+	<p>
+		<a>&nbsp; &nbsp;&lt;% response.ExpiresAbsolute=#Oct 30,2017 10:10:11# %&gt;指定缓存与浏览器中的页面的确切到期日期和时间。默认为当天午夜过期</a> 
+	</p>
+	<p>
+		<a>IsClientConnected属性：值为Boolean类型，表明客户端是否和服务器连接</a> 
+	</p>
+	<p>
+		<a>PICS属性：将PICS标题值写入响应的HTTP标题中</a> 
+	</p>
+	<p>
+		<a>Status属性：表示页面被处理的状态，成功或者错误</a>
+	</p>
+	<h3>
+		<a>Response对象的集合</a> 
+	</h3>
+	<p>
+		<a>&lt;% Response.Cookies("name")="test"</a> 
+	</p>
+	<p>
+		<a></a><a>Response.Cookies("name").Expires=#Oct 10,2017#&nbsp;</a>%&gt;
+	</p>
+	<p>
+		<a>只有一个Cookies，可以用来设置或获取cookie的值。 </a> 
+	</p>
+	<p>
+		<a>Cookies集合的attribute描述</a> 
+	</p>
+	<p>
+		<a>Domain：cookie只发生请求到这个域</a> 
+	</p>
+	<p>
+		<a>Expires：过期时间，如果没有指定，当Session结束时Cookie也自动过期</a> 
+	</p>
+	<p>
+		<a>Haskeys：指定cookie是否有keys（该属性只能在Request.Cookies命令上）</a> 
+	</p>
+	<p>
+		<a>Path：设置cookie只有当这个路径请求才会发生</a> 
+	</p>
+	<p>
+		<a>Secure：设置其安全性</a>
+	</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/642.html">ServerVariables—ASP</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/644.html">Application对象—ASP</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

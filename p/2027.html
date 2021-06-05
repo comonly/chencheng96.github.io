@@ -1,0 +1,277 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>solr服务开机自启动设置（windows）_comonly.cn</title>
+<meta name="keywords" content="solr服务开机自启动设置（windows）" />
+<meta name="description" content="solr开机自启动设置
+1、第一种方法 自写bat文件
+首先新建一个txt 文件，并更名后缀为bat ,我名字叫solrstart.bat 。在里边填写下边的内容
+@echo off
+echo 'solr服务启动中'
+start "solr" cmd /k "solr start -p 8983"
+
+也可以写成：
+@echo off
+echo 'solr服务启动中'
+solr start -p 8983
+
+然后，把该bat 文件，放到solr-7.3.1\bin 文件夹中。
+最后" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">solr服务开机自启动设置（windows）</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">JAVA码上飘</li>
+          <li class="lmname"><a href="https://blog.csdn.net/wohaqiyi/article/details/80549912" target="_blank">https://blog.csdn.net/wohaqiyi/article/details/80549912</a></li>
+          <li class="timer">2021-04-03</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	电脑配置设置  软件使用 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>solr开机自启动设置
+1、第一种方法 自写bat文件
+首先新建一个txt 文件，并更名后缀为bat ,我名字叫solrstart.bat 。在里边填写下边的内容
+@echo off
+echo 'solr服务启动中'
+start "solr" cmd /k "solr start -p 8983"
+
+也可以写成：
+@echo off
+echo 'solr服务启动中'
+solr start -p 8983
+
+然后，把该bat 文件，放到solr-7.3.1\bin 文件夹中。
+最后</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> solr开机自启动设置<br />
+1、第一种方法 自写bat文件<br />
+首先新建一个txt 文件，并更名后缀为bat ,我名字叫solrstart.bat 。在里边填写下边的内容<br />
+@echo off<br />
+echo 'solr服务启动中'<br />
+start "solr" cmd /k "solr start -p 8983"<br />
+<br />
+也可以写成：<br />
+@echo off<br />
+echo 'solr服务启动中'<br />
+solr start -p 8983<br />
+<br />
+然后，把该bat 文件，放到solr-7.3.1\bin 文件夹中。<br />
+最后，把这个文件发送到桌面快捷方式 ,把这个文件快捷方式，复制粘贴到开机启动项文件夹中即可，关于不同的windows系统的开机启动项文件夹的位置，可以百度，我的是window 7,可以在左下角开始----&gt;所有程序中找到启动文件夹，打开后粘贴进里边即可。<br />
+缺点：这种方式的启动弹出的窗口不能关闭，一关掉，solr就停了，不好。<br />
+注意：上边的配置有可能不行，我没有测试过，如果提示找不到路径，那可能就是路径错误，可以多写几步如下：<br />
+<br />
+@echo off<br />
+echo 'solr服务启动中'<br />
+d:<br />
+cd znxdsoft\solr-7.3.1\bin<br />
+solr start -p 8983<br />
+<br />
+即先进入到bin 路径里再执行命令即可.。<br />
+<br />
+2、第二种方法 采用nssm添加服务（推荐）<br />
+此方法非常简单好用，具体步骤如下：<br />
+访问nssm官方下载地址，下载下这个文件夹以后，解压，将里边的如下exe ，拷贝到你的\solr-7.3.1\bin 文件夹中，<br />
+进入到\solr-7.3.1\bin 文件夹中，shift +鼠标右击，点击此处打开命令窗口 ,执行如下命令：<br />
+nssm install solr<br />
+输入上边的内容后，点击install service 即可。<br />
+然后在任务管理器 ----服务 中即可看到你注册的服务，点击打开服务 ，找到相应的服务，启动即可，设置为自动 ，可做到开机启动。<br />
+这里注意一下nssm 可以设置很多的开机启动服务，非常好用的软件。<br />
+<br />
+第三种：<br />
+我把它写到了另一篇文章里了。。。<br />
+windows设置开机启动可执行文件<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/2026.html">C++项目在不同版本vs下同时开发关于静态库等兼容性问题</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/2028.html">windows设置开机启动可执行文件</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/wohaqiyi/article/details/80549912" target="_blank">https://blog.csdn.net/wohaqiyi/article/details/80549912</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

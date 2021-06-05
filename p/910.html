@@ -1,0 +1,252 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>WEB前端——返回顶部相关问题 （实例）_comonly.cn</title>
+<meta name="keywords" content="WEB前端——返回顶部相关问题 （实例）" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">WEB前端——返回顶部相关问题 （实例）</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-04-17</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='返回顶部的常用方法'>
+	返回顶部的常用方法
+</h2>
+<h3>
+	锚标记
+</h3>
+# 包含了一个位置信息，默认的锚是 #top 也就是网页的顶端。会在地址栏里多出 # 符号。<br />
+<h3>
+	使用JavaScript Scroll 事件
+</h3>
+<pre class="prettyprint lang-html">&lt;div style="position: fixed; bottom:10px; right:10px; z-index:999;"&gt;
+&lt;a href="javascript:scroll(0, 0)" title="返回顶部"&gt;返回顶部&lt;/a&gt;
+&lt;/div&gt;</pre>
+<div>
+	scroll(0, 0) 中第一个参数是相对于屏幕的水平位置，第二个参数是相对于屏幕的垂直位置。可调整其中任意一个值。
+</div>
+<h2 id='关于widow.croll()，widow.crollBy()，widow.crollTo()'>
+	关于window.scroll()，window.scrollBy()，window.scrollTo()
+</h2>
+这3个是全局函数，最新的IE/FF/CH都支持。<br />
+<ol>
+	<li>
+		window.scroll(x,y)是让window滚动条滚动到那个x,y坐标。//x是水平坐标，y是垂直坐标。
+	</li>
+	<li>
+		window.scrollBy(-x,-y)是让window滚动条相对滚动到某个坐标，- 10即相对向左/向上滚动10像素。
+	</li>
+	<li>
+		window.scrollTo(x,y)和window.scroll(x,y)一样。
+	</li>
+</ol>
+<h2 id='j的ocroll方法'>
+	js的onscroll方法
+</h2>
+<p>
+	当元素的滚动条滚动时触发的事件。onscroll事件貌似任何实体元素都可以绑定，这里的实体元素包括DOM元素、window元素、document元素。用法即：element.onscroll=function(){};<br />
+需要注意的是，滚动条一定要出现，而且滚动条是属于这元素的，例如：
+</p>
+<pre class="prettyprint lang-html">&lt;div id="wrap" style="height:100px;overflow:auto;"&gt;
+    &lt;div id="inner" style="height:200px;"&gt;content&lt;/div&gt;
+&lt;/div&gt;</pre>
+因为外层wrap的高度小于内层inner的高度，所以当设置overflow:auto时会出现滚动条，当拖动滚动条时就会触发wrap的onscroll事件，而不是inner的onscroll事件，即这滚动条属于wrap而不是属于inner，明白这点十分重要，对下面理解的scrollTop、scrollHeight一样道理。</div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/909.html">WEB前端——HTML的TextArea标记跟随文本内容自动设置高度，去除右侧滑动条 （实例）</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/911.html">WEB前端——CSS布局inline-block和float的共性和区别 页面元素的隐藏与显示（布局、按钮、:hover（实例））</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#返回顶部的常用方法">返回顶部的常用方法</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#关于widow.croll()，widow.crollBy()，widow.crollTo()">关于widow.croll()，widow.crollBy()，widow.crollTo()</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#j的ocroll方法">j的ocroll方法</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,316 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>TCP超时与重传_comonly.cn</title>
+<meta name="keywords" content="TCP超时与重传" />
+<meta name="description" content="1、超时重传
+
+
+	1、引言
+TCP提供可靠的运输层。它使用的方法之一就是确认从另一端收到的数据。但数据和确认都有可能会丢失。TCP通过在发送时设置一个定时器来解决这种问题。如果当定时器溢出时还没有收到确认，它就重传该数据。对任何实现而言，关键之处就在于超时和重传的策略，即怎样决定超时间隔和如何确定重传的频率。
+对每个连接， TCP管理4个不同的定时器：
+
+
+	
+		1、重传定时器使用于当希望收到另一端的确认。在本章我们将详细讨论这个定时器以及一些相关的问题，如拥塞避免。
+	
+	
+" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">TCP超时与重传</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">有时需要偏执狂</li>
+          <li class="lmname"><a href="https://blog.csdn.net/u010710458/article/details/79872156" target="_blank">https://blog.csdn.net/u010710458/article/details/79872156</a></li>
+          <li class="timer">2020-10-03</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>1、超时重传
+
+
+	1、引言
+TCP提供可靠的运输层。它使用的方法之一就是确认从另一端收到的数据。但数据和确认都有可能会丢失。TCP通过在发送时设置一个定时器来解决这种问题。如果当定时器溢出时还没有收到确认，它就重传该数据。对任何实现而言，关键之处就在于超时和重传的策略，即怎样决定超时间隔和如何确定重传的频率。
+对每个连接， TCP管理4个不同的定时器：
+
+
+	
+		1、重传定时器使用于当希望收到另一端的确认。在本章我们将详细讨论这个定时器以及一些相关的问题，如拥塞避免。
+	
+	
+</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='1、超时重传'>
+	1、超时重传
+</h2>
+<p>
+	1、引言<br />
+TCP提供可靠的运输层。它使用的方法之一就是确认从另一端收到的数据。但数据和确认都有可能会丢失。TCP通过在发送时设置一个定时器来解决这种问题。如果当定时器溢出时还没有收到确认，它就重传该数据。对任何实现而言，关键之处就在于超时和重传的策略，即怎样决定超时间隔和如何确定重传的频率。<br />
+对每个连接， TCP管理4个不同的定时器：
+</p>
+<ul>
+	<li>
+		1、重传定时器使用于当希望收到另一端的确认。在本章我们将详细讨论这个定时器以及一些相关的问题，如拥塞避免。
+	</li>
+	<li>
+		2、坚持(persist)定时器使窗口大小信息保持不断流动，即使另一端关闭了其接收窗口。
+	</li>
+	<li>
+		3、保活(keepalive)定时器可检测到一个空闲连接的另一端何时崩溃或重启。
+	</li>
+	<li>
+		4、2MSL定时器测量一个连接处于TIME_WAIT状态的时间。
+	</li>
+</ul>
+<h2 id='2、慢启动和拥塞避免算法'>
+	<a></a><a></a>2、慢启动和拥塞避免算法
+</h2>
+<p>
+	拥塞窗口是发送方控制流量，滑动窗口是接收方控制流量。
+</p>
+<p>
+	下面讲解什么是慢启动算法，什么是拥塞避免算法，以及二者如何配合使用避免拥塞？？？<br />
+1、为什么需要慢启动？<br />
+在双方握手的时候，会告知对方自己的接收缓冲区大小（接收方接收滑动窗口），而发送方发送窗口是多少较好呢？所以一般发送方一开始便向网络发送多个报文段，直至达到接收方通告的窗口大小为止。当发送方和接收方处于同一个局域网时，这种方式是可以的。但是如果在发送方和接收方之间存在多个路由器和速率较慢的链路时，就有可能出现一些问题。一些中间路由器必须缓存分组，并有可能耗尽存储器的空间，这将严重降低TCP连接的吞吐量。于是TCP在刚开始发送数据的时候支持慢启动算法。
+</p>
+<p>
+	2、为什么需要拥塞避免？<br />
+慢启动完成之后，拥塞窗口会持续增大，但是当拥塞窗口增加过快，可能导致过多的数据注入到网络中，引起整个网络的拥塞，从而需要拥塞避免。<br />
+3、什么时候确定拥塞发生？<br />
+发送方发送一些报文段时，如果发送方没有在时间间隔内收到接收方的确认报文段（响应超时），则就可以人为网络出现了拥塞，就可以进入拥塞避免算法。
+</p>
+<p>
+	4、慢启动和拥塞避免算法原理<br />
+拥塞避免算法和慢启动算法需要对每个连接维持两个变量：一个拥塞窗口cwnd和一个慢启动门限ssthresh。<br />
+慢启动算法：就是在主机刚开始发送数据报的时候先探测一下网络的状况，如果网络状况良好，发送方每发送一次文段都能正确的接受确认报文段。那么就从小到大的增加拥塞窗口的大小，即增加发送窗口的大小。慢启动算法是慢启动的指数增加，初始设置cwnd为1个报文段，此后每收到一个确认就加1，那样，这会使窗口按指数方式增长：发送1个报文段，然后是2个，接着是4个等等。<br />
+慢启动简单的例子：开始发送方先设置cwnd（拥塞窗口）=1,发送第一个报文段M1，接收方接收到M1后，发送方接收到接收方的确认后，把cwnd增加到2，接着发送方发送M2、M3，发送方接收到接收方发送的确认后cwnd增加到4，慢启动算法每经过一个传输轮次（认为发送方都成功接收接收方的确认），拥塞窗口cwnd就加倍。<br />
+拥塞避免算法：为了防止cwnd增加过快而导致网络拥塞，所以需要启动拥塞避免算法。拥塞避免算法使得cwnd缓慢的增加而不是加倍的增长，每经历过一次往返时间就使cwnd增加1，而不是加倍。这样使cwnd缓慢的增长，比慢启动要慢的多。
+</p>
+<p>
+	5、当拥塞发生时候，两种算法如何配合工作？<br />
+无论是慢启动算法还是拥塞避免算法，只要判断网络出现拥塞，就要把慢启动开始门限(ssthresh)设置为发送窗口的一半（&gt;=2），cwnd(拥塞窗口)设置为1，然后在使用慢启动算法，这样做的目的能迅速的减少主机向网络中传输数据，使发生拥塞的路由器能够把队列中堆积的分组处理完毕。慢启动算法拥塞窗口按指数增加，拥塞窗口是按照线性的规律增长，比慢启动算法拥塞窗口增长慢的多。<br />
+二者配合工作简单实例：<br />
+1、TCP连接进行初始化的时候，cwnd=1,ssthresh=16。<br />
+2、连接刚开始使用慢启动算法发送数据，在慢启动算法开始时，cwnd的初始值是1，每次发送方收到一个ACK拥塞窗口就增加1，当ssthresh = cwnd时，就启动拥塞控制算法，拥塞窗口按照规律增长。<br />
+3、当cwnd=24时，网络出现超时，发送方收不到确认ACK，此时设置ssthresh=12,(二分之一cwnd)，并设置cwnd=1,然后重新开始慢启动算法，当cwnd = ssthresh = 12,慢启动算法变为拥塞控制算法，cwnd按照线性的速度进行增长。<br />
+<img src="https://img-blog.csdn.net/20180409200458572?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTA3MTA0NTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述" title="" /><br />
+这就是所谓的：<br />
+加法增大：当网络频发出现超时情况时，ssthresh就下降的很快，为了减少注入到网络中的分组数，而加法增大是指执行拥塞避免算法后，是拥塞窗口缓慢的增大，以防止网络过早出现拥塞。<br />
+乘法减小：无论在慢启动阶段还是在拥塞控制阶段，只要网络出现超时，就是将cwnd置为1，ssthresh置为cwnd的一半，然后执行慢启动（cwnd小于ssthresh）。
+</p>
+<p>
+	6、接收方接收窗口和发送方拥塞窗口的关系<br />
+网络中实际传输的未经确认的数据大小 = Min(拥塞窗口，接收方的接收窗口)。
+</p>
+<h2 id='3、快速重传与快速恢复算法'>
+	<a></a><a></a>3、快速重传与快速恢复算法
+</h2>
+<p>
+	针对接收到失序报文的快速重传算法。
+</p>
+<p>
+	快速重传<br />
+快重传算法要求首先接收方收到一个失序的报文段后就立刻发出重复确认，而不要等待自己发送数据时才进行捎带确认。例如当接收方成功的接受了发送方发送来的M1、M2并且分别给发送了ACK，现在接收方没有收到M3，而接收到了M4，显然接收方不能确认M4，因为M4是失序的报文段。如果根据可靠性传输原理接收方什么都不做，但是按照快速重传算法，在收到M4、M5等报文段的时候，不断重复的向发送方发送M2的ACK。该重复的ACK的目的在于让对方知道收到一个失序的报文段，并告诉对方自己希望收到的序号告诉对方我要M3啊，你快点发给我。如果接收方一连收到三个重复的ACK,那么发送方不必等待重传计时器到期，由于发送方尽早重传未被确认的报文段。<br />
+<img src="https://img-blog.csdn.net/20180409202526836?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTA3MTA0NTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述" title="" /> 
+</p>
+<p>
+	快速恢复算法<br />
+1、当发送发连续接收到三个确认时，就执行乘法减小算法，把慢启动开始门限（ssthresh）减半，但是接下来并不执行慢启动算法。而是把cwnd设置为ssthresh的一半， 然后执行拥塞避免算法，使拥塞窗口缓慢增大，这就是快速恢复算法。<br />
+<img src="https://img-blog.csdn.net/20180409203135153?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTA3MTA0NTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述" title="" /> 
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1777.html">HTTP的长连接和短连接</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1779.html">TCP通信粘包问题分析和解决</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/u010710458/article/details/79872156" target="_blank">https://blog.csdn.net/u010710458/article/details/79872156</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#1、超时重传">1、超时重传</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#2、慢启动和拥塞避免算法">2、慢启动和拥塞避免算法</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#3、快速重传与快速恢复算法">3、快速重传与快速恢复算法</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

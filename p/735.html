@@ -1,0 +1,227 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>管理员登录_comonly.cn</title>
+<meta name="keywords" content="管理员登录" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">管理员登录</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-05-20</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	javaweb---jsp asp数据库框架
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 添加管理员登录验证<br />
+在制作用户登录时有一种验证方式。这里，可以直接利用服务器行为进行登录验证。打开网页adminlogin.asp，设计管理员登录表单，测试值为asdfgh,用户名，密码，均是。<br />
+<br />
+在“服务器行为”面板上单击“+”按钮，选择“用户身份验证”——“登录用户”命令，此对话框用于在登录网页上添加一个服务器行为，它确保访问者输入的用户名和密码有效，按要求填写。<br />
+如果要让用户在试图访问受限页时前进到登录页，并且在登陆后返回改受限页，请选择“转到前一URL”选项。如果用户未登录就试图打开受限页来访问站点，则受限页可以使改用户前进到登录页。当用户登录成功，登录页会将用户重定向到原来的受限页。<br />
+当在网页中添加“限制对页的访问”服务器行为后，请确保在“如果访问被拒绝，则转到”文本框中指定登录页。在“登录用户”对话框，从表单获取的用户名和密码与数据表Admin中对于字段进行比较，如果登录成功，转到“adminuser.asp”,如果验证失败则仍将停留在“adminlogin.asp”页面。单击“确定”添加成功，表单区域显示为浅绿色。<br />
+接下来，要在网页adminuser.asp,admintype.asp,delete.asp和editblog.asp中分别添加服务器行为“限制对页的访问”。<br />
+<br />
+以adminuser.asp为例，在“服务器行为”面板上单击“+”按钮，选择“用户身份验证”——“限制对页的访问”命令。在对话框上选择“用户名和密码”，表明对管理页面的访问要经过用户名和密码的认证。同时，指定访问被拒绝是转到的页面adminlogin.asp(管理登录页面)。<br />
+如果只让具有特定访问权限的用户才能访问该页，则选择“用户名，密码和访问级别”，并指定该页的授权级别。用户可以单击“定义”按钮，在出现的“定义访问级别”列表中，输入新的授权级别，并通过单击“+”按钮添加。Dreamweaver8自动保存该级别，不必为每个页面输入该级别，添加服务器行为“限制对页的访问”后，如果没有进行管理员登录就直接访问管理页面，则会跳转至adminlogin.asp，且在浏览器地址栏出现拒绝登录的URL参数。<br />
+上述管理页面都要添加服务器行为“限制页的访问”，避免没有认证的用户访问。<br />
+<br />
+管理员注销<br />
+为保证系统的安全，管理员退出系统时需要注销此次登录。利用服务器行为实现。选中文本“注销管理员登录”，单击“服务器行为”面板“+”按钮，选择“用户身份验证”——“注销用户”，改对话框用于注销用户并清除在用户登录时创建的会话变量1.当用户单击链接或者当指定页加载时，可以调用“注销用户”服务器行为。<br />
+1，如果已选择文本或图像作为注销链接，则指定在用户单击该链接时所打开的页，该页通常是“再见”或“谢谢”。<br />
+2，如果要在页加载时注销用户，请选择“当页载入时注销”。<br />
+<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/729.html">结构化查询语言SQL</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/743.html">如何以管理员身份运行cmd2</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,524 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Spring之AOP配置实现及参数设置_comonly.cn</title>
+<meta name="keywords" content="Spring之AOP配置实现及参数设置" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Spring之AOP配置实现及参数设置</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">springMVC之AOP</li>
+          <li class="lmname"><a href="https://www.cnblogs.com/parryyang/p/5881523.html" target="_blank">https://www.cnblogs.com/parryyang/p/5881523.html</a></li>
+          <li class="timer">2019-02-23</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	java框架-spring等
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='配置（基于注解）'>
+	配置（基于注解）
+</h2>
+<p>
+	1. 引入aop相关的jar包。基于注解要多引入的两个包aspectjweaver.jar或aspectjrtweaver.jar，这个2个包中才有Aspect这个注解。
+</p>
+<pre class="prettyprint lang-xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-aop&lt;/artifactId&gt;
+    &lt;version&gt;${spring.version}&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;!-- aop注解相关包 --&gt; &lt;dependency&gt;
+    &lt;groupId&gt;org.aspectj&lt;/groupId&gt;
+    &lt;artifactId&gt;aspectjrt&lt;/artifactId&gt;
+    &lt;version&gt;1.9.2&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.aspectj&lt;/groupId&gt;
+    &lt;artifactId&gt;aspectjweaver&lt;/artifactId&gt;
+    &lt;version&gt;1.9.2&lt;/version&gt;
+&lt;/dependency&gt;</pre>
+<p>
+	2. spring-mvc.xml中引入aop名称空间
+</p>
+<pre class="prettyprint lang-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"&gt;</pre>
+3. spring-mvc.xml中开启aop注解扫描，如下配置所示：<br />
+<pre class="prettyprint lang-xml">&lt;!-- 启动自动扫描 --&gt;
+&lt;context:component-scan base-package="vip.chencheng.*" /&gt;
+
+&lt;!--使用xml配置aop--&gt;
+&lt;aop:aspectj-autoproxy proxy-target-class="true" /&gt;</pre>
+<h2 id='使用（基于注解）'>
+	使用（基于注解）
+</h2>
+<p>
+	spring使用AspectJ注解来声明通知方法,注解参数如下：
+</p>
+<ul>
+	<li>
+		@After： 通知方法会在目标方法返回或抛出异常后调用
+	</li>
+	<li>
+		@AfterReturning： 通知方法会在目标方法返回后调用
+	</li>
+	<li>
+		@AfterThrowing： 通知方法会在目标方法抛出异常后调用
+	</li>
+	<li>
+		@Around： 通知方法会将目标方法封装起来
+	</li>
+	<li>
+		@Before： 通知方法会在目标方法调用之前执行
+	</li>
+</ul></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1063.html">Spring控制反转（IOC）</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1065.html">Spring MVC  利用切面AOP编程进行加密</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.cnblogs.com/parryyang/p/5881523.html" target="_blank">https://www.cnblogs.com/parryyang/p/5881523.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="注解实例">
+							<h2 style="display:inline;color:#5BC648;">注解实例</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-02-25&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><pre class="prettyprint lang-java">package vip.chencheng.aop;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint; import org.aspectj.lang.annotation.*;
+import org.springframework.stereotype.Component;
+
+/**
+ * 
+ * @author chen cheng
+ * 注解方式声明aop
+ * 1.用@Aspect注解将类声明为切面
+ * 	如果用@Component("")注解注释为一个bean对象，那么就要在spring配置文件中开启注解
+ * 	扫描，&lt;context:component-scan base-package="com.cjh.aop2"/&gt;否则要在spring配置文件中声明一个bean对象
+ * 
+ * 2.在切面需要实现相应方法的前面加上相应的注释，也就是通知类型。
+ * 3.此处有环绕通知，环绕通知方法一定要有ProceedingJoinPoint类型的参数传入，然后执行对应的proceed()方法，环绕才能实现。
+ */
+
+@Component
+@Aspect
+public class SleepHelper {
+ 
+    public SleepHelper(){
+        
+    }
+    
+    /**
+     * 定义一个方法，用于声明切入点表达式，方法中一般不需要添加其他代码
+     * 使用@Pointcut声明切入点表达式
+     * 后面的通知直接使用方法名来引用当前的切点表达式；如果是其他类使用，加上包名即可
+     */
+    @Pointcut("execution(* vip.chencheng.controller.UrlController.*(..))")
+    public void declearJoinPointExpression(){}
+    
+    /**
+     * 前置通知
+     * @param joinPoint
+     *
+     * 前置通知(注解中的sayings()方法，其实就是上面定义pointcut切点注解所修饰的方法名，那只是个代理对象,不需要写具体方法，
+     * 相当于xml声明切面的id名，如下，相当于id="embark",用于供其他通知类型引用)
+     * &lt;aop:config&gt;
+        &lt;aop:aspect ref="mistrel"&gt;
+            &lt;!-- 定义切点 --&gt;
+            &lt;aop:pointcut expression="execution(* vip.chencheng.controller.UrlController.*(..))" id="declearJoinPointExpression"/&gt;
+            &lt;!-- 声明前置通知 (在切点方法被执行前调用) --&gt;
+            &lt;aop:before method="beforMethod" pointcut-ref="declearJoinPointExpression"/&gt;
+            &lt;!-- 声明后置通知 (在切点方法被执行后调用) --&gt;
+            &lt;aop:after method="afterMethod" pointcut-ref="declearJoinPointExpression"/&gt;
+        &lt;/aop:aspect&gt;
+       &lt;/aop:config&gt;
+     */
+    @Before("declearJoinPointExpression()") //该标签声明次方法是一个前置通知：在目标方法开始之前执行
+    public void beforMethod(JoinPoint joinPoint){
+        String methodName = joinPoint.getSignature().getName();
+        List&lt;Object&gt; args = Arrays.asList(joinPoint.getArgs());
+        System.out.println("this method "+methodName+" begin. param&lt;"+ args+"&gt;");
+    }
+    
+    /**
+     * 后置通知（无论方法是否发生异常都会执行,所以访问不到方法的返回值）
+     * @param joinPoint
+     */
+    @After("declearJoinPointExpression()")
+    public void afterMethod(JoinPoint joinPoint){
+        String methodName = joinPoint.getSignature().getName();
+        System.out.println("this method "+methodName+" end.");
+    }
+    
+    /**
+     * 返回通知（在方法正常结束执行的代码）
+     * 返回通知可以访问到方法的返回值！
+     * @param joinPoit
+     */
+    @AfterReturning(value="declearJoinPointExpression()",returning="result")
+    public void afterReturnMethod(JoinPoint joinPoint,Object result){
+        String methodName = joinPoint.getSignature().getName();
+        System.out.println("this method "+methodName+" end.result&lt;"+result+"&gt;");
+    }
+    
+    /**
+     * 异常通知（方法发生异常执行的代码）
+     * 可以访问到异常对象；且可以指定在出现特定异常时执行的代码
+     * @param joinPoint
+     * @param ex
+     */
+    @AfterThrowing(value="declearJoinPointExpression()",throwing="ex")
+    public void afterThrowingMethod(JoinPoint joinPoint,Exception ex){
+        String methodName = joinPoint.getSignature().getName();
+        System.out.println("this method "+methodName+" end.ex message&lt;"+ex+"&gt;");
+    }
+    
+    /**
+     * 环绕通知(需要携带类型为ProceedingJoinPoint类型的参数)
+     * 环绕通知方法一定要有ProceedingJoinPoint类型的参数传入，然后执行对应的proceed()方法，环绕才能实现。
+     * 环绕通知包含前置、后置、返回、异常通知；ProceedingJoinPoin 类型的参数可以决定是否执行目标方法
+     * 且环绕通知必须有返回值，返回值即目标方法的返回值
+     * @param joinPoint
+     */
+    @Around(value="declearJoinPointExpression()")
+    public Object aroundMethod(ProceedingJoinPoint point){
+        
+        Object result = null;
+        String methodName = point.getSignature().getName();
+        try {
+            //前置通知
+            System.out.println("The method "+ methodName+" start. param&lt;"+ Arrays.asList(point.getArgs())+"&gt;");
+            //执行目标方法
+            result = point.proceed();
+            //返回通知
+            System.out.println("The method "+ methodName+" end. result&lt;"+ result+"&gt;");
+        } catch (Throwable e) {
+            //异常通知
+            System.out.println("this method "+methodName+" end.ex message&lt;"+e+"&gt;");
+            throw new RuntimeException(e);
+        }
+        //后置通知
+        System.out.println("The method "+ methodName+" end.");
+        return result;
+    }
+    
+}</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="aop中获取及修改增强方法中的参数">
+							<h2 style="display:inline;color:#5BC648;">aop中获取及修改增强方法中的参数</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-02-25&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	只能用在环绕通知中
+</p>
+<ul>
+	<li>
+		获取参数：Object[] args = point.getArgs();
+	</li>
+	<li>
+		修改参数：调用环绕增强（Around）中的point.proceed(args)方法，就可以修改传进来的参数了。相当于重新传了一份参数进去。
+	</li>
+</ul>
+<pre class="prettyprint lang-java">//获取方法名
+String methodName = point.getSignature().getName();
+//获取参数名的一个数组
+String[] parameterName = ((MethodSignature)point.getSignature()).getParameterNames();
+
+//将数字转化为list. Arrays.asList
+//该方法将数组与列表链接起来，当更新其中之一时，另一个自动更新
+//不适用于基本数据类型。不支持add和remove方法
+List&lt;String&gt; paramNameList = Arrays.asList(parameterName);
+
+//获取传入的参数，和上面参数名顺序一致
+Object[] args = point.getArgs();
+
+//遍历参数名及参数值
+for(int i =0; i&lt; parameterName.length; i++) {
+    System.out.println(parameterName[i] + "参数值：" + arg[i]);
+}
+
+//获取指定参数名的参数值
+args[paramNameList.indexOf("zt")] );
+
+//修改某一参数值
+args[0]="修改的参数值";
+//将修改后的参数值传入到增强的方法中
+point.proceed(args);</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="aop修改方法的返回值 或者 跳过增强方法执行">
+							<h2 style="display:inline;color:#5BC648;">aop修改方法的返回值 或者 跳过增强方法执行</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-02-25&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	环绕通知中不执行 result = point.proceed(args); 这样就跳过增强方法执行。
+</p>
+<p>
+	每个环绕通知都有一个返回值。可以修改上述result值，或者直接定义新的返回值作为争强方法的返回
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="通过切断ProceedingJoinPoint能够获取到的信息">
+							<h2 style="display:inline;color:#5BC648;">通过切断ProceedingJoinPoint能够获取到的信息</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-02-25&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	加入定义切点为joinPoint，异常为ex
+</p>
+<p>
+	<br />
+</p>
+<p>
+	类名 joinPoint.getTarget().getClass().getName()
+</p>
+<p>
+	方法名 joinPoint.getSignature().getName()
+</p>
+<p>
+	异常通知 ex.getMessage()
+</p>
+<p>
+	参数&nbsp;<span>joinPoint</span>.getArgs()
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#配置（基于注解）">配置（基于注解）</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#使用（基于注解）">使用（基于注解）</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#注解实例">注解实例</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#aop中获取及修改增强方法中的参数">aop中获取及修改增强方法中的参数</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#aop修改方法的返回值 或者 跳过增强方法执行">aop修改方法的返回值 或者 跳过增强方法执行</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#通过切断ProceedingJoinPoint能够获取到的信息">通过切断ProceedingJoinPoint能够获取到的信息</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,427 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>maven_comonly.cn</title>
+<meta name="keywords" content="maven" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">maven</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">子莫晓</li>
+          <li class="lmname"><a href="https://www.cnblogs.com/zmx12/p/5586753.html" target="_blank">https://www.cnblogs.com/zmx12/p/5586753.html</a></li>
+          <li class="timer">2018-10-04</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	包管理--版本库等
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	不过，这只是在web项目中使用了Maven的支持，而不是直接创建的Maven项目。若是创建Maven项目，文件目录结构与标准的不一致，还要自己添加很多子目录，比较烦。
+</p>
+<h2 id='安装Mve'>
+	安装Maven
+</h2>
+(1) 下载及解压。直接在官网https://maven.apache.org/download.cgi下载的，解压即可使用。最新版，要求jdk1.7以上。3.2.5版本还支持jdk1.6。解压后把文件夹apache-maven-3.2.5直接放到想要安装的位置（相当于安装目录吧）
+<p>
+	(2) 修改配置文件settings.xml。在apache-maven-3.2.5\conf下找到settings.xml，修改localRepository段，原来是被注释掉的，去除注释。然后配置中央仓库（这里使用阿里云的）
+</p>
+<pre class="prettyprint lang-xml">&lt;!-- 配置本地仓库 --&gt;
+&lt;localRepository&gt; 本地仓库的目录 &lt;/localRepository&gt;
+
+&lt;!-- 配置中央仓库 --&gt;
+&lt;mirror&gt; &lt;id&gt;alimaven&lt;/id&gt;
+  &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;
+  &lt;name&gt;alyun maven&lt;/name&gt;
+  &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public/&lt;/url&gt;
+&lt;/mirror&gt;</pre>
+<p>
+	关于环境变量。许多文章包括官网都说要设置修改环境变量，在Path上加上对　maven安装路径/bin　的支持。但是若不在cmd命令行方式下运行mvn命令，可以省略这一步的。
+</p>
+<h2 id='将mve添加到myeclie中'>
+	将maven添加到myeclipse中
+</h2>
+<p>
+	MyEclipse自带有maven插件，MyEclipse的版本不同，自带的maven版本也就不同，因此很多人不太愿意使用自带的插件。在MyEclipse中添加外部的maven插件只需要两步骤即可完成。
+</p>
+<ul>
+	<li>
+		在MyEclipse中集成自己安装的maven。Windows-&gt;Preferences-&gt;MyEclipse-&gt;Maven4MyEclipse，修改installations和User settings两项。其中installation通过add选择maven的安装目录可以进行设置。
+	</li>
+	<li>
+		在installations同级目录下，选择user settings，在第二行user settings中把你修改的maven的setting.xml文件引进来。
+	</li>
+</ul>
+<h2 id='MyEclie中创建一个支持Mve的WebProject'>
+	MyEclispe中创建一个支持Maven的Web Project
+</h2>
+<h4>
+	1. 直接创建maven项目
+</h4>
+<p>
+	开启myeclipse，右键new——》other，找到maven project。选择maven project，显示创建maven项目的窗口，Create a simple project括号后面的skip archetype selection表示跳过骨架，骨架表示一些创建模板，这里我们不使用模板更加简单。输入maven项目的基本信息，如果是web工程，在Packaging栏我们要选择war（区别web项目和Java项目等）。
+</p>
+<h4>
+	2. 创建普通的web项目，在创建中添加maven支持
+</h4>
+<p>
+	直接在创建过程中勾选 Add Maven Support.
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1002.html">思维导图脑图</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1004.html">Android网络请求Volley</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.cnblogs.com/zmx12/p/5586753.html" target="_blank">https://www.cnblogs.com/zmx12/p/5586753.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="本人maven配置">
+							<h2 style="display:inline;color:#5BC648;">本人maven配置</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-10-05&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	安装目录：D:\Program Files (x86)\Java\apache-maven-3.2.5
+</p>
+<p>
+	仓库目录：F:\MyEclipse 8.5\maven_repository
+</p>
+<p>
+	中央仓库地址：http://maven.aliyun.com/nexus/content/groups/public/
+</p>
+<p>
+	高版本不支持jdk1.6版本，所以使用的maven版本是：apache-maven-3.2.5-bin.zip
+</p>
+<p>
+	<span>不在cmd命令行方式下运行mvn命令，所以没有配置环境变量</span><span></span> 
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="在pom.xml中添加jar包依赖">
+							<h2 style="display:inline;color:#5BC648;">在pom.xml中添加jar包依赖</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-10-05&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	通过https://mvnrepository.com/可以搜索到各种jar包
+</p>
+<p>
+	用的阿里云的仓库也可以通过http://maven.aliyun.com/mvn/search搜索jar包
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="Eclipse下，修改MAVEN 中央仓库地址，解决maven下载慢问题">
+							<h2 style="display:inline;color:#5BC648;">Eclipse下，修改MAVEN 中央仓库地址，解决maven下载慢问题</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-03-18&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	：&nbsp;<a href="https://blog.csdn.net/zlcoy_1/article/details/70057722" target="_blank">https://blog.csdn.net/zlcoy_1/article/details/70057722</a>
+</p>
+<p>
+	好久不写代码，突然需要写点小程序，手生，记录知识点备忘：
+</p>
+表现：导入项目到工作空间后，编译时显示maven在下载资源，但速度巨慢，无法忍受。<br />
+<br />
+eclipse中修改maven中央仓库：2种方式<br />
+方式1：(已测试)<br />
+作用于所有工作空间：<br />
+1、逐项打开：eclipse-&gt;preference-&gt;Maven-&gt;User Settings。按窗口中的User Settings文本框显示的路径，创建settings.xml文件，或修改路径后创建文件。<br />
+2、关闭窗口后重新打开，点击“open file”，在IDE中打开该配置文件，出现“could not read settings.xml”不必管。<br />
+<p>
+	3、复制下列内容至配置文件，其中&lt;mirror&gt;&lt;/mirror&gt;部分为国内镜像。
+</p>
+<p>
+	<br />
+</p>
+<pre class="prettyprint lang-xml">&lt;settings xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd"&gt;
+	&lt;mirrors&gt;
+		&lt;!-- mirror | Specifies a repository mirror site to use instead of a given 
+			repository. The repository that | this mirror serves has an ID that matches 
+			the mirrorOf element of this mirror. IDs are used | for inheritance and direct 
+			lookup purposes, and must be unique across the set of mirrors. | --&gt;
+		 &lt;mirror&gt;
+		    &lt;id&gt;alimaven&lt;/id&gt;
+		    &lt;name&gt;aliyun maven&lt;/name&gt;
+		    &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public/&lt;/url&gt;
+		    &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;
+		  &lt;/mirror&gt;
+		
+		  &lt;mirror&gt; 
+		    &lt;id&gt;uk&lt;/id&gt;  
+		    &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;  
+		    &lt;name&gt;Human Readable Name for this Mirror.&lt;/name&gt;  
+		    &lt;url&gt;http://uk.maven.org/maven2/&lt;/url&gt; 
+		  &lt;/mirror&gt;
+		
+		   &lt;mirror&gt;
+		    &lt;id&gt;CN&lt;/id&gt;
+		    &lt;name&gt;OSChina Central&lt;/name&gt;
+		    &lt;url&gt;http://maven.oschina.net/content/groups/public/&lt;/url&gt;
+		    &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;
+		  &lt;/mirror&gt;
+		
+		  &lt;mirror&gt;
+		    &lt;id&gt;nexus&lt;/id&gt;
+		    &lt;name&gt;internal nexus repository&lt;/name&gt;
+		    &lt;url&gt;http://repo.maven.apache.org/maven2&lt;/url&gt;
+		    &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;
+		  &lt;/mirror&gt;
+	&lt;/mirrors&gt;
+ 
+	&lt;profiles&gt;
+		&lt;profile&gt;
+			&lt;id&gt;default&lt;/id&gt;
+			&lt;repositories&gt;
+				&lt;repository&gt;
+					&lt;id&gt;nexus&lt;/id&gt;
+					&lt;name&gt;local private nexus&lt;/name&gt;
+					&lt;url&gt;http://maven.oschina.net/content/groups/public/&lt;/url&gt;
+					&lt;releases&gt;
+						&lt;enabled&gt;true&lt;/enabled&gt;
+					&lt;/releases&gt;
+					&lt;snapshots&gt;
+						&lt;enabled&gt;false&lt;/enabled&gt;
+					&lt;/snapshots&gt;
+				&lt;/repository&gt;
+			&lt;/repositories&gt;
+			&lt;pluginRepositories&gt;
+				&lt;pluginRepository&gt;
+					&lt;id&gt;nexus&lt;/id&gt;
+					&lt;name&gt;local private nexus&lt;/name&gt;
+					&lt;url&gt;http://maven.oschina.net/content/groups/public/&lt;/url&gt;
+					&lt;releases&gt;
+						&lt;enabled&gt;true&lt;/enabled&gt;
+					&lt;/releases&gt;
+					&lt;snapshots&gt;
+						&lt;enabled&gt;false&lt;/enabled&gt;
+					&lt;/snapshots&gt;
+				&lt;/pluginRepository&gt;
+			&lt;/pluginRepositories&gt;
+		&lt;/profile&gt;
+	&lt;/profiles&gt;
+&lt;/settings&gt;</pre>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	4、"apply"后配置生效，重新编译即可。
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#安装Mve">安装Mve</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#将mve添加到myeclie中">将mve添加到myeclie中</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#MyEclie中创建一个支持Mve的WebProject">MyEclie中创建一个支持Mve的WebProject</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#本人maven配置">本人maven配置</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#在pom.xml中添加jar包依赖">在pom.xml中添加jar包依赖</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Eclipse下，修改MAVEN 中央仓库地址，解决maven下载慢问题">Eclipse下，修改MAVEN 中央仓库地址，解决maven下载慢问题</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

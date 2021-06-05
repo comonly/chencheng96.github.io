@@ -1,0 +1,339 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>windows下通过msys编译nginx_comonly.cn</title>
+<meta name="keywords" content="windows下通过msys编译nginx" />
+<meta name="description" content="nginx官网介绍的编译方法：http://nginx.org/en/docs/howto_build_on_win32.html 
+
+
+	
+
+
+	首先安装msys
+
+
+	如果需要使用SSL模块，必须安装 perl
+
+
+	PCRE, zlib and OpenSSL libraries sources.需要下载
+
+
+	下载nginx源码：http://nginx.org/en/download.html 包含已经编译好的可直接使用的包
+
+
+	github地址：https" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">windows下通过msys编译nginx</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2020-01-18</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>nginx官网介绍的编译方法：http://nginx.org/en/docs/howto_build_on_win32.html 
+
+
+	
+
+
+	首先安装msys
+
+
+	如果需要使用SSL模块，必须安装 perl
+
+
+	PCRE, zlib and OpenSSL libraries sources.需要下载
+
+
+	下载nginx源码：http://nginx.org/en/download.html 包含已经编译好的可直接使用的包
+
+
+	github地址：https</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	nginx官网介绍的编译方法：<a href="http://nginx.org/en/docs/howto_build_on_win32.html" target="_blank">http://nginx.org/en/docs/howto_build_on_win32.html</a> 
+</p>
+<p>
+	<br />
+</p>
+<p>
+	首先安装msys
+</p>
+<p>
+	如果需要使用SSL模块，必须安装 perl
+</p>
+<p>
+	<a href="http://www.pcre.org/" target="_blank">PCRE</a>, <a href="http://zlib.net/" target="_blank">zlib</a> and <a href="http://www.openssl.org/" target="_blank">OpenSSL</a> libraries sources.需要下载
+</p>
+<p>
+	下载nginx源码：<a href="http://nginx.org/en/download.html" target="_blank">http://nginx.org/en/download.html</a> 包含已经编译好的可直接使用的包
+</p>
+<p>
+	github地址：<a href="https://github.com/nginx/nginx" target="_blank">https://github.com/nginx/nginx</a> 
+</p>
+<p>
+	<br />
+</p>
+<p>
+	编译过程：
+</p>
+<p>
+	1. 解压nginx
+</p>
+<p>
+	2. 在nginx根目录下（和auto目录同级）新建objs文件夹
+</p>
+<p>
+	3. 在objs文件夹下新建lib文件夹
+</p>
+<p>
+	4. 将解压后的PCRE, zlib and OpenSSL放到 objs/lib 目录下。
+</p>
+<p>
+	<span>5. 通过msys进入nginx根目录下执行</span> 
+</p>
+<p>
+	<span> </span> 
+</p>
+<pre class="prettyprint lang-bsh">auto/configure \
+    --with-cc=cl \
+    --with-debug \
+    --prefix= \
+    --conf-path=conf/nginx.conf \
+    --pid-path=logs/nginx.pid \
+    --http-log-path=logs/access.log \
+    --error-log-path=logs/error.log \
+    --sbin-path=nginx.exe \
+    --http-client-body-temp-path=temp/client_body_temp \
+    --http-proxy-temp-path=temp/proxy_temp \
+    --http-fastcgi-temp-path=temp/fastcgi_temp \
+    --http-scgi-temp-path=temp/scgi_temp \
+    --http-uwsgi-temp-path=temp/uwsgi_temp \
+    --with-cc-opt=-DFD_SETSIZE=1024 \
+    --with-pcre=objs/lib/pcre-8.43 \
+    --with-zlib=objs/lib/zlib-1.2.11 \
+    --with-openssl=objs/lib/openssl-1.1.1c \
+    --with-openssl-opt=no-asm \
+    --with-http_ssl_module</pre>
+<p>
+	<span>其中 openssl 模块如果不需要可以去掉 <span>--with-openssl</span> ，否则需要在电脑上安装有perl。</span> 
+</p>
+<p>
+	<span><br />
+</span> 
+</p>
+<p>
+	<span>6. 打开vs命令工具提示，到nginx根目录中，执行 nmake 开始编译链接。</span> 
+</p>
+<p>
+	如果提示 cl 未找到等异常，需要将vs路径添加到环境变量中。
+</p>
+<p>
+	<span>比如：C:\Program Files (x86)\Microsoft Visual Studio 11.0\Common7\IDE</span> 
+</p>
+<p>
+	<span><br />
+</span> 
+</p>
+<p>
+	<span>如果提示 “'sed' 不是内部或外部命令，也不是可运行的程序” ，若无需使用 sed 可以忽略。</span> 
+</p>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1654.html">Generate mapfile 解决 APPCRASH 问题</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1656.html">通达信指标 条件选股公式编辑</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

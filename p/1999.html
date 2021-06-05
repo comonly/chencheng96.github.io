@@ -1,0 +1,215 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>深度破解学习————Linux磁盘管理和管理文件系统_comonly.cn</title>
+<meta name="keywords" content="深度破解学习————Linux磁盘管理和管理文件系统" />
+<meta name="description" content="一.磁盘的详细结构1.磁盘2.磁头3.磁道4.扇区5.柱面盘片的片面和磁头每个盘片包含两个面，每个盘面都对应地有一个读/写磁头。受到硬盘整体体积和生产成本的限制，盘片数量都受到限制，一般都在5片以内。盘片的编号自下向上从0开始，如最下边的盘片有0面和1面，再上一个盘片就编号为2面和3面。我们通过这张图来仔细研究一下什么是磁盘扇区和磁道下图显示的是一个盘面，盘面中一圈圈灰色同心圆为一条条磁道，从圆心" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">深度破解学习————Linux磁盘管理和管理文件系统</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">23trl</li>
+          <li class="lmname"><a href="https://blog.51cto.com/14449524/2430823" target="_blank">https://blog.51cto.com/14449524/2430823</a></li>
+          <li class="timer">2019-08-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>一.磁盘的详细结构1.磁盘2.磁头3.磁道4.扇区5.柱面盘片的片面和磁头每个盘片包含两个面，每个盘面都对应地有一个读/写磁头。受到硬盘整体体积和生产成本的限制，盘片数量都受到限制，一般都在5片以内。盘片的编号自下向上从0开始，如最下边的盘片有0面和1面，再上一个盘片就编号为2面和3面。我们通过这张图来仔细研究一下什么是磁盘扇区和磁道下图显示的是一个盘面，盘面中一圈圈灰色同心圆为一条条磁道，从圆心</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <div class="con artical-content editor-preview-side"><p>一.磁盘的详细结构<br>1.磁盘<br>2.磁头<br>3.磁道<br>4.扇区<br>5.柱面<br>盘片的片面和磁头<br>每个盘片包含两个面，每个盘面都对应地有一个读/写磁头。受到硬盘整体体积和生产成本的限制，盘片数量都受到限制，一般都在5片以内。盘片的编号自下向上从0开始，如最下边的盘片有0面和1面，再上一个盘片就编号为2面和3面。<br><img src="https://s1.51cto.com/images/blog/201908/19/3465b0055e40f656c9615f9c3ff96510.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="深度破解学习————Linux磁盘管理和管理文件系统" style="cursor: pointer;"><br>我们通过这张图来仔细研究一下什么是磁盘<br>扇区 和 磁道<br>下图显示的是一个盘面，盘面中一圈圈灰色同心圆为一条条磁道，从圆心向外画直线，可以将磁道划分为若干个弧段，每个磁道上一个弧段被称之为一个扇区（图践绿色部分）。扇区是磁盘的最小组成单元，通常是512字节。（由于不断提高磁盘的大小，部分厂商设定每个扇区的大小是4096字节）<br><img src="https://s1.51cto.com/images/blog/201908/19/037b058e281ce762d08093809f81654a.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="深度破解学习————Linux磁盘管理和管理文件系统" style="cursor: pointer;"><br>磁头 和 柱面<br>硬盘通常由重叠的一组盘片构成，每个盘面都被划分为数目相等的磁道，并从外缘的“0”开始编号，具有相同编号的磁道形成一个圆柱，称之为磁盘的柱面。磁盘的柱面数与一个盘面上的磁道数是相等的。由于每个盘面都有自己的磁头，因此，盘面数等于总的磁头数。<br><img src="https://s1.51cto.com/images/blog/201908/19/ebaf1db554fb59797e576f2aadf1e4a5.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="深度破解学习————Linux磁盘管理和管理文件系统" style="cursor: pointer;"><br>磁盘容量计算<br>存储容量 ＝ 磁头数 × 磁道(柱面)数 × 每道扇区数 × 每扇区字节数<br>图中磁盘是一个 3个圆盘6个磁头，7个柱面（每个盘片7个磁道） 的磁盘，图3中每条磁道有12个扇区，所以此磁盘的容量为：<br>存储容量 6 <em> 7 </em> 12 * 512 = 258048<br>每个磁道的扇区数一样是说的老的硬盘，外圈的密度小，内圈的密度大，每圈可存储的数据量是一样的。新的硬盘数据的密度都一致，这样磁道的周长越长，扇区就越多，存储的数据量就越大。<br>1.扇区： 硬盘的最小读写单元<br>2.块/簇： 是操作系统针对硬盘读写的最小单元<br>3.page： 是内存与操作系统之间操作的最小单元。<br>二.磁盘分区表示<br>分区：表示分区时，以硬盘设备的文件名作为基础，在后边添加该分区（无论主分区、 <br>扩展分区、逻辑分区）对应的数字序号即可。例如，第 1 个 IDE 硬盘中的第 1 个分区表 <br>示为“hda1”、第 2 个分区表示为“hda2”，第 2 个 SCSI 硬盘中的第 3 个分区表示为“sdb3”、<br>第 5 个分区表示为“sdb5”。 <br>需要注意的是，由于硬盘中的主分区数目只有 4 个，因此主分区和扩展分区的序号也就 <br>限制在 1～4，而逻辑分区的序号将始终从 5 开始。例如，即便第 1 个 IDE 硬盘中只划分了 <br>一个主分区、一个扩展分区，则新建的第 1 个逻辑分区的序号仍然是从 5 开始的，应表示为 <br>“hda5”，第 2 个逻辑分区表示为“hda6”。 <br>三.linux使用的文件系统类型<br>XFS：是一种高性能的日志文件系统，特别擅长于处理大文件，可支持上百万 T 字节的<br>存储空间。由于 XFS 文件系统开启日志功能，所以即便发生宕机也不怕数据遭到破坏，<br>这种文件系统可以根据日志记录在短时间内进行数据恢复。<br> SWAP：交换文件系统，用于为 Linux 系统建立交换分区。交换分区的作用相当于虚拟内<br>存，能够在一定程度上缓解物理内存不足的问题。一般建议将交换分区的大小设置为物<br>理内存的 1.5～2 倍。例如，对于拥有 512MB 物理内存的主机，其交换分区的大小建议<br>设置为 1024MB。如果服务器的物理内存足够大（如 8GB 以上），也可以不设置交换分区。<br>交换分区不用于直接存储用户的文件和目录等数据。<br>四.我们来练习和使用命令<br>1.查看我们的磁盘分区<img src="https://s1.51cto.com/images/blog/201908/19/4b56c9689c66c63febe6bfcc0c623d72.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="深度破解学习————Linux磁盘管理和管理文件系统" style="cursor: pointer;"><br>2.查看我们所有磁盘分区的详细信息<img src="https://s1.51cto.com/images/blog/201908/19/4a1033f6ec81add9020560cd8da3b9f2.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="深度破解学习————Linux磁盘管理和管理文件系统" style="cursor: pointer;"><br>sda1:前导码和显示分区列表内容<br>start：开始扇区<br>end:结束扇区<br>blocks：总容量<br>3.我们到VM虚拟机去加一个硬盘<img src="https://s1.51cto.com/images/blog/201908/19/1e63cba6d803fa140187f100764c235a.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="深度破解学习————Linux磁盘管理和管理文件系统" style="cursor: pointer;"><img src="https://s1.51cto.com/images/blog/201908/19/13419bbba2f146da0d3aa533d137e055.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="深度破解学习————Linux磁盘管理和管理文件系统" style="cursor: pointer;"><img src="https://s1.51cto.com/images/blog/201908/19/036aaa7b86f6dab2343db6e99c944672.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="深度破解学习————Linux磁盘管理和管理文件系统" style="cursor: pointer;"><br>4.重启电脑<img src="https://s1.51cto.com/images/blog/201908/19/17ec11702d9d9117ef251472d5e261d2.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="深度破解学习————Linux磁盘管理和管理文件系统" style="cursor: pointer;"><br>5.查看我们新加的磁盘<img src="https://s1.51cto.com/images/blog/201908/19/af2b30c6c062a947376f4beb7d254826.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="深度破解学习————Linux磁盘管理和管理文件系统" style="cursor: pointer;"><br>6.对磁盘进行管理和了解它的命令<img src="https://s1.51cto.com/images/blog/201908/19/191c2fae1bbf6279af36b1b28555c34c.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="深度破解学习————Linux磁盘管理和管理文件系统" style="cursor: pointer;"><br>7.创建第一个主分区<img src="https://s1.51cto.com/images/blog/201908/19/d8b5e5601a084d19a784cbad3f9ed37d.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="深度破解学习————Linux磁盘管理和管理文件系统" style="cursor: pointer;"><br>8.查看分区消息<img src="https://s1.51cto.com/images/blog/201908/19/2630dd6dde9e278523c4643851f44d37.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="深度破解学习————Linux磁盘管理和管理文件系统" style="cursor: pointer;"><br>9.再加一个主分区<img src="https://s1.51cto.com/images/blog/201908/19/3f350a0f982eb3f23996fb2fdfd36820.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="深度破解学习————Linux磁盘管理和管理文件系统" style="cursor: pointer;"><br>10.再加一个扩展分区<img src="https://s1.51cto.com/images/blog/201908/19/c68ff92333e0e28a9ace0419947d4529.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="深度破解学习————Linux磁盘管理和管理文件系统" style="cursor: pointer;"><br>扩展分区要添加逻辑分区才可以存储数据<br>11.我们添加第一个逻辑分区<br><img src="https://s1.51cto.com/images/blog/201908/19/f5ca58122fa33d30aac12448a8a31027.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="深度破解学习————Linux磁盘管理和管理文件系统" style="cursor: pointer;"><br>12.添加第二个逻辑分区<img src="https://s1.51cto.com/images/blog/201908/19/f936d132ba0cd6a789c1020db8394f1e.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="深度破解学习————Linux磁盘管理和管理文件系统" style="cursor: pointer;"><br>13.更改文件系统类型<br><img src="https://s1.51cto.com/images/blog/201908/19/b412b342ed5d3f565c3ebb9e74a4a143.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="深度破解学习————Linux磁盘管理和管理文件系统" style="cursor: pointer;"><br>14.删除分区<img src="https://s1.51cto.com/images/blog/201908/19/2c648a34fe83c85559cb71a6c34cff27.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="深度破解学习————Linux磁盘管理和管理文件系统" style="cursor: pointer;"><br>15.保存我们的设置，去查看我们的磁盘分区消息<img src="https://s1.51cto.com/images/blog/201908/19/5566526219a8e1c5fe0838ce9e909877.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="深度破解学习————Linux磁盘管理和管理文件系统" style="cursor: pointer;"><img src="https://s1.51cto.com/images/blog/201908/19/7e33404112019709681bb1034a5c2bd3.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="深度破解学习————Linux磁盘管理和管理文件系统" style="cursor: pointer;"><img src="https://s1.51cto.com/images/blog/201908/19/9f79ef41e623761230bf345903e1425b.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="深度破解学习————Linux磁盘管理和管理文件系统" style="cursor: pointer;"><br>16.格式化<img src="https://s1.51cto.com/images/blog/201908/19/e8405a49ab5697ca634f04ed5e6b84bf.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="深度破解学习————Linux磁盘管理和管理文件系统" style="cursor: pointer;"><br>17.查看挂载点<img src="https://s1.51cto.com/images/blog/201908/19/a7294676500de6e245c7ebbd32c6c56b.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="深度破解学习————Linux磁盘管理和管理文件系统" style="cursor: pointer;"><br>18.添加挂载点和挂载<img src="https://s1.51cto.com/images/blog/201908/19/433bb73e7408aa1c7ce61b6461ed1665.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="深度破解学习————Linux磁盘管理和管理文件系统" style="cursor: pointer;"><br>19.我们发现内容不见了<img src="https://s1.51cto.com/images/blog/201908/19/0e6b674f51ee9b36429401b42826cb3b.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="深度破解学习————Linux磁盘管理和管理文件系统" style="cursor: pointer;"><img src="https://s1.51cto.com/images/blog/201908/19/91d98a54effa6dfa235dbd39b0eb0009.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="深度破解学习————Linux磁盘管理和管理文件系统" style="cursor: pointer;"><br>20.我们看这张图来了解一下<img src="https://s1.51cto.com/images/blog/201908/19/567bf71f4ae54d30e1b9a73338698904.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="深度破解学习————Linux磁盘管理和管理文件系统" style="cursor: pointer;"><br>我们挂载只是用这个名称，但是里面的内容永远会在磁盘分区里面，无论换什么名称，内容还是在<br>21.给SWAP分区虚拟内存格式化，和添加<img src="https://s1.51cto.com/images/blog/201908/19/e0eef7a65813d6ecbe67bd1289cb3180.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="深度破解学习————Linux磁盘管理和管理文件系统" style="cursor: pointer;"><img src="https://s1.51cto.com/images/blog/201908/19/620c1791d93b442a75f6b634621f608f.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="深度破解学习————Linux磁盘管理和管理文件系统" style="cursor: pointer;"><br>以上就是我们的全部内容了</p></div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1998.html">基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/2000.html">Disk Map for Mac(磁盘映射软件)</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.51cto.com/14449524/2430823" target="_blank">https://blog.51cto.com/14449524/2430823</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,281 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>用perl发送http请求【转】【待处理】_comonly.cn</title>
+<meta name="keywords" content="用perl发送http请求【转】【待处理】" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">用perl发送http请求【转】【待处理】</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">u014046192</li>
+          <li class="lmname"><a href="http://m.blog.csdn.net/u014046192/article/details/50491504" target="_blank">http://m.blog.csdn.net/u014046192/article/details/50491504</a></li>
+          <li class="timer">2017-07-15</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	python  perl
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">perl,http</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 工作中经常用到脚本发送http请求，但是用脚本发送和用浏览器发送差别很到，当你用脚本调用一些接口时可能没有权限，此时需要获取到调用接口的权限，一般情况下就是。请求的时候需要带着一个cookie值或者一个token值，浏览器发送时一般都会保存这个值，但是脚本发送不知道保存在那个地方还是不会生成（知道的小伙伴告诉我一声），但是一般的做法是带着用户名和密码去请求，服务器给你回复一个cookie值，然后下一次调用接口的时候就带着这个cookie值去请求；<br />
+<br />
+获取cookie值<br />
+```<br />
+sub getCookie{<br />
+&nbsp; &nbsp; my($ip，$port)=@_;<br />
+&nbsp; &nbsp; my &nbsp;$ua = LWP::UserAgent-&gt;new(<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;protocols_allowed =&gt; [ 'http', 'https' ],<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;timeout &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =&gt; 30,&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ssl_opts =&gt; { verify_hostname =&gt; 0},<br />
+&nbsp; &nbsp; &nbsp; &nbsp; );<br />
+&nbsp; &nbsp; $username='admin';<br />
+&nbsp; &nbsp; $password='admin';#密码有没经过加密处理，如果经过加密处理要写加密后的<br />
+&nbsp; &nbsp; my $arg={<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 'username' =&gt; $username,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 'password' =&gt; $password,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;};<br />
+&nbsp; &nbsp; &nbsp;$url="https://$ip:$port/vapi/extjs/access/ticket";#url可以抓包获取，不是登录的那个地址<br />
+&nbsp; &nbsp; my &nbsp;$resp = $ua-&gt;post($url,$arg,'Content_Type' =&gt; 'form-data');#用post方法提交参数<br />
+&nbsp; &nbsp; my $status=$resp-&gt;status_line;<br />
+&nbsp; &nbsp; my $header=$resp-&gt;headers_as_string;#解析头部<br />
+&nbsp; &nbsp; my $content = $resp-&gt;content;<br />
+&nbsp; &nbsp; if ($status=~ /200/)<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; @array=split(/\n/,$header);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; foreach $rock (@array)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if ($rock=~/^Set-Cookie/)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; @Setcookie=split(/\s+/,$rock);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $Setcookie[1]=~s/;$//;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; my $cookie=$Setcookie[1];<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $content=$cookie;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; last;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; } &nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; return $content;<br />
+}<br />
+<br />
+发送get请求<br />
+调用上面的getcookie函数，获取cookie值<br />
+sub https_Get {<br />
+&nbsp;my ( $url,$cookie) = @_;<br />
+&nbsp;my $ua = LWP::UserAgent-&gt;new(<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; protocols_allowed =&gt; [ 'http', 'https' ],<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; timeout &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =&gt; 30,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ssl_opts =&gt; { verify_hostname =&gt; 0 },<br />
+&nbsp; &nbsp; &nbsp; &nbsp; );<br />
+&nbsp;$ua-&gt;default_header('cookie' =&gt; "$cookie" );<br />
+&nbsp;my $response = $ua-&gt;get($url);<br />
+&nbsp;return $response-&gt;{_content};<br />
+}<br />
+<br />
+发送post请求<br />
+sub https_Post{<br />
+&nbsp; &nbsp; my($url,$arg,$cookie) = @_; #arg为需要提交的参数<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;my &nbsp;$ua = LWP::UserAgent-&gt;new(<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;protocols_allowed =&gt; [ 'http', 'https' ],<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;timeout &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =&gt; 30, &nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; ssl_opts =&gt; { verify_hostname =&gt; 0},<br />
+&nbsp; &nbsp; &nbsp; &nbsp; );<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $ua-&gt;default_header('cookie' =&gt; "$cookie" );<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $resp = $ua-&gt;post($url,$arg,'Content_Type' =&gt; 'form-data'); &nbsp;#注意参数的格式是form-data还是其他格式，可用postman（一款模拟发送http请求的插件，只可以在谷歌浏览器中用）调试&nbsp;<br />
+&nbsp; &nbsp; &nbsp;$content = $resp-&gt;content;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; return $content;<br />
+&nbsp; &nbsp; }<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/786.html">【python2*使用】用python发送http请求</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/788.html">Python 字典(Dictionary)及其操作</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="http://m.blog.csdn.net/u014046192/article/details/50491504" target="_blank">http://m.blog.csdn.net/u014046192/article/details/50491504</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

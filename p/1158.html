@@ -1,0 +1,326 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>循环队列_comonly.cn</title>
+<meta name="keywords" content="循环队列" />
+<meta name="description" content="队列是一种只能在表的一端进行插入运算，在表的另一端进行删除运算的线性表（头删尾插），它的存储方式分为&nbsp;顺序队或链队，以循环队列更常见。
+
+
+	这里仅介绍顺序队以及顺序队存在的假溢出缺陷，进而引出循环队列。
+
+
+	顺序队列
+
+
+	 
+
+
+	在顺序队列中，当队尾指针已经到数组的上界，不能再有入队操作，但其实数组中还有空位置，这就叫做“假溢出”，解决假溢出的途径----&nbsp;采用循环队列。
+
+
+	
+
+
+	循环队列
+
+
+	 
+
+
+	
+
+
+	消除" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">循环队列</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">smile_zhangwj</li>
+          <li class="lmname"><a href="https://blog.csdn.net/smile_zhangw/article/details/80894159" target="_blank">https://blog.csdn.net/smile_zhangw/article/details/80894159</a></li>
+          <li class="timer">2020-09-30</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	数据结构 算法
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>队列是一种只能在表的一端进行插入运算，在表的另一端进行删除运算的线性表（头删尾插），它的存储方式分为&nbsp;顺序队或链队，以循环队列更常见。
+
+
+	这里仅介绍顺序队以及顺序队存在的假溢出缺陷，进而引出循环队列。
+
+
+	顺序队列
+
+
+	 
+
+
+	在顺序队列中，当队尾指针已经到数组的上界，不能再有入队操作，但其实数组中还有空位置，这就叫做“假溢出”，解决假溢出的途径----&nbsp;采用循环队列。
+
+
+	
+
+
+	循环队列
+
+
+	 
+
+
+	
+
+
+	消除</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	队列是一种只能在表的一端进行插入运算，在表的另一端进行删除运算的线性表（头删尾插），它的存储方式分为&nbsp;顺序队或链队，以循环队列更常见。
+</p>
+<p>
+	这里仅介绍顺序队以及顺序队存在的假溢出缺陷，进而引出循环队列。
+</p>
+<div>
+	顺序队列
+</div>
+<div>
+	<img src="https://img-blog.csdn.net/20180703102512656?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NtaWxlX3poYW5ndw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="" style="height:auto;" /> 
+</div>
+<div>
+	在顺序队列中，当队尾指针已经到数组的上界，不能再有入队操作，但其实数组中还有空位置，这就叫做“假溢出”，解决假溢出的途径----&nbsp;采用循环队列。
+</div>
+<div>
+	<br />
+</div>
+<div>
+	循环队列
+</div>
+<p>
+	<img src="https://img-blog.csdn.net/20180703103827920?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NtaWxlX3poYW5ndw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="" style="height:auto;" /> 
+</p>
+<p>
+	<br />
+</p>
+<p>
+	消除假溢出就是当队尾指针rear和队头指针front到达存储空间最大值QueueSize时，让队尾指针自动转化为存储空间的最小值0。
+</p>
+<p>
+	<br />
+</p>
+<div>
+	新问题：在循环队列中，空队特征是front = rear,&nbsp;队满时也会有front = rear;&nbsp;判断条件将出现二义性。
+</div>
+<div>
+	解决方案有三种：
+</div>
+<div>
+	<ol>
+		<li>
+			加设标志位，让删除动作使其为1，插入动作使其为0， 则可识别当前front == rear;
+		</li>
+		<li>
+			使用一个计数器记录队列中元素个数（即队列长度）
+		</li>
+		<li>
+			人为浪费一个单元，令队满特征为 front = (rear +1)%N---空闲单元法
+		</li>
+	</ol>
+</div>
+<div>
+	这里采用空闲单元法解决二义性问题。
+</div>
+<p>
+	<img src="https://img-blog.csdn.net/20180703105302743?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NtaWxlX3poYW5ndw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="" style="height:auto;" /> 
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1157.html">堆以及堆排序</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1159.html">二叉树的遍历算法 遍历、插入、删除等常见操作</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/smile_zhangw/article/details/80894159" target="_blank">https://blog.csdn.net/smile_zhangw/article/details/80894159</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,420 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>函数—JavaScript_comonly.cn</title>
+<meta name="keywords" content="函数—JavaScript" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">函数—JavaScript</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-03-10</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">JavaScript,函数</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	函数用来把程序组织成小的，独立的单元。每个函数封装一个或一组算法，这些算法分别应用在特点的数据集上。
+</p>
+<h2 id='定义函数'>
+	定义函数
+</h2>
+<p>
+	JavaScript中使用function语句定义函数。
+</p>
+<p>
+	<em>function 函数名(参数1,,参数2,参数3,...){代码块; return 返回值;}</em> 
+</p>
+<h2 id='调用函数'>
+	调用函数
+</h2>
+<p>
+	<em>直接调用没有返回值的函数</em> 
+</p>
+<p>
+	&lt;script type="text/javascript"&gt;<br />
+function hello(str) //定义一个函数，函数名为hello<br />
+{window.alert(str); &nbsp; //没有return语句，此函数没有返回值<br />
+}<br />
+hello("JavaScript!");//直接调用没有返回值的函数<br />
+hello("hello_the_word");//直接调用没有返回值的函数<br />
+&lt;/script&gt;
+</p>
+<p>
+	复制上述代码<a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank"><span style="background-color:#FFE500;">进入在线测试</span><span style="background-color:#FFE500;"></span></a> 
+</p>
+<p>
+	<span style="line-height:1.5;"></span> 
+</p>
+<p>
+	<em>通过事件调用没有返回值的函数</em> 
+</p>
+<p>
+	<span>&lt;script type="text/javascript"&gt;</span><br />
+<span>function hello(str) //定义一个函数，函数名为hello</span><br />
+<span>{window.alert(str); &nbsp; //没有return语句，此函数没有返回值</span><br />
+<span>}</span><br />
+<span>&lt;/script&gt;</span> 
+</p>
+&lt;a href="#" onclick="hello('JavaScript!')"&gt;点击我&lt;/a&gt;
+<p>
+	<span>复制上述代码</span><a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank"><span style="background-color:#FFE500;">进入在线测试</span><span style="background-color:#FFE500;"></span></a> 
+</p>
+<p>
+	上例中通过鼠标事件调用没有返回值的函数
+</p>
+<p>
+	<em>调用有返回值的函数，把返回值赋给变量</em>
+</p>
+<p>
+	&lt;script type="text/javascript"&gt;<br />
+function sum(x,y)<br />
+{var z=x+y;return z;<br />
+}<br />
+var he=sum(3,5);<br />
+window.alert("3加5的和是："+he);<br />
+&lt;/script&gt;
+</p>
+<p>
+	复制上述代码<span style="background-color:#FFE500;"><a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank">进入在线测试</a></span>
+</p>
+<h2 id='函数的参数'>
+	函数的参数
+</h2>
+<p>
+	JavaScript不介意传递进来多少个函数，也不在乎传进来的参数是什么数据类型。即使定义两个参数，调用时可以只传递1个或者3个参数。如果传递的参数个数小于函数定义的参数个数，会自动将多余的参数值设为undefined，如果多于函数定义的参数，那么多余的参数会被忽略掉。
+</p>
+<p>
+	JavaScript中的参数在内部用一个数值表示，在函数体内可以通过arguments对象来访问这个参数数组，从而获取传递给函数的每一个参数。可以通过arguments[0]来访问第一个元素，通过arguments[1]访问第二个元素...使用length属性来确定传递进来多少个参数。
+</p>
+<p>
+	&lt;script type="text/javascript"&gt;<br />
+function sum(x,y)<br />
+{<br />
+document.write("第一个传递进来的参数值是："+arguments[0]+"&lt;/br&gt;");<br />
+document.write("第二个传递进来的参数值是："+arguments[1]+"&lt;/br&gt;");<br />
+document.write("一共传递的参数个数是："+arguments.length+"个");<br />
+}<br />
+sum(3,5);<br />
+&lt;/script&gt;
+</p>
+<p>
+	复制上述代码<a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank"><span style="background-color:#FFE500;">进入在线测试</span></a> 
+</p>
+<p>
+	<br />
+</p>
+<h1>
+	系统函数
+</h1>
+<p>
+	系统内置的函数
+</p>
+<h2 id='编码函数ece()'>
+	编码函数escape()
+</h2>
+<p>
+	将字符串中的非文字，数字中的字符转换成相应的ASCII码，将传入参数中的所有空格，标点，符号，重音字符以及其他任何非ASCII字符替换为%xx的编码形式，其中xx与其所表示的字符的十六进制数表示形式相同。如空格字符的十六进制表示形式为0x20，则此时xx应为20，即escape(" ")返回"%20"。
+</p>
+<h2 id='解码函数uece()'>
+	解码函数unescape()
+</h2>
+<p>
+	与escape()的作用相反，将ASCII码的文字转换成一般文字。
+</p>
+<p>
+	&lt;script type="text/javascript"&gt;<br />
+var str="!@#$"<br />
+document.write("编码前的字符串："+str+"&lt;/br&gt;");<br />
+document.write("编码后的字符串："+escape(str)+"&lt;/br&gt;");<br />
+str=escape(str);str=unescape(str);<br />
+document.write("解码后的字符串："+str);<br />
+&lt;/script&gt;
+</p>
+<p>
+	复制上述代码<span style="background-color:#FFE500;"><a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank">进入在线测试</a></span>
+</p>
+<h2 id='求值函数evl()'>
+	求值函数eval()
+</h2>
+<p>
+	把一个字符串当作一个JavaScript表达式去执行它。
+</p>
+<p>
+	&lt;script type="text/javascript"&gt;<br />
+var str="2+3";<br />
+var num=eval("2+3"); //把表达式执行算术运算<br />
+document.write("str的值："+str+"&lt;/br&gt;"); &nbsp; &nbsp; &nbsp; &nbsp; //输出字符串<br />
+document.write("num的值："+num+"&lt;/br&gt;");&nbsp;<br />
+&lt;/script&gt;
+</p>
+<p>
+	复制上述代码<span style="background-color:#FFE500;"><a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank">进入在线测试</a></span>
+</p>
+<h2 id='数值判断函数iNN()'>
+	数值判断函数isNaN()
+</h2>
+<p>
+	判断某个变量是否是非数字值，如果是，返回true，否则返回false。
+</p>
+<p>
+	isNaN(123); //false
+</p>
+<p>
+	isNaN("great"); //true
+</p>
+<h2 id='整数转换函数reIt()'>
+	整数转换函数parseInt()
+</h2>
+<p>
+	把字符串转换成整数。
+</p>
+<p>
+	<em>parseInt(字符串,基数);</em> 
+</p>
+<p>
+	第一个参数字符串是必须的。第二个参数“基数”是可选的，表示要解析的数字的基数，该值介于2~36，若省略或该参数为0时，数字以10进制为基数解析；若以“0x”或“0X”开头，将以十六进制为基数；若该值小于2或大于36，则parseInt()将返回NaN。
+</p>
+<p>
+	&lt;script type="text/javascript"&gt;<br />
+parseInt("10"); &nbsp; &nbsp; //省略基数，默认为10进制，得到10<br />
+parseInt("10",10); &nbsp; &nbsp; //10进制，得到10<br />
+parseInt("10",2); &nbsp; &nbsp; //基数为2，得到十进制数2<br />
+parseInt("10",8); &nbsp; &nbsp; //基数为8，得到十进制数8<br />
+parseInt("10",16); &nbsp; &nbsp; //基数为16，得到十进制数16<br />
+parseInt("2A5C",16); &nbsp; &nbsp; //基数为16，得到十进制数10844<br />
+&lt;/script&gt;
+</p>
+<p>
+	复制上述代码<a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank"><span style="background-color:#FFE500;">进入在线测试</span></a> 
+</p>
+如果碰到不能转换的字符串，会停止转换操作，并返回已转换的数据。
+<h2 id='浮点数转换函数reFlot()'>
+	浮点数转换函数parseFloat()
+</h2>
+<p>
+	把字符串转换成浮点数据
+</p>
+<p>
+	<em>parseFloat(字符串);</em> 
+</p>
+<p>
+	如果字符串的第一个字符不能被转换为数字，那么parseFloat()会返回NaN。
+</p>
+<p>
+	&lt;script type="text/javascript"&gt;<br />
+document.write(parseFloat("16")); &nbsp;//得到16<br />
+document.write(parseFloat("16.00")); &nbsp;//得到16<br />
+document.write(parseFloat("16.98")); &nbsp;//得到16.98<br />
+document.write(parseFloat("16 12 32")); &nbsp;//得到16，后面的省略了<br />
+document.write(parseFloat(" 16")); &nbsp;//得到16，前面的空格不受影响<br />
+document.write(parseFloat("he 16")); &nbsp;//得到NaN，第一个字符是字母，全部省略<br />
+document.write(parseFloat("16 asdqwe")); &nbsp;//得到16，后面字符串省略了<br />
+&lt;/script&gt;
+</p>
+<p>
+	复制上述代码<span style="background-color:#FFE500;"><a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank">进入在线测试</a></span>
+</p>
+<p>
+	<span>如果碰到不能转换的字符串，会停止转换操作，并返回已转换的数据。</span> 
+</p>
+<h2 id='变量有效范围参考href="htt:www.iyk.cblog14_603.html"trget="_blk"下一篇文章'>
+	变量有效范围参考<a href="http://www.iyaka.cn/blog/14_603.html" target="_blank">下一篇文章</a> 
+</h2></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/601.html">语句—JavaScript</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/603.html">变量有效范围—JavaScript</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#定义函数">定义函数</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#调用函数">调用函数</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#函数的参数">函数的参数</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#编码函数ece()">编码函数ece()</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#解码函数uece()">解码函数uece()</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#求值函数evl()">求值函数evl()</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#数值判断函数iNN()">数值判断函数iNN()</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#整数转换函数reIt()">整数转换函数reIt()</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#浮点数转换函数reFlot()">浮点数转换函数reFlot()</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#变量有效范围参考href="htt:www.iyk.cblog14_603.html"trget="_blk"下一篇文章">变量有效范围参考href="htt:www.iyk.cblog14_603.html"trget="_blk"下一篇文章</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

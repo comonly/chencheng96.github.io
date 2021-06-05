@@ -1,0 +1,714 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Shell脚本中$0、$?、$!、$$、$*、$#、$@等的意义以及linux命令执行返回值代表意义_comonly.cn</title>
+<meta name="keywords" content="Shell脚本中$0、$?、$!、$$、$*、$#、$@等的意义以及linux命令执行返回值代表意义" />
+<meta name="description" content="Shell脚本中$0、$?、$!、$$、$*、$#、$@等的意义以及linux命令执行返回值意义
+
+
+	
+
+
+	(1) Shell脚本中$0、$?、$!、$$、$*、$#、$@等的意义说明
+
+
+	1.1、简要说明
+
+
+	ps： 你在Linux环境下多试下就明白了
+
+
+	$$
+
+
+	Shell本身的PID（ProcessID，即脚本运行的当前&nbsp;进程ID号）
+
+
+	$!
+
+
+	Shell最后运行的后台Process的PID(后台运行的最后一个进程的&n" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Shell脚本中$0、$?、$!、$$、$*、$#、$@等的意义以及linux命令执行返回值代表意义</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">Data_IT_Farmer</li>
+          <li class="lmname"><a href="https://blog.csdn.net/helloxiaozhe/article/details/80940066" target="_blank">https://blog.csdn.net/helloxiaozhe/article/details/80940066</a></li>
+          <li class="timer">2020-10-04</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>Shell脚本中$0、$?、$!、$$、$*、$#、$@等的意义以及linux命令执行返回值意义
+
+
+	
+
+
+	(1) Shell脚本中$0、$?、$!、$$、$*、$#、$@等的意义说明
+
+
+	1.1、简要说明
+
+
+	ps： 你在Linux环境下多试下就明白了
+
+
+	$$
+
+
+	Shell本身的PID（ProcessID，即脚本运行的当前&nbsp;进程ID号）
+
+
+	$!
+
+
+	Shell最后运行的后台Process的PID(后台运行的最后一个进程的&n</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	<br />
+</p>
+<div>
+	Shell脚本中$0、$?、$!、$$、$*、$#、$@等的意义以及linux命令执行返回值意义
+</div>
+<div>
+	<br />
+</div>
+<h3>
+	(1) Shell脚本中$0、$?、$!、$$、$*、$#、$@等的意义说明
+</h3>
+<div>
+	1.1、简要说明
+</div>
+<div>
+	ps： 你在Linux环境下多试下就明白了
+</div>
+<div>
+	$$
+</div>
+<div>
+	Shell本身的PID（ProcessID，即脚本运行的当前&nbsp;<a href="https://www.baidu.com/s?wd=%E8%BF%9B%E7%A8%8BID&amp;tn=SE_PcZhidaonwhc_ngpagmjz&amp;rsv_dl=gh_pc_zhidao">进程ID</a>号）
+</div>
+<div>
+	$!
+</div>
+<div>
+	Shell最后运行的后台Process的PID(后台运行的最后一个进程的&nbsp;<a href="https://www.baidu.com/s?wd=%E8%BF%9B%E7%A8%8BID&amp;tn=SE_PcZhidaonwhc_ngpagmjz&amp;rsv_dl=gh_pc_zhidao">进程ID</a>号)
+</div>
+<div>
+	$?
+</div>
+<div>
+	最后运行的命令的结束代码（返回值）即执行上一个指令的返回值 (显示最后命令的退出状态。0表示没有错误，其他任何值表明有错误)
+</div>
+<div>
+	$-
+</div>
+<div>
+	显示shell使用的当前选项，与set命令功能相同
+</div>
+<div>
+	$*
+</div>
+<div>
+	所有参数列表。如"$*"用「"」括起来的情况、以"$1 $2 … $n"的形式输出所有参数，此选项参数可超过9个。
+</div>
+<div>
+	$@
+</div>
+<div>
+	所有参数列表。如"$@"用「"」括起来的情况、以"$1" "$2" … "$n" 的形式输出所有参数。
+</div>
+<div>
+	$@ 跟$*类似，但是可以当作数组用
+</div>
+<div>
+	$#
+</div>
+<div>
+	添加到Shell的参数个数
+</div>
+<div>
+	$0
+</div>
+<div>
+	Shell本身的文件名
+</div>
+<div>
+	$1～$n
+</div>
+<div>
+	添加到Shell的各参数值。$1是第1参数、$2是第2参数…。
+</div>
+<div>
+	<br />
+</div>
+<div>
+	1.2、脚本举例
+</div>
+<div>
+	<br />
+</div>
+<div>
+	我们先写一个简单的脚本，执行以后再解释各个变量的意义
+</div>
+<div>
+	# touch variable
+</div>
+<div>
+	# vi variable
+</div>
+<div>
+	脚本内容如下：
+</div>
+<div>
+	#!/bin/sh
+</div>
+<div>
+	echo "number:$#"
+</div>
+<div>
+	echo "scname:$0"
+</div>
+<div>
+	echo "first :$1"
+</div>
+<div>
+	echo "second:$2"
+</div>
+<div>
+	echo "argume:$@"
+</div>
+<div>
+	保存退出
+</div>
+<div>
+	赋予脚本执行权限
+</div>
+<div>
+	# chmod +x variable
+</div>
+<div>
+	执行脚本
+</div>
+<div>
+	# ./variable aa bb
+</div>
+<div>
+	number:2
+</div>
+<div>
+	scname:./variable
+</div>
+<div>
+	first: aa
+</div>
+<div>
+	second:bb
+</div>
+<div>
+	argume:aa bb
+</div>
+<div>
+	<br />
+</div>
+<div>
+	结果分析
+</div>
+<div>
+	<br />
+</div>
+<div>
+	通过显示结果可以看到：
+</div>
+<div>
+	$# 是传给脚本的参数个数
+</div>
+<div>
+	$0 是脚本本身的名字
+</div>
+<div>
+	$1是传递给该shell脚本的第一个参数
+</div>
+<div>
+	$2是传递给该shell脚本的第二个参数
+</div>
+<div>
+	$@ 是传给脚本的所有参数的列表
+</div>
+<div>
+	<br />
+</div>
+<div>
+	参考：&nbsp;<a href="https://blog.csdn.net/slovyz/article/details/47400107">https://blog.csdn.net/slovyz/article/details/47400107</a> 
+</div>
+<div>
+	<br />
+</div>
+<div>
+	(2) linux命令执行返回值说明
+</div>
+<div>
+	<br />
+</div>
+<div>
+	在 Linux 下，不管你是启动一个桌面程序也好，还是在控制台下运行命令，所有的程序在结束时，都会返回一个数字值，这个值叫做返回值，或者称为错误号 ( Error Number )。
+</div>
+<div>
+	<br />
+</div>
+<div>
+	2.1、在控制台下，有一个特殊的环境变量&nbsp;$?，保存着前一个程序的返回值，我们可以试试：
+</div>
+<div>
+	$ ls *.png
+</div>
+<div>
+	Diagram1.png&nbsp;&nbsp;eqn.png&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;peazip.png
+</div>
+<div>
+	eqn4.png&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mandelbrot.png&nbsp;&nbsp;x2.png
+</div>
+<div>
+	$&nbsp;echo $?
+</div>
+<div>
+	0
+</div>
+<div>
+	先随便执行个命令，比如像上面的 ls 某些文件，然后通过 echo $?，打印 $? 的值～
+</div>
+<div>
+	我们发现返回值是 0，这是什么意思呢？
+</div>
+<div>
+	只要返回值是 0，就代表程序执行成功了～
+</div>
+<div>
+	也就是说，如果 $? 变量的值不是 0 的话，就表示上一个命令在执行的过程中出错了。
+</div>
+<div>
+	<br />
+</div>
+<div>
+	2.2、我们可以试着 ls 一个不存在的文件：
+</div>
+<div>
+	$ ls linuxgem
+</div>
+<div>
+	ls: 无法访问 linuxgem: 没有那个文件或目录
+</div>
+<div>
+	$ echo $?
+</div>
+<div>
+	2
+</div>
+<div>
+	这样，对于某些打印出一堆不熟悉的英文信息的命令，可以方便的看出它是否成功执行结束。
+</div>
+<div>
+	不过，每次都 echo $? 一下太累了，没关系，你可以把 $? 放在提示符里去：
+</div>
+<div>
+	<br />
+</div>
+<div>
+	2.3、将上次命令执行是否成功的返回值放到提示符里面去：export PS1="[\$?]${PS1}"
+</div>
+<div>
+	<br />
+</div>
+<div>
+	tom@localhost ~ $ export PS1="[\$?]${PS1}"[0]tom@localhost ~ $
+</div>
+<div>
+	export PS1="[\$?]${PS1}"&nbsp;&nbsp;这个命令把 $? 的值放在的提示符的最前面，这样每次执行完命令，这个值都会自动更新，这下就一目了然了～&nbsp;
+</div>
+<div>
+	<br />
+</div>
+<div>
+	2.3、用perror查看错误提示
+</div>
+<div>
+	<br />
+</div>
+<div>
+	那么如果返回的值不是 0，我们要怎么知道是那里出错了呢？ 大多数的程序出错都会给出提示，如果没有提示的话，可以用&nbsp;perror&nbsp;这个程序来查看错误的信息，比如返回值是 2，我们可以运行：
+</div>
+<div>
+	$ perror 2
+</div>
+<div>
+	OS error code&nbsp;&nbsp;&nbsp;2:&nbsp;&nbsp;No such file or directory
+</div>
+<div>
+	这样就清楚了，原来是文件不存在～
+</div>
+<div>
+	&nbsp;
+</div>
+<div>
+	2.4、给出错误代码及其具体原因对照表：
+</div>
+<p>
+	&nbsp;"OS error code&nbsp; &nbsp;1:&nbsp; Operation not permitted"<br />
+"OS error code&nbsp; &nbsp;2:&nbsp; No such file or directory"<br />
+"OS error code&nbsp; &nbsp;3:&nbsp; No such process"<br />
+"OS error code&nbsp; &nbsp;4:&nbsp; Interrupted system call"<br />
+"OS error code 5: Input/output error"<br />
+"OS error code 6: No such device or address"<br />
+"OS error code 7:&nbsp; Argument list too long"<br />
+"OS error code 8:&nbsp; Exec format error"<br />
+"OS error code 9:&nbsp; Bad file descriptor"<br />
+"OS error code 10: No child processes"<br />
+"OS error code 11: Resource temporarily unavailable"<br />
+"OS error code 12:&nbsp; Cannot allocate memory"<br />
+"OS error code 13:&nbsp; Permission denied"<br />
+"OS error code 14:&nbsp; Bad address"<br />
+"OS error code 15: Block device required"<br />
+"OS error code 16:&nbsp; Device or resource busy"<br />
+"OS error code 17: File exists"<br />
+"OS error code 18:&nbsp; Invalid cross-device link"<br />
+"OS error code 19: No such device"<br />
+"OS error code 20: Not a directory"<br />
+"OS error code 21: Is a directory"<br />
+"OS error code 22:&nbsp; Invalid argument"<br />
+"OS error code 23:&nbsp; Too many open files in system"<br />
+"OS error code 24:&nbsp; Too many open files"<br />
+"OS error code 25:&nbsp; Inappropriate ioctl for device"<br />
+"OS error code 26: Text file busy"<br />
+"OS error code 27: File too large"<br />
+"OS error code 28: No space left on device"<br />
+"OS error code 29:&nbsp; Illegal seek"<br />
+"OS error code 30: Read-only file system"<br />
+"OS error code 31:&nbsp; Too many links"<br />
+"OS error code 32:&nbsp; Broken pipe"<br />
+"OS error code 33:&nbsp; Numerical argument out of domain"<br />
+"OS error code 34:&nbsp; Numerical result out of range"<br />
+"OS error code 35: Resource deadlock avoided"<br />
+"OS error code 36: File name too long"<br />
+"OS error code 37: No locks available"<br />
+"OS error code 38: Function not implemented"<br />
+"OS error code 39: Directory not empty"<br />
+"OS error code 40:&nbsp; Too many levels of symbolic links"<br />
+"OS error code 42: No message of desired type"<br />
+"OS error code 43:&nbsp; Identifier removed"<br />
+"OS error code 44:&nbsp; Channel number out of range"<br />
+"OS error code 45: Level 2 not synchronized"<br />
+"OS error code 46: Level 3 halted"<br />
+"OS error code 47: Level 3 reset"<br />
+"OS error code 48: Link number out of range"<br />
+"OS error code 49:&nbsp; Protocol driver not attached"<br />
+"OS error code 50: No CSI structure available"<br />
+"OS error code 51: Level 2 halted"<br />
+"OS error code 52:&nbsp; Invalid exchange"<br />
+"OS error code 53:&nbsp; Invalid request descriptor"<br />
+"OS error code 54: Exchange full"<br />
+"OS error code 55: No anode"<br />
+"OS error code 56:&nbsp; Invalid request code"<br />
+"OS error code 57:&nbsp; Invalid slot"<br />
+"OS error code 59:&nbsp; Bad font file format"<br />
+"OS error code 60:&nbsp; Device not a stream"<br />
+"OS error code 61: No data available"<br />
+"OS error code 62:&nbsp; Timer expired"<br />
+"OS error code 63: Out of streams resources"<br />
+"OS error code 64:&nbsp; Machine is not on the network"<br />
+"OS error code 65: Package not installed"<br />
+"OS error code 66: Object is remote"<br />
+"OS error code 67: Link has been severed"<br />
+"OS error code 68:&nbsp; Advertise error"<br />
+"OS error code 69:&nbsp; Srmount error"<br />
+"OS error code 70:&nbsp; Communication error on send"<br />
+"OS error code 71:&nbsp; Protocol error"<br />
+"OS error code 72:&nbsp; Multihop attempted"<br />
+"OS error code 73:&nbsp; RFS specific error"<br />
+"OS error code 74:&nbsp; Bad message"<br />
+"OS error code 75: Value too large for defined data type"<br />
+"OS error code 76: Name not unique on network"<br />
+"OS error code 77: File descriptor in bad state"<br />
+"OS error code 78:&nbsp; Remote address changed"<br />
+"OS error code 79:&nbsp; Can not access a needed shared library"<br />
+"OS error code 80:&nbsp; Accessing a corrupted shared library"<br />
+"OS error code 81:&nbsp; .lib section in a.out corrupted"<br />
+"OS error code 82:&nbsp; Attempting to link in too many shared libraries"<br />
+"OS error code 83:&nbsp; Cannot exec a shared library directly"<br />
+"OS error code 84:&nbsp; Invalid or incomplete multibyte or wide character"<br />
+"OS error code 85:&nbsp; Interrupted system call should be restarted"<br />
+"OS error code 86:&nbsp; Streams pipe error"<br />
+"OS error code 87:&nbsp; Too many users"<br />
+"OS error code 88:&nbsp; Socket operation on non-socket"<br />
+"OS error code 89:&nbsp; Destination address required"<br />
+"OS error code 90:&nbsp; Message too long"<br />
+"OS error code 91:&nbsp; Protocol wrong type for socket"<br />
+"OS error code 92:&nbsp; Protocol not available"<br />
+"OS error code 93:&nbsp; Protocol not supported"<br />
+"OS error code 94:&nbsp; Socket type not supported"<br />
+"OS error code 95:&nbsp; Operation not supported"<br />
+"OS error code 96:&nbsp; Protocol family not supported"<br />
+"OS error code 97:&nbsp; Address family not supported by protocol"<br />
+"OS error code 98:&nbsp; Address already in use"<br />
+"OS error code 99:&nbsp; Cannot assign requested address"<br />
+"OS error code 100:&nbsp; Network is down"<br />
+"OS error code 101:&nbsp; Network is unreachable"<br />
+"OS error code 102:&nbsp; Network dropped connection on reset"<br />
+"OS error code 103:&nbsp; Software caused connection abort"<br />
+"OS error code 104: Connection reset by peer"<br />
+"OS error code 105: No buffer space available"<br />
+"OS error code 106:&nbsp; Transport endpoint is already connected"<br />
+"OS error code 107:&nbsp; Transport endpoint is not connected"<br />
+"OS error code 108:&nbsp; Cannot send after transport endpoint shutdown"<br />
+"OS error code 109:&nbsp; Too many references: cannot splice"<br />
+"OS error code 110: Connection timed out"<br />
+"OS error code 111: Connection refused"<br />
+"OS error code 112:&nbsp; Host is down"<br />
+"OS error code 113: No route to host"<br />
+"OS error code 114:&nbsp; Operation already in progress"<br />
+"OS error code 115:&nbsp; Operation now in progress"<br />
+"OS error code 116:&nbsp; Stale NFS file handle"<br />
+"OS error code 117:&nbsp; Structure needs cleaning"<br />
+"OS error code 118: Not a XENIX named type file"<br />
+"OS error code 119: No XENIX semaphores available"<br />
+"OS error code 120: Is a named type file"<br />
+"OS error code 121:&nbsp; Remote I/O error"<br />
+"OS error code 122:&nbsp; Disk quota exceeded"<br />
+"OS error code 123: No medium found"<br />
+"OS error code 124:&nbsp; Wrong medium type"<br />
+"OS error code 125:&nbsp; Operation canceled"<br />
+"OS error code 126: Required key not available"<br />
+"OS error code 127: Key has expired"<br />
+"OS error code 128: Key has been revoked"<br />
+"OS error code 129: Key was rejected by service"<br />
+"OS error code 130:&nbsp; Owner died"<br />
+"OS error code 131:&nbsp; State not recoverable"<br />
+"MySQL error code 132: Old database file"<br />
+"MySQL error code 133: No record read before update"<br />
+"MySQL error code 134: Record was already deleted (or record file crashed)"<br />
+"MySQL error code 135: No more room in record file"<br />
+"MySQL error code 136: No more room in index file"<br />
+"MySQL error code 137: No more records (read after end of file)"<br />
+"MySQL error code 138: Unsupported extension used for table"<br />
+"MySQL error code 139: Too big row"<br />
+"MySQL error code 140: Wrong create options"<br />
+"MySQL error code 141: Duplicate unique key or constraint on write or update"<br />
+"MySQL error code 142: Unknown character set used"<br />
+"MySQL error code 143: Conflicting table definitions in sub-tables of MERGE table"<br />
+"MySQL error code 144: Table is crashed and last repair failed"<br />
+"MySQL error code 145: Table was marked as crashed and should be repaired"<br />
+"MySQL error code 146: Lock timed out; Retry transaction"<br />
+"MySQL error code 147: Lock table is full;&nbsp; Restart program with a larger locktable"<br />
+"MySQL error code 148: Updates are not allowed under a read only transactions"<br />
+"MySQL error code 149: Lock deadlock; Retry transaction"<br />
+"MySQL error code 150: Foreign key constraint is incorrectly formed"<br />
+"MySQL error code 151: Cannot add a child row"<br />
+"MySQL error code 152: Cannot delete a parent row"<br />
+</p>
+<p>
+	<br />
+</p>
+<div>
+	参考：&nbsp;<a href="https://blog.csdn.net/u012359618/article/details/51442966">https://blog.csdn.net/u012359618/article/details/51442966</a> 
+</div>
+<p>
+	<br />
+</p>
+<div>
+	<a href="https://blog.csdn.net/u012359618/article/details/51442966"></a> 
+</div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1810.html">编译原理 -- 编译的过程</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1812.html">cpu缓存一致性问题和volatile</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/helloxiaozhe/article/details/80940066" target="_blank">https://blog.csdn.net/helloxiaozhe/article/details/80940066</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,354 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>内存泄漏（memory leak）和内存溢出_comonly.cn</title>
+<meta name="keywords" content="内存泄漏（memory leak）和内存溢出" />
+<meta name="description" content="1. 什么是内存泄漏（memory leak）？
+指由于疏忽或错误造成程序未能释放已经不再使用的内存的情况。内存泄漏并非指内存在物理上的消失，而是应用程序分配某段内存后，由于设计错误，失去了对该段内存的控制，因而造成了内存的浪费。
+
+
+2. 两种类型的内存泄漏：
+堆内存泄漏（Heap leak）。对内存指的是程序运行中根据需要分配通过malloc,realloc new等从堆中分配的一块内存，再是完成后必须通过调用对应的 free或者delete 删掉。如果程序的设计的错误导致这部分内存没有被释" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">内存泄漏（memory leak）和内存溢出</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">柳下_MBX</li>
+          <li class="lmname"><a href="https://www.cnblogs.com/13224ACMer/p/6295379.html" target="_blank">https://www.cnblogs.com/13224ACMer/p/6295379.html</a></li>
+          <li class="timer">2020-09-24</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>1. 什么是内存泄漏（memory leak）？
+指由于疏忽或错误造成程序未能释放已经不再使用的内存的情况。内存泄漏并非指内存在物理上的消失，而是应用程序分配某段内存后，由于设计错误，失去了对该段内存的控制，因而造成了内存的浪费。
+
+
+2. 两种类型的内存泄漏：
+堆内存泄漏（Heap leak）。对内存指的是程序运行中根据需要分配通过malloc,realloc new等从堆中分配的一块内存，再是完成后必须通过调用对应的 free或者delete 删掉。如果程序的设计的错误导致这部分内存没有被释</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 1. 什么是内存泄漏（memory leak）？<br />
+指由于疏忽或错误造成程序未能释放已经不再使用的内存的情况。内存泄漏并非指内存在物理上的消失，而是应用程序分配某段内存后，由于设计错误，失去了对该段内存的控制，因而造成了内存的浪费。<br />
+<br />
+<br />
+2. 两种类型的内存泄漏：<br />
+堆内存泄漏（Heap leak）。对内存指的是程序运行中根据需要分配通过malloc,realloc new等从堆中分配的一块内存，再是完成后必须通过调用对应的 free或者delete 删掉。如果程序的设计的错误导致这部分内存没有被释放，那么此后这块内存将不会被使用，就会产生Heap Leak.<br />
+<br />
+系统资源泄露（Resource Leak）.主要指程序使用系统分配的资源比如 Bitmap,handle ,SOCKET等没有使用相应的函数释放掉，导致系统资源的浪费，严重可导致系统效能降低，系统运行不稳定。<br />
+在linux中 两个文件描述符指向一个file。必须关闭两次，否则会出现内存泄露<br />
+还有在linux中，open（）以后一定要加上close（）<br />
+eg:closehandle() closesocket()<br />
+<br />
+<br />
+内存泄露引出内存溢出话题：<br />
+所谓内存溢出就是你要求分配的内存超出了系统能给你的，系统不能满足需求，于是会产生内存溢出的问题。<br />
+<br />
+常见的溢出主要有：<br />
+内存分配未成功，却使用了它。<br />
+常用解决办法是，在使用内存之前检查指针是否为NULL。如果指针p 是函数的参数，那么在函数的入口处用assert(p!=NULL)进行检查。如果是用malloc 或new 来申请内存，应该用if(p==NULL)或if(p!=NULL)进行防错处理。<br />
+<br />
+内存分配虽然成功，但是尚未初始化就引用它。<br />
+内存分配成功并且已经初始化，但操作越过了内存的边界。<br />
+例如在使用数组时经常发生下标“多1”或者“少1”的操作。特别是在for 循环语句中，循环次数很容易搞错，导致数组操作越界。<br />
+<br />
+使用free 或delete 释放了内存后，没有将指针设置为NULL。导致产生“野指针”。<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1746.html">VS2017C++ 引用pthread.h头文件提示无法打开头文件</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1748.html">C++11 完美转发</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.cnblogs.com/13224ACMer/p/6295379.html" target="_blank">https://www.cnblogs.com/13224ACMer/p/6295379.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="【转】记一次内存泄漏调试(memory leak)">
+							<h2 style="display:inline;color:#5BC648;">【转】记一次内存泄漏调试(memory leak)</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-09-24&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	<a href="https://www.cnblogs.com/gcczhongduan/p/5115440.html">https://www.cnblogs.com/gcczhongduan/p/5115440.html</a> 
+</p>
+<p>
+	第四步：验证内存泄露问题<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1）执行应用程序，使程序负荷加到最大,用 free 查看内存使用情况<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 发现内存在以 5kb/s 的速度降低（到这一步能够全然确认是内存泄露）<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2） 进一步验证发现系统内存仅仅剩下 8kb 左右系统会很卡。<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;最后内核会打印系统内存不足错误。<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;同一时候也有一定概率出现system() 函数调用失败情况<br />
+<br />
+第五步：调试代码超出内存泄露代码&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1）怀疑是 malloc() 后没有 free() 引起的 Leak<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 验证：在全部的malloc() 和 free()上包一层&nbsp; 并分别分配一个计数器，<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 发现计数器并没有随时间推移而添加。排除是malloc 和free 的问题。<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2）怀疑系统中用的 c++ map&nbsp; string&nbsp; 这些全局对象有问<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 分别打印这些对象的 size() 发现size 也没有添加<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 到这一步调试有点陷入僵局。最后去了一趟茅厕。灵光一现是不是用的开源库，使用方法不正确引起的泄露问题<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 3）验证第二步的怀疑。
+</p>
+<p>
+	<br />
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="C/C++内存泄漏及检测">
+							<h2 style="display:inline;color:#5BC648;">C/C++内存泄漏及检测</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-09-25&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	<a href="https://www.cnblogs.com/skynet/archive/2011/02/20/1959162.html">https://www.cnblogs.com/skynet/archive/2011/02/20/1959162.html</a>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	1、内存泄漏简介<br />
+2、Windows平台下的内存泄漏检测<br />
+2.1、检测是否存在内存泄漏问题<br />
+2.2、定位具体的内存泄漏地方<br />
+3、Linux平台下的内存泄漏检测&nbsp;<br />
+4、总结
+</p>
+<p>
+	<br />
+</p>
+<p>
+	内存泄漏分析工具tMemMonitor (TMM)使用简介 <a href="https://www.cnblogs.com/tmemmonitor/p/4867347.html">https://www.cnblogs.com/tmemmonitor/p/4867347.html</a>
+</p>
+<p>
+	<br />
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="内存溢出之黑客篇">
+							<h2 style="display:inline;color:#5BC648;">内存溢出之黑客篇</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-10-04&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	<a href="https://blog.csdn.net/hylove123x/article/details/50496987">https://blog.csdn.net/hylove123x/article/details/50496987</a>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	在丢失的信息里有能够被程序调用的子程序的列表信息，直到缓冲区溢出发生。另外，给那些子程序的信息——参数——也丢失了。这意味着程序不能得到足够的信息从子程序返回，以完成它的任务。就像一个人步行穿过沙漠。如果他依赖于他的足迹走回头路，当沙暴来袭抹去了这些痕迹时，他将迷失在沙漠中。这个问题比程序仅仅迷失方向严重多了。入侵者用精心编写的入侵代码（一种恶意程序）使缓冲区溢出，然后告诉程序依据预设的方法处理缓冲区，并且执行。此时的程序已经完全被入侵者操纵了。&nbsp;<br />
+<br />
+入侵者经常改编现有的应用程序运行不同的程序。例如，一个入侵者能启动一个新的程序，发送秘密文件（支票本记录，口令文件，或财产清单）给入侵者的电子邮件。这就好像不仅仅是沙暴吹了脚印，而且后来者也会踩出新的脚印，将我们的迷路者领向不同的地方，他自己一无所知的地方。<br />
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#【转】记一次内存泄漏调试(memory leak)">【转】记一次内存泄漏调试(memory leak)</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#C/C++内存泄漏及检测">C/C++内存泄漏及检测</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#内存溢出之黑客篇">内存溢出之黑客篇</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

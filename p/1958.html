@@ -1,0 +1,215 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>linux必备高级技能——linux挂载共享文件，自动挂载_comonly.cn</title>
+<meta name="keywords" content="linux必备高级技能——linux挂载共享文件，自动挂载" />
+<meta name="description" content="一.linux共享挂载1.设置我们windows系统中用户，把来宾用户打开2.打开我们的本地策略3.在用户权限分配中，拒绝从网络访问这台计算机，把guest删掉4.打开我们的网络共享中心，开启我们的网络发现5.去设置我们的VNINT1网络6.查看我们服务器的共享文件7.我们回到服务器去创建一个文件内容8.用LINUX去访问我们的服务器二.自动挂载1.首先我们自己创建了一个挂载点2.进入我们的自动挂" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">linux必备高级技能——linux挂载共享文件，自动挂载</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">23trl</li>
+          <li class="lmname"><a href="https://blog.51cto.com/14449524/2430839" target="_blank">https://blog.51cto.com/14449524/2430839</a></li>
+          <li class="timer">2019-08-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>一.linux共享挂载1.设置我们windows系统中用户，把来宾用户打开2.打开我们的本地策略3.在用户权限分配中，拒绝从网络访问这台计算机，把guest删掉4.打开我们的网络共享中心，开启我们的网络发现5.去设置我们的VNINT1网络6.查看我们服务器的共享文件7.我们回到服务器去创建一个文件内容8.用LINUX去访问我们的服务器二.自动挂载1.首先我们自己创建了一个挂载点2.进入我们的自动挂</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <div class="con artical-content editor-preview-side"><p>一.linux共享挂载<br>1.设置我们windows系统中用户，把来宾用户打开<img src="https://s1.51cto.com/images/blog/201908/19/9b7f94790a2fd861863a1eb873728286.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="linux必备高级技能——linux挂载共享文件，自动挂载" style="cursor: pointer;"><br>2.打开我们的本地策略<img src="https://s1.51cto.com/images/blog/201908/19/40ec33070f6b2fab31873d8b84ee907e.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="linux必备高级技能——linux挂载共享文件，自动挂载" style="cursor: pointer;"><br>3.在用户权限分配中，拒绝从网络访问这台计算机，把guest删掉<img src="https://s1.51cto.com/images/blog/201908/19/193afc4ecff1c19b4828cfdbe00acdc7.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="linux必备高级技能——linux挂载共享文件，自动挂载" style="cursor: pointer;"><br>4.打开我们的网络共享中心，开启我们的网络发现<img src="https://s1.51cto.com/images/blog/201908/19/48eb2c0893ae2ab59b1455459a11d706.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="linux必备高级技能——linux挂载共享文件，自动挂载" style="cursor: pointer;"><img src="https://s1.51cto.com/images/blog/201908/19/dcf427f9aa404a7e63dfe349c2137f65.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="linux必备高级技能——linux挂载共享文件，自动挂载" style="cursor: pointer;"><img src="https://s1.51cto.com/images/blog/201908/19/29e0b7a351ac3f641187b4b2d72aaf8c.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="linux必备高级技能——linux挂载共享文件，自动挂载" style="cursor: pointer;"><br>5.去设置我们的VNINT1网络<img src="https://s1.51cto.com/images/blog/201908/19/a66f84066974b7c91701c61031247dff.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="linux必备高级技能——linux挂载共享文件，自动挂载" style="cursor: pointer;"><br>6.查看我们服务器的共享文件<img src="https://s1.51cto.com/images/blog/201908/19/63a8a349d03ea43ffa8e22c6231bae1b.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="linux必备高级技能——linux挂载共享文件，自动挂载" style="cursor: pointer;"><br>7.我们回到服务器去创建一个文件内容<img src="https://s1.51cto.com/images/blog/201908/19/2a59c1d1aab4e58d779161de7ea99526.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="linux必备高级技能——linux挂载共享文件，自动挂载" style="cursor: pointer;"><br>8.用LINUX去访问我们的服务器<img src="https://s1.51cto.com/images/blog/201908/19/feb085c7a357b183e9fd0f2d80fb108b.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="linux必备高级技能——linux挂载共享文件，自动挂载" style="cursor: pointer;"><br>二.自动挂载<br>1.首先我们自己创建了一个挂载点<img src="https://s1.51cto.com/images/blog/201908/19/278bbdd02d1c7ed19401fe2f52b93132.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="linux必备高级技能——linux挂载共享文件，自动挂载" style="cursor: pointer;"><br>2.进入我们的自动挂载的文件里<img src="https://s1.51cto.com/images/blog/201908/19/985d14887ee27ed7c7bb8b7fe978e5ca.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="linux必备高级技能——linux挂载共享文件，自动挂载" style="cursor: pointer;"><br>来了解一下这个是什么意思<br>1.设备名称，2.挂载点，3.文件系统类型，4.功能权限，可读可写，<br>5.0：是否容灾备份，6.0：启动检查序列<br>3.我们来设置一下<img src="https://s1.51cto.com/images/blog/201908/19/0f8d1a9c6c58d72123fede99dc07669b.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="linux必备高级技能——linux挂载共享文件，自动挂载" style="cursor: pointer;"><br>4.我们重启自动挂载<img src="https://s1.51cto.com/images/blog/201908/19/6a06e2763b3d3c53fb471d8d5e98be0a.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="linux必备高级技能——linux挂载共享文件，自动挂载" style="cursor: pointer;"><br>这样以后电脑重新启动还是会自动挂载上去，只适合我们一直需要挂载的文件。<br>以上就是我们的所有内容了。</p></div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1955.html">[计算机操作系统]从内存的时间局部性与空间局部性看多重循环的代码优化</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1959.html">JAVA自己实现List接口Stack</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.51cto.com/14449524/2430839" target="_blank">https://blog.51cto.com/14449524/2430839</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

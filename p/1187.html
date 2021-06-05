@@ -1,0 +1,218 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>混合动态纹理模型(Mixtures of Dynamic Textures, MDT)_comonly.cn</title>
+<meta name="keywords" content="混合动态纹理模型(Mixtures of Dynamic Textures, MDT)" />
+<meta name="description" content="在计算机视觉领域，混合动态纹理模型(Mixtures of Dynamic Textures, MDT)常用于视频帧序列建模。比如对帧序列的分割，局部或全局的异常事件检测。下图能很好表明MDT的建模过程及其应用，该模型用于人群场景中局部异常的检测。首先，训练阶段：在一定的训练时间内且在每一个子区域中学习相应的MDT模型；其次，测试阶段：针对每一个子区域的MDT模型计算测试帧对应区域的负对数似然。整个过程类比于GMM模型用于视频建模，其中两者的区别在于GMM模型中的样本数据点为单帧中的local patch" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">混合动态纹理模型(Mixtures of Dynamic Textures, MDT)</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">JRRG</li>
+          <li class="lmname"><a href="https://blog.csdn.net/step_forward_ML/article/details/78661766" target="_blank">https://blog.csdn.net/step_forward_ML/article/details/78661766</a></li>
+          <li class="timer">2020-11-20</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	机器学习算法分析
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>在计算机视觉领域，混合动态纹理模型(Mixtures of Dynamic Textures, MDT)常用于视频帧序列建模。比如对帧序列的分割，局部或全局的异常事件检测。下图能很好表明MDT的建模过程及其应用，该模型用于人群场景中局部异常的检测。首先，训练阶段：在一定的训练时间内且在每一个子区域中学习相应的MDT模型；其次，测试阶段：针对每一个子区域的MDT模型计算测试帧对应区域的负对数似然。整个过程类比于GMM模型用于视频建模，其中两者的区别在于GMM模型中的样本数据点为单帧中的local patch</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	在计算机视觉领域，混合动态纹理模型(Mixtures of Dynamic Textures, MDT)常用于视频帧序列建模。比如对帧序列的分割，局部或全局的异常事件检测。下图能很好表明MDT的建模过程及其应用，该模型用于人群场景中局部异常的检测。首先，训练阶段：在一定的训练时间内且在每一个子区域中学习相应的MDT模型；其次，测试阶段：针对每一个子区域的MDT模型计算测试帧对应区域的负对数似然。整个过程类比于GMM模型用于视频建模，其中两者的区别在于GMM模型中的样本数据点为单帧中的local patch；而在MDT模型中的样本数据点多考虑了时间信息，即为spatio-temporal local patchs。而这层时间信息可以用马尔科夫链进行建模。
+</p>
+<img src="https://img-blog.csdn.net/20171209103908968?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc3RlcF9mb3J3YXJkX01M/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="" title="" width="709" height="512" align="" /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1186.html">主成分分析（PCA）直观的理解</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1188.html">直线检测-Radon变换、Hough变换</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/step_forward_ML/article/details/78661766" target="_blank">https://blog.csdn.net/step_forward_ML/article/details/78661766</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

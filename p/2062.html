@@ -1,0 +1,269 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>服务器新建账号及配置虚拟环境方法_comonly.cn</title>
+<meta name="keywords" content="服务器新建账号及配置虚拟环境方法" />
+<meta name="description" content="一、新建账号
+useradd -d /home/jc -m jc
+passwd jc
+修改shell
+vi /etc/passwd
+sh改为bash
+2、赋予root权限
+方法一：修改 /etc/sudoers 文件，找到下面一行，把前面的注释（#）去掉
+## Allows people in group wheel to run all commands
+%wheel&nbsp; &nbsp; ALL=(ALL)&nbsp; &nbsp; ALL
+然后修改用户，使其属于root组（w" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">服务器新建账号及配置虚拟环境方法</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2021-06-23</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	电脑配置设置  软件使用 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>一、新建账号
+useradd -d /home/jc -m jc
+passwd jc
+修改shell
+vi /etc/passwd
+sh改为bash
+2、赋予root权限
+方法一：修改 /etc/sudoers 文件，找到下面一行，把前面的注释（#）去掉
+## Allows people in group wheel to run all commands
+%wheel&nbsp; &nbsp; ALL=(ALL)&nbsp; &nbsp; ALL
+然后修改用户，使其属于root组（w</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 一、新建账号<br />
+useradd -d /home/jc -m jc<br />
+passwd jc<br />
+修改shell<br />
+vi /etc/passwd<br />
+sh改为bash<br />
+2、赋予root权限<br />
+方法一：修改 /etc/sudoers 文件，找到下面一行，把前面的注释（#）去掉<br />
+## Allows people in group wheel to run all commands<br />
+%wheel&nbsp; &nbsp; ALL=(ALL)&nbsp; &nbsp; ALL<br />
+然后修改用户，使其属于root组（wheel），命令如下：<br />
+#usermod -g root tommy<br />
+修改完毕，现在可以用tommy帐号登录，然后用命令 su – ，即可获得root权限进行操作。<br />
+方法二：修改 /etc/sudoers 文件，找到下面一行，在root下面添加一行，如下所示：<br />
+## Allow root to run any commands anywhere<br />
+root&nbsp; &nbsp; ALL=(ALL)&nbsp; &nbsp; &nbsp;ALL<br />
+tommy&nbsp; &nbsp;ALL=(ALL)&nbsp; &nbsp; &nbsp;ALL<br />
+userdel 选项 用户名<br />
+常用的选项是-r，它的作用是把用户的主目录一起删除。<br />
+<br />
+二、新增虚拟环境<br />
+Conda常用指令<br />
+1.在conda环境下，输入conda env list（或者输入conda info --envs也是一样滴）查看当前存在的环境。<br />
+2.创建新的环境<br />
+&nbsp;conda create -n python2 python=2<br />
+<span> </span>#-n: 设置新的环境的名字<br />
+<span> </span>#python=2 指定新环境的python的版本<br />
+3.切换到另一个环境(activate/deactivate)<br />
+source activate snowflakes<br />
+conda deactivate<br />
+4.复制一个环境<br />
+conda create -n flowers --clone snowflakes<br />
+5.删除一个环境<br />
+conda remove -n flowers --all<br />
+<div>
+	<br />
+</div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/2061.html">大一浅谈</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/2063.html">MACD</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

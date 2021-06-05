@@ -1,0 +1,287 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>winio的使用，InitializeWinIo Winio64在64位系统中初始化失败问题(下载源码，直接看文档帮助)_comonly.cn</title>
+<meta name="keywords" content="winio的使用，InitializeWinIo Winio64在64位系统中初始化失败问题(下载源码，直接看文档帮助)" />
+<meta name="description" content="几个下载地址：
+
+
+	https://github.com/vaptu/winio 
+
+
+	https://github.com/starofrainnight/winio 
+
+
+	https://www.softpedia.com/get/Programming/Components-Libraries/WinIo.shtml 
+
+
+	
+
+
+	系统是win7 64位，从上面网站下载的winio源码，官网http://www.internals.com/打不开，下载后的Bin" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">winio的使用，InitializeWinIo Winio64在64位系统中初始化失败问题(下载源码，直接看文档帮助)</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">工程人在路上[CC 4.0 by-sa版权协议]</li>
+          <li class="lmname"><a href="https://blog.csdn.net/xingqingly/article/details/38899825" target="_blank">https://blog.csdn.net/xingqingly/article/details/38899825</a></li>
+          <li class="timer">2019-08-21</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>几个下载地址：
+
+
+	https://github.com/vaptu/winio 
+
+
+	https://github.com/starofrainnight/winio 
+
+
+	https://www.softpedia.com/get/Programming/Components-Libraries/WinIo.shtml 
+
+
+	
+
+
+	系统是win7 64位，从上面网站下载的winio源码，官网http://www.internals.com/打不开，下载后的Bin</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	几个下载地址：
+</p>
+<p>
+	<a href="https://github.com/vaptu/winio">https://github.com/vaptu/winio</a> 
+</p>
+<p>
+	<a href="https://github.com/starofrainnight/winio">https://github.com/starofrainnight/winio</a> 
+</p>
+<p>
+	<a href="https://www.softpedia.com/get/Programming/Components-Libraries/WinIo.shtml">https://www.softpedia.com/get/Programming/Components-Libraries/WinIo.shtml</a> 
+</p>
+<p>
+	<br />
+</p>
+<p>
+	系统是win7 64位，从上面网站下载的winio源码，官网http://www.internals.com/打不开，下载后的Binaries文件夹中包含WinIo64.dll，WinIo64.sys，将这两个文件放在debug文件夹下，如果是在Release模式下，就放在Release文件夹下，与执行文件放在一起。
+</p>
+<p>
+	源码放在\WinIo\Source\Dll 可以通过vs编译生成库文件。建议在项目所在开发环境下生成对应的库文件使用。
+</p>
+<br />
+<p>
+	<strong>调用InitializeWinIo()一直返回的是false</strong>
+</p>
+<p>
+	Winio64.sys没有正式的数字签名，只有测试的。需要修改一些东西，具体如下：
+</p>
+<br />
+首先要将系统设置为测试模式，输入cmd打开dos模式：<br />
+cmd-&gt;bcdedit /set testsigning on<br />
+<br />
+然后修改WinIo64.sys的测试签名<br />
+<br />
+1.打开 WinIO64.sys的属性框，翻到“数字签名”选项卡，点击“详细信息”<br />
+2.在新出来的对话框中点击“查看证书”<br />
+3.在又新出来的对话框中点击“安装证书”<br />
+4.点击“下一步”，然后选择“将所有的证书放入下列存储”<br />
+5.点击浏览，选择“受信任的根证书发布机构”<br />
+6.点击“下一步”，然后点击“完成”<br />
+7.在弹出的“安全性警告”对话框中选择“是”，才能导入成功<br />
+然后重启。<br />
+再调试程序，就可以成功初始化了。<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/2019.html">SQL Server 2008修改sa密码的详细方法</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/2021.html">C++创建文件夹 输出当前程序运行路径</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/xingqingly/article/details/38899825" target="_blank">https://blog.csdn.net/xingqingly/article/details/38899825</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

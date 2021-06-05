@@ -1,0 +1,215 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>大数据日志传输之Kafka，Kafka架构详解kafka的核心_comonly.cn</title>
+<meta name="keywords" content="大数据日志传输之Kafka，Kafka架构详解kafka的核心" />
+<meta name="description" content="大数据日志传输之Kafka，Kafka架构详解kafka的核心" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">大数据日志传输之Kafka，Kafka架构详解kafka的核心</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">mnsj1188</li>
+          <li class="lmname"><a href="https://blog.51cto.com/14485508/2430869" target="_blank">https://blog.51cto.com/14485508/2430869</a></li>
+          <li class="timer">2019-08-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>大数据日志传输之Kafka，Kafka架构详解kafka的核心</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <div class="con editor-preview-side" id="result"><h2 style="margin:0px;padding:0px;font-family:'Source Han Sans SC', 'Noto Sans CJK SC Medium', 'WenQuanYi Micro Hei', Arial, Helvetica, sans-serif, '黑体', '苹方';white-space:normal;background-color:rgb(255,255,255);">1.&nbsp;Kafka的经典架构</h2><p style="margin-top:0px;margin-bottom:0px;padding:0px;font-family:'Source Han Sans SC', 'Noto Sans CJK SC Medium', 'WenQuanYi Micro Hei', Arial, Helvetica, sans-serif, '黑体', '苹方';font-size:14px;white-space:normal;background-color:rgb(255,255,255);"><br> Kafka是LinkedIn&nbsp;用于日志处理的分布式消息队列，同时支持离线和在线日志处理。<br> Kafka&nbsp;对消息保存时根据<strong>&nbsp;Topic</strong>&nbsp;进行归类。<br> 发送消息者就是<strong>Producer</strong>，消息的发布描述为Producer<br> 消息接受者就是&nbsp;<strong>Consumer</strong>，消息的订阅描述为&nbsp;Consumer<br> 每个&nbsp;Kafka&nbsp;实例称为&nbsp;<strong>Broker</strong>，将中间的存储阵列称作&nbsp;Broker(代理)，Broker也是kafka集群的节点</p><h2 style="margin:0px;padding:0px;font-family:'Source Han Sans SC', 'Noto Sans CJK SC Medium', 'WenQuanYi Micro Hei', Arial, Helvetica, sans-serif, '黑体', '苹方';white-space:normal;background-color:rgb(255,255,255);">2.架构的角色介绍</h2><h3 style="margin:0px;padding:0px;font-family:'Source Han Sans SC', 'Noto Sans CJK SC Medium', 'WenQuanYi Micro Hei', Arial, Helvetica, sans-serif, '黑体', '苹方';white-space:normal;background-color:rgb(255,255,255);"> &nbsp;&nbsp;(1)broker</h3><p style="margin-top:0px;margin-bottom:0px;padding:0px;font-family:'Source Han Sans SC', 'Noto Sans CJK SC Medium', 'WenQuanYi Micro Hei', Arial, Helvetica, sans-serif, '黑体', '苹方';font-size:14px;white-space:normal;background-color:rgb(255,255,255);">  kafka集群包括一个或者多个服务器，这种服务器被称为brker。<br>  broker也就是中间的存储队列的节点实例。我们将消息发布者称为：Produce，将消息的订阅者称为：Consumer，将中间的存储阵列称为broker。<br> </p><h3 style="margin:0px;padding:0px;font-family:'Source Han Sans SC', 'Noto Sans CJK SC Medium', 'WenQuanYi Micro Hei', Arial, Helvetica, sans-serif, '黑体', '苹方';white-space:normal;background-color:rgb(255,255,255);"> &nbsp;&nbsp;(2)topic</h3><p style="margin-top:0px;margin-bottom:0px;padding:0px;font-family:'Source Han Sans SC', 'Noto Sans CJK SC Medium', 'WenQuanYi Micro Hei', Arial, Helvetica, sans-serif, '黑体', '苹方';font-size:14px;white-space:normal;background-color:rgb(255,255,255);">  每条发布到kafka集群的消息都有一个类别，这个类别被成为Tpoic。物理上不同的topic的消息分开存储，逻辑上一个topic的消息虽然保存与一个或者多个broker中。但用户只需要指定消费的topic，即生产或者消费数据的客户端不需要关心数据存储与何处。<br>  kafka中发布订阅的对象就是topic。为每一个数据类型创建一个topic，把向topic发布消息的客户端称为producer，从topic订阅消息的客户端称为consumer，producer和consumer可以同时从多个topic读写数据。一个kafka集群由一个或者多个broker服务器组成。他负责持久化和备份具体的kafka消息。<br>  topic就是数据的主题，是数据记录发布的地方，可以用来区分业务系统。kafka中的topics总是<strong>多订阅者模式</strong>，一个topic可以拥有一个或者多个消费者来订阅它的数据。<br> </p><h3 style="margin:0px;padding:0px;font-family:'Source Han Sans SC', 'Noto Sans CJK SC Medium', 'WenQuanYi Micro Hei', Arial, Helvetica, sans-serif, '黑体', '苹方';white-space:normal;background-color:rgb(255,255,255);"> &nbsp;&nbsp;(3)partition</h3><p style="margin-top:0px;margin-bottom:0px;padding:0px;font-family:'Source Han Sans SC', 'Noto Sans CJK SC Medium', 'WenQuanYi Micro Hei', Arial, Helvetica, sans-serif, '黑体', '苹方';font-size:14px;white-space:normal;background-color:rgb(255,255,255);"><br>  partition是物理的概念，每一个topic包含一个或者多个partition。<br>  <strong>topic的分区策略</strong>（针对写数据的时候进行分区）：<br>   &nbsp;-&nbsp;<strong>轮询</strong>：顺序分发，仅针对于message没有key的时候。<br>   &nbsp;-&nbsp;<strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hash分区</strong>：在message有key的情况下，（key.hash%分区个数）。如果在增加分区的时候，partition里面的message不会重新进行分配，随着数据的继续写入，这个新的分区才会参与load&nbsp;balance。</p><hr><p style="margin-top:0px;margin-bottom:0px;padding:0px;font-family:'Source Han Sans SC', 'Noto Sans CJK SC Medium', 'WenQuanYi Micro Hei', Arial, Helvetica, sans-serif, '黑体', '苹方';font-size:14px;white-space:normal;background-color:rgb(255,255,255);">  <strong>topic的分区逻辑存储方式</strong>：<br><br>   topic&nbsp;会分成一个或多个&nbsp;partition，每个&nbsp;partiton&nbsp;相当于是一个&nbsp;子&nbsp;queue。在物理结构上，每个&nbsp;partition&nbsp;对应一个物理的目录（文件夹），文件夹命名是&nbsp;<strong>[topicname][partition][序号]</strong>，一个&nbsp;topic&nbsp;可以有无数多的&nbsp;partition，根据业务需求和数据量&nbsp;来设置。在&nbsp;kafka&nbsp;配置文件中可随时更高&nbsp;num.partitions&nbsp;参数来配置更改&nbsp;topic&nbsp;的&nbsp;partition&nbsp;数&nbsp;量，在创建&nbsp;Topic&nbsp;时通过参数指定&nbsp;parittion&nbsp;数量。Topic&nbsp;创建之后通过&nbsp;Kafka&nbsp;提供的工具也可以修改&nbsp;partiton&nbsp;数量。分区中存放着数据本身和数据的index下标。在向partition写入数据的时候，是<strong>顺序写入</strong>的，每一个数据写入的时候都会有一个类似下标的东西（index），随着数据的写入而增长。partition也是集群负载均衡的基本单位。</p><hr><p style="margin-top:0px;margin-bottom:0px;padding:0px;font-family:'Source Han Sans SC', 'Noto Sans CJK SC Medium', 'WenQuanYi Micro Hei', Arial, Helvetica, sans-serif, '黑体', '苹方';font-size:14px;white-space:normal;background-color:rgb(255,255,255);">  <strong>总结</strong>：<br>   &nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;一个topic的partition数量大于等于broker的数量，可以提高吞吐率。<br>   &nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;同一个partition的Replica尽量分散到不同的机器上，高可用。<br>   &nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;kafka的分区数：(1|2|3&nbsp;+&nbsp;0.95)&nbsp;*&nbsp;broker数量<br> </p><h3 style="margin:0px;padding:0px;font-family:'Source Han Sans SC', 'Noto Sans CJK SC Medium', 'WenQuanYi Micro Hei', Arial, Helvetica, sans-serif, '黑体', '苹方';white-space:normal;background-color:rgb(255,255,255);"> &nbsp;&nbsp;(4)Producer</h3><p style="margin-top:0px;margin-bottom:0px;padding:0px;font-family:'Source Han Sans SC', 'Noto Sans CJK SC Medium', 'WenQuanYi Micro Hei', Arial, Helvetica, sans-serif, '黑体', '苹方';font-size:14px;white-space:normal;background-color:rgb(255,255,255);">   负责主动发布消息到kakfa&nbsp;broker（push）<br>   <strong>kafka消息的保存策略</strong>：每个&nbsp;Topic&nbsp;被分成多个&nbsp;partition(区)。每条消息在&nbsp;partition&nbsp;中的位置称为&nbsp;offset(偏移量)，类型为&nbsp;long&nbsp;型数字。消息即使被消费了，也不会被立即删除，&nbsp;而是根据&nbsp;broker&nbsp;里的设置（<strong>基于时间存储或者基于大小</strong>），保存一定时间后再清除，比如&nbsp;log&nbsp;文件设置存储两天，则两天后，&nbsp;不管消息是否被消费，都清除。<br> </p><h3 style="margin:0px;padding:0px;font-family:'Source Han Sans SC', 'Noto Sans CJK SC Medium', 'WenQuanYi Micro Hei', Arial, Helvetica, sans-serif, '黑体', '苹方';white-space:normal;background-color:rgb(255,255,255);"> &nbsp;&nbsp;(5)Consumer</h3><p style="margin-top:0px;margin-bottom:0px;padding:0px;font-family:'Source Han Sans SC', 'Noto Sans CJK SC Medium', 'WenQuanYi Micro Hei', Arial, Helvetica, sans-serif, '黑体', '苹方';font-size:14px;white-space:normal;background-color:rgb(255,255,255);">   消息消费者，向kafkabroker读取消息的客户端。（pull）<br>   <strong>消费消息的策略</strong>：(使用的是roundrabin算法)：如果有4个分区，现在有三个消费者线程，那么这个三个线程一人分一个分区消费，最后一个分区以轮询的方式，发送给第一个线程消费，如果此时又多加入一个线程，那么就会将第4个分区就分给新加入的线程消费，如果有一个线程退出，那么第三个和第四个分区也会以轮询的方式，发送给第一个线程和第二个线程消费。（kafka内部自动维护这个负载均衡）。<br>   <strong>消费的原则</strong>：一个consumer对一个partition中的一条数据只需要消费一次，每一个consumer组维护一个下标文件，叫做offset，这个offset用于记录当前的consumer组消费数据的下标，每进行消费一条数据，当前的offset就会递增1（offset之前的数据，都表示已经消费过的数据）。</p><p style="margin-top:0px;margin-bottom:0px;padding:0px;font-family:'Source Han Sans SC', 'Noto Sans CJK SC Medium', 'WenQuanYi Micro Hei', Arial, Helvetica, sans-serif, '黑体', '苹方';font-size:14px;white-space:normal;background-color:rgb(255,255,255);"> </p><h3 style="margin:0px;padding:0px;font-family:'Source Han Sans SC', 'Noto Sans CJK SC Medium', 'WenQuanYi Micro Hei', Arial, Helvetica, sans-serif, '黑体', '苹方';white-space:normal;background-color:rgb(255,255,255);"> &nbsp;&nbsp;(6)Consumer&nbsp;group</h3><p style="margin-top:0px;margin-bottom:0px;padding:0px;font-family:'Source Han Sans SC', 'Noto Sans CJK SC Medium', 'WenQuanYi Micro Hei', Arial, Helvetica, sans-serif, '黑体', '苹方';font-size:14px;white-space:normal;background-color:rgb(255,255,255);"><br>   一个consumer&nbsp;group&nbsp;包含多个consumer，这个是预先在配置文件中配置好的。各个consumer可以组成一个租，partition中的每一个message只能被一个组中的一个consumer进行消费，其他的consumer不能消费同一个topic中同一个分区的数据，不同组的consumer可以消费同一个topic的同一个分区的数据。<br>   &nbsp;<strong>广播和单播</strong>：<br>    &nbsp;<strong>广播</strong>：所有的consumer每一个consumer划分一组<br>    &nbsp;&nbsp;<strong>单播</strong>：所有的consumer划分一组（一组中只允许一个消费）<br>   &nbsp;<strong>对于kafka消费的总结</strong>：<br>   &nbsp; &nbsp;-&nbsp;一个分区只能被一个消费者组中的一个成员消费<br>   &nbsp; &nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一个成员可以消费一个topic的多个分区<br>   &nbsp; &nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一个&nbsp;Topic&nbsp;中的每个&nbsp;Partition&nbsp;只会被一个“Consumer&nbsp;group”中的一个&nbsp;Consumer&nbsp;消费<br>   &nbsp; &nbsp;-&nbsp;一个成员还可以消费另外一个topic的分区</p><p style="margin-top:0px;margin-bottom:0px;padding:0px;font-family:'Source Han Sans SC', 'Noto Sans CJK SC Medium', 'WenQuanYi Micro Hei', Arial, Helvetica, sans-serif, '黑体', '苹方';font-size:14px;white-space:normal;background-color:rgb(255,255,255);"> </p><h3 style="margin:0px;padding:0px;font-family:'Source Han Sans SC', 'Noto Sans CJK SC Medium', 'WenQuanYi Micro Hei', Arial, Helvetica, sans-serif, '黑体', '苹方';white-space:normal;background-color:rgb(255,255,255);"> &nbsp;&nbsp;(7)segment</h3><p style="margin-top:0px;margin-bottom:0px;padding:0px;font-family:'Source Han Sans SC', 'Noto Sans CJK SC Medium', 'WenQuanYi Micro Hei', Arial, Helvetica, sans-serif, '黑体', '苹方';font-size:14px;white-space:normal;background-color:rgb(255,255,255);">   &nbsp;在kafka文件存储找中，同一个topic下有多个partition，每一个partition为一个目录，partition命名规则为：<strong>topic&nbsp;名称+有序序号</strong>，第一个partition序号从0开始，序号最大值为partitions数量-1，partition物理上由多个segment组成，每一个segment存储着多个message信息（默认是：1G），而每一个message是由一个key-value和一个时间戳组成。<br>   &nbsp;segment文件的生命周期由服务器配置参数决定：默认的是<strong>168个小时</strong>后删除。<br>   &nbsp;segment由两大部分组成：&nbsp;<strong>index&nbsp;file</strong>&nbsp;和&nbsp;<strong>data&nbsp;file</strong>，这2个文件一一对应，成对出现，后缀".index"和".log"分别表示为&nbsp;segment&nbsp;索引文件、数据文件。<br><br>   &nbsp;&nbsp;segment的命名规则：partion&nbsp;全局的第一个&nbsp;segment&nbsp;从&nbsp;0&nbsp;开始，后续每个&nbsp;segment&nbsp;文件名为上一个&nbsp;segment&nbsp;文件最后一条消息的&nbsp;offset&nbsp;值。数值最大为&nbsp;64&nbsp;位&nbsp;long&nbsp;大小，19&nbsp;位数字字符长度，没有数字用&nbsp;0&nbsp;填充。（每一个partition都是如此）<br>   &nbsp;segment的<strong>index&nbsp;file</strong>：&nbsp;&nbsp;索引文件存储大量元数据，数据文件存储大量消息，索引文件中元数据指向对应数据文件中&nbsp;message&nbsp;的物理偏移地址。<br><br>   &nbsp;segment的<strong>data&nbsp;file</strong>：<br></p><p><br></p></div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1983.html">大数据实时计算系统实践</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1985.html">kubernetes(K8s)，体系架构，集群解决方案</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.51cto.com/14485508/2430869" target="_blank">https://blog.51cto.com/14485508/2430869</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

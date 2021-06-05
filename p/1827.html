@@ -1,0 +1,621 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>LIVE555再学习 -- 单播、多播、广播、直播、点播 都是个啥？_comonly.cn</title>
+<meta name="keywords" content="LIVE555再学习 -- 单播、多播、广播、直播、点播 都是个啥？" />
+<meta name="description" content="一、单播
+
+
+	简介
+
+
+	&nbsp; &nbsp; &nbsp; &nbsp;Unicast，是客户端与服务器之间的点到点连接。“点到点”指每个客户端都从服务器接收远程流。仅当客户端发出请求时，才发送单播流。
+
+
+	
+Unicast(单播)：在客户端与媒体服务器之间需要建立一个单独的数据通道，从一台服务器送出的每个数据包只能传送给一个客户机,这种传送方式称为单播。指网络中从源向目的地转发单播流量的过程。单播流量地址唯一。每个用户必须分别对媒体服务器发送单独的查询,而媒体服务器必须向" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">LIVE555再学习 -- 单播、多播、广播、直播、点播 都是个啥？</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">聚优致成</li>
+          <li class="lmname"><a href="https://blog.csdn.net/qq_29350001/article/details/78086800" target="_blank">https://blog.csdn.net/qq_29350001/article/details/78086800</a></li>
+          <li class="timer">2020-10-04</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>一、单播
+
+
+	简介
+
+
+	&nbsp; &nbsp; &nbsp; &nbsp;Unicast，是客户端与服务器之间的点到点连接。“点到点”指每个客户端都从服务器接收远程流。仅当客户端发出请求时，才发送单播流。
+
+
+	
+Unicast(单播)：在客户端与媒体服务器之间需要建立一个单独的数据通道，从一台服务器送出的每个数据包只能传送给一个客户机,这种传送方式称为单播。指网络中从源向目的地转发单播流量的过程。单播流量地址唯一。每个用户必须分别对媒体服务器发送单独的查询,而媒体服务器必须向</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h1>
+	一、单播
+</h1>
+<h2 id='简介'>
+	<a></a><a></a>简介
+</h2>
+<p>
+	&nbsp; &nbsp; &nbsp; &nbsp;Unicast，是客户端与服务器之间的点到点连接。“点到点”指每个客户端都从服务器接收远程流。仅当客户端发出请求时，才发送单播流。
+</p>
+<p>
+	<img src="https://img-blog.csdn.net/20170926092918962" alt="" style="height:auto;" /><br />
+Unicast(单播)：在客户端与媒体服务器之间需要建立一个单独的数据通道，从一台服务器送出的每个数据包只能传送给一个客户机,这种传送方式称为单播。指网络中从源向目的地转发单播流量的过程。单播流量地址唯一。每个用户必须分别对媒体服务器发送单独的查询,而媒体服务器必须向每个用户发送所申请的数据包拷贝。这种巨大冗余首先造成服务器沉重的负担，响应需要很长时间，甚至停止播放；管理人员也被迫购买硬件和带宽来保证一定的服务质量。文字单播方式下，只有一个发送方和一个接收方。与之比较，组播是指单个发送方对应一组选定接收方的一种通信，任意播是指任意发送方对应一组较为接近的接收方间的一种通信。早期的点对点通信含义类似于单播。如果10个客户机需要相同的数据，则服务器需要逐一传送，重复10次相同的工作。但由于其能够针对每个客户的及时响应，所以现在的网页浏览全部都是采用IP单播协议。网络中的路由器和交换机根据其目标地址选择传输路径，将IP单播数据传送到其指定的目的地。
+</p>
+<h2 id='单播的优点：'>
+	<a></a><a></a>单播的优点：
+</h2>
+1. 服务器及时响应客户机的请求<br />
+2. 服务器针对每个客户不同的请求发送不同的数据，容易实现个性化服务。
+<h2 id='单播的缺点：'>
+	<a></a><a></a>单播的缺点：
+</h2>
+1. 服务器针对每个客户机发送数据流，服务器流量＝客户机数量×客户机流量；在客户数量大、每个客户机流量大的流媒体应用中服务器不堪重负。<br />
+2. 现有的网络带宽是金字塔结构，城际省际主干带宽仅仅相当于其所有用户带宽之和的5％。如果全部使用单播协议，将造成网络主干不堪重负。现在的P2P应用就已经使主干经常阻塞，只要有5％的客户在全速使用网络，其他人就不要玩了。而将主干扩展20倍几乎是不可能。<br />
+<h1>
+	<a></a><a></a>二、多播（组播）
+</h1>
+<h2 id='简介'>
+	<a></a><a></a>简介
+</h2>
+<p>
+	多播(multicast)：主机之间“一对一组”的通讯模式，也就是加入了同一个组的主机可以接受到此组内的所有数据，网络中的交换机和路由器只向有需求者复制并转发其所需数据。主机可以向路由器请求加入或退出某个组，网络中的路由器和交换机有选择的复制并传输数据，即只将组内数据传输给那些加入组的主机。这样既能一次将数据传输给多个有需要（加入组）的主机，又能保证不影响其他不需要（未加入组）的主机的其他通讯。
+</p>
+<p>
+	<img src="https://img-blog.csdn.net/20170926094914325" alt="" style="height:auto;" /> 
+</p>
+<h2 id='多播的优点：'>
+	<a></a><a></a>多播的优点：
+</h2>
+1. 需要相同数据流的客户端加入相同的组共享一条数据流，节省了服务器的负载。具备广播所具备的优点。<br />
+2. 由于多播协议是根据接受者的需要对数据流进行复制转发，所以服务端的服务总带宽不受客户接入端带宽的限制。IP协议允许有2亿6千多万个（268435456）多播，所以其提供的服务可以非常丰富。<br />
+3. 此协议和单播协议一样允许在Internet宽带网上传输。<br />
+<h2 id='多播的缺点：'>
+	<a></a><a></a>多播的缺点：
+</h2>
+1．与单播协议相比没有纠错机制，发生丢包错包后难以弥补，但可以通过一定的容错机制和QOS加以弥补。<br />
+2．现行网络虽然都支持多播的传输，但在客户认证、QOS等方面还需要完善，这些缺点在理论上都有成熟的解决方案，只是需要逐步推广应用到现存网络当中。<br />
+<h1>
+	<a></a><a></a>三、广播
+</h1>
+<h2 id='简介'>
+	<a></a><a></a>简介
+</h2>
+<p>
+	广播(broadcast)：主机之间“一对所有”的通讯模式，网络对其中每一台主机发出的信号都进行无条件复制并转发，所有主机都可以接收到所有信息（不管你是否需要），由于其不用路径选择，所以其网络成本可以很低廉。有线电视网就是典型的广播型网络，我们的电视机实际上是接受到所有频道的信号，但只将一个频道的信号还原成画面。在数据网络中也允许广播的存在，但其被限制在二层交换机的局域网范围内，禁止广播数据穿过路由器，防止广播数据影响大面积的主机。
+</p>
+<p>
+	<img src="https://img-blog.csdn.net/20170926095245576" alt="" style="height:auto;" /> 
+</p>
+<h2 id='广播的优点：'>
+	<a></a><a></a>广播的优点：
+</h2>
+1. 网络设备简单，维护简单，布网成本低廉<br />
+2. 由于服务器不用向每个客户机单独发送数据，所以服务器流量负载极低。<br />
+<h2 id='广播的缺点：'>
+	<a></a><a></a>广播的缺点：
+</h2>
+1.无法针对每个客户的要求和时间及时提供个性化服务。<br />
+2. 网络允许服务器提供数据的带宽有限，客户端的最大带宽＝服务总带宽。例如有线电视的客户端的线路支持100个频道（如果采用数字压缩技术，理论上可以提供500个频道），即使服务商有更大的财力配置更多的发送设备、改成光纤主干，也无法超过此极限。也就是说无法向众多客户提供更多样化、更加个性化的服务。<br />
+3. 广播禁止在Internet宽带网上传输。<br />
+<h1>
+	<a></a><a></a>四、IP地址
+</h1>
+<h2 id='（1）IP地址的分类'>
+	<a></a><a></a>（1）IP地址的分类
+</h2>
+<p>
+	参看：<a target="_blank" href="http://blog.csdn.net/gatieme/article/details/50989257">IP地址、子网掩码、网络号、主机号、网络地址、主机地址以及ip段/数字-如192.168.0.1/24是什么意思?</a> 
+</p>
+<p>
+	IP地址是一个 32 位的二进制数，通常被分割为 4 个“8 位二进制数”（也就是 4 个字节）。IP 地址通常用“点分十进制”表示成（a.b.c.d）的形式，其中，a,b,c,d 都是 0~255 之间的十进制整数。例：点分十进 IP 地址（100.4.5.6），实际上是 32 位二进制数（01100100.00000100.00000101.00000110）。
+</p>
+<p>
+	<img src="https://img-blog.csdn.net/20160712182446560" alt="" style="height:auto;" /> 
+</p>
+<p>
+	然后通过上图可以看出各类网络地址和主机地址分别占有多少位。
+</p>
+<p>
+	而根据网络地址和主机地址所占位数可以看出各类的子网掩码
+</p>
+<p>
+	举个例子，最常用的C类 &nbsp;192.168.1.108&nbsp;
+</p>
+<p>
+	第1个8位中的第1、2、3 位始终为110，网络地址21位，主机地址8位，则子网掩码为 255.255.255.0
+</p>
+<p>
+	我们今天不是重点不是为了将IP地址的，这部分只做了解。
+</p>
+<p>
+	子网掩码部分参看：<a target="_blank" href="http://blog.csdn.net/leichelle/article/details/8217022">IP地址、子网掩码、网络号、主机号、网络地址、主机地址</a> 
+</p>
+<h2 id='（2）单播、多播和广播的IP地址'>
+	<a></a><a></a>（2）单播、多播和广播的IP地址
+</h2>
+<p>
+	参看：<a target="_blank" href="http://www.360doc.com/content/12/0622/17/8185406_219837399.shtml">单播、广播和多播地址</a> 
+</p>
+<p>
+	<br />
+</p>
+<p>
+	单播（unicast）指数据发送过程中只有一个发送方和一个接受方，单播地址就是指接受方接口的地址
+</p>
+<p>
+	<br />
+</p>
+<h3>
+	<a></a><a></a>1．单播
+</h3>
+<p>
+	单播地址是IP网络中最常见的。包含单播目标地址的分组发送给特定主机，一个这样的例子是，IP地址为192.168.1.5（源地址）的主机向IP地址为192.168.1.200（目标地址）的服务器请求网页，如图下图所示。
+</p>
+<p>
+	<img src="https://img-blog.csdn.net/20170926134328521" alt="" style="height:auto;" /><br />
+提示，要发送和接收单播分组，IP分组报头中必须有一个目标IP地址，而以太网帧报头中必须有相应的目标MAC地址。IP地址和MAC地址一起将数据传输到特定的目标主机。
+</p>
+<p>
+	如果目标IP地址属于另一个网络，则在帧中使用的目标MAC地址将为与源IP地址位于同一个网络中的路由器接口的MAC地址。
+</p>
+<h3>
+	<a></a><a></a>2．广播
+</h3>
+<p>
+	广播分组的目标IP地址的主机部分全为1，这意味着本地网络（广播域）中的所有主机都将接收并查看该分组。诸如ARP和DHCP等很多网络协议都使用广播。
+</p>
+<p>
+	例如：
+</p>
+<p>
+	C类网络&nbsp;&nbsp;192.168.1.0的默认子网掩码为255.255.255.0（掩码的255个数对应网络的网络地址个数），其广播地址为192.168.1.255，其主机部分为十进制数255或二进制数11111111（全为1）；
+</p>
+<p>
+	B类网络&nbsp;&nbsp;172.16.0.0的默认子网掩码为255.255.0.0，其广播地址为172.16.255.255；
+</p>
+<p>
+	A类网络&nbsp;&nbsp;10.0.0.0的默认子网掩码为255.0.0.0，其广播地址为10.255.255.255。
+</p>
+<p>
+	在以太网帧中，必须包含与广播IP地址对应的广播MAC地址。在以太网中，广播MAC地址长48位，其十六进制表示为FF-FF-FF-FF-FF-FF（全1为广播mac，主机地址为全1即广播ip地址）。图5.9所示的是一个广播IP分组。
+</p>
+<p>
+	<img src="https://img-blog.csdn.net/20170926134612533" alt="" style="height:auto;" /> 
+</p>
+<h3>
+	<a></a><a></a>3. &nbsp;多播
+</h3>
+多播地址让源设备能够将分组发送给一组设备。属于多播组的设备将被分配一个多播组IP地址，多播地址范围为224.0.0.0～239.255.255.255 （即D类IP地址）由于多播地址表示一组设备（有时被称为主机组），因此只能用作分组的目标地址。源地址总是为单播地址。3．多播
+<p>
+	远程游戏就是一个使用多播地址的例子，很多玩家通过远程连接玩同一个游戏；另一例子是通过视频会议进行远程教学，其中很多学生连接到同一个教室。还有一个例子是硬盘映像应用程序，这种程序用于同时恢复众多硬盘的内容。
+</p>
+<p>
+	同单播地址和广播地址一样，多播IP地址也需要相应的多播MAC地址在本地网络中实际传送帧。多播MAC地址以十六进制值01-00-5E打头，余下的6个十六进制位是根据IP多播组地址的最后23位转换得到的。一个MAC多播地址是01-00-5E-0F-64-C5，如图5.10所示。每个十六进制位相对于4个二进制位。
+</p>
+<p>
+	<img src="https://img-blog.csdn.net/20170926134657748" alt="" style="height:auto;" /> 
+</p>
+<h1>
+	<a></a><a></a>五、原理
+</h1>
+<p>
+	参看：<a target="_blank" href="http://blog.csdn.net/a5503308/article/details/47336493">广播、多播与单播的原理</a> 
+</p>
+<p>
+	参看：<a target="_blank" href="http://blog.csdn.net/herbert5069/article/details/31358641">网络基本概念之TCP, UDP, 单播（Unicast）, 多播（组播）（Multicast）</a> 
+</p>
+<p>
+	单播和广播，相对来说好比较好理解。我们主要来看一下多播。
+</p>
+<p>
+	IP多播首先要知道的是只有UDP有多播，没有TCP多播这样的东西。
+</p>
+<h2 id='为什么要多播？'>
+	<a></a><a></a>为什么要多播？
+</h2>
+当一个主机需要向N个主机发送数据时（有的不属于同一子网），假如使用单播，那么将对发送主机产生非常大的性能消耗，同时需要发送主机有足够强大的主机。假如使用广播，那么意味着就算子网中不是目的主机的主机也要接收数据包，对非目的主机产生不必要的消耗。而且，广播还不能跨越子网发送。所以假如可以指定一个组的主机进行发送，那就非常好了。所以就有了多播。<br />
+<h2 id='路由器和主机如何确认这是一个多播地址？'>
+	<a></a><a></a>路由器和主机如何确认这是一个多播地址？
+</h2>
+多播使用D类地址。所以IP目的地址以“1110”开头的就被认为为多播地址。而剩下的28位可以成为多播的组编号。多播地址还有很多是被预定的了。部分预定如下：<br />
+地址&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;内容<br />
+224.0.0.0(预定）<br />
+224.0.0.1子网内所有的系统<br />
+224.0.0.2子网内所有的路由器<br />
+224.0.0.5OSPF路由器
+<h2 id='路由器怎么知道哪里有需要接受多播分组的主机？'>
+	<a></a><a></a>路由器怎么知道哪里有需要接受多播分组的主机？
+</h2>
+<p>
+	这是多播最核心的问题。路由器面对一个IP地址为多播地址的数据包时，该怎么样判断这个数据包的转发方向呢？假如路由器上每一个主机都接收多播分组，那么可以采用广播方式进行扩散。但是简单的扩散会产生回路——解决方法：逆向路径广播。
+</p>
+<p>
+	<br />
+逆向路径广播规定：当一个路由器收到一个源地址S发往组G的多播分组时，仅当接收该分组的接口位于从路由器到源主机S的最短路径上时才扩散该分组。<br />
+这个规定有效地防止了多播数据包的循环转发。整体来看，我们可以理解为一个多播的传播过程就像一些数据不停地从一个树的根节点往叶子节点进行传播的过程。那么，在这棵多播传播网络树中，也许有一些子树是不含有接收多播分组主机的，那么最后在传播树中，最后就不要有那一部分的子树。于是，逆向路径广播协议就有了“剪枝”行为了。
+</p>
+<p>
+	<br />
+定义：对于基于一个源地址的多播流，如果路由的所有下游接口均没有该组成员或已被剪枝，则它通过其双亲链路向上发送剪枝消息（消息意思是：上游的路由器啊，我这边不接收多播分组数据，你不要传给我了！）。路由器不会把多播分组从剪枝接口转发出去。<br />
+当然，这个剪枝行为是不能恒定的，因为随时可以有主机登记为多播目的主机。所以就有与剪枝相对应的行为——嫁接。实现原理很简单：路由器定时删除剪枝信息，下游重新对上剪枝。
+</p>
+<p>
+	<img src="https://img-blog.csdn.net/20170926142249085" alt="" style="height:auto;" /> 
+</p>
+<p>
+	通过逆向路径广播的技术，我们可以知道路由器是如何转发多播数据包的。那么在这里我们可以再引出一个问题：怎么知道一个主机是多播接收主机呢？那就是IGMP的工作了。
+</p>
+<h2 id='多播与IGMP协议'>
+	<a></a><a></a>多播与IGMP协议
+</h2>
+IGMP译名为：Internet组管理协议。用于路由器查询与它直连的网络上是否存在组成员。<br />
+IGMP是多播技术的一个基本模块。我们可以想象一个多播路由器的工作情况，当它接收到一个多播数据包（假设是224.1.2.3），需要转发时，那么它就要选择合适的接口进行转发。从上文可知，假如接口le1不存在224.1.2.3的多播主机，那么路由器就无需在这个接口中转发。对于一个多播路由器而言，IGMP的功能主要就是维护这个信息：接口是否存在多播主机。<br />
+IGMP主要是两个功能：<br />
+&nbsp; &nbsp; 1、主机加入多播组<br />
+&nbsp; &nbsp; 2、IGMP报告和查询，维护多播组转发表<br />
+<p>
+	<br />
+</p>
+<p>
+	简略的介绍一下过程，详细可以参考 《TCP/IP详解》
+</p>
+<p>
+	<br />
+</p>
+<p>
+	主机加入多播组
+</p>
+<p>
+	主机中，某一个进程希望可以加入多播组（例如，我打开一个直播，意味着主机希望假如这个多播组，以获得直播的数据）。那么，它会定时地发送一个IGMP报告。在这个报文中：
+</p>
+<div>
+	<table>
+		<tbody>
+			<tr>
+				<th>
+					字段
+				</th>
+				<th>
+					数据
+				</th>
+			</tr>
+		</tbody>
+		<tbody>
+			<tr>
+				<td>
+					报文类型
+				</td>
+				<td>
+					IGMP报告
+				</td>
+			</tr>
+			<tr>
+				<td>
+					IGMP组地址
+				</td>
+				<td>
+					组地址
+				</td>
+			</tr>
+			<tr>
+				<td>
+					目的IP地址
+				</td>
+				<td>
+					组地址
+				</td>
+			</tr>
+			<tr>
+				<td>
+					源IP地址
+				</td>
+				<td>
+					主机IP地址
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<p>
+	当多播路由器在某个接口中接收到这个报文时。那么就证明，这个接口存在这个多播组的接收主机。以后它就懂得转发它的数据包了。
+</p>
+<p>
+	IGMP的报告与查询
+</p>
+<p>
+	多播是动态的，意味着随时会有主机加入多播组或退出多播组。所以IGMP必需可以合理维护多播组的信息，所以多播路由器必需每隔一段时间就发送查询消息，保证接口中存在多播主机，并以此维护自己的多播分组转发路由表。查询报文简要记述如下：
+</p>
+<div>
+	<table>
+		<tbody>
+			<tr>
+				<th>
+					字段
+				</th>
+				<th>
+					数据
+				</th>
+			</tr>
+		</tbody>
+		<tbody>
+			<tr>
+				<td>
+					报文类型
+				</td>
+				<td>
+					IGMP查询
+				</td>
+			</tr>
+			<tr>
+				<td>
+					IGMP组地址
+				</td>
+				<td>
+					0
+				</td>
+			</tr>
+			<tr>
+				<td>
+					目的IP地址
+				</td>
+				<td>
+					224.0.0.1
+				</td>
+			</tr>
+			<tr>
+				<td>
+					源IP地址
+				</td>
+				<td>
+					路由器IP地址
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<p>
+	其中，224.0.0.1意味着它想所有多播组的主机发送查询。每一个允许多播的主机都必要先加入224.0.0.1这个多播组。至此，我们了解完IGMP的两个重要工作后，我们已经可以完全理解：一个主机加入多播分组或离开多播分组的原理。
+</p>
+<h1>
+	<a></a><a></a>六、直播和点播
+</h1>
+<p>
+	最后我们讲一下，直播和点播。这个从字面上也可以大致看出是什么意思的吧。
+</p>
+<p>
+	直播，比如斗鱼、熊猫直播这种形式的
+</p>
+<p>
+	流媒体技术在音视频直播的应用，大概可以这样分类，
+</p>
+<p>
+	一是广电新媒体网台、IPTV直播/OTT直播为代表的以电视直播业务为主，特点是延时容忍度高，但稳定性、清晰度要求高；
+</p>
+<p>
+	二是秀场/游戏直播/体育直播/移动直播/教育直播等为代表的互动直播，特点是延时要求高；
+</p>
+<p>
+	三是以视频会议为代表的音视频通讯业务，特点是延时要求极高，音频质量要求高。
+</p>
+<p>
+	点播，比如优酷、爱奇艺这种形式的
+</p>
+<p>
+	音视频的点播已经非常成熟，其业务流程一般为 上传-转码-编辑制作-入库-用户请求-网络分发-播放。类型上可以简单分为如下几类：
+</p>
+<p>
+	一是以优酷、爱奇艺等为代表的音视频点播网站，特点是少量上传海量点播；
+</p>
+<p>
+	二是以监控、秀场直播录制为代表的录像点播，特点是海量上传少量点播；
+</p>
+<p>
+	三是以段视频网站，特点是海量上传海量点播。针对不同类型的点播应用，需要架构不同的流媒体系统。
+</p>
+<p>
+	需要说明的是，如前文所述目前点播大多以 HTTP 渐进方式分发，或者以 HLS 切片方式分发（点播的 HLS 只下载一次 M3U8 索引，后续就是 .ts 文件下载了），它更接近文件分发。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1826.html">正则表达式匹配符号表</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1828.html">如何设计一个高并发系统</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/qq_29350001/article/details/78086800" target="_blank">https://blog.csdn.net/qq_29350001/article/details/78086800</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#简介">简介</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#单播的优点：">单播的优点：</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#单播的缺点：">单播的缺点：</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#简介">简介</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#多播的优点：">多播的优点：</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#多播的缺点：">多播的缺点：</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#简介">简介</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#广播的优点：">广播的优点：</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#广播的缺点：">广播的缺点：</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#（1）IP地址的分类">（1）IP地址的分类</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#（2）单播、多播和广播的IP地址">（2）单播、多播和广播的IP地址</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#为什么要多播？">为什么要多播？</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#路由器和主机如何确认这是一个多播地址？">路由器和主机如何确认这是一个多播地址？</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#路由器怎么知道哪里有需要接受多播分组的主机？">路由器怎么知道哪里有需要接受多播分组的主机？</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#多播与IGMP协议">多播与IGMP协议</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

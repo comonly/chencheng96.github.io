@@ -1,0 +1,304 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>基于范围的for循环 冒号（:）_comonly.cn</title>
+<meta name="keywords" content="基于范围的for循环 冒号（:）" />
+<meta name="description" content="采用c++11新特性中的基于范围for循环，不必去操心数组越界（边界）问题，因此非常的方便，特别是在项目开发中。
+
+语法形式：
+for(declaration:expression)
+{
+ statement
+}
+
+其中：
+expression部分表示一个对象，用于表示一个序列。
+declaration部分负责定义一个变量，该变量将被用于访问序列中的基础元素。
+每次迭代，declaration部分的变量会被初始化为expression部分的下一个
+元素值。
+
+	
+
+
+	 " />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">基于范围的for循环 冒号（:）</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-11-26</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>采用c++11新特性中的基于范围for循环，不必去操心数组越界（边界）问题，因此非常的方便，特别是在项目开发中。
+
+语法形式：
+for(declaration:expression)
+{
+ statement
+}
+
+其中：
+expression部分表示一个对象，用于表示一个序列。
+declaration部分负责定义一个变量，该变量将被用于访问序列中的基础元素。
+每次迭代，declaration部分的变量会被初始化为expression部分的下一个
+元素值。
+
+	
+
+
+	 </div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 采用c++11新特性中的基于范围for循环，不必去操心数组越界（边界）问题，因此非常的方便，特别是在项目开发中。<br />
+<br />
+语法形式：<br />
+for(declaration:expression)<br />
+{<br />
+<span> </span>statement<br />
+}<br />
+<br />
+其中：<br />
+expression部分表示一个对象，用于表示一个序列。<br />
+declaration部分负责定义一个变量，该变量将被用于访问序列中的基础元素。<br />
+每次迭代，declaration部分的变量会被初始化为expression部分的下一个<br />
+元素值。<br />
+<p>
+	<br />
+</p>
+<p>
+	<span> </span>int arr[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };<br />
+<span> </span>for (auto val : arr)<br />
+<span> </span>{<br />
+<span> </span>cout &lt;&lt; val &lt;&lt; " ";<br />
+<span> </span>}
+</p>
+<h2 id='通过修改迭代器的值修改循环对象本身内容'>
+	通过修改迭代器的值修改循环对象本身内容
+</h2>
+<p>
+	若迭代器变量的值希望能够在for中被修改，可以采用引用&amp;的方式；
+</p>
+<p>
+	<span> </span>int arr[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };<br />
+<span> </span>for (auto &amp;val : arr)<br />
+<span> </span>{<br />
+<span> </span>if (val == 5)<br />
+<span> </span>{<br />
+<span> </span>val += 1;<br />
+<span> </span>}<br />
+<span> </span>cout &lt;&lt; val &lt;&lt; " ";<br />
+<span> </span>}
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+（1）和普通循环一样，也可以采用continue跳出循环的本次迭代。<br />
+（2）用break来终止整个循环
+</p>
+<p>
+	<br />
+</p>
+<p>
+	对map和multimap容器使用范围循环，每次拿到的元素既不是键也不是值，而是由键和值组成的pair<br />
+在使用基于范围的for循环时，不能违背容器本身的约束<br />
+基于范围的for循环，无论循环体执行多少次，冒号后面的表达式永远只执行一次<br />
+基于范围的for循环，其底层实现依然要借助于容器的迭代器，<br />
+因此任何可能导致迭代器失效的结构性改变，都可能引发未定义的后果
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1558.html">音视频编解码</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1560.html">c++顺序容器定义和初始化</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#通过修改迭代器的值修改循环对象本身内容">通过修改迭代器的值修改循环对象本身内容</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

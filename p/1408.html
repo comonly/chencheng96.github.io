@@ -1,0 +1,243 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>vm虚拟机访问外网或暴露服务给外网访问_comonly.cn</title>
+<meta name="keywords" content="vm虚拟机访问外网或暴露服务给外网访问" />
+<meta name="description" content="vm虚拟机访问外网或暴露服务给外网访问
+Vm常用网络设置解释
+
+桥接：虚拟机跟宿主机处于同一网段(二者不是嵌套关系，是并列)，前提是你宿主机所在局域网你有多余1个的IP，否则可能IP冲突。此外，需要手工为虚拟系统配置IP地址、子网掩码，且注意和宿主机器处于同一网段。
+NAT:由vmware完成网络地址转换，最简单，无需额外配置，确保宿主机上VMware NAT Service和VMware DHCP Service运行状态即可
+Host-only:Host-only模式和NAT模式一样，都是以宿" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">vm虚拟机访问外网或暴露服务给外网访问</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">secretx</li>
+          <li class="lmname"><a href="https://blog.csdn.net/secretx/article/details/41676985" target="_blank">https://blog.csdn.net/secretx/article/details/41676985</a></li>
+          <li class="timer">2019-09-06</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>vm虚拟机访问外网或暴露服务给外网访问
+Vm常用网络设置解释
+
+桥接：虚拟机跟宿主机处于同一网段(二者不是嵌套关系，是并列)，前提是你宿主机所在局域网你有多余1个的IP，否则可能IP冲突。此外，需要手工为虚拟系统配置IP地址、子网掩码，且注意和宿主机器处于同一网段。
+NAT:由vmware完成网络地址转换，最简单，无需额外配置，确保宿主机上VMware NAT Service和VMware DHCP Service运行状态即可
+Host-only:Host-only模式和NAT模式一样，都是以宿</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> vm虚拟机访问外网或暴露服务给外网访问<br />
+Vm常用网络设置解释<br />
+<br />
+桥接：虚拟机跟宿主机处于同一网段(二者不是嵌套关系，是并列)，前提是你宿主机所在局域网你有多余1个的IP，否则可能IP冲突。此外，需要手工为虚拟系统配置IP地址、子网掩码，且注意和宿主机器处于同一网段。<br />
+NAT:由vmware完成网络地址转换，最简单，无需额外配置，确保宿主机上VMware NAT Service和VMware DHCP Service运行状态即可<br />
+Host-only:Host-only模式和NAT模式一样，都是以宿主机为基础建立一个虚拟网络，所以Host-only模式的配置与NAT模式基本上完全一样，仅仅是Host-only不自带NAT功能，需要你手动配置NAT<br />
+虚拟机连接外网<br />
+<br />
+采用最简单的，选择NAT，虚拟机网络行为就像宿主机一样，访问外网，包括宿主机所在局域网。此时可以想象虚拟机嵌套在宿主机中，宿主机相当于虚拟机的代理服务器，所有宿主机能访问的，虚拟机都能访问<br />
+<br />
+外网连接虚拟机<br />
+<br />
+比如你的虚拟机里面运行着一个web服务，假定端口为9999，由于上一步选择NAT，虚拟机会被分配一个内网地址，比如192.168.230.129.首先虚拟机必须开放端口9999<br />
+<br />
+宿主机访问虚拟机：直接浏览器访问http://192.168.230.129:9999<br />
+外网访问虚拟机：在vm上"编辑"--&gt;"虚拟网络编辑器"--&gt;选中"VMnet8"--&gt;"NAT设置"--&gt;"添加"端口映射。<br />
+主机端口：填写宿主机对外开放的端口<br />
+虚拟机IP/PORT：填写虚拟机IP/PORT<br />
+此时访问“http://宿主机IP:宿主机PORT”就会转发给“http://虚拟机IP:虚拟机PORT”, vmware完成请求转发.<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1407.html">主机上配置的DNS影响通过桥接模式联网的虚拟机的DNS配置</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1409.html">指定的域不存在或无法联系</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/secretx/article/details/41676985" target="_blank">https://blog.csdn.net/secretx/article/details/41676985</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,328 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Android—控件Spinner实现下拉列表及监听_comonly.cn</title>
+<meta name="keywords" content="Android—控件Spinner实现下拉列表及监听" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Android—控件Spinner实现下拉列表及监听</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">喵喵侠客</li>
+          <li class="lmname"><a href="https://blog.csdn.net/qq_38217237/article/details/79044448" target="_blank">https://blog.csdn.net/qq_38217237/article/details/79044448</a></li>
+          <li class="timer">2018-09-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	android
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 在Web开发中，HTML提供了下拉列表的实现，就是使用&lt;select&gt;元素实现一个下拉列表，在其中每个下拉列表项使用&lt;option&gt;表示即可。这是在Web开发中一个必不可少的交互性组件，而在Android中的对应实现就是Spinner。<br />
+<h2 id='1.以资源方式，静态展示Sier选项'>
+	1. 以资源方式，静态展示 Spinner 选项
+</h2>
+<pre class="prettyprint lang-xml">&lt;Spinner 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/spinner_id"
+    android:entries="@array/spinnerarr"/&gt;
+ 
+数据文件：
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;resources&gt;
+    &lt;string-array name="spinnerarr"&gt;
+        &lt;item&gt;北京&lt;/item&gt;
+        &lt;item&gt;上海&lt;/item&gt;
+    &lt;/string-array&gt;
+&lt;/resources&gt;</pre>
+<h2 id='2.以代码方式，动态展示Sier选项，用适配器给Sier添加数据'>
+	2. 以代码方式，动态展示 Spinner 选项，用适配器给Spinner添加数据
+</h2>
+<pre class="prettyprint lang-java">//页面布局
+&lt;Spinner
+    android:id="@+id/spin_pos_add_mcc"
+    android:layout_toRightOf="@id/static_text_pos_add_mcc"
+    android:layout_width="500px"
+    android:layout_height="150px"
+    android:layout_marginTop="1200px"/&gt;
+
+
+//获取SpinnerOption数组，可以通过网络、本地sqlite数据库、手动添加等获取数据
+public ArrayList&lt;SpinnerOption&gt; getMatchListSp(){
+    ArrayList&lt;SpinnerOption&gt; lists=new ArrayList&lt;&gt;();
+    Cursor cursor = db.query("plotform", null, null, null, null, null, null);
+    if (cursor.moveToFirst()) {
+        do {
+            int number=cursor.getInt(cursor.getColumnIndex("number"));
+            String ma=cursor.getString(cursor.getColumnIndex("mach"));
+            String plot=cursor.getString(cursor.getColumnIndex("plotform"));
+            SpinnerOption c = new SpinnerOption(number ,":"+ ma+"-"+plot);
+            lists.add(c);
+        } while (cursor.moveToNext());
+    }
+    cursor.close();
+    return lists;
+}
+
+//将数组通过Adapter绑定到Spinner上
+ArrayList&lt;SpinnerOption&gt; lists=new PosDao(this).getMatchListSp();
+Spinner Sp=(Spinner)findViewById(R.id.spin_pos_add_match);
+//设置Adapter
+ArrayAdapter&lt;SpinnerOption&gt; mAdapter = new ArrayAdapter&lt;SpinnerOption&gt;(this,android.R.layout.simple_spinner_item, lists);
+mAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+Sp.setAdapter(mAdapter);
+
+//取下拉框的值
+((SpinnerOption)Sp.getSelectedItem()).getText();
+
+//监听控件
+Sp.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {//选择item的选择点击监听事件
+    public void onItemSelected(AdapterView&lt;?&gt; arg0, View arg1,
+            int arg2, long arg3) {
+        //可以通过arg2获得选择了第几项
+    }
+
+    public void onNothingSelected(AdapterView&lt;?&gt; arg0) {
+        myTextView.setText("Nothing");
+    }
+});</pre></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/977.html">v,c,b,m,r 表示层、控制层、业务逻辑层、数据访问层</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/979.html">Android开发学习之路--性能优化之布局优化【善用linelayout】</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/qq_38217237/article/details/79044448" target="_blank">https://blog.csdn.net/qq_38217237/article/details/79044448</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="SpinnerOption的定义——Spinner的value和text关系">
+							<h2 style="display:inline;color:#5BC648;">SpinnerOption的定义——Spinner的value和text关系</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-09-19&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	参：原 //https://blog.csdn.net/zhouyingge1104/article/details/41489643
+</p>
+<p>
+	下拉框选项实体 SpinnerOption.java，在Spinner中显示选项的时候，默认会显示每个项（Object）的 toString() 之后的内容，因此重写 toString() 方法，让它输出 text 。
+</p>
+<pre class="prettyprint lang-java">//一种基本的下拉选项实体定义方法
+public class SpinnerOption {
+    private int value = "";
+    private String text = "";
+ 
+    public SpinnerOption() {
+        value = ""; text = "";
+    }
+ 
+    public SpinnerOption(int value, String text) {
+        this.value = value;
+        this.text = text;
+    }
+ 
+    @Override
+    public String toString() { 
+        return text;
+    }
+    public int getValue() {
+        return value;
+    }
+    public String getText() {
+        return text;
+    }
+}</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#1.以资源方式，静态展示Sier选项">1.以资源方式，静态展示Sier选项</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#2.以代码方式，动态展示Sier选项，用适配器给Sier添加数据">2.以代码方式，动态展示Sier选项，用适配器给Sier添加数据</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#SpinnerOption的定义——Spinner的value和text关系">SpinnerOption的定义——Spinner的value和text关系</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

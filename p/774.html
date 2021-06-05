@@ -1,0 +1,317 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>pyodbc连接access数据库_comonly.cn</title>
+<meta name="keywords" content="pyodbc连接access数据库" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">pyodbc连接access数据库</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-07-07</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	python  perl
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">pyodbc,access</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	本文主要介绍python3.6版本64位连接access32位过程中遇到的问题已经解决方法。
+</p>
+<p>
+	本文操作使用的环境是：64为PC，64位的python-3.6.1-amd64，32位的access，以及AccessDataEngine64位。<span id="__kindeditor_bookmark_start_9__"></span>
+</p>
+<p>
+	access.py的源代码：
+</p>
+<p>
+	# -*- coding: utf-8 -*-&nbsp;<br />
+# 功能:python连接access2010数据库(.accdb)<br />
+	<hr />
+	import pyodbc<br />
+DBfile = r"F:\myPython\test.mdb" &nbsp;# 数据库文件<br />
+conn = pyodbc.connect(r"Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=" + DBfile + ";Uid=;Pwd=;") &nbsp;<br />
+cursor = conn.cursor()<br />
+SQL = "SELECT * from t1;"<br />
+for row in cursor.execute(SQL):<br />
+&nbsp; &nbsp; print (row)<br />
+cursor.close()<br />
+conn.close()
+</p>
+<p>
+	<hr />
+</p>
+<p>
+	下面是操作步骤：
+</p>
+<p>
+	1.运行py文件报错，No module named 'pyodbc'
+</p>
+<div style="color:#FFFFFF;background-color:#000000;">
+	F:\myPython&gt;python access.py<br />
+Traceback (most recent call last):<br />
+File "access.py", line 1, in&gt;<br />
+import pyodbc<br />
+ModuleNotFoundError: No module named 'pyodbc'
+</div>
+<p>
+	所以只有安装该扩展模块了，如下图
+</p>
+<div style="color:#FFFFFF;background-color:#000000;">
+	F:\myPython&gt;pip install wheel<br />
+Collecting wheel<br />
+Downloading wheel-0.29.0-py2.py3-none-any.whl (66kB)<br />
+100% |████████████████████████████████| 71kB 45kB/s<br />
+Installing collected packages: wheel<br />
+Successfully installed wheel-0.29.0<br />
+</div>
+<p>
+	<br />
+</p>
+<div style="color:#FFFFFF;background-color:#000000;">
+	F:\myPython&gt;pip install wheel<br />
+Requirement already satisfied: wheel in d:\programs\python\python36\lib\site-packages<br />
+</div>
+<p>
+	下面是成功安装pyodbc模块的结果
+</p>
+<div style="color:#FFFFFF;background-color:#000000;">
+	F:\myPython&gt;pip install pyodbc-4.0.17-cp36-cp36m-win_amd64.whl<br />
+Processing f:\mypython\pyodbc-4.0.17-cp36-cp36m-win_amd64.whl<br />
+Installing collected packages: pyodbc<br />
+Successfully installed pyodbc-4.0.17<br />
+</div>
+<p>
+	安装pyodbc模块参考另一篇文章：<a href="http://www.iyaka.cn/blog/18_775.html" target="_blank">http://www.iyaka.cn/blog/18_775.html</a>
+</p>
+<p>
+	2.成功安装pyodbc后依然报错，并且提示信息是乱码
+</p>
+<div style="color:#FFFFFF;background-color:#000000;">
+	F:\myPython&gt;python access.py<br />
+Traceback (most recent call last):<br />
+File "access.py", line 7, in<br />
+conn = pyodbc.connect(r"Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=" + DBfile + ";Uid=;Pwd=;")<br />
+pyodbc.Error: ('IM002', '[IM002] [Microsoft][ODBC �������������] δ��������Դ���Ʋ���δָ��Ĭ���������� (0) (SQLDriverConnect)')<br />
+</div>
+<p>
+	找到相关介绍说是32位和64为不匹配，所以想把pyodbc换成32位的，可是提示python版本不支持。
+</p>
+<div style="color:#FFFFFF;background-color:#000000;">
+	F:\myPython&gt;pip install pyodbc-4.0.17-cp36-cp36m-win32.whl<br />
+pyodbc-4.0.17-cp36-cp36m-win32.whl is not a supported wheel on this platform.<br />
+</div>
+<p>
+	3.安装64位的数据库驱动，直接运行会报错，提示卸载32位版本的access，下面是解决方法
+</p>
+<p>
+	电脑中安装有32为office的情况下安装<span>64位的数据库驱动的方法参考：<a href="http://www.iyaka.cn/blog/18_776.html" target="_blank">http://www.iyaka.cn/blog/18_776.html</a></span>
+</p>
+<div style="color:#FFFFFF;background-color:#000000;">
+	F:\myPython\accessdatabaseengine_x64&gt;AccessDatabaseEngine_X64.exe<br />
+F:\myPython\accessdatabaseengine_x64&gt;AccessDatabaseEngine_X64.exe /passive<br />
+</div>
+<p>
+	4.最终大功告成，python可以成功访问access的数据库了。
+</p>
+<div style="color:#FFFFFF;background-color:#000000;">
+	F:\myPython&gt;python access.py<br />
+(1, '12', '12', '1212')<br />
+(2, '12', '12', '1')<br />
+(3, '12', '12', '1')
+</div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/773.html">怎么用谷歌浏览器查看请求或响应HTTP头</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/775.html">python安装pyodbc模块</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

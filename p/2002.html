@@ -1,0 +1,271 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>CSS：placeholder-shown伪类实现Material Design占位符交互效果_comonly.cn</title>
+<meta name="keywords" content="CSS：placeholder-shown伪类实现Material Design占位符交互效果" />
+<meta name="description" content="一、MaterialDesign规范中占位符交互效果MaterialDesign风格占位符交互效果官方示意见此demo页面。效果可以参见下面的GIF录屏示意：现在这种设计在移动端很常见，因为宽度是稀缺的。相信不少人设计项目中有实现过这种交互，而且，我敢保证是利用JS实现的。实际上，我们可以借助CSS:placeholder-shown伪类，纯CSS，无任何JS，实现这样的占位符交互效果。:plac" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">CSS：placeholder-shown伪类实现Material Design占位符交互效果</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">学好web开发</li>
+          <li class="lmname"><a href="https://blog.51cto.com/14458119/2430806" target="_blank">https://blog.51cto.com/14458119/2430806</a></li>
+          <li class="timer">2019-08-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>一、MaterialDesign规范中占位符交互效果MaterialDesign风格占位符交互效果官方示意见此demo页面。效果可以参见下面的GIF录屏示意：现在这种设计在移动端很常见，因为宽度是稀缺的。相信不少人设计项目中有实现过这种交互，而且，我敢保证是利用JS实现的。实际上，我们可以借助CSS:placeholder-shown伪类，纯CSS，无任何JS，实现这样的占位符交互效果。:plac</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <div class="con artical-content editor-preview-side"><h3>一、Material Design规范中占位符交互效果</h3>
+<p>Material Design风格占位符交互效果官方示意见此<a href="https://material-components.github.io/material-components-web-catalog/#/component/text-field" rel="nofollow" style="color: rgb(66, 133, 244);">demo页面</a>。</p>
+<p>效果可以参见下面的GIF录屏示意：</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL3VwbG9hZC1pbWFnZXMuamlhbnNodS5pby91cGxvYWRfaW1hZ2VzLzEzMTMzMDQ5LWFmZGM2NDc0ZmJiM2NmNjYuZ2lm" alt="CSS：placeholder-shown伪类实现Material Design占位符交互效果" style="cursor: pointer;"></p>
+<p>现在这种设计在移动端很常见，因为宽度是稀缺的。相信不少人设计项目中有实现过这种交互，而且，我敢保证是利用JS实现的。</p>
+<p>实际上，我们可以借助CSS :placeholder-shown伪类，纯CSS，无任何JS，实现这样的占位符交互效果。</p>
+<p>:placeholder-shown表示，当输入框的placeholder内容显示的时候，输入框干嘛干嘛。</p>
+<p>:placeholder-shown伪类目前兼容性如下：</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL3VwbG9hZC1pbWFnZXMuamlhbnNodS5pby91cGxvYWRfaW1hZ2VzLzEzMTMzMDQ5LTM2NDg0Njc1ZTczNTU4ZjgucG5n" alt="CSS：placeholder-shown伪类实现Material Design占位符交互效果" style="cursor: pointer;"></p>
+<p>兼容性还是很不错的，在移动端我们可以放心使用。因为就算一些老手机不支持，也不过是传统的placeholder占位符效果，并没有什么损失。</p>
+<h3>二、:placeholder-shown经典案例</h3>
+<p>展示使用几个:placeholder-shown实现label特性占位符案例。</p>
+<p>下面就是我实现的demo页面中的效果图（GIF动图）：</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL3VwbG9hZC1pbWFnZXMuamlhbnNodS5pby91cGxvYWRfaW1hZ2VzLzEzMTMzMDQ5LWZlYzI4MzYyMDhkNzg3MDIuZ2lm" alt="CSS：placeholder-shown伪类实现Material Design占位符交互效果" style="cursor: pointer;"></p>
+<p>输入内容功能也是布局效果也是正常的：</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL3VwbG9hZC1pbWFnZXMuamlhbnNodS5pby91cGxvYWRfaW1hZ2VzLzEzMTMzMDQ5LWI0MWI3MTY5YjY0MWE4MDYucG5n" alt="CSS：placeholder-shown伪类实现Material Design占位符交互效果" style="cursor: pointer;"></p>
+<p>纯CSS实现，要比JS实现好一千倍，代码少，性能高，样式调整方便，上手简单容易，可谓是前端必备技能了。</p>
+<h4>实现原理</h4>
+<p>拿第一个fill模式的输入框举例，HTML结构如下：</p>
+<pre><code class="hljs javascript">&lt;div <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"input-fill-x"</span>&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"input-fill"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"邮箱"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"input-label"</span>&gt;</span>邮箱<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+</code></pre>
+<p><strong>首先，</strong>让浏览器默认的placeholder效果不可见，我们可以让颜色透明即可，如下CSS：</p>
+<pre><code class="hljs css"><span class="hljs-comment">/* 默认placeholder颜色透明不可见 */</span>
+<span class="hljs-selector-class">.input-fill</span><span class="hljs-selector-pseudo">:placeholder-shown</span><span class="hljs-selector-pseudo">::placeholder</span> {
+    <span class="hljs-attribute">color</span>: transparent;
+}
+</code></pre>
+<p><strong>然后，</strong>后面的<code>.input-label</code>这个label元素代替成为我们肉眼看到的占位符。我们可以采用绝对定位：</p>
+<pre><code class="hljs css"><span class="hljs-selector-class">.input-fill-x</span> {
+    <span class="hljs-attribute">position</span>: relative;
+}
+<span class="hljs-selector-class">.input-label</span> {
+    <span class="hljs-attribute">position</span>: absolute;
+    <span class="hljs-attribute">left</span>: <span class="hljs-number">16px</span>; <span class="hljs-attribute">top</span>: <span class="hljs-number">14px</span>;
+    <span class="hljs-attribute">pointer-events</span>: none;
+}
+</code></pre>
+<p><strong>最后，</strong>对这个label元素在输入框focus时候，以及非placeholder显示的时候进行重定位（缩小并位移到上方）：</p>
+<pre><code class="hljs css"><span class="hljs-selector-class">.input-fill</span><span class="hljs-selector-pseudo">:not(</span><span class="hljs-selector-pseudo">:placeholder-shown)</span> ~ <span class="hljs-selector-class">.input-label</span>,
+<span class="hljs-selector-class">.input-fill</span><span class="hljs-selector-pseudo">:focus</span> ~ <span class="hljs-selector-class">.input-label</span> {
+    <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">scale</span>(0.75) <span class="hljs-built_in">translate</span>(0, -32px);
+}
+</code></pre>
+<p>于是，效果达成！</p>
+<p>是不是要比JS写各种事件，判断各种场景简单多了？</p>
+<h3>三、赶快项目中用起来吧</h3>
+<p>赶快项目中用起来吧！或者把这个技术分享给其他小伙伴吧~</p>
+<p>对web前端这门技术感兴趣的小伙伴可以加入到我们的学习圈来，正因为我不是211，985，只是个普通的本科生，英语不是特别好，数学不是特别好。所以我选择了前端。工作第六个年头了，我庆幸自己选择了这条路。767-273-102 秋裙。与大家分享一些学习方法，实战开发需要注意的细节。从零基础开始怎么样学好前端。都是一群有梦想的人，我们可能在不同的城市，但我们会一起结伴同行<a href="http://u6.gg/srMpX" rel="nofollow" style="color: rgb(66, 133, 244);">前端前端前端</a> </p>
+<p><strong>其他</strong></p>
+<ul>
+<li>demo页面还使用了其他一些CSS3属性，例如，外部容器宽度是跟着输入框宽度走的，使用的是width:fit-content]这个声明。</li>
+<li>输入框focus时候有个边框动画效果，借助了:focus-within伪类选择器，:focus-within伪类选择器也是非常强非常实用以后会大火的选择器，如果不了解的一定要进行了解。</li>
+<li>:placeholder-shown还可以实现下面的交互：输入框的后面（或下方）会有关于输入内容的说明和提示信息（因为很长，placeholder放不下），当用户输入内容，提示信息消失。</li>
+</ul></div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/2001.html">电子学习工具包iSpring Suite，教你将Word文档快速转换为SCORM</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/2004.html">编写生成脚本的基本格式的脚本</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.51cto.com/14458119/2430806" target="_blank">https://blog.51cto.com/14458119/2430806</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

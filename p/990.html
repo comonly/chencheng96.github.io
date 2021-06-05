@@ -1,0 +1,334 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Android原生日期时间选择器_comonly.cn</title>
+<meta name="keywords" content="Android原生日期时间选择器" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Android原生日期时间选择器</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-09-30</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	android
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	这是日期选择，里面的themeresid表示的是效果的背景色，设置为2就是上面的效果图，当点击确认后就会触发上面的onDateSet方法，在这里就可以做操作，同理，时间选择如下：，同样很简单，还有一些简单的操作可以自行百度。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/989.html">Android中关于EditText的点击事件及响应</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/991.html">Java中如何将字符串转化为Timestamp格式的  Timestamp format must be yyyy-MM-dd HH:mm:ss.fffffffff; </a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="日期/事件选择器代码">
+							<h2 style="display:inline;color:#5BC648;">日期/事件选择器代码</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-09-30&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	函数的调用方法：GetTimestamp.showDatePickerDialog(activity,2,editText, Calendar.getInstance()); 其中&nbsp;activity是<span>android.app.Activity，否则会报错：</span>Found: 'android.content.Context', required: 'android.app.Activity'
+</p>
+<p>
+	其中activity是通过Activity的onCreate()方法传递的this参数后，在下一层函数声明的final Activity activity，所传递的函数。即
+</p>
+<pre class="prettyprint lang-js">onCreate(){
+    setPaytime(this);
+}
+
+public void setPaytime(final Activity activity){
+    GetTimestamp.showDatePickerDialog(activity,2,editText, Calendar.getInstance());
+}</pre>
+<p>
+	转：原//https://blog.csdn.net/qq_33756493/article/details/78120743
+</p>
+<pre class="prettyprint lang-java">public static void showDatePickerDialog(Activity activity, int themeResId, final TextView tv, Calendar calendar) {
+    // 直接创建一个DatePickerDialog对话框实例，并将它显示出来
+    new DatePickerDialog(activity , themeResId,new DatePickerDialog.OnDateSetListener() {
+            // 绑定监听器(How the parent is notified that the date is set.)
+            @Override public void onDateSet(DatePicker view, int year,  int monthOfYear, int dayOfMonth) {
+                // 此处得到选择的时间，可以进行你想要的操作
+                tv.setText("您选择了：" + year + "年" + (monthOfYear+1)+ "月" + dayOfMonth + "日");
+            }
+        }
+        // 设置初始日期
+        , calendar.get(Calendar.YEAR)
+        ,calendar.get(Calendar.MONTH) ,calendar.get(Calendar.DAY_OF_MONTH)).show();
+}
+
+public static void showTimePickerDialog(Activity activity,int themeResId, final TextView tv, Calendar calendar) {
+    // Calendar c = Calendar.getInstance();
+    // 创建一个TimePickerDialog实例，并把它显示出来
+    // 解释一哈，Activity是context的子类
+    new TimePickerDialog( activity,themeResId,  new TimePickerDialog.OnTimeSetListener() {
+        // 绑定监听器
+      
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                tv.setText("您选择了：" + hourOfDay + "时" + minute  + "分");
+            }
+        }
+        // 设置初始时间
+        , calendar.get(Calendar.HOUR_OF_DAY)
+        , calendar.get(Calendar.MINUTE)
+        // true表示采用24小时制
+        ,true).show();
+}</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="android 两次调用DatePickerDialog.onDateSet（）的方法">
+							<h2 style="display:inline;color:#5BC648;">android 两次调用DatePickerDialog.onDateSet（）的方法</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-09-30&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span>//解决方案--添加一个boolean标记：&nbsp;Boolean isFirst = false;让第二次直接跳过<br /></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="Android DatePickerDialog和TimePickerDialog显示样式">
+							<h2 style="display:inline;color:#5BC648;">Android DatePickerDialog和TimePickerDialog显示样式</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-09-30&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	转：//https://www.cnblogs.com/huanyou/p/5087044.html
+</p>
+<p>
+	<br />
+</p>
+<p>
+	1、通过构造方法设置显示样式。
+</p>
+<p>
+	可以通过DatePickerDialog(Context context, int theme, DatePickerDialog.OnDateSetListener callBack, int year, int monthOfYear, int dayOfMonth)这个构造方法的第二个参数来设置显示样式。这个theme参数对应的值，可以使用AlertDialog中的theme值。AlertDialog.THEME_TRADITIONAL
+</p>
+<p>
+	2、通过DatePicker设置显示样式
+</p>
+<p>
+	首先获取DatePicker，然后使用DatePicker.setCalendarViewShow(boolean)和DatePicker.setSpinnersShow(boolean)来设置。CalendarView和Spinners的值分别为true和false
+</p>
+<p>
+	<br />
+</p>
+<p>
+	对于TimePickerDialog而言，它的样式设置，只有构造函数一种方式，对应的theme参数和DatePickerDialog相同。它内部定义了一个TimePicker，但是没有提供获取的方式。在构造TimePickerDialog和DatePickerDialog的时候最好使用DialogFragment来进行构造。
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#日期/事件选择器代码">日期/事件选择器代码</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#android 两次调用DatePickerDialog.onDateSet（）的方法">android 两次调用DatePickerDialog.onDateSet（）的方法</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Android DatePickerDialog和TimePickerDialog显示样式">Android DatePickerDialog和TimePickerDialog显示样式</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

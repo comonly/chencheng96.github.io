@@ -1,0 +1,340 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>WEB前端——拖拉页面元素改变页面布局 管理后台（实例）_comonly.cn</title>
+<meta name="keywords" content="WEB前端——拖拉页面元素改变页面布局 管理后台（实例）" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">WEB前端——拖拉页面元素改变页面布局 管理后台（实例）</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-04-17</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	拖拉事件，动态改变页面元素布局。一般用一个分隔条（用一个html元素加上填充即可）拖动时，页面布局跟随改变。常用在网站管理后台的布局设计。
+</p>
+<h3>
+	页面版块设计
+</h3>
+<p>
+	<span><img src="/File/ForKindEditor/image/20180418120717_943.jpg" alt="" /><br />
+</span>
+</p>
+<p>
+	<span>对于页面布局的设置，在js中，一般通过style进行设置。对布局页面的每块（比如管理页面的顶部，左下，右下三块）设置position: absolute;生成绝对定位的元素，相对于 static（默认值，没有定位） 以外的第一个父元素进行定位。元素的位置通过 "left", "top", "right" 以及 "bottom" 属性进行规定。</span>
+</p>
+<h3>
+	分隔条设计
+</h3>
+<p>
+	一般只需要设置初始状态的样式和伪类:hover时的样式即可达到一定的效果。下面分别设计了横向和竖向的两个分隔条，当鼠标移动到目标时，样式发生改变。两分隔条内嵌入的小块（用来直接隐藏页面元素）相关布局也相似。
+</p>
+<pre class="prettyprint lang-css">.north-west { background: #DDD;
+}
+.north-west:hover { /* mouse-over */
+	background: #9D9;
+}
+
+.north {
+	position: absolute;
+	top: 72px;
+	width: 1500px; height: 8px;
+	left: 0px;
+	border: 1px solid #CCCCCC;
+	cursor: n-resize;
+	z-index: 3;
+}
+.west {
+	position: absolute;
+	left: 12%;
+	height: 670px;
+	width: 6px;
+	top: 80px;
+	border: 1px solid #CCCCCC;
+	border-top: 0px;
+	cursor: w-resize;
+	z-index: 3;
+}
+
+.north-west .close{
+	position: absolute;
+	display: block;
+	padding: 0px;
+	margin: 0px;
+	overflow: hidden;
+	text-align: center;
+	font-size: 1px;
+	cursor: pointer;
+	background: #AAAAAA;
+} .north-west .close:hover {
+	background: #DDCCAA;
+}</pre>
+<h3>
+	关于页面重叠的相关处理
+</h3>
+<p>
+	在整个布局页面设置z-index和background属性，当拖动分隔条使某区域移动时，主区域可以覆盖变小（根据实际需求）的区域，设置z-index可以确保覆盖关系，但是页面元素背景色默认是透明的，使用设置background属性，可以保证覆盖关系的同时，不至于发生重叠。
+</p>
+<h3>
+	js事件
+</h3>
+<p>
+	下面两个函数分别为点击事件发生时和拖拉事件发生时对页面布局的处理（拖拉效果对火狐浏览器无效，在火狐只能使用点击事件直接隐藏或显示某区域）。
+</p>
+<p>
+	要使拖动事件有效需要设置draggable属性为true（但是该设置在实际测试对火狐浏览器无效，谷歌，360可以正常使用），ondrag事件在拖动过程中有效果，但是拖动结束后页面布局会恢复拖动前的状态。因此要加上ondragend事件，在拖动结束后固定页面拖动后的效果。
+</p>
+<pre class="prettyprint lang-js">&lt;!--两个拉条--&gt;
+&lt;span draggable="true" ondrag="changeViewDynamic('top')" ondragend="changeViewDynamic('top')"class="north-west north" id="north" &gt;
+&lt;div class="close" onclick="changeView('top')" style=" width: 50px; height: 8px; left: 45%;"&gt;&lt;/div&gt;
+&lt;/span&gt;
+&lt;span draggable="true" ondrag="changeViewDynamic('left')" ondragend="changeViewDynamic('left')" class="north-west west" id="west"&gt;
+&lt;div class="close" onclick="changeView('left')" style=" height: 50px; width: 6px; top: 40%;"&gt;&lt;/div&gt;
+&lt;/span&gt;
+
+//改变页面布局，隐藏或显示顶部，或左边
+function changeView(kind){
+	if(kind=="top"){
+		if(document.getElementById("north").style.top=="0px"){
+   //对top点击，且现在为隐藏状态，接下来要变成不隐藏
+			document.getElementById("top").style.display="block";
+			document.getElementById("mainFrame").style.top="80px";
+			document.getElementById("north").style.top="72px";
+			document.getElementById("west").style.top="80px";
+			document.getElementById("left").style.top="80px";
+		}else{
+			document.getElementById("top").style.display="none";
+			document.getElementById("mainFrame").style.top="8px";
+			document.getElementById("north").style.top="0px";
+			document.getElementById("west").style.top="8px";
+			document.getElementById("left").style.top="8px";
+		}
+	}else{
+		if(document.getElementById("west").style.left=="0px"){
+   //对left点击，且现在为隐藏状态，接下来要变成不隐藏
+			document.getElementById("left").style.display="block";
+			document.getElementById("mainFrame").style.left="12%";
+			document.getElementById("west").style.left="12%";
+		}else{
+			document.getElementById("left").style.display="none";
+			document.getElementById("mainFrame").style.left="5px";
+			document.getElementById("west").style.left="0px";
+		}
+	}
+}  //动态改变布局，拖拉实现
+function changeViewDynamic(type){
+	// 获取鼠标位置
+	var e = window.event;
+	var x = e.clientX;
+	var y = e.clientY
+	// window.alert(x+y);
+
+	if (type == "top") { // 对top点击
+		document.getElementById("top").style.display = "block";
+		document.getElementById("mainFrame").style.top = y+8+"px";
+		document.getElementById("north").style.top = y+"px";
+		document.getElementById("west").style.top = y+8+"px";
+		document.getElementById("left").style.top = y+8+"px";
+	} else { // 对left点击
+		document.getElementById("left").style.display = "block";
+		document.getElementById("mainFrame").style.left = x+"px";
+		document.getElementById("west").style.left = x+"px";  }
+}</pre></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/911.html">WEB前端——CSS布局inline-block和float的共性和区别 页面元素的隐藏与显示（布局、按钮、:hover（实例））</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/913.html">后端相关汇总_plan</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

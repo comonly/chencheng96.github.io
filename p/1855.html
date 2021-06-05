@@ -1,0 +1,314 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Hibernate 数据库映射 ORM：Object/Relationship Mapping  对象/关系映射_comonly.cn</title>
+<meta name="keywords" content="Hibernate 数据库映射 ORM：Object/Relationship Mapping  对象/关系映射" />
+<meta name="description" content="ORM：Object/Relationship Mapping&nbsp; 对象/关系映射
+&nbsp;
+实现流程：
+&nbsp;
+1.项目中导入Hibernate相关类包并创建配置文件。Hibernate.cfg.xml(可放在src根目录下):&nbsp; &nbsp;
+复制代码
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;session-factory&gt;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Hibernate 数据库映射 ORM：Object/Relationship Mapping  对象/关系映射</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"> 一只肥腊肠</li>
+          <li class="lmname"><a href="https://www.cnblogs.com/caden1225/p/5897675.html" target="_blank">https://www.cnblogs.com/caden1225/p/5897675.html</a></li>
+          <li class="timer">2020-10-16</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>ORM：Object/Relationship Mapping&nbsp; 对象/关系映射
+&nbsp;
+实现流程：
+&nbsp;
+1.项目中导入Hibernate相关类包并创建配置文件。Hibernate.cfg.xml(可放在src根目录下):&nbsp; &nbsp;
+复制代码
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;session-factory&gt;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> ORM：Object/Relationship Mapping&nbsp; 对象/关系映射<br />
+&nbsp;<br />
+实现流程：<br />
+&nbsp;<br />
+1.项目中导入Hibernate相关类包并创建配置文件。Hibernate.cfg.xml(可放在src根目录下):&nbsp; &nbsp;<br />
+复制代码<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;session-factory&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;property name="hibernate.connection.username"&gt;root&lt;/...&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;property name="hibernate.connection.password"&gt;123&lt;/...&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;property name="hibernate.connection.driver_class"&gt;com.mysql.jdbc.Driver&lt;/...&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;property name="hibernate.connection.url"&gt;jdbc:mysql://loaclhost:3306/TABLE?useUnicode=true&amp;amp;characterEncoding=utf-8&lt;/...&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;property name="hibernate.dialect"&gt;org.hibernate.dialtct.MySQLDialect&lt;/...&gt;<br />
+&nbsp; &nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;property name="show_sql"&gt;true&lt;/...&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;property name="format_sql"&gt;true&lt;/...&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;property name="hbm2ddl.auto"&gt;assigned&lt;/...&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/session-factory&gt;<br />
+复制代码<br />
+&nbsp;<br />
+<br />
+2.创建持久化类(实体类)(一对多时，在一方添加set集合HashSet用以包含多方，代码略);<br />
+&nbsp;<br />
+&nbsp;<br />
+3.创建对应映射文件(实体类到数据库)。Grade.hbm.xml(Hibernate5以上可能需要与实体类放在一个包内):&nbsp; &nbsp; &nbsp;<br />
+复制代码<br />
+&nbsp;&lt;hibernate-mapping&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;class name="com.entity.Grade" table="GRADES”&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;id name="gid" column="SID" type="java.lang.Integer"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;generator class="increment"&gt;&lt;/generator&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/id&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;property name="gname" type="java.lang.String"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;column name="GNAME" length="20"&gt;&lt;/column&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/property&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;property name="amount" type="java.lang.Integer"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;column name="AMOUNT"&gt;&lt;/column&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/property&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;!--&nbsp; &nbsp; &nbsp;一对多需配置set&nbsp; &nbsp; &nbsp;--&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;set name="student"（Grade中属性，实体类）table="STUDENTS"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;key column="gid"&gt;&lt;/key&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;one-to-many class="com.entity.Student"/&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/set&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;/class&gt;<br />
+&nbsp;&lt;/hibernate-mapping&gt;<br />
+复制代码<br />
+上图为一对多点一方配置。实现双向配置时，需在多对一对多端同时添加配置&lt;many-to-one&gt;标签<br />
+多对一的映射文件配置：<br />
+&lt;many-to-one&nbsp; &nbsp; &nbsp;name="grade"对应属性 class=”com.entity.Grade"&nbsp; column="grade"&gt;<br />
+&lt;/many-to-one&gt;&nbsp;<br />
+&nbsp;<br />
+关于双向级联的补充：<br />
+（1）inverse属性：指定关联关系维护方。在one一方的&lt;set&gt;标签中，表示反转；默认为fasle，表示关联关系由one方维护；<br />
+&nbsp;<br />
+保存one方时，one方所包含的many方对象若数据库中不存在，应一同保存，此为级联操作。通过cascade实现。&nbsp;<br />
+（2）cascade属性：all所有操作级联；save-update保存和更新时级联操作；delete删除时级联操作；none不级联操作。 在one 方的&lt;set&gt;标签中或many方的&lt;many-to-one&gt;标签中设置。<br />
+<br />
+&nbsp;<br />
+&nbsp;<br />
+4.在配置文件中添加映射文件路径：<br />
+复制代码<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;session-factory&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;..........<br />
+&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;mapping resource="src/com/entity/Grade.hbm.xml"/&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;mapping resource="src/com.entity/Student.hbm.xml"/&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/session-factory&gt;<br />
+复制代码<br />
+&nbsp;<br />
+<br />
+5.编写查询操作类：&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //版本不同存在差异4与5<br />
+利用configuration创建sessionFactory对象；<br />
+通过sessionFactory创建session对象；<br />
+通过sessionFactory获取session(openSession方法或getCurrentSession方法）；<br />
+通过session开启transaction事务(beginTransaction方法)；<br />
+操作数据库：sesison.save()/get(Student.class,id)/load()/delete()；<br />
+提交事务:transactoin.commit()；<br />
+关闭session；<br />
+Hibernate5.2的session创建：<br />
+<br />
+.....<br />
+ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();<br />
+sessionFactory = new MetadataSources(ssr).buildMetadata().buildSessionFactory();<br />
+session = sessionFactory.openSession();<br />
+......<br />
+<br />
+<br />
+操作过程中基本摆脱数据库语句，只是对持久化类操作后进行事务的提交。各版本session创建方法待补充<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1854.html">Nginx为什么可以支持高并发</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1856.html">互斥量和信号量的区别</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.cnblogs.com/caden1225/p/5897675.html" target="_blank">https://www.cnblogs.com/caden1225/p/5897675.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

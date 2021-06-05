@@ -1,0 +1,255 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>原子变量和非原子变量_comonly.cn</title>
+<meta name="keywords" content="原子变量和非原子变量" />
+<meta name="description" content="原子变量类相当于一种泛化的volatile变量，能够支持原子的和有条件的读-改-写操作。比锁的粒度更细，量级更轻。原子变量将发生竞争的范围缩小到单个变量上。
+
+
+	
+
+
+	随着硬件上对于原子操作指令的支持，Java中也引入CAS。对于int、long和对象的引用，Java都支持CAS操作，也就是原子变量类，JVM会把对于原子变量类的操作编译为底层硬件提供的最有效的方法：如果硬件支持CAS，则编译为CAS指令，如果不支持，则编译为上锁的操作。
+
+原子变量比锁的粒度更细， 更为轻量级，将竞争控" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">原子变量和非原子变量</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-11-23</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>原子变量类相当于一种泛化的volatile变量，能够支持原子的和有条件的读-改-写操作。比锁的粒度更细，量级更轻。原子变量将发生竞争的范围缩小到单个变量上。
+
+
+	
+
+
+	随着硬件上对于原子操作指令的支持，Java中也引入CAS。对于int、long和对象的引用，Java都支持CAS操作，也就是原子变量类，JVM会把对于原子变量类的操作编译为底层硬件提供的最有效的方法：如果硬件支持CAS，则编译为CAS指令，如果不支持，则编译为上锁的操作。
+
+原子变量比锁的粒度更细， 更为轻量级，将竞争控</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	原子变量类相当于一种泛化的volatile变量，能够支持原子的和有条件的读-改-写操作。比锁的粒度更细，量级更轻。原子变量将发生竞争的范围缩小到单个变量上。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	随着硬件上对于原子操作指令的支持，Java中也引入CAS。对于int、long和对象的引用，Java都支持CAS操作，也就是原子变量类，JVM会把对于原子变量类的操作编译为底层硬件提供的最有效的方法：如果硬件支持CAS，则编译为CAS指令，如果不支持，则编译为上锁的操作。<br />
+<br />
+原子变量比锁的粒度更细， 更为轻量级，将竞争控制在单个变量之上。因为其不需要上锁，所以不会引发线程的挂起和恢复，因此避免了线程间上下文的切换，性能更好，不易出现延迟和死锁的现象。<br />
+<br />
+常见的原子变量有AtomicInteger、AtomicLong、AtomicBoolean和AtomicReference，这些类都支持原子操作，使用get和set方法来获取和更新对象。原子变量数组只支持AtomicInteger、AtomicLong和AtomicReference类型，保证数组中每个元素都是可以以volatile语义被访问。<br />
+<br />
+需要注意的是原子变量没有定义hashCode和equals方法，所以每个实例都是不同的，不适合作为散列容器的key。<br />
+<br />
+原子变量可以被视为一种更好volatile变量，通过compareAndSet方法尝试以CAS方式更新数据，下面以实现数字区间为示例代码展示如何使用AtomicReference。<br />
+<br />
+</p>
+<p>
+	C++11的原子量与内存序浅析：<a href="https://www.cnblogs.com/FateTHarlaown/p/8919235.html" target="_blank">https://www.cnblogs.com/FateTHarlaown/p/8919235.html</a>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	我感觉，针对 i++ 的问题 通过定义原子量解决就可以了，其他的尽量加锁吧！
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1555.html">Git中的变基(Rebase)</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1557.html">测试端口连通性</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

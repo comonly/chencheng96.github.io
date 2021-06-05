@@ -1,0 +1,321 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>在C程序中按照你想要的格式输出时间：strftime()_comonly.cn</title>
+<meta name="keywords" content="在C程序中按照你想要的格式输出时间：strftime()" />
+<meta name="description" content="C语言中经常需要将时间戳转换成你所需要的各式各样种类繁多的格式。使用strftime()可以帮助你。
+
+
+	函数原型
+
+#include &lt;time.h&gt; size_t strftime(char *s, size_t max, const char *format, const struct tm *tm);
+
+	调用例子
+
+#define CFG_BUFF_LEN    (128) time_t timeCurr = time(NULL);
+char timeStr[C" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">在C程序中按照你想要的格式输出时间：strftime()</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">amc</li>
+          <li class="lmname"><a href="https://segmentfault.com/a/1190000005345431" target="_blank">https://segmentfault.com/a/1190000005345431</a></li>
+          <li class="timer">2019-12-25</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>C语言中经常需要将时间戳转换成你所需要的各式各样种类繁多的格式。使用strftime()可以帮助你。
+
+
+	函数原型
+
+#include &lt;time.h&gt; size_t strftime(char *s, size_t max, const char *format, const struct tm *tm);
+
+	调用例子
+
+#define CFG_BUFF_LEN    (128) time_t timeCurr = time(NULL);
+char timeStr[C</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p style="color:#212529;font-family:-apple-system, BlinkMacSystemFont, &quot;font-size:16px;background-color:#FFFFFF;">
+	C语言中经常需要将时间戳转换成你所需要的各式各样种类繁多的格式。使用strftime()可以帮助你。
+</p>
+<h2 id="item-1" style="font-size:1.75rem;color:#212529;font-family:-apple-system, BlinkMacSystemFont, &quot;background-color:#FFFFFF;">
+	函数原型
+</h2>
+<pre class="hljs cpp"><span class="hljs-meta" style="color:#999999;font-weight:700;">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;time.h&gt;</span></span> <span class="hljs-keyword" style="font-weight:700;">size_t</span> strftime(<span class="hljs-keyword" style="font-weight:700;">char</span> *s, <span class="hljs-keyword" style="font-weight:700;">size_t</span> max, <span class="hljs-keyword" style="font-weight:700;">const</span> <span class="hljs-keyword" style="font-weight:700;">char</span> *format, <span class="hljs-keyword" style="font-weight:700;">const</span> <span class="hljs-keyword" style="font-weight:700;">struct</span> tm *tm);</pre>
+<h2 id="item-2" style="font-size:1.75rem;color:#212529;font-family:-apple-system, BlinkMacSystemFont, &quot;background-color:#FFFFFF;">
+	调用例子
+</h2>
+<pre class="hljs perl"><span class="hljs-comment" style="color:#999988;font-style:italic;">#define CFG_BUFF_LEN    (128)</span> time_t timeCurr = <span class="hljs-keyword" style="font-weight:700;">time</span>(NULL);
+char timeStr[CFG_BUFF_LEN];
+
+strftime(timeStr, sizeof(timeStr), <span class="hljs-string" style="color:#DD1144;">"%Y%m%d-%H:%M:%S"</span>, <span class="hljs-keyword" style="font-weight:700;">localtime</span>(&amp;timrCurr));</pre>
+<h2 id="item-3" style="font-size:1.75rem;color:#212529;font-family:-apple-system, BlinkMacSystemFont, &quot;background-color:#FFFFFF;">
+	格式化字符表
+</h2>
+<p style="color:#212529;font-family:-apple-system, BlinkMacSystemFont, &quot;font-size:16px;background-color:#FFFFFF;">
+	以下列出全部的格式化字符，但只说明我自己用到的哈。需要用到的建议大家自行写程序测试一下。<br />
+<span style="font-weight:bolder;">年份：</span><br />
+%C:<br />
+%g:<br />
+%G:<br />
+%y：不带世纪的十进制年份，即0~99<br />
+%Y：带世纪的十进制年份
+</p>
+<p style="color:#212529;font-family:-apple-system, BlinkMacSystemFont, &quot;font-size:16px;background-color:#FFFFFF;">
+	<span style="font-weight:bolder;">月份：</span><br />
+%b：月份的简称<br />
+%B：月份的全称<br />
+%h：与%b相同<br />
+%m：月份的十进制数，01~12
+</p>
+<p style="color:#212529;font-family:-apple-system, BlinkMacSystemFont, &quot;font-size:16px;background-color:#FFFFFF;">
+	<span style="font-weight:bolder;">天：</span><br />
+%d：每月的第几天，01~31<br />
+%e：每月的第几天，1~31<br />
+%j：每年的第几天，001~366
+</p>
+<p style="color:#212529;font-family:-apple-system, BlinkMacSystemFont, &quot;font-size:16px;background-color:#FFFFFF;">
+	<span style="font-weight:bolder;">星期几：</span><br />
+%a：星期几，简写<br />
+%A：星期几，全称<br />
+%u：每周的第几天，1~7，星期日为7<br />
+%w：每周的第几天，0~6，星期日为0
+</p>
+<p style="color:#212529;font-family:-apple-system, BlinkMacSystemFont, &quot;font-size:16px;background-color:#FFFFFF;">
+	<span style="font-weight:bolder;">小时：</span><br />
+%H：24小时制。00~23<br />
+%I：12小时制。01~12
+</p>
+<p style="color:#212529;font-family:-apple-system, BlinkMacSystemFont, &quot;font-size:16px;background-color:#FFFFFF;">
+	<span style="font-weight:bolder;">分钟：</span><br />
+%M：00~59
+</p>
+<p style="color:#212529;font-family:-apple-system, BlinkMacSystemFont, &quot;font-size:16px;background-color:#FFFFFF;">
+	<span style="font-weight:bolder;">秒：</span><br />
+%S：00~60——是的，有部分分钟有61秒。
+</p>
+<p style="color:#212529;font-family:-apple-system, BlinkMacSystemFont, &quot;font-size:16px;background-color:#FFFFFF;">
+	<span style="font-weight:bolder;">一段日期的等效</span><br />
+%c：标准的日期时间串<br />
+%D：等同于%m/%d/%y<br />
+%F：等同于%Y-%m-%d<br />
+%r：等同于%I:%M:%S %p<br />
+%R：等同于%H:%M<br />
+%T：等同于%H:%M:%S<br />
+%x：标准的日期串<br />
+%X：标准的时间串
+</p>
+<p style="color:#212529;font-family:-apple-system, BlinkMacSystemFont, &quot;font-size:16px;background-color:#FFFFFF;">
+	<span style="font-weight:bolder;">时区</span><br />
+%z：相对UTC的时间偏移。参见<span style="font-weight:bolder;">RFC 822 date headers</span><br />
+%Z：时区名
+</p>
+<p style="color:#212529;font-family:-apple-system, BlinkMacSystemFont, &quot;font-size:16px;background-color:#FFFFFF;">
+	<span style="font-weight:bolder;">其他</span><br />
+%V<br />
+%U<br />
+%W
+</p>
+<p style="color:#212529;font-family:-apple-system, BlinkMacSystemFont, &quot;font-size:16px;background-color:#FFFFFF;">
+	%n：换行符<br />
+%p：AM和PM标志<br />
+%t：制表符<br />
+%%：<span style="font-weight:bolder;">%</span>符号
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1608.html">memcpy和strcpy的区别</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1610.html">智能指针</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://segmentfault.com/a/1190000005345431" target="_blank">https://segmentfault.com/a/1190000005345431</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

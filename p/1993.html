@@ -1,0 +1,274 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>ELK报错及解决方案_comonly.cn</title>
+<meta name="keywords" content="ELK报错及解决方案" />
+<meta name="description" content="1.jdk版本问题报错如下：futureversionsofElasticsearchwillrequireJava11;yourJavaversionfrom[/usr/local/jdk9/jdk-9.0.4]doesnotmeetthisrequirementJavaHotSpot(TM)64-BitServerVMwarning:OptionUseConcMarkSweepGCwasdep" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">ELK报错及解决方案</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">何宇泽</li>
+          <li class="lmname"><a href="https://blog.51cto.com/heyong/2430853" target="_blank">https://blog.51cto.com/heyong/2430853</a></li>
+          <li class="timer">2019-08-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>1.jdk版本问题报错如下：futureversionsofElasticsearchwillrequireJava11;yourJavaversionfrom[/usr/local/jdk9/jdk-9.0.4]doesnotmeetthisrequirementJavaHotSpot(TM)64-BitServerVMwarning:OptionUseConcMarkSweepGCwasdep</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <div class="con artical-content editor-preview-side"><p>1.jdk版本问题<br>报错如下：</p>
+<pre><code class="hljs coffeescript">future versions <span class="hljs-keyword">of</span> Elasticsearch will <span class="hljs-built_in">require</span> Java <span class="hljs-number">11</span>; your Java version <span class="hljs-keyword">from</span> [/usr/local/jdk9/jdk<span class="hljs-number">-9.0</span><span class="hljs-number">.4</span>] does <span class="hljs-keyword">not</span> meet <span class="hljs-keyword">this</span> requirement
+Java HotSpot(TM) <span class="hljs-number">64</span>-Bit Server VM warning: Option UseConcMarkSweepGC was deprecated <span class="hljs-keyword">in</span> version <span class="hljs-number">9.0</span> <span class="hljs-keyword">and</span> will likely be removed <span class="hljs-keyword">in</span> a future release.</code></pre>
+<p>解决方案：</p>
+<p>由于Elasticsearch依赖于jdk，es和jdk有着对应的依赖关系。具体可见：<br><a href="https://www.elastic.co/cn/support/matrix" rel="nofollow" style="color: rgb(66, 133, 244);">https://www.elastic.co/cn/support/matrix</a><br><a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.2/setup.html" rel="nofollow" style="color: rgb(66, 133, 244);">https://www.elastic.co/guide/en/elasticsearch/reference/7.2/setup.html</a></p>
+<p><img src="https://s1.51cto.com/images/blog/201908/19/9bba18fa6ff7eeb59ffbccfc4a0666f6.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="ELK报错及解决方案" style="cursor: pointer;"></p>
+<p>这里是说Elasticsearch该版本内置了JDK，而内置的JDK是当前推荐的JDK版本。当然如果你本地配置了JAVA_HOME那么ES就是优先使用配置的JDK启动ES。<br>ES推荐使用LTS版本的JDK（这里只是推荐，JDK8就不支持），如果你使用了一些不支持的JDK版本，ES会拒绝启动。</p>
+<p>根据启动信息我们看到Elasticsearch7.2推荐使用JDK11</p>
+<p>jdk下载链接：<a href="https://www.oracle.com/technetwork/java/java-se-support-roadmap.html" rel="nofollow" style="color: rgb(66, 133, 244);">https://www.oracle.com/technetwork/java/java-se-support-roadmap.html</a></p>
+<p>安装OpenJDK11</p>
+<p>[root@ELK1 tar.gz]# pwd<br>/usr/local/src/tar.gz&lt;br&gt;&lt;br&gt;#下载<br>[root@ELK1 tar.gz]# wget <a href="https://download.java.net/java/GA/jdk11/13/GPL/openjdk-11.0.1_linux-x64_bin.tar.gz&lt;br&gt;&lt;br&gt;#加压到指定目录&lt;br&gt;[root@ELK1" rel="nofollow" style="color: rgb(66, 133, 244);">https://download.java.net/java/GA/jdk11/13/GPL/openjdk-11.0.1_linux-x64_bin.tar.gz&lt;br&gt;&lt;br&gt;#加压到指定目录&lt;br&gt;[root@ELK1</a> tar.gz]# tar -xzvf jdk-11.0.4_linux-x64_bin.tar.gz /opt/</p>
+<p>修改配置文件</p>
+<p>[root@localhost bin]# vim /home/elk/elasticsearch/-7.2.1/bin/elasticsearch</p>
+<p>#配置自己的jdk11<br>export JAVA_HOME=/opt/jdk-11.0.1<br>export PATH=$JAVA_HOME/bin:$PATH</p>
+<p>#添加jdk判断<br>if [ -x "$JAVA_HOME/bin/java" ]; then<br>JAVA="/opt/jdk-11.0.1/bin/java"<br>else<br>JAVA=<code>which java</code><br>fi<br>　　</p>
+<p>启动ES</p>
+<p>[elasticsearch@ELK1 bin]$ ./elasticsearch<br>OpenJDK 64-Bit Server VM warning: Option UseConcMarkSweepGC was deprecated in version 9.0 and will likely be removed in a future release.<br>[2019-08-02T15:33:27,994][INFO ][o.e.e.NodeEnvironment    ] [node-1] using [1] data paths, mounts [[/ (rootfs)]], net usable_space [32.6gb], net total_space [35.7gb], types [rootfs]<br>[2019-08-02T15:33:28,014][INFO ][o.e.e.NodeEnvironment    ] [node-1] heap size [1015.6mb], compressed ordinary object pointers [true]<br>[2019-08-02T15:33:28,017][INFO ][o.e.n.Node               ] [node-1] node name [node-1], node ID [8zGCWQhBS3OpVShqjSgU-w], cluster name [es-application]<br>[2019-08-02T15:33:28,017][INFO ][o.e.n.Node               ] [node-1] version[7.2.0], pid[1545], build[default/tar/508c38a/2019-06-20T15:54:18.811730Z], OS[Linux/3.10.0-862.el7.x86_64/amd64], JVM[Oracle Corporation/OpenJDK 64-Bit Server VM/11.0.1/11.0.1+13]<br>[2019-08-02T15:33:28,017][INFO ][o.e.n.Node               ] [node-1] JVM home [/opt/jdk-11.0.1]<br>[2019-08-02T15:33:28,018][INFO ][o.e.n.Node               ] [node-1] JVM arguments [-Xms1g, -Xmx1g, -XX:+UseConcMarkSweepGC, -XX:CMSInitiatingOccupancyFraction=75, -XX:+UseCMSInitiatingOccupancyOnly, -Des.networkaddress.cache.ttl=60, -Des.networkaddress.cache.negative.ttl=10, -XX:+AlwaysPreTouch, -Xss1m, -Djava.awt.headless=true, -Dfile.encoding=UTF-8, -Djna.nosys=true, -XX:-OmitStackTraceInFastThrow, -Dio.netty.noUnsafe=true, -Dio.netty.noKeySetOptimization=true, -Dio.netty.recycler.maxCapacityPerThread=0, -Dlog4j.shutdownHookEnabled=false, -Dlog4j2.disable.jmx=true, -Djava.io.tmpdir=/tmp/elasticsearch-5247006010869253587, -XX:+HeapDumpOnOutOfMemoryError, -XX:HeapDumpPath=data, -XX:ErrorFile=logs/hs_err_pid%p.log, -Xlog:gc*,gc+age=trace,safepoint:file=logs/gc.log:utctime,pid,tags:filecount=32,filesize=64m, -Djava.locale.providers=COMPAT, -Dio.netty.allocator.type=unpooled, -XX:MaxDirectMemorySize=536870912, -Des.path.home=/usr/local/src/elasticsearch, -Des.path.conf=/usr/local/src/elasticsearch/config, -Des.distribution.flavor=default, -Des.distribution.type=tar, -Des.bundled_jdk=true]<br>　　</p>
+<p>2.启动elasticsearch报错<br>报错如下：</p>
+<p>ERROR: [2] bootstrap checks failed<br>[1]: max file descriptors [4096] for elasticsearch process is too low, increase to at least [65535]<br>[2]: max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]<br>[2019-08-08T16:04:33,578][INFO ][o.e.n.Node               ] [ELK1] stopping ...<br>[2019-08-08T16:04:33,591][INFO ][o.e.n.Node               ] [ELK1] stopped<br>[2019-08-08T16:04:33,592][INFO ][o.e.n.Node               ] [ELK1] closing ...<br>[2019-08-08T16:04:33,618][INFO ][o.e.n.Node               ] [ELK1] closed<br>[2019-08-08T16:04:33,621][INFO ][o.e.x.m.p.NativeController] [ELK1] Native controller process has stopped - no new native processes can be started<br>　　</p>
+<p>解决方法：</p>
+<p>#1、max file descriptors [4096] for elasticsearch process is too low, increase to at least [65536]</p>
+<p>每个进程最大同时打开文件数太小，可通过下面2个命令查看当前数量<br>ulimit -Hn<br>ulimit -Sn</p>
+<p>修改/etc/security/limits.conf文件，增加配置，用户退出后重新登录生效</p>
+<ul>
+<li>soft    nofile          65536</li>
+<li>hard    nofile          65536<br>#2、max number of threads [3818] for user [es] is too low, increase to at least [4096]</li>
+</ul>
+<p>#问题同上，最大线程个数太低。修改配置文件/etc/security/limits.conf，增加配置</p>
+<ul>
+<li>soft    nproc           4096</li>
+<li>hard    nproc           4096</li>
+</ul>
+<p>#可通过命令查看</p>
+<p>ulimit -Hu<br>ulimit -Su<br>　　</p>
+<p>3.在安装elasticsearch-head的过程中npm install报错<br>报错如下：</p>
+<p>[root@ELK1 elasticsearch-head]# npm install<br>npm: relocation error: npm: symbol SSL_set_cert_cb, version libssl.so.10 not defined in file libssl.so.10 with link time reference<br>　</p>
+<p>解决方法：</p>
+<p>升级openssl，执行：<br>yum update openssl -y</p>
+<p>#升级之前版本信息：</p>
+<p>[root@ELK1 elasticsearch-head]# openssl version<br>OpenSSL 1.0.1i 6 Aug 2014</p>
+<p>#升级之后：</p>
+<p>[root@ELK elasticsearch-head]# openssl version<br>OpenSSL 1.0.2k-fips 26 Jan 2017</p>
+<p>此时再次执行，报错消除<br>　　</p>
+<p>4.启动logstash报错<br>报错如下：</p>
+<p>Thread.exclusive is deprecated, use Thread::Mutex<br>Sending Logstash logs to /data/logstash/logs which is now configured via log4j2.properties<br>[2019-08-08T17:23:59,508][WARN ][logstash.config.source.multilocal] Ignoring the 'pipelines.yml' file because modules or command line options are specified<br>[2019-08-08T17:23:59,519][FATAL][logstash.runner          ] Logstash could not be started because there is already another instance using the configured data directory.  If you wish to run multiple instances, you must change the "path.data" setting.<br>[2019-08-08T17:23:59,527][ERROR][org.logstash.Logstash    ] java.lang.IllegalStateException: Logstash stopped processing because of an error: (SystemExit) exit<br>　　</p>
+<p>原因：之前运行的instance有缓冲，保存在path.data里面有.lock文件，删除掉就可以</p>
+<p>解决方法：<br>在 logstash.yml 文件中找到 Data path 的路径(默认在安装目录的data目录下）</p>
+<h1>------------ Data path ------------------</h1>
+<p>#</p>
+<h1>Which directory should be used by logstash and its plugins</h1>
+<h1>for any persistent needs. Defaults to LOGSTASH_HOME/data</h1>
+<p>#<br>path.data:<br>　　</p>
+<p>查看是否存在 .lock 文件，如果存在把它删除</p>
+<p>[root@ELK1 data]# ls -alh<br>总用量 20K<br>drwxr-sr-x  4 tingshuo staff 4.0K 8月 19 11:42 .<br>drwxr-sr-x 14 tingshuo staff 4.0K 8月 19 11:42 ..<br>drwxr-sr-x  2 tingshuo staff 4.0K 8月 19 11:42 dead_letter_queue<br>-rw-r--r--  1 tingshuo staff    0 8月 19 11:42 .lock<br>drwxr-sr-x  2 tingshuo staff 4.0K 8月 19 11:42 queue<br>-rw-r--r--  1 tingshuo staff   36 8月 19 11:42 uuid<br>　　</p>
+<p>删除</p>
+<p>[root@ELK1 data]# rm .lock<br>　　</p>
+<p>5.Logstash 报错: A plugin had an unrecoverable error. Will restart this plugin<br>解决方法：</p>
+<p>因为断开终端，进程还存在</p>
+<p>[root@Elk1 ~]# ps aux | grep logstash<br>root     12180  1.6  4.5 6912300 744896 ?      Sl   Oct18  69:39 /usr/bin/java -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -Djava.awt.headless=true -XX:CMSInitiatingOccupancyFraction=75 -XX:+UseCMSInitiatingOccupancyOnly -XX:+HeapDumpOnOutOfMemoryError -Xmx1g -Xss2048k -Djffi.boot.library.path=/opt/logstash/vendor/jruby/lib/jni -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -Djava.awt.headless=true -XX:CMSInitiatingOccupancyFraction=75 -XX:+UseCMSInitiatingOccupancyOnly -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/opt/logstash/heapdump.hprof -Xbootclasspath/a:/opt/logstash/vendor/jruby/lib/jruby.jar -classpath : -Djruby.home=/opt/logstash/vendor/jruby -Djruby.lib=/opt/logstash/vendor/jruby/lib -Djruby.script=jruby -Djruby.shell=/bin/sh org.jruby.Main --1.9 /opt/logstash/lib/bootstrap/environment.rb logstash/runner.rb agent -f /etc/logstash/conf.d/filebeat.conf<br>root     16921  0.0  0.0 103244   864 pts/2    S+   15:28   0:00 grep 12180<br>[root@Elk1 ~]# kill 12180<br>　　</p>
+<p>杀掉这个没有正常关闭的前台测试 Logstash 进程，重启logstash。</p></div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1992.html">Linux磁盘管理与文件系统（精简理论部分，浓缩的精华！）</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1994.html">Python基础教程：range/for/break/continue简单使用</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.51cto.com/heyong/2430853" target="_blank">https://blog.51cto.com/heyong/2430853</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

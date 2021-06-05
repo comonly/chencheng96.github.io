@@ -1,0 +1,274 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>MySQL 导出导入数据 导入数据时unknown command '\'问题_comonly.cn</title>
+<meta name="keywords" content="MySQL 导出导入数据 导入数据时unknown command '\'问题" />
+<meta name="description" content="导出 SQL 格式的数据到指定文件
+
+$ mysqldump -u root -p 数据库名 数据库表 &gt; 存放路径及文件名(f:\mysql.sql)
+password ******
+
+	省略数据库表表示全部导入。
+
+
+	导入SQL 格式的数据到指定数据库
+
+
+	$ mysql -u 用户名&nbsp; -p&nbsp; 数据库名 &lt; 要导入的数据库数据(f:\mysql.sql)
+
+
+	
+
+
+	MySQL执行外部sql脚本文件命令报错：unknown co" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">MySQL 导出导入数据 导入数据时unknown command '\'问题</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-09-08</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>导出 SQL 格式的数据到指定文件
+
+$ mysqldump -u root -p 数据库名 数据库表 &gt; 存放路径及文件名(f:\mysql.sql)
+password ******
+
+	省略数据库表表示全部导入。
+
+
+	导入SQL 格式的数据到指定数据库
+
+
+	$ mysql -u 用户名&nbsp; -p&nbsp; 数据库名 &lt; 要导入的数据库数据(f:\mysql.sql)
+
+
+	
+
+
+	MySQL执行外部sql脚本文件命令报错：unknown co</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='导出SQL格式的数据到指定文件'>
+	导出 SQL 格式的数据到指定文件
+</h2>
+$ mysqldump -u root -p 数据库名 数据库表 &gt; <span>存放路径及文件名<span>(f:\mysql.sql)</span></span><br />
+password ******
+<p>
+	省略数据库表表示全部导入。
+</p>
+<h2 id='导入SQL格式的数据到指定数据库'>
+	导入SQL 格式的数据到指定数据库
+</h2>
+<p>
+	<span>$ </span>mysql -u 用户名&nbsp; -p&nbsp; 数据库名 &lt; 要导入的数据库数据(f:\mysql.sql)
+</p>
+<p>
+	<br />
+</p>
+<h4>
+	MySQL执行外部sql脚本文件命令报错：unknown command '\'
+</h4>
+<p>
+	由于编码不一致导致的<br />
+虽然大部分导出是没有问题的 但是数据表中存储包含一些脚本(富文本内容)会出现该问题,强制指定编码即可解决。<br />
+mysql导入时指定编码：<br />
+mysql -u root -p --default-character-set=utf8<span>mysql -u root -p --default-character-set=utf8 数据库名 &lt; d:\mysql20190919.sql(文件路径)</span><br />
+或者在导出时后显式指定编码就不存在这个问题了：<br />
+mysqldump -u root -p --default-character-set=utf8 mydb &gt; E://xxxx.sql
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1413.html">WinIo因为调用ShutdownWinIO导致的InitializeWinIo失败</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1415.html">string与cstring有什么区别</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#导出SQL格式的数据到指定文件">导出SQL格式的数据到指定文件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#导入SQL格式的数据到指定数据库">导入SQL格式的数据到指定数据库</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

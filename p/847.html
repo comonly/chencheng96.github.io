@@ -1,0 +1,291 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>c++指针与引用_comonly.cn</title>
+<meta name="keywords" content="c++指针与引用" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">c++指针与引用</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-02-09</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	c c++
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='定义指针'>
+	定义指针
+</h2>
+<pre class="prettyprint lang-cpp">int *p = NULL;    //定义一个指针变量
+int a = 111;
+p = &amp;a;    //给指针赋值
+*p    //获取p指向地址存储的数据</pre>
+<h2 id='通过ew关键字分配堆内存'>
+	通过new关键字分配堆内存
+</h2>
+<p>
+	使用new关键字分配内存，返回内存地址，赋值给指针。delete关键字将内存归还堆，释放指定的内存
+</p>
+<pre class="prettyprint lang-cpp">int *a = new int;  //new 数据类型
+delete a;  //释放a指向的内存空间</pre>
+<p>
+	通过delete释放内存后，指针变量可以继续使用，可以赋值为NULL，以防意外的调用。通过new分配的内存一定要delete防止内存泄漏。delete指针后，没有设置为null,仍指向原来的内存区域的指针称为悬摆指针(dangling)。
+</p>
+<p>
+	使用new在堆中创建对象时。会调用构造函数实例化。
+</p>
+<pre class="prettyprint lang-js">cat *pcat = new cat;  //cat为定义的类
+delete pcat;</pre>
+<p>
+	使用指针访问成员变量和成员函数
+</p>
+<pre class="prettyprint lang-cpp">(*pcat).getName();  //访问成员函数
+pcat-&gt;getName();</pre>
+<p>
+	<span>堆中的成员变量（int *age;） 可以在构造函数中对成员函数分配内存，析构函数中释放。</span>
+</p>
+<p>
+	<span>this指针</span>指向函数被调用的对象。this-&gt;age = age
+</p>
+<h2 id='cot指针'>
+	<span>const指针</span> 
+</h2>
+<p>
+	相对于*操作符，const在左对象是常量，const在右指针是常量。
+</p>
+<pre class="prettyprint lang-cpp">const int * pone;    //需要将常量赋值给pone
+int * const ptwo;    //ptwo需要是常量，初始化赋值后不能再赋值
+const int * const three;</pre>
+<h3>
+	<span>const指针与const成员函数</span>
+</h3>
+<p>
+	<span>通过声明指向常量对象的指针，指针只能调用常量函数。</span>
+</p>
+<h2 id='引用'>
+	<span>引用</span> 
+</h2>
+<p>
+	引用创建变量的别名
+</p>
+<pre class="prettyprint lang-cpp">int &amp;rIntAge = myAge; //之后rIntAge和myAge等价</pre>
+<p>
+	引用是指向对象的引用，而不是指向类或数据类型的引用。不能使用空引用。
+</p>
+<h2 id='使用引用或指针再函数间进行值传递'>
+	使用引用或指针再函数间进行值传递
+</h2>
+<pre class="prettyprint lang-js">int a=1, b=2;
+
+swap(a,b);  //引用做参数
+swap(int &amp;a,int&amp;b){ a=b }
+
+swap(&amp;a,&amp;b);  //指针
+swap(int *a,int * b){ *a=*b }</pre>
+<p>
+	注意：
+</p>
+<p>
+	不能返回指向局部变量引用。
+</p>
+<p>
+	通过const指针解决，引用和指针不想修改值的问题。指针只为传递值到被调用函数中，不想被调用函数生成新的临时变量时使用该方法。
+</p>
+<p>
+	指针内存的生成和分配在一个函数中。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/846.html">c++面向对象程序设计-类和对象</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/848.html">c++面向对象程序设计(三)</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#定义指针">定义指针</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#通过ew关键字分配堆内存">通过ew关键字分配堆内存</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#cot指针">cot指针</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#引用">引用</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#使用引用或指针再函数间进行值传递">使用引用或指针再函数间进行值传递</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,241 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>对象的创建和生命周期_comonly.cn</title>
+<meta name="keywords" content="对象的创建和生命周期" />
+<meta name="description" content="在使用对象时，最关键的问题之一便是他们的生成和销毁方式。每个对象为了生存都需要资源，尤其是内存。当我们不需要一个对象时，它必须被处理掉，使其占有的资源必须被释放和重用。
+
+在相对简单的编程情况下，怎样清理对象看起来似乎不是什么难事，你创建了对象，根据需要使用它，然后他应该被销毁。你可能遇到相对复杂的情况。
+
+例如：假设你正在为某个机场设计交通管理系统，一开始问题似乎很简单：创建一个容器来保存所有飞机，然后为每个飞机创建一个对象，并将其置于容器中，对于清理工作，只需在飞机离开时删除相关飞机对象即可。" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">对象的创建和生命周期</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">对象的创建和生命周期</li>
+          <li class="lmname"><a href="https://www.cnblogs.com/www-hsy-com/p/7507793.html" target="_blank">https://www.cnblogs.com/www-hsy-com/p/7507793.html</a></li>
+          <li class="timer">2019-08-30</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>在使用对象时，最关键的问题之一便是他们的生成和销毁方式。每个对象为了生存都需要资源，尤其是内存。当我们不需要一个对象时，它必须被处理掉，使其占有的资源必须被释放和重用。
+
+在相对简单的编程情况下，怎样清理对象看起来似乎不是什么难事，你创建了对象，根据需要使用它，然后他应该被销毁。你可能遇到相对复杂的情况。
+
+例如：假设你正在为某个机场设计交通管理系统，一开始问题似乎很简单：创建一个容器来保存所有飞机，然后为每个飞机创建一个对象，并将其置于容器中，对于清理工作，只需在飞机离开时删除相关飞机对象即可。</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 在使用对象时，最关键的问题之一便是他们的生成和销毁方式。每个对象为了生存都需要资源，尤其是内存。当我们不需要一个对象时，它必须被处理掉，使其占有的资源必须被释放和重用。<br />
+<br />
+在相对简单的编程情况下，怎样清理对象看起来似乎不是什么难事，你创建了对象，根据需要使用它，然后他应该被销毁。你可能遇到相对复杂的情况。<br />
+<br />
+例如：假设你正在为某个机场设计交通管理系统，一开始问题似乎很简单：创建一个容器来保存所有飞机，然后为每个飞机创建一个对象，并将其置于容器中，对于清理工作，只需在飞机离开时删除相关飞机对象即可。但是可能别的系统也记录这有关的飞机的数据，也许这些数据不需要像主要控制功能那样立即引人注意。例如，他可能记录着所有飞离机场的小型飞机的飞行计划，因此你需要有第二个容器来存放小型飞机；无论何时，只要创建的是小型飞机对象，那么它同时也应该放入第二个人容器内。然后某个后台进程空闲时对第二个容器内的对象进行操作。<br />
+<br />
+现在问题变得困难了：怎样才能知道何时销毁这些对象呢？当处理完某个对象之后，系统某个其它部分可能还在处理它。在其他很多场合中也会遇到同样的问题，在必须明确删除对象的编程系统中（例如：C++），此问题会变得十分麻烦。<br />
+<br />
+&nbsp; &nbsp; 对象的数据位于何处？怎样控制对象的声明周期？C++ 认为效率控制是最重要的议题，所以给程序员提供了选择的权利。为了追求最大的执行速度，对象的存储空间和生命周期可以在编写程序时确定，这可以将对象置于堆栈（它们优势被称为自动变量（automatic variable）或限域变量（scoped variable））或静态存储区域内来实现。这种方式将存储空间分配和释放置于优先考虑的位置，某些情况下这样控制非常有价值。但是也牺牲了灵活性。因为必须在编写程序时知道对象确切的数量、生命周期和类型。如果试图解决更一般化的问题，例如计算机辅助设计、仓库管理或者空中交通控制，这种方式就显得过于受限了。<br />
+<br />
+&nbsp; &nbsp; 第二种方式是在被称为对（heap）的内存池中动态的创建对象。在这种方式中，知道运行时才知道需要多少对象，它们的生命周期如何，以及它们的具体类型是什么。这些问题的答案只能在程序运行时相关代码被执行到的那一刻才能确定。如果需要一个对象，可以在需要的时候直接在堆中创建。因为存储空间运行的时候是被动态管理的，所以需要大量的时间在堆中分配存储空间，这可能要远远大于在堆栈中创建存储空间的时间。在堆栈中创建存储空间和释放存储空间通常各需要一条汇编指令即可，分别对应将栈顶指针向下移动和将栈顶指针向上移动。创建堆存储空间的的时间依赖于存储机制的设计。<br />
+<br />
+&nbsp; &nbsp; 动态方式有这样一个一般性的逻辑假设：对象趋向于变得复杂，对于查找和释放存储空间的开销不会对对象的创建造成重大打击。动态方式所带来的更大的灵活性正是解决一般化编程问题的要点所在。<br />
+<br />
+&nbsp; &nbsp; Java 完全采用了动态内存分配方式。每当想要创建新对象时，就要使用 new 关键字来构建此对象的动态实例。<br />
+<br />
+&nbsp; &nbsp; 还有一个议题，就是对象的生命周期。对于允许在堆上创建对象的编程语言，编译器可以确定对象存活的时间，并可以自动销毁它。然而，如果在栈上创建对象，编译器就会对它的生命周期一无所知。在像 C++ 这样的语言中，必须通过编程方式来确定何时销毁对象，这可能会因为不能正确处理而导致内存泄露（C++ 程序中的家常便饭）。Java 提供了被称为“垃圾回收器”的机制，它可以自动发现对象何时不再使用，并继而销毁它。垃圾回收器非常有用，因为它减少了所必须考虑的议题和必须编写得代码。更重要的是，垃圾回收器提供了更高层的保障，可以避免暗藏的内存泄露问题，这个问题已经使许多 C++ 项目折戟沉沙。<br />
+<br />
+&nbsp; &nbsp; Java 的垃圾回收器被设计用来处理内存释放问题（尽管它不包括清理对象的其他方面）。垃圾回收器“知道”对象何时不再被使用，并自动释放对象占用的内存。这一点同所有对象都是继承自单根基类 Object 以及只能以一种方式创建对象（在堆上创建）这两个特性结合起来，使得 Java 编程的过程跟 C++ 相比要简单得多，所以要做出的决策和要克服的障碍也要少很多。<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1372.html">下面代码在win10上运行可能会出问题</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1374.html">C++日志库log4cplus使用</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.cnblogs.com/www-hsy-com/p/7507793.html" target="_blank">https://www.cnblogs.com/www-hsy-com/p/7507793.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,291 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>VS生成MFC框架程序的文件结构与含义_comonly.cn</title>
+<meta name="keywords" content="VS生成MFC框架程序的文件结构与含义" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">VS生成MFC框架程序的文件结构与含义</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">鸡啄米</li>
+          <li class="lmname"><a href="http://www.jizhuomi.com/software/143.html" target="_blank">http://www.jizhuomi.com/software/143.html</a></li>
+          <li class="timer">2018-08-12</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	c c++
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 用应用程序向导生成框架程序后，我们可以在之前设置的Location下看到以解决方案名命名的文件夹，此文件夹中包含了几个文件和一个以工程名命名的子文件夹，这个子文件夹中又包含了若干个文件和一个res文件夹，创建工程时的选项不同，工程文件夹下的文件可能也会有所不同。<br />
+<br />
+如果已经以Debug方式编译链接过程序，则会在解决方案文件夹下和工程子文件夹下各有一个名为“Debug”的文件夹，而如果是Release方式编译则会有名为“Release”的文件夹。这两种编译方式将产生两种不同版本的可执行程序：Debug版本和Release版本。Debug版本的可执行文件中包含了用于调试的信息和代码，而Release版本则没有调试信息，不能进行调试，但可执行文件比较小。<br />
+<br />
+所有文件分为6个部分：解决方案相关文件、工程相关文件、应用程序头文件和源文件、资源文件、预编译头文件和编译链接生成文件。<br />
+<br />
+<h2 id='1.解决方案相关文件'>
+	1.解决方案相关文件
+</h2>
+<br />
+解决方案相关文件包括解决方案文件夹下的.sdf文件、.sln文件、.suo文件和ipch文件夹。<br />
+<br />
+.sdf文件和ipch目录一般占用空间比较大，几十兆甚至上百兆，与智能提示、错误提示、代码恢复和团队本地仓库等相关。如果你觉得不需要则可以设置不生成它们，方法是点击菜单栏Tools-&gt;Options，弹出Options对话框，选择左侧面板中Text Editor-&gt;C/C++-&gt;Advanced，右侧列表中第一项Disable Database由False改为True就可以了，最后关闭VS2010再删除.sdf文件和ipch目录以后就不会再产生了。但关闭此选项以后也会有很多不便，例如写程序时的智能提示没有了。<br />
+<br />
+.sln文件和.suo文件为MFC自动生成的解决方案文件，它包含当前解决方案中的工程信息，存储解决方案的设置。<br />
+<br />
+<h2 id='2.工程相关文件'>
+	2.工程相关文件
+</h2>
+<br />
+工程相关文件包括工程文件夹下的.vcxproj文件和.vcxproj.filters文件。<br />
+<br />
+.vcxproj文件是MFC生成的工程文件，它包含当前工程的设置和工程所包含的文件等信息。.vcxproj.filters文件存放工程的虚拟目录信息，也就是在解决方案浏览器中的目录结构信息。<br />
+<br />
+VS2010/MFC编程入门之三（VS2010应用程序工程中文件的组成结构）<br />
+<br />
+<h2 id='3.应用程序头文件和源文件'>
+	3.应用程序头文件和源文件
+</h2>
+<br />
+应用程序向导会根据应用程序的类型（单文档、多文档或基于对话框的程序）自动生成一些头文件和源文件，这些文件是工程的主体部分，用于实现主框架、文档、视图等。鸡啄米下面分别简单介绍下各个文件：<br />
+<br />
+HelloWorld.h：应用程序的主头文件。主要包含由CWinAppEx类派生的CHelloWorldApp类的声明，以及CHelloWorldApp类的全局对象theApp的声明。<br />
+<br />
+HelloWorld.cpp：应用程序的主源文件。主要包含CHelloWorldApp类的实现，CHelloWorldApp类的全局对象theApp的定义等。<br />
+<br />
+MainFrm.h和MainFrm.cpp：通过这两个文件从CFrameWndEx类派生出CMainFrame类，用于创建主框架、菜单栏、工具栏和状态栏等。<br />
+<br />
+HelloWorldDoc.h和HelloWorldDoc.cpp：这两个文件从CDocument类派生出文档类CHelloWorldDoc，包含一些用来初始化文档、串行化（保存和装入）文档和调试的成员函数。<br />
+<br />
+HelloWorldView.h和HelloWorldView.cpp：它们从CView类派生出名为CHelloWorldView的视图类，用来显示和打印文档数据，包含了一些绘图和用于调试的成员函数。<br />
+<br />
+ClassView.h和ClassView.cpp：由CDockablePane类派生出CClassView类，用于实现应用程序界面左侧面板上的Class View。<br />
+<br />
+FileView.h和FileView.cpp：由CDockablePane类派生出CFileView类，用于实现应用程序界面左侧面板上的File View。<br />
+<br />
+OutputWnd.h和OutputWnd.cpp：由CDockablePane类派生出COutputWnd类，用于实现应用程序界面下侧面板Output。<br />
+<br />
+PropertiesWnd.h和PropertiesWnd.cpp：由CDockablePane类派生出CPropertiesWnd类，用于实现应用程序界面右侧面板Properties。<br />
+<br />
+ViewTree.h和ViewTree.cpp：由CTreeCtrl类派生出CViewTree类，用于实现出现在ClassView和FileView等中的树视图。<br />
+<br />
+<h2 id='4.资源文件'>
+	4.资源文件
+</h2>
+<br />
+一般我们使用MFC生成窗口程序都会有对话框、图标、菜单等资源，应用程序向导会生成资源相关文件：res目录、HelloWorld.rc文件和Resource.h文件。<br />
+<br />
+res目录：工程文件夹下的res目录中含有应用程序默认图标、工具栏使用图标等图标文件。<br />
+<br />
+HelloWorld.rc：包含默认菜单定义、字符串表和加速键表，指定了默认的About对话框和应用程序默认图标文件等。<br />
+<br />
+Resource.h：含有各种资源的ID定义。<br />
+<br />
+<h2 id='5.预编译头文件'>
+	5.预编译头文件
+</h2>
+<br />
+几乎所有的MFC程序的文件都要包含afxwin.h等文件，如果每次都编译一次则会大大减慢编译速度。所以把常用的MFC头文件都放到了stdafx.h文件中，然后由stdafx.cpp包含stdafx.h文件，编译器对stdafx.cpp只编译一次，并生成编译之后的预编译头HelloWorld.pch，大大提高了编译效率。<br />
+<br />
+<h2 id='6.编译链接生成文件'>
+	6.编译链接生成文件
+</h2>
+<br />
+如果是Debug方式编译，则会在解决方案文件夹和工程文件夹下都生成Debug子文件夹，而如果是Release方式编译则生成Release子文件夹。<br />
+<br />
+工程文件夹下的Debug或Release子文件夹中包含了编译链接时产生的中间文件，解决方案文件夹下的Debug或Release子文件夹中主要包含有应用程序的可执行文件。<br />
+<br />
+<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/942.html">MFC(C++)VS2017项目结构与对话框程序汇总</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/944.html">nodejs基本汇总</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="http://www.jizhuomi.com/software/143.html" target="_blank">http://www.jizhuomi.com/software/143.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#1.解决方案相关文件">1.解决方案相关文件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#2.工程相关文件">2.工程相关文件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#3.应用程序头文件和源文件">3.应用程序头文件和源文件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#4.资源文件">4.资源文件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#5.预编译头文件">5.预编译头文件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#6.编译链接生成文件">6.编译链接生成文件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

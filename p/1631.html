@@ -1,0 +1,453 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>nginx中定义的空宏 nginx 中的 ngx_cdecl_comonly.cn</title>
+<meta name="keywords" content="nginx中定义的空宏 nginx 中的 ngx_cdecl" />
+<meta name="description" content="看nginx的代码时，发现有些函数返回值之后，还有一个ngx_cdecl关键字，如：
+	
+
+	
+		
+		
+			
+				
+				
+					1
+				
+				
+					2
+				
+				
+					3
+				
+				
+					4
+				
+				
+					5
+				
+				
+					6
+				
+				
+					7
+				
+					
+					
+						
+							
+								int n" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">nginx中定义的空宏 nginx 中的 ngx_cdecl</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">nginx中的ngx_cdecl</li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2020-01-04</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>看nginx的代码时，发现有些函数返回值之后，还有一个ngx_cdecl关键字，如：
+	
+
+	
+		
+		
+			
+				
+				
+					1
+				
+				
+					2
+				
+				
+					3
+				
+				
+					4
+				
+				
+					5
+				
+				
+					6
+				
+				
+					7
+				
+					
+					
+						
+							
+								int n</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p style="font-family:Verdana, " background-color:#ffffff;"="">
+	看nginx的代码时，发现有些函数返回值之后，还有一个ngx_cdecl关键字，如：
+	</p>
+<div style="font-family:Verdana, " background-color:#ffffff;"="">
+	<div>
+		<table border="0" cellspacing="0" cellpadding="0" style="border: 1px solid rgb(192, 192, 192); width: 1184.8px; background-image: none !important; background-position: initial !important; background-size: initial !important; background-repeat: initial !important; background-attachment: initial !important; background-origin: initial !important; background-clip: initial !important; height: auto !important; margin: 0px !important; padding: 0px !important;" font-size:12px="" !important;"="" class="ke-zeroborder">
+		<tbody>
+			<tr>
+				<td class="gutter" style="border: 1px solid rgb(192, 192, 192); background-image: none !important; background-position: initial !important; background-size: initial !important; background-repeat: initial !important; background-attachment: initial !important; background-origin: initial !important; background-clip: initial !important; vertical-align: baseline !important;" color:#afafaf="" !important;"="">
+				<div>
+					1
+				</div>
+				<div>
+					2
+				</div>
+				<div>
+					3
+				</div>
+				<div>
+					4
+				</div>
+				<div>
+					5
+				</div>
+				<div>
+					6
+				</div>
+				<div>
+					7
+				</div>
+					</td>
+					<td>
+						<div>
+							<div>
+								int ngx_cdecl
+							</div>
+							<div>
+								main(intargc,&nbsp;char*const*argv)
+							</div>
+							<div>
+								{
+							</div>
+							<div>
+								ngx_int_t&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; i;
+							</div>
+							<div>
+								ngx_log_t&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *log;
+							</div>
+							<div>
+								ngx_cycle_t&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *cycle, init_cycle;
+							</div>
+							<div>
+								ngx_core_conf_t&nbsp; *ccf;
+							</div>
+						</div>
+					</td>
+						</tr>
+							</tbody>
+								</table>
+									</div>
+								</div>
+<p style="font-family:Verdana, " background-color:#ffffff;"="">
+	查看其定义处发现竟然是个空：
+									</p>
+<div style="font-family:Verdana, " background-color:#ffffff;"="">
+									<div>
+										<table border="0" cellspacing="0" cellpadding="0" style="border: 1px solid rgb(192, 192, 192); width: 1184.8px; background-image: none !important; background-position: initial !important; background-size: initial !important; background-repeat: initial !important; background-attachment: initial !important; background-origin: initial !important; background-clip: initial !important; height: auto !important; margin: 0px !important; padding: 0px !important;" font-size:12px="" !important;"="" class="ke-zeroborder">
+										<tbody>
+											<tr>
+												<td class="gutter" style="border: 1px solid rgb(192, 192, 192); background-image: none !important; background-position: initial !important; background-size: initial !important; background-repeat: initial !important; background-attachment: initial !important; background-origin: initial !important; background-clip: initial !important; vertical-align: baseline !important;" color:#afafaf="" !important;"="">
+												<div>
+													1
+												</div>
+													</td>
+													<td>
+														<div>
+															<div>
+																#define ngx_cdecl
+															</div>
+														</div>
+													</td>
+														</tr>
+															</tbody>
+																</table>
+																	</div>
+																</div>
+<p style="font-family:Verdana, " background-color:#ffffff;"="">
+	那么这个宏的作用是什么呢？如果了解函数调用的规则，则对这个宏基本上就能理解了：
+																	</p>
+<p style="font-family:Verdana, " background-color:#ffffff;"="">
+	在C语言中，假设我们有这样的一个函数：int function(int a,int b)，调用时只要用result = function(1,2)这样的方式就可以使用这个函数。但是，当高级语言被编译成计算机可以识别的机器码时，有一个问题就凸现出来：在CPU中，计算机没有办法知道一个函数调用需要多少个、什么样的参数，也没有硬件可以保存这些参数。也就是说，计算机不知道怎么给这个函数传递参数，传递参数的工作必须由函数调用者和函数本身来协调。为此，计算机提供了一种被称为栈的数据结构来支持参数传递。不同CPU，不同编译器的堆栈布局、函数调用方法都可能不同，但堆栈的基本概念是一样的。
+																</p>
+<p style="font-family:Verdana, " background-color:#ffffff;"="">
+	函数调用约定包括传递参数的顺序，谁负责清理参数占用的堆栈等，例如 ：
+																	</p>
+<table border="1" style="border: 1px solid rgb(192, 192, 192);" font-size:12px;background-color:#ffffff;width:709.6px;"="">
+																	<tbody>
+																		<tr>
+																			<td>
+																				调用方法
+																			</td>
+																			<td>
+																				参数传递顺序
+																			</td>
+																			<td>
+																				谁负责清理参数占用的堆栈
+																			</td>
+																		</tr>
+																		<tr>
+																			<td>
+																				__pascal
+																			</td>
+																			<td>
+																				从左到右
+																			</td>
+																			<td>
+																				调用者
+																			</td>
+																		</tr>
+																		<tr>
+																			<td>
+																				__stdcall
+																			</td>
+																			<td>
+																				从右到左
+																			</td>
+																			<td>
+																				被调函数
+																			</td>
+																		</tr>
+																		<tr>
+																			<td>
+																				__cdecl
+																			</td>
+																			<td>
+																				从右到左
+																			</td>
+																			<td>
+																				调用者
+																			</td>
+																		</tr>
+																	</tbody>
+																		</table>
+<p style="font-family:Verdana, " background-color:#ffffff;"="">
+	调用函数的代码和被调函数必须采用相同的函数的调用约定，程序才能正常运行。<br />
+如前表所示，__cdecl和__stdcall的区别是：__cdecl是调用者清理参数占用的堆栈，__stdcall是被调函数清理参数占用的堆栈。假设函数A是__stdcall，函数B调用函数A。你必须通过函数声明告诉编译器，函数A是__stdcall。编译器自然会产生正确的调用代码。如果函数A是__stdcall。但在引用函数A的地方，你却告诉编译器，函数A是__cdecl方式，编译器产生__cdecl方式的代码，与函数A的调用约定不一致，就会发生错误。
+																			</p>
+<p style="font-family:Verdana, " background-color:#ffffff;"="">
+	由于__stdcall的被调函数在编译时就必须知道传入参数的准确数目（被调函数要清理堆栈），所以不能支持变参数函数，例如printf。而且如果调用者使用了不正确的参数数目，会导致堆栈错误。
+																		</p>
+<p style="font-family:Verdana, " background-color:#ffffff;"="">
+	因此，nginx中使用这个宏是为了跨平台支持，方便调整函数调用方式。在遇到问题时，可以修改上面的定义为：
+																			</p>
+<div style="font-family:Verdana, " background-color:#ffffff;"="">
+																			<div>
+																				<table border="0" cellspacing="0" cellpadding="0" style="border: 1px solid rgb(192, 192, 192); width: 1184.8px; background-image: none !important; background-position: initial !important; background-size: initial !important; background-repeat: initial !important; background-attachment: initial !important; background-origin: initial !important; background-clip: initial !important; height: auto !important; margin: 0px !important; padding: 0px !important;" font-size:12px="" !important;"="" class="ke-zeroborder">
+																				<tbody>
+																					<tr>
+																						<td class="gutter" style="border: 1px solid rgb(192, 192, 192); background-image: none !important; background-position: initial !important; background-size: initial !important; background-repeat: initial !important; background-attachment: initial !important; background-origin: initial !important; background-clip: initial !important; vertical-align: baseline !important;" color:#afafaf="" !important;"="">
+																						<div>
+																							1
+																						</div>
+																							</td>
+																							<td>
+																								<div>
+																									<div>
+																										#define ngx_cdecl stdcall
+																									</div>
+																								</div>
+																							</td>
+																								</tr>
+																									</tbody>
+																										</table>
+																											</div>
+																										</div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1630.html">代码中定义为空的宏的作用</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1632.html">ffmpeg处理RTMP流媒体的命令大全</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

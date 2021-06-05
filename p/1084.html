@@ -1,0 +1,325 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>spring-JDBC事务管理_comonly.cn</title>
+<meta name="keywords" content="spring-JDBC事务管理" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">spring-JDBC事务管理</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-03-03</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	java框架-spring等
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	Spring事务管理（详解+实例）https://blog.csdn.net/trigl/article/details/50968079
+</p>
+<p>
+	Spring中的事务管理详解https://www.cnblogs.com/longshiyVip/p/5061637.html
+</p>
+<p>
+	Spring JDBC-Spring对事务管理的支持https://blog.csdn.net/yangshangwei/article/details/78050480#t8
+</p>
+<p>
+	透彻的掌握 Spring 中@transactional 的使用https://www.ibm.com/developerworks/cn/java/j-master-spring-transactional-use/index.html
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1083.html">容器事务</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1085.html">spring事务管理基本实现——通过jdbcTemplate和transactionTemplate显式调用实现</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="基于AOP的注解方式">
+							<h2 style="display:inline;color:#5BC648;">基于AOP的注解方式</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-03-05&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	通过AOP注释方式一定要<span style="color:#E53333;"><strong>开启aop注解</strong></span> &lt;aop:aspectj-autoproxy proxy-target-class="true" /&gt;
+</p>
+<p>
+	然后开启事务，开启事务后数据源配置的defaultAutoCommit参数无效
+</p>
+<pre class="prettyprint lang-xml">&lt;bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"&gt;
+    &lt;property name="url" value="jdbc:mysql://localhost:3306/test"&gt;&lt;/property&gt;
+    &lt;property name="username" value="root"&gt;&lt;/property&gt;
+    &lt;property name="password" value=""&gt;&lt;/property&gt;
+    &lt;property name="defaultAutoCommit" value="true" /&gt;
+&lt;/bean&gt;
+
+&lt;bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate"&gt;  
+	&lt;property name="dataSource" ref="dataSource"/&gt;
+&lt;/bean&gt;
+
+&lt;!-- 配置开启事务 --&gt;
+&lt;!-- 配置事务管理器 --&gt;
+&lt;bean id="transactionManager"
+    class="org.springframework.jdbc.datasource.DataSourceTransactionManager"&gt;
+    &lt;property name="dataSource" ref="dataSource"&gt;&lt;/property&gt;
+&lt;/bean&gt;
+
+&lt;tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/&gt;</pre>
+<pre class="prettyprint lang-xml"></pre>
+<p>
+	在需要使用事务的地方使用@Transactional注解
+</p>
+<p>
+	通过jdbc对数据库的操作：
+</p>
+<pre class="prettyprint lang-js">@Autowired
+private JdbcTemplate jdbcTemplate;
+
+public void out(String test) {
+	jdbcTemplate.update("insert into inss(test) values(?)",test);
+}</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="tx标签配置的拦截器">
+							<h2 style="display:inline;color:#5BC648;">tx标签配置的拦截器</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-03-05&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	指定事务的切入点。和AOP注解方式的不同只是将AOP注解换成了tx标签配置拦截器。同样需要开启aop&nbsp;
+</p>
+<pre class="prettyprint lang-xml">&lt;aop:aspectj-autoproxy /&gt;</pre>
+<pre class="prettyprint lang-xml">&lt;bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"&gt;
+    &lt;property name="url" value="jdbc:mysql://localhost:3306/test"&gt;&lt;/property&gt;
+    &lt;property name="username" value="root"&gt;&lt;/property&gt;
+    &lt;property name="password" value=""&gt;&lt;/property&gt;
+    &lt;property name="defaultAutoCommit" value="true" /&gt;
+&lt;/bean&gt; &lt;bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate"&gt;  
+	&lt;property name="dataSource" ref="dataSource"/&gt;
+&lt;/bean&gt;
+
+&lt;!-- 配置开启事务 --&gt;
+&lt;!-- 配置事务管理器 --&gt;
+&lt;bean id="transactionManager"
+    class="org.springframework.jdbc.datasource.DataSourceTransactionManager"&gt;
+    &lt;property name="dataSource" ref="dataSource"&gt;&lt;/property&gt;
+&lt;/bean&gt;
+
+&lt;!-- 切面 --&gt;
+&lt;tx:advice id="txAdvice" transaction-manager="transactionManager"&gt;
+    &lt;tx:attributes &gt;
+        &lt;tx:method name="delete*" propagation="REQUIRED" /&gt;
+        &lt;tx:method name="insert*" propagation="REQUIRED" /&gt;
+        &lt;tx:method name="update*" propagation="REQUIRED" /&gt;
+        &lt;tx:method name="*" propagation="SUPPORTS" read-only="true"/&gt;
+    &lt;/tx:attributes&gt;
+&lt;/tx:advice&gt;
+&lt;aop:config &gt;
+    &lt;aop:pointcut expression="execution(* vip.chencheng.controller.*.*(..))" id="serviceCutPoint"/&gt;
+    &lt;aop:advisor advice-ref="txAdvice" pointcut-ref="serviceCutPoint"/&gt;
+&lt;/aop:config&gt;</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#基于AOP的注解方式">基于AOP的注解方式</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#tx标签配置的拦截器">tx标签配置的拦截器</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

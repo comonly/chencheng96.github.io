@@ -1,0 +1,489 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>C数组指针_comonly.cn</title>
+<meta name="keywords" content="C数组指针" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">C数组指针</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-02-18</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	c c++
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='数组'>
+	数组
+</h2>
+<p>
+	int a[10];
+</p>
+<p>
+	数组中元素的个数必须是常量（5）和符号常量（3+5）。不能包含变量（n）。在调用函数中定义数组，其长度可以是变量或非常量表达式（形参从实参得到确定的值）。
+</p>
+<h4>
+	一维数组的初始化
+</h4>
+<p>
+	可以在定义时对元素赋值：
+</p>
+<pre class="prettyprint lang-cpp">int a[3]={1,2,2};
+int b[5]={1,2};//其他元素值为0
+int c[]={1,2};//相当于定义了c[2]</pre>
+<h4>
+	多维数组
+</h4>
+<p>
+	int a[3][4]={{1},{1},{1}};&nbsp;&nbsp;&nbsp;&nbsp;//按行进行赋值的，定义数组的第一列全为1，其他3列为0。
+</p>
+<h4>
+	字符数组
+</h4>
+<p>
+	定义同一维数组（仅是不同的数据类型）
+</p>
+<h4>
+	字符串
+</h4>
+<p>
+	char c[]={"I am happy"};&nbsp;&nbsp;&nbsp;&nbsp;//可以省略花括号，该数组长度为11，字符串常量的最后由系统自动加上'\0'。初始化赋值，或逐个对元素赋值，不能char s[11];s=<span>{"I am happy"};</span> 
+</p>
+<p>
+	字符数组可以逐个字符输出，也可以将整个字符串输出‘
+</p>
+<ul>
+	<li>
+		printf("%s\n",c);&nbsp; &nbsp; //&nbsp; &nbsp; 输出数组c中的字符串,输出字符串时遇到'\0'就停止。
+	</li>
+	<li>
+		scanf("%s",c);&nbsp; &nbsp; //&nbsp; &nbsp; 输入一个字符串，输入项如果是字符数组名，不再加地址符&amp;。
+	</li>
+	<li>
+		puts(字符数组);
+	</li>
+	<li>
+		gets(字符数组);
+	</li>
+</ul>
+<ul>
+	<li>
+		strcat(字符数组1, 字符数组2);&nbsp; &nbsp; //字符串连接函数
+	</li>
+	<li>
+		strcpy(字符数组1, 字符数组2);&nbsp; &nbsp; //将字符串2复制到字符串1中去
+	</li>
+	<li>
+		strncpy(str1,str2,n);&nbsp; &nbsp; //将str2前面n个字符复制到str1中，n不应该多余str1中原有的字符个数
+	</li>
+	<li>
+		strcmp(str1,str2);&nbsp; &nbsp; //比较字符串1和字符串2。相等返回0，str1&gt;str2返回一个正整数
+	</li>
+	<li>
+		strlen(str);&nbsp; &nbsp; //测试字符串长度，不含'\0'
+	</li>
+	<li>
+		strlwr(str);&nbsp; &nbsp; //大写字母换成小写字母
+	</li>
+	<li>
+		strupr(str);&nbsp; &nbsp; //小写转换为大写
+	</li>
+</ul>
+<p>
+	字符串处理函数应包含头文件 &lt;string.h&gt;
+</p>
+<h2 id='指针'>
+	指针
+</h2>
+<pre class="prettyprint lang-cpp">#include&lt;stdio.h&gt;
+void main()
+{
+	int a=100,b=10;
+	int *p1,*p2;	//定义两个整形指针
+	p1=&amp;a;	//a的地址赋值给指针变量
+	p2=&amp;b;
+	printf("a=%d,b=%d\n",a,*p2);	//*p2获得指针变量所指地址存放的值
+}</pre>
+<h4>
+	指针变量做函数参数
+</h4>
+<pre class="prettyprint lang-cpp">#include&lt;stdio.h&gt;
+void main()
+{
+	void swap(int *pt1,int *pt2);
+	int a=100,b=10;
+	int *p1,*p2;	//定义两个整形指针
+	p1=&amp;a;	//a的地址赋值给指针变量
+	p2=&amp;b;
+	swap(p1,p2);
+	printf("a=%d,b=%d\n",a,*p2);	//*p2获得指针变量所指地址存放的值
+}
+void swap(int *pt1,int *pt2)
+{
+	int temp;
+	temp=*pt1;
+	*pt1=*pt2;
+	*pt2=temp;
+}</pre>
+实参和形参之间数据的传递是值传递。调用函数传递指针也不能改变实参指针变量的值，但是可以改变实参指针所指变量的值。
+<h4>
+	指针引用数组
+</h4>
+<pre class="prettyprint lang-cpp">#include&lt;stdio.h&gt;
+void main()
+{
+	int a[10]={1,2,3,4,5,6};
+	int *p;
+	p=&amp;a[0];	//效果同p=a,因为数组名就代表数组第一个元素的地址
+	p++;	//数组指针可以进行++，--，+，-运算。p++指数组下一个元素的地址
+	printf("%d\n",*p);
+}</pre>
+<p>
+	会输出数组的第二个元素 2 。
+</p>
+<p>
+	数组名做函数的参数传递的是地址，所以对形参的更改会影响实参。
+</p>
+<h4>
+	指针引用多维数组
+</h4>
+<pre class="prettyprint lang-cpp">#include&lt;stdio.h&gt;
+void main()
+{
+	int a[10][2]={1,2,3,4,5,6};
+	printf("%d\n",a[1]+2);	//第2行第3列的地址
+	printf("%d\n",*(a+1)+2);	//第2行第3列的地址
+}</pre>
+<p>
+	对于多维数组a[i][j]等价于 *(a[i]+j) 或 *( *(a+i) +j)
+</p>
+<p>
+	a[i]与<span>*(a+i) 以及a+1都表示第i行的起始地址</span> 
+</p>
+<h4>
+	指针引用字符串
+</h4>
+<pre class="prettyprint lang-cpp">#include&lt;stdio.h&gt;
+void main()
+{
+	char *str1="I LOVE ";
+	char str2[]="china";
+	char *temp;
+	printf("%s%s\n",str1,str2);
+	temp=str2;	//将str2字符串地址赋值给temp
+	printf("%s\n%c\n",temp,temp[3]);	//通过temp输出str2中的内容
+	printf("%d\n",temp);	//输出str2首元素的地址
+	str2[2]='s';
+	//str1[3]='m';	//字符串常量的内容不能改变，该句无法执行
+	printf("%s\n",temp);
+}</pre>
+<h4>
+	函数指针
+</h4>
+<p>
+	可以定义一个指向函数的指针变量，存放某一函数的起始地址。
+</p>
+<pre class="prettyprint lang-cpp">#include&lt;stdio.h&gt;
+void main()
+{
+	int max(int,int);
+	int (*p)(int,int);	//定义一个函数指针
+	int a=7,b=8,c;
+	p=max;	//指针指向函数
+	c=(*p)(a,b);		//通过指针调用函数
+	printf("%d\n",c);
+}
+int max(int x,int y)
+{
+	return x&gt;y?x:y;
+}</pre>
+<p>
+	用函数指针做函数参数
+</p>
+<pre class="prettyprint lang-cpp">#include&lt;stdio.h&gt;
+void main()
+{
+	int max(int,int);
+	int min(int,int);
+	int fun(int i, int j, int (*x2)(int,int));
+	//int (*p)(int,int);	//定义一个函数指针
+	int c,d;
+	//p=max;	//指针指向函数
+	c=fun(9,2,max);		//通过指针传递函数，也可以直接用p
+	d=fun(9,2,min);
+	printf("%d  %d\n",c,d);
+}
+int fun(int i, int j, int (*x2)(int,int)) 
+{
+	return (* x2)(i,j);
+}
+int max(int x,int y)
+{
+	return x&gt;y?x:y;
+}
+int min(int x,int y)
+{
+	return x&lt;y?x:y;
+}</pre>
+<h4>
+	指针数组
+</h4>
+<p>
+	数组元素均为指针类型的数据，即数组中每个元素都是一个地址。
+</p>
+<p>
+	int *p[4];&nbsp; &nbsp; //[]优先级比*高
+</p>
+<p>
+	int ( *p )[4];&nbsp; &nbsp; //指向一维数组的指针变量
+</p>
+<pre class="prettyprint lang-cpp">#include&lt;stdio.h&gt;
+void main()
+{
+	int i;
+	char * name[]={"firsrt","second","third"};
+	char **p;
+	for(i=0;i&lt;3;i++)
+	{
+		p=name+i;
+		printf("%s	",*p);
+	}
+}</pre>
+<h4>
+	main函数的形参
+</h4>
+<p>
+	int main(int argc, char *argv[] );&nbsp; &nbsp; //argc(argument count)指参数个数，argv(argument vector)参数向量。
+</p>
+<h4>
+	动态内存分配
+</h4>
+<p>
+	需要通过 stdlib.h 声明
+</p>
+<ul>
+	<li>
+		malloc函数：void *malloc(unsigned int size);&nbsp; &nbsp; //生成一个长度为size的连续空间。返回第一个字节的指针，失败返回null
+	</li>
+	<li>
+		calloc函数：void *calloc(unsigned n, unsigned size);&nbsp; &nbsp; //分配n个长度为size的连续空间。成功返回起始位置指针，失败返回null
+	</li>
+	<li>
+		free函数：void free(void *p);&nbsp; &nbsp; //释放指针变量p指向的动态空间
+	</li>
+	<li>
+		realloc函数：void *realloc(void *p, unsigned int size);&nbsp;&nbsp;&nbsp;&nbsp;//改变由malloc和calloc生成空间的大小。将p指向空间的大小改为size，p不变，失败返回null
+	</li>
+</ul>
+<h4>
+	void指针类型
+</h4>
+<pre class="prettyprint lang-cpp">#include&lt;stdio.h&gt;
+void main()
+{
+	int a=3;
+	void *p;
+	int *m,*v;
+	m=&amp;a;
+	p=&amp;a;
+	printf("m指向的：%d\n",*m);
+	//printf("p指向的：%d\n",*p);	//p并不指向a，只是把a的地址赋值给p
+	printf("m的内容：%d，p的内容：%d\n",m,p);
+	v=p;
+	printf("v指向的：%d\n",*v);	//可以把void类型的指针存放的地址赋值给合适类型的指针
+}</pre></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/852.html">C基础</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/854.html">C用户自己建立的数据类型（结构体）</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#数组">数组</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#指针">指针</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

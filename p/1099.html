@@ -1,0 +1,333 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Redis复制与哨兵Redis Sentinel_comonly.cn</title>
+<meta name="keywords" content="Redis复制与哨兵Redis Sentinel" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Redis复制与哨兵Redis Sentinel</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-06-01</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	数据库
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='节点复制'>
+	节点复制
+</h2>
+<p>
+	主节点(master)--&gt;从节点(slave)复制的数据流是单向的。
+</p>
+<h3>
+	建立复制
+</h3>
+<ol>
+	<li>
+		配置文件中加入slaveof {masterHost} {masterPort}
+	</li>
+	<li>
+		redis-server启动命令后加入。--slaveof {masterHost} {masterPort}
+	</li>
+	<li>
+		直接通过命令建立复制，通过该命令也可以切换主节点。slaveof {masterHost} {masterPort}
+	</li>
+</ol>
+<p>
+	可以通过info replication查看复制状态。只用在从节点中配置。建立复制后，会清空从节点之前所有数据。
+</p>
+<h3>
+	断开复制
+</h3>
+<p>
+	slaveof no one断开复制后不会抛弃已复制的数据，只是无法获取主节点的更新。
+</p>
+<h3>
+	密码验证
+</h3>
+<p>
+	主节点设置requirepass参数进行密码验证，从节点通过设置masterauth参数设置密码。
+</p>
+<h3>
+	设置只读
+</h3>
+<p>
+	从节点通过slave-read-only=yes配置只读，由于从节点修改不会同步到主节点，这样就会造成数据不一致。
+</p>
+<h3>
+	传输延迟
+</h3>
+<p>
+	repl-disable-tcp-nodelay控制是否关闭TCP_NODELAY
+</p>
+<ol>
+	<li>
+		关闭时，主节点的更新会及时同步到从节点
+	</li>
+	<li>
+		开启时，主节点会合并较小TCP数据包，按Linux内核的时间大约40ms同步从节点。
+	</li>
+</ol>
+<h3>
+	数据同步的方法
+</h3>
+<p>
+	分为全量复制和部分复制，主从节点在建立复制后，维护着长连接并彼此发送心跳命令。
+</p>
+<h2 id='哨兵'>
+	哨兵
+</h2>
+<p>
+	Redis主从复制模式下，主节点由于故障不能提供服务，需要将从节点改为主节点。可以通过Redis Sentinel（哨兵）架构解决该问题。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1098.html">C++程序运行中栈和堆的相关概念</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1100.html">软件整理</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="Redis Sentinel节点的部署与API">
+							<h2 style="display:inline;color:#5BC648;">Redis Sentinel节点的部署与API</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-06-01&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	Redis主从复制原理总结&nbsp;<a href="https://www.cnblogs.com/daofaziran/p/10978628.html">https://www.cnblogs.com/daofaziran/p/10978628.html</a>
+</p>
+<p>
+	<br />
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="Redis Sentinel客户端连接">
+							<h2 style="display:inline;color:#5BC648;">Redis Sentinel客户端连接</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-06-01&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span>通过jedis作为redis的Java客户端</span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="Redis哨兵（Sentinel）模式">
+							<h2 style="display:inline;color:#5BC648;">Redis哨兵（Sentinel）模式</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-08-02&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><a href="https://www.jianshu.com/p/06ab9daf921d">https://www.jianshu.com/p/06ab9daf921d</a></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#节点复制">节点复制</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#哨兵">哨兵</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Redis Sentinel节点的部署与API">Redis Sentinel节点的部署与API</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Redis Sentinel客户端连接">Redis Sentinel客户端连接</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Redis哨兵（Sentinel）模式">Redis哨兵（Sentinel）模式</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

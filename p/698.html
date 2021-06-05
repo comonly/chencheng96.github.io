@@ -1,0 +1,412 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>IMacros脚本入门教程_comonly.cn</title>
+<meta name="keywords" content="IMacros脚本入门教程" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">IMacros脚本入门教程</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">mmyechq</li>
+          <li class="lmname"><a href="http://www.360doc.com/userhome/7552213" target="_blank">http://www.360doc.com/userhome/7552213</a></li>
+          <li class="timer">2017-05-08</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	电脑配置设置  软件使用 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">IMacros,TAG,SET</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 例子来自于官方的demo分析:<br />
+<br />
+1.英文引号:' 是注释<br />
+<br />
+2.<br />
+PROMPT Enter&lt;SP&gt;a&lt;SP&gt;Page&lt;SP&gt;Name !VAR1 NoName_Time_{{!NOW:yyyymmdd_hhnnss}}&nbsp;<br />
+-&gt;&lt;SP&gt; : 是空格<br />
+-&gt;PROMPT : 弹出提示框<br />
+-&gt;!VAR1 : 把用户输入赋值到这个变量<br />
+-&gt;NoName_Time_{{!NOW:yyyymmdd_hhnnss}} : 默认值<br />
+-&gt;{{!NOW:yyyymmdd_hhnnss}} : 当前日期且格式化<br />
+<br />
+3.<br />
+SAVEAS TYPE=CPL FOLDER=* FILE={{!VAR1}}<br />
+-&gt;SAVEAS : 保存文件<br />
+-&gt;TYPE=CPL : 我也不知道是啥<br />
+-&gt;FOLDER=* : 文件保存在Downloads 文件夹<br />
+-&gt;FILE={{!VAR1}} : 指定文件名,扩展名imacro会自动帮你处理<br />
+<br />
+4.<br />
+WAIT SECONDS=3<br />
+URL GOTO=http://www.iopus.com/imacros/home/msg/ok.htm&nbsp;<br />
+-&gt;SECONDS=3 : 等待3秒<br />
+-&gt;URL GOTO=访问url<br />
+<br />
+5.<br />
+SET !VAR1 EVAL("Math.floor(Math.random()*5 + 1);")<br />
+-&gt;设置变量,其值为js生成的随机数<br />
+<br />
+6.<br />
+SET !VAR1 EVAL("Math.floor(Math.random()*5 + 1);")<br />
+WAIT SECONDS={{!VAR1}}<br />
+-&gt;{{!VAR1}} : 引用值<br />
+<br />
+7.<br />
+SET !VAR2 EVAL("var h=20; var s=\"{{!EXTRACT}}\"; if(3&gt;2){MacroError(\"3大于2了\");}else null")<br />
+-&gt; var s=\"{{!EXTRACT}}\" : 在eval中赋值的写法<br />
+-&gt; MacroError(\"3大于2了\"); : 抛出错误的写法<br />
+<br />
+8.<br />
+SET !EXTRACT NULL<br />
+-&gt;设置变量为null<br />
+<br />
+9.<br />
+TAG POS=1 TYPE=B ATTR=TXT:* EXTRACT=TXT<br />
+-&gt;把 B 标签中的文本赋值给EXTRACT变量中,希望我没有说错<br />
+<br />
+10.<br />
+TAG POS=1 TYPE=INPUT:TEXT FORM=ID:form1 ATTR=NAME:textfield EXTRACT=TXT<br />
+-&gt;把 id为form1的表单中的名字为textfield的文本框的值赋值给EXTRACT变量中,希望我没有说错<br />
+<br />
+11.<br />
+SET !EXTRACT_TEST_POPUP NO<br />
+-&gt;不弹出窗口<br />
+<br />
+12.<br />
+TAG POS=1 TYPE=TD ATTR=CLASS:bdytxt&amp;&amp;TXT:* EXTRACT=TXT<br />
+-&gt;td标签且存在bdytxt这个css类,且任意文本<br />
+<br />
+13.<br />
+TAG POS=1 TYPE=A ATTR=TXT:HREF&lt;SP&gt;extracts&lt;SP&gt;links EXTRACT=HREF&nbsp;<br />
+-&gt;抽取a标签中文本是HREF extracts links 的href值<br />
+<br />
+14.<br />
+TAG POS=1 TYPE=DIV ATTR=TXT:MyTable<br />
+-&gt;获得文本为MyTable的div<br />
+<br />
+15.<br />
+TAG POS=1 TYPE=DIV ATTR=TXT:MyTable<br />
+TAG POS=R3 TYPE=TD ATTR=TXT:* EXTRACT=TXT&nbsp;<br />
+TAG POS=R-2 TYPE=TD ATTR=TXT:* EXTRACT=TXT &nbsp;<br />
+-&gt;设置div中文本为MyTable的位置为1<br />
+-&gt;R3 相对于位置1而言,向前选择元素,希望我没有说错<br />
+-&gt;R-2相对于位置1而言,向后选择元素<br />
+<br />
+16.<br />
+SAVEAS TYPE=EXTRACT FOLDER=* FILE=mytable_{{!NOW:yymmdd_hhnnss}}.csv<br />
+-&gt;FOLDER=* 使用默认文件夹,默认文件夹位置是你的ff扩展imacro的选项里面设置的路径<br />
+-&gt;FOLDER=c:\yourfolder 你可以这么使用你的文件夹<br />
+<br />
+17.<br />
+TAG XPATH="id('TestForm')/div/center/table/tbody/tr[2]/td[3]/select" CONTENT=$Pizza<br />
+-&gt;设置id为TestForm表单下的某个td中的下拉菜单标签为Pizza的元素选中,CONTENT是为了设置选中,注意在select中要用$号<br />
+-&gt;或许id('TestForm')的写法代替了传统的写法: //*[@id="TestForm"]<br />
+<br />
+18.<br />
+TAG XPATH="id('TestForm')/descendant::select[2]" CONTENT=$Water<br />
+-&gt;id为TestForm表单下的所有的下拉菜单中的第二个,且设置其显示标签为Water的元素选中,CONTENT是为了设置选中,注意在select中要用$号<br />
+<br />
+19.<br />
+TAG XPATH="id('TestForm')/descendant::input[@name='C7']" CONTENT=YES<br />
+-&gt;id为TestForm表单下的所有的input中name为C7且设置其显示内容为YES的元素,CONTENT是为了设置input的value值<br />
+<br />
+20.<br />
+TAG XPATH="id('TestForm')/descendant::input[translate(@name, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')='reg_code']" CONTENT=demo123&nbsp;<br />
+-&gt;大写转小写,且注册每个需要转换的字母<br />
+<br />
+21.<br />
+TAG XPATH="/descendant::input[@type='submit']"<br />
+-&gt;一个只有一个提交按钮的页面的快捷访问写法<br />
+<br />
+22.<br />
+SET !ENCRYPTION NO<br />
+-&gt;未知<br />
+<br />
+23.<br />
+FILTER TYPE=IMAGES STATUS=ON&nbsp;<br />
+-&gt;开启显示网页图片<br />
+<br />
+24.<br />
+SET !REPLAYSPEED MEDIUM<br />
+-&gt;设置播放速度,SLOW为慢<br />
+<br />
+25.<br />
+TAG POS=1 TYPE=A ATTR=HREF:http://www.iopus.com/imacros/demo/v5/frames/subframe.htm&nbsp; &nbsp;<br />
+-&gt;未知<br />
+<br />
+26.<br />
+ONDIALOG POS=1 BUTTON=OK CONTENT=<br />
+-&gt;未知<br />
+<br />
+27.<br />
+TAG POS=1 TYPE=INPUT:BUTTON FORM=NAME:NoFormName ATTR=VALUE:Popup&lt;SP&gt;1<br />
+-&gt;点击一个按钮,然而这个按钮不在表单中,所以:NoFormName<br />
+<br />
+28.<br />
+SET !VAR1 1<br />
+<br />
+TAB OPEN NEW<br />
+ADD !VAR1 1<br />
+TAB T={{!VAR1}}<br />
+URL GOTO=http://www.iopus.com<br />
+<br />
+TAB OPEN NEW<br />
+ADD !VAR1 1<br />
+TAB T={{!VAR1}}<br />
+URL GOTO=http://forum.iopus.com<br />
+<br />
+-&gt;先设置变量SET !VAR1 为1<br />
+-&gt;然后设置标签打开方式是新开标签<br />
+-&gt;变量自增<br />
+-&gt;TAB T={{!VAR1}},当前用户所在标签页的第二个标签<br />
+-&gt;然后在第二个标签中打开连接<br />
+-&gt;因为不想影响当前用户打开的标签页,故而新开一个标签页再打开地址,这样是用户体验友好的做法<br />
+<br />
+29.<br />
+SAVEAS TYPE=CPL FOLDER=* FILE=+_{{!NOW:yyyymmdd_hhnnss}}&nbsp; &nbsp;<br />
+SAVEAS TYPE=HTM FOLDER=* FILE=+_{{!NOW:yyyymmdd_hhnnss}}&nbsp; &nbsp;<br />
+SAVEAS TYPE=TXT FOLDER=* FILE=+_{{!NOW:yyyymmdd_hhnnss}} &nbsp;<br />
+-&gt;以三种类型保存文件<br />
+<br />
+30.<br />
+URL GOTO=http://www.iopus.com/imacros/demo/v5/pdf/ &nbsp;<br />
+TAG POS=1 TYPE=A ATTR=TXT:*User&lt;SP&gt;Manual*&nbsp; &nbsp;<br />
+ONDOWNLOAD FOLDER=* FILE=+_{{!NOW:yyyymmdd_hhnnss}}&nbsp;&nbsp; &nbsp;<br />
+SAVEITEM &nbsp;<br />
+<br />
+-&gt;打开url<br />
+-&gt;点击a标签,准备下载<br />
+-&gt;定义下载文件然后下载保存,<br />
+<br />
+31.<br />
+TAB T=1&nbsp;<br />
+-&gt;使用当前打开的标签页<br />
+<br />
+32.<br />
+SAVEAS TYPE=JPEG FOLDER=* FILE=+_{{!NOW:yyyymmdd_hhnnss}}<br />
+-&gt;支持的下载类型: CPL|HTM|TXT|EXTRACT|PNG|JPEG<br />
+<br />
+33.<br />
+TAB T=1&nbsp;&nbsp;&nbsp; &nbsp;<br />
+URL GOTO=http://www.iopus.com/imacros/demo/v6/images&nbsp; &nbsp;<br />
+SET !LOOP 2<br />
+TAG POS={{!loop}} TYPE=A ATTR=HREF:http://*.jpg &nbsp;<br />
+SAVEAS TYPE=JPEG FOLDER=* FILE=+_{{!NOW:yyyymmdd_hhnnss}}<br />
+-&gt;当前标签页打开url<br />
+-&gt;设置从第二次循环开始<br />
+-&gt;{!loop}} 引用循环下标值<br />
+-&gt;一次点击页面上的图片<br />
+-&gt;以指定的格式保存<br />
+<br />
+34.<br />
+STOPWATCH ID=Firstpage<br />
+URL GOTO=http://www.iopus.com/imacros/demo/v6/stopwatch.htm &nbsp;<br />
+STOPWATCH ID=Firstpage&nbsp; &nbsp;<br />
+-&gt;开启一个停表,计算打开url的时间<br />
+<br />
+35.<br />
+SET !FILESTOPWATCH C:\demo-stopwatch2.csv &nbsp;<br />
+<br />
+STOPWATCH ID=Firstpage<br />
+URL GOTO=http://www.iopus.com/imacros/demo/v6/stopwatch.htm &nbsp;<br />
+STOPWATCH ID=Firstpage&nbsp; &nbsp;<br />
+&nbsp;<br />
+ADD !EXTRACT {{!STOPWATCHTIME}}<br />
+-&gt;设置秒表执行信息的文件保存位置<br />
+-&gt;秒表记录打开url的耗时<br />
+-&gt;记录进文件中</div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/697.html">按键精灵常用语法介绍</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/699.html">imacros的一些注意事项比如模拟鼠标点击</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="http://www.360doc.com/userhome/7552213" target="_blank">http://www.360doc.com/userhome/7552213</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

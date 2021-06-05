@@ -1,0 +1,345 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>【python2*使用】用python发送http请求_comonly.cn</title>
+<meta name="keywords" content="【python2*使用】用python发送http请求" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">【python2*使用】用python发送http请求</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">无影</li>
+          <li class="lmname"><a href="http://blog.163.com/xychenbaihu@yeah/blog/static/132229655201231085444250/" target="_blank">http://blog.163.com/xychenbaihu@yeah/blog/static/132229655201231085444250/</a></li>
+          <li class="timer">2017-07-15</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	python  perl
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">python,http,urllib方法</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	import urllib2是python2*的方法
+</p>
+<p>
+	<br />
+</p>
+<p>
+	测试用CGI,名字为test.py，放在apache的cgi-bin目录下:
+</p>
+#!/usr/bin/python<br />
+import cgi<br />
+def main():&nbsp;<br />
+&nbsp; &nbsp; print "Content-type: text/html\n"<br />
+&nbsp; &nbsp; form = cgi.FieldStorage()<br />
+&nbsp; &nbsp; if form.has_key("ServiceCode") and form["ServiceCode"].value != "":<br />
+&nbsp; &nbsp; &nbsp; &nbsp; print "&lt;h1&gt; Hello",form["ServiceCode"].value,"&lt;/h1&gt;"&nbsp;<br />
+&nbsp; &nbsp; else: &nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; print "&lt;h1&gt; Error! Please enter first name.&lt;/h1&gt;"&nbsp;<br />
+main()<br />
+<br />
+python发送post和get请求<br />
+<br />
+get请求：<br />
+使用get方式时，请求数据直接放在url中。<br />
+方法一、<br />
+import urllib<br />
+import urllib2<br />
+<br />
+url = "http://192.168.81.16/cgi-bin/python_test/test.py?ServiceCode=aaaa"<br />
+req = urllib2.Request(url)<br />
+print req<br />
+res_data = urllib2.urlopen(req)<br />
+res = res_data.read()<br />
+print res<br />
+<br />
+方法二、<br />
+import httplib<br />
+<br />
+url = "http://192.168.81.16/cgi-bin/python_test/test.py?ServiceCode=aaaa"<br />
+conn = httplib.HTTPConnection("192.168.81.16")<br />
+conn.request(method="GET",url=url)&nbsp;<br />
+response = conn.getresponse()<br />
+res= response.read()<br />
+print res<br />
+<br />
+post请求：<br />
+使用post方式时，数据放在data或者body中，不能放在url中，放在url中将被忽略。<br />
+方法一、<br />
+import urllib<br />
+import urllib2<br />
+<br />
+test_data = {'ServiceCode':'aaaa','b':'bbbbb'}<br />
+test_data_urlencode = urllib.urlencode(test_data)<br />
+requrl = "http://192.168.81.16/cgi-bin/python_test/test.py"<br />
+req = urllib2.Request(url = requrl,data =test_data_urlencode)<br />
+print req<br />
+res_data = urllib2.urlopen(req)<br />
+res = res_data.read()<br />
+print res<br />
+<br />
+方法二、<br />
+import urllib<br />
+import httplib&nbsp;<br />
+test_data = {'ServiceCode':'aaaa','b':'bbbbb'}<br />
+test_data_urlencode = urllib.urlencode(test_data)<br />
+requrl = "http://192.168.81.16/cgi-bin/python_test/test.py"<br />
+headerdata = {"Host":"192.168.81.16"}<br />
+conn = httplib.HTTPConnection("192.168.81.16")<br />
+conn.request(method="POST",url=requrl,body=test_data_urlencode,headers = headerdata)&nbsp;<br />
+response = conn.getresponse()<br />
+res= response.read()<br />
+print res<br />
+对python中json的使用不清楚，所以临时使用了urllib.urlencode(test_data)方法;<br />
+<br />
+模块urllib,urllib2,httplib的区别<br />
+&nbsp; &nbsp; &nbsp; &nbsp; httplib实现了http和https的客户端协议，但是在python中，模块urllib和urllib2对httplib进行了更上层的封装。<br />
+&nbsp;<br />
+介绍下例子中用到的函数：<br />
+1、HTTPConnection函数<br />
+httplib.HTTPConnection(host[,port[,stict[,timeout]]])<br />
+这个是构造函数，表示一次与服务器之间的交互，即请求/响应<br />
+host &nbsp; &nbsp; &nbsp; &nbsp;标识服务器主机(服务器IP或域名)<br />
+port &nbsp; &nbsp; &nbsp; &nbsp; 默认值是80<br />
+strict &nbsp; &nbsp; &nbsp; &nbsp;模式是False，表示无法解析服务器返回的状态行时，是否抛出BadStatusLine异常<br />
+例如:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;conn = httplib.HTTPConnection("192.168.81.16"，80) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;与服务器建立链接。<br />
+<br />
+2、HTTPConnection.request(method,url[,body[,header]])函数<br />
+这个是向服务器发送请求<br />
+method &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 请求的方式，一般是post或者get，<br />
+例如：<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;method="POST"或method="Get"<br />
+url &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;请求的资源，请求的资源(页面或者CGI,我们这里是CGI)<br />
+例如：<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; url="http://192.168.81.16/cgi-bin/python_test/test.py" &nbsp; &nbsp; &nbsp;请求CGI<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; 或者<br />
+&nbsp; &nbsp; &nbsp; &nbsp; url="http://192.168.81.16/python_test/test.html" &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;请求页面<br />
+body &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 需要提交到服务器的数据，可以用json，也可以用上面的格式，json需要调用json模块<br />
+headers &nbsp; &nbsp; &nbsp; &nbsp; 请求的http头headerdata = {"Host":"192.168.81.16"}<br />
+例如:<br />
+test_data = {'ServiceCode':'aaaa','b':'bbbbb'}<br />
+test_data_urlencode = urllib.urlencode(test_data)<br />
+requrl = "http://192.168.81.16/cgi-bin/python_test/test.py"<br />
+headerdata = {"Host":"192.168.81.16"}<br />
+conn = httplib.HTTPConnection("192.168.81.16"，80)<br />
+conn.request(method="POST",url=requrl,body=test_data_urlencode,headers = headerdata) &nbsp;<br />
+conn在使用完毕后，应该关闭，conn.close()<br />
+<br />
+3、HTTPConnection.getresponse()函数<br />
+&nbsp; &nbsp; &nbsp;这个是获取http响应，返回的对象是HTTPResponse的实例。<br />
+<br />
+4、HTTPResponse介绍：<br />
+HTTPResponse的属性如下：<br />
+read([amt]) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;获取响应消息体，amt表示从响应流中读取指定字节的数据，没有指定时，将全部数据读出；<br />
+getheader(name[,default]) &nbsp; &nbsp; &nbsp;获得响应的header，name是表示头域名，在没有头域名的时候，default用来指定返回值<br />
+getheaders() &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 以列表的形式获得header<br />
+例如：<br />
+<br />
+date=response.getheader('date');<br />
+print date<br />
+resheader=''<br />
+resheader=response.getheaders();<br />
+print resheader<br />
+列形式的响应头部信息:<br />
+[('content-length', '295'), ('accept-ranges', 'bytes'), ('server', 'Apache'), ('last-modified', 'Sat, 31 Mar 2012 10:07:02 GMT'), ('connection', 'close'), ('etag', '"e8744-127-4bc871e4fdd80"'), ('date', 'Mon, 03 Sep 2012 10:01:47 GMT'), ('content-type', 'text/html')]&nbsp;<br />
+date=response.getheader('date');<br />
+print date<br />
+取出响应头部的date的值。<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/785.html">用python发送http请求——Requests方法</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/787.html">用perl发送http请求【转】【待处理】</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="http://blog.163.com/xychenbaihu@yeah/blog/static/132229655201231085444250/" target="_blank">http://blog.163.com/xychenbaihu@yeah/blog/static/132229655201231085444250/</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

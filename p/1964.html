@@ -1,0 +1,265 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Birt支持自定义导出中文名称_comonly.cn</title>
+<meta name="keywords" content="Birt支持自定义导出中文名称" />
+<meta name="description" content="BIRT是以Java和JavaEE为基础为Web应用程序开发的基于Eclipse的开源报表系统，虽然支持文件导出功能，但不支持导出时动态自定义文件名称，尤其不支持中文。Birt默认提供了两种导出文件时自定义名称的方法，如下：DefaultFilenameGenerator：报表文件名称.后缀名TimestampFilenameGenerator：报表文件名称+yyyyMMdd-HHmmss.后缀名" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Birt支持自定义导出中文名称</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">genuinecx</li>
+          <li class="lmname"><a href="https://blog.51cto.com/favccxx/2430816" target="_blank">https://blog.51cto.com/favccxx/2430816</a></li>
+          <li class="timer">2019-08-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>BIRT是以Java和JavaEE为基础为Web应用程序开发的基于Eclipse的开源报表系统，虽然支持文件导出功能，但不支持导出时动态自定义文件名称，尤其不支持中文。Birt默认提供了两种导出文件时自定义名称的方法，如下：DefaultFilenameGenerator：报表文件名称.后缀名TimestampFilenameGenerator：报表文件名称+yyyyMMdd-HHmmss.后缀名</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <div class="con artical-content editor-preview-side"><p>BIRT 是以 Java 和 JavaEE 为基础为 Web 应用程序开发的基于 Eclipse 的开源报表系统，虽然支持文件导出功能，但不支持导出时动态自定义文件名称，尤其不支持中文。</p>
+<p>Birt默认提供了两种导出文件时自定义名称的方法，如下：</p>
+<ul>
+<li>DefaultFilenameGenerator：报表文件名称.后缀名</li>
+<li>TimestampFilenameGenerator：报表文件名称+yyyyMMdd-HHmmss.后缀名</li>
+</ul>
+<p>Birt若实现自定义导出文件名称，需要实现org.eclipse.birt.report.utility.filename包下的IFilenameGenerator接口，具体操作如下：</p>
+<ol>
+<li>自定义实现IFilenameGenerator 接口</li>
+</ol>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CustomExportGenerator</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">IFilenameGenerator</span> </span>{
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getFilename</span><span class="hljs-params">( String baseName, String fileExtension, String outputType, Map options)</span> </span>{
+        <span class="hljs-keyword">return</span> baseName  + <span class="hljs-string">"."</span> + fileExtension;
+    }
+}</code></pre>
+<p>从上面的代码看出，IFilenameGenerator 中的方法默认没有提供自定义文件名称，这时候只能够从Map options参数中获取，当然如果不嫌麻烦的话，也可以重写getFilename接口。</p>
+<pre><code class="hljs javascript"><span class="hljs-built_in">Object</span> obj = options.get(<span class="hljs-string">"httpRequest"</span>);
+    <span class="hljs-keyword">if</span>(obj !=<span class="hljs-literal">null</span> &amp;&amp; obj <span class="hljs-keyword">instanceof</span> RequestFacade){
+        RequestFacade request = (RequestFacade)obj;
+        exportName = ParameterAccessor.getParameter(request,<span class="hljs-string">"__filename"</span>);
+    }</code></pre>
+<ol start="2">
+<li>配置Birt的导出文件生成类 </li>
+</ol>
+<p>修改web.xml </p>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">context-param</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">param-name</span>&gt;</span>BIRT_FILENAME_GENERATOR_CLASS<span class="hljs-tag">&lt;/<span class="hljs-name">param-name</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">param-value</span>&gt;</span>org.eclipse.birt.report.utility.filename.CustomExportGenerator<span class="hljs-tag">&lt;/<span class="hljs-name">param-value</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">context-param</span>&gt;</span></code></pre>
+<ol start="3">
+<li>支持中文</li>
+</ol>
+<p>文件名称：org.eclipse.birt.report.presentation.aggregation.layout.FramesetFragment<br>方法： doPreService( HttpServletRequest request, HttpServletResponse response )<br>操作：</p>
+<pre><code class="hljs javascript"><span class="hljs-built_in">String</span> filename = ParameterAccessor.getExportFilename( <span class="hljs-keyword">new</span> BirtContext( request, response ), format, emitterId );
+        <span class="hljs-built_in">String</span> displayName = URLEncoder.encode(filename,<span class="hljs-string">"utf-8"</span>);
+        displayName = displayName .replace(<span class="hljs-string">"+"</span>,<span class="hljs-string">"%20"</span>);
+        response.setCharacterEncoding(<span class="hljs-string">"utf-8"</span>);
+        response.setHeader(<span class="hljs-string">"contentType"</span>, <span class="hljs-string">"text/html; charset=utf-8"</span>);
+        response.setHeader( <span class="hljs-string">"Content-Disposition"</span>, <span class="hljs-comment">//$NON-NLS-1$</span>
+                ParameterAccessor.htmlEncode( openType )
+                        + <span class="hljs-string">"; filename=\""</span> 
+                        + ParameterAccessor.htmlEncode(displayName )
+                        + <span class="hljs-string">"\""</span> ); </code></pre>
+<ol start="4">
+<li>修改Tomcat的编码</li>
+</ol>
+<p><code>&amp;lt;Connector URIEncoding="UTF-8" connectionTimeout="20000" port="8080" protocol="HTTP/1.1" redirectPort="8443"/&amp;gt;</code></p>
+<ol start="5">
+<li>访问方式：<br>frameset?<strong>report=test.rptdesign&amp;</strong>format=docx&amp;__filename=测试</li>
+</ol></div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1963.html">F5-ASM-AdvWAF后续转至csdn</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1965.html">太全了｜万字详解Docker架构原理、功能及使用</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.51cto.com/favccxx/2430816" target="_blank">https://blog.51cto.com/favccxx/2430816</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,446 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>C++ 字节对齐举例_comonly.cn</title>
+<meta name="keywords" content="C++ 字节对齐举例" />
+<meta name="description" content="&nbsp; &nbsp; &nbsp; &nbsp; #include "iostream"
+
+&nbsp; &nbsp; &nbsp; &nbsp; using namespace std;
+&nbsp; &nbsp; &nbsp; &nbsp; struct student_info{
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; char name;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; int age;" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">C++ 字节对齐举例</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-10-31</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>&nbsp; &nbsp; &nbsp; &nbsp; #include "iostream"
+
+&nbsp; &nbsp; &nbsp; &nbsp; using namespace std;
+&nbsp; &nbsp; &nbsp; &nbsp; struct student_info{
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; char name;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; int age;</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> &nbsp; &nbsp; &nbsp; &nbsp; #include "iostream"<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; using namespace std;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; struct student_info{<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; char name;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; int age;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; int number;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; char add;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; };<br />
+&nbsp; &nbsp; &nbsp; &nbsp; int main(){<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cout &lt;&lt; sizeof(student_info) &lt;&lt; endl;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return 0;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+<p>
+	<br />
+</p>
+<p>
+	对结构体student_info使用sizeof()会出现什么结果？也许你会这样求:sizeof(student_info) = sizeof(char) + sizeof(int) + sizeof(int) + sizeof(char) = 10。但是实际结果是16,原因就是VC对变量存储做了一个特殊处理。为了提高CPU的存储速度，VC对一些变量的起始地址做了“对齐”处理。 在默认情况下，VC规定各成员变量存放的起始地址相对于结构的起始地址的偏移量必须是该变量的类型所占用的字节数的倍数。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<div>
+	<p>
+		<table>
+			<tbody>
+				<tr>
+					<th>
+						类型
+					</th>
+					<th>
+						对齐方式(变量存放的起始地址相对于结构的起始地址的偏移量)
+					</th>
+				</tr>
+			</tbody>
+			<tbody>
+				<tr>
+					<td>
+						char
+					</td>
+					<td>
+						偏移量必须是sizeof(char)即1的倍数
+					</td>
+				</tr>
+				<tr>
+					<td>
+						int
+					</td>
+					<td>
+						偏移量必须是sizeof(int)即4的倍数
+					</td>
+				</tr>
+				<tr>
+					<td>
+						float
+					</td>
+					<td>
+						偏移量必须是sizeof(float)即4的倍数
+					</td>
+				</tr>
+				<tr>
+					<td>
+						double
+					</td>
+					<td>
+						偏移量必须是sizeof(double)即8的倍数
+					</td>
+				</tr>
+				<tr>
+					<td>
+						short
+					</td>
+					<td>
+						偏移量必须是sizeof(short)即2的倍数
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</p>
+	<div>
+		<h3>
+			<br />
+		</h3>
+	</div>
+</div>
+<p>
+	<br />
+</p>
+<p>
+	&nbsp; &nbsp; struct myStruct{<br />
+&nbsp; &nbsp; &nbsp; &nbsp; char a;&nbsp; // 偏移量为0，满足对齐方式，a占用1个字节；&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; double b;&nbsp; // 下一个可用的地址的偏移量为1，不是sizeof(double)=8的倍数，需要补足7个字节才能使偏移量变为8（满足对齐方式），因此VC自动填充7个字节，dda1存放在偏移量为8的地址上，它占用8个字节。&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; int c; // 下一个可用的地址的偏移量为16，是sizeof(int)=4的倍数，满足int的对齐方式，所以不需要VC自动填充，type存放在偏移量为16的地址上，它占用4个字节<br />
+&nbsp; &nbsp; };&nbsp; // 所有成员变量都分配了空间，空间总的大小为1+7+8+4=20，不是结构的节边界数（即结构中占用最大空间的类型所占用的字节数sizeof(double)=8）的倍数，所以需要填充4个字节，以满足结构的大小为sizeof(double)=8的倍数。&nbsp;<br />
+<br />
+&nbsp; &nbsp; int main(){<br />
+&nbsp; &nbsp; &nbsp; &nbsp; cout &lt;&lt; "sizeof(student_info): " &lt;&lt; sizeof(student_info) &lt;&lt; endl;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; cout &lt;&lt; "sizeof(myStruct): " &lt;&lt; sizeof(myStruct) &lt;&lt; endl;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; return 0;<br />
+&nbsp; &nbsp; }<br />
+所以该结构总的大小为：sizeof(MyStruct)为1+7+8+4+4=24。其中总的有7+4=11个字节是VC自动填充的，没有放任何有意义的东西。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+# pragma pack(16)<br />
+struct A{<br />
+&nbsp; &nbsp; &nbsp; char a;<br />
+&nbsp; &nbsp; &nbsp; short c;<br />
+&nbsp; &nbsp; &nbsp; double b;<br />
+};<br />
+00 CC 00 00 CC CCCC CC 00 00 00 00 00 00 00 00&nbsp;&nbsp;
+</p>
+<p>
+	<br />
+</p>
+<p>
+	# pragma pack(16)<br />
+struct A{<br />
+&nbsp; &nbsp; &nbsp; char a;<br />
+&nbsp; &nbsp; &nbsp; double b;<br />
+&nbsp; &nbsp; &nbsp; short c;<br />
+};<br />
+00 CC CC CC CC CCCC CC 00 00 00 00 00 00 00 00 11 11 CC CC CC CC CC CC
+</p>
+<p>
+	<br />
+</p>
+<p>
+	# pragma pack(4)<br />
+struct A{<br />
+&nbsp; &nbsp; &nbsp; char a;<br />
+&nbsp; &nbsp; &nbsp; double b;<br />
+&nbsp; &nbsp; &nbsp; short c;<br />
+};
+</p>
+<div>
+	<br />
+</div>
+把指定对齐参数设置成 4，此时 a 和 c 的有效对齐仍然是其自身对齐，而 b 因为它的自身对齐 8 大于了指定的对齐 4，所以 b 的有效对齐现在变成了 4 而不再是 8 了。a 仍然位于偏移 0，b 要满足对齐规则的话，地址偏移必须是其有效对齐的整数倍，所以 b 的偏移应该是 4，c 仍然紧紧跟在 b 的后面，因为此时的偏移 12 满足了 c 的对齐要求12 % 2 = 0；结构 A 的有效对齐现在也变成了 4，即等于成员中最大的有效对齐，b 的有效对齐。A 的总大小要满足对齐规则的话还必须在 c 的后面填充 2 个字节，让总大小变为 16 字节。此时 A 的内存布局如下：<br />
+<br />
+00 CC CC CC 00 0000 00 00 00 00 00 11 11 CC CC<br />
+<p>
+	<br />
+</p>
+<p>
+	struct A{<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; int a;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; char b;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; short c;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; };<br />
+&nbsp; &nbsp; &nbsp; &nbsp;struct B{<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; char b;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; int a;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; short c;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; };<br />
+<br />
+sizeof(A) = 8;sizeof(B) = 12。<br />
+<br />
+深究一下，为什么是这样，我们可以看看内存里的布局情况。<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;a&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;b&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;c<br />
+&nbsp; &nbsp; &nbsp;A的内存布局：1111,&nbsp; &nbsp; &nbsp;1*,&nbsp; &nbsp; &nbsp; &nbsp;11<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;b&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; a&nbsp; &nbsp; &nbsp; &nbsp; c<br />
+&nbsp; &nbsp; &nbsp;B的内存布局：1***,&nbsp; &nbsp; &nbsp;1111,&nbsp; &nbsp;11**
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	struct A{<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;int a;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;double b;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;float c;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; };<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; struct B{<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;char e[2];<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;int f;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;double g;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;short h;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;struct A i;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; };<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp;sizeof(A) = 24; 这个比较好理解，int为4，double为8，float为4，总长为8的倍数，补齐，所以整个A为24。<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp;sizeof(B) = 48; 看看B的内存布局。<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; e&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;f&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;g&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; h&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; i&nbsp;<br />
+B的内存布局：11* *,&nbsp; &nbsp;1111,&nbsp; &nbsp;11111111, 11 * * * * * *,&nbsp; &nbsp; &nbsp; &nbsp; 1111* * * *, 11111111, 1111 * * * *
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1522.html">C/C++ 字节对齐</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1524.html">C++字节对齐在编码中需要注意的内容  优化代码结构，编程过程中避免踩坑</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,630 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>AJAX相关_comonly.cn</title>
+<meta name="keywords" content="AJAX相关" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">AJAX相关</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-04-09</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	AJAX 是一种在 2005 年由 Google 推广开来的编程模式，不是一种新的编程语言，而是一种使用现有标准的新方法。AJAX 基于 JavaScript 和 HTTP 请求（HTTP requests）。
+</p>
+<p>
+	AJAX = 异步 JavaScript 和 XML。AJAX 是一种用于创建快速动态网页的技术。通过在后台与服务器进行少量数据交换，AJAX 可以使网页实现异步更新。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。传统的网页（不使用 AJAX）如果需要更新内容，必需重载整个网页面。有很多使用 AJAX 的应用程序案例：新浪微博、Google 地图、开心网等等。
+</p>
+<h2 id='XMLHttRequet对象'>
+	XMLHttpRequest 对象
+</h2>
+<p>
+	所有现代浏览器均支持 XMLHttpRequest 对象（IE5 和 IE6 使用 ActiveXObject）。XMLHttpRequest 用于在后台与服务器交换数据。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。
+</p>
+<table border="1" bordercolor="#000000" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<th>
+				<span>向服务器发送请求</span>方法
+			</th>
+			<th>
+				描述
+			</th>
+		</tr>
+		<tr>
+			<td>
+				open(method,url,async)
+			</td>
+			<td>
+				<p>
+					规定请求的类型、URL 以及是否异步处理请求。
+				</p>
+				<ul>
+					<li>
+						method：请求的类型；GET 或 POST
+					</li>
+					<li>
+						url：文件在服务器上的位置，<span>该文件可以是任何类型的文件，比如 .txt 和 .xml，或者服务器脚本文件，比如 .asp 和 .php （在传回响应之前，能够在服务器上执行任务）。</span> 
+					</li>
+					<li>
+						async：true（异步）或 false（同步）。<span>当您使用 async=false 时，请不要编写 onreadystatechange 函数 - 把代码放到 send() 语句后面即可。</span> 
+					</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				send(string)
+			</td>
+			<td>
+				<p>
+					将请求发送到服务器。string：仅用于 POST 请求
+				</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<h4>
+	GET 还是 POST？
+</h4>
+<p>
+	与 POST 相比，GET 更简单也更快，并且在大部分情况下都能用。
+</p>
+<p>
+	然而，在以下情况中，请使用 POST 请求：
+</p>
+<ul>
+	<li>
+		无法使用缓存文件（更新服务器上的文件或数据库）
+	</li>
+	<li>
+		向服务器发送大量数据（POST 没有数据量限制）
+	</li>
+	<li>
+		发送包含未知字符的用户输入时，POST 比 GET 更稳定也更可靠
+	</li>
+</ul>
+<p>
+	如果需要像 HTML 表单那样 POST 数据，请使用 setRequestHeader() 来添加 HTTP 头。然后在 send() 
+方法中规定您希望发送的数据：
+</p>
+<p>
+	<table cellpadding="0" cellspacing="0" border="1" bordercolor="#000000">
+		<tbody>
+			<tr>
+				<th>
+					方法
+				</th>
+				<th>
+					描述
+				</th>
+			</tr>
+			<tr>
+				<td>
+					setRequestHeader(header,value)
+				</td>
+				<td>
+					<p>
+						向请求添加 HTTP 头。header: 规定头的名称。value: 规定头的值
+					</p>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</p>
+<h4>
+	异步 - True 或 False？
+</h4>
+<p>
+	AJAX 指的是异步 JavaScript 和 XML（Asynchronous JavaScript and XML）。XMLHttpRequest 对象如果要用于 AJAX 的话，其 open() 方法的 async 参数必须设置为 true：
+</p>
+<p>
+	对于 web 开发人员来说，发送异步请求是一个巨大的进步。很多在服务器执行的任务都相当费时。AJAX 出现之前，这可能会引起应用程序挂起或停止。通过 AJAX，JavaScript 无需等待服务器的响应，而是：
+</p>
+<ul>
+	<li>
+		在等待服务器响应时执行其他脚本
+	</li>
+	<li>
+		当响应就绪后对响应进行处理
+	</li>
+</ul>
+<p>
+	当使用 async=true 时，请规定在响应处于 onreadystatechange 事件中的就绪状态时执行的函数。如需使用 async=false，请将 open() 方法中的第三个参数改为 false（不推荐使用 async=false，但是对于一些小型的请求，也是可以的）。请记住，JavaScript 会等到服务器响应就绪才继续执行。如果服务器繁忙或缓慢，应用程序会挂起或停止。
+</p>
+<h2 id='服务器响应'>
+	服务器响应
+</h2>
+<p>
+	如需获得来自服务器的响应，请使用 XMLHttpRequest 对象的 responseText 或 responseXML 属性。
+</p>
+<p>
+	<table cellpadding="0" cellspacing="0" border="1" bordercolor="#000000">
+		<tbody>
+			<tr>
+				<th>
+					<span>服务器响应数据</span>属性
+				</th>
+				<th>
+					描述
+				</th>
+			</tr>
+			<tr>
+				<td>
+					responseText
+				</td>
+				<td>
+					获得字符串形式的响应数据。目前为止为服务器接收到的响应体（不包括头部），或者如果还没有接收到数据的话，就是空字符串。如果 readyState 小于 3，这个属性就是一个空字符串。如果响应包含了为响应体指定字符编码的头部，就使用该编码。否则，假定使用 Unicode UTF-8。当 readyState 为 3，这个属性返回目前已经接收的响应部分。如果 readyState 为 4，这个属性保存了完整的响应体。如果来自服务器的响应并非 XML，请使用 responseText 属性。responseText 属性返回字符串形式的响应，xmlhttp.responseText
+				</td>
+			</tr>
+			<tr>
+				<td>
+					responseXML
+				</td>
+				<td>
+					获得 XML 形式的响应数据。如果来自服务器的响应是 XML，而且需要作为 XML 对象进行解析
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</p>
+<h2 id='oredyttechge事件'>
+	onreadystatechange 事件
+</h2>
+<p>
+	当请求被发送到服务器时，我们需要执行一些基于响应的任务。
+</p>
+<p>
+	每当 readyState 改变时，就会触发 onreadystatechange 事件。
+</p>
+<p>
+	readyState 属性存有 XMLHttpRequest 的状态信息。
+</p>
+<p>
+	下面是 XMLHttpRequest 对象的三个重要的属性：
+</p>
+<table cellpadding="0" cellspacing="0" border="1" bordercolor="#000000">
+	<tbody>
+		<tr>
+			<th>
+				属性
+			</th>
+			<th>
+				描述
+			</th>
+		</tr>
+		<tr>
+			<td>
+				onreadystatechange&nbsp;
+			</td>
+			<td>
+				存储函数（或函数名），每当 readyState 属性改变时，就会调用该函数。当 readyState 为 3 时，它也可能调用多次。在 onreadystatechange 事件中，我们规定当服务器响应已做好被处理的准备时所执行的任务。
+			</td>
+		</tr>
+		<tr>
+			<td>
+				readyState
+			</td>
+			<td>
+				<p>
+					存有 XMLHttpRequest 的状态。从 0 到 4 发生变化。这个属性的值从 0 开始，直到接收到完整的 HTTP 响应，这个值增加到 4。
+				</p>
+				<ul>
+					<li>
+						0: 请求未初始化
+					</li>
+					<li>
+						1: 服务器连接已建立
+					</li>
+					<li>
+						2: 请求已接收
+					</li>
+					<li>
+						3: 请求处理中
+					</li>
+					<li>
+						4: 请求已完成，且响应已就绪
+					</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				status
+			</td>
+			<td>
+				<p>
+					200: "OK"
+				</p>
+				<p>
+					404: 未找到页面
+				</p>
+				<p>
+					当 readyState 小于 3 的时候读取这一属性会导致一个异常。
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				statusText
+			</td>
+			<td>
+				这个属性用名称而不是数字指定了请求的 HTTP 的状态代码。也就是说，当状态为 200 的时候它是 "OK"，当状态为 404 的时候它是 "Not Found"。和 status 属性一样，当 readyState 小于 3 的时候读取这一属性会导致一个异常。
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	当 readyState 等于 4 且状态为 200 时，表示响应已就绪：
+</p>
+<h2 id='使用Cllbck函数'>
+	使用 Callback 函数
+</h2>
+<p>
+	callback 函数是一种以参数形式传递给另一个函数的函数。如果您的网站上存在多个 AJAX 任务，那么您应该为创建 XMLHttpRequest 对象编写一个标准的函数，并为每个 AJAX 
+任务调用该函数。该函数调用应该包含 URL 以及发生 onreadystatechange 事件时执行的任务（每次调用可能不尽相同）。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/893.html">JavaWeb——项目结构，编码规范（userdao...）</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/895.html">WEB前端——js（点击移动，滑动和定时功能，显示浮层，4种输出消息方法）（实例）</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="jsp+ajax(获取XML类型返回数据)自动刷新局部页面">
+							<h2 style="display:inline;color:#5BC648;">jsp+ajax(获取XML类型返回数据)自动刷新局部页面</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-04-09&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	响应jsp请求的页面ajax.jsp
+</p>
+<pre class="prettyprint lang-java">&lt;%@ page contentType="text/html; charset=gb2312" %&gt;
+&lt;%
+    //设置输出信息的格式及字符集
+    response.setContentType("text/xml; charset=UTF-8");
+    response.setHeader("Cache-Control","no-cache");
+    out.println("&lt;response&gt;");
+   
+    for(int i=0;i&lt;2;i++){
+    out.println("&lt;name&gt;"+(int)(Math.random()*10)+
+       "号传感器&lt;/name&gt;");
+    out.println("&lt;count&gt;" +(int)(Math.random()*100)+ "&lt;/count&gt;");
+    }
+    out.println("&lt;/response&gt;");
+    out.close();
+%&gt;</pre>
+发送ajax请求的jsp文件：zx.jsp
+<pre class="prettyprint lang-html">&lt;head&gt;  
+    &lt;META http-equiv=Content-Type content="text/html; charset=gb2312"&gt;  
+&lt;/head&gt;  
+&lt;script language="javascript"&gt;  
+        var XMLHttpReq;  //创建XMLHttpRequest对象         
+        function createXMLHttpRequest() {  
+            if(window.XMLHttpRequest) { //Mozilla 浏览器  
+                XMLHttpReq = new XMLHttpRequest();  
+            }  
+            else if (window.ActiveXObject) { // IE浏览器  
+                try {  
+                    XMLHttpReq = new ActiveXObject("Msxml2.XMLHTTP");  
+                } catch (e) {  try {  
+                        XMLHttpReq = new ActiveXObject("Microsoft.XMLHTTP");  
+                    } catch (e) {}  
+                }  
+            }  
+        }  
+        //发送请求函数  
+        function sendRequest() {  
+            createXMLHttpRequest();  
+            var url = "ajax.jsp";  
+            XMLHttpReq.open("GET", url, true);  
+            XMLHttpReq.onreadystatechange = processResponse;//指定响应函数  
+            XMLHttpReq.send(null);  // 发送请求  
+        }  
+        // 处理返回信息函数  
+        function processResponse() {  
+            if (XMLHttpReq.readyState == 4) { // 判断对象状态  
+                if (XMLHttpReq.status == 200) { // 信息已经成功返回，开始处理信息  
+                    DisplayHot();  
+                    setTimeout("sendRequest()", 1000);  
+                } else { //页面不正常  
+                    window.alert("您所请求的页面有异常。");  
+                }  
+            }  
+        }  
+        function DisplayHot() {  
+            var name = XMLHttpReq.responseXML.getElementsByTagName("name")[0].firstChild.nodeValue;  
+            var count = XMLHttpReq.responseXML.getElementsByTagName("count")[0].firstChild.nodeValue;  
+            document.getElementById("product").innerHTML = name;      
+            document.getElementById("count").innerHTML = count;   
+        }  
+&lt;/script&gt;  
+      
+&lt;body onload =sendRequest()&gt;  
+    &lt;table style="BORDER-COLLAPSE: collapse" borderColor=#111111 cellSpacing=0 cellPadding=0 width=200    bgColor=#f5efe7 border=0&gt;  
+      
+    &lt;TR&gt;  
+       &lt;TD align=middle bgColor=#dbc2b0 height=19 colspan="2"&gt;&lt;B&gt;无线传感网&lt;/B&gt; &lt;/TD&gt;  
+    &lt;/TR&gt;  
+    &lt;tr&gt;  
+       &lt;td height="20"&gt; 传感器：&lt;/td&gt;  
+       &lt;td height="20" id="product"&gt; &lt;/td&gt;  
+    &lt;/tr&gt;  
+    &lt;tr&gt;  
+       &lt;td height="20"&gt;传感器个数：&lt;/td&gt;  
+       &lt;td height="20" id="count"&gt; &lt;/td&gt;  
+    &lt;/tr&gt;
+    &lt;/table&gt;
+  &lt;/body&gt;  
+&lt;/table&gt;</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="对于AJXA字符串请求的处理">
+							<h2 style="display:inline;color:#5BC648;">对于AJXA字符串请求的处理</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-04-09&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	响应ajax请求的页面（可以通过servlet）
+</p>
+<pre class="prettyprint lang-java">&lt;%
+out.write("响应的字符串");
+%&gt;</pre>
+发生ajax异步请求的jsp页面（部分需要内容）
+<pre class="prettyprint lang-html">&lt;script type="text/javascript"&gt;
+	var XMLHttpReq;
+	//创建XMLHttpRequest对象  
+	//为了应对所有的现代浏览器，包括 IE5 和 IE6，请检查浏览器是否支持 XMLHttpRequest 对象。
+	//如果支持，则创建 XMLHttpRequest 对象。如果不支持，则创建 ActiveXObject 
+	function createXMLHttpRequest() {
+		if (window.XMLHttpRequest) { //Mozilla 浏览器  XMLHttpReq = new XMLHttpRequest();
+		} else if (window.ActiveXObject) { // IE浏览器  
+			try {
+				XMLHttpReq = new ActiveXObject("Msxml2.XMLHTTP");
+			} catch (e) {
+				try {
+					XMLHttpReq = new ActiveXObject("Microsoft.XMLHTTP");
+				} catch (e) {
+				}
+			}
+		}
+	}
+	//发送请求函数  
+	function sendRequest() {
+		createXMLHttpRequest();
+		var url = "../graduation_project/jsp/Template/ajaxresponse.jsp";
+		XMLHttpReq.open("GET", url, true);
+		//当使用 async=true 时，请规定在响应处于 onreadystatechange 事件中的就绪状态时执行的函数
+		XMLHttpReq.onreadystatechange = processResponse;//指定响应函数  
+		XMLHttpReq.send(null); // 发送请求  
+	}
+	// 处理返回信息函数  
+	function processResponse() {
+		if (XMLHttpReq.readyState == 4) { // 判断对象状态  
+			if (XMLHttpReq.status == 200) { // 信息已经成功返回，开始处理信息  DisplayHot();
+				//setTimeout("sendRequest()", 1000);  
+			} else { //页面不正常  
+				window.alert("您所请求的页面有异常。");
+			}
+		}
+	}
+	function DisplayHot() {
+		document.getElementById("myDiv").innerHTML = XMLHttpReq.responseText
+				+ "__tag_39$78_aa";
+&lt;/script&gt;
+
+&lt;div&gt;&lt;h3 id="myDiv"&gt;Let AJAX change this text&lt;/h3&gt;&lt;/div&gt;
+&lt;button type="button" onclick=sendRequest();&gt;Change Content&lt;/button&gt;</pre>
+对于js的处理过程，可以看出处理ajax异步响应的基本流程。</span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#XMLHttRequet对象">XMLHttRequet对象</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#服务器响应">服务器响应</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#oredyttechge事件">oredyttechge事件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#使用Cllbck函数">使用Cllbck函数</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#jsp+ajax(获取XML类型返回数据)自动刷新局部页面">jsp+ajax(获取XML类型返回数据)自动刷新局部页面</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#对于AJXA字符串请求的处理">对于AJXA字符串请求的处理</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,347 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Javascript中document.execCommand()的用法_comonly.cn</title>
+<meta name="keywords" content="Javascript中document.execCommand()的用法" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Javascript中document.execCommand()的用法</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-04-11</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">document.execCommand,Javascript</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	<span>document.execCommand()方法处理Html数据时常用语法格式为：document.execCommand(sCommand[,交互方式, 动态参数])</span>
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其中：sCommand为指令参数（如下例中的”2D-Position”），交互方式参数如果是true的话将显示对话框，如果为false的话，则不显示对话框（下例中的”false”即表示不显示对话框），动态参数一般为一可用值或属性值（如下例中的”true”）。
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.execCommand(”2D-Position”,”false”,”true”);
+</p>
+<p>
+	调用execCommand()可以实现浏览器菜单的很多功能. 如保存文件,打开新文件,撤消、重做操作…等等. 有了这个方法,就可以很容易的实现网页中的文本编辑器。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<span>关于document.execCommand：</span>
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;要执行编辑命令，可调用 document.execCommand，并传递对应于命令 ID 的字符串。另外还有可选的第二个参数，该参数指定如果可以应用的话是否显示此命令的用户界面。传递整数 1 将显示用户界面，整数 0 将跳过它。这个参数通常不用于编辑命令。因为默认值为 0，所以假如您没有使用第三个参数（在这种情况下，还必须为第二个参数传递值），一般可以不管它。第三个参数也是可选的，在可应用的情况下，使用它来将任何所需参数传递给该命令。
+</p>
+<br />
+<span>Js代码 下面列出的是指令参数及意义：</span><br />
+<p>
+	document.execCommand(”Open”);//相当于单击文件中的打开按钮
+</p>
+<p>
+	<span style="line-height:1.5;">document.execCommand(”SaveAs”);//将当前页面另存为</span>
+</p>
+<p>
+	document.execCommand(”Cut”,”false”,null);//剪贴选中的文字到剪贴板;
+</p>
+<p>
+	document.execCommand(”Delete”,”false”,null);//删除选中的文字;
+</p>
+<p>
+	document.execCommand(”FontName”,”false”,sFontName);//改变选中区域的字体;
+</p>
+<p>
+	document.execCommand(”FontSize”,”false”,sSize|iSize);//改变选中区域的字体大小;
+</p>
+<p>
+	document.execCommand(”ForeColor”,”false”,sColor);//设置前景颜色;
+</p>
+<p>
+	document.execCommand(”2D-Position”,”false”,”true”);//使绝对定位的对象可直接拖动;
+</p>
+<p>
+	document.execCommand(”AbsolutePosition”,”false”,”true”);//使对象定位变成绝对定位;
+</p>
+<p>
+	document.execCommand(”BackColor”,”false”,sColor);//设置背景颜色;
+</p>
+<p>
+	document.execCommand(”Bold”,”false”,null);//使选中区域的文字加粗;
+</p>
+<p>
+	document.execCommand(”Copy”,”false”,null);//复制选中的文字到剪贴板;
+</p>
+<p>
+	document.execCommand(”CreateBookmark”,”false”,sAnchorName);//设置指定锚点为书签;
+</p>
+<p>
+	document.execCommand(”CreateLink”,”false”,sLinkURL);//将选中文本变成超连接,若第二个参数为true,会出现参数设置对话框;
+</p>
+<p>
+	document.execCommand(”FormatBlock”,”false”,sTagName);//设置当前块的标签名;
+</p>
+<p>
+	document.execCommand(”Open”);//相当于单击文件中的打开按钮
+</p>
+<p>
+	document.execCommand(”SaveAs”);//将当前页面另存为
+</p>
+<p>
+	document.execCommand(”Cut”,”false”,null);//剪贴选中的文字到剪贴板;
+</p>
+<p>
+	document.execCommand(”Delete”,”false”,null);//删除选中的文字;
+</p>
+<p>
+	document.execCommand(”FontName”,”false”,sFontName);//改变选中区域的字体;
+</p>
+<p>
+	document.execCommand(”FontSize”,”false”,sSize|iSize);//改变选中区域的字体大小;
+</p>
+<p>
+	document.execCommand(”ForeColor”,”false”,sColor);//设置前景颜色;
+</p>
+<p>
+	document.execCommand(”2D-Position”,”false”,”true”);//使绝对定位的对象可直接拖动;
+</p>
+<p>
+	document.execCommand(”AbsolutePosition”,”false”,”true”);//使对象定位变成绝对定位;
+</p>
+<p>
+	document.execCommand(”BackColor”,”false”,sColor);//设置背景颜色;
+</p>
+<p>
+	document.execCommand(”Bold”,”false”,null);//使选中区域的文字加粗;
+</p>
+<p>
+	document.execCommand(”Copy”,”false”,null);//复制选中的文字到剪贴板;
+</p>
+<p>
+	document.execCommand(”CreateBookmark”,”false”,sAnchorName);//设置指定锚点为书签;
+</p>
+<p>
+	document.execCommand(”CreateLink”,”false”,sLinkURL);//将选中文本变成超连接,若第二个参数为true,会出现参数设置对话框;
+</p>
+<p>
+	document.execCommand(”FormatBlock”,”false”,sTagName);//设置当前块的标签名;
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<span><span>使用的例子如下:</span><br />
+<span>1、〖全选〗命令的实现</span><br />
+<span>[格式]:document.execCommand(”selectAll”)</span><br />
+<span>[说明]将选种网页中的全部内容！</span><br />
+<br />
+<span>2、〖打开〗命令的实现</span><br />
+<span>[格式]:document.execCommand(”open”)</span><br />
+<span>[说明]这跟VB等编程设计中的webbrowser控件中的命令有些相似，大家也可依此琢磨琢磨。</span><br />
+<br />
+<span>3、〖另存为〗命令的实现</span><br />
+<span>[格式]:document.execCommand(”saveAs”)</span><br />
+<span>[说明]将该网页保存到本地盘的其它目录！</span><br />
+<br />
+<span>4、〖打印〗命令的实现</span><br />
+<span>[格式]:document.execCommand(”print”)</span><br />
+<span>[说明]当然，你必须装了打印机！</span><br />
+</span>
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/670.html">execCommand实现复制到剪切板—隐藏域的处理</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/672.html">ASP中session的定义以及用法 及 与cookie的联系</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

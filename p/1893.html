@@ -1,0 +1,480 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>python 机器学习中常用的数据处理方法_comonly.cn</title>
+<meta name="keywords" content="python 机器学习中常用的数据处理方法" />
+<meta name="description" content="改变数组的维度
+
+
+	reshape
+
+
+	
+
+
+	对图片增加维度
+
+
+	img = np.array(img) 
+img = img.reshape(1,3,32,32)
+
+
+	
+
+
+	对列表排序
+
+
+	list.sort()
+
+
+	
+
+
+	转换为数字
+
+
+	int(str)
+
+
+	
+
+
+	按分隔符分割字符串
+
+
+	str.split('.')
+
+
+	
+
+
+	插入新的维度
+
+
+	np.newaxis
+
+" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">python 机器学习中常用的数据处理方法</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2020-11-13</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>改变数组的维度
+
+
+	reshape
+
+
+	
+
+
+	对图片增加维度
+
+
+	img = np.array(img) 
+img = img.reshape(1,3,32,32)
+
+
+	
+
+
+	对列表排序
+
+
+	list.sort()
+
+
+	
+
+
+	转换为数字
+
+
+	int(str)
+
+
+	
+
+
+	按分隔符分割字符串
+
+
+	str.split('.')
+
+
+	
+
+
+	插入新的维度
+
+
+	np.newaxis
+
+</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	改变数组的维度
+</p>
+<p>
+	reshape
+</p>
+<p>
+	<br />
+</p>
+<p>
+	对图片增加维度
+</p>
+<p>
+	img = np.array(img) <br />
+img = img.reshape(1,3,32,32)
+</p>
+<p>
+	<br />
+</p>
+<p>
+	对列表排序
+</p>
+<p>
+	list.sort()
+</p>
+<p>
+	<br />
+</p>
+<p>
+	转换为数字
+</p>
+<p>
+	int(str)
+</p>
+<p>
+	<br />
+</p>
+<p>
+	按分隔符分割字符串
+</p>
+<p>
+	str.split('.')
+</p>
+<p>
+	<br />
+</p>
+<p>
+	插入新的维度
+</p>
+<p>
+	np.newaxis
+</p>
+<p>
+	a=np.array([1,2,3,4,5])<br />
+aa=a[:,np.newaxis]&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # [[1][2][3][4][5]]<br />
+aa=a[np.newaxis,:]&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # [[1 2 3 4 5]]
+</p>
+<p>
+	<br />
+</p>
+<p>
+	Python中的 // 与 / 的区别<br />
+" / "&nbsp; 表示浮点数除法，返回浮点结果;<br />
+" // " 表示整数除法,返回不大于结果的一个最大的整数
+</p>
+<p>
+	<br />
+</p>
+<p>
+	numpy求平均值的维度
+</p>
+<p>
+	&gt;&gt;&gt; a = np.array([[1, 2], [3, 4]]) <br />
+&gt;&gt;&gt; np.mean(a) # 将上面二维矩阵的每个元素相加除以元素个数（求平均数） <br />
+2.5<br />
+&gt;&gt;&gt; np.mean(a, axis=0) # axis=0，计算所有子数组的平均值 <br />
+array([ 2., 3.]) <br />
+&gt;&gt;&gt; np.mean(a, axis=1) # axis=1，对每一个子数组，计算它的平均值<br />
+array([ 1.5, 3.5])
+</p>
+<p>
+	<br />
+</p>
+<p>
+	a.squeeze(axis)：降维<br />
+需要降低的维度，必须为1，不为1时操作无效果。<br />
+a.squeeze(axis)默认是将 a 中所有为 1 的维度删掉。
+</p>
+<p>
+	a.unsqueeze(axis)：升维<br />
+在参数指定的位置增加一个维度。<br />
+x.unsqueeze(0) # 在第一维增加
+</p>
+<p>
+	<br />
+</p>
+<p>
+	Python 将numpy array由浮点型转换为整型<br />
+使用numpy中的astype()方法可以实现 .astype(int)
+</p>
+<p>
+	<br />
+</p>
+<p>
+	python-numpy如何初始化数组值全为nan (某值)
+</p>
+<p>
+	import numpy as np<br />
+data = np.full((2, 2), np.nan)<br />
+print(data)&nbsp; # [[nan nan] [nan nan]]
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	数组拼接np.concatenate
+</p>
+<p>
+	&gt;&gt;&gt; a=np.array([[1,2,3],[4,5,6]])<br />
+&gt;&gt;&gt; b=np.array([[11,21,31],[7,8,9]])<br />
+&gt;&gt;&gt; np.concatenate((a,b),axis=0)<br />
+array([[ 1,&nbsp; 2,&nbsp; 3],<br />
+[ 4,&nbsp; 5,&nbsp; 6],<br />
+[11, 21, 31],<br />
+[ 7,&nbsp; 8,&nbsp; 9]])<br />
+<br />
+&gt;&gt;&gt; np.concatenate((a,b),axis=1)&nbsp; #axis=1表示对应行的数组进行拼接<br />
+array([[ 1,&nbsp; 2,&nbsp; 3, 11, 21, 31],<br />
+[ 4,&nbsp; 5,&nbsp; 6,&nbsp; 7,&nbsp; 8,&nbsp; 9]])
+</p>
+<p>
+	<br />
+</p>
+<p>
+	numpy.append()和numpy.concatenate()两个函数
+</p>
+<p>
+	<br />
+</p>
+<p>
+	python构建指定长度全为零的数组
+</p>
+<p>
+	numpy.zeros(shape, dtype=float, order='C')
+</p>
+<p>
+	<br />
+</p>
+<p>
+	Numpy修改数组中的元素值&nbsp;<a href="https://www.cnblogs.com/hany-postq473111315/p/12844928.html" target="_blank">https://www.cnblogs.com/hany-postq473111315/p/12844928.html</a>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1892.html">tensorflow 中with作用区域的使用 variable_scope、name_scope、Session</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1894.html">tensorflow 中常用的函数 tf.reduce_xxx</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

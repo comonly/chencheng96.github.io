@@ -1,0 +1,470 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>【待处理】Android studio中怎么将方形按钮设置成圆角以及渐变效果_comonly.cn</title>
+<meta name="keywords" content="【待处理】Android studio中怎么将方形按钮设置成圆角以及渐变效果" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">【待处理】Android studio中怎么将方形按钮设置成圆角以及渐变效果</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">one只文艺的程序猿</li>
+          <li class="lmname"><a href="http://blog.csdn.net/Jack_forever_yyl/article/details/52513567" target="_blank">http://blog.csdn.net/Jack_forever_yyl/article/details/52513567</a></li>
+          <li class="timer">2018-01-10</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	android
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 首先，告诉你一个好消息，这个知识点非常的简单！！！<br />
+一、在 studio中res 包下的drawable中建立一个shape的文件，系统会给你一个默认的方形然后你就可以开始设置你需要的效果。<br />
+<br />
+//solid &nbsp;指的是背景颜色的设置<br />
+<br />
+<stroke< span=""><br />
+android:width="2dp" &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//width 指的是边框的宽度<br />
+android:color="#ff00ff" /&gt; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//color指的是边框的颜色<br />
+<br />
+<br />
+<!-- 设置弧度 Radius设置所有角的弧度 --> &nbsp; &nbsp; &nbsp; &nbsp; //radius &nbsp; &nbsp;指的就是角的弧度<br />
+<corners 方形存在四个角，我们可以同时设置四个角，也可以分开设置<="" span=""><br />
+android:bottomLeftRadius="20dp" &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//左下角<br />
+android:bottomRightRadius="20dp" &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //右下角<br />
+android:topLeftRadius="20dp" &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//左上角<br />
+android:topRightRadius="20dp" /&gt; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//右上角<br />
+<br />
+//同时设置：<corners< span=""><br />
+android:Radius="20dp" &nbsp; &nbsp; &nbsp; &nbsp; /&gt; &nbsp; &nbsp; //四个角同时设置<br />
+<br />
+<!-- 渐变色 startColor 启示颜色 endColor最终颜色 type类型(如果类型为radial（径向渐变，一个圆心以半径的方式渐变），必须加上 android:gradientRadius="**")--><br />
+<gradient< span=""><br />
+android:startColor="#ff0000" &nbsp; &nbsp;//开始颜色<br />
+android:endColor="#ffffff" &nbsp; &nbsp; &nbsp; &nbsp;//结束颜色<br />
+android:type="linear" /&gt; &nbsp; &nbsp; &nbsp; //水平渐变 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 从左到右 &nbsp;type 指的是渐变的模式<br />
+<padding< span=""><br />
+android:bottom="15dp"<br />
+android:left="15dp"<br />
+android:right="15dp"<br />
+android:top="15dp" /&gt;<br />
+<br />
+shape的颜色渐变属性<br />
+attributes:<br />
+<br />
+android:angle<br />
+Integer，代表渐变颜色的角度， 0 is left to right, 90 is bottom to top. 必须是45的整数倍.<br />
+默认是 0.该属性只有在type=linear情况下起作用，默认的type为linear。<br />
+默认情况下，从左到右：<br />
+<br />
+<img src="http://img.my.csdn.net/uploads/201506/18/1434635112_5542.png-thumb.jpg" /><br />
+<br />
+xml代码：<gradient <="" span=""><br />
+android:startColor="#000000"<br />
+android:endColor="#ffffff"<br />
+/&gt;<br />
+<br />
+<br />
+angle=270，从上到下 ：<br />
+<img src="http://img.my.csdn.net/uploads/201506/18/1434635113_7364.png" /><br />
+xml代码：<gradient <="" span=""><br />
+android:startColor="#000000"<br />
+android:endColor="#ffffff"<br />
+android:angle="270"<br />
+/&gt;<br />
+android:startColor<br />
+Color. 颜色渐变的开始颜色，如angle=270中的 android:startColor="#000000"<br />
+android:endColor<br />
+Color. 颜色渐变的结束颜色，如angle=270中的 &nbsp;android:endColor="#ffffff"<br />
+android:centerColor<br />
+<p>
+	Color. 颜色渐变的中间颜
+</p>
+<p>
+	<br />
+</p>
+<p>
+	Color. 颜色渐变的中间颜色，主要用于多彩。<br />
+<img src="http://img.my.csdn.net/uploads/201506/18/1434635113_9363.png" /><br />
+<gradient <="" span=""><br />
+android:startColor="#000000"<br />
+android:endColor="#ffffff"<br />
+android:centerColor="#ff0000"<br />
+/&gt;<br />
+android:centerX<br />
+Float.(0 - 1.0) 相对X的渐变位置。<br />
+android:centerY<br />
+Float.(0 - 1.0) 相对Y的渐变位置。<br />
+这两个属性只有在type不为linear情况下起作用。<br />
+android:gradientRadius<br />
+Float. 渐变颜色的半径，单位应该是像素点. 需要 android:type="radial".<br />
+如果android:type="radial"，没有设置android:gradientRadius，将会报错，error inflating class.<br />
+<br />
+<img src="http://img.my.csdn.net/uploads/201506/18/1434635113_1523.png" /><br />
+xml代码：<br />
+<gradient <="" span=""><br />
+android:startColor="#ff0000"<br />
+android:endColor="#ffffff"<br />
+android:centerX="0.5"<br />
+android:centerY="0.5"<br />
+android:gradientRadius="30"<br />
+android:type="radial"<br />
+/&gt;<br />
+加入Android:centerColor属性<br />
+<img src="http://img.my.csdn.net/uploads/201506/18/1434635114_6633.png" /><br />
+<gradient <="" span=""><br />
+android:startColor="#ff0000"<br />
+android:endColor="#ffffff"<br />
+android:centerColor="#000000"<br />
+android:centerX="0.5"<br />
+android:centerY="0.5"<br />
+android:gradientRadius="30"<br />
+android:type="radial"<br />
+/&gt;<br />
+android:type<br />
+Value	Description<br />
+"linear"	线性渐变.可以理解为 y=kx+b.<br />
+"radial"	A radial gradient.圆形渐变，起始颜色从cenralX,centralY点开始。<br />
+"sweep"	A sweeping line gradient.<br />
+<br />
+centerX="0.2" &nbsp; centerX="0.2"<br />
+<img src="http://img.my.csdn.net/uploads/201506/18/1434635134_3430.png" /><br />
+xml代码： &nbsp; &nbsp; &nbsp;<gradient <="" span=""><br />
+android:startColor="#ff0000"<br />
+android:endColor="#ffffff"<br />
+android:centerX="0.2"<br />
+android:centerX="0.2"<br />
+android:gradientRadius="30"<br />
+android:type="radial"<br />
+/&gt;<br />
+type="sweep"：<br />
+<img src="http://img.my.csdn.net/uploads/201506/18/1434635134_2747.png" /><br />
+xml代码：<br />
+<gradient <="" span=""><br />
+android:startColor="#ff0000"<br />
+android:endColor="#ffffff"<br />
+android:centerX="0.5"<br />
+android:centerY="0.5"<br />
+android:type="sweep"
+</p>
+<p>
+	/&gt;
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<br />
+一、在 studio中res 包下的drawable中建立一个shape的文件，系统会给你一个默认的方形然后你就可以开始设置你需要的效果。<br />
+&lt;?xml version="1.0" encoding="utf-8"?&gt;<br />
+&lt;shape xmlns:Android="<a href="http://schemas.android.com/apk/res/android" target="_blank">http://schemas.android.com/apk/res/android</a>"&gt;<br />
+&lt;!--填充背景色 --&gt;<br />
+&lt;solid android:color="#ffff00" /&gt; &nbsp; &nbsp; //solid &nbsp;指的是背景颜色的设置<br />
+&lt;!--描边 他需要 2个参数，颜色 第二参数 宽度 --&gt;<br />
+&lt;stroke<br />
+android:width="2dp" &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//width 指的是边框的宽度<br />
+android:color="#ff00ff" /&gt; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//color指的是边框的颜色<br />
+&lt;!-- 设置弧度 &nbsp;Radius设置所有角的弧度 --&gt; &nbsp; &nbsp; &nbsp; &nbsp; //radius &nbsp; &nbsp;指的就是角的弧度<br />
+&lt;corners &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //方形存在四个角，我们可以同时设置四个角，也可以分开设置<br />
+android:bottomLeftRadius="20dp" &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//左下角<br />
+android:bottomRightRadius="20dp" &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //右下角<br />
+android:topLeftRadius="20dp" &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//左上角<br />
+android:topRightRadius="20dp" /&gt; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//右上角<br />
+//同时设置：&lt;corners<br />
+android:Radius="20dp" &nbsp; &nbsp; &nbsp; &nbsp; /&gt; &nbsp; &nbsp; //四个角同时设置<br />
+&lt;!-- 渐变色 startColor 启示颜色 &nbsp;endColor最终颜色 &nbsp;type类型(如果类型为radial（径向渐变，一个圆心以半径的方式渐变），必须加上 &nbsp; android:gradientRadius="**")--&gt;<br />
+&lt;gradient<br />
+android:startColor="#ff0000" &nbsp; &nbsp;//开始颜色<br />
+android:endColor="#ffffff" &nbsp; &nbsp; &nbsp; &nbsp;//结束颜色<br />
+android:type="linear" /&gt; &nbsp; &nbsp; &nbsp; //水平渐变 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 从左到右 &nbsp;type 指的是渐变的模式<br />
+&lt;!--内容与边框的间距--&gt;<br />
+&lt;padding<br />
+android:bottom="15dp"<br />
+android:left="15dp"<br />
+android:right="15dp"<br />
+android:top="15dp" /&gt;<br />
+&lt;!--如果设置了渐变色 那么背景颜色将不显示 --&gt;<br />
+&lt;/shape&gt;<br />
+&lt;gradient&gt;<br />
+shape的颜色渐变属性<br />
+attributes:<br />
+android:angle<br />
+Integer，代表渐变颜色的角度， 0 is left to right, 90 is bottom to top. 必须是45的整数倍. <br />
+默认是 0.该属性只有在type=linear情况下起作用，默认的type为linear。<br />
+默认情况下，从左到右：<br />
+xml代码：&lt;gradient <br />
+android:startColor="#000000"<br />
+android:endColor="#ffffff"<br />
+/&gt;<br />
+angle=270，从上到下 ： <br />
+xml代码：&lt;gradient <br />
+android:startColor="#000000"<br />
+android:endColor="#ffffff"<br />
+android:angle="270"<br />
+/&gt;<br />
+android:startColor<br />
+Color. 颜色渐变的开始颜色，如angle=270中的 android:startColor="#000000"<br />
+android:endColor<br />
+Color. 颜色渐变的结束颜色，如angle=270中的 &nbsp;android:endColor="#ffffff"<br />
+android:centerColor<br />
+Color. &nbsp;颜色渐变的中间颜色，主要用于多彩。<br />
+&lt;gradient <br />
+android:startColor="#000000"<br />
+android:endColor="#ffffff"<br />
+android:centerColor="#ff0000"<br />
+/&gt;<br />
+android:centerX<br />
+Float.(0 - 1.0) 相对X的渐变位置。<br />
+android:centerY<br />
+Float.(0 - 1.0) 相对Y的渐变位置。 <br />
+这两个属性只有在type不为linear情况下起作用。<br />
+android:gradientRadius<br />
+Float. 渐变颜色的半径，单位应该是像素点. 需要 android:type="radial".<br />
+如果android:type="radial"，没有设置android:gradientRadius，将会报错，error inflating class.<br />
+xml代码： <br />
+&lt;gradient <br />
+android:startColor="#ff0000"<br />
+android:endColor="#ffffff"<br />
+android:centerX="0.5"<br />
+android:centerY="0.5"<br />
+android:gradientRadius="30"<br />
+android:type="radial"<br />
+/&gt;<br />
+加入Android:centerColor属性 <br />
+&lt;gradient <br />
+android:startColor="#ff0000"<br />
+android:endColor="#ffffff"<br />
+android:centerColor="#000000"<br />
+android:centerX="0.5"<br />
+android:centerY="0.5"<br />
+android:gradientRadius="30"<br />
+android:type="radial"<br />
+/&gt;<br />
+android:type<br />
+Value	Description<br />
+"linear"	线性渐变.可以理解为 y=kx+b.<br />
+"radial"	A radial gradient.圆形渐变，起始颜色从cenralX,centralY点开始。<br />
+"sweep"	A sweeping line gradient.<br />
+centerX="0.2" &nbsp; centerX="0.2" <br />
+xml代码： <br />
+&lt;gradient <br />
+android:startColor="#ff0000"<br />
+android:endColor="#ffffff"<br />
+android:centerX="0.2"<br />
+android:centerX="0.2"<br />
+android:gradientRadius="30"<br />
+android:type="radial"<br />
+/&gt;<br />
+type="sweep"： <br />
+xml代码：<br />
+&lt;gradient <br />
+android:startColor="#ff0000"<br />
+android:endColor="#ffffff"<br />
+android:centerX="0.5"<br />
+android:centerY="0.5"<br />
+android:type="sweep"<br />
+/&gt;
+<p>
+	<br />
+</p>
+</padding<></gradient<></corners<></stroke<></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/815.html">java字符串操作-查找indexOf,截取substring,分割split</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/817.html">【待处理】Android设置Selector不同状态下颜色及图片</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="http://blog.csdn.net/Jack_forever_yyl/article/details/52513567" target="_blank">http://blog.csdn.net/Jack_forever_yyl/article/details/52513567</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

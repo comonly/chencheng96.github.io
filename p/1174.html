@@ -1,0 +1,303 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>PSNR - 峰值信噪比_comonly.cn</title>
+<meta name="keywords" content="PSNR - 峰值信噪比" />
+<meta name="description" content="PSNR的全称为“Peak Signal-to-Noise Ratio”，直译为中文就是峰值信噪比。是一种衡量图像质量的指标。
+
+
+	
+
+
+	
+
+
+	计算PSNR要先知道MSE(均方误差)的计算。两个m×n单色图像I和K，如果一个为另外一个的噪声近似，那么它们的的均方误差定义为：
+
+
+	 
+
+
+	MSE的概念应该是比较熟悉的，这也是常见的损失函数。而PSNR就是通过MSE得出来的，公式如下：
+
+
+	 
+
+
+	其中，MAXI是表示图像点颜色的最大数值，如果每个采样点" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">PSNR - 峰值信噪比</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">PSNR-峰值信噪比(原理及python代码实现)</li>
+          <li class="lmname"><a href="https://blog.csdn.net/leviopku/article/details/84586446" target="_blank">https://blog.csdn.net/leviopku/article/details/84586446</a></li>
+          <li class="timer">2020-11-14</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	机器学习算法分析
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>PSNR的全称为“Peak Signal-to-Noise Ratio”，直译为中文就是峰值信噪比。是一种衡量图像质量的指标。
+
+
+	
+
+
+	
+
+
+	计算PSNR要先知道MSE(均方误差)的计算。两个m×n单色图像I和K，如果一个为另外一个的噪声近似，那么它们的的均方误差定义为：
+
+
+	 
+
+
+	MSE的概念应该是比较熟悉的，这也是常见的损失函数。而PSNR就是通过MSE得出来的，公式如下：
+
+
+	 
+
+
+	其中，MAXI是表示图像点颜色的最大数值，如果每个采样点</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	PSNR的全称为“Peak Signal-to-Noise Ratio”，直译为中文就是峰值信噪比。是一种衡量图像质量的指标。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	计算PSNR要先知道MSE(均方误差)的计算。两个m×n单色图像I和K，如果一个为另外一个的噪声近似，那么它们的的均方误差定义为：
+</p>
+<p>
+	<img alt="" height="83" src="https://img-blog.csdnimg.cn/20181128163302721.png" width="394" style="height:auto;" /> 
+</p>
+<p>
+	MSE的概念应该是比较熟悉的，这也是常见的损失函数。而PSNR就是通过MSE得出来的，公式如下：
+</p>
+<p>
+	<img alt="" height="86" src="https://img-blog.csdnimg.cn/20181128163533114.png" width="552" style="height:auto;" /> 
+</p>
+<p>
+	其中，MAXI是表示图像点颜色的最大数值，如果每个采样点用 8 位表示，那么就是 255。
+</p>
+<p>
+	所以MSE越小，则PSNR越大；所以PSNR越大，代表着图像质量越好。
+</p>
+<p>
+	一般来说，
+</p>
+<blockquote>
+	<p>
+		PSNR高于40dB说明图像质量极好（即非常接近原始图像），
+	</p>
+	<p>
+		在30—40dB通常表示图像质量是好的（即失真可以察觉但可以接受），
+	</p>
+	<p>
+		在20—30dB说明图像质量差；
+	</p>
+	<p>
+		最后，PSNR低于20dB图像不可接受
+	</p>
+</blockquote>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1173.html">ROC曲线与AUC值</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1175.html">深度学习网络结构 U net</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/leviopku/article/details/84586446" target="_blank">https://blog.csdn.net/leviopku/article/details/84586446</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

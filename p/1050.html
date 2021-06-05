@@ -1,0 +1,365 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>使用springmvc创建web项目的基本结构_comonly.cn</title>
+<meta name="keywords" content="使用springmvc创建web项目的基本结构" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">使用springmvc创建web项目的基本结构</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-02-20</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	java框架-spring等
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	<img src="/File/ForKindEditor/image/20190221170229_350.jpg" alt="" /><img src="/webapps/File/ForKindEditor/image/20180217114708_25.jpg" alt="" />
+</p>
+<p>
+	controller，提供前后端连接的接口
+</p>
+<p>
+	<br />
+</p>
+<pre class="prettyprint lang-java">package vip.chencheng.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import vip.chencheng.pojo.UrlList;
+import vip.chencheng.service.UrlService;
+
+
+@Controller
+@RequestMapping(value = "/buy")
+public class UrlController {
+	
+	@Autowired 
+	private UrlService urlService;
+	
+	//提交新设备申请
+	@RequestMapping(value = "/find", method = RequestMethod.GET)
+    public @ResponseBody List&lt;UrlList&gt; find(String status) {
+    	System.out.println("in controller");
+    	
+    	urlService.find(status);
+    	return null;
+    }
+}</pre>
+<p>
+	<br />
+</p>
+<p>
+	service，接口
+</p>
+<p>
+	<br />
+</p>
+<pre class="prettyprint lang-java">package vip.chencheng.service;
+
+import java.util.List;
+
+import vip.chencheng.pojo.UrlList;
+
+public interface UrlService {
+
+	public List&lt;UrlList&gt; find(String status);
+}
+</pre>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<pre class="prettyprint lang-java">package vip.chencheng.service.impl;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import vip.chencheng.dao.UrlDao;
+import vip.chencheng.dao.impl.UrlDaoImpl;
+import vip.chencheng.pojo.UrlList;
+import vip.chencheng.service.UrlService;
+
+@Service
+public class UrlServiceImpl implements UrlService {
+	
+	@Autowired
+	private UrlDao urlDao;
+	
+	//private UrlDaoImpl urlDao = new UrlDaoImpl();
+	
+	public List&lt;UrlList&gt; find(String status) {
+		System.out.println("service imple "+status);
+		//建立持久化对象
+        UrlList url=new UrlList();
+        url.setName("小红");
+        url.setKind(status);
+
+		urlDao.findAll(url);
+		return null;
+	}
+}</pre>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	service接口的实现
+</p>
+<p>
+<pre class="prettyprint lang-java">package vip.chencheng.service.impl;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import vip.chencheng.dao.UrlDao;
+import vip.chencheng.dao.impl.UrlDaoImpl;
+import vip.chencheng.pojo.UrlList;
+import vip.chencheng.service.UrlService;
+
+@Service
+public class UrlServiceImpl implements UrlService {
+	
+	@Autowired
+	private UrlDao urlDao;
+	
+	//private UrlDaoImpl urlDao = new UrlDaoImpl();
+	
+	public List&lt;UrlList&gt; find(String status) {
+		System.out.println("service imple "+status);
+		//建立持久化对象
+        UrlList url=new UrlList();
+        url.setName("小红");
+        url.setKind(status);
+
+		urlDao.findAll(url);
+		return null;
+	}
+}</pre>
+之后是（持久层）dao的接口及实现
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1049.html">@Autowired注解实例化对象与new的区别——spring mvc</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1051.html">eclipse中使用hibernate——自动生成相关文件</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

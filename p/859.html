@@ -1,0 +1,504 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Python函数，模块与包_comonly.cn</title>
+<meta name="keywords" content="Python函数，模块与包" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Python函数，模块与包</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-02-25</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	python  perl
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">Python,函数,模块,包</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='自定义函数'>
+	自定义函数
+</h2>
+<p>
+	Python可以创建四种函数：全局函数，局部函数，lambda函数，方法。
+</p>
+<ul>
+	<li>
+		全局函数：可以由创建该对象的同一模块（同一个.py文件）中的任意代码存取。
+	</li>
+	<li>
+		局部函数（嵌套函数）：定义在其他函数之内，本地函数只对对其定义的函数是可见的。
+	</li>
+	<li>
+		lambda函数：是表达式，可以在需要使用的地方创建。
+	</li>
+	<li>
+		方法：与特定数据类型关联的函数，并且只能与数据类型关联在一起使用。
+	</li>
+</ul>
+<h4>
+	全局函数
+</h4>
+<pre class="prettyprint lang-py">def functionName(parameters):    #parameters可选
+   suite
+   return backValue     #可选，若无返回None</pre>
+parameters是可选的，多于一个参数可以用逗号（,）分隔，带默认值的参数是可选的。或者identifier=value对序列（指定默认值，函数调用时可以不指定该参数，若指定则覆盖。不允许在有默认值的参数后面跟随不带默认值的参数）。
+<p>
+	返回值可以是一个单独的值，一组值或者组合类型的值。
+</p>
+<p>
+	给定的默认值是在执行def语句时创建的，而不是调用时创建的。对固定变量（数字，字符串）没什么区别，但是对可变参数，可能不是所期待的。
+</p>
+<pre class="prettyprint lang-py">def append_if_even(x,lst=[]):
+   if x%2==0:
+      lst.append(x)
+   return lst
+print(append_if_even(4))   #第一次调用lst默认为[]
+print(append_if_even(8))   #第二次调用lst默认为上次操作后的[4]
+
+运行结果：
+[4]
+[4, 8]</pre>
+<p>
+	global语句告诉Python，某个变量作用范围是全局（文件中）的，对变量的赋值应作用于全局变量而不是创建一个局部（函数内）变量。
+</p>
+<pre class="prettyprint lang-py">def change_b():
+   global b
+   b=2
+b=1
+change_b()
+print(b)
+输出结果：2</pre>
+<h4>
+	Lambda函数
+</h4>
+<pre class="prettyprint lang-py">#lambda parameters:expression  #parameters参数可选
+
+s=lambda x:"x==1'return"if x==1 else "x!=1'return"
+#返回一个匿名函数，将函数赋值给s
+print(s)
+print(s(1))
+print(s(3))
+
+运行结果
+&lt;function &lt;lambda&gt; at 0x000001A7C199B598&gt;
+x==1'return
+x!=1'return</pre>
+<p>
+	expression不能包含分支和循环（运行条件表达式），不能包含return（或yield）语句，结果是一个匿名函数。调用Lambda函数返回的结果是对表达式计算产生的结果。如果expression是一个元组，应该使用圆括号将其包含起来。
+</p>
+<p>
+	lambda函数通常用作键值函数。
+</p>
+<pre class="prettyprint lang-py">e=["qew","Afas","21ds","Ssd"]
+e.sort(key=lambda temp:temp.lower())   #大小写不明感进行排序
+print(e)
+e=["qew","Afas","21ds","Ssd"]
+e.sort()
+print(e)
+
+运行结果
+['21ds', 'Afas', 'qew', 'Ssd']
+['21ds', 'Afas', 'Ssd', 'qew']</pre>
+lambda可以作为创建默认字典的默认值
+<pre class="prettyprint lang-py">import collections
+point_zero_dict=collections.defaultdict(lambda:(0,0))
+#创建默认字典，默认值为一个lambda函数
+print(point_zero_dict.items())   #创建的是一个空字典
+print(point_zero_dict.get("value_get"))   #通过get获取不存在的键返回None
+print(point_zero_dict["value_will_except"])
+#获取字典键值，普通字典会产生异常。自动创建值为-1的键
+print(point_zero_dict.items())</pre>
+<h4>
+	断言
+</h4>
+<p>
+	避免函数接受无效参数继续执行，应该使用测试。同时使用assert语句指定前提与后果。断言是为开发者设计的，而不是面向终端用户的。
+</p>
+<pre class="prettyprint lang-py">assert boolean_expression,optional_expression</pre>
+<p>
+	如果boolean_expression为False，就产生一个AssertionError异常。如果给定了可选的optional_expression，就用其作为异常的参数。
+</p>
+<pre class="prettyprint lang-py">def assertFunction(a):
+   assert a!=0,"被除数不能为0"
+   return 5/a
+print(assertFunction(1))
+print(assertFunction(0))
+
+结果及异常信息
+5.0
+Traceback (most recent call last):
+  File "F:\myPython\test.py", line 5, in &lt;module&gt;
+    print(assertFunction(0))
+  File "F:\myPython\test.py", line 2, in assertFunction
+    assert a!=0,"被除数不能为0"
+AssertionError: 被除数不能为0</pre>
+程序写好后就不需要断言了。可以在运行程序时命令行指定-O实现（比如：python -O test.py）,如果docstrings对用户没用，可以使用-OO来摒弃assert语句和docstrings。可以产生程序的副本直接注释掉。
+<h2 id='模块'>
+	模块
+</h2>
+<p>
+	Python模块简单说就是一个.py 文件，包含所需要的代码。模块的导入一般通过import进行。如果是包中的模块一般用“. ”进行分隔。
+</p>
+<pre class="prettyprint lang-py">import importable    #importable通常是一个模块，或者包
+import importable1,...importableN
+import importable as preferred_name    #对导入的包赋一个名字</pre>
+<p>
+	采用 from importable import *会从模块导入所有的对象（或从包中导入所有的模块），之后可以对模块中的函数方便的调用（不要. 取，直接使用。比如from os.path import dirname后可以直接使用dirname()），但是容易参数命名冲突。
+</p>
+<h2 id='包'>
+	包
+</h2>
+<p>
+	包是一个目录，其中包含一组模块和一个__init__.py文件。该目录就是包名
+</p>
+<p>
+	只要目录是我们程序目录的子目录（或存在于Python路径中），我们就可以导入这些模块中的任意模块使用。
+</p>
+<p>
+	包的__init__.py文件包含一条语句，该语句指定要加载哪些模块。该语句必须将模块名列表赋值给特殊变量__all__。之后就可以使用from package import * 来导入__all__中指定的所有模块。
+</p>
+<p>
+	__all__=["pyFill1","pyFill2",..."pyFillN"]&nbsp; &nbsp; #<span>pyFillN为 .py 文件名，其中不含 .py。</span>
+</p>
+<h2 id='自定义模块'>
+	自定义模块
+</h2>
+<p>
+	模块的基本结构：
+</p>
+<pre class="prettyprint lang-py">#!/usr/bin/env python3
+#Copyright(c) 2018 Chen.All rights reserved
+"""
+This modul provides a few ** functions.
+
+&gt;&gt;&gt; function1()
+0
+&gt;&gt;&gt; function2()
+2
+"""
+
+def function1():
+   r"""函数介绍
+
+   详细介绍
+
+   &gt;&gt;&gt; function1()  #&gt;&gt;&gt;后有一个空格
+   0
+   """
+   print(0)
+
+def function2():
+   print(2)
+
+if __name__=="__main__":   #.py 文件末追加3行代码，测试docstrings中的实例
+   import doctest
+   doctest.testmod()</pre>
+第一行是shebang行，之后一些注释，然后三引号里提供模块概览，以及一些实例（该模块的docstring）。
+<p>
+	任何模块被导入后，Python会创建一个名为__name__的变量（赋值为模块对应.py文件名，不包括扩展名）。正常导入上述模块，后三行不会执行。若向运行程序那样运行上述模块，后三行就会执行。doctest.testmod()函数用来发现模块，并执行所有docstrings中的代码段。如果正常运行，不会输出信息，否则输出错误信息。如果传递命令行标记 -v ，就可以获得详细的输出信息。
+</p>
+<p>
+	如果希望模块可用，可用把模块放在Python分发的site-packages子目录中window系统通常在...\Python\Python36\Lib\site-packages中。第二种可用设置环境变量PYTHONPATH来指定
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/858.html">Python控制结构与异常处理</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/860.html">Python面向对象</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="">
+							<h2 style="display:inline;color:#5BC648;"></h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-02-25&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><h4>
+	docstring
+</h4>
+<p>
+	docstring可以为任何函数添加文档信息，docstring可以简单地添加在def行之后，函数代码开始前的字符串。一般第一行是一个简单的描述，之后一个空白行，再之后是完整的描述，可以给出一些实例。
+</p>
+<pre class="prettyprint lang-py">def viewDocstring() :
+   """简单的介绍
+
+      详细的描述
+   """
+   print(0)
+viewDocstring()</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="">
+							<h2 style="display:inline;color:#5BC648;"></h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-02-25&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><h4>
+	*操作符<span>（</span>参数与参数拆分）
+</h4>
+<p>
+	使用序列拆分操作符（*）对序列进行拆分。
+</p>
+<pre class="prettyprint lang-py">def mul_que(a,b,c):
+   return a+b+c
+a=(1,2,3)
+print(mul_que(*a))
+print(mul_que(a[0],a[1],a[2]))
+运行结果
+6
+6</pre>
+<p>
+	可以在函数参数列表中使用序列拆分符，可以创建可变数量的参数。
+</p>
+<pre class="prettyprint lang-py">def mul_que(*args):
+   result=0
+   for _ in args:
+      result+=_
+   return result
+print(mul_que(1,2,3))
+print(mul_que(7,8))
+运行结果
+6
+15</pre>
+<p>
+	*本身作为参数，可以现在使用位置参数
+</p>
+<pre class="prettyprint lang-py">def mul_que(a,b,c,*,d=0):
+   return (a+b+c)*d
+print(mul_que(1,2,3,1)) #在*后面传递位置参数，产生TypeError异常
+#TypeError: mul_que() takes 3 positional arguments but 4 were given
+
+def mul_que(a,b,c,*,d=0):
+   return (a+b+c)*d
+print(mul_que(1,2,3,d=1))  #d必须使用关键字参数
+运行结果
+6</pre>
+映射拆分操作符（**）可以对映射进行拆分
+<pre class="prettyprint lang-py">def mul_que(a,b,c,d):
+   return (a+b+c)*d
+options={"a":1,"b":2,"c":3,"d":1}
+print(*options)
+print(mul_que(**options))   #将字典拆分成键-值对，每个键的值赋予适当参数
+运行结果
+a b c d
+6</pre>
+<p>
+	当然也可以在参数中使用映射拆分操作符（**）
+</p>
+<pre class="prettyprint lang-py">def mul_que(**mu):
+   add_str=add_str2=""
+   for _ in mu:   #拆分出的_为键名
+      add_str+=_
+      add_str2+=mu[_]   #mu为传递的字典
+   return add_str,add_str2
+options={"a":"str1","b":"str2"}
+print(mul_que(**options))
+运行结果
+('ab', 'str1str2')</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#自定义函数">自定义函数</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#模块">模块</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#包">包</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#自定义模块">自定义模块</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,419 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Android 文件的读取和写入及文件夹的操作_comonly.cn</title>
+<meta name="keywords" content="Android 文件的读取和写入及文件夹的操作" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Android 文件的读取和写入及文件夹的操作</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-01-10</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	android
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">android,file,文件</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='（1）oeFileIut和oeFileOutut的使用'>
+	（1）openFileInput和openFileOutput的使用
+</h2>
+文件的使用，注意最后要用finally给关闭掉。<br />
+<br />
+openFileOutput:(写入文件，如果没有文件名可以创建，这里不需要判断是否有这个文件)---&gt; FileOutputStream<br />
+openFileInput:(读取文件，没有文件名会保存，debug的时候会看到，不影响ui)---&gt; FileInputStream<br />
+<br />
+保存文件：（FileOutputStream 保存地址；data/data/包名/files/, 下面是写入的四种模式）<br />
+<blockquote>
+	MODE_APPEND：即向文件尾写入数据<br />
+MODE_PRIVATE：即仅打开文件可写入数据<br />
+MODE_WORLD_READABLE：所有程序均可读该文件数据<br />
+MODE_WORLD_WRITABLE：即所有程序均可写入数据。
+</blockquote>
+<br />
+private void savePackageFile() { &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//写入文件，filename可以只写文件名,不用完整路径<br />
+<blockquote>
+	String msg = tvSaveMessage.getText().toString() + " \n";<br />
+FileOutputStream outputStream;<br />
+try {<br />
+outputStream = openFileOutput(filename, Context.MODE_APPEND);<br />
+outputStream.write(msg.getBytes());<br />
+outputStream.flush();<br />
+outputStream.close();<br />
+} catch (Exception e) {<br />
+e.printStackTrace();<br />
+}
+</blockquote>
+}<br />
+<br />
+private void readSaveFile() { &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //读取文件：（FileInputStream 读取包名下files文件夹下的文件）<br />
+<blockquote>
+	FileInputStream inputStream;<br />
+try {<br />
+inputStream = openFileInput(filename);<br />
+byte temp[] = new byte[1024];<br />
+StringBuilder sb = new StringBuilder("");<br />
+int len = 0;<br />
+while ((len = inputStream.read(temp)) &gt; 0){<br />
+sb.append(new String(temp, 0, len));<br />
+}<br />
+Log.d("msg", "readSaveFile: \n" + sb.toString());<br />
+inputStream.close();<br />
+} catch (Exception e) {<br />
+e.printStackTrace();<br />
+}
+</blockquote>
+}<br />
+<br />
+File logFile = new File(context.getFilesDir(), MainActivity.filename); &nbsp; &nbsp;//文件的初始化：（创建需要的文件）<br />
+<blockquote>
+	if (!logFile.exists()) { &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Make sure log file is exists<br />
+boolean result; // 文件是否创建成功<br />
+try {<br />
+result = logFile.createNewFile();<br />
+} catch (IOException e) {<br />
+e.printStackTrace();<br />
+return;<br />
+}<br />
+if (!result) {<br />
+return;<br />
+}
+</blockquote>
+}<br />
+<h2 id='(2)BufferReder和BufferWriter使用:'>
+	(2)BufferReader和BufferWriter使用:
+</h2>
+保存文件：如果没有会自动创建，如果有的话会覆盖。 当在创建时加入true参数，实现对文件的续写。 false则会覆盖前面的数据<br />
+public static void bufferSave(String msg) {<br />
+<blockquote>
+	try {<br />
+BufferedWriter bfw = new BufferedWriter(new FileWriter(logFile, true));<br />
+bfw.write(msg);<br />
+bfw.newLine();<br />
+bfw.flush();<br />
+bfw.close();<br />
+} catch (IOException e) {<br />
+e.printStackTrace();<br />
+}
+</blockquote>
+}<br />
+<br />
+读取文件：这里需要做判断，如果没有这个文件会报错。<br />
+public static void bufferRead() {<br />
+<blockquote>
+	try {<br />
+BufferedReader bfr = new BufferedReader(new FileReader(logFile));<br />
+String line = bfr.readLine();<br />
+StringBuilder sb = new StringBuilder();<br />
+while (line != null) {<br />
+sb.append(line);<br />
+sb.append("\n");<br />
+line = bfr.readLine();<br />
+}<br />
+bfr.close();<br />
+Log.d("buffer", "bufferRead: " + sb.toString());<br />
+} catch (IOException e) {<br />
+e.printStackTrace();<br />
+}
+</blockquote>
+}<br />
+<h2 id='(3)SD卡读取和写入—路径：torgedcrd0&b;'>
+	(3)SD卡读取和写入—路径：/storage/sdcard0/&nbsp;
+</h2>
+往SD卡写入文件的方法，如果手机已插入sd卡,且app具有读写sd卡的权限<br />
+public void savaFileToSD(String filename, String filecontent) throws Exception {<br />
+<blockquote>
+	if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {<br />
+filename = Environment.getExternalStorageDirectory().getCanonicalPath() + "/" + filename;<br />
+FileOutputStream output = new FileOutputStream(filename); &nbsp; &nbsp;//这里就不要用openFileOutput了,那个是往手机内存中写数据的<br />
+output.write(filecontent.getBytes()); &nbsp; &nbsp;//将String字符串以字节流的形式写入到输出流中<br />
+output.close(); &nbsp; &nbsp; &nbsp;//关闭输出流<br />
+} else Toast.makeText(context, "SD卡不存在或者不可读写", Toast.LENGTH_SHORT).show();
+</blockquote>
+}<br />
+<br />
+读取SD卡中文件的方法，定义读取文件的方法:<br />
+public String readFromSD(String filename) throws IOException {<br />
+<blockquote>
+	StringBuilder sb = new StringBuilder("");<br />
+if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {<br />
+filename = Environment.getExternalStorageDirectory().getCanonicalPath() + "/" + filename;<br />
+FileInputStream input = new FileInputStream(filename); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//打开文件输入流<br />
+byte[] temp = new byte[1024];<br />
+int len = 0;<br />
+while ((len = input.read(temp)) &gt; 0) { &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//读取文件内容:<br />
+sb.append(new String(temp, 0, len));<br />
+}<br />
+input.close(); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//关闭输入流<br />
+}<br />
+return sb.toString();
+</blockquote>
+}<br />
+<h2 id='（4）读取rw和et文件夹下的文件'>
+	（4）读取raw和assets文件夹下的文件
+</h2>
+res/raw：文件会被映射到R.java文件中，访问的时候直接通过资源ID即可访问，而且 他不能有目录结构，就是不能再创建文件夹<br />
+assets：不会映射到R.java文件中，通过AssetManager来访问，能有目录结构，即可以自行创建文件夹<br />
+<br />
+读取文件资源;<br />
+<br />
+raw:&nbsp;<br />
+InputStream is =getResources().openRawResource(R.raw.filename);&nbsp;<br />
+<br />
+assets:&nbsp;<br />
+AssetManager am = &nbsp;getAssets();&nbsp;<br />
+InputStream is = am.open("filename");<br />
+<h2 id='一、首先添加权限'>
+	一、首先添加权限
+</h2>
+&lt;uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"&gt;&lt;/uses-permission&gt;<br />
+二、建立文件夹、生成文件并写入文本文件内容代码<br />
+private void initData() {<br />
+&nbsp; &nbsp; String filePath = "/sdcard/Test/";<br />
+&nbsp; &nbsp; String fileName = "log.txt";<br />
+&nbsp; &nbsp; writeTxtToFile("txt content", filePath, fileName);<br />
+}<br />
+<br />
+// 将字符串写入到文本文件中<br />
+public void writeTxtToFile(String strcontent, String filePath, String fileName) {<br />
+&nbsp; &nbsp; makeFilePath(filePath, fileName); &nbsp; &nbsp; //生成文件夹之后，再生成文件，不然会出错<br />
+&nbsp; &nbsp; String strFilePath = filePath+fileName;<br />
+&nbsp; &nbsp; String strContent = strcontent + "\r\n"; &nbsp; &nbsp; &nbsp; // 每次写入时，都换行写<br />
+&nbsp; &nbsp; try {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; File file = new File(strFilePath);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; if (!file.exists()) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Log.d("TestFile", "Create the file:" + strFilePath);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; file.getParentFile().mkdirs();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; file.createNewFile();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; RandomAccessFile raf = new RandomAccessFile(file, "rwd");<br />
+&nbsp; &nbsp; &nbsp; &nbsp; raf.seek(file.length());<br />
+&nbsp; &nbsp; &nbsp; &nbsp; raf.write(strContent.getBytes());<br />
+&nbsp; &nbsp; &nbsp; &nbsp; raf.close();<br />
+&nbsp; &nbsp; } catch (Exception e) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; Log.e("TestFile", "Error on write File:" + e);<br />
+&nbsp; &nbsp; }<br />
+}<br />
+&nbsp;<br />
+// 生成文件<br />
+public File makeFilePath(String filePath, String fileName) {<br />
+&nbsp; &nbsp; File file = null;<br />
+&nbsp; &nbsp; makeRootDirectory(filePath);<br />
+&nbsp; &nbsp; try {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; file = new File(filePath + fileName);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; if (!file.exists()) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; file.createNewFile();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; } catch (Exception e) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; e.printStackTrace();<br />
+&nbsp; &nbsp; }<br />
+&nbsp; &nbsp; return file;<br />
+}<br />
+<br />
+// 生成文件夹<br />
+public static void makeRootDirectory(String filePath) {<br />
+&nbsp; &nbsp; File file = null;<br />
+&nbsp; &nbsp; try {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; file = new File(filePath);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; if (!file.exists()) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; file.mkdir();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; } catch (Exception e) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; Log.i("error:", e+"");<br />
+&nbsp; &nbsp; }<br />
+}<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/817.html">【待处理】Android设置Selector不同状态下颜色及图片</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/819.html">【待处理】[Android]Android数据的四种存储方式</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#（1）oeFileIut和oeFileOutut的使用">（1）oeFileIut和oeFileOutut的使用</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#(2)BufferReder和BufferWriter使用:">(2)BufferReder和BufferWriter使用:</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#(3)SD卡读取和写入—路径：torgedcrd0&b;">(3)SD卡读取和写入—路径：torgedcrd0&b;</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#（4）读取rw和et文件夹下的文件">（4）读取rw和et文件夹下的文件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#一、首先添加权限">一、首先添加权限</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

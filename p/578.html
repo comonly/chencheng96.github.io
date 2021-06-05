@@ -1,0 +1,896 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>css选择器_comonly.cn</title>
+<meta name="keywords" content="css选择器" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">css选择器</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-03-04</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">css,选择器</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	每个CSS样式都包含两个基础部分：选择器和声明块。选择器包括type，ID，class等
+</p>
+<p>
+	<strong>标签选择器</strong> 
+</p>
+<table cellpadding="2" cellspacing="0" border="1" bordercolor="#999999" style="width:98%;" class="">
+	<tbody>
+		<tr>
+			<td>
+				<p>
+					&lt;style type="text/css"&gt;
+				</p>
+				<blockquote>
+					<p>
+						<strong>p{</strong> 
+					</p>
+				</blockquote>
+				<blockquote>
+					<blockquote>
+						<p>
+							<strong>color: red;</strong> 
+						</p>
+					</blockquote>
+					<blockquote>
+						<p>
+							<strong>font-size: 12px;</strong> 
+						</p>
+					</blockquote>
+					<blockquote>
+						<p>
+							<strong>text=align: center;</strong> 
+						</p>
+					</blockquote>
+				</blockquote>
+				<blockquote>
+					<p>
+						<strong>}</strong> 
+					</p>
+				</blockquote>
+				<p>
+					&lt;/style&gt;
+				</p>
+				<p>
+					...
+				</p>
+				<p>
+					&lt;body&gt;
+				</p>
+				<p>
+					&lt;p&gt;这是一个p选择器&lt;/p&gt;
+				</p>
+				<p>
+					&lt;/body&gt;
+				</p>
+			</td>
+			<td>
+				<p>
+					该css代码声明了HTML页面中所有的&lt;p&gt;标记，影响该页面所有的&lt;p&gt;标签
+				</p>
+				<p>
+					设置的标签要和HTML标签同名
+				</p>
+				<p>
+					<br />
+				</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	<span style="line-height:1.5;"><strong>类</strong></span><span style="line-height:1.5;"><strong>选</strong></span><span style="line-height:1.5;"><strong>择</strong></span><span style="line-height:1.5;"><strong>器</strong></span> 
+</p>
+<table cellpadding="2" cellspacing="0" border="1" bordercolor="#999999" style="width:98%;" class="">
+	<tbody>
+		<tr>
+			<td>
+				<p>
+					&lt;style type="text/css"&gt;
+				</p>
+				<blockquote>
+					<p>
+						<strong>.center{</strong> 
+					</p>
+				</blockquote>
+				<blockquote>
+					<blockquote>
+						<p>
+							<b>text-align: center;</b> 
+						</p>
+					</blockquote>
+				</blockquote>
+				<blockquote>
+					<p>
+						<strong>}</strong> 
+					</p>
+				</blockquote>
+				<p>
+					&lt;/style&gt;
+				</p>
+				<p>
+					...
+				</p>
+				<p>
+					&lt;body&gt;
+				</p>
+				<p>
+					&lt;h1 class="center"&gt;h1标签中的文字居中显示&lt;h1&gt;
+				</p>
+				<p>
+					&lt;p class="center"&gt;p标签中的文字居中显示&lt;/p&gt;
+				</p>
+				<p>
+					&lt;/body&gt;
+				</p>
+<br />
+			</td>
+			<td>
+				<p>
+					类选择器名称必须以一个英文的圆点开头。
+				</p>
+				<p>
+					类选择器的名称只能使用字母，数字，连字符（-）和下划线（_）
+				</p>
+				<p>
+					在圆点后，名称始终以字母开头
+				</p>
+				<p>
+					类名称区分大小写
+				</p>
+				<p>
+					<br />
+				</p>
+				<p>
+					在使用时直接在标签中进行调用
+				</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	<span style="line-height:1.5;"><br />
+<strong>ID选择器</strong></span> 
+</p>
+<table cellpadding="2" cellspacing="0" border="1" bordercolor="#999999" style="width:98%;" class="">
+	<tbody>
+		<tr>
+			<td>
+				<p>
+					&lt;style type="text/css"&gt;
+				</p>
+				<blockquote>
+					<p>
+						<strong>#banner{</strong> 
+					</p>
+				</blockquote>
+				<blockquote>
+					<blockquote>
+						<p>
+							<b>width： 468px;</b> 
+						</p>
+						<p>
+							<b>height: 60px;</b> 
+						</p>
+						<p>
+							<b>background: #cc0000;</b> 
+						</p>
+					</blockquote>
+				</blockquote>
+				<blockquote>
+					<p>
+						<strong>}</strong> 
+					</p>
+				</blockquote>
+				<p>
+					&lt;/style&gt;
+				</p>
+				<p>
+					...
+				</p>
+				<p>
+					&lt;body&gt;
+				</p>
+				<p>
+					&lt;p id="banner"&gt;这是网页的banner&lt;/p&gt;
+				</p>
+				<p>
+					&lt;/body&gt;<span style="line-height:1.5;"></span> 
+				</p>
+			</td>
+			<td>
+				<p>
+					ID选择器名称前用#表示，遵循与类选择器完全相同的命名规则。
+				</p>
+				<p>
+					<br />
+				</p>
+				<p>
+					如果某一样式在网页上多次使用，应该使用类选择器。
+				</p>
+				<p>
+					ID选择器用来识别网页上出现一次的部分，如横幅，版权，logo，网页布局，侧边栏，页脚等。
+				</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	<span style="line-height:1.5;"><br />
+<strong>群选择器</strong><br />
+</span> 
+</p>
+<table cellpadding="2" cellspacing="0" border="1" bordercolor="#999999" style="width:98%;" class="">
+	<tbody>
+		<tr>
+			<td>
+				<p>
+					&lt;style type="text/css"&gt;
+				</p>
+				<blockquote>
+					<p>
+						<strong>h1,p,.red,#banner{</strong> 
+					</p>
+				</blockquote>
+				<blockquote>
+					<blockquote>
+						<p>
+							<b>font-size: 16px;</b> 
+						</p>
+					</blockquote>
+				</blockquote>
+				<blockquote>
+					<p>
+						<strong>}</strong> 
+					</p>
+				</blockquote>
+				<p>
+					&lt;/style&gt;
+				</p>
+				<p>
+					...
+				</p>
+				<p>
+					&lt;body&gt;
+				</p>
+				<p>
+					<br />
+				</p>
+				<p>
+					&lt;h1&gt;h1标签中的文字大小为16px&lt;h1&gt;
+				</p>
+				<p>
+					&lt;p&gt;p标签中的文字大小为16px&lt;/p&gt;
+				</p>
+&lt;p class="red"&gt;p标签中的文字大小为16px&lt;/p&gt;
+				<p>
+					<br />
+				</p>
+				<p>
+					&lt;p id="banner"&gt;这是id选择器中的文字大小为16px&lt;/p&gt;
+				</p>
+				<p>
+					&lt;/body&gt;<span style="line-height:1.5;"></span> 
+				</p>
+			</td>
+			<td>
+				群选择器即创建一个用逗号分隔的选择器列表，利用群体声明的方法将风格相同的css选择器同时声明
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	<span style="line-height:1.5;"><br />
+<strong>通配符选择器</strong><br />
+</span> 
+</p>
+<table cellpadding="2" cellspacing="0" border="1" bordercolor="#999999" style="width:98%;" class="">
+	<tbody>
+		<tr>
+			<td>
+				<p>
+					*{
+				</p>
+				<p>
+					margin: 0;
+				</p>
+				<p>
+					padding: 0;
+				</p>
+				<p>
+					}<span style="line-height:1.5;">/*将网页中所有标签的内边距设置为0*/</span> 
+				</p>
+			</td>
+			<td>
+				<p>
+					对网页中所有标签初始化，不管有用的还是不用的，过时的还是先进的。
+				</p>
+				<p>
+					<br />
+				</p>
+				<p>
+					初始化HTML标签，统一设置网页字体大小等
+				</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	<span style="line-height:1.5;"><br />
+派生选择器<br />
+</span> 
+</p>
+<table cellpadding="2" cellspacing="0" border="1" bordercolor="#999999" style="width:98%;" class="">
+	<tbody>
+		<tr>
+			<td>
+				<p>
+					&lt;style type="text/css"&gt;
+				</p>
+				<blockquote>
+					<p>
+						<strong>p a{</strong> 
+					</p>
+				</blockquote>
+				<blockquote>
+					<blockquote>
+						<p>
+							<b>font-size: 20px;</b> 
+						</p>
+					</blockquote>
+				</blockquote>
+				<blockquote>
+					<p>
+						<strong>}</strong> 
+					</p>
+					<p>
+						<strong>a{</strong> 
+					</p>
+				</blockquote>
+				<blockquote>
+					<blockquote>
+						<p>
+							<strong>font-size: 20px;</strong> 
+						</p>
+					</blockquote>
+				</blockquote>
+				<blockquote>
+					<p>
+						<strong>}</strong> 
+					</p>
+				</blockquote>
+				<p>
+					&lt;/style&gt;
+				</p>
+				<p>
+					...
+				</p>
+				<p>
+					&lt;body&gt;
+				</p>
+				<p>
+					&lt;p&gt;这是p选择器中&lt;a href="#"&gt;a标签&lt;/a&gt;&lt;/p&gt;
+				</p>
+				<p>
+					&lt;a href="#"&gt;a标签&lt;/a&gt;
+				</p>
+				<p>
+					&lt;/body&gt;<span style="line-height:1.5;"></span> 
+				</p>
+			</td>
+			<td>
+				<p>
+					<br />
+				</p>
+				<p>
+					<strong>p a{</strong> 
+				</p>
+				<blockquote>
+					<p>
+						<b>font-size: 20px;</b> 
+					</p>
+				</blockquote>
+				<p>
+					<strong>}</strong> 
+				</p>
+表示&lt;p&gt;标签中的&lt;a&gt;标签字体大小为20像素，其它位置的&lt;a&gt;标签不受影响
+				<p>
+					<br />
+				</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	<span style="line-height:1.5;"><br />
+<strong>选择器的继承与层叠</strong></span> 
+</p>
+<table cellpadding="2" cellspacing="0" border="1" bordercolor="#999999" style="width:98%;" class="">
+	<tbody>
+		<tr>
+			<td>
+				<p>
+					&lt;style type="text/css"&gt; &nbsp; &nbsp;/*选择器的继承*/
+				</p>
+				<blockquote>
+					<p>
+						<strong>body{</strong> 
+					</p>
+				</blockquote>
+				<blockquote>
+					<blockquote>
+						<p>
+							<b>color: red;</b> 
+						</p>
+					</blockquote>
+				</blockquote>
+				<blockquote>
+					<p>
+						<strong>}</strong> 
+					</p>
+				</blockquote>
+				<p>
+					&lt;/style&gt;
+				</p>
+				<p>
+					...
+				</p>
+				<p>
+					&lt;body&gt;
+				</p>
+				<p>
+					&lt;p&gt;这是p选择器中的&lt;strong&gt;strong标签&lt;/strong&gt;&lt;/p&gt;
+				</p>
+				<p>
+					&lt;/body&gt;<span style="line-height:1.5;"></span> 
+				</p>
+			</td>
+			<td>
+				<p>
+					左侧&lt;strong&gt;标签中的属性继承了&lt;p&gt;,&lt;body&gt;标签的属性，所以效果应该是<span>&lt;strong&gt;标签中的文字为红色。</span> 
+				</p>
+				<p>
+					<span>一般影响网页元素位置的属性，或者页边距，背景颜色和元素的边框等，都不会被继承。</span> 
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<p>
+					&lt;style type="text/css"&gt;&nbsp;&nbsp; &nbsp;/*选择器的层叠*/
+				</p>
+				<blockquote>
+					<p>
+						<strong>body{</strong> 
+					</p>
+				</blockquote>
+				<blockquote>
+					<blockquote>
+						<p>
+							<b>color: red;</b> 
+						</p>
+					</blockquote>
+				</blockquote>
+				<blockquote>
+					<p>
+						<strong>}</strong> 
+					</p>
+					<p>
+						<strong></strong> 
+					</p>
+					<p>
+						<strong>p{</strong> 
+					</p>
+					<blockquote>
+						<p>
+							<strong>color: #blue;</strong> 
+						</p>
+					</blockquote>
+					<p>
+						<strong>}</strong> 
+					</p>
+					<p>
+						<strong>strong{</strong> 
+					</p>
+					<blockquote>
+						<p>
+							<strong>font-size: 20px;</strong> 
+						</p>
+					</blockquote>
+					<p>
+						<strong><strong>}</strong><strong></strong></strong> 
+					</p>
+				</blockquote>
+				<p>
+					&lt;/style&gt;
+				</p>
+				<p>
+					...
+				</p>
+				<p>
+					&lt;body&gt;
+				</p>
+				<p>
+					&lt;p&gt;这是p选择器中的&lt;strong&gt;strong标签&lt;/strong&gt;&lt;/p&gt;
+				</p>
+				<p>
+					&lt;/body&gt;<span style="line-height:1.5;"></span> 
+				</p>
+			</td>
+			<td>
+				<p>
+					通过继承，多个标签的属性进行叠加，同一出现出现不同属性值时该怎么处理呢？
+				</p>
+				<p>
+					浏览器会采取“最近的样式优选的原则”，故左侧&lt;strong&gt;标签中的文字应该显示成蓝色。
+				</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	<span style="line-height:1.5;"><br />
+<strong>选择器的优先级</strong></span> 
+</p>
+<table cellpadding="2" cellspacing="0" border="1" bordercolor="#999999" style="width:98%;" class="">
+	<tbody>
+		<tr>
+			<td>
+				<p>
+					&lt;style type="text/css"&gt;&nbsp;&nbsp; &nbsp;/*选择器的层叠*/
+				</p>
+				<blockquote>
+					<p>
+						<strong>a{</strong> 
+					</p>
+				</blockquote>
+				<blockquote>
+					<blockquote>
+						<p>
+							<b>color: red;</b> 
+						</p>
+					</blockquote>
+				</blockquote>
+				<blockquote>
+					<p>
+						<strong>}</strong> 
+					</p>
+					<p>
+						<strong></strong> 
+					</p>
+					<p>
+						<strong>p a{</strong> 
+					</p>
+					<blockquote>
+						<p>
+							<strong>color:&nbsp;blue;</strong> 
+						</p>
+					</blockquote>
+					<p>
+						<strong>}</strong> 
+					</p>
+					<p>
+						<strong>.info a{</strong> 
+					</p>
+					<blockquote>
+						<p>
+							<strong>color: green;</strong> 
+						</p>
+					</blockquote>
+					<p>
+						<strong><strong>}</strong><strong></strong></strong> 
+					</p>
+				</blockquote>
+				<p>
+					&lt;/style&gt;
+				</p>
+				<p>
+					...
+				</p>
+				<p>
+					&lt;body&gt;
+				</p>
+				<p>
+					&lt;p class="info"&gt;我们的邮箱：&lt;a href="#"&gt;联系我们&lt;/a&gt;&lt;/p&gt;
+				</p>
+				<p>
+					&lt;/body&gt;
+				</p>
+			</td>
+			<td>
+				<p>
+					css提供一个公式，根据赋给各种选择器的值来确定样式的权重，最后根据样式的权重值的大小来决定采用哪种样式：
+				</p>
+				<p>
+					一个标签选择器：1分
+				</p>
+				<p>
+					一个类选择器：10分
+				</p>
+				<p>
+					一个ID选择器：100分
+				</p>
+				<p>
+					一个内部样式选择器：1000分
+				</p>
+				<p>
+					一个伪类值：10分
+				</p>
+				<p>
+					最后显示分值大的那个样式。
+				</p>
+				<p>
+					<br />
+				</p>
+				<p>
+					若有确保某一特定的属性不会被权重值更大的样式覆盖，需在需保护的属性后面插入!important,避免被权重更大的属性覆盖。
+				</p>
+				<p>
+					<br />
+				</p>
+				<p>
+					<strong>a{</strong><b>color: red; !important&nbsp;</b><strong>}</strong> &nbsp; &nbsp; &nbsp;权重：1，保持优先
+				</p>
+<strong>.info a{</strong><strong>color: green;&nbsp;</strong><strong>}</strong> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;权重：10+1=11
+				<p>
+					<br />
+				</p>
+				<p>
+					<strong><br />
+</strong> 
+				</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	<span style="line-height:1.5;"><br />
+<strong>伪类</strong><br />
+</span> 
+</p>
+<p>
+	<span style="line-height:1.5;"></span> 
+</p>
+<p>
+	<table cellpadding="1" cellspacing="0" border="1" bordercolor="#000000" style="border-collapse:collapse;width:70%;">
+		<tbody>
+			<tr>
+				<td style="font-style:normal;font-weight:normal;font-size:12px;font-family:'sans serif', tahoma, verdana, helvetica;">
+					a:link
+				</td>
+				<td style="font-style:normal;font-weight:normal;font-size:12px;font-family:'sans serif', tahoma, verdana, helvetica;">
+					指网页中正常的，还没访问到的，鼠标也没有移到过或点击过的所有链接
+				</td>
+			</tr>
+			<tr>
+				<td style="font-style:normal;font-weight:normal;font-size:12px;font-family:'sans serif', tahoma, verdana, helvetica;">
+					a:visited
+				</td>
+				<td style="font-style:normal;font-weight:normal;font-size:12px;font-family:'sans serif', tahoma, verdana, helvetica;">
+					已经点击过的链接
+				</td>
+			</tr>
+			<tr>
+				<td style="font-style:normal;font-weight:normal;font-size:12px;font-family:'sans serif', tahoma, verdana, helvetica;">
+					a:hover
+				</td>
+				<td style="font-style:normal;font-weight:normal;font-size:12px;font-family:'sans serif', tahoma, verdana, helvetica;">
+					用户鼠标滑过这个链接时改变链接的展示效果
+				</td>
+			</tr>
+			<tr>
+				<td style="font-style:normal;font-weight:normal;font-size:12px;font-family:'sans serif', tahoma, verdana, helvetica;">
+					a:active
+				</td>
+				<td style="font-style:normal;font-weight:normal;font-size:12px;font-family:'sans serif', tahoma, verdana, helvetica;">
+					当用户点击链接时的效果，作用范围是按下鼠标的那短暂的十亿分之一秒
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</p>
+<p>
+	<span><span style="line-height:normal;">伪类的一般顺序为：a:link,a:visited,a:hover,a:active，不能混乱</span></span> 
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/577.html">css样式以及样式表的使用</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/579.html">格式化文本—css</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

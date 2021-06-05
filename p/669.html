@@ -1,0 +1,348 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Javascript 实现复制（Copy）动作方法大全_comonly.cn</title>
+<meta name="keywords" content="Javascript 实现复制（Copy）动作方法大全" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Javascript 实现复制（Copy）动作方法大全</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">nd</li>
+          <li class="lmname"><a href="http://www.cnblogs.com/tylerdonet/p/4533782.html" target="_blank">http://www.cnblogs.com/tylerdonet/p/4533782.html</a></li>
+          <li class="timer">2017-04-11</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">copy,js</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p style="font-family:Arial, 宋体;">
+	以下代码可在线进行测试：<a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank">http://www.iyaka.cn/main/extend/online_test.asp</a> 
+</p>
+<p style="font-family:Arial, 宋体;">
+	<br />
+</p>
+<p style="font-family:Arial, 宋体;">
+	<span style="line-height:1.5;">1.实现点击按钮，复制文本框中的的内容（在谷歌和360浏览器上正常运行，在IE浏览器上显示Internet Explorer 已对此页面进行了修改，以帮助阻止跨站脚本）</span> 
+</p>
+<p style="font-family:Arial, 宋体;">
+	在<a href="http://www.iyaka.cn/blog/14_670.html" target="_blank">下一篇文章</a>中将重点介绍一下<span style="font-family:Arial, 宋体;">document.execCommand("Copy"); // 执行浏览器复制命令实现较多的复制到剪切板功能的方法及实例</span> 
+</p>
+<p style="font-family:Arial, 宋体;">
+	&lt;script type="text/javascript"&gt;<br />
+function copyUrl2()<br />
+{<br />
+var Url2=document.getElementById("biao1");<br />
+Url2.select(); // 选择对象<br />
+document.execCommand("Copy"); // 执行浏览器复制命令<br />
+alert("已复制好，可贴粘。");<br />
+}<br />
+&lt;/script&gt;<br />
+&lt;textarea cols="20" rows="10" id="biao1"&gt;用户定义的代码区域&lt;/textarea&gt;<br />
+&lt;input type="button" onClick="copyUrl2()" value="点击复制代码" /&gt;
+</p>
+<p style="font-family:Arial, 宋体;">
+	<br />
+</p>
+<p style="font-family:Arial, 宋体;">
+	2.复制专题地址和 url 地址，传给 QQ/MSN 上的好友（由于<span style="font-family:Arial, 宋体;">window.clipboardData.setData("Text",clipBoardContent);方法仅IE浏览器支持，所以需要在IE浏览器上进行测试，此种方法不建议使用</span>）
+</p>
+<p style="font-family:Arial, 宋体;">
+	&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;<br />
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;<br />
+&lt;head&gt;<br />
+&lt;meta http-equiv="Content-Type" content="text/html; charset=gb2312" /&gt;<br />
+&lt;title&gt;Js复制代码&lt;/title&gt;<br />
+&lt;/head&gt;<br />
+&lt;body&gt;<br />
+&lt;p&gt;<br />
+&lt;input type="button" name="anniu1" onClick='copyToClipBoard()' value="复制专题地址和url地址，传给QQ/MSN上的好友"&gt;<br />
+&lt;script language="javascript"&gt;<br />
+function copyToClipBoard(){<br />
+var clipBoardContent="";<br />
+clipBoardContent+=document.title;<br />
+clipBoardContent+="";<br />
+clipBoardContent+=this.location.href;<br />
+window.clipboardData.setData("Text",clipBoardContent);<br />
+alert("复制成功，请粘贴到你的QQ/MSN上推荐给你的好友");<br />
+}<br />
+&lt;/script&gt;
+</p>
+<p style="font-family:Arial, 宋体;">
+	<br />
+</p>
+<p style="font-family:Arial, 宋体;">
+	3.直接复制 url<span style="font-family:Arial, 宋体;">（由于</span><span style="font-family:Arial, 宋体;">window.clipboardData.setData("Text",clipBoardContent);方法仅IE浏览器支持，所以需要在IE浏览器上进行测试，此种方法不建议使用</span><span style="font-family:Arial, 宋体;">）</span> 
+</p>
+<p style="font-family:Arial, 宋体;">
+	&lt;input type="button" name="anniu2" onClick='copyUrl()' value="复制URL地址"&gt;<br />
+&lt;script language="javascript"&gt;<br />
+function copyUrl()<br />
+{<br />
+var clipBoardContent=this.location.href;<br />
+window.clipboardData.setData("Text",clipBoardContent);<br />
+alert("复制成功!");<br />
+}<br />
+&lt;/script&gt;
+</p>
+<p style="font-family:Arial, 宋体;">
+	<br />
+</p>
+<p style="font-family:Arial, 宋体;">
+	4.点击文本框时，复制文本框里面的内容（此种方法在360及谷歌浏览器上测试无法正常复制，在IE浏览器上正常）
+</p>
+<p style="font-family:Arial, 宋体;">
+	&lt;input onclick="oCopy(this)" value="你好.要copy的内容!"&gt;<br />
+&lt;script language="javascript"&gt;<br />
+function oCopy(obj){<br />
+obj.select();<br />
+js=obj.createTextRange();<br />
+js.execCommand("Copy")<br />
+alert("复制成功!");<br />
+}<br />
+&lt;/script&gt;
+</p>
+<p style="font-family:Arial, 宋体;">
+	<br />
+</p>
+<p style="font-family:Arial, 宋体;">
+	5.复制 span 标记中的内容<span style="font-family:Arial, 宋体;">（此种方法在360及谷歌浏览器上测试无法正常复制，在IE浏览器上正常）</span> 
+</p>
+<p style="font-family:Arial, 宋体;">
+	&lt;script type="text/javascript"&gt;<br />
+function copyText(obj) &nbsp;<br />
+{<br />
+var rng = document.body.createTextRange();<br />
+rng.moveToElementText(obj);<br />
+rng.scrollIntoView();<br />
+rng.select();<br />
+rng.execCommand("Copy");<br />
+rng.collapse(false);<br />
+alert("复制成功!");<br />
+}<br />
+&lt;/script&gt;<br />
+&lt;span id="span"&gt;<br />
+&nbsp; &nbsp; &lt;span style="color: rgb(229, 51, 51);"&gt;2132131321&lt;/span&gt;<br />
+&lt;/span&gt;<br />
+&lt;input type="button" onClick="copyText(span)" value="点击复制代码" /&gt;
+</p>
+<p style="font-family:Arial, 宋体;">
+	<br />
+</p>
+<p style="font-family:Arial, 宋体;">
+	js实现但击自动选中文本
+</p>
+<p style="font-family:Arial, 宋体;">
+	&lt;script type="text/javascript"&gt;<br />
+function Myselect_txt(){<br />
+&nbsp; if (document.form1.title.focus){<br />
+&nbsp; &nbsp; document.form1.title.select();}<br />
+}<br />
+function Myselect_txtarea(){<br />
+&nbsp; if (document.form1.content.focus){<br />
+&nbsp; &nbsp; document.form1.content.select();}<br />
+}<br />
+&lt;/script&gt;<br />
+&lt;form name="form1"&gt;<br />
+&lt;input name="title" type="text" size="50" value="今日新闻头条" onClick="Myselect_txt()"&gt;<br />
+&lt;textarea name="content" cols="50" rows="6" onClick="Myselect_txtarea()"&gt;今日,据相关方面报道,...&lt;/textarea&gt;
+</p>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/668.html">asp如何调用当天的数据？常用的ASP时间函数 ，以及输出当前的系统时间</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/670.html">execCommand实现复制到剪切板—隐藏域的处理</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="http://www.cnblogs.com/tylerdonet/p/4533782.html" target="_blank">http://www.cnblogs.com/tylerdonet/p/4533782.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

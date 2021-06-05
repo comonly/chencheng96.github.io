@@ -1,0 +1,824 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>向量vector 使用const 类型vector遍历不能用迭代的方式_comonly.cn</title>
+<meta name="keywords" content="向量vector 使用const 类型vector遍历不能用迭代的方式" />
+<meta name="description" content="几种容器遍历方法
+
+1.迭代器
+for (std::vector&lt;int&gt;::iterator it = vecTest.begin(); it != vecTest.end(); ++it)
+{
+ tempNum = *it;
+}
+2.C++11 新增关键字auto
+for (auto it : vecTest)
+{
+ tempNum = it;
+}
+3.对C念念不舍的童鞋们习惯的数组写法
+for (size_t i = 0; i &lt; maxCount; i+" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">向量vector 使用const 类型vector遍历不能用迭代的方式</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-10-30</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>几种容器遍历方法
+
+1.迭代器
+for (std::vector&lt;int&gt;::iterator it = vecTest.begin(); it != vecTest.end(); ++it)
+{
+ tempNum = *it;
+}
+2.C++11 新增关键字auto
+for (auto it : vecTest)
+{
+ tempNum = it;
+}
+3.对C念念不舍的童鞋们习惯的数组写法
+for (size_t i = 0; i &lt; maxCount; i+</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='几种容器遍历方法'>
+	几种容器遍历方法
+</h2>
+1.迭代器<br />
+for (std::vector&lt;int&gt;::iterator it = vecTest.begin(); it != vecTest.end(); ++it)<br />
+{<br />
+<span> </span>tempNum = *it;<br />
+}<br />
+2.C++11 新增关键字auto<br />
+for (auto it : vecTest)<br />
+{<br />
+<span> </span>tempNum = it;<br />
+}<br />
+3.对C念念不舍的童鞋们习惯的数组写法<br />
+for (size_t i = 0; i &lt; maxCount; i++)<br />
+{<br />
+<span> </span>tempNum = vecTest[i];<br />
+}<br />
+<br />
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<h2 id='vector容器中添加和删除元素'>
+	vector容器中添加和删除元素
+</h2>
+添加元素：<br />
+<br />
+方法一：<br />
+<br />
+insert() 插入元素到Vector中<br />
+&nbsp;<br />
+&nbsp; iterator insert( iterator loc, const TYPE &amp;val );&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//在指定位置loc前插入值为val的元素,返回指向这个元素的迭代器<br />
+&nbsp; void insert( iterator loc, size_type num, const TYPE &amp;val );&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //在指定位置loc前插入num个值为val的元素&nbsp;<br />
+&nbsp; void insert( iterator loc, input_iterator start, input_iterator end );&nbsp; &nbsp; &nbsp; &nbsp;//在指定位置loc前插入区间[start, end)的所有元素<br />
+方法二：<br />
+<br />
+push_back() 在Vector最后添加一个元素（参数为要插入的值）<br />
+删除元素：<br />
+<br />
+方法一：<br />
+<br />
+clear() 清空所有元素<br />
+&nbsp;<br />
+empty() 判断Vector是否为空（返回true时为空）<br />
+方法二：<br />
+<br />
+erase() 删除指定元素 (可以用指针来代替迭代器)<br />
+&nbsp;<br />
+&nbsp; iterator erase( iterator loc );&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //要删除元素的迭代器<br />
+&nbsp; iterator erase( iterator start, iterator end );&nbsp; &nbsp; //要删除的第一个元素的迭代器，要删除的第二个元素的迭代器<br />
+方法三：<br />
+<br />
+pop_back() 移除最后一个元素<br />
+方法四：<br />
+<br />
+可以采用通用算法remove()来删除vector容器中的元素， 不同的是，采用 remove 一般情况下不会改变容器的大小，而pop_back()与erase()等成员函数会改变容器的大小。<br />
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1520.html">DFS 文件复制配置中无法访问其中一台的文件目录  默认文件共享问题</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1522.html">C/C++ 字节对齐</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="C++ vector 向量、向量参数">
+							<h2 style="display:inline;color:#5BC648;">C++ vector 向量、向量参数</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-07-02&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><div style="font-size:14px;">
+	<a href="https://www.cnblogs.com/aminxu/p/4686332.html"><span style="color:#003884;">https://www.cnblogs.com/aminxu/p/4686332.html</span></a> 
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	向量 vector 是一种对象实体, 能够容纳许多其他类型相同的元素, 因此又被称为容器。 与string相同, vector 同属于STL(Standard Template Library, 标准模板库)中的一种自定义的数据类型, 可以广义上认为是数组的增强版。
+</div>
+<div style="font-size:14px;">
+	在使用它时, 需要包含头文件 vector, #include
+</div>
+<div style="font-size:14px;">
+	vector 容器与数组相比其优点在于它能够根据需要随时自动调整自身的大小以便容下所要放入的元素。此外, vector 也提供了许多的方法来对自身进行操作。
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div id="1291-1560500581249" style="font-size:14px;">
+	<span style="font-size:20px;font-weight:bold;">向量的声明及初始化</span> 
+</div>
+<div style="font-size:14px;">
+	vectora;                                //声明一个int型向量a
+</div>
+<div style="font-size:14px;">
+	vectora(10);                            //声明一个初始大小为10的向量
+</div>
+<div style="font-size:14px;">
+	vectora(10, 1);                         //声明一个初始大小为10且初始值都为1的向量
+</div>
+<div style="font-size:14px;">
+	vectorb(a);                             //声明并用向量a初始化向量b
+</div>
+<div style="font-size:14px;">
+	vectorb(a.begin(), a.begin() + 3);  //将a向量中从第0个到第2个(共3个)作为向量b的初始值
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div id="8345-1561634511140" style="font-size:14px;">
+	<span style="font-size:20px;font-weight:bold;">添加和删除数据</span> 
+</div>
+<div style="font-size:14px;">
+	push_back() 在Vector最后添加一个元素（参数为要插入的值）
+</div>
+<div style="font-size:14px;">
+	pop_back() 移除最后一个元素
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div id="4952-1561634526618" style="font-size:14px;">
+	<span style="font-size:20px;color:#393939;font-weight:bold;">迭代输出</span> 
+</div>
+<div style="font-size:14px;">
+	<span style="color:#393939;">for (vector::iterator iter = a.begin();iter != a.end();++iter)</span> 
+</div>
+<div style="font-size:14px;">
+	<span style="color:#393939;">{</span> 
+</div>
+<div style="font-size:14px;">
+	<span style="color:#393939;"> cout &lt;&lt; *iter &lt;&lt; endl; //使用 * 访问迭代器所指向的元素</span> 
+</div>
+<div style="font-size:14px;">
+	<span style="color:#393939;">}</span> 
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	for(auto it : list) 	若是对象需要通过&amp;it给对象赋值/取值
+</div>
+<div style="font-size:14px;">
+	cout &lt;&lt; it &lt;&lt; endl; 值直接取
+</div>
+<div style="font-size:14px;">
+	return 0;
+</div>
+<div style="font-size:14px;">
+	}
+</div>
+<div id="9772-1561634526618" style="font-size:14px;">
+	<br />
+</div>
+<div id="4916-1560500644038" style="font-size:14px;">
+	<span style="font-size:20px;font-weight:bold;">向量作为函数参数</span> 
+</div>
+<div style="font-size:14px;">
+	使用vector时的注意事项：vector作为函数的参数或者返回值时，需要注意其中的"&amp;"绝对不能少
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	定义向量作为参数传到子函数，子函数以std::vector&amp;stringList形式接收参数。接收后函数体内正常使用。
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div id="7338-1560500892709" style="font-size:14px;">
+	<span style="font-size:20px;font-weight:bold;">向量基本操作</span> 
+</div>
+<div style="font-size:14px;">
+	1&gt;.a.size()                 //获取向量中的元素个数
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	2&gt;.a.empty()                //判断向量是否为空
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	3&gt;.a.clear()                //清空向量中的元素
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	4&gt;.复制
+</div>
+<div style="font-size:14px;">
+	a = b;            //将b向量复制到a向量中
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	5&gt;.比较
+</div>
+<div style="font-size:14px;">
+	保持 == 、 != 、&gt;、 &gt;= 、&lt;、 &lt;= 的惯有含义;
+</div>
+<div style="font-size:14px;">
+	如: a == b;    //a向量与b向量比较, 相等则返回1
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	6&gt;.插入 - insert
+</div>
+<div style="font-size:14px;">
+	①、 a.insert(a.begin(), 1000);            //将1000插入到向量a的起始位置前
+</div>
+<div style="font-size:14px;">
+	②、 a.insert(a.begin(), 3, 1000);        //将1000分别插入到向量元素位置的0-2处(共3个元素)
+</div>
+<div style="font-size:14px;">
+	③、 vectora(5, 1);
+</div>
+<div style="font-size:14px;">
+	vectorb(10);
+</div>
+<div style="font-size:14px;">
+	b.insert(b.begin(), a.begin(), a.end());        //将a.begin(), a.end()之间的全部元素插入到b.begin()前
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	7&gt;.删除 - erase
+</div>
+<div style="font-size:14px;">
+	<span style="color:#DF402A;">必须用b.begin()作为上界和下界的索引</span> 
+</div>
+<div style="font-size:14px;">
+	<span style="color:#DF402A;">删除a中第0个（从第0个算起）到第那个元素，也就是说删除的元素从a.begin()算起（包括它）一直到a.begin()+ n（不包括它）</span> 
+</div>
+<div style="font-size:14px;">
+	①、 b.erase(b.begin());                     //将起始位置的元素删除
+</div>
+<div style="font-size:14px;">
+	②、 b.erase(b.begin(), b.begin() + n);        //将(b.begin(), b.begin()+n)之间的元素删除
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	8&gt;.交换 - swap
+</div>
+<div style="font-size:14px;">
+	b.swap(a);            //a向量与b向量进行交换
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	<a href="https://www.cnblogs.com/hdk1993/p/4419779.html"><span style="color:#003884;">https://www.cnblogs.com/hdk1993/p/4419779.html</span></a> 
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	向量定义 std::vectorvecAdapterStationId;
+</div>
+<div style="font-size:14px;">
+	作为参数const std::vector&amp;vecAdapterId；
+</div></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="迭代器（iterator）  向量vector">
+							<h2 style="display:inline;color:#5BC648;">迭代器（iterator）  向量vector</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-07-02&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><div style="font-size:14px;">
+	标准库为每一种标准容器（包括vector）定义了一种迭代器类型。迭代器类型提供了比下标操作更一般化的方法：所有的标准库容器都定义了相应的迭代器类型，而只有少数的容器支持下标操作。因为迭代器对所有的容器都适用，现代C++程序更倾向于使用迭代器而不是下标操作访问容器元素，即使对支持下标操作的vector类型也这样。
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	容器的iterator类型
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	每种容器类型都定义了自己的迭代器类型，如vector：
+</div>
+<div id="5466-1561810199787">
+	vector&lt;int&gt;::iterator iter;
+</div>
+<div style="font-size:14px;">
+	这条语句定义了一个名为iter的变量，它的数据类型是由vector&lt;int&gt;定义的iterator类型。每个标准库容器类型都定义了一个名为iterator的成员，这里的iterator与迭代器实际类型的含义相同。
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	不同的容器类定义了自己的iterator类型，用于访问容器内的元素。换句话说，每个容器定义了一种名为iterator的类型，而这种类型支持（概念上的）迭代器的各种行为。
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div id="6274-1561810185505" style="font-size:14px;">
+	<span style="font-weight:bold;">begin和end操作</span>
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	每种容器都定义了一对命名为begin和end的函数，用于返回迭代器。如果容器中有元素的话，由begin返回的迭代器指向<span style="color:#DF402A;">第一个元素</span>：
+</div>
+<div id="1268-1561810242126">
+	vector&lt;int&gt;::iterator iter = ivec.begin();
+</div>
+<div style="font-size:14px;">
+	上述语句把iter初始化为由名为begin的vector操作返回的值。假设vector不空，初始化后，iter即指该元素为ivec[0]。
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	由end操作返回的迭代器指向vector的“<span style="color:#DF402A;">末端元素的下一个</span>”。通常称为超出末端迭代器(off-the-end iterator)，表明它指向了一个不存在的元素。如果vector为空，begin返回的迭代器与end返回的迭代器相同。
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	由end操作返回的迭代器并不指向vector中任何实际的元素，相反，它只是起一个哨兵（sentinel）的作用，表示我们已处理完vector中所有元素。
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div id="6171-1561810185505" style="font-size:14px;">
+	<span style="font-size:16px;font-weight:bold;">vector迭代器的自增和解引用运算</span>
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	迭代器类型定义了一些操作来获取迭代器所指向的元素，并允许程序员将迭代器从一个元素移动到另一个元素。
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	迭代器类型可使用解引用操作符（*操作符）来访问迭代器所指向r 元素：
+</div>
+<div id="7045-1561810346715">
+	*iter = 0;
+</div>
+<div style="font-size:14px;">
+	解引用操作符返回迭代器当前所指向的元素。假设iter指向vector对象ivec的第一个元素，那么*iter和ivec[0]就是指向同一个元素。上面这个语句的效果就是把这个元素的值赋为0。
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	迭代器使用自增操作符向前移动迭代器指向容器中下一个元素。从逻辑上说，迭代器的自增操作和int型对象的自增操作类似。对int对象来说，操作结果就是把int型值“加1”，而对迭代器对象则是把容器中的迭代器“向前移动一个位置”。因此，如果iter指向第一个元素，则++iter指向第二个元素。
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	<span>由于end操作返回的迭代器不指向任何元素，因此不能对它进行解引用或自增操作。</span>
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div id="9669-1561810185505" style="font-size:14px;">
+	<span style="font-size:16px;font-weight:bold;"> 迭代器的其他运算</span>
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	另一对可执行于迭代器的操作就是比较：用==或!=操作符来比较两个迭代器，如果两个迭代器对象指向同一个元素，则它们相等，否则就不相等。
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div id="2946-1561810185505" style="font-size:14px;">
+	<span style="font-size:16px;font-weight:bold;">迭代器应用的程序示例</span>
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	假设已声明了一个vector&lt;int&gt;型的ivec变量，要把它所有元素值重置为0，可以用下标操作来完成：
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div id="9573-1561810498123">
+	// reset all the elements in ivec to 0
+    for (vector&lt;int&gt;::size_type ix = 0; ix != ivec.size(); ++ix)
+    ivec[ix] = 0;
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	上述程序用for循环遍历ivec的元素，for循环定义了一个索引ix，每循环迭代一次ix就自增1。for循环体将ivec的每个元素赋值为0。
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	更典型的做法是用迭代器来编写循环：
+</div>
+<div id="9819-1561810556208">
+	// equivalent loop using iterators to reset all the elements in ivec to 0
+for (vector&lt;int&gt;::iterator iter = ivec.begin(); iter != ivec.end(); ++iter)
+    *iter = 0;  // set element to which iter refers to 0
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	for循环首先定义了iter，并将它初始化为指向ivec的第一个元素。for循环的条件测试iter是否与end操作返回的迭代器不等。每次迭代iter都自增1，这个for循环的效果是从ivec第一个元素开始，顺序处理vector中的每一元素。最后，iter将指向ivec中的最后一个元素，处理完最后一个元素后，iter再增加1，就会与end操作的返回值相等，在这种情况下，循环终止。
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	for循环体内的语句用解引用操作符来访问当前元素的值。和下标操作符一样，解引用操作符的返回值是一个左值，因此可以对它进行赋值来改变它的值。上述循环的效果就是把ivec中所有元素都赋值为0。
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	通过上述对代码的详细分析，可以看出这段程序与用下标操作符的版本达到相同的操作效果：从vector的第一个元素开始，把vector中每个元素都置为0。
+</div>
+<div style="font-size:14px;">
+	如果vector为空，程序是安全的。如果ivec为空，则begin返回的迭代器不指向任何元素，由于没有元素，所以它不能指向任何元素——在这种情况下，从begin操作返回的迭代器与从end操作返回的迭代器的值相同，因此for语句中的测试条件立即失败。
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div id="2058-1561810185507" style="font-size:14px;">
+	<span style="font-weight:bold;">const_iterator</span>
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	前面的程序用vector::iterator改变vector中的元素值。每种容器类型还定义了一种名为const_iterator的类型，该类型只能访问容器内元素，但不能改变其值。
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	当我们对普通iterator类型解引用时，得到对某个元素的非const引用。而如果我们对const_iterator类型解引用时，则可以得到一个指向const对象的引用，如同任何常量一样，该对象不能进行重写。
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	例如，如果text是vector&lt;string&gt;类型，程序员想要遍历它，输出每个元素,可以这样编写程序：
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div id="6890-1561810853461">
+	// use const_iterator because we won't change the elements
+for (vector&lt;string&gt;::const_iterator iter = text.begin(); 
+    iter != text.end(); ++iter)
+cout &lt;&lt; *iter &lt;&lt; endl; // print each element in text
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	除了是从迭代器读取元素值而不是对它进行赋值之外，这个循环与前一个相似。由于这里只需要借助迭代器进行读，不需要写，这里把iter定义为const_iterator类型。当对const_iterator类型解引用时，返回的是一个const值。不允许用const_iterator进行赋值：
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div id="3046-1561810910206">
+	for (vector&lt;string&gt;::const_iterator iter = text.begin();
+    iter != text.end(); ++ iter)
+*iter = " ";     // error: *iter is const
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	使用const_iterator类型时，我们可以得到一个迭代器，它自身的值可以改变，但不能用来改变其所指向的元素的值。可以对迭代器进行自增以及使用解引用操作符来读取值，但不能对该元素值赋值。
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	不要把const_iterator对象与const的iterator对象混淆起来。声明一个const迭代器时，必须初始化迭代器。一旦被初始化后，就不能改变它的值：
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div id="1660-1561810185508" style="font-size:14px;">
+	<span style="font-size:16px;font-weight:bold;">迭代器的算术操作</span>
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	除了一次移动迭代器的一个元素的增量操作符外，vector的迭代器（很少有其他标准库容器迭代器）也支持其他的算术操作。这些操作称为迭代器算术操作（iterator arithmetic），包括：
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	l iter + n
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	iter - n
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	可以对迭代器对象加上或减去一个整型值。这样做将产生一个新的迭代器，其位置在iter所指元素之前（加）或之后（减）n个元素的位置。加或减之后的结果必须指向iter所指vector中的某个元素，或者是vector末端的后一个元素。加上或减去的值的类型应该是vector的size_type或difference_type类型（参考下面的解释）。
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	l iter1 - iter2
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	该表达式用来计算两个迭代器对象的距离，该距离是名为difference_type的signed整数类型的值，这里的difference_type类型类似于size_type类型，也是由vector定义的。difference_type是signed类型，因为减法运算可能产生负数的结果。该类型可以保证足够大以存储任何两个迭代器对象间的距离。iter1与iter2两者必须都指向同一vector中的元素，或者指向vector末端之后的下一个元素。
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	可以用迭代器算术操作来移动迭代器直接指向某个元素，例如，下面语句直接定位于vector的中间元素：
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	vector&lt;int&gt;::iterator mid = vi.begin() + vi.size()/2;
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	上述代码用来初始化mid，使其指向vi中最靠近正中间的元素。这种直接计算迭代器的方法，与用迭代器逐个元素自增操作到达中间元素的方法是等价的，但前者的效率要高得多。
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	<span style="color:#DF402A;background-color:#FAE220;">任何改变vector长度的操作都会使已存在的迭代器失效</span>。例如，在调用push_back之后，就不能再信赖指向vector的迭代器的值了。
+</div></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#几种容器遍历方法">几种容器遍历方法</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#vector容器中添加和删除元素">vector容器中添加和删除元素</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#C++ vector 向量、向量参数">C++ vector 向量、向量参数</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#迭代器（iterator）  向量vector">迭代器（iterator）  向量vector</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

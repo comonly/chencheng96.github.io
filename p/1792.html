@@ -1,0 +1,417 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>C++无法重载点符号、::、sizeof等的原因_comonly.cn</title>
+<meta name="keywords" content="C++无法重载点符号、::、sizeof等的原因" />
+<meta name="description" content="大多数的运算符能够被程序员重载。例外的是：
+
+
+	&nbsp;&nbsp;&nbsp; . (点符号) :: ?: sizeof
+
+
+	并没有什么根本的原因要禁止重载?:。仅仅是因为，我没有发现有哪种特殊的情况需要重载一个三元运算符。注意一个重载了 表达式1？表达式2：表达式3 的函数，不能够保证表达式2：表达式3 中只有一个会被执行。
+
+
+	Sizeof 不能够被重载是因为内建的操作（built-in operations），诸如对一个指向数组的指针进行增量操作，必须依靠它。考虑一下：" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">C++无法重载点符号、::、sizeof等的原因</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">weixueyuan</li>
+          <li class="lmname"><a href="https://www.jb51.net/article/84799.htm" target="_blank">https://www.jb51.net/article/84799.htm</a></li>
+          <li class="timer">2020-10-03</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>大多数的运算符能够被程序员重载。例外的是：
+
+
+	&nbsp;&nbsp;&nbsp; . (点符号) :: ?: sizeof
+
+
+	并没有什么根本的原因要禁止重载?:。仅仅是因为，我没有发现有哪种特殊的情况需要重载一个三元运算符。注意一个重载了 表达式1？表达式2：表达式3 的函数，不能够保证表达式2：表达式3 中只有一个会被执行。
+
+
+	Sizeof 不能够被重载是因为内建的操作（built-in operations），诸如对一个指向数组的指针进行增量操作，必须依靠它。考虑一下：</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	大多数的运算符能够被程序员重载。例外的是：
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp; . (点符号) :: ?: sizeof
+</p>
+<p>
+	并没有什么根本的原因要禁止重载?:。仅仅是因为，我没有发现有哪种特殊的情况需要重载一个三元运算符。注意一个重载了 表达式1？表达式2：表达式3 的函数，不能够保证表达式2：表达式3 中只有一个会被执行。
+</p>
+<p>
+	Sizeof 不能够被重载是因为内建的操作（built-in operations），诸如对一个指向数组的指针进行增量操作，必须依靠它。考虑一下：
+</p>
+<div>
+	<div>
+		<div>
+			<table border="0" class="ke-zeroborder">
+				<tbody>
+					<tr>
+						<td>
+							<div>
+								1
+							</div>
+							<div>
+								2
+							</div>
+							<div>
+								3
+							</div>
+							<div>
+								4
+							</div>
+							<div>
+								5
+							</div>
+						</td>
+						<td>
+							<div>
+								<div>
+									X a[10];
+								</div>
+								<div>
+									X* p = &amp;a[3];
+								</div>
+								<div>
+									X* q = &amp;a[3];
+								</div>
+								<div>
+									p++;// p 指向a[4]
+								</div>
+								<div>
+									// 那么p 的整型值必须比q 的整型值大出一个sizeof(X)
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<p>
+	所以，sizeof(X)不能由程序员来赋予一个不同的新意义，以免违反基本的语法。
+</p>
+<p>
+	在N::m 中，无论N 还是m 都不是值的表达式；N 和m 是编译器知道的名字，::执行一个（编译期的）范围解析，而不是表达式求值。你可以想象一下，允许重载x::y 的话，x 可能是一个对象而不是一个名字空间（namespace）或者一个类，这样就会导致——与原来的表现相反——产生新的语法（允许 表达式1::表达式2）。很明显，这种复杂性不会带来任何好处。
+</p>
+<p>
+	理论上来说，.（点运算符）可以通过使用和-&gt;一样的技术来进行重载。但是，这样做会导致一个问题，那就是无法确定操作的是重载了.的对象呢，还是通过.引用的一个对象。例如：
+</p>
+<div>
+	<div>
+		<div>
+			<table border="0" class="ke-zeroborder">
+				<tbody>
+					<tr>
+						<td>
+							<div>
+								1
+							</div>
+							<div>
+								2
+							</div>
+							<div>
+								3
+							</div>
+							<div>
+								4
+							</div>
+							<div>
+								5
+							</div>
+							<div>
+								6
+							</div>
+							<div>
+								7
+							</div>
+							<div>
+								8
+							</div>
+							<div>
+								9
+							</div>
+							<div>
+								10
+							</div>
+							<div>
+								11
+							</div>
+							<div>
+								12
+							</div>
+							<div>
+								13
+							</div>
+							<div>
+								14
+							</div>
+						</td>
+						<td>
+							<div>
+								<div>
+									classY {
+								</div>
+								<div>
+									&nbsp;&nbsp;public:
+								</div>
+								<div>
+									&nbsp;&nbsp;voidf();
+								</div>
+								<div>
+									&nbsp;&nbsp;// ...
+								</div>
+								<div>
+									};
+								</div>
+								<div>
+									classX {// 假设你能重载.
+								</div>
+								<div>
+									&nbsp;&nbsp;Y* p;
+								</div>
+								<div>
+									&nbsp;&nbsp;Y&amp; operator.() {return*p; }
+								</div>
+								<div>
+									&nbsp;&nbsp;voidf();
+								</div>
+								<div>
+									&nbsp;&nbsp;// ...
+								</div>
+								<div>
+									};
+								</div>
+								<div>
+									voidg(X&amp; x){
+								</div>
+								<div>
+									&nbsp;&nbsp;x.f();// X::f 还是Y::f 还是错误？
+								</div>
+								<div>
+									}
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<p>
+	附上C++重载的一些总结
+</p>
+<p>
+	重载操作符的限制：
+</p>
+<p>
+	1 并不是所有的操作符都能被重载。除了. ，.* ，:: ，? : ，sizeof，typeid这几个运算符不能被重载，其他运算符都能被重载<br />
+2 重载不能改变该运算符用于内置类型时的函义，程序员不能改变运算符+用于两个int型时的含义。<br />
+3 运算符函数的参数至少有一个必须是类的对象或者类的对象的引用。这种规定可以防止程序员运用运算符改变内置类型的函义。<br />
+4 重载不能改变运算符的优先级。<br />
+5 重载不能改变运算符的结合律。<br />
+6 重载不能改变运算符操作数的个数。比如+需要两个操作数，则重载的+也必须要有两个操作数。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1791.html">c++ 关于菱形继承&虚继承的问题</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1793.html">vector中不能存放引用类型</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.jb51.net/article/84799.htm" target="_blank">https://www.jb51.net/article/84799.htm</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

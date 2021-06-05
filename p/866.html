@@ -1,0 +1,310 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>c++ 知识点待巩固_comonly.cn</title>
+<meta name="keywords" content="c++ 知识点待巩固" />
+<meta name="description" content="C++中四种类型转换是：static_cast, dynamic_cast, const_cast, reinterpret_cast
+
+
+	dynamic_cast 针对的父类和子类之间的转换，对应指针和引用异常处理不同。什么情况会发生异常？？
+
+
+	
+
+
+	weak_ptr 解决 share_ptr循环引用的问题，但是怎么知道选释放 引用少的（weak_ptr）那个对象的？？
+
+
+	其实和顺序无关，和 share_ptr 引用的次数有关！&nbsp; 变量作用域结束后，先释放某" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">c++ 知识点待巩固</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-02-27</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	工作相关
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>C++中四种类型转换是：static_cast, dynamic_cast, const_cast, reinterpret_cast
+
+
+	dynamic_cast 针对的父类和子类之间的转换，对应指针和引用异常处理不同。什么情况会发生异常？？
+
+
+	
+
+
+	weak_ptr 解决 share_ptr循环引用的问题，但是怎么知道选释放 引用少的（weak_ptr）那个对象的？？
+
+
+	其实和顺序无关，和 share_ptr 引用的次数有关！&nbsp; 变量作用域结束后，先释放某</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	C++中四种类型转换是：static_cast, dynamic_cast, const_cast, reinterpret_cast
+</p>
+<p>
+	dynamic_cast 针对的父类和子类之间的转换，对应指针和引用异常处理不同。什么情况会发生异常？？
+</p>
+<p>
+	<br />
+</p>
+<p>
+	weak_ptr 解决 share_ptr循环引用的问题，但是怎么知道选释放 引用少的（weak_ptr）那个对象的？？
+</p>
+<p>
+	其实和顺序无关，和 share_ptr 引用的次数有关！&nbsp; 变量作用域结束后，先释放某对象，对象计数减一，若为0则析构，若异构后另一 share_ptr 计数变为0，则析构。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	对于“分配内存”，由于局部静态变量存储在全局存储区，故应在程序执行前，编译时分配内存。
+</p>
+<p>
+	关于编译出的程序包，文件大小包含·分配的内存？
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	个人感觉函数指针放在这里不太合适（或者说如果我面试被问到我会这么回答）。<br />
+C++本身是支持面向对象的编程范式的，那么希望实现多态完全没必要在使用C的struct+函数指针的套路，而可以直接使用虚函数。<br />
+假如我们希望把函数作为参数传递也是没有必要的，因为我们有C++的特性：function&lt;()&gt;，也可以作为函数指针的替代品。<br />
+我认为学习C++这门语言无需带有太多“语言历史”的顾虑，C++的特性掌握好就足够了。<br />
+发表于 2020-05-28 11:03:19回复(1)赞(0)举报<br />
+Kirai! ：举个例子吧：<br />
+```c++<br />
+int f(int x) {<br />
+return x;<br />
+}<br />
+<br />
+int g(int x, function<int(int)> f) {<br />
+return 3 + f(x);<br />
+}<br />
+<br />
+signed main() {<br />
+cout &lt;&lt; g(5, f) &lt;&lt; endl;<br />
+}</int(int)>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	const&nbsp; 位置&nbsp; 放在成员函数后面 与 不放 算重载？
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	每一个函数调用都会分配函数栈，在栈内进行函数执行过程。调用前，先把返回地址压栈，然后把当前函数的esp（应该为ebp）指针压栈。<br />
+ebp压栈，然后ebp改为当前esp值，此时ebp=esp，表示初始的子函数帧栈其大小为0<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/865.html">Python正则表达式</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/867.html">Python GUI程序设计</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

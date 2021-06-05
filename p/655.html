@@ -1,0 +1,369 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>URL静态化，URL伪静态，URL重写和页面静态化_comonly.cn</title>
+<meta name="keywords" content="URL静态化，URL伪静态，URL重写和页面静态化" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">URL静态化，URL伪静态，URL重写和页面静态化</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">陋室铭</li>
+          <li class="lmname"><a href="http://www.cnblogs.com/cuihongyu3503319/archive/2012/12/05/2804221.html" target="_blank">http://www.cnblogs.com/cuihongyu3503319/archive/2012/12/05/2804221.html</a></li>
+          <li class="timer">2017-03-30</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">URL,静态化,重写</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	做SEO的朋友现在都知道了，URL静态化、URL伪静态、URL重写对SEO的重要性，搜索引擎喜欢静态的网站页面。今天我们来详细分析一下URL静态化、URL伪静态、URL重写这三者的区别。
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp; URL静态化。URL静态化 就是在你的网站服务器上现实存在的HTML页面，每个HTML页面对应着你网站上的一个URL。常见的可以生成URL静态化页面的网站开源程序有DEDECMS和其它一些CMS内容管理系统，WordPress在安装插件后也可以实现URL静态化。URL静态化和伪静态不同的地方就是URL静态化需要生成HTML文件，如果文件太多生成一次可能需要很长的时间，这一点不太方便。
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp; URL伪静态。URL伪态是最常见的网页存在形式，URL伪静态看起来和URL静态化完全一样，但实际上URL对应的文件是不存在的，是用技术手段实现的。伪静态的优点很多，比如不生成现实的HTML文件，就不会占用网站空间，管理方便，维护方便，和URL静态化一样有利于SEO。
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp; URL重写。URL重写技术就是我们常见的Rewrite技术，属于URL伪静态技术中的一种，现在是被广泛应用于各种系统环境，比如目前用得最多的LINUX 系统PHP环境，还有Asp.net环境，都是通过编辑配置文件规则实现的，例如我们常用的在LINUX系统PHP环境下的301重定向，就是通过Rewrite技术实现的。
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp; 做SEO的朋友们一定要懂得URL静态化和URL伪静态的设置，这是做SEO站的基本要求。
+</p>
+<h1>
+	页面静态化
+</h1>
+<p>
+	优点：降低数据库、web服务器压力，访问速度比较快；&nbsp;同时，让搜索引擎搜录该链接的几率大，有助于seo
+</p>
+<p>
+	思路：将"newsDetail.aspx?id=101"动态的生成的网页，下载到自定的文件夹，然后重新命名：20120319/101.htm。这样用户在访问的时候，就直接访问101.htm，静态页的好处这时就体现了。
+</p>
+<p>
+	示例代码：
+</p>
+<div>
+	<table border="0" class="ke-zeroborder">
+		<tbody>
+			<tr>
+				<td>
+					<div>
+						string&nbsp;newPath = id +".htm";
+					</div>
+					<div>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;localPath = HttpContext.Current.Server.MapPath("~/20120319/"&nbsp;+ newPath);//HostingEnvironment.MapPath();
+					</div>
+					<div>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//创建文件夹
+					</div>
+					<div>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Directory.CreateDirectory(Path.GetDirectoryName(localPath));
+					</div>
+					<div>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WebClient wc =new&nbsp;WebClient();
+					</div>
+					<div>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wc.Encoding = Encoding.UTF8;
+					</div>
+					<div>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//通过WebClient向服务器发Get请求，把服务器返回的html内容保存到磁盘上。以后用户直接请求html文件请求。
+					</div>
+					<div>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wc.DownloadFile("http://localhost:7930/newsDetail.aspx?id="&nbsp;+ art.id, localPath);
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<p>
+	页面的a标签就可以这么写：&lt;a href='20120319/&lt;%#Eval("id") %&gt;.htm'&gt;&lt;%#Eval("title")%&gt;&lt;/a&gt;
+</p>
+<p>
+	静态页注意几个问题：
+</p>
+<p>
+	1.页面编码问题：需要保存的页面指明编码方式(&lt;meta http-equiv="Content-Type" content="text/html;charset=utf-8" /&gt;),
+</p>
+<p>
+	WebClient下载网页时，也要注意编码问题。
+</p>
+<p>
+	2.路径：&nbsp;图片、js、css等都用绝对路径
+</p>
+<p>
+	3.页面上不要使用服务器控件，都用ajax处理
+</p>
+<h1>
+	Url重写
+</h1>
+<p>
+	页面静态化和URL重写目的不一样，URL重写和页面静态化都可以SEO，
+</p>
+<p>
+	但是URL重写SEO的开发难度小，页面静态化除了SEO之外还能大大降低服务器的压力。只有经常被访问的、很少变化的内容做成静态化。
+</p>
+<p>
+	示例代码
+</p>
+<div>
+	<table border="0" class="ke-zeroborder">
+		<tbody>
+			<tr>
+				<td>
+					<div>
+						&nbsp;&nbsp;protected&nbsp;void&nbsp;Application_BeginRequest(object&nbsp;sender, EventArgs e)
+					</div>
+					<div>
+						&nbsp; &nbsp; &nbsp; &nbsp;{&nbsp;&nbsp;string&nbsp;url = HttpContext.Current.Request.AppRelativeCurrentExecutionFilePath;//获得用户要访问的资源。这个属性获得的是虚拟路径
+					</div>
+					<div>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//判断用户访问的是否是/Art/newsDetail-101.aspx格式
+					</div>
+					<div>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Match match = Regex.Match(url,@"~/Art/newsDetail-(\d+)\.aspx");
+					</div>
+					<div>
+						&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(match.Success)
+					</div>
+					<div>
+						&nbsp;&nbsp;&nbsp;&nbsp;{
+					</div>
+					<div>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;id = match.Groups[1].Value;
+					</div>
+					<div>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//把客户端请求发给内部的其他页面
+					</div>
+					<div>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HttpContext.Current.RewritePath("~/Art/newsDetail.aspx?id="&nbsp;+ id);
+					</div>
+					<div>
+						&nbsp;&nbsp;&nbsp;&nbsp;}
+					</div>
+					<div>
+						}
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<p>
+	总结一下
+</p>
+<p>
+	1.URL重写和页面真正的静态化，都可以做SEO优化，他们对于搜索引擎来说没有区别。
+</p>
+<p>
+	2.页面静态化还有一个主要的原因就是减小服务器和数据库压力，静态化一般是不变化的信息，比如新闻等等，所以一个系统可以静态化的就制作成静态页面，如果和服务器交互多的页面，那么还保持原来的动态页面，不过通过URL重写充能，做SEO。
+</p>
+<p>
+	3.还有一些和服务器交互不多的页面，比如用户信息页面，一般都是每个用户生成一个静态信息页面，每次修改用户信息的时候，动态的生成静态页面，然后替换原来的静态页面。
+</p>
+<p>
+	4.生成静态页也有很多问题，不说寻址和映射问题，如果静态页面太多的话，存储和管理也是问题。所以动态页面和静态页面遇到具体问题要具体分析，选择最优方案。
+</p>
+<p>
+	5.如果只想做SEO的话，那完全可以只做URL重写。
+</p>
+<p>
+	6.另外提一下，.net中有页面缓存的技术，这个服务器压力和生成静态页面有些相似，具体技术大家自己查资料吧(其实页面缓存是静态页的一种折中的办法，不过它局限在存储在内存中，会占用内存)。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/653.html">File Access（文件存取组件）</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/656.html">安装和使用URL重写工具-URL Rewrite</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="http://www.cnblogs.com/cuihongyu3503319/archive/2012/12/05/2804221.html" target="_blank">http://www.cnblogs.com/cuihongyu3503319/archive/2012/12/05/2804221.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

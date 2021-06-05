@@ -1,0 +1,412 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>python相关汇总(增加中)_comonly.cn</title>
+<meta name="keywords" content="python相关汇总(增加中)" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">python相关汇总(增加中)</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-03-13</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	python  perl
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h4>
+	Python3中字符串中的数字提取方法
+</h4>
+<p>
+	totalCount ='100abc'
+</p>
+<p>
+	totalCount = re.sub("\D","", totalCount)
+</p>
+<p>
+	re.sub(pattern,repl,string,count=0,flags=0)
+</p>
+<p>
+	在字符串 string 中找到匹配正则表达式 pattern 的所有子串，用另一个字符串 repl 进行替换。如果没有找到匹配 pattern 的串，则返回未被修改的 string。Repl 既可以是字符串也可以是一个函数。由此可分析上面使用的语句的含义：在'100abc'这个字符串中找到非数字的字符（正则表达式中'\D'表示非数字），并用""替换，然后返回的就是只剩下数字的字符串。
+</p>
+<p>
+	含有有小数点正则位可以是[^0-9|.]
+</p>
+<h4>
+	pyodbc插入access数据库时不能含 '
+</h4>
+<h4>
+	所有大写字母，小写字母，数字组成的字符串
+</h4>
+<p>
+	string.ascii_lowercase
+</p>
+<p>
+	<br />
+</p>
+<p>
+	print[chr(i)foriinrange(65,91)]#所有大写字母
+</p>
+<p>
+	print[chr(i)foriinrange(97,123)]#所有小写字母
+</p>
+<p>
+	print[chr(i)foriinrange(48,58)]#所有数字
+</p>
+<p>
+	<br />
+</p>
+<p>
+	import string#导入string这个模块
+</p>
+<p>
+	string.digits#输出包含数字0~9的字符串
+</p>
+<p>
+	string.letters#包含所有字母(大写或小写)的字符串
+</p>
+<p>
+	string.lowercase#包含所有小写字母的字符串
+</p>
+<p>
+	string.uppercase#包含所有大写字母的字符串
+</p>
+<p>
+	string.punctuation#包含所有标点的字符串
+</p>
+<p>
+	string.ascii_letters#与string.letters一样
+</p>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/875.html">apache-tomcat-6.0.20</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/877.html">JVM terminated. Exit code=-1</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="python相关测试">
+							<h2 style="display:inline;color:#5BC648;">python相关测试</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-03-29&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><pre class="prettyprint lang-py">Python 3.6.2 (v3.6.2:5fd33b5, Jul  8 2017, 04:57:36) [MSC v.1900 64 bit (AMD64)] on win32
+Type "copyright", "credits" or "license()" for more information.
+&gt;&gt;&gt; import re
+&gt;&gt;&gt; re.findall('(d)\1+','33abcd112')
+[]
+&gt;&gt;&gt; len('SDIBT')
+5
+&gt;&gt;&gt; sorted(random.sample(range(5),5))
+Traceback (most recent call last):
+  File "&lt;pyshell#3&gt;", line 1, in &lt;module&gt;
+    sorted(random.sample(range(5),5))
+NameError: name 'random' is not defined
+&gt;&gt;&gt; import random
+&gt;&gt;&gt; sorted(random.sample(range(5),5))
+[0, 1, 2, 3, 4]
+&gt;&gt;&gt; isinstance('4',(int,float,complex))
+False
+&gt;&gt;&gt; min(['11','2','3'])
+'11'
+&gt;&gt;&gt; g=lambda x,y=3,z=5:x+y+z
+&gt;&gt;&gt; g(2)
+10
+&gt;&gt;&gt; [1,2]+[3]
+[1, 2, 3]
+&gt;&gt;&gt; list(filter(None,[0,1,2,3,0,0]))
+[1, 2, 3]
+&gt;&gt;&gt; int('123',8)
+83
+&gt;&gt;&gt; x=[3,5,7]
+&gt;&gt;&gt; x[:3]=[2]
+&gt;&gt;&gt; x
+[2]
+&gt;&gt;&gt; [index for index,value in enumerate([3,5,7,3,7]) if value==max([3,5,7,3,7])]
+[2, 4]
+&gt;&gt;&gt; (1)+(2)
+3
+&gt;&gt;&gt; 3&lt;&lt;2
+12
+&gt;&gt;&gt; x={'a':'b",'c':'d'}
+   
+SyntaxError: invalid syntax
+&gt;&gt;&gt; x={'a':'b','c':'d'}
+&gt;&gt;&gt; 'a' in x
+True
+&gt;&gt;&gt; for i in range(3):print(i,end=',')
+;
+SyntaxError: invalid syntax
+&gt;&gt;&gt; for i in range(3):print(i,end=',')
+;
+SyntaxError: invalid syntax
+&gt;&gt;&gt; for i in range(3):print(i,end=',');
+
+0,1,2,
+&gt;&gt;&gt; type(3+4j) in (int,float,complex)
+True
+&gt;&gt;&gt; dir
+&lt;built-in function dir&gt;
+&gt;&gt;&gt; x=(3,)
+&gt;&gt;&gt; x*3
+(3, 3, 3)
+&gt;&gt;&gt; '%c'%65==str(65)
+False
+&gt;&gt;&gt; sum(range(1,10))
+45
+&gt;&gt;&gt; x=[1,2,3,2,3]
+&gt;&gt;&gt; x.remove(2)
+&gt;&gt;&gt; x
+[1, 3, 2, 3]
+&gt;&gt;&gt; x={1:1}
+&gt;&gt;&gt; x[2]=2
+&gt;&gt;&gt; len(x)
+2
+&gt;&gt;&gt; x=3
+&gt;&gt;&gt; x+=6
+&gt;&gt;&gt; x
+9
+&gt;&gt;&gt; x=[1,2]
+&gt;&gt;&gt; x.append([3])
+&gt;&gt;&gt; x
+[1, 2, [3]]
+&gt;&gt;&gt; x=[1,2,3,2,3]
+&gt;&gt;&gt; x.pop()
+3
+x
+&gt;&gt;&gt; 
+&gt;&gt;&gt; x
+[1, 2, 3, 2]
+&gt;&gt;&gt; [1,2,3].count(4)
+0
+&gt;&gt;&gt; int('123')
+123
+&gt;&gt;&gt; 
+======================== RESTART: F:\myPython\test.py ========================
+Traceback (most recent call last):
+  File "F:\myPython\test.py", line 10, in &lt;module&gt;
+    sort(i1,i2,i3,i4)
+NameError: name 'sort' is not defined
+&gt;&gt;&gt; 
+======================== RESTART: F:\myPython\test.py ========================
+Traceback (most recent call last):
+  File "F:\myPython\test.py", line 10, in &lt;module&gt;
+    sorted(i1,i2,i3,i4)
+TypeError: sorted() takes at most 3 arguments (4 given)
+&gt;&gt;&gt; 
+======================== RESTART: F:\myPython\test.py ========================
+&gt;&gt;&gt; 
+======================== RESTART: F:\myPython\test.py ========================
+&gt;&gt;&gt; a
+[5, 5, 5]
+&gt;&gt;&gt; 
+======================== RESTART: F:\myPython\test.py ========================
+&gt;&gt;&gt; a
+[2, 3, 4]
+&gt;&gt;&gt; 
+======================== RESTART: F:\myPython\test.py ========================
+&gt;&gt;&gt; a
+[2, 3, 4, 5]
+&gt;&gt;&gt; a[0]
+2
+&gt;&gt;&gt; </pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#python相关测试">python相关测试</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

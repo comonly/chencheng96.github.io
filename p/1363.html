@@ -1,0 +1,567 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>C++信号量 互斥Mutex（互斥对象）和Critical_Section（关键代码段）_comonly.cn</title>
+<meta name="keywords" content="C++信号量 互斥Mutex（互斥对象）和Critical_Section（关键代码段）" />
+<meta name="description" content="Mutex和Critical Section都是主要用于限制多线程（Multithread）对全局或共享的变量、对象或内存空间的访问。下面是其主要的异同点（不同的地方用绿色表示）。
+
+
+	
+		
+			
+				
+					
+						
+					
+				
+				
+					
+						Mutex（互斥对象）
+					
+				
+				
+					
+						Critical Section（代码段）
+					
+				
+			
+			
+			" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">C++信号量 互斥Mutex（互斥对象）和Critical_Section（关键代码段）</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-08-29</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>Mutex和Critical Section都是主要用于限制多线程（Multithread）对全局或共享的变量、对象或内存空间的访问。下面是其主要的异同点（不同的地方用绿色表示）。
+
+
+	
+		
+			
+				
+					
+						
+					
+				
+				
+					
+						Mutex（互斥对象）
+					
+				
+				
+					
+						Critical Section（代码段）
+					
+				
+			
+			
+			</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	Mutex和Critical Section都是主要用于限制多线程（Multithread）对全局或共享的变量、对象或内存空间的访问。下面是其主要的异同点（不同的地方用绿色表示）。
+</p>
+<p>
+	<table border="1" cellpadding="0" class="" cellspacing="0">
+		<tbody>
+			<tr>
+				<td>
+					<p>
+						<br />
+					</p>
+				</td>
+				<td>
+					<p>
+						Mutex（互斥对象）
+					</p>
+				</td>
+				<td>
+					<p>
+						Critical Section（代码段）
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>
+						<span style="color:#009900;">性能和速度</span> 
+					</p>
+				</td>
+				<td>
+					<p>
+						慢。
+					</p>
+					<p>
+						Mutex是内核对象，相关函数的执行（WaitForSingleObject，
+					</p>
+					<p>
+						ReleaseMutex）需要用户模式（User Mode）到内核模式
+					</p>
+					<p>
+						（Kernel Mode）的转换，在x86处理器上这种转化一般要
+					</p>
+					<p>
+						发费600个左右的CPU指令周期。
+					</p>
+				</td>
+				<td>
+					<p>
+						快。
+					</p>
+					<p>
+						Critical Section本身不是内核对象，相关函数
+					</p>
+					<p>
+						（EnterCriticalSection，LeaveCriticalSection）
+					</p>
+					<p>
+						的调用一般都在用户模式内执行，在x86处理器上
+					</p>
+					<p>
+						一般只需要发费9个左右的CPU指令周期。只有
+					</p>
+					<p>
+						当想要获得的锁正好被别的线程拥有时才会退化
+					</p>
+					<p>
+						成和Mutex一样，即转换到内核模式，发费600个
+					</p>
+					<p>
+						左右的CPU指令周期。
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>
+						<span style="color:#009900;">能否跨越进程（Process）边界</span> 
+					</p>
+				</td>
+				<td>
+					<p>
+						可以
+					</p>
+				</td>
+				<td>
+					<p>
+						不可
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>
+						定义写法
+					</p>
+				</td>
+				<td>
+					<p>
+						HANDLE hmtx;
+					</p>
+				</td>
+				<td>
+					<p>
+						CRITICAL_SECTION cs;
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>
+						初始化写法
+					</p>
+				</td>
+				<td>
+					<p>
+						hmtx= CreateMutex (NULL, FALSE, NULL);
+					</p>
+				</td>
+				<td>
+					<p>
+						InitializeCriticalSection(&amp;cs);
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>
+						结束清除写法
+					</p>
+				</td>
+				<td>
+					<p>
+						CloseHandle(hmtx);
+					</p>
+				</td>
+				<td>
+					<p>
+						DeleteCriticalSection(&amp;cs);
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>
+						无限期等待的写法
+					</p>
+				</td>
+				<td>
+					<p>
+						WaitForSingleObject (hmtx, INFINITE);
+					</p>
+				</td>
+				<td>
+					<p>
+						EnterCriticalSection(&amp;cs);
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>
+						0等待（状态检测）的写法
+					</p>
+				</td>
+				<td>
+					<p>
+						WaitForSingleObject (hmtx, 0);
+					</p>
+				</td>
+				<td>
+					<p>
+						TryEnterCriticalSection(&amp;cs);
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>
+						<span style="color:#009900;">任意时间等待的写法</span> 
+					</p>
+				</td>
+				<td>
+					<p>
+						WaitForSingleObject (hmtx, dwMilliseconds);
+					</p>
+				</td>
+				<td>
+					<p>
+						不支持
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>
+						锁释放的写法
+					</p>
+				</td>
+				<td>
+					<p>
+						ReleaseMutex(hmtx);
+					</p>
+				</td>
+				<td>
+					<p>
+						LeaveCriticalSection(&amp;cs);
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>
+						<span style="color:#009900;">能否被一道用于等待其他内核对象</span> 
+					</p>
+				</td>
+				<td>
+					<p>
+						可以（使用WaitForMultipleObjects，
+					</p>
+					<p>
+						WaitForMultipleObjectsEx，
+					</p>
+					<p>
+						MsgWaitForMultipleObjects，
+					</p>
+					<p>
+						MsgWaitForMultipleObjectsEx等等）
+					</p>
+				</td>
+				<td>
+					<p>
+						不可
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>
+						<span style="color:#009900;">当拥有锁的线程死亡时</span> 
+					</p>
+				</td>
+				<td>
+					<p>
+						Mutex变成abandoned状态，其他的等待线程可以获得锁。
+					</p>
+				</td>
+				<td>
+					<p>
+						Critical Section的状态不可知（undefined），
+					</p>
+					<p>
+						以后的动作就不能保证了。
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>
+						自己会不会锁住自己
+					</p>
+				</td>
+				<td>
+					<p>
+						不会（对已获得的Mutex,重复调用WaitForSingleObject不会
+					</p>
+					<p>
+						锁住自己。但最后你别忘了要调用同样次数的
+					</p>
+					<p>
+						ReleaseMutex）
+					</p>
+				</td>
+				<td>
+					<p>
+						不会（对已获得的Critical Section,重复调用
+					</p>
+					<p>
+						EnterCriticalSection不会锁住自己。但最后
+					</p>
+					<p>
+						你别忘了要调用同样次数的
+					</p>
+					<p>
+						LeaveCriticalSection）
+					</p>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</p>
+<p>
+	表来自：<a href="https://blog.csdn.net/u014679804/article/details/49464677" target="_blank">https://blog.csdn.net/u014679804/article/details/49464677</a>
+</p>
+<p>
+	基本使用：
+</p>
+<h4>
+	mutex
+</h4>
+<pre class="prettyprint lang-cpp">HANDLE hMutex;//定义互斥变量 WaitForSingleObject(hMutex,INFINITE);//获取信号量
+ReleaseMutex(hMutex);//释放信号量</pre>
+<h4>
+	Critical Section
+</h4>
+<pre class="prettyprint lang-cpp">CRITICAL_SECTION  cs;//定义用于初始化临界区的结构体指针
+InitializeCriticalSection(&amp;cs);//初始化的临界区
+EnterCriticalSection(&amp;cs);//获取当前线程访问权
+LeaveCriticalSection(&amp;cs);//释放资源
+DeleteCriticalSection(&amp;cs);//释放指针</pre></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1362.html">WaitForSingleObject等待某信号量</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1364.html">虚拟机MAC地址重复</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

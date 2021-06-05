@@ -1,0 +1,472 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>左值引用和右值引用、move函数_comonly.cn</title>
+<meta name="keywords" content="左值引用和右值引用、move函数" />
+<meta name="description" content="左值是可以放在赋值号左边可以被赋值的值；左值必须要在内存中有实体；右值当在赋值号右边取出值赋给其他变量的值；右值可以在内存也可以在CPU寄存器。一个对象被用作右值时，使用的是它的内容(值)，被当作左值时，使用的是它的地址。
+
+
+	
+
+
+	左值 
+
+
+	左值：既可以放在等号左侧，也可以放在等号右侧的变量。例如下面的例子：
+
+
+	int a = 1;
+
+
+	int&amp; b = a
+
+
+	上面的变量a既可以放在等号的左侧也可以放在等号的右侧，所以她是左值。
+
+
+	" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">左值引用和右值引用、move函数</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">想要飞的鱼儿</li>
+          <li class="lmname"><a href="https://blog.csdn.net/weixin_42259823/article/details/107078773" target="_blank">https://blog.csdn.net/weixin_42259823/article/details/107078773</a></li>
+          <li class="timer">2019-12-28</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>左值是可以放在赋值号左边可以被赋值的值；左值必须要在内存中有实体；右值当在赋值号右边取出值赋给其他变量的值；右值可以在内存也可以在CPU寄存器。一个对象被用作右值时，使用的是它的内容(值)，被当作左值时，使用的是它的地址。
+
+
+	
+
+
+	左值 
+
+
+	左值：既可以放在等号左侧，也可以放在等号右侧的变量。例如下面的例子：
+
+
+	int a = 1;
+
+
+	int&amp; b = a
+
+
+	上面的变量a既可以放在等号的左侧也可以放在等号的右侧，所以她是左值。
+
+
+	</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <div style="font-size:14px;">
+	左值是可以放在赋值号左边可以被赋值的值；左值必须要在内存中有实体；右值当在赋值号右边取出值赋给其他变量的值；右值可以在内存也可以在CPU寄存器。一个对象被用作右值时，使用的是它的内容(值)，被当作左值时，使用的是它的地址。
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div id="1239-1562308095016" style="font-size:14px;">
+	<span style="font-size:20px;font-weight:bold;">左值</span> 
+</div>
+<div style="font-size:14px;">
+	左值：既可以放在等号左侧，也可以放在等号右侧的变量。例如下面的例子：
+</div>
+<div style="font-size:14px;">
+	int a = 1;
+</div>
+<div style="font-size:14px;">
+	int&amp; b = a
+</div>
+<div style="font-size:14px;">
+	上面的变量a<span style="color:#DF402A;">既可以放在等号的左侧也可以放在等号的右侧</span>，所以她是左值。
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div id="5073-1562308474040" style="font-size:14px;">
+	<span style="font-size:20px;font-weight:bold;">右值</span> 
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	右值：只可以放在等号右侧的变量。例如下面的例子：
+</div>
+<div style="font-size:14px;">
+	int a = 1;
+</div>
+<div style="font-size:14px;">
+	int b = a + 2;
+</div>
+<div style="font-size:14px;">
+	int&amp; c = a + 2; //error
+</div>
+<div style="font-size:14px;">
+	a+2 = 3; // error
+</div>
+<div style="font-size:14px;">
+	这里的a+2只能放在等好的右侧，所以a+2是右值。
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	为什么a+2只能放在等号右侧呢？原因在于a+2会产生一个临时变量，b=a+2实际上是先算出a+2的结果存储到临时变量然后赋值给b，并销毁这个临时变量。如果将a+2放到等好的左侧，那么将产生无意义的结果。
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	综合上面的左值和右值的概念我们可以得到“左值持久，右值短暂”的概念。左值持久存在，右值将在运算结束后销毁。
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div id="2788-1562308523363" style="font-size:14px;">
+	<span style="font-size:20px;font-weight:bold;">引用</span> 
+</div>
+<div style="font-size:14px;">
+</div>
+<div style="font-size:14px;">
+	引用是C++语法做的优化，引用的本质还是靠指针来实现的。引用相当于变量的别名。
+</div>
+<div style="font-size:14px;">
+	引用可以改变指针的指向，还可以改变指针所指向的值。
+</div>
+<div style="font-size:14px;">
+	引用的基本规则：声明引用的时候必须初始化，且一旦绑定，不可把引用绑定到其他对象；即引用必须初始化，不能对引用重定义；
+</div>
+<div style="font-size:14px;">
+	对引用的一切操作，就相当于对原对象的操作。
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	左值引用
+</div>
+<div style="font-size:14px;">
+	左值引用的基本语法：type &amp;引用名 = 左值表达式；
+</div>
+<div style="font-size:14px;">
+	右值引用
+</div>
+<div style="font-size:14px;">
+	必须绑定到右值，一个将要销毁的对象
+</div>
+<div style="font-size:14px;">
+	右值引用的基本语法type &amp;&amp;引用名 = 右值表达式；
+</div>
+<div style="font-size:14px;">
+	右值引用在企业开发人员在代码优化方面会经常用到；
+</div>
+<div style="font-size:14px;">
+	右值引用的“&amp;&amp;”中间不可以有空格。
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	右值引用的一个重要性质和作用就是只能绑定到一个将要销毁的对象，因此我们可以将右值引用的资源移动到另一个对象中
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div id="5775-1562308457873" style="font-size:14px;">
+	<span style="font-size:20px;font-weight:bold;">move</span> 
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	std::move 会无条件将自己的参数转换为右值。在对象拷贝的时候，在运行时，它们不会产生一行代码， 可以减少资源创建和释放。
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	浅析C++11右值引用和move语义<a href="https://www.k2zone.cn/?p=1880"><span style="color:#003884;">https://www.k2zone.cn/?p=1880</span></a> 
+</div>
+<div style="font-size:14px;">
+	我们通常见到的引用（int &amp;a=b;）可以称之为左值引用，而右值引用则是int &amp;&amp;a的形式。<span style="color:#DF402A;">右值引用</span>的一个重要性质和作用就是<span style="color:#DF402A;">只能绑定到一个将要销毁的对象</span>，因此我们可以将右值引用的资源移动到另一个对象中。
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	从上面的介绍我们可以总结出，只有右值可以绑定到右值引用上。但是，话不能说的太慢。我们总有办法能将左值也绑定到右值引用上，我们可以显式的使用move将一个左值转换为对用的右值引用类型。如下：
+</div>
+<div id="2790-1561642467119">
+	int a = 1;
+int&amp;&amp; b = std::move(a);
+</div>
+<div style="font-size:14px;">
+	此时，a和b的地址是相同的，b将是a的应用。
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	总结出来move的概念其实很简单，就一句话：将一个左值转换为对应的右值引用类型。
+</div>
+<div style="font-size:14px;">
+	这里需要注意一点的就是，右值引用的是将要销毁的对象，使用move调用意味着告诉编译器我们有一个左值，但想像右值一样使用，所以调用move后原来的对象除了赋值和销毁它外不能有其他的操作（书上是这么说的，但是测试的时候未发现问题）。
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div id="1717-1561642652861">
+	string st = "I love xing";
+vector&lt;string&gt; vc ;
+vc.push_back(move(st));
+cout&lt;&lt;vc[0]&lt;&lt;endl;
+if(!st.empty()) cout&lt;&lt;st&lt;&lt;endl;
+//输出一行I love xing
+//原来的字符串st已经为空
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div id="7570-1561642708431">
+	string st = "I love xing";
+vector&lt;string&gt; vc ;
+vc.push_back(st);
+cout&lt;&lt;vc[0]&lt;&lt;endl;
+if(!st.empty()) cout&lt;&lt;st&lt;&lt;endl;
+//输出两行I love xing
+</div>
+<div style="font-size:14px;">
+	<br />
+</div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1613.html">delete删除new出来的对象、数组 memset char*   memcpy</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1615.html">c++ string类型变量到底是什么 string和basic_string的关系</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/weixin_42259823/article/details/107078773" target="_blank">https://blog.csdn.net/weixin_42259823/article/details/107078773</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="c++右值引用">
+							<h2 style="display:inline;color:#5BC648;">c++右值引用</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-07-02&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p style="color:#555555;font-size:16px;background-color:#FFFFFF;">
+	<span style="color:#E53333;">对右值引用赋值 原来的右值怎么办？！</span> 
+</p>
+<p style="color:#555555;font-size:16px;background-color:#FFFFFF;">
+	<br />
+</p>
+<p style="color:#555555;font-size:16px;background-color:#FFFFFF;">
+	右值引用，延长右值的有效期。直接接管右值所在的内存空间。
+</p>
+<p style="color:#555555;font-size:16px;background-color:#FFFFFF;">
+	减少拷贝。
+</p>
+<p style="color:#555555;font-size:16px;background-color:#FFFFFF;">
+	<br />
+</p>
+<p style="color:#555555;font-size:16px;background-color:#FFFFFF;">
+	<br />
+</p>
+<p style="color:#555555;font-size:16px;background-color:#FFFFFF;">
+	c++11 中的右值引用、 move 、 forward：<a href="https://blog.csdn.net/u011529563/article/details/77620681" target="_blank">https://blog.csdn.net/u011529563/article/details/77620681</a> 
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#c++右值引用">c++右值引用</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

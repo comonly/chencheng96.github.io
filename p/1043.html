@@ -1,0 +1,282 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Access数据库在jdk1.8版本无法使用jdbc-odbc问题的解决过程及问题汇总_comonly.cn</title>
+<meta name="keywords" content="Access数据库在jdk1.8版本无法使用jdbc-odbc问题的解决过程及问题汇总" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Access数据库在jdk1.8版本无法使用jdbc-odbc问题的解决过程及问题汇总</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-01-07</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	数据库
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">access,jdbc-odbc</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	JAVA 8没有JDBC-ODBC桥了，要用只能使用java 7了，使用Java8解决该问题就只能引入相关的包。因为刚换电脑，装了java8的版本，之前有一个本地项目用地odbc的连接方式，原来的数据库是access2003，jdk是1.6。所以项目迁移过来数据请求就用不了了。然后找各种解决方法，最后还是决定换数据库吧！
+</p>
+<h2 id='引入其他含JDBC-ODBC的包'>
+	引入其他含JDBC-ODBC的包
+</h2>
+UCanAccess<br />
+http://ucanaccess.sourceforge.net/site.html<br />
+https://sourceforge.net/projects/ucanaccess/files/<br />
+免费但是不支持access2017。有一些数据获取不正确。<br />
+<br />
+Access_JDBC30.jar<br />
+https://zhidao.baidu.com/question/1580341510001633700.html不好下载，还要付费才能用正版<br />
+<h2 id='问题汇总'>
+	问题汇总
+</h2>
+No suitable driver found for jdbc:odbc:driver<br />
+java.lang.ClassNotFoundException: sun.jdbc.odbc.JdbcOdbcDriver<br />
+JAVA 8没有JDBC-ODBC桥了，要用只能使用java 7了。<br />
+<h3>
+	JDBC-ODBC桥可以用什么代替
+</h3>
+JDBC-ODBC：就是搭建jdbc与odbc之间的桥梁，（odbc是微软的驱程，jdbc是甲骨文的驱程）你要在控制面板上指定数据源，通过数据源来建立连接。这样程序的可移植性并不高。当你换一台主机运行，必须先要去配置数据源，否则程序是无法运行的。<br />
+纯java方式，即jdbc连接方式，就是通过java代码直接与数据库建立连接关系，可以执行很高，那样当你换主机运行的时候，直接运行就好。<br />
+关于两者最关注的问题是：两者谁的连接效率更高，从安全性还是开发速度上比较，显然jdbc效率要高一些，jdbc最大的优点就是可移植性很好，odbc只是用于windows平台，而jdbc可以跨平台，如unix平台下照样可用。<br />
+jsp/java代码中用jdbc驱动代替jdbc-odbc桥连接SQL Server数据库<br />
+<h3>
+	各种数据库的jdbc驱动下载及连接方式
+</h3>
+https://blog.csdn.net/u012338954/article/details/52294851<br />
+<h3>
+	sun.jdbc.odbc.JdbcOdbcDriver在jdk什么位置
+</h3>
+这是未被归档和源代码未被公开的类，是虚拟机底层类库，位于 JRE 的 rt.jar 文件中。<br />
+sun.* 的包属于底层类库，每个平台下的 JRE 并不一定都是一样的，没有跨平台的特性，因此尽量不要使用这个包中的类。<br />
+Ref: http://java.sun.com/products/jdk/faq/faq-sun-packages.html<br />
+另外，不建议采用 JDBC/ODBC 的方式去连接数据库，建议采用 JDBC 直接进行连接，以获得最好的效率。<br />
+<h3>
+	myeclipse2017部署项目没人反应----- 换eclipse
+</h3>
+<p>
+	eclipse的部署可以通过clean来处理
+</p>
+<h3>
+	启动tomcat，访问jsp报错：org.apache.catalina.core.StandardWrapperValve invoke
+</h3>
+<p>
+	一种可能是：jar冲突导致的，查看你的tomcat下的lib里的jar是不是跟工程里的lib有相同应用，我的问题是由于工程里有jsp-api.jar，同时tomcat的lib里也有导致的。把工程里的jar删掉重启下就可以了。
+</p>
+<h3>
+	怎么查看class文件里的java代码
+</h3>
+jd-gui<br />
+<h3>
+	Java文件编译成class
+</h3>
+<p>
+	通过eclipse的dy web项目部署一下就自动生产class文件了。然后压缩成zip（一定要zip）改名成jar（jar包下的文件夹META-INF，带处理在做什么）
+</p>
+<ul>
+	<li>
+		想安装eclipse（官网下载即可）&nbsp;,请问应该下那个版本和运行环境？https://zhidao.baidu.com/question/337661512.html
+	</li>
+	<li>
+		解决eclipse中启动Tomcat成功但是访问不了Tomcat问题。https://blog.csdn.net/huohuotu/article/details/77669041
+	</li>
+	<li>
+		设置eclipse还是在tomcat的配置同步，还有启动时间默认45.默认部署在wtpwebapps
+	</li>
+</ul></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1042.html">Java中获取时间以及java.util和java.sql之间时间日期的转换</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1044.html">MySQL5.6解压版的安装</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#引入其他含JDBC-ODBC的包">引入其他含JDBC-ODBC的包</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#问题汇总">问题汇总</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

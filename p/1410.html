@@ -1,0 +1,257 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>1个网卡设置多个IP的作用  发送数据包时源ip的选择_comonly.cn</title>
+<meta name="keywords" content="1个网卡设置多个IP的作用  发送数据包时源ip的选择" />
+<meta name="description" content="配置有多个ip时
+
+
+	主机在接收外部数据包，并发送响应数据包时，响应源地址显然就是客户端的目标地址，这是非常容易理解的，如客户端向主机的1.1.2.3:80 发起请求，那么主机响应数据包的源 IP 地址一定是 1.1.2.3 。
+
+那么当主机对外主动发起请求时，数据包的源IP 地址如何选择？
+当一个主机创建IP 数据包时，必须选择正确的源地址，这是至关重要的，因为只有源地址正确，才能让接收者正确响应。如果源地址错误，则无法得到对端主机的任何回应。
+
+Linux 2.2 选择源 IP 地址" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">1个网卡设置多个IP的作用  发送数据包时源ip的选择</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-09-08</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>配置有多个ip时
+
+
+	主机在接收外部数据包，并发送响应数据包时，响应源地址显然就是客户端的目标地址，这是非常容易理解的，如客户端向主机的1.1.2.3:80 发起请求，那么主机响应数据包的源 IP 地址一定是 1.1.2.3 。
+
+那么当主机对外主动发起请求时，数据包的源IP 地址如何选择？
+当一个主机创建IP 数据包时，必须选择正确的源地址，这是至关重要的，因为只有源地址正确，才能让接收者正确响应。如果源地址错误，则无法得到对端主机的任何回应。
+
+Linux 2.2 选择源 IP 地址</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	配置有多个ip时
+</p>
+<p>
+	主机在接收外部数据包，并发送响应数据包时，响应源地址显然就是客户端的目标地址，这是非常容易理解的，如客户端向主机的1.1.2.3:80 发起请求，那么主机响应数据包的源 IP 地址一定是 1.1.2.3 。<br />
+<br />
+那么当主机对外主动发起请求时，数据包的源IP 地址如何选择？<br />
+当一个主机创建IP 数据包时，必须选择正确的源地址，这是至关重要的，因为只有源地址正确，才能让接收者正确响应。如果源地址错误，则无法得到对端主机的任何回应。<br />
+<br />
+Linux 2.2 选择源 IP 地址使用以下三种机制：<br />
+1.&nbsp; 应用程序可以通过bind(2) 系统调用，应用至 sendmsg(2) 调用上，并通过辅助数据对象 IP_PKTINFO ，从而显式指定源 IP 地址。在这种情况下，操作系统内核仅仅检查其源 IP 地址是否正确，否则产生相应的错误。<br />
+2.&nbsp; 如果应用程序没有指定源IP 地址，包含源 IP 的路由表将决定数据包源 IP 地址，通过设置 ip route 命令的 src参数，从而指定源 IP 地址。如果路由表没有包含 src 属性，则使用主要 IP 地址。<br />
+3.&nbsp; 其它情况下内核搜寻绑定定数据包路由接口上的IP 地址， IPv6 选择第一个可用的 IP 地址。 IPv4 情况下，尽量选择与目标 IP 处于同一子网的源 IP ，如果目标 IP 与自己的所有 ip 没有处于同一子网，则使用第二种算法。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	一个网卡设置多个IP的作用就是连接多个网段。
+</p>
+举个例子：<br />
+<br />
+有两个局域网LAN1(192.168.0.0/24)，LAN2(192.168.1.0/24)，LAN1和LAN2通过交换机物理相连。因为LAN1的网络号是192.168.0，LAN2的网络号是192.168.1，所以LAN1下的主机和LAN2下的主机无法通讯。如何才能让他们相互通讯呢？有两种方法。<br />
+<br />
+【方法一】通过路由器连接LAN1和LAN2。<br />
+<br />
+【方法二】将LAN1或LAN2下的主机设置两个IP地址，一个是LAN1网络号的主机地址，一个是LAN2网络号的主机地址。比如：192.168.0.100/24 和 192.168.1.100/24。<br />
+<br />
+原文链接：https://blog.csdn.net/junqiand/article/details/80567078<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1409.html">指定的域不存在或无法联系</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1411.html">组播MAC地址和各类IP地址</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

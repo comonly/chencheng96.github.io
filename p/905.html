@@ -1,0 +1,675 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>WEB前端——js获取页面元素，给页面元素结点赋值，设置元素css,style.,classonclick事件_comonly.cn</title>
+<meta name="keywords" content="WEB前端——js获取页面元素，给页面元素结点赋值，设置元素css,style.,classonclick事件" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">WEB前端——js获取页面元素，给页面元素结点赋值，设置元素css,style.,classonclick事件</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-04-17</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	节点类型主要有三种：元素节点，属性节点和文本节点。而对DOM的主要也就是围绕元素节点和属性节点的增删改查。下面就分别从对元素节点的操作和对属性节点的操作来介绍。
+</p>
+<p>
+	HTML文档可以说由节点构成的集合，DOM节点有:
+</p>
+<ol>
+	<li>
+		元素节点：上图中&lt;html&gt;、&lt;body&gt;、&lt;p&gt;等都是元素节点，即标签。
+	</li>
+	<li>
+		文本节点:向用户展示的内容，如&lt;li&gt;...&lt;/li&gt;中的JavaScript、DOM、CSS等文本。
+	</li>
+	<li>
+		属性节点:元素属性，如&lt;a&gt;标签的链接属性href="http://www.xxxx.com"。
+	</li>
+</ol>
+<p>
+	每个节点都拥有包含着关于节点某些信息的属性。这些属性是：nodeName（节点名称），nodeValue（节点值），nodeType（节点类型）。
+</p>
+<p>
+	1. nodeName属性含有某个节点的名称
+</p>
+<ul>
+	<li>
+		对于元素节点，nodeName=标签名（返回的名称是大写的）
+	</li>
+	<li>
+		对于文本节点，nodeName=#text
+	</li>
+	<li>
+		对于属性节点，nodeName=属性名（返回的名称是大写的）
+	</li>
+</ul>
+2. nodeValue<br />
+<ul>
+	<li>
+		对于元素节点，因为本身不直接包含文本，所以nodeValue是不可用的。当然你也可以在示例中自己写试试看有什么结果出现。
+	</li>
+	<li>
+		对于文本节点，nodeValue=文本值
+	</li>
+	<li>
+		对于属性节点，nodeValue=属性值
+	</li>
+</ul>
+3. nodeType<br />
+<ul>
+	<li>
+		对于元素节点，nodeType=1
+	</li>
+	<li>
+		对于文本节点，nodeType=3
+	</li>
+	<li>
+		对于属性节点，nodeType=2
+	</li>
+	<li>
+		对于注释元素，nodeType=8
+	</li>
+	<li>
+		对于文档元素，nodeType=9
+	</li>
+</ul>
+<h2 id='一、元素节点'>
+	一、元素节点
+</h2>
+<h3>
+	（一）查
+</h3>
+在对DOM进行增删改之前，首先要找到对应的元素。具体的查找方法如下：
+<ol>
+	<li>
+		document.getElementById()。根据页面id获取元素，在一个页面中元素id必须是惟一 的，否则用这种方法将取不到其元素。如果页面中没有此id，会找不到你要找的元素，就会报null的错误。
+	</li>
+	<li>
+		document.getElementsByName()。跟据页面的元素名来获取页面元素，在一个页面中，元素id是唯一的，但是页面的元素名字name可以是重复的。用这种方法，我们会得到一个数组。如果我们找到某个具体的页面元素，可以在此方法后面添加一个下标"[整数]"，下标是从0开始的，此整数也就是在页面中你要获取的此元素的位置减一。
+	</li>
+	<li>
+		document.getElementsByTagName()。根据HTML的标签来获取的。因为页面元素使用的标签可以重复，所以用这种方法的的值也是一个数组。如果我们用这种方法想获取某个具体的元素的值，可以直接用下标的形式表示，下标的开始也是从0开始的，当然也可以先的到数组，在从数组中获取。
+	</li>
+</ol>
+同时可以利用元素节点的属性获取它的父子节点、兄弟结点和文本节点（在文本结点里有相关说明）（其中Node表示的是以获取的结点元素，包括上述获取或通过this获取的）：<br />
+<h4>
+	子节点
+</h4>
+<ol>
+	<li>
+		Node.childNodes。获取子节点列表，换行在浏览器中被算作了text节点，是一个数组的格式。他会把换行和空格也当成是节点信息，需要进行过滤。
+	</li>
+	<li>
+		Node.children方法。经测试children方法在所有主流浏览器中都兼容，包括ie678，并且它也能实现firstElementChild的功能，对其获取子元素的访问只需按数组的访问形式即可。
+	</li>
+	<li>
+		Node.firstChild。返回第一个子节点。firstChild和childNodes是一样的，在浏览器解析的时候会把他当换行和空格一起解析，其实你获取的是第一个子节点，只是这个子节点是一个换行或者是一个空格而已。
+	</li>
+	<li>
+		Node.firstElementChild。会获取到父元素第一个子元素的节点，并不会匹配换行和空格信息。
+	</li>
+	<li>
+		Node.lastChild 。返回最后一个子节点
+	</li>
+	<li>
+		Node.lastElementChild。
+	</li>
+</ol>
+<p>
+	为了不显示不必须的换行的空格，我们如果要使用childNodes就必须进行必要的过滤。通过正则表达式式取掉不必要的信息。
+</p>
+for(var i=0; i&lt;b.length;i++){   //去掉换行的空格
+   if(b[i].nodeName == "#text" &amp;&amp; !/\s/.test(b.nodeValue)){
+      document.getElementById("test").removeChild(b[i]);
+   } 
+}
+<h4>
+	获取子节点个数
+</h4>
+<ol>
+	<li>
+		Node.childElementCount;&nbsp; &nbsp; //可以直接获取长度 同length
+	</li>
+	<li>
+		Node.children.length;&nbsp; &nbsp; //效果同上
+	</li>
+</ol>
+<h4>
+	父节点
+</h4>
+<ul>
+	<li>
+		Node.parentNode。返回父节点，获取的是当前元素的直接父元素。parentElement和parentNode一样，只是parentElement是ie的标准。
+	</li>
+	<li>
+		Node.ownerDocument。返回祖先节点（整个document）。
+	</li>
+	<li>
+		Node.offsetParent获取所有父节点,一看offset我们就知道是偏移量 其实这个是于位置有关的上下级 ，直接能够获取到所有父亲节点， 这个对应的值是body下的所有节点信息。
+	</li>
+</ul>
+<h4>
+	同胞节点
+</h4>
+<ol>
+	<li>
+		Node.previousSibling。返回前一个节点，如果没有则返回null，会匹配字符，包括换行和空格。
+	</li>
+	<li>
+		Node.previousElementSibling。直接匹配节点。
+	</li>
+	<li>
+		Node.nextSibling。返回后一个节点
+	</li>
+	<li>
+		Node.nextElementSibling。直接匹配节点。
+	</li>
+	<li>
+		Node.parentNode.children[1]。通过获取父亲节点再获取子节点来获取兄弟节点
+	</li>
+</ol>
+<h3>
+	（二）增
+</h3>
+新增节点首先要创建节点，然后将新建的节点插入DOM中，所以下面分别介绍创建节点和插入节点的方法，复制节点的方法也在创建节点中进行介绍。<br />
+<h4>
+	创建节点
+</h4>
+<ol>
+	<li>
+		createElement()&nbsp; &nbsp;// 按照指定的标签名创建一个新的元素节点这个方法接受一个参数，即要创建元素的标签名，这个标签名在HTML文档中不区分大小写。
+	</li>
+	<li>
+		createDocumentFragment()&nbsp; &nbsp; //创建代码片段（为避免频繁刷新DOM，可以先创造代码片段，完成所有节点操作之后统一添加到DOM中）
+	</li>
+</ol>
+<h4>
+	复制节点
+</h4>
+<ul>
+	<li>
+		clonedNode = Node.cloneNode(boolean)&nbsp;&nbsp;&nbsp;&nbsp;// 只有一个参数，传入一个布尔值，true表示复制该节点下的所有子节点；false表示只复制该节点。若参数为空，也相当于false。该方法不会复制添加到DOM节点中的javascript属性，例如事件处理程序等。这个方法只复制特性和子节点，其他一切都不会复制。
+	</li>
+</ul>
+<h4>
+	插入节点
+</h4>
+<ol>
+	<li>
+		parentNode.appendChild(childNode);&nbsp;&nbsp;&nbsp;&nbsp; // 将新节点追加到子节点列表的末尾用于向childNodes列表的末尾添加一个节点，并返回新增节点。添加节点后，childNodes中的新增节点、父节点和以前的最后一个子节点的关系指针都会相应地得到更新。
+	</li>
+	<li>
+		parentNode.insertBefore(newNode, targetNode); &nbsp;&nbsp;&nbsp;&nbsp;//将newNode插入targetNode之前 。插入节点后，被插入的节点会变成参照节点的前一个兄弟节点(previousSibling)，同时被方法返回。如果参照节点是null，则insertBefore()与appendChild()方法执行相同的操作。同样地，如果插入的节点已经是文档的一部分了，那结果就是将该节点从原来的位置转移到新位置。
+	</li>
+	<li>
+		parentNode.insertAdjacentHTML('insertplace', html)&nbsp; &nbsp; //相当于前面三个方法的综合。该方法接收两个参数：插入的位置和要插入的HTML文本，该方法无返回值。
+	</li>
+</ol>
+<p>
+	insertAdjacentHTML第二个参数是一个HTML字符串，如果浏览器无法解析字符串，就会抛出错误。第一个参数必须是下列值之一，且这些值都必须是小写形式：
+</p>
+<ul>
+	<li>
+		"beforebegin"    　 在当前元素之前插入一个紧邻的同级元素
+	</li>
+	<li>
+		"afterbegin"    　　在当前元素之下插入一个新的子元素或在第一个子元素之前再插入新的子元素
+	</li>
+	<li>
+		"beforeend"        在当前元素之下插入一个新的子元素或在最后一个子元素之后再插入新的子元素
+	</li>
+	<li>
+		"afterend"         在当前元素之后插入一个紧邻的同级元素
+	</li>
+</ul>
+（beforebegin）&lt;div id='target'&gt;（afterbegin）This is the element content（beforeend）&lt;/div&gt;（afterend）
+<h4>
+	替换节点
+</h4>
+<ul>
+	<li>
+		parentNode.replace(newNode, targetNode);//使用newNode替换targetNode。replaceChild()接收的两个参数是要插入的节点和要替换的节点，要替换的节点将由这个方法返回并从文档树中移除，同时由要插入的节点占据其位置。
+	</li>
+</ul>
+<h3>
+	（三）删
+</h3>
+<h4>
+	移除节点
+</h4>
+<ol>
+	<li>
+		parentNode.removeChild(childNode);&nbsp;&nbsp;&nbsp;&nbsp;// 移除目标节点接收一个参数，即要移除的节点，被移除的节点成为方法的返回值。
+	</li>
+	<li>
+		parentNode.remove();&nbsp; &nbsp; //方法不太常见，但是却非常简单。该方法不用调用其父节点，直接在当前节点使用remove()方法就可以删除该节点，无返回值。常用于删除元素节点和文本节点，不可用于特性节点。IE浏览器不支持该方法。
+	</li>
+</ol>
+<h2 id='二、属性节点'>
+	二、属性节点
+</h2>
+操作属性节点，就是对DOM样式进行增删改查。对于行内样式、内联样式、外部样式有不同的操作方法；各种方法获得的样式也有可读可写和只读之分。
+<h3>
+	（一）js设置style属性（CSS定义）
+</h3>
+node.style.color&nbsp; &nbsp; // 可读可写<br />
+<h4>
+	Style本身的属性和方法
+</h4>
+<ol>
+	<li>
+		node.style.cssText&nbsp; &nbsp; //获取node行内样式字符串
+	</li>
+	<li>
+		node.style.length&nbsp; &nbsp; &nbsp;//获取行内样式个数
+	</li>
+	<li>
+		node.style.item(0)&nbsp; &nbsp; //获取指定位置的样式
+	</li>
+</ol>
+<h4>
+	只读方法
+</h4>
+getComputedStyle是window的方法。它能够获取当前元素所有最终使用的CSS属性值，但是是只读的。它有两个参数，第一个为传入的节点，第二个可以传入:hover, :blur等获取其伪类样式，如果没有则传入null。然而IE并不支持getComputedStyle方法，可以使用currentStyle来保持兼容性：window.getComputedStyle ? window.getComputedStyle(node,null) : node.currentStyle
+<h3>
+	（二）js设置class属性
+</h3>
+<h4>
+	获取class属性值
+</h4>
+var value = Node.className;&nbsp;&nbsp;<br />
+<h4>
+	更改class属性值
+</h4>
+Node.className = "styleclass";&nbsp;&nbsp;&nbsp;&nbsp;//styleclass为新的属性值&nbsp;&nbsp;<br />
+Node.setAttribute("class","styleclass");&nbsp;&nbsp;<br />
+<h4>
+	添加一个class属性（在原有的基础上）
+</h4>
+Node.className += ' styleclass';&nbsp;&nbsp;&nbsp;&nbsp;// 注意前面加空格，防止两个属性挨一起<br />
+<h4>
+	去除一个class属性
+</h4>
+<p>
+	Node.removeClass("styleclass");&nbsp;&nbsp;
+</p>
+<h4>
+	通过HTML5的classList获取和修改元素样式
+</h4>
+<ol>
+	<li>
+		Node.classList.add(value);&nbsp; &nbsp; &nbsp;//为元素添加指定的类
+	</li>
+	<li>
+		Node.classList.contains(value);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 判断元素是否含有指定的类，如果存在返回true
+	</li>
+	<li>
+		Node.classList.remove(value);&nbsp;&nbsp;&nbsp;&nbsp; // 删除指定的类
+	</li>
+	<li>
+		Node.classList.toggle(value);&nbsp;&nbsp;&nbsp;&nbsp; // 有就删除，没有就添加指定类
+	</li>
+</ol>
+<h3>
+	（三）Js操作自定义属性的方法：
+</h3>
+<ol>
+	<li>
+		Node.hasAttribute("id")&nbsp; &nbsp; //返回一个布尔值，表示当前元素节点是否包含指定属性。
+	</li>
+	<li>
+		Node.getAttribute('id')&nbsp; &nbsp;// 获取特性的值，如果给定名称的特性不存在或无参数则返回null。直接获得某特性的值
+	</li>
+	<li>
+		Node.setAttribute('id',"aaa")&nbsp; &nbsp;// 设置接受两个参数：要设置的特性名和值，如果已经存在，则替换现有的值。如果特性不存在，setAttribute()则创建该属性并设置相应的值。该方法无返回值。
+	</li>
+	<li>
+		Node.removeAttribute()&nbsp; &nbsp; // 移除彻底删除元素的特性，这个方法不仅会彻底删除元素的特性值，还会删除元素特性。该方法无返回值。
+	</li>
+	<li>
+		Node.attributes&nbsp; &nbsp; &nbsp; &nbsp;// 获取DOM全部特性。
+	</li>
+</ol>
+<h3>
+	（四）js修改动作事件的方式&nbsp;
+</h3>
+<ol>
+	<li>
+		Node.onclick = function("alert('hello');");
+	</li>
+	<li>
+		Node.onclick = function(){alert("hello"); };
+	</li>
+	<li>
+		Node.onclick = myAlert;&nbsp; &nbsp; //其中myAlert为一个函数：function myAlert(){alert("hello");}&nbsp;
+	</li>
+</ol>
+<p>
+	可以添加多个函数(添加的事件的顺序即执行顺序)。&nbsp;&nbsp;
+</p>
+<pre class="prettyprint lang-js">function test(){alert("haha");}
+
+if(window.addEventListener){
+   // Mozilla, Netscape, Firefox  
+   //element.addEventListener(type,listener,useCapture);   
+   button.addEventListener('click', function(){test()}, false);  
+   button.addEventListener('click', function(){test()}, false);
+   //执行顺序11 -&gt; 12  
+} else { // IE  
+   button.attachEvent('onclick', function(){alert('21');});  
+   button.attachEvent('onclick', function(){alert('22');});
+   //执行顺序22 -&gt; 21  
+}  </pre>
+相同事件绑定和解除，需要使用共用函数；绑定和解除事件时 事件没有"on" 即onclick写成click。<br />
+<h2 id='文本结点'>
+	文本结点
+</h2>
+<h3>
+	（一）属性
+</h3>
+<ol>
+	<li>
+		data。文本节点的data属性与nodeValue属性相同
+	</li>
+	<li>
+		length。文本节点的length属性保存着节点字符的数目，而且nodeValue.length、data.length也保存着相同的值
+	</li>
+</ol>
+<h3>
+	（二）方法
+</h3>
+<ol>
+	<li>
+		createTextNode()方法用于创建文本节点，这个方法接收一个参数——要插入节点中的文本
+	</li>
+	<li>
+		normalize()方法的作用是合并相邻的文本节点，该方法在文本节点的父节点——元素节点上调用。[注意]IE9+浏览器无法正常使用该方法
+	</li>
+	<li>
+		splitText()&nbsp; 与normalize()方法作用相反，splitText()方法将一个文本节点分成两个文本节点，即按照指定的位置分割nodeValue值。原来的文本节点将包含从开始到指定位置之前的内容。这个方法会返回一个新文本节点，包含剩下的文本。splitText()方法返回的节点与原节点的parentNode相同&nbsp;
+	</li>
+	<li>
+		appendData(text)方法将text添加到节点的末尾，该方法无返回值
+	</li>
+	<li>
+		deleteData(offset,count)方法从offset指定的位置开始删除count个字符，无返回值
+	</li>
+	<li>
+		insertData(offset,text)方法在offset指定的位置插入text，无返回值
+	</li>
+	<li>
+		replaceData(offset,count,text)方法用text替换从offset指定位置开始到offset+count为止的文本，无返回值
+	</li>
+	<li>
+		substringData(offset,count)方法提取从offset指定的位置开始到offset+count为止处的字符串，并返回该字符串。原来的文本节点无变化
+	</li>
+</ol>
+<h3>
+	（三）获取（更改）文本结点内容
+</h3>
+<p>
+	innerHTML,innerText,outHTML的用法及区别对于如下HTML：&lt;div id="test"&gt; &lt;span style="color:red"&gt;www.test.com&lt;/span&gt; &lt;/div&gt;
+</p>
+<ul>
+	<li>
+		test.innerText//它得到的是&lt;div&gt;&lt;/div&gt;标签中的文本节点的内容，也就是www.test.com
+	</li>
+	<li>
+		test.innerHTML//它得到的是&lt;div&gt;&lt;/div&gt;标签中的所有内容，包括元素节点，属性节点以及文本节点，也就是&lt;span style="color:red"&gt;www.test.com&lt;/span&gt;
+	</li>
+	<li>
+		test.outerHTML//它得到的是包括&lt;div&gt;&lt;/div&gt;标签自身及其中的所有内容，也就是&lt;div id="test"&gt;&lt;span style="color:red"&gt;www.test.com&lt;/span&gt;&lt;/div&gt;
+	</li>
+</ul></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/904.html">WEB前端——html页面引入其他页面或js,css方法</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/906.html">WEB前端——js获元素属性（元素位置，宽高等属性）、鼠标位置、Event 对象及js函数传参</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="">
+							<h2 style="display:inline;color:#5BC648;"></h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-04-17&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p style="color:#000000;font-family:&quot;font-size:12px;font-style:normal;font-weight:400;text-align:start;text-indent:0px;">
+	性能<br />
+通过上面的方法介绍，我们会发现，文本节点的操作与字符串的操作方法相当类似。一般地，我们获取文本都用innerHTML，然后再去字符串的操作方法去操作。下面对两者的性能进行对比分析<br />
+【1】首先，对replaceData()和replace()这两个方法进行比较。replace()方法又分为两个方法，一个是在循环中直接对innerHTML进行赋值；另一个是在循环中对变量进行赋值，最后再赋值给innerHTML<br />
+从结果中可以看出，在100万次的循环中，直接操作innerHTML开销较大，操作文本节点的的开销最小<br />
+【2】对substring()和substringData()方法进行比较，这两种方法都用于提取子串<br />
+从结果中可以看出，在1000万次的循环中，使用substringData()方法比substring()方法的开销较大
+</p>
+<p style="color:#000000;font-family:&quot;font-size:12px;font-style:normal;font-weight:400;text-align:start;text-indent:0px;">
+	<br />
+</p>
+<p style="color:#000000;font-family:&quot;font-size:12px;font-style:normal;font-weight:400;text-align:start;text-indent:0px;">
+	https://www.cnblogs.com/xiaohuochai/p/5815193.html
+</p>
+<p style="color:#000000;font-family:&quot;font-size:12px;font-style:normal;font-weight:400;text-align:start;text-indent:0px;">
+	<br />
+</p>
+<p style="color:#000000;font-family:&quot;font-size:12px;font-style:normal;font-weight:400;text-align:start;text-indent:0px;">
+	<br />
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="通过js获取元素节点补充">
+							<h2 style="display:inline;color:#5BC648;">通过js获取元素节点补充</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-01-18&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span>getElementsByTagName 通过标签名获取节点列表 p、div、a等标签</span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#一、元素节点">一、元素节点</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#二、属性节点">二、属性节点</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#文本结点">文本结点</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#通过js获取元素节点补充">通过js获取元素节点补充</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

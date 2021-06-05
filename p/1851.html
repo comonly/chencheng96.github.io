@@ -1,0 +1,680 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>c, c++函数名编译符号修饰符_comonly.cn</title>
+<meta name="keywords" content="c, c++函数名编译符号修饰符" />
+<meta name="description" content="C++ 编译器的函数名修饰规则&nbsp;
+
+函数名字修饰（Decorated Name）方式&nbsp;
+
+&nbsp; &nbsp; 函数的名字修饰（Decorated Name）就是编译器在编译期间创建的一个字符串。用来指明函数的定义或原型。
+LINK程序或其它工具有时须要指定函数的名字修饰来定位函数的正确位置。
+
+多数情况下程序猿并不须要知道函数的名字修饰。LINK程序或其它工具会自己主动区分他们。
+
+当然，在某些情况下须要指定函数的名字修饰，比如在C++程序中， 为了让LINK" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">c, c++函数名编译符号修饰符</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">IT超人</li>
+          <li class="lmname"><a href="https://blog.csdn.net/liweigao01/article/details/78351464" target="_blank">https://blog.csdn.net/liweigao01/article/details/78351464</a></li>
+          <li class="timer">2020-10-14</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>C++ 编译器的函数名修饰规则&nbsp;
+
+函数名字修饰（Decorated Name）方式&nbsp;
+
+&nbsp; &nbsp; 函数的名字修饰（Decorated Name）就是编译器在编译期间创建的一个字符串。用来指明函数的定义或原型。
+LINK程序或其它工具有时须要指定函数的名字修饰来定位函数的正确位置。
+
+多数情况下程序猿并不须要知道函数的名字修饰。LINK程序或其它工具会自己主动区分他们。
+
+当然，在某些情况下须要指定函数的名字修饰，比如在C++程序中， 为了让LINK</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> C++ 编译器的函数名修饰规则&nbsp;<br />
+<br />
+函数名字修饰（Decorated Name）方式&nbsp;<br />
+<br />
+&nbsp; &nbsp; 函数的名字修饰（Decorated Name）就是编译器在编译期间创建的一个字符串。用来指明函数的定义或原型。<br />
+LINK程序或其它工具有时须要指定函数的名字修饰来定位函数的正确位置。<br />
+<br />
+多数情况下程序猿并不须要知道函数的名字修饰。LINK程序或其它工具会自己主动区分他们。<br />
+<br />
+当然，在某些情况下须要指定函数的名字修饰，比如在C++程序中， 为了让LINK程序或其它工具可以匹配到正确的函数名字，就必须为重载函数和一些特殊的函数（如构造函数和析构函数）指定名字装饰。<br />
+<br />
+还有一种须要指定函数的 名字修饰的情况是在汇编程序中调用C或C++的函数。<br />
+<br />
+假设函数名字，调用约定。返回值类型或函数參数有不论什么改变，原来的名字修饰就不再有效，必须指定新的 名字修饰。<br />
+<br />
+C和C++程序的函数在内部使用不同的名字修饰方式，以下将分别介绍这两种方式。&nbsp;<br />
+<br />
+<br />
+1. C编译器的函数名修饰规则&nbsp;<br />
+<br />
+&nbsp; &nbsp; 对于__stdcall调用约定，编译器和链接器会在输出函数名前加上一个下划线前缀，函数名后面加上一个“@”符号和其參数的字节数。比如 _functionname@number。<br />
+<br />
+__cdecl调用约定仅在输出函数名前加上一个下划线前缀。比如_functionname。 __fastcall调用约定在输出函数名前加上一个“@”符号。后面也是一个“@”符号和其參数的字节数，比如 @functionname@number&nbsp;<br />
+<br />
+2. C++编译器的函数名修饰规则&nbsp;<br />
+<br />
+&nbsp; &nbsp;C++的函数名修饰规则有些复杂。可是信息更充分，通过分析修饰名不仅可以知道函数的调用方式。返回值类型，參数个数甚至參数类型。<br />
+<br />
+无论 __cdecl，__fastcall还是__stdcall调用方式，函数修饰都是以一个“?”開始，后面紧跟函数的名字。再后面是參数表的開始标识和 依照參数类型代号拼出的參数表。<br />
+<br />
+对于__stdcall方式，參数表的開始标识是“@@YG”，对于__cdecl方式则是“@@YA”。对于 __fastcall方式则是“@@YI”。參数表的拼写代号例如以下所看到的：&nbsp;<br />
+X--void&nbsp; &nbsp;&nbsp;<br />
+D--char&nbsp; &nbsp;&nbsp;<br />
+E--unsigned char&nbsp; &nbsp;&nbsp;<br />
+F--short&nbsp; &nbsp;&nbsp;<br />
+H--int&nbsp; &nbsp;&nbsp;<br />
+I--unsigned int&nbsp; &nbsp;&nbsp;<br />
+J--long&nbsp; &nbsp;&nbsp;<br />
+K--unsigned long（DWORD）&nbsp;<br />
+M--float&nbsp; &nbsp;&nbsp;<br />
+N--double&nbsp; &nbsp;&nbsp;<br />
+_N--bool&nbsp;<br />
+U--struct&nbsp;<br />
+....&nbsp;<br />
+指针的方式有些特别。用PA表示指针，用PB表示const类型的指针。<br />
+<br />
+后面的代号表明指针类型。假设同样类型的指针连续出现，以“0”取代，一 个“0”代表一次反复。U表示结构类型。通常后跟结构体的类型名，用“@@”表示结构类型名的结束。函数的返回值不作特殊处理，它的描写叙述方式和函数參数一 样。紧跟着參数表的開始标志，也就是说。函数參数表的第一项实际上是表示函数的返回值类型。參数表后以“@Z”标识整个名字的结束。假设该函数无參数，则 以“Z”标识结束。以下举两个样例，假如有以下函数声明：&nbsp;<br />
+<br />
+int Function1 (char *var1,unsigned long);&nbsp;<br />
+其函数修饰名为“?<br />
+<br />
+Function1@@YGHPADK@Z”。而对于函数声明：&nbsp;<br />
+void Function2();&nbsp;<br />
+其函数修饰名则为“?Function2@@YGXXZ” 。&nbsp;<br />
+<br />
+&nbsp; &nbsp; 对于C++的类成员函数（其调用方式是thiscall）。函数的名字修饰与非成员的C++函数稍有不同，首先就是在函数名字和參数表之间插入以“@”字 符引导的类名。其次是參数表的開始标识不同，公有（public）成员函数的标识是“@@QAE”,保护（protected）成员函数的标识是 “@@IAE”,私有（private）成员函数的标识是“@@AAE”，假设函数声明使用了constkeyword，则对应的标识应分别为 “@@QBE”，“@@IBE”和“@@ABE”。<br />
+<br />
+假设參数类型是类实例的引用。则使用“AAV1”，对于const类型的引用。则使用“ABV1”。下 面就以类CTest为例说明C++成员函数的名字修饰规则：&nbsp;<br />
+class CTest&nbsp;<br />
+{&nbsp;<br />
+......&nbsp;<br />
+private:&nbsp;<br />
+&nbsp; &nbsp; void Function(int);&nbsp;<br />
+protected:&nbsp;<br />
+&nbsp; &nbsp; void CopyInfo(const CTest &amp;src);&nbsp;<br />
+public:&nbsp;<br />
+&nbsp; &nbsp; long DrawText(HDC hdc, long pos, const TCHAR* text, RGBQUAD color, BYTE bUnder, bool bSet);&nbsp;<br />
+&nbsp; &nbsp; long InsightClass(DWORD dwClass) const;&nbsp;<br />
+......&nbsp;<br />
+};&nbsp;<br />
+<br />
+对于成员函数Function，其函数修饰名为“?Function@CTest@@AAEXH@Z”，字符串“@@AAE”表示这是一个私有函 数。成员函数CopyInfo仅仅有一个參数，是对类CTest的const引用參数，其函数修饰名为 “?<br />
+<br />
+CopyInfo@CTest@@IAEXABV1@@Z”。<br />
+<br />
+DrawText是一个比較复杂的函数声明。不仅有字符串參数。还有结构体參数和HDC 句柄參数。须要指出的是HDC实际上是一个HDC__结构类型的指针，这个參数的表示就是“PAUHDC__@@”，其完整的函数修饰名为 “?<br />
+<br />
+DrawText@CTest@@QAEJPAUHDC__@@JPBDUtagRGBQUAD@@E_N@Z”。InsightClass是一个共 有的const函数。它的成员函数标识是“@@QBE”，完整的修饰名就是“?InsightClass@CTest@@QBEJK@Z”。<br />
+<br />
+&nbsp;<br />
+<br />
+不管是C函数名修饰方式还是C++函数名修饰方式均不改变输出函数名中的字符大写和小写。这和PASCAL调用约定不同，PASCAL约定输出的函数名无不论什么修饰且所有大写。&nbsp;<br />
+<br />
+3.查看函数的名字修饰&nbsp;<br />
+<br />
+&nbsp; &nbsp; 有两种方式能够检查你的程序中的函数的名字修饰：使用编译输出列表或使用Dumpbin工具。<br />
+<br />
+使用/FAc，/FAs或/FAcs命令行參数能够让编译器 输出函数或变量名字列表。使用dumpbin.exe /SYMBOLS命令也能够获得obj文件或lib文件里的函数或变量名字列表。<br />
+<br />
+此外。还能够使用 undname.exe 将修饰名转换为未修饰形式。&nbsp;<br />
+<br />
+<br />
+<br />
+函数调用约定和名字修饰规则不匹配引起的常见问题&nbsp;<br />
+&nbsp; &nbsp; 函数调用时假设出现堆栈异常。十有八九是因为函数调用约定不匹配引起的。<br />
+<br />
+比方动态链接库a有下面导出函数：long MakeFun(long lFun);&nbsp;<br />
+动态库生成的时候採用的函数调用约定是__stdcall，所以编译生成的a.dll中函数MakeFun的调用约定是_stdcall。也就是 函数调用时參数从右向左入栈，函数返回时自己还原堆栈。如今某个程序模块b要引用a中的MakeFun。b和a一样使用C++方式编译，仅仅是b模块的函数 调用方式是__cdecl，因为b包括了a提供的头文件里MakeFun函数声明，所以MakeFun在b模块中被其他调用MakeFun的函数觉得是 __cdecl调用方式，b模块中的这些函数在调用完MakeFun当然要帮着恢复堆栈啦。但是MakeFun已经在结束时自己恢复了堆栈，b模块中的函 数这样多此一举就引起了栈指针错误，从而引发堆栈异常。宏观上的现象就是函数调用没有问题（由于參数传递顺序是一样的），MakeFun也完毕了自己的功 能，仅仅是函数返回后引发错误。解决办法也非常easy。仅仅要保证两个模块的在编译时设置同样的函数调用约定即可了。&nbsp;<br />
+&nbsp; &nbsp;在了解了函数调用约定和函数的名修饰规则之后，再来看在C++程序中使用C语言编译的库时常常出现的LNK 2001错误就非常easy了。还以上面样例的两个模块为例，这一次两个模块在编译的时候都採用__stdcall调用约定，可是a.dll使用C语言的语法编 译的（C语言方式）。所以a.dll的加载库a.lib中MakeFun函数的名字修饰就是“_MakeFun@4”。<br />
+<br />
+b包括了a提供的头文件里 MakeFun函数声明，可是因为b採用的是C++语言编译，所以MakeFun在b模块中被依照C++的名字修饰规则命名为 “?MakeFun@@YGJJ@Z”，编译过程相安无事，链接程序时c++的链接器就到a.lib中去找“?<br />
+<br />
+MakeFun@@YGJJ@Z”，可是 a.lib中仅仅有“_MakeFun@4”，没有“?MakeFun@@YGJJ@Z”，于是链接器就报告：&nbsp;<br />
+<br />
+error LNK2001: unresolved external symbol ?MakeFun@@YGJJ@Z&nbsp;<br />
+<br />
+解决办法和简单，就是要让b模块知道这个函数是C语言编译的，extern "C"能够做到这一点。一个採用C语言编译的库应该考虑到使用这个库的程序可能是C++程序（使用C++编译器），所以在设计头文件时应该注意这一点。通常应该这样声明头文件：&nbsp;<br />
+<br />
+<br />
+#ifdef _cplusplus&nbsp;<br />
+extern "C" {&nbsp;<br />
+#endif&nbsp;<br />
+<br />
+long MakeFun(long lFun);&nbsp;<br />
+<br />
+#ifdef _cplusplus&nbsp;<br />
+}&nbsp;<br />
+#endif&nbsp;<br />
+<br />
+<br />
+<br />
+这样C++的编译器就知道MakeFun的修饰名是“_MakeFun@4”。就不会有链接错误了。<br />
+<br />
+&nbsp;<br />
+<br />
+&nbsp; &nbsp; 很多人不明确，为什么我使用的编译器都是VC的编译器还会产生“error LNK2001”错误？事实上，VC的编译器会依据源文件的扩展名选择编译方式，假设文件的扩展名是“.C”，编译器会採用C的语法编译，假设扩展名是 “.cpp”。编译器会使用C++的语法编译程序，所以。最好的方法就是使用extern "C"。&nbsp;<br />
+<br />
+1.__stdcall&nbsp;<br />
+<br />
+<br />
+<br />
+<br />
+以“?”标识函数名的開始。后跟函数名。 函数名后面以“@@YG”标识參数表的開始，后跟參数表。&nbsp;<br />
+參数表以代号表示： X--void 。 D--char。 E--unsigned char， F--short， H--int。 I--unsigned int， J--long， K--unsigned long。 M--float。 N--double， _N--bool， .... PA--表示指针。后面的代号表明指针类型，假设同样类型的指针连续出现。以“0”取代，一个“0”代表一次反复；&nbsp;<br />
+參数表的第一项为该函数的返回值类型，其后依次为參数的数据类型，指针标识在其所指数据类型前。&nbsp;<br />
+參数表后以“@Z”标识整个名字的结束。假设该函数无參数，则以“Z”标识结束。 其格式为“?functionname@@YG*****@Z”或“?functionname@@YG*XZ”， 比如 int Test1（char *var1。unsigned long）-----“?<br />
+<br />
+Test1@@YGHPADK@Z” void Test2（） -----“?<br />
+<br />
+Test2@@YGXXZ”&nbsp;<br />
+2 __cdecl调用约定： 规则同上面的 _stdcall 调用约定，仅仅是參数表的開始标识由上面的“@@YG”变为“@@YA”。&nbsp;<br />
+<br />
+3 __fastcall调用约定： 规则同上面的_stdcall调用约定，仅仅是參数表的開始标识由上面的“@@YG”变为“@@YI”。&nbsp;<br />
+<br />
+VC++对函数的省缺声明是"__cedcl"，将仅仅能被C/C++调用。&nbsp;<br />
+<br />
+CB在输出函数声明时使用4种修饰符号 :&nbsp;<br />
+<br />
+__cdecl cb 的默认值，它会在输出函数名前加 "_"，并保留此函数名不变，參数依照从右到左的顺序依次传递给栈，也能够写成_cdecl和cdecl形式。&nbsp;<br />
+__fastcall 修饰的函数的參数将尽可能的使用寄存器来处理，其函数名前加@，參数依照从左到右的顺序压栈；&nbsp;<br />
+__pascal 它说明的函数名使用 Pascal 格式的命名约定。<br />
+<br />
+这时函数名所有大写。<br />
+<br />
+參数依照从左到右的顺序压栈；&nbsp;<br />
+__stdcall 使用标准约定的函数名。函数名不会改变。使用 __stdcall 修饰时。參数依照由右到左的顺序压栈，也能够是_stdcall。&nbsp;<br />
+<br />
+<br />
+C语言函数调用约定&nbsp;&nbsp;<br />
+<br />
+在C语言中。如果我们有这种一个函数：&nbsp;<br />
+<br />
+int function(int a,int b)&nbsp;<br />
+<br />
+调用时仅仅要用 result = function(1,2) 这种方式就能够使用这个函数。可是，当高级语言被编译成计算机能够识别的机器码时，有一个问题就出现来：在CPU中，计算机没有办法知道一个函数调用需 要多少个、什么样的參数，也没有硬件能够保存这些參数。也就是说，计算机不知道怎么给这个函数传递參数，传递參数的工作必须由函数调用者和函数本身来协 调。<br />
+<br />
+为此。计算机提供了一种被称为栈的数据结构来支持參数传递。&nbsp;<br />
+<br />
+栈是一种先后进先出的数据结构，栈有一个存储区、一个栈顶指针。栈顶指针指向堆栈中第一个可用的数据项（被称为栈顶）。<br />
+<br />
+用户能够在栈顶上方向栈中 增加数据。这个操作被称为压栈 (Push)。压栈以后，栈顶自己主动变成新增加数据项的位置。栈顶指针也随之改动。用户也能够从堆栈中取走栈顶。称为弹出栈 (pop)，弹出栈后，栈顶下的一个元素变成栈顶。栈顶指针随之改动。<br />
+<br />
+&nbsp;<br />
+<br />
+函数调用时，调用者依次把參数压栈，然后调用函数。函数被调用以后，在堆栈中取得数据，并进行计算。函数计算结束以后。或者调用者、或者函数本身改动堆栈，使堆栈恢复原装。&nbsp;<br />
+<br />
+在參数传递中。有两个非常重要的问题必须得到明白说明：&nbsp;<br />
+<br />
+当參数个数多于一个时，依照什么顺序把參数压入堆栈&nbsp;<br />
+函数调用后，由谁来把堆栈恢复原状&nbsp;<br />
+在高级语言中，通过函数调用约定来说明这两个问题。常见的调用约定有：&nbsp;<br />
+<br />
+stdcall&nbsp;<br />
+cdecl&nbsp;<br />
+fastcall&nbsp;<br />
+thiscall&nbsp;<br />
+naked call&nbsp;<br />
+<br />
+stdcall调用约定&nbsp;<br />
+stdcall非常多时候被称为pascal调用约定。由于pascal是早期非经常见的一种教学用计算机程序设计语言。其语法严谨。使用的函数调用 约定就是stdcall。<br />
+<br />
+在Microsoft C++系列的C/C++编译器中。经常常使用PASCAL宏来声明这个调用约定。类似的宏还有WINAPI和CALLBACK。&nbsp;<br />
+<br />
+stdcall调用约定声明的语法为(曾经文的那个函数为例）：&nbsp;<br />
+<br />
+int __stdcall function(int a,int b)&nbsp;<br />
+<br />
+stdcall的调用约定意味着：1）參数从右向左压入堆栈。2）函数自身改动堆栈 3)函数名自己主动加前导的下划线，后面紧跟一个@符号，其后紧跟着參数的尺寸&nbsp;<br />
+<br />
+以上述这个函数为例，參数b首先被压栈，然后是參数a，函数调用function(1,2)调用处翻译成汇编语言将变成：&nbsp;<br />
+<br />
+push 2&nbsp; &nbsp; &nbsp; // 第二个參数入栈&nbsp;<br />
+push 1&nbsp; &nbsp; &nbsp; // 第一个參数入栈&nbsp;<br />
+call function // 调用參数。注意此时自己主动把cs:eip入栈&nbsp;<br />
+<br />
+而对于函数自身，则能够翻译为：&nbsp;<br />
+<br />
+push ebp&nbsp; &nbsp; &nbsp;// 保存ebp寄存器，该寄存器将用来保存堆栈的栈顶指针，能够在函数退出时恢复&nbsp;<br />
+mov ebp,esp // 保存堆栈指针&nbsp;<br />
+mov eax,[ebp + 8H] // 堆栈中ebp指向位置之前依次保存有 ebp,cs:eip,a,b,ebp + 8指向 a&nbsp;<br />
+add eax,[ebp + 0CH] // 堆栈中ebp + 1 2处保存了b&nbsp;<br />
+mov esp,ebp&nbsp; &nbsp; &nbsp; &nbsp; // 恢复esp&nbsp;<br />
+pop ebp&nbsp;<br />
+ret 8&nbsp;<br />
+而在编译时。这个函数的名字被翻译成_function@8&nbsp;<br />
+<br />
+注意不同编译器会插入自己的汇编代码以提供编译的通用性，可是大体代码如此。&nbsp;<br />
+当中在函数開始处保留esp到ebp中，在函数结束恢复是编译器经常使用的方法。&nbsp;<br />
+<br />
+从函数调用看。2和1依次被push进堆栈，而在函数中又通过相对于ebp(即刚进函数时的堆栈指针）的偏移量存取參数。&nbsp;<br />
+函数结束后，ret 8 表示清理8个字节的堆栈，函数自己恢复了堆栈。&nbsp;<br />
+<br />
+cdecl调用约定&nbsp;<br />
+cdecl 调用约定又称为C调用约定，是C语言缺省的调用约定，它的定义语法是：&nbsp;<br />
+<br />
+int function (int a ,int b) //不加修饰就是C调用约定&nbsp;<br />
+int __cdecl function(int a,int b) //明白指出C调用约定&nbsp;<br />
+<br />
+cdecl调用约定的參数压栈顺序是和 stdcall是一样的，參数首先由有向左压入堆栈。&nbsp;<br />
+所不同的是，函数本身不清理堆栈。调用者负责清理堆栈。&nbsp;<br />
+因为这样的变化，C 调用约定同意函数的參数的个数是不固定的，这也是C语言的一大特色。<br />
+<br />
+&nbsp;<br />
+对于前面的function函数，使用cdecl后的汇编码变成：&nbsp;<br />
+<br />
+调用处&nbsp;<br />
+push 1&nbsp;<br />
+push 2&nbsp;<br />
+call functionadd&nbsp;<br />
+esp,8&nbsp; &nbsp;// 注意：这里调用者在恢复堆栈&nbsp;<br />
+<br />
+被调用函数_function处&nbsp;<br />
+push ebp&nbsp; &nbsp; &nbsp; // 保存ebp寄存器，该寄存器将用来保存堆栈的栈顶指针。能够在函数退出时恢复&nbsp;<br />
+mov ebp,esp // 保存堆栈指针&nbsp;<br />
+mov eax,[ebp + 8H] // 堆栈中ebp指向位置之前依次保存有 ebp, cs:eip,a,b,ebp +8指向a&nbsp;<br />
+add eax,[ebp + 0CH] // 堆栈中ebp + 12处保存了b&nbsp;<br />
+mov esp,ebp&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// 恢复esp&nbsp;<br />
+pop ebp&nbsp;<br />
+&nbsp; &nbsp;ret&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// 注意。这里没有改动堆栈&nbsp;<br />
+<br />
+MSDN中说，该修饰自己主动在函数名前加前导的下划线，因此函数名在符号表中被记录为_function，可是我在编译时似乎没有看到这样的变化。<br />
+<br />
+&nbsp;<br />
+因为參数依照从右向左顺序压栈。因此最開始的參数在最接近栈顶的位置，因此当採用不定个数參数时。第一个參数在栈中的位置肯定能知道。仅仅要不定的參数个数可以依据第一个后者兴许的明白的參数确定下来，就行使用不定參数，比如对于CRT中的sprintf函数，定义为：&nbsp;<br />
+<br />
+int sprintf(char* buffer,const char* format,...)&nbsp;<br />
+<br />
+因为全部的不定參数都能够通过 format 确定，因此使用不定个数的參数是没有问题的。<br />
+<br />
+&nbsp;<br />
+<br />
+fastcall调用约定&nbsp;<br />
+fastcall调用约定和stdcall类似。它意味着：&nbsp;<br />
+<br />
+函数的第一个和第二个DWORD參数（或者尺寸更小的）通过ecx和edx传递，其它參数通过从右向左的顺序压栈&nbsp;<br />
+被调用函数清理堆栈&nbsp;<br />
+函数名改动规则同stdcall&nbsp;<br />
+其声明语法为：int fastcall function(int a,int b)&nbsp;<br />
+<br />
+为了说明这个调用约定，定义例如以下类和使用代码：&nbsp;<br />
+class A&nbsp;<br />
+{&nbsp;<br />
+public:&nbsp; &nbsp; &nbsp;&nbsp;<br />
+int function1(int a,int b);&nbsp; &nbsp; &nbsp;&nbsp;<br />
+int function2(int a,...);&nbsp;<br />
+};&nbsp;<br />
+<br />
+int A::function1 (int a,int b)&nbsp;<br />
+{&nbsp; &nbsp;<br />
+return a+b;&nbsp;<br />
+}&nbsp;<br />
+<br />
+<br />
+int A::function2(int a,...)&nbsp;<br />
+{&nbsp; &nbsp;&nbsp;<br />
+va_list ap;&nbsp;&nbsp;<br />
+<br />
+va_start(ap,a);&nbsp;<br />
+<br />
+int i;&nbsp; &nbsp;<br />
+int result = 0;&nbsp;<br />
+<br />
+for(i = 0 ; i &lt; a ; i ++)&nbsp; &nbsp;&nbsp;<br />
+{&nbsp; &nbsp; &nbsp; &nbsp;<br />
+&nbsp; &nbsp;result += va_arg(ap,int);&nbsp; &nbsp;&nbsp;<br />
+}&nbsp;&nbsp;<br />
+<br />
+return result;&nbsp;<br />
+}&nbsp;<br />
+<br />
+void callee()&nbsp;<br />
+{&nbsp; &nbsp;&nbsp;<br />
+A a;&nbsp; &nbsp;&nbsp;<br />
+a.function1 (1,2);&nbsp; &nbsp;<br />
+a.function2(3,1,2,3);&nbsp;<br />
+}&nbsp;<br />
+<br />
+// 以下这段汇编代码是原文章的。我认为有问题。还是自己反汇编看看&nbsp;<br />
+<br />
+//函数function1调用0401C1D&nbsp; &nbsp;<br />
+push&nbsp; &nbsp; &nbsp; &nbsp; 200401C1F&nbsp; &nbsp;<br />
+push&nbsp; &nbsp; &nbsp; &nbsp; 100401C21&nbsp; &nbsp;<br />
+lea&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ecx,[ebp-8]00401C24&nbsp; &nbsp;<br />
+call function1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />
+// 注意。这里this没有被入栈&nbsp;<br />
+//函数function2调用00401C29&nbsp; &nbsp;<br />
+push&nbsp; &nbsp; &nbsp; &nbsp; 300401C2B&nbsp; &nbsp;<br />
+push&nbsp; &nbsp; &nbsp; &nbsp; 200401C2D&nbsp; &nbsp;<br />
+push&nbsp; &nbsp; &nbsp; &nbsp; 100401C2F&nbsp; &nbsp;<br />
+push&nbsp; &nbsp; &nbsp; &nbsp; 300401C31&nbsp; &nbsp;<br />
+lea&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;eax,[ebp-8]&nbsp; &nbsp;<br />
+这里引入this指针00401C34&nbsp; &nbsp;<br />
+push&nbsp; &nbsp; &nbsp; &nbsp; eax00401C35&nbsp; &nbsp;<br />
+call&nbsp; &nbsp;function200401C3A&nbsp; &nbsp;<br />
+add&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;esp,14h&nbsp;<br />
+<br />
+下面代码是我改动分析的：&nbsp;<br />
+<br />
+上面的C++代码，必须包括 stdarg.h ，提供动态參数头文件&nbsp;<br />
+<br />
+int A::function1 (int a,int b)&nbsp; &nbsp; &nbsp;//&nbsp;<br />
+{&nbsp; &nbsp;<br />
+004113A0 push&nbsp; &nbsp; &nbsp; &nbsp; ebp&nbsp;<br />
+004113A1 mov&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ebp,esp&nbsp;<br />
+004113A3 sub&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;esp,0CCh&nbsp;<br />
+004113A9 push&nbsp; &nbsp; &nbsp; &nbsp; ebx&nbsp;<br />
+004113AA push&nbsp; &nbsp; &nbsp; &nbsp; esi&nbsp;<br />
+004113AB push&nbsp; &nbsp; &nbsp; &nbsp; edi&nbsp;<br />
+004113AC push&nbsp; &nbsp; &nbsp; &nbsp; ecx&nbsp;<br />
+004113AD lea&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;edi,[ebp-0CCh]&nbsp;<br />
+004113B3 mov&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ecx,33h&nbsp;<br />
+004113B8 mov&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;eax,0CCCCCCCCh&nbsp;<br />
+004113BD rep stos&nbsp; &nbsp; dword ptr es:[edi]&nbsp;<br />
+004113BF pop&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ecx&nbsp;<br />
+004113C0 mov&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;dword ptr [ebp-8],ecx&nbsp;<br />
+return a+b;&nbsp;<br />
+004113C3 mov&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;eax,dword ptr [a]&nbsp;<br />
+004113C6 add&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;eax,dword ptr [b]&nbsp;<br />
+}&nbsp;<br />
+<br />
+004113C9 pop&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;edi&nbsp;<br />
+004113CA pop&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;esi&nbsp;<br />
+004113CB pop&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ebx&nbsp;<br />
+004113CC mov&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;esp,ebp&nbsp;<br />
+004113CE pop&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ebp&nbsp;<br />
+004113CF ret&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;8&nbsp;<br />
+<br />
+void callee()&nbsp;<br />
+{&nbsp; &nbsp;&nbsp;<br />
+00411460 push&nbsp; &nbsp; &nbsp; &nbsp; ebp&nbsp;<br />
+00411461 mov&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ebp,esp&nbsp;<br />
+00411463 sub&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;esp,0CCh&nbsp;<br />
+00411469 push&nbsp; &nbsp; &nbsp; &nbsp; ebx&nbsp;<br />
+0041146A push&nbsp; &nbsp; &nbsp; &nbsp; esi&nbsp;<br />
+0041146B push&nbsp; &nbsp; &nbsp; &nbsp; edi&nbsp;<br />
+0041146C lea&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;edi,[ebp-0CCh]&nbsp;<br />
+00411472 mov&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ecx,33h&nbsp;<br />
+00411477 mov&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;eax,0CCCCCCCCh&nbsp;<br />
+0041147C rep stos&nbsp; &nbsp; dword ptr es:[edi]&nbsp;<br />
+A a;&nbsp; &nbsp;&nbsp;<br />
+a.function1 (1,2);&nbsp; &nbsp;<br />
+0041147E push&nbsp; &nbsp; &nbsp; &nbsp; 2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // 參数 2 入栈&nbsp;<br />
+00411480 push&nbsp; &nbsp; &nbsp; &nbsp; 1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// 參数 1 入栈&nbsp;<br />
+00411482 lea&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ecx,[a]&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// this 指针 ----&gt; ECX&nbsp;<br />
+00411485 call&nbsp; &nbsp; &nbsp; &nbsp; A::function1 (411050h)&nbsp;<br />
+a.function2(3,1,2,3);&nbsp;<br />
+0041148A push&nbsp; &nbsp; &nbsp; &nbsp; 3&nbsp; &nbsp;&nbsp;<br />
+0041148C push&nbsp; &nbsp; &nbsp; &nbsp; 2&nbsp; &nbsp;&nbsp;<br />
+0041148E push&nbsp; &nbsp; &nbsp; &nbsp; 1&nbsp; &nbsp;&nbsp;<br />
+00411490 push&nbsp; &nbsp; &nbsp; &nbsp; 3&nbsp; &nbsp;&nbsp;<br />
+00411492 lea&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;eax,[a]&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // 这里 this 指针入栈了，对比 callee 对 function1 的调用。&nbsp;<br />
+<br />
+00411495 push&nbsp; &nbsp; &nbsp; &nbsp; eax&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// 对 this 的处理是不同的&nbsp; &nbsp;<br />
+00411496 call&nbsp; &nbsp; &nbsp; &nbsp; A::function2 (411122h)&nbsp; &nbsp; &nbsp;// 此处调用者自己没有恢复堆栈&nbsp;<br />
+<br />
+// 因为上面的入栈顺序可知。在 function 2中 当保存ebp 后(打开stack frame后)。堆栈的状态例如以下.&nbsp;<br />
+ebp&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// 保存的 EBP 的值, 且 此时ebp指向该处&nbsp;<br />
+RetAddr&nbsp; &nbsp; &nbsp; &nbsp;// 返回地址&nbsp;<br />
+this指针&nbsp; &nbsp; &nbsp; &nbsp;// 入栈的 this 指针&nbsp;<br />
+參数 3&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // 以下是入栈的參数, 从右向左入栈&nbsp;<br />
+參数 1&nbsp;<br />
+參数 2&nbsp;<br />
+參数 3&nbsp;<br />
+<br />
+<br />
+0041149B add&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;esp,14h&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // 此处调用者自己恢复堆栈&nbsp;<br />
+<br />
+//.............以下的汇编代码是 检查堆栈和恢复 callee 堆栈的操作。不再写了&nbsp;<br />
+}&nbsp;<br />
+<br />
+可见。对于參数个数固定情况下。它类似于stdcall，不定时则类似cdecl&nbsp;<br />
+<br />
+naked call 调用约定&nbsp;<br />
+这是一个非常少见的调用约定，一般程序设计者建议不要使用。编译器不会给这样的函数添加初始化和清理代码。更特殊的是。你不能用return返&nbsp;<br />
+<br />
+回返回值，仅仅能用插入汇编返回结果。这一般用于实模式驱动程序设计，如果定义一个求和的加法程序。能够定义为：&nbsp;<br />
+<br />
+__declspec(naked) int add(int a,int b)&nbsp;<br />
+{&nbsp; &nbsp;<br />
+&nbsp; &nbsp;__asm mov eax,a&nbsp; &nbsp;<br />
+&nbsp; &nbsp;__asm add eax,b&nbsp; &nbsp;<br />
+&nbsp; &nbsp;__asm ret&nbsp;<br />
+}&nbsp;<br />
+<br />
+注意，这个函数没有显式的return返回值，返回通过改动eax寄存器实现，并且连退出函数的ret指令都必须显式插入。&nbsp;<br />
+<br />
+上面代码被翻译成汇编以后变成：&nbsp;<br />
+<br />
+mov eax,[ebp+8]&nbsp;<br />
+add eax,[ebp+12]&nbsp;<br />
+ret 8&nbsp;<br />
+<br />
+注意这个修饰是和__stdcall及cdecl结合使用的。前面是它和cdecl结合使用的代码，对于和stdcall结合的代码，则变成：&nbsp;<br />
+<br />
+__declspec(naked) int __stdcall function(int a,int b)&nbsp;<br />
+{&nbsp; &nbsp;&nbsp;<br />
+__asm mov eax,a&nbsp; &nbsp;&nbsp;<br />
+__asm add eax,b&nbsp; &nbsp;&nbsp;<br />
+__asm ret 8&nbsp; &nbsp; &nbsp; &nbsp; //注意后面的8&nbsp;<br />
+}&nbsp;<br />
+至于这样的函数被调用，则和普通的cdecl及stdcall调用函数一致。&nbsp;<br />
+<br />
+<br />
+函数调用约定导致的常见问题&nbsp;<br />
+假设定义的约定和使用的约定不一致。则将导致堆栈被破坏，导致严重问题，以下是两种常见的问题：&nbsp;<br />
+函数原型声明和函数体定义不一致&nbsp;<br />
+DLL导入函数时声明了不同的函数约定&nbsp;<br />
+以后者为例，如果我们在dll种声明了一种函数为：&nbsp;<br />
+<br />
+__declspec(dllexport) int func(int a,int b);//注意。这里没有stdcall，使用的是cdecl&nbsp;<br />
+使用时代码为：&nbsp;<br />
+<br />
+typedef int (*WINAPI DLLFUNC)func(int a,int b);&nbsp; &nbsp; &nbsp;&nbsp;<br />
+hLib = LoadLibrary(...);&nbsp; &nbsp; &nbsp;&nbsp;<br />
+DLLFUNC func = (DLLFUNC)GetProcAddress(...) //这里改动了调用约定&nbsp; &nbsp; &nbsp;&nbsp;<br />
+result = func(1,2);&nbsp; &nbsp; &nbsp; &nbsp;//导致错误&nbsp;<br />
+因为调用者没有理解WINAPI的含义错误的添加了这个修饰，上述代码必定导致堆栈被破坏，&nbsp;<br />
+MFC在编译时插入的checkesp函数将告诉你。堆栈被破坏了。<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1850.html">安装 Keras（tensorflow-gpu）</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1852.html">内联函数的作用</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/liweigao01/article/details/78351464" target="_blank">https://blog.csdn.net/liweigao01/article/details/78351464</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

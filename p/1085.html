@@ -1,0 +1,288 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>spring事务管理基本实现——通过jdbcTemplate和transactionTemplate显式调用实现_comonly.cn</title>
+<meta name="keywords" content="spring事务管理基本实现——通过jdbcTemplate和transactionTemplate显式调用实现" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">spring事务管理基本实现——通过jdbcTemplate和transactionTemplate显式调用实现</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-03-04</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	java框架-spring等
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <pre class="prettyprint lang-js">&lt;!--创建数据源--&gt;
+&lt;bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"&gt;
+    &lt;property name="url" value="jdbc:mysql://localhost:3306/test"&gt;&lt;/property&gt;
+    &lt;property name="username" value="root"&gt;&lt;/property&gt;
+    &lt;property name="password" value=""&gt;&lt;/property&gt;
+    &lt;property name="defaultAutoCommit" value="true" /&gt;
+&lt;/bean&gt;  &lt;!--jdbcTemplate执行数据有关操作--&gt; &lt;bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate"&gt;  &lt;property name="dataSource" ref="dataSource"/&gt;
+&lt;/bean&gt;
+
+&lt;!-- 配置开启事务 --&gt;
+&lt;!-- 配置事务管理器 --&gt;
+&lt;bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"&gt;
+    &lt;property name="dataSource" ref="dataSource"&gt;&lt;/property&gt;
+&lt;/bean&gt;
+
+&lt;!-- 配置transactionTemplate模板 --&gt;    
+&lt;bean id="transactionTemplate" class="org.springframework.transaction.support.TransactionTemplate"&gt;
+    &lt;property name="transactionManager" ref="transactionManager"&gt;&lt;/property&gt; &lt;/bean&gt;</pre>
+<p>
+	关于数据源自动提交的设置defaultAutoCommit，当在事务中进行数据库操作时该属性失效，commit由事务管理器接管。
+</p>
+<pre class="prettyprint lang-js">@Autowired
+private Dao dao;
+@Autowired
+private TransactionTemplate transactionTemplate;
+...
+
+transactionTemplate.execute(new TransactionCallbackWithoutResult() {
+    @Override
+    protected void doInTransactionWithoutResult(TransactionStatus status) {
+        // 需要在事务中执行的逻辑
+	dao.out("test");
+	//int i = 1/0;
+	dao.in("test");
+    }
+});</pre>
+transactionTemplate指定事务的范围，在事务结束后可能自动commit.
+<pre class="prettyprint lang-js">@Autowired
+private JdbcTemplate jdbcTemplate;
+
+public void out(String test) {
+	jdbcTemplate.update("insert into inss(test) values(?)",test);
+}</pre>
+通过JdbcTemplate对象执行数据库有关操作。</div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1084.html">spring-JDBC事务管理</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1086.html">AOP与JAVA动态代理</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="DataSourceTransactionManager程序式事务管理">
+							<h2 style="display:inline;color:#5BC648;">DataSourceTransactionManager程序式事务管理</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-03-04&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><pre class="prettyprint lang-java">//DataSourceTransactionManager实现事务管理
+@Autowired
+private DataSourceTransactionManager transactionManager;
+
+DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
+TransactionStatus status = transactionManager.getTransaction(def); // get
+try {
+	//do some things.
+	dao.out("test");
+	int i = 1/0;
+	dao.in("test");
+	//.............................................
+	// commit.
+	transactionManager.commit(status);
+} catch (Exception e) {
+	transactionManager.rollback(status);
+}</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#DataSourceTransactionManager程序式事务管理">DataSourceTransactionManager程序式事务管理</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

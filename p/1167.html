@@ -1,0 +1,405 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>动态规划 题型汇总_comonly.cn</title>
+<meta name="keywords" content="动态规划 题型汇总" />
+<meta name="description" content="原问题--&gt;子问题，每个子问题只求解一次。
+
+
+	递归问题中存在重叠子问题
+
+
+	1. 自顶而下：记忆化搜索
+
+
+	2. 自底而上：动态规划
+
+
+	
+
+
+	1. 上楼梯问题
+
+
+	1，2，3，4，5，6，7 ..... n 层
+
+
+	每次k层：
+
+
+	记录已经上到前k层时的情况，a[i] = a[i-1] + a[i-2] + ... + a[i - k +1]
+
+
+	&lt;一个数组，记录到每个台阶可能走的方法即可&gt;
+
+
+	
+
+" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">动态规划 题型汇总</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2020-10-23</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	数据结构 算法
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>原问题--&gt;子问题，每个子问题只求解一次。
+
+
+	递归问题中存在重叠子问题
+
+
+	1. 自顶而下：记忆化搜索
+
+
+	2. 自底而上：动态规划
+
+
+	
+
+
+	1. 上楼梯问题
+
+
+	1，2，3，4，5，6，7 ..... n 层
+
+
+	每次k层：
+
+
+	记录已经上到前k层时的情况，a[i] = a[i-1] + a[i-2] + ... + a[i - k +1]
+
+
+	&lt;一个数组，记录到每个台阶可能走的方法即可&gt;
+
+
+	
+
+</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	原问题--&gt;子问题，每个子问题只求解一次。
+</p>
+<p>
+	递归问题中存在重叠子问题
+</p>
+<p>
+	1. 自顶而下：记忆化搜索
+</p>
+<p>
+	2. 自底而上：动态规划
+</p>
+<p>
+	<br />
+</p>
+<p>
+	1. 上楼梯问题
+</p>
+<p>
+	1，2，3，4，5，6，7 ..... n 层
+</p>
+<p>
+	每次k层：
+</p>
+<p>
+	记录已经上到前k层时的情况，a[i] = a[i-1] + a[i-2] + ... + a[i - k +1]
+</p>
+<p>
+	&lt;一个数组，记录到每个台阶可能走的方法即可&gt;
+</p>
+<p>
+	<br />
+</p>
+<p>
+	2.&nbsp; 路径和最小（从上到下）
+</p>
+<p>
+	14
+</p>
+<p>
+	12 13
+</p>
+<p>
+	9&nbsp; &nbsp;10&nbsp; 11
+</p>
+<p>
+	5&nbsp; &nbsp;6&nbsp; &nbsp; 7&nbsp; &nbsp;8
+</p>
+<p>
+	1&nbsp; &nbsp;2&nbsp; &nbsp;3&nbsp; &nbsp;4&nbsp; &nbsp;5
+</p>
+<p>
+	实际是无序的一个组合。
+</p>
+<p>
+	用两个a[5]， 的数组存储即可，从下到上依次计算路径长度，到最后得到的就是最终结果。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	3. 方形表格（r*l），从左上角到右下角最小路径
+</p>
+<p>
+	一个r长度的数组，记录当前列的最小路径，遍历数组（按列），从上到下，判断从上、左那边路径短记录下来。最后求出的值即为最短路径。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	4. 分割正整数n（分割出&gt;=2个），使乘积最大。
+</p>
+<p>
+	v[i] 记录长度为i的绳子，切分后成绩的最大值。//最少切分为两端。
+</p>
+<p>
+	对于长度为n的绳子，结果为 max(1*v[n-1], v[2]*v[n-2],&nbsp; v[3]*v[n-3], ... v[n/2]*v[n-n/2])
+</p>
+<p>
+	<br />
+</p>
+<p>
+	5. 小偷偷宝物，不能偷相邻的，最多投多少，每个位置宝物价值不同。
+</p>
+<p>
+	前后关联的线性问题。
+</p>
+<p>
+	从左往右，前一个偷了的价值和，前一个没偷的价值和 ==&gt; 当前偷的价值和(前一个没偷的加当前投了的)，当前没偷的价值和（前一个没偷的和前一个偷了的较大的那个值）。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	6. 背包问题（容量、价值）
+</p>
+<p>
+	a[n][w]&nbsp; 记录处理前n个商品后，背包容量剩余w 时可以装的最大价值。&nbsp; 第i个商品放/不放。
+</p>
+<p>
+	第i行只依赖于i-1行 ... （通过一个二维数组实现）
+</p>
+<p>
+	<br />
+</p>
+<p>
+	7. 最长上升子序列&nbsp; &nbsp; 一整数序列中的最长上升子序列的长度。
+</p>
+<p>
+	从头开始数 记录a[i]结尾的子序列的最大长度。maxLIS 记录以前i元素的最长序列长度。O（n^2）时间复杂度。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	O（nlogn） 的时间复杂度。
+</p>
+<p>
+	维护一个栈（按序列长度，单调递增，同时尽可能的存较小的数）最后栈顶元素即为最长子序列的长度。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1166.html">Ubuntu 18 + tensorflow-gpu 1.15.0 + cuda_10.0 + cudnn-10.0 + python3.7安装</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1168.html">KindEditor 编辑器粘贴图片直接上传（Chrome,IE11,opera）</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

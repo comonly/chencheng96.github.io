@@ -1,0 +1,299 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Cookie和Session的使用——登录、自动登录、注销登录（实例）_comonly.cn</title>
+<meta name="keywords" content="Cookie和Session的使用——登录、自动登录、注销登录（实例）" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Cookie和Session的使用——登录、自动登录、注销登录（实例）</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-04-26</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	javaweb---jsp asp数据库框架
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='登录用户（使用eio在页面判断）'>
+	<span>登录用户（使用session在页面判断）</span>
+</h2>
+<p>
+	<span>验证用户提交的登录信息后，如何在后续页面判断登录状态（以控制访问权限等），这里使用session变量来表示登录状态。登录成功后，将用户信息封装起来（这里使用的是一个javabean）存放到session中。在需要进行权限登录验证的页面通过获取该session标记“</span>loginUser”来判断是否是登录状态。request.getSession().setAttribute("loginUser",loginUser);
+</p>
+<p>
+	<span>本项目中，在每个页面右上角都会显示登录和注册选项，当用户处于登录状态时会显示用户名的信息。当然该部分用include标签简化（分块设计，在页面分块设计中有相关说明），使用仅用设置一处即可。判断登录状态的核心代码（jstl方式）如下：</span>
+</p>
+<p>
+	<span> </span>
+</p>
+<pre class="prettyprint lang-html">&lt;c:choose&gt;
+	&lt;c:when test="${islogin eq 'false'}"&gt;
+		非登录状态显示的信息
+	&lt;/c:when&gt;
+	&lt;c:otherwise&gt;
+		登录状态显示的信息
+	&lt;/c:otherwise&gt;
+&lt;/c:choose&gt;</pre>
+其中islogin是在页面中判断登录标志Javabean（<span>loginUser</span>）是否为空来说明的一个标志字段。
+<h2 id='设置自动登录（登录时写入cookie）'>
+	<span>设置自动登录（登录时写入cookie）</span>
+</h2>
+<p>
+	自动登录是通过在用户通过账号、密码登录是，是在cookie来实现的。为了让用户感觉不到登录的过程，本项目采用的是在在过滤器（filter）中判断是否满足自动登录条件，若满足便自动登录。具体实现是设置表示用户信息的唯一编码（本项目中使用用户唯一id及用户名加上干扰字符生成的字符串）到cookie，每次访问请求在判断登录标志为空的情况下继续判断cookie的信息是否有满足自动登录的项。并对信息进行处理确保登录用户的有效性。在信息验证成功后，要对登录标志进行相应的处理（将loginUser写入cookie中）。
+</p>
+<p>
+	下面是保存cookie信息的核心部分：
+</p>
+<pre class="prettyprint lang-java">//设置cookie保持登录状态
+//对用户信息编码（用户名和id）在非登录状态进行自动登录处理。
+String value="msg_ic"+loginUser.getMnumber()+"msg_ic"+loginUser.getMname()+"msg_ic";
+Cookie cookie = new Cookie(URLEncoder.encode("idvaluename"),URLEncoder.encode(value));
+cookie.setMaxAge(60*60*24*7);//保存用户cookie7天
+cookie.setPath("/graduation_project");//设置有效范围
+response.addCookie(cookie);</pre>
+<p>
+	下面是在过滤器中提取相关信息实现自动登录的核心思路（对登录状态以及cookie中保存的信息编码（idvaluename）的获取这里不再进行说明）：
+</p>
+<pre class="prettyprint lang-java">int mnumber=Integer.parseInt(idvaluename.split("msg_ic")[1]);//对字符串拆分，获取id和用户名
+String mname=idvaluename.split("msg_ic")[2];
+//上述信息验证成功，登录成功后设置session变量，在每个页面使用（检测登录状态等）
+MemberDao memberDao=new MemberDao();
+MemberOutInfo loginUser=memberDao.getmemberOutInfoByMnumberAndMname(mnumber,mname);
+if(loginUser!=null){    //验证cookie中的信息是否正确
+    req.getSession().setAttribute("loginUser",loginUser);
+} </pre>
+<h2 id='注销登录（清除cookie以及eio域的标识Jvbe）'>
+	注销登录（清除cookie以及session域的标识Javabean）
+</h2>
+<p>
+	注销登录即对登录标志（loginUser）、cookie中自动登录字段（idvaluename）进行处理。使当前用户，即客户端（因为自动登录的使用，所以这里使用客户端的“非登录状态”）处于非登录状态。
+</p>
+<pre class="prettyprint lang-java">//移除用来标志登录的session变量loginUser
+request.getSession().removeAttribute("loginUser");
+//移除自动登录的cookie变量idvaluename
+//注销该会话
+request.getSession().invalidate();
+//注销cookie（通过设置过期时间为0）
+Cookie cookie = new Cookie(URLEncoder.encode("idvaluename"),"0");
+cookie.setMaxAge(0);//设置有效期0即删除cookie
+cookie.setPath("/graduation_project");
+response.addCookie(cookie);</pre>
+<h2 id='登录、注销、注册后跳转到之前的页面'>
+	<span>登录、注销、注册后跳转到之前的页面</span>
+</h2>
+<p>
+	<span>这里在每次请求（除登录、注销、注册操作）时设置session变量（</span>reurl）保存请求的url，这样在进行登录、注销、注册后就可以获取相应的session变量（reurl）来跳转到最后请求的url。这样做的一个好处是，无需在登录、注销、注册页面设置相应的跳转参数（这样做同样是繁琐的，对于转发的请求可以会带来一些新的问题）即可以跳转到之前的访问页面
+</p>
+<pre class="prettyprint lang-js">//获取session变量，将要跳转的位置
+String gotourl=request.getSession().getAttribute("reurl").toString();
+if(gotourl==null)gotourl="/graduation_project/";  //设置默认的跳转页面
+try {
+    response.sendRedirect(gotourl);
+} catch (IOException e) { e.printStackTrace();
+}</pre>
+<h2 id='使用cookie保存登录信息（最后一次登录时间，i等）'>
+	<span>使用cookie保存登录信息（最后一次登录时间，ip等）</span>
+</h2>
+<p>
+	<span>只需要在每次请求对相应的cookie进行设置即可。</span>
+</p>
+<p>
+	<span>这里仅提供一种</span>通过System类中的currentTimeMillis方法来获取当前时间的方法：SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");&nbsp; &nbsp;System.out.println(df.format(System.currentTimeMillis()));
+</p>
+<p>
+	对于获取ip的方法，这里不再进行说明。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/926.html">Java Web会话机制——Cookie和Session</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/928.html">在web页上画出动态变化的曲线</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#登录用户（使用eio在页面判断）">登录用户（使用eio在页面判断）</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#设置自动登录（登录时写入cookie）">设置自动登录（登录时写入cookie）</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#注销登录（清除cookie以及eio域的标识Jvbe）">注销登录（清除cookie以及eio域的标识Jvbe）</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#登录、注销、注册后跳转到之前的页面">登录、注销、注册后跳转到之前的页面</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#使用cookie保存登录信息（最后一次登录时间，i等）">使用cookie保存登录信息（最后一次登录时间，i等）</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

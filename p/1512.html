@@ -1,0 +1,362 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>c++ map的使用_comonly.cn</title>
+<meta name="keywords" content="c++ map的使用" />
+<meta name="description" content="map插入数据：
+
+
+	map mapStudent;
+mapStudent.insert(pair(1,“student_one”));
+
+
+	
+
+
+	
+
+
+	
+
+添加
+cameraBroadcastPlayInfo.vecRegionId = vecRegionId;
+cameraBroadcastPlayInfo.bIsPlaying = true;
+m_cameraBroadcastPlayInfo.insert(pair(strMac, cameraBroad" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">c++ map的使用</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-10-22</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>map插入数据：
+
+
+	map mapStudent;
+mapStudent.insert(pair(1,“student_one”));
+
+
+	
+
+
+	
+
+
+	
+
+添加
+cameraBroadcastPlayInfo.vecRegionId = vecRegionId;
+cameraBroadcastPlayInfo.bIsPlaying = true;
+m_cameraBroadcastPlayInfo.insert(pair(strMac, cameraBroad</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	<br />
+</p>
+<p>
+	map插入数据：
+</p>
+<p>
+	map<int, string=""> mapStudent;<br />
+mapStudent.insert(pair<int, string="">(1,“student_one”));</int,></int,>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+<br />
+添加<br />
+cameraBroadcastPlayInfo.vecRegionId = vecRegionId;<br />
+cameraBroadcastPlayInfo.bIsPlaying = true;<br />
+m_cameraBroadcastPlayInfo.insert(pair<string, tcamerabroadcastplayinfo="">(strMac, cameraBroadcastPlayInfo));<br />
+<br />
+<br />
+修改&nbsp; &nbsp;/ 删除<br />
+map<string, tcamerabroadcastplayinfo="">::iterator iter = m_cameraBroadcastPlayInfo.find(strMac);<br />
+if (iter != m_cameraBroadcastPlayInfo.end())<br />
+{<br />
+//判断 是否 存在记录<br />
+//m_cameraBroadcastPlayInfo.erase(iter);<br />
+iter-&gt;second.bIsPlaying = false;<br />
+}<br />
+else<br />
+{<br />
+//strDescription = "不存在要停播的内容";<br />
+//return -1;<br />
+<br />
+}<br />
+<br />
+<br />
+auto it = m_mapPlayers.find(strEbmId);<br />
+if (it != m_mapPlayers.end())<br />
+{<br />
+delete it-&gt;second;<br />
+//it-&gt;second-&gt;UnInit();<br />
+//it-&gt;second-&gt;~BroadcastPlayer();<br />
+m_mapPlayers.erase(it);<br />
+bFound = true;<br />
+</string,></string,>
+</p>
+<p>
+	<string, tcamerabroadcastplayinfo=""><string, tcamerabroadcastplayinfo=""> }</string,></string,>
+</p>
+<p>
+	<string, tcamerabroadcastplayinfo=""><string, tcamerabroadcastplayinfo=""><br />
+</string,></string,>
+</p>
+<p>
+	<string, tcamerabroadcastplayinfo=""><string, tcamerabroadcastplayinfo=""><br />
+</string,></string,>
+</p>
+<p>
+	<string, tcamerabroadcastplayinfo=""><string, tcamerabroadcastplayinfo="">map删除指定值的内容</string,></string,>
+</p>
+<p>
+	<string, tcamerabroadcastplayinfo=""><string, tcamerabroadcastplayinfo="">map 是关联容器,对于关联容器来说，如果某一个元素已经被删除，那么其对应的迭代器就失效了，不应该再被使用；否则会导致程序无定义的行为。<br />
+可以用以下方法解决这问题:<br />
+正确的写法<br />
+1.使用删除之前的迭代器定位下一个元素。STL建议的使用方式<br />
+<br />
+for(ITER iter=mapTest.begin();iter!=mapTest.end();)<br />
+{<br />
+cout&lt;&lt;iter-&gt;first&lt;&lt;":"&lt;&lt;iter-&gt;second&lt;&lt;endl;<br />
+mapTest.erase(iter++);<br />
+}<br />
+2. erase() 成员函数返回下一个元素的迭代器<br />
+<br />
+for(ITER iter=mapTest.begin();iter!=mapTest.end();)<br />
+{<br />
+cout&lt;&lt;iter-&gt;first&lt;&lt;":"&lt;&lt;iter-&gt;second&lt;&lt;endl;<br />
+iter=mapTest.erase(iter);<br />
+}<br />
+&nbsp;<br />
+<br />
+&nbsp;<br />
+<br />
+</string,></string,>
+</p>
+<p>
+	<string, tcamerabroadcastplayinfo=""><string, tcamerabroadcastplayinfo="">res.empty()&nbsp; //是否为空？一般用于条件判断;<br />
+&nbsp;<br />
+res.find(3) //返回迭代器，它定位到键为Key的元素，没有找到匹配项就返回m.end()&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //(此处返回指向key为3的pair的迭代器)<br />
+&nbsp;<br />
+res.erase(3) //删除键为3的pair；<br />
+</string,></string,>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<string, tcamerabroadcastplayinfo=""><string, tcamerabroadcastplayinfo=""><br />
+</string,></string,>
+</p>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1510.html">VXG Media Player 1.8.63插件在高版本(77.)谷歌浏览器上使用</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1513.html">PowerDesigner</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

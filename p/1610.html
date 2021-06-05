@@ -1,0 +1,299 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>智能指针_comonly.cn</title>
+<meta name="keywords" content="智能指针" />
+<meta name="description" content="c++中动态内存的管理是通过new和delete来完成的，只要保证new和delete的配对使用，是没有问题的。但是有时候我们会忘记释放内存，甚至有时候我们根本就不知道什么时候释放内存。特别时在多个线程间共享数据时，更难判断内存该何使释放。这种情况下就机器容易产生引用非法内存的指针。 
+
+
+	为了更容易（同时也更安全的管）的使用动态内存，新的标准库（C++11）提供了两种智能指针（smart pointer）类型来管理动态对象。智能指针的行为类似于常规指针。重要的区别是它负责自动释放所指向的对象。新" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">智能指针</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-12-26</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>c++中动态内存的管理是通过new和delete来完成的，只要保证new和delete的配对使用，是没有问题的。但是有时候我们会忘记释放内存，甚至有时候我们根本就不知道什么时候释放内存。特别时在多个线程间共享数据时，更难判断内存该何使释放。这种情况下就机器容易产生引用非法内存的指针。 
+
+
+	为了更容易（同时也更安全的管）的使用动态内存，新的标准库（C++11）提供了两种智能指针（smart pointer）类型来管理动态对象。智能指针的行为类似于常规指针。重要的区别是它负责自动释放所指向的对象。新</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> c++中动态内存的管理是通过new和delete来完成的，只要保证new和delete的配对使用，是没有问题的。但是有时候我们会忘记释放内存，甚至有时候我们根本就不知道什么时候释放内存。特别时在多个线程间共享数据时，更难判断内存该何使释放。这种情况下就机器容易产生引用非法内存的指针。 <br />
+<br />
+<p>
+	为了更容易（同时也更安全的管）的使用动态内存，新的标准库（C++11）提供了两种智能指针（smart pointer）类型来管理动态对象。智能指针的行为类似于常规指针。重要的区别是它负责自动释放所指向的对象。新标准提供的这两种智能指针的区别在于管理底层指针的方式：shared_ptr允许多个指针指向同一个对象；unique_ptr则独占所指向的对象。标准库还定义了一个weak_ptr的伴随类，他是一种弱引用，指向shared_ptr所管理的对象。这三种类型都定义在memory头文件中。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	初始化 sahred_ptr<br />
+<br />
+智能指针的使用方式与普通指针类似。解引用一个智能指针返回它指向的对象。如果在一个条件判断中使用智能指针，效果就是检测它是否为空：<br />
+//一般的初始化方式<br />
+&nbsp; &nbsp; shared_ptr&lt;string&gt; pint(new string("normal usage!"));<br />
+&nbsp; &nbsp; cout&lt;&lt;*pint&lt;&lt;endl;<br />
+<br />
+&nbsp; &nbsp; //推荐的安全的初始化方式<br />
+&nbsp; &nbsp; shared_ptr&lt;string&gt; pint1 = make_shared&lt;string&gt;("safe uage!");<br />
+&nbsp; &nbsp; cout&lt;&lt;*pint1&lt;&lt;endl;
+</p>
+<p>
+	shared_ptr&lt;string&gt; p1;<br />
+&nbsp; &nbsp; if(!p1)&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;　　　　//!默认初始化的智能指针中保存着一个空指针！并不是""空字符串<br />
+&nbsp; &nbsp; &nbsp; &nbsp; cout&lt;&lt;"p1==NULL"&lt;&lt;endl;
+</p>
+<p>
+	<br />
+</p>
+<p>
+	关于get()函数；<br />
+<br />
+智能指针定义了一个名为get的函数，它返回一个内置指针，指向智能指针的管理的对象。此函数设置的初衷是当我们向不能使用智能指针的代码传递一个内置指针。使用get返回指针的代码不能delete此指针。<br />
+<br />
+&nbsp; &nbsp; shared_ptr&lt;int&gt; p1 = make_shared&lt;int&gt;(32);<br />
+//&nbsp; &nbsp; delePointer(p1.get());&nbsp; &nbsp; &nbsp; &nbsp; //!error:
+</p>
+<p>
+	再次声明：get用来将指针的访问权限传递给代码，只有在确定代码不会delete指针的情况下，才能使用get。特别是，永远不要用get初始化另一个智能指针或者为另一个智能指针赋值！
+</p>
+<p>
+	<br />
+</p>
+<p>
+	C++内存管理之shared_ptr：<a href="https://www.cnblogs.com/wangkeqin/p/9351191.html" target="_blank">https://www.cnblogs.com/wangkeqin/p/9351191.html</a>
+</p>
+<p>
+	1）不使用相同的内置指针值初始化（或reset）多个智能指针。<br />
+2）不delete get函数返回的指针。<br />
+3）如果你使用了get返回的指针，记住当最后一个对应的智能指针销毁后，你的指针就变为无效了。<br />
+4）如果你使用智能指针管理的资源不是new分配的内存，记得传递给他一个删除器。
+</p>
+<p>
+	C++11中常用的智能指针<br />
+C++中常用的智能指针有，在C++11中的&lt;memory&gt;中有unique_ptr、shared_ptr、weak_ptr<br />
+1. unique_ptr：同一时刻只能由唯一的unique_ptr指向给定对象，不支持拷贝和赋值操作。<br />
+2. shared_ptr：可以有多个指针指向相同的对象，通过引用计数机制，支持拷贝和赋值操作。每使用一次，内部引用计数器加1，析构一次，引用计数减1，当计数为0时，释放所指的堆空间。<br />
+3. weak_ptr：弱引用。引用计数器有一个问题就是相互引用形成环，这样两个指针指向的内存都无法释放。需要手动打破循环引用或者使用weak_ptr。顾名思义，weak_ptr是一个弱引用，只引用不计数。如果一块内存被shared_ptr和weak_ptr同时引用，当所有的shared_ptr析构了之后，不管还有没有weak_ptr引用该内存，内存也会被释放，所以weak_ptr不保证它指向的内存一定有效，在使用之前需要检查weak_ptr是否为空指针。
+</p>
+<p>
+	尽量使用std::make_unique和std::make_shared而不直接使用new
+</p>
+<p>
+	1.&nbsp; make_unique 同 unique_ptr 、auto_ptr 等一样，都是 smart pointer，可以取代new 并且无需 delete pointer，有助于代码管理。<br />
+2. make_unique 创建并返回 unique_ptr 至指定类型的对象，这一点从其构造函数能看出来。make_unique相较于unique_ptr 则更加安全。<br />
+3. 编译器不同，make_unique 要求更新（Visual Studio 2015）。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1609.html">在C程序中按照你想要的格式输出时间：strftime()</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1611.html">C++标准库中的string内存储器是分配在堆上面吗标准C＋＋类std::string的内存共享和Copy-On-Write（写时拷贝）</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

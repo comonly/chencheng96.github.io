@@ -1,0 +1,374 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>c++面向对象程序设计(三)_comonly.cn</title>
+<meta name="keywords" content="c++面向对象程序设计(三)" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">c++面向对象程序设计(三)</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-02-10</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	c c++
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='友元'>
+	友元
+</h2>
+<p>
+	解决类外一般函数或其他类的成员函数与类的私有成员之间进行属性共享的障碍。
+</p>
+<h4>
+	友元函数
+</h4>
+<p>
+	友元函数是在类定义中使用关键字friend声明的非成员函数。可以在类中的public部分，也可以在private部分，与访问权限无关。
+</p>
+<pre class="prettyprint lang-cpp">friend 函数类型 友元函数名(参数表){函数体}
+
+#include &lt;iostream&gt;
+using namespace std; class Count
+{
+    private:
+        int x;
+        friend void set_x(Count &amp;, int);    //声明类外非成员函数set_x为友元函数
+    public:
+        void print(){cout&lt;&lt;x;}
+};
+void set_x(Count &amp;c ,int a)
+{
+    c.x=a;
+}
+void main(){
+    Count counter;
+    set_x(counter,10);
+    counter.print();
+}</pre>
+<h4>
+	友元类
+</h4>
+<p>
+	作为友元的类中的所有成员函数都可以访问（修改）另一个类中的私有成员（访问时同样需要传递对象名）。
+</p>
+<pre class="prettyprint lang-cpp">class A{friend class B;};    //    声明友元类B
+void set_x(Count &amp;counter, int x);    //访问函数对象名的传递
+
+#include &lt;iostream&gt;
+using namespace std;
+class Count
+{
+    private:
+        int x;
+        friend class Change;
+    public:
+        void print(){cout&lt;&lt;x;}
+};
+class Change
+{
+    public:
+        void changeCount(Count &amp;counter, int x){counter.x=x; }
+};
+void main(){
+    Count counter;
+    Change chang;
+    chang.changeCount(counter,10);
+    counter.print();
+}</pre>
+<h2 id='继承与派生'>
+	继承与派生
+</h2>
+<p>
+	继承就是一个派生类拥有全部基类的成员变量和成员函数。产生新类的被继承类称为基类（父类），由基类通过继承产生的新类称为派生类（子类）。基类的构造函数和析构函数不能继承（程序运行过程中会执行的）。
+</p>
+<p>
+	class 派生类名 : 继承属性 基类名
+</p>
+<p>
+	{
+</p>
+<p>
+	派生类成员变量和成员函数定义
+</p>
+<p>
+	};
+</p>
+<p>
+	继承属性为public，private（默认方式），protected
+</p>
+<ol>
+	<li>
+		公有继承，基类的公有成员和保护成员分别成为派生类的公有成员和保护成员。
+	</li>
+	<li>
+		私有继承，基类的公有成员和保护成员成为派生类的私有成员。
+	</li>
+	<li>
+		保护继承，基类的公有成员和保护成员成为派生类的保护成员。
+	</li>
+</ol>
+<h4>
+	多继承
+</h4>
+<pre class="prettyprint lang-cpp">class 派生类名 : 继承方式1 基类名1 ,继承方式2 基类名2......
+{
+//派生类新增的内容
+};</pre>
+<h4>
+	派生类的构造函数和析构函数
+</h4>
+<pre class="prettyprint lang-cpp">派生类的构造函数名(参数) : 基类构造函数名(基类参数) ,子对象数据成员初始化
+{
+派生类新增成员的初始化语句;
+}
+
+class Tdate
+{
+    public:
+        int year;
+        Tdate(int year){this.year=year; }
+};
+class Tmouth
+{
+    public:
+        int m;
+        Tmouth(int m){this.m=m; }
+};
+class Tdatemouth : public Tdate
+{
+    public year;     //派生类同名成员屏蔽基类成员
+    Tmouth mouth;    //定义子对象mouth
+    Tdatemouth(int yy) : Tdate(2000),Tmouse(2)
+    {
+        year=yy;    //覆盖了Tdate中的year
+        cout&lt;&lt;year&lt;&lt;mouth.m;
+    }
+};
+void main()
+{
+    Tdatemouth(2018);
+}</pre>
+<h2 id='虚函数'>
+	虚函数
+</h2>
+<pre class="prettyprint lang-cpp">virtual 函数返回值类型 函数名(形参表)
+{
+函数体;
+}</pre>
+<p>
+	虚函数是用来表现基类与派生类成员函数之间关系的。在基类用virtual声明的虚函数可以在一个或多个派生类中被重新定义，在派生类中重新定义时，其函数原型必须与基类完全相同。在派生类中可以不用virtual声明。
+</p>
+<p>
+	虚函数可以用基类指针访问或对象名访问。
+</p>
+<p>
+	在派生类中重新定义虚函数是函数重载的一种特殊形式。
+</p>
+<h4>
+	纯虚函数
+</h4>
+<p>
+	基类中不给出有意义的定义，定义留给派生类来完成。
+</p>
+<pre class="prettyprint lang-cpp">virtual 类型 函数名(参数表) = 0;</pre>
+<h4>
+	抽象类
+</h4>
+<p>
+	包含纯虚函数的类。只能做为基类，不能生成对象。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/847.html">c++指针与引用</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/849.html">c++运算符重载</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#友元">友元</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#继承与派生">继承与派生</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#虚函数">虚函数</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

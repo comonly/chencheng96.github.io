@@ -1,0 +1,797 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>精通CSS滤镜（filter）（实例解析）【转】_comonly.cn</title>
+<meta name="keywords" content="精通CSS滤镜（filter）（实例解析）【转】" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">精通CSS滤镜（filter）（实例解析）【转】</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">施杨 's Think out</li>
+          <li class="lmname"><a href="http://www.cnblogs.com/shiyangxt/archive/2008/11/16/1334633.html" target="_blank">http://www.cnblogs.com/shiyangxt/archive/2008/11/16/1334633.html</a></li>
+          <li class="timer">2017-03-05</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">CSS,实例</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	&nbsp; &nbsp; &nbsp; &nbsp;CSS（Cascading Style Sheets) 层叠样式表单。1998年5月12日，Cascading Style Sheets,level 2 成为了W3C&nbsp;的新标准。同时,”W3C CoreStyles '和CSS2 Validation Service' 以及“CSS Test Suite' 宣布成立。它是一组样式，样式中的属性在HTML元素中依次出现，并显示在浏览器中。样式可以定义在HTML文档的标志（TAG）里，也可以在外部附加文档作为外加文档。此时，一个样式表单可以作用于多个页面---甚至整个站点，因此具有更好的易用性和扩展性。
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp; &nbsp; 对于滤镜和渐变效果，前者是基础，因为后者就是滤镜效果的不断变化和演示更替。当滤镜和渐变效果结合到一个基本的SCRIPT小程序中后，网页设计者就可以拥有一个建立动态交互文档的强大工具。也就是CSS FILTER+ SCRIPT， 这就说明想要建立动态的文档还要一些SCRIPT （脚本语言）的基础。&nbsp;
+</p>
+<br />
+<p>
+	可视化滤镜属性只能用在HTML控件元素上，不能使用div的id，class定义。所谓的HTML空间元素就是它们在页面上定义了一个矩形空间，浏览器的窗口可以显示这些空间。下面列出了HTML合法的控件和它们的说明。&nbsp;
+</p>
+<br />
+元素 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 说明&nbsp;<br />
+<br />
+BODY &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; 网页文档的主体元素，所有的可见范围都在元素内&nbsp;<br />
+BUTTON &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;表单域的按钮，可以有“发送(submit)”、“重置(reset)”等形式&nbsp;<br />
+DIV &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 定义了网页上的一个区域，这个区域的高度、宽度或者绝对位置都是以知的&nbsp;<br />
+IMG &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 图片元素，通过指定“src'属性来指定图片的来源&nbsp;<br />
+INPUT &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; 输入表单域&nbsp;<br />
+MARQUEE &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;移动字幕效果&nbsp;<br />
+SPAN &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;定义了网页上的一个区域，这个区域的高度、宽度或者绝对位置都是以知的&nbsp;<br />
+TABLE &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;表格&nbsp;<br />
+TD &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 表格数据单元格&nbsp;<br />
+TEXTAREA &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;文本区域&nbsp;<br />
+TFOOT &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 多行输入文本框&nbsp;<br />
+TH &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 表格标题单元格&nbsp;<br />
+THEAD &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 表格标题&nbsp;<br />
+TR &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 表格行&nbsp;<br />
+<br />
+////////////////////////////////////////<br />
+<br />
+<p>
+	IE4.0以上支持的滤镜属性表&nbsp;
+</p>
+<p>
+	滤镜效果 描述 ：
+</p>
+Alpha 设置透明度&nbsp;<br />
+Blru 建立模糊效果&nbsp;<br />
+Chroma 把指定的颜色设置为透明&nbsp;<br />
+DropShadow 建立一种偏移的影象轮廓，即投射阴影&nbsp;<br />
+FlipH 水平反转&nbsp;<br />
+FlipV 垂直反转&nbsp;<br />
+Glow 为对象的外边界增加光效&nbsp;<br />
+Grayscale 降低图片的彩色度&nbsp;<br />
+Invert 将色彩、饱和度以及亮度值完全反转建立底片效果&nbsp;<br />
+Light 在一个对象上进行灯光投影&nbsp;<br />
+Mask 为一个对象建立透明膜&nbsp;<br />
+Shadow 建立一个对象的固体轮廓，即阴影效果&nbsp;<br />
+Wave 在X轴和Y轴方向利用正弦波纹打乱图片&nbsp;<br />
+Xray 只显示对象的轮廓&nbsp;<br />
+<p>
+	&nbsp;
+</p>
+<p>
+	下面分别阐述：
+</p>
+1、Alpha 滤镜&nbsp;<br />
+语法：{FILTER：ALPHA(opacity=opacity,finishopacity=finishopacity,style=style,startx=startx,&nbsp;<br />
+starty=starty,finishx=finishx,finishy=finishy)}&nbsp;<br />
+<br />
+<p>
+	'Alpha'属性是把一个目标元素与背景混合。设计者可以指定数值来控制混合的程度。这种“与背景混合”通俗地说<span style="line-height:1.5;">就是一个元素的透明度。通过指定坐标，可以指定点、线、面的透明度。他们的参数含义分别如下：</span> 
+</p>
+&nbsp;<br />
+<p>
+	“opacity'代表透明度水准。默认的范围是从0 到 100，他们其实是百分比的形式。也就是说，0代表完全透明，<span style="line-height:1.5;">100代表完全不透明。”finishopacity'是一个可选参数，如果想要设置渐变的透明效果，就可以使用他们来指定</span><span style="line-height:1.5;">结束时的透明度。范围也是0 到 100。“style' 参数指定了透明区域的形状特征。其中0代表统一形状、1代表线形、2代表放射状</span><span style="line-height:1.5;">、3代表长方形。”STARTX“和”STARTY“代表渐变透明效果的开始X和Y坐标。”</span> 
+</p>
+<p>
+	FINISHX“和”FINISHY“代表渐变透明效果结束X和Y 的坐标。&nbsp;
+</p>
+<div class="cnblogs_code" style="border:1px solid #CCCCCC;padding:5px;margin:5px 0px;">
+	&lt;!DOCTYPE&nbsp;html&nbsp;PUBLIC&nbsp;"-//W3C//DTD&nbsp;XHTML&nbsp;1.0&nbsp;Transitional//EN"&nbsp;"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;<br />
+&lt;html&nbsp;xmlns="http://www.w3.org/1999/xhtml"&gt;<br />
+&lt;head&gt;<br />
+&lt;meta&nbsp;http-equiv="Content-Type"&nbsp;content="text/html;&nbsp;charset=utf-8"&nbsp;/&gt;<br />
+&lt;title&gt;css滤镜&lt;/title&gt;<br />
+&lt;style&gt;<br />
+body{FILTER:ALPHA(opacity=50,finishopacity=80,style=2}<br />
+&lt;/style&gt;<br />
+&lt;/head&gt;<br />
+&lt;body&gt;<br />
+&lt;div&nbsp;class="try"&gt;&lt;font&nbsp;color="#CC33C2"&gt;我的世界&lt;/font&gt;&lt;/div&gt;<br />
+&lt;div&gt;&lt;img&nbsp;src="2294440953.jpg"&nbsp;/&gt;&lt;/div&gt;<br />
+&lt;/body&gt;<br />
+&lt;/html&gt;
+</div>
+<br />
+<br />
+2、Blur 滤镜<br />
+语法：对于HTML：{filter:blur(add=add,direction=direction,strength=strength)}&nbsp;<br />
+对于Script语言： [oblurfilter=] object.filters.blur&nbsp;<br />
+用手指在一幅尚未干透的油画上迅速划过时，画面就会变得模糊。”Blur'就是产生同样的模糊效果。&nbsp;<br />
+<p>
+	“ADD”参数是一个布尔判断“TRUE（默认）”或者“FALSE”。它指定图片是否被改变成印象派的模糊<span style="line-height:1.5;">效果。模糊效果是按顺时针的方向进行的，“DIRECTION”参数用来设置模糊的方向。其中0度代表垂直</span><span style="line-height:1.5;">向上，然后每45度为一个单位。它的默认值是向左的270度。“STRENGTH“值只能使用整数来指定，</span><span style="line-height:1.5;">她代表有多少像素的宽度将受到模糊影响。默认是5个。</span> 
+</p>
+<br />
+<p>
+	代码如下：
+</p>
+<div class="cnblogs_code" style="border:1px solid #CCCCCC;padding:5px;margin:5px 0px;">
+	&lt;!DOCTYPE&nbsp;html&nbsp;PUBLIC&nbsp;"-//W3C//DTD&nbsp;XHTML&nbsp;1.0&nbsp;Transitional//EN"&nbsp;"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;<br />
+&lt;html&nbsp;xmlns="http://www.w3.org/1999/xhtml"&gt;<br />
+&lt;head&gt;<br />
+&lt;meta&nbsp;http-equiv="Content-Type"&nbsp;content="text/html;&nbsp;charset=utf-8"&nbsp;/&gt;<br />
+&lt;title&gt;css滤镜&lt;/title&gt;<br />
+&lt;style&gt;<br />
+body{filter:blur(add=ture,direction=135,strength=200)}<br />
+&lt;/style&gt;<br />
+&lt;/head&gt;<br />
+&lt;body&gt;<br />
+&lt;div&nbsp;class="try"&gt;&lt;font&nbsp;color="#CC33C2"&gt;我的世界&lt;/font&gt;&lt;/div&gt;<br />
+&lt;div&gt;&lt;img&nbsp;src="2294440953.jpg"&nbsp;/&gt;&lt;/div&gt;<br />
+&lt;/body&gt;<br />
+&lt;/html&gt;
+</div>
+<p>
+	&nbsp;
+</p>
+<p>
+	<br />
+</p>
+3、FlipH, FlipV 滤镜&nbsp;<br />
+语法：{filter:filph} ,{filter:filpv} 分别是水平反转和垂直反转<br />
+<br />
+4、Chroma 滤镜&nbsp;<br />
+语法：{filter:chroma(color=color)}&nbsp;<br />
+使用”Chroma'属性可以设置一个对象中指定的颜色为透明色，参数COLOR即要透明的颜色。<br />
+代码如下：
+<div class="cnblogs_code" style="border:1px solid #CCCCCC;padding:5px;margin:5px 0px;">
+	&lt;!DOCTYPE&nbsp;html&nbsp;PUBLIC&nbsp;"-//W3C//DTD&nbsp;XHTML&nbsp;1.0&nbsp;Transitional//EN"&nbsp;"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;<br />
+&lt;html&nbsp;xmlns="http://www.w3.org/1999/xhtml"&gt;<br />
+&lt;head&gt;<br />
+&lt;meta&nbsp;http-equiv="Content-Type"&nbsp;content="text/html;&nbsp;charset=utf-8"&nbsp;/&gt;<br />
+&lt;title&gt;css滤镜&lt;/title&gt;<br />
+&lt;style&gt;<br />
+body{filter:chroma(color=#CC33C2)}<br />
+&lt;/style&gt;<br />
+&lt;/head&gt;<br />
+&lt;body&gt;<br />
+&lt;div&nbsp;class="try"&gt;&lt;font&nbsp;color="#CC33C2"&gt;我的世界&lt;/font&gt;&lt;/div&gt;<br />
+&lt;div&gt;&lt;img&nbsp;src="2294440953.jpg"&nbsp;/&gt;&lt;/div&gt;<br />
+&lt;/body&gt;<br />
+&lt;/html&gt;
+</div>
+<p>
+	<br />
+</p>
+<p>
+	可以屏蔽颜色，大有用处。
+</p>
+5、DropShadow 滤镜&nbsp;<br />
+语法：{filter:dropshadow(color=color,offx=ofx,offy=offy,positive=positive)}&nbsp;<br />
+<br />
+<p>
+	“DropShaow'顾名思义就是添加对象的阴影效果。其工作原理是建立一个偏移量，加上较深。
+</p>
+<p>
+	'Color'代表投射阴影的颜色，'offx'和'offy'分别是X方向和Y方向阴影的饿偏移量。
+</p>
+<br />
+<p>
+	'Positive'参数是一个布尔值，如果为“TRUE（非0）”，那么就为任何的非透明像素建立可见的投影。
+</p>
+<p>
+	如果为“FASLE（0）”，那么就为透明的像素部分建立透明效果 代码如下：
+</p>
+<p>
+	dropshadow(color=gray,offx=5,offy=5.positive=0)&nbsp;
+</p>
+<p>
+	<br />
+</p>
+6、Glow 滤镜&nbsp;<br />
+语法：{filter:glow(color=color,strength)}&nbsp;<br />
+<p>
+	当对一个对象使用'glow'属性后，这个对象的边缘就会产生类似发光的效果。“COLOR”是指定<span style="line-height:1.5;">发光的颜色，“STRENGTH”则是强度的表现，可以从1到255之间的任何整数来指定这个力度。</span> 
+</p>
+filter:glow(color=red,strength=10) 后的效果&nbsp;<br />
+<br />
+filter:glow(color=#ffff00,strength=5) 后的效果&nbsp;
+<div class="cnblogs_code" style="border:1px solid #CCCCCC;padding:5px;margin:5px 0px;">
+	&lt;!DOCTYPE&nbsp;html&nbsp;PUBLIC&nbsp;"-//W3C//DTD&nbsp;XHTML&nbsp;1.0&nbsp;Transitional//EN"&nbsp;"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;<br />
+&lt;html&nbsp;xmlns="http://www.w3.org/1999/xhtml"&gt;<br />
+&lt;head&gt;<br />
+&lt;meta&nbsp;http-equiv="Content-Type"&nbsp;content="text/html;&nbsp;charset=utf-8"&nbsp;/&gt;<br />
+&lt;title&gt;css滤镜&lt;/title&gt;<br />
+&lt;style&gt;<br />
+body{filter:glow(color=red,strength=10)}<br />
+.try{&nbsp;margin-left:30px;}<br />
+&lt;/style&gt;<br />
+&lt;/head&gt;<br />
+&lt;body&gt;<br />
+&lt;br&nbsp;/&gt;&lt;br&nbsp;/&gt;<br />
+&lt;div&nbsp;class="try"&gt;&lt;font&nbsp;color="#CC33C2"&gt;我的世界&lt;/font&gt;&lt;br&nbsp;/&gt;<br />
+&lt;br&nbsp;/&gt;<br />
+&lt;div&gt;&lt;img&nbsp;src="2294440953.jpg"&nbsp;/&gt;&lt;/div&gt;&lt;br&nbsp;/&gt;&lt;br&nbsp;/&gt;&lt;/div&gt;<br />
+&lt;/body&gt;<br />
+&lt;/html&gt;
+</div>
+<p>
+	&nbsp;
+</p>
+<br />
+7、Gray ,Invert,Xray 滤镜<br />
+语法：{filter:gray} ,{filter:invert},{filter:xray}&nbsp;<br />
+<br />
+<p>
+	Gray滤镜是把一张图片变成灰度图；（汶川大地震后很多网站色调都变灰色，就是用的这一点代码实现的）
+</p>
+<p>
+	Invert滤镜是把对象的可视化属性全部翻转，包括色彩、饱和度、和亮度值；
+</p>
+<p>
+	Xray滤镜是让对象反映出它的轮廓并把这些轮廓加亮，也就是所谓的“X”光片。&nbsp;
+</p>
+<p>
+	&nbsp;
+</p>
+8、Light 滤镜&nbsp;<br />
+语法：Filter{light}&nbsp;<br />
+<br />
+这个属性模拟光源的投射效果。一旦为对象定义了“LIGHT'滤镜属性，那么就可以调用它的“方法(Method)'来设置或者改变属性。“LIGHT'可用的方法有：&nbsp;<br />
+<br />
+·AddAmbient 加入包围的光源&nbsp;<br />
+·AddCone 加入锥形光源&nbsp;<br />
+·AddPoint 加入点光源&nbsp;<br />
+·Changcolor 改变光的颜色&nbsp;<br />
+·Changstrength 改变光源的强度&nbsp;<br />
+·Clear 清除所有的光源&nbsp;<br />
+·MoveLight 移动光源<br />
+<br />
+addAmbient (iRed,iGreen,iBlue,iStrength) : 为滤镜添加环境光。环境光是无方向的，并且均匀的洒在页面的表面。环境光有颜色和强度值，可以为对象田家更多的颜色。它通<br />
+<br />
+常和其他光一起使用。无返回值。参数见下表。<br />
+iRed : 必选项。整数值(Integer)。 指定红色值。取值范围为 0 - 255 。&nbsp;<br />
+iGreen : 必选项。整数值(Integer)。 指定绿色值。取值范围为 0 - 255 。&nbsp;<br />
+iBlue : 必选项。整数值(Integer)。 指定蓝色值。取值范围为 0 - 255 。&nbsp;<br />
+iStrength : 必选项。整数值(Integer)。 指定光强度。取值范围为 0 - 100 。<br />
+<br />
+changeColor (iLightNumber,iRed,iGreen,iBlue,fAbsolute) : 改变光的颜色。无返回值。参数见下表。<br />
+iLightNumber : 必选项。整数值(Integer)。 指定光的标识符。&nbsp;<br />
+iRed : 必选项。整数值(Integer)。指定红色值。取值范围为 0 - 255 。&nbsp;<br />
+iGreen : 必选项。整数值(Integer)。指定绿色值。取值范围为 0 - 255 。&nbsp;<br />
+iBlue : 必选项。整数值(Integer)。指定蓝色值。取值范围为 0 - 255 。&nbsp;<br />
+fAbsolute : 必选项。布尔值(Boolean)。指定改变是替换当前设置的绝对值，还是加到当前设置的相对值。此参数不等于零表示采用绝对值。否则表示采用相对值。<br />
+<br />
+<br />
+可以定义光源的虚拟位置，以及通过调整X轴和Y轴的数值来控制光源焦点的位置，还可以调整光源的形式（点光源或者锥形光源）指定光源是否模糊边界、光源的颜色、亮度等属性。如果动态的设置光源，可能回产生一些意想不到的效果。实现图片自动变色效果
+<p>
+	&lt;!DOCTYPE&nbsp;html&nbsp;PUBLIC&nbsp;"-//W3C//DTD&nbsp;XHTML&nbsp;1.0&nbsp;Transitional//EN"&nbsp;"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;<br />
+&lt;html&nbsp;xmlns="http://www.w3.org/1999/xhtml"&gt;<br />
+&lt;head&gt;<br />
+&lt;meta&nbsp;http-equiv="Content-Type"&nbsp;content="text/html;&nbsp;charset=utf-8"&nbsp;/&gt;<br />
+&lt;title&gt;css滤镜&lt;/title&gt;<br />
+&lt;style&gt;<br />
+body{}<br />
+.try{&nbsp;margin-left:30px;}<br />
+&lt;/style&gt;<br />
+&lt;/head&gt;<br />
+&lt;body&gt;<br />
+&lt;br&nbsp;/&gt;&lt;br&nbsp;/&gt;<br />
+&lt;div&nbsp;class="try"&gt;&lt;font&nbsp;color="#CC33C2"&gt;我的世界&lt;/font&gt;&lt;br&nbsp;/&gt;<br />
+&lt;br&nbsp;/&gt;
+</p>
+<p>
+	&lt;div&gt;&lt;img&nbsp;src="000.jpg"&nbsp;style="filter:light();&nbsp;width:400;&nbsp;height:300"&nbsp;
+</p>
+<p>
+	onload="javascript:this.filters.light.addAmbient(10,250,100,55)" &nbsp;onmousemove="javascript:this.filters.light.changeColor(0,150,100,50,0)"/&gt;&lt;/div&gt;&lt;br&nbsp;/&gt;&lt;br&nbsp;/&gt;&lt;/div&gt;
+</p>
+&lt;/body&gt;<br />
+&lt;/html&gt;
+<p>
+	<br />
+</p>
+<br />
+<br />
+9、Mask 滤镜&nbsp;<br />
+语法：{filter:mask(color=color)}&nbsp;<br />
+<br />
+使用'MASK'属性可以为对象建立一个覆盖于表面的膜，其效果就象戴者有色眼镜看物体一样。&nbsp;<br />
+<div class="cnblogs_code" style="border:1px solid #CCCCCC;padding:5px;margin:5px 0px;">
+	<div class="cnblogs_code_toolbar">
+		<a>&lt;!DOCTYPE&nbsp;html&nbsp;PUBLIC&nbsp;"-//W3C//DTD&nbsp;XHTML&nbsp;1.0&nbsp;Transitional//EN"&nbsp;"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</a> 
+	</div>
+&lt;html&nbsp;xmlns="http://www.w3.org/1999/xhtml"&gt;<br />
+&lt;head&gt;<br />
+&lt;meta&nbsp;http-equiv="Content-Type"&nbsp;content="text/html;&nbsp;charset=utf-8"&nbsp;/&gt;<br />
+&lt;title&gt;css滤镜&lt;/title&gt;<br />
+&lt;style&gt;<br />
+body{&nbsp;filter:mask(color=yellow);}<br />
+#try{&nbsp;margin-left:30px;}<br />
+&lt;/style&gt;<br />
+&lt;/head&gt;<br />
+&lt;body&gt;<br />
+&lt;br&nbsp;/&gt;&lt;br&nbsp;/&gt;<br />
+&lt;div&nbsp;id="try"&gt;&lt;font&nbsp;color="#CC33C2"&gt;我的世界&lt;/font&gt;&lt;br&nbsp;/&gt;<br />
+&lt;br&nbsp;/&gt;<br />
+&lt;div&gt;&lt;img&nbsp;src="2294440953.jpg"&nbsp;/&gt;&lt;/div&gt;&lt;br&nbsp;/&gt;&lt;br&nbsp;/&gt;&lt;/div&gt;<br />
+&lt;/body&gt;<br />
+&lt;/html&gt;
+</div>
+虽然实现，但是效果并不想想象的那样帅，不好用。<br />
+<br />
+10、Shadow 滤镜<br />
+语法：{filter:shadow(color=color,direction=direction)}&nbsp;<br />
+利用“Shadow”属性可以在指定的方向建立物体的投影，COLOR是投影色，DIRECTION是设置投影的方向。其中0度代表垂直向上，然后每45度为一个单位。它的默认值是向左的270度。&nbsp;<br />
+<br />
+filter:shadow(color=red,direction=225)&nbsp;<br />
+filter:shadow(color=blue,direction=225)&nbsp;<br />
+filter:shadow(color=gray,direction=225)&nbsp;<br />
+<br />
+<div class="cnblogs_code" style="border:1px solid #CCCCCC;padding:5px;margin:5px 0px;">
+	<div class="cnblogs_code_toolbar">
+		<a>&lt;!DOCTYPE&nbsp;html&nbsp;PUBLIC&nbsp;"-//W3C//DTD&nbsp;XHTML&nbsp;1.0&nbsp;Transitional//EN"&nbsp;"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</a> 
+	</div>
+&lt;html&nbsp;xmlns="http://www.w3.org/1999/xhtml"&gt;<br />
+&lt;head&gt;<br />
+&lt;meta&nbsp;http-equiv="Content-Type"&nbsp;content="text/html;&nbsp;charset=utf-8"&nbsp;/&gt;<br />
+&lt;title&gt;css滤镜&lt;/title&gt;<br />
+&lt;style&gt;<br />
+body{&nbsp;filter:shadow(color=red,direction=225);}<br />
+#try{&nbsp;margin-left:30px;}<br />
+&lt;/style&gt;<br />
+&lt;/head&gt;<br />
+&lt;body&gt;<br />
+&lt;br&nbsp;/&gt;&lt;br&nbsp;/&gt;<br />
+&lt;div&nbsp;id="try"&gt;&lt;font&nbsp;color="#CC33C2"&gt;我的世界&lt;/font&gt;&lt;br&nbsp;/&gt;<br />
+&lt;br&nbsp;/&gt;<br />
+&lt;div&gt;&lt;img&nbsp;src="2294440953.jpg"&nbsp;/&gt;&lt;/div&gt;&lt;br&nbsp;/&gt;&lt;br&nbsp;/&gt;&lt;/div&gt;<br />
+&lt;/body&gt;<br />
+&lt;/html&gt;
+</div>
+<p>
+	<br />
+</p>
+<br />
+11、Wave 滤镜 语法：{filter:wave(add=add,freq=freq,lightstrength=strength,phase=phase,strength=strength)}&nbsp;<br />
+<br />
+'wave' 属性把对象按垂直的波形样式打乱。默认是“TRUE（非0）”，&nbsp;<br />
+“ADD”表示是否要把对象按照波形样式打乱，&nbsp;<br />
+“FREQ”是波纹的频率，也就是指定在对象上一共需要产生多少个完整的波纹，&nbsp;<br />
+“LIGHTSTRENGTH”参数可以对于波纹增强光影的效果，范围0----100，&nbsp;<br />
+“PHASE”参数用来设置正弦波的偏移量。&nbsp;<br />
+“STRENGTH”代表振幅大小。&nbsp;<br />
+<br />
+<div class="cnblogs_code" style="border:1px solid #CCCCCC;padding:5px;margin:5px 0px;">
+	<div class="cnblogs_code_toolbar">
+		<a>&lt;!DOCTYPE&nbsp;html&nbsp;PUBLIC&nbsp;"-//W3C//DTD&nbsp;XHTML&nbsp;1.0&nbsp;Transitional//EN"&nbsp;"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</a> 
+	</div>
+&lt;html&nbsp;xmlns="http://www.w3.org/1999/xhtml"&gt;<br />
+&lt;head&gt;<br />
+&lt;meta&nbsp;http-equiv="Content-Type"&nbsp;content="text/html;&nbsp;charset=utf-8"&nbsp;/&gt;<br />
+&lt;title&gt;css滤镜&lt;/title&gt;<br />
+&lt;style&gt;<br />
+body{&nbsp;filter:wave(add=add,freq=freq,lightstrength=strength,phase=phase,strength=20);}<br />
+#try{&nbsp;margin-left:30px;}<br />
+&lt;/style&gt;<br />
+&lt;/head&gt;<br />
+&lt;body&gt;<br />
+&lt;br&nbsp;/&gt;&lt;br&nbsp;/&gt;<br />
+&lt;div&nbsp;id="try"&gt;&lt;font&nbsp;color="#CC33C2"&gt;我的世界&lt;/font&gt;&lt;br&nbsp;/&gt;<br />
+&lt;br&nbsp;/&gt;<br />
+&lt;div&gt;&lt;img&nbsp;src="2294440953.jpg"&nbsp;/&gt;&lt;/div&gt;&lt;br&nbsp;/&gt;&lt;br&nbsp;/&gt;&lt;/div&gt;<br />
+&lt;/body&gt;<br />
+&lt;/html&gt;
+</div>
+<br />
+<p>
+	<br />
+</p>
+<p>
+	jQuery弹出层源码：
+</p>
+<p>
+	页面：
+</p>
+<div class="cnblogs_code" style="border:1px solid #CCCCCC;padding:5px;margin:5px 0px;">
+	<div class="cnblogs_code_toolbar">
+		&lt;!DOCTYPE&nbsp;HTML&nbsp;PUBLIC&nbsp;"-//W3C//DTD&nbsp;HTML&nbsp;4.01&nbsp;Transitional//EN"&nbsp;"http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd"&gt;
+	</div>
+&lt;!--&nbsp;saved&nbsp;from&nbsp;url=(0045)http://interface.eyecon.ro/demos/windows.html&nbsp;--&gt;<br />
+&lt;HTML&nbsp;xmlns="http://www.w3.org/1999/xhtml"&gt;<br />
+&lt;HEAD&gt;&lt;TITLE&gt;Resizeable&nbsp;demo&nbsp;-&nbsp;Interface&nbsp;plugin&nbsp;for&nbsp;jQuery&lt;/TITLE&gt;<br />
+&lt;META&nbsp;http-equiv=Content-Language&nbsp;content=en&gt;<br />
+&lt;META&nbsp;http-equiv=Content-Type&nbsp;content="text/html;&nbsp;charset=utf-8"&gt;<br />
+&lt;SCRIPT&nbsp;<br />
+src="js/jquery.js"&nbsp;<br />
+type=text/javascript&gt;&lt;/SCRIPT&gt;<br />
+&lt;SCRIPT&nbsp;<br />
+src="js/interface.js"&nbsp;<br />
+type=text/javascript&gt;&lt;/SCRIPT&gt;<br />
+&lt;link&nbsp;href="css/div_show.css"&nbsp;rel="stylesheet"&nbsp;type="text/css"&nbsp;media="all"&gt;<br />
+&lt;META&nbsp;content="MSHTML&nbsp;6.00.6000.16735"&nbsp;name=GENERATOR&gt;<br />
+&lt;/HEAD&gt;<br />
+&lt;BODY&gt;&lt;A&nbsp;id=windowOpen&gt;管理员登陆&lt;/A&gt;<br />
+&lt;DIV&nbsp;id=window&gt;<br />
+&lt;DIV&nbsp;id=windowTop&gt;<br />
+&lt;DIV&nbsp;id=windowTopContent&gt;登陆界面&lt;/DIV&gt;<br />
+&lt;IMG&nbsp;id=windowMin&nbsp;<br />
+src="css/images/window_min.jpg"&gt;&nbsp;<br />
+&lt;IMG&nbsp;id=windowMax&nbsp;<br />
+src="css/images/window_max.jpg"&gt;&nbsp;<br />
+&lt;IMG&nbsp;id=windowClose&nbsp;<br />
+src="css/images/window_close.jpg"&gt;&nbsp;<br />
+&lt;/DIV&gt;<br />
+&lt;DIV&nbsp;id=windowBottom&gt;<br />
+&lt;DIV&nbsp;id=windowBottomContent&gt;&lt;/DIV&gt;&lt;/DIV&gt;<br />
+&lt;DIV&nbsp;id=windowContent&gt;<br />
+&lt;P&gt;&lt;/P&gt;<br />
+&lt;P&gt;&lt;/P&gt;<br />
+&lt;P&gt;&lt;/P&gt;<br />
+&lt;P&gt;&lt;/P&gt;<br />
+&lt;P&gt;&lt;/P&gt;<br />
+&lt;P&gt;&lt;/P&gt;<br />
+&lt;P&gt;&lt;/P&gt;<br />
+&lt;P&gt;&lt;/P&gt;<br />
+&lt;P&gt;&lt;/P&gt;<br />
+&lt;P&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;IMG&nbsp;id=windowResize&nbsp;<br />
+src="css/images/window_resize.gif"&gt;&nbsp;<br />
+&lt;/DIV&gt;<br />
+&lt;P&gt;&lt;/P&gt;<br />
+&lt;P&gt;&lt;/P&gt;<br />
+&lt;P&gt;&lt;/P&gt;<br />
+&lt;P&gt;&lt;/P&gt;<br />
+&lt;P&gt;&lt;/P&gt;<br />
+&lt;P&gt;&lt;/P&gt;<br />
+&lt;P&gt;&lt;/P&gt;<br />
+&lt;P&gt;&lt;/P&gt;<br />
+&lt;P&gt;&lt;/P&gt;<br />
+&lt;P&gt;&lt;/P&gt;<br />
+&lt;SCRIPT&nbsp;type="text/javascript"&nbsp;src="js/div_show.js"&gt;&lt;/SCRIPT&gt;<br />
+&lt;SCRIPT&nbsp;language=JavaScript&nbsp;type=text/javascript&gt;var&nbsp;client_id&nbsp;=&nbsp;1;&lt;/SCRIPT&gt;<br />
+	<p>
+		&lt;/BODY&gt;&lt;/HTML&gt;&nbsp;
+	</p>
+</div>
+<p>
+	&nbsp;
+</p>
+<p>
+	css源码：
+</p>
+<div class="cnblogs_code" style="border:1px solid #CCCCCC;padding:5px;margin:5px 0px;">
+	<div class="cnblogs_code_toolbar">
+		<a>BODY&nbsp;{</a> 
+	</div>
+&nbsp;&nbsp;&nbsp;&nbsp;BACKGROUND:&nbsp;#fff;&nbsp;HEIGHT:&nbsp;100%<br />
+}<br />
+#window&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DISPLAY:&nbsp;none;&nbsp;LEFT:&nbsp;200px;&nbsp;OVERFLOW:&nbsp;hidden;&nbsp;WIDTH:&nbsp;400px;&nbsp;POSITION:&nbsp;absolute;&nbsp;TOP:&nbsp;100px;&nbsp;HEIGHT:&nbsp;300px<br />
+}<br />
+#windowTop&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;BACKGROUND-POSITION:&nbsp;right&nbsp;top;&nbsp;BACKGROUND-IMAGE:&nbsp;url(images/window_top_end.png);&nbsp;OVERFLOW:&nbsp;hidden;&nbsp;CURSOR:&nbsp;move;&nbsp;BACKGROUND-REPEAT:&nbsp;no-repeat;&nbsp;POSITION:&nbsp;relative;&nbsp;HEIGHT:&nbsp;30px<br />
+}<br />
+#windowTopContent&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;BACKGROUND-POSITION:&nbsp;left&nbsp;top;&nbsp;FONT-WEIGHT:&nbsp;bold;&nbsp;FONT-SIZE:&nbsp;14px;&nbsp;BACKGROUND-IMAGE:&nbsp;url(images/window_top_start.png);&nbsp;OVERFLOW:&nbsp;hidden;&nbsp;COLOR:&nbsp;#6caf00;&nbsp;TEXT-INDENT:&nbsp;10px;&nbsp;LINE-HEIGHT:&nbsp;30px;&nbsp;MARGIN-RIGHT:&nbsp;13px;&nbsp;BACKGROUND-REPEAT:&nbsp;no-repeat;&nbsp;FONT-FAMILY:&nbsp;Arial,&nbsp;Helvetica,&nbsp;sans-serif;&nbsp;HEIGHT:&nbsp;30px<br />
+}<br />
+#windowMin&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;RIGHT:&nbsp;25px;&nbsp;CURSOR:&nbsp;pointer;&nbsp;POSITION:&nbsp;absolute;&nbsp;TOP:&nbsp;10px<br />
+}<br />
+#windowMax&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DISPLAY:&nbsp;none;&nbsp;RIGHT:&nbsp;25px;&nbsp;CURSOR:&nbsp;pointer;&nbsp;POSITION:&nbsp;absolute;&nbsp;TOP:&nbsp;10px<br />
+}<br />
+#windowClose&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;RIGHT:&nbsp;10px;&nbsp;CURSOR:&nbsp;pointer;&nbsp;POSITION:&nbsp;absolute;&nbsp;TOP:&nbsp;10px<br />
+}<br />
+#windowBottom&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;BACKGROUND-POSITION:&nbsp;right&nbsp;bottom;&nbsp;BACKGROUND-IMAGE:&nbsp;url(images/window_bottom_end.png);&nbsp;BACKGROUND-REPEAT:&nbsp;no-repeat;&nbsp;POSITION:&nbsp;relative;&nbsp;HEIGHT:&nbsp;270px<br />
+}<br />
+#windowBottomContent&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;BACKGROUND-POSITION:&nbsp;left&nbsp;bottom;&nbsp;BACKGROUND-IMAGE:&nbsp;url(images/window_bottom_start.png);&nbsp;MARGIN-RIGHT:&nbsp;13px;&nbsp;BACKGROUND-REPEAT:&nbsp;no-repeat;&nbsp;POSITION:&nbsp;relative;&nbsp;HEIGHT:&nbsp;270px<br />
+}<br />
+#windowResize&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;RIGHT:&nbsp;3px;&nbsp;CURSOR:&nbsp;se-resize;&nbsp;BOTTOM:&nbsp;5px;&nbsp;POSITION:&nbsp;absolute<br />
+}<br />
+#windowContent&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;BORDER-RIGHT:&nbsp;#6caf00&nbsp;1px&nbsp;solid;&nbsp;BORDER-TOP:&nbsp;#6caf00&nbsp;1px&nbsp;solid;&nbsp;FONT-SIZE:&nbsp;11px;&nbsp;LEFT:&nbsp;10px;&nbsp;OVERFLOW:&nbsp;auto;&nbsp;BORDER-LEFT:&nbsp;#6caf00&nbsp;1px&nbsp;solid;&nbsp;WIDTH:&nbsp;375px;&nbsp;MARGIN-RIGHT:&nbsp;10px;&nbsp;BORDER-BOTTOM:&nbsp;#6caf00&nbsp;1px&nbsp;solid;&nbsp;FONT-FAMILY:&nbsp;Arial,&nbsp;Helvetica,&nbsp;sans-serif;&nbsp;POSITION:&nbsp;absolute;&nbsp;TOP:&nbsp;30px;&nbsp;HEIGHT:&nbsp;255px;&nbsp;BACKGROUND-COLOR:&nbsp;#fff<br />
+}<br />
+#windowContent&nbsp;*&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;MARGIN:&nbsp;10px<br />
+}<br />
+.transferer2&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;BORDER-RIGHT:&nbsp;#6baf04&nbsp;1px&nbsp;solid;&nbsp;BORDER-TOP:&nbsp;#6baf04&nbsp;1px&nbsp;solid;&nbsp;FILTER:&nbsp;alpha(opacity=30);&nbsp;BORDER-LEFT:&nbsp;#6baf04&nbsp;1px&nbsp;solid;&nbsp;BORDER-BOTTOM:&nbsp;#6baf04&nbsp;1px&nbsp;solid;&nbsp;BACKGROUND-COLOR:&nbsp;#b4f155;&nbsp;-moz-opacity:&nbsp;0.3;&nbsp;opacity:&nbsp;0.3<br />
+}
+</div>
+<p>
+	&nbsp;
+</p>
+<p>
+	js源码：
+</p>
+<div class="cnblogs_code" style="border:1px solid #CCCCCC;padding:5px;margin:5px 0px;">
+	<div class="cnblogs_code_toolbar">
+		<a>$(document).ready(</a> 
+	</div>
+&nbsp;&nbsp;&nbsp;&nbsp;function()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#windowOpen').bind(<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'click',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function()&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if($('#window').css('display')&nbsp;==&nbsp;'none')&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(this).TransferTo(<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to:'window',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;className:'transferer2',&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;duration:&nbsp;400,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;complete:&nbsp;function()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#window').show();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.blur();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;false;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#windowClose').bind(<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'click',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#window').TransferTo(<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to:'windowOpen',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;className:'transferer2',&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;duration:&nbsp;400<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;).hide();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#windowMin').bind(<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'click',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#windowContent').SlideToggleUp(300);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#windowBottom,&nbsp;#windowBottomContent').animate({height:&nbsp;10},&nbsp;300);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#window').animate({height:40},300).get(0).isMinimized&nbsp;=&nbsp;true;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(this).hide();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#windowResize').hide();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#windowMax').show();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#windowMax').bind(<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'click',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;windowSize&nbsp;=&nbsp;$.iUtil.getSize(document.getElementById('windowContent'));<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#windowContent').SlideToggleUp(300);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#windowBottom,&nbsp;#windowBottomContent').animate({height:&nbsp;windowSize.hb&nbsp;+&nbsp;13},&nbsp;300);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#window').animate({height:windowSize.hb+43},&nbsp;300).get(0).isMinimized&nbsp;=&nbsp;false;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(this).hide();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#windowMin,&nbsp;#windowResize').show();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#window').Resizable(<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;minWidth:&nbsp;200,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;minHeight:&nbsp;60,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maxWidth:&nbsp;700,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maxHeight:&nbsp;400,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dragHandle:&nbsp;'#windowTop',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handlers:&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;se:&nbsp;'#windowResize'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;onResize&nbsp;:&nbsp;function(size,&nbsp;position)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#windowBottom,&nbsp;#windowBottomContent').css('height',&nbsp;size.height-33&nbsp;+&nbsp;'px');<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;windowContentEl&nbsp;=&nbsp;$('#windowContent').css('width',&nbsp;size.width&nbsp;-&nbsp;25&nbsp;+&nbsp;'px');<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!document.getElementById('window').isMinimized)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;windowContentEl.css('height',&nbsp;size.height&nbsp;-&nbsp;48&nbsp;+&nbsp;'px');<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+);
+</div>
+<p>
+	&nbsp;
+</p>
+<p>
+	提供了一个滤镜学习网址，于是加上来：<a href="http://msdn.microsoft.com/zh-cn/library/ms532853" target="_new">http://msdn.microsoft.com/zh-cn/library/ms532853</a>(en-us,VS.85).aspx&nbsp;
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/589.html">鼠标指针</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/591.html">链接—CSS美化网站</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="http://www.cnblogs.com/shiyangxt/archive/2008/11/16/1334633.html" target="_blank">http://www.cnblogs.com/shiyangxt/archive/2008/11/16/1334633.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

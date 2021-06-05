@@ -1,0 +1,401 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>用AspJpeg组件，按宽高比例，真正生成缩略图(待完善)_comonly.cn</title>
+<meta name="keywords" content="用AspJpeg组件，按宽高比例，真正生成缩略图(待完善)" />
+<meta name="description" content="在网站前台产品展示时，一般用缩略图，点击进入然后看到大图。
+
+缩略图带来了两个烦劳：
+1.如果后台只传一张大图，显示缩略图时只是将大图固定宽度和高度，这样不但造成缩略图变形，而且使得页面访问速度缓慢。
+2.如果后台每次上传时，都上传两张图片，一张大图，一张缩略图。这样的话，没有1中的问题，但是给后台人员造成很大麻烦。因为后台人员并不一定知道处理生成缩略图；即使知道并能快速处理，也浪费掉一些时间。
+
+下面的代码可以帮您用AspJpeg组件，按宽高比例，真正生成缩略图
+AspJpeg组件下载：h" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">用AspJpeg组件，按宽高比例，真正生成缩略图(待完善)</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">null</li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2016-04-22</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	javaweb---jsp asp数据库框架
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">网页技术</a></div>
+      
+      
+        <div class="news_about"><strong>简介</strong>在网站前台产品展示时，一般用缩略图，点击进入然后看到大图。
+
+缩略图带来了两个烦劳：
+1.如果后台只传一张大图，显示缩略图时只是将大图固定宽度和高度，这样不但造成缩略图变形，而且使得页面访问速度缓慢。
+2.如果后台每次上传时，都上传两张图片，一张大图，一张缩略图。这样的话，没有1中的问题，但是给后台人员造成很大麻烦。因为后台人员并不一定知道处理生成缩略图；即使知道并能快速处理，也浪费掉一些时间。
+
+下面的代码可以帮您用AspJpeg组件，按宽高比例，真正生成缩略图
+AspJpeg组件下载：h</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 在网站前台产品展示时，一般用缩略图，点击进入然后看到大图。<br />
+<br />
+缩略图带来了两个烦劳：<br />
+1.如果后台只传一张大图，显示缩略图时只是将大图固定宽度和高度，这样不但造成缩略图变形，而且使得页面访问速度缓慢。<br />
+2.如果后台每次上传时，都上传两张图片，一张大图，一张缩略图。这样的话，没有1中的问题，但是给后台人员造成很大麻烦。因为后台人员并不一定知道处理生成缩略图；即使知道并能快速处理，也浪费掉一些时间。<br />
+<br />
+下面的代码可以帮您用AspJpeg组件，按宽高比例，真正生成缩略图<br />
+AspJpeg组件下载：http://www.aspjpeg.com/download.html<br />
+AspJpeg组件使用：http://www.mydw.cn/tech/1/766.html<br />
+注册码：48958-77556-02411<br />
+<br />
+<br />
+&lt;%<br />
+Dim sOriginalPath<br />
+sOriginalPath = "images/1.gif"<br />
+'原图片路径一般上传完毕后获取，或者从数据库获取<br />
+<br />
+Dim sReturnInfo, sSmallPath '函数返回信息, 缩略图路径<br />
+sReturnInfo = BuildSmallPic(sOriginalPath, "images", 100, 100)<br />
+<br />
+Response.Write "返回信息:" &amp; sReturnInfo &amp; "<br />
+"<br />
+If InStr(sReturnInfo, "Error_") &lt;= 0 Then<br />
+sSmallPath = sReturnInfo '如果没有错误，返回信息就是 缩略图路径<br />
+'将sSmallPath写入数据库<br />
+'<br />
+Else<br />
+Response.Write "详细错误:"<br />
+Select Case sReturnInfo<br />
+Case "Error_01"<br />
+Response.Write "创建AspJpeg组件失败,没有正确安装注册该组件" &amp; "<br />
+"<br />
+Case "Error_02"<br />
+Response.Write "原图片不存在,检查s_OriginalPath参数传入值" &amp; "<br />
+"<br />
+Case "Error_03"<br />
+Response.Write "缩略图存盘失败.可能原因:缩略图保存基地址不存在,检查s_OriginalPath参数传入值;对目录没有写权限;磁盘空间不足" &amp; "<br />
+"<br />
+Case "Error_Other"<br />
+Response.Write "未知错误" &amp; "<br />
+"<br />
+End Select<br />
+Response.End<br />
+End If<br />
+<br />
+%&gt;<br />
+原文件名：&lt;%=sOriginalPath%&gt;<br />
+<br />
+缩略图文件名：&lt;%=sSmallPath%&gt;<br />
+<br />
+原图片：<br />
+<br />
+<br />
+缩略图：<br />
+<br />
+<br />
+&lt;%<br />
+'================================================================<br />
+'Author：laifangsong QQ:25313644<br />
+'功能：按照指定图片生成缩略图<br />
+'注意：以下提到的“路径”都是值相对于调用本函数的文件的相对路径<br />
+'参数：<br />
+'&nbsp; &nbsp; s_OriginalPath:&nbsp; &nbsp; &nbsp; &nbsp; 原图片路径 例:images/image1.gif<br />
+'&nbsp; &nbsp; s_BuildBasePath:&nbsp; &nbsp; 生成图片的基路径,不论是否以“/”结尾均可 例:images或images/<br />
+'&nbsp; &nbsp; n_MaxWidth:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 生成图片最大宽度<br />
+'&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 如果在前台显示的缩略图是 100*100,这里 n_MaxWidth=100,n_MaxHeight=100.<br />
+'&nbsp; &nbsp; n_MaxHeight:&nbsp; &nbsp; &nbsp; &nbsp; 生成图片最大高度<br />
+'返回值：<br />
+'&nbsp; &nbsp; 返回生成后的缩略图的路径<br />
+'错误处理：<br />
+'&nbsp; &nbsp; 如果函数执行过程中出现错误,将返回错误代码,错误代码以 “Error”开头<br />
+'&nbsp; &nbsp; &nbsp; &nbsp; Error_01:创建AspJpeg组件失败,没有正确安装注册该组件<br />
+'&nbsp; &nbsp; &nbsp; &nbsp; Error_02:原图片不存在,检查s_OriginalPath参数传入值<br />
+'&nbsp; &nbsp; &nbsp; &nbsp; Error_03:缩略图存盘失败.可能原因:缩略图保存基地址不存在,检查s_OriginalPath参数传入值;对目录没有写权限;磁盘空间不足<br />
+'&nbsp; &nbsp; &nbsp; &nbsp; Error_Other:未知错误<br />
+'调用例子:<br />
+'&nbsp; &nbsp; Dim sSmallPath '缩略图路径<br />
+'&nbsp; &nbsp; sSmallPath = BuildSmallPic("images/image1.gif", "images", 100, 100)<br />
+'================================================================<br />
+Function BuildSmallPic(s_OriginalPath, s_BuildBasePath, n_MaxWidth, n_MaxHeight)<br />
+Err.Clear<br />
+On Error Resume Next<br />
+<br />
+'检查组件是否已经注册<br />
+Dim AspJpeg<br />
+Set AspJpeg = Server.Createobject("Persits.Jpeg")<br />
+If Err.Number &lt;&gt; 0 Then<br />
+Err.Clear<br />
+BuildSmallPic = "Error_01"<br />
+Exit Function<br />
+End If<br />
+<br />
+'检查原图片是否存在<br />
+Dim s_MapOriginalPath<br />
+s_MapOriginalPath = Server.MapPath(s_OriginalPath)<br />
+AspJpeg.Open s_MapOriginalPath '打开原图片<br />
+If Err.Number &lt;&gt; 0 Then<br />
+Err.Clear<br />
+BuildSmallPic = "Error_02"<br />
+Exit Function<br />
+End If<br />
+<br />
+'按比例取得缩略图宽度和高度<br />
+Dim n_OriginalWidth, n_OriginalHeight '原图片宽度、高度<br />
+Dim n_BuildWidth, n_BuildHeight '缩略图宽度、高度<br />
+Dim div1, div2<br />
+Dim n1, n2<br />
+n_OriginalWidth = AspJpeg.Width<br />
+n_OriginalHeight = AspJpeg.Height<br />
+div1 = n_OriginalWidth / n_OriginalHeight<br />
+div2 = n_OriginalHeight / n_OriginalWidth<br />
+n1 = 0<br />
+n2 = 0<br />
+If n_OriginalWidth &gt; n_MaxWidth Then<br />
+n1 = n_OriginalWidth / n_MaxWidth<br />
+Else<br />
+n_BuildWidth = n_OriginalWidth<br />
+End If<br />
+If n_OriginalHeight &gt; n_MaxHeight Then<br />
+n2 = n_OriginalHeight / n_MaxHeight<br />
+Else<br />
+n_BuildHeight = n_OriginalHeight<br />
+End If<br />
+If n1 &lt;&gt; 0 Or n2 &lt;&gt; 0 Then<br />
+If n1 &gt; n2 Then<br />
+n_BuildWidth = n_MaxWidth<br />
+n_BuildHeight = n_MaxWidth * div2<br />
+Else<br />
+n_BuildWidth = n_MaxHeight * div1<br />
+n_BuildHeight = n_MaxHeight<br />
+End If<br />
+End If<br />
+<br />
+'指定宽度和高度生成<br />
+AspJpeg.Width = n_BuildWidth<br />
+AspJpeg.Height = n_BuildHeight<br />
+<br />
+'--将缩略图存盘开始--<br />
+Dim pos, s_OriginalFileName, s_OriginalFileExt '位置、原文件名、原文件扩展名<br />
+pos = InStrRev(s_OriginalPath, "/") + 1<br />
+s_OriginalFileName = Mid(s_OriginalPath, pos)<br />
+pos = InStrRev(s_OriginalFileName, ".")<br />
+s_OriginalFileExt = Mid(s_OriginalFileName, pos)<br />
+<br />
+Dim s_MapBuildBasePath, s_MapBuildPath, s_BuildFileName '缩略图绝对路径、缩略图文件名<br />
+Dim s_EndFlag '小图片文件名结尾标识 例: 如果大图片文件名是“image1.gif”,结尾标识是“_small”,那么小图片文件名就是“image1_small.gif”<br />
+If Right(s_BuildBasePath, 1) &lt;&gt; "/" Then s_BuildBasePath = s_BuildBasePath &amp; "/"<br />
+s_MapBuildBasePath = Server.MapPath(s_BuildBasePath)<br />
+s_EndFlag = "_small" '可以自定义,只要能区别大小图片即可<br />
+s_BuildFileName = Replace(s_OriginalFileName, s_OriginalFileExt, "") &amp; s_EndFlag &amp; s_OriginalFileExt<br />
+s_MapBuildPath = s_MapBuildBasePath &amp; "\" &amp; s_BuildFileName<br />
+<br />
+AspJpeg.Save s_MapBuildPath '保存<br />
+If Err.Number &lt;&gt; 0 Then<br />
+Err.Clear<br />
+BuildSmallPic = "Error_03"<br />
+Exit Function<br />
+End If<br />
+'--将缩略图存盘结束--<br />
+<br />
+'注销实例<br />
+Set AspJpeg = Nothing<br />
+If Err.Number &lt;&gt; 0 Then<br />
+BuildSmallPic = "Error_Other"<br />
+Err.Clear<br />
+End If<br />
+BuildSmallPic = s_BuildBasePath &amp; s_BuildFileName<br />
+End Function<br />
+<br />
+%&gt;<br />
+<div>
+	<br />
+</div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/312.html">html头部代码【转载】</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/332.html">网页分层，返回顶部，联系站长放在页面固定位置的方法</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

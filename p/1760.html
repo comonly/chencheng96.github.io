@@ -1,0 +1,693 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Linux如何查看进程、杀死进程、启动进程等常用命令_comonly.cn</title>
+<meta name="keywords" content="Linux如何查看进程、杀死进程、启动进程等常用命令" />
+<meta name="description" content="1.查进程&nbsp; &nbsp;
+(1)、ps命令查找与进程相关的PID号：&nbsp;&nbsp;
+(2)、即时跟踪进程信息：top命令
+top命令显示的信息会占满一页，并且在默认情况下每10秒更新一次。CPU使用最多的进程会排在最前面，用户可以使用这个命令实时观察到当前CPU使用率，内存占用率等。最后使用命令q来退出这个监控程序。
+（3）、查看占用文件的进程：lsof
+如果你想知道某个文件正被那个进程使用，lsof命令能够提供包括PID在内的各种进程信息。不带任何参数的lsof命令会列出" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Linux如何查看进程、杀死进程、启动进程等常用命令</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">都市烟火</li>
+          <li class="lmname"><a href="https://www.cnblogs.com/duhuo/p/4209572.html" target="_blank">https://www.cnblogs.com/duhuo/p/4209572.html</a></li>
+          <li class="timer">2020-09-26</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>1.查进程&nbsp; &nbsp;
+(1)、ps命令查找与进程相关的PID号：&nbsp;&nbsp;
+(2)、即时跟踪进程信息：top命令
+top命令显示的信息会占满一页，并且在默认情况下每10秒更新一次。CPU使用最多的进程会排在最前面，用户可以使用这个命令实时观察到当前CPU使用率，内存占用率等。最后使用命令q来退出这个监控程序。
+（3）、查看占用文件的进程：lsof
+如果你想知道某个文件正被那个进程使用，lsof命令能够提供包括PID在内的各种进程信息。不带任何参数的lsof命令会列出</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	1.查进程&nbsp; &nbsp;<br />
+(1)、ps命令查找与进程相关的PID号：&nbsp;&nbsp;<br />
+(2)、即时跟踪进程信息：top命令<br />
+top命令显示的信息会占满一页，并且在默认情况下每10秒更新一次。CPU使用最多的进程会排在最前面，用户可以使用这个命令实时观察到当前CPU使用率，内存占用率等。最后使用命令q来退出这个监控程序。<br />
+（3）、查看占用文件的进程：lsof<br />
+如果你想知道某个文件正被那个进程使用，lsof命令能够提供包括PID在内的各种进程信息。不带任何参数的lsof命令会列出当前系统文件中所有打开文件的进程信息，要找到占用某个特定文件的进程，需要提供文件名作为参数：例如：<br />
+2.杀进程<br />
+&nbsp;使用kill命令结束进程：kill xxx<br />
+&nbsp; &nbsp;常用：kill －9 324<br />
+&nbsp; &nbsp;Linux下还提供了一个killall命令，可以直接使用进程的名字而不是进程标识号，例如：# killall -9 NAME<br />
+3.进入到进程的执行文件所在的路径下，执行文件 ./文件名<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	1. 更改档案拥有者&nbsp;<br />
+命令 : chown [-cfhvR] [--help] [--version] user[:group] file...&nbsp;<br />
+功能 : 更改文件或者文件夹的拥有者&nbsp;<br />
+参数格式 :&nbsp;<br />
+&nbsp; &nbsp; user : 新的档案拥有者的使用者 IDgroup : 新的档案拥有者的使用者群体(group)&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp;-c : 若该档案拥有者确实已经更改，才显示其更改动作&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp;-f : 若该档案拥有者无法被更改也不要显示错误讯息&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp;-h : 只对于连结(link)进行变更，而非该 link 真正指向的档案&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp;-v : 显示拥有者变更的详细资料&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp;　-R : 对目前目录下的所有档案与子目录进行相同的拥有者变更(即以递回的方式逐个变更)&nbsp;<br />
+<br />
+例如：chown -R oracle:oinstall /oracle/u01/app/oracle&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; 更改目录拥有者为oracle&nbsp;<br />
+<br />
+2. 修改权限&nbsp;<br />
+&nbsp; &nbsp; 命令：chmod (change mode)&nbsp;<br />
+&nbsp; &nbsp; 功能：改变文件的读写和执行权限。有符号法和八进制数字法。&nbsp;<br />
+&nbsp; &nbsp; 选项：(1)符号法：&nbsp;<br />
+&nbsp; 命令格式：chmod {u|g|o|a}{+|-|=}{r|w|x} filename&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; u (user)&nbsp; &nbsp;表示用户本人。&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; g (group)&nbsp; 表示同组用户。&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; o (oher)&nbsp; &nbsp;表示其他用户。&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; a (all)&nbsp; &nbsp; 表示所有用户。&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; +&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 用于给予指定用户的许可权限。&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 用于取消指定用户的许可权限。&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 将所许可的权限赋给文件。&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; r (read)&nbsp; &nbsp;读许可，表示可以拷贝该文件或目录的内容。&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; w (write)&nbsp; 写许可，表示可以修改该文件或目录的内容。&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; x (execute)执行许可，表示可以执行该文件或进入目录。&nbsp;<br />
+&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (2)八进制数字法：&nbsp; &nbsp;<br />
+&nbsp; 命令格式：chmod abc file&nbsp;<br />
+&nbsp; 其中a,b,c各为一个八进制数字，分别表示User、Group、及Other的权限。&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 4 (100)&nbsp; &nbsp; 表示可读。&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2 (010)&nbsp; &nbsp; 表示可写。&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1 (001)&nbsp; &nbsp; 表示可执行。&nbsp;<br />
+&nbsp; 若要rwx属性则4+2+1=7；&nbsp;<br />
+&nbsp; 若要rw-属性则4+2=6；&nbsp;<br />
+&nbsp; 若要r-x属性则4+1=5。&nbsp;<br />
+<br />
+&nbsp; &nbsp; 例如：# chmod a+rx filename&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 让所有用户可以读和执行文件filename。&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # chmod go-rx filename&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 取消同组和其他用户的读和执行文件filename的权限。&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # chmod 741 filename&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 让本人可读写执行、同组用户可读、其他用户可执行文件filename。&nbsp;<br />
+&nbsp; # chmod -R 755 /home/oracle&nbsp;<br />
+&nbsp; &nbsp; 递归更改目录权限，本人可读写执行、同组用户可读可执行、其他用户可读可执行&nbsp;<br />
+<br />
+3. 修改文件日期&nbsp;<br />
+&nbsp; &nbsp; 命令：touch&nbsp;<br />
+&nbsp; &nbsp; 格式：touch filenae&nbsp;<br />
+&nbsp; &nbsp; 功能：改变文件的日期，不对文件的内容做改动，若文件不存在则建立新文件。&nbsp;<br />
+&nbsp; &nbsp; 例如：% touch file&nbsp;<br />
+<br />
+4. 链接文件&nbsp;<br />
+&nbsp; &nbsp; 命令：ln (link)&nbsp;<br />
+&nbsp; &nbsp; 格式：ln [option] filename linkname&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ln [option] directory pathname&nbsp;<br />
+&nbsp; &nbsp; 功能：为文件或目录建立一个链。其中，filename和directory是源文件名和&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 源目录名；linkname和pathname分别表示与源文件或源目录名相链接的&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 文件或目录。&nbsp;<br />
+&nbsp; &nbsp; 选项：-s&nbsp; 为文件或目录建立符号链接。不加-s表示为文件或目录建立硬链接&nbsp;<br />
+&nbsp; &nbsp; 注释：链接的目地在于，对一个文件或目录赋予两个以上的名字，使其可以出&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 现在不同的目录中，既可以使文件或目录共享，又可以节省磁盘空间。&nbsp;<br />
+&nbsp; &nbsp; 例如：% ln -s filename linkname&nbsp;<br />
+<br />
+5. 显示日期&nbsp;<br />
+&nbsp; &nbsp; 命令：date&nbsp;<br />
+&nbsp; &nbsp; 例如：% date&nbsp;<br />
+<br />
+6. 显示日历&nbsp;<br />
+&nbsp; &nbsp; 命令：cal (calendar)&nbsp;<br />
+&nbsp; &nbsp; 格式：cal [month] year&nbsp;<br />
+&nbsp; &nbsp; 功能：显示某年内指定的日历&nbsp;<br />
+&nbsp; &nbsp; 例如：% cal 1998&nbsp;&nbsp;<br />
+<br />
+7. 显示文件头部&nbsp;<br />
+&nbsp; &nbsp; 命令：head&nbsp;<br />
+&nbsp; &nbsp; 格式：head [option] filename&nbsp;<br />
+&nbsp; &nbsp; 功能：显示文件的头部&nbsp;<br />
+&nbsp; &nbsp; 选项：缺省&nbsp; 显示文件的头10行。&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -i&nbsp; &nbsp; 显示文件的开始 i行。&nbsp;<br />
+&nbsp; &nbsp; 例如：% head filename&nbsp;<br />
+<br />
+8. 显示文件尾部&nbsp;<br />
+&nbsp; &nbsp; 命令：tail&nbsp;<br />
+&nbsp; &nbsp; 格式：tail [option] filename&nbsp;<br />
+&nbsp; &nbsp; 功能：显示文件的尾部&nbsp;<br />
+&nbsp; &nbsp; 选项：缺省&nbsp; 显示文件的末10行。&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -i&nbsp; &nbsp; 显示文件最后 i行。&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; +i&nbsp; &nbsp; 从文件的第i行开始显示。&nbsp;<br />
+&nbsp; &nbsp; 例如：% tail filename&nbsp;<br />
+<br />
+9. 显示用户标识&nbsp;<br />
+&nbsp; &nbsp; 命令：id&nbsp;<br />
+&nbsp; &nbsp; 格式：id [option] [user]&nbsp;<br />
+&nbsp; &nbsp; 功能：显示用户标识及用户所属的所有组。&nbsp;<br />
+&nbsp; &nbsp; 选项：-a 显示用户名、用户标识及用户所属的所有组&nbsp;<br />
+&nbsp; &nbsp; 注释：&nbsp;<br />
+&nbsp; &nbsp; 例如：% id username&nbsp;<br />
+<br />
+10. 查看当前登录的用户&nbsp;<br />
+&nbsp; &nbsp; 命令：users&nbsp;<br />
+<br />
+11. 显示都谁登录到机器上&nbsp;<br />
+&nbsp; &nbsp; 命令：who&nbsp;<br />
+&nbsp; &nbsp; 格式：who&nbsp;<br />
+&nbsp; &nbsp; 功能：显示当前正在系统中的所有用户名字，使用终端设备号，注册时间。&nbsp;<br />
+&nbsp; &nbsp; 例如：% who&nbsp;<br />
+<br />
+12. 显示当前终端上的用户名&nbsp;<br />
+&nbsp; &nbsp; 命令：whoami&nbsp;<br />
+&nbsp; &nbsp; 格式：whoami&nbsp;<br />
+&nbsp; &nbsp; 功能：显示出当前终端上使用的用户。&nbsp;<br />
+&nbsp; &nbsp; 例如：% whoami&nbsp;<br />
+<br />
+13. 寻找文件&nbsp;<br />
+&nbsp; &nbsp; 命令：find&nbsp;<br />
+&nbsp; &nbsp; 格式：find pathname [option] expression&nbsp;<br />
+&nbsp; &nbsp; 功能：在所给的路经名下寻找符合表达式相匹配的文件。&nbsp;<br />
+&nbsp; &nbsp; 选项：-name&nbsp; &nbsp; &nbsp;表示文件名&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -user&nbsp; &nbsp; &nbsp;用户名，选取该用户所属的文件&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -size&nbsp; &nbsp; &nbsp;按大小查找，以block为单位，一个block是512B&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -mtime n&nbsp; 按最后一次修改时间查找，选取n天内被修改的文件&nbsp;<br />
+&nbsp; -perm&nbsp; &nbsp; &nbsp;按权限查找&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -type&nbsp; &nbsp; &nbsp;按文件类型查找&nbsp;<br />
+&nbsp; -atime&nbsp; &nbsp; 按最后一次访问时间查找&nbsp;<br />
+<br />
+&nbsp; &nbsp; 例如：% find ./ -name '*abc*' -print&nbsp;<br />
+<br />
+14. 搜索文件中匹配符&nbsp;<br />
+&nbsp; &nbsp; 命令：grep&nbsp;<br />
+&nbsp; &nbsp; 格式：grep [option] pattern filenames&nbsp;<br />
+&nbsp; &nbsp; 功能：逐行搜索所指定的文件或标准输入，并显示匹配模式的每一行。&nbsp;<br />
+&nbsp; &nbsp; 选项：-i&nbsp; &nbsp; 匹配时忽略大小写&nbsp;<br />
+&nbsp; -v 找出模式失配的行&nbsp;<br />
+<br />
+&nbsp; &nbsp; 例如：% grep -i 'java*' ./test/run.sh&nbsp;<br />
+<br />
+15. 统计文件字数&nbsp;<br />
+&nbsp; &nbsp; 命令：wc [option] filename&nbsp;<br />
+&nbsp; &nbsp; 功能：统计文件中的文件行数、字数和字符数。&nbsp;<br />
+&nbsp; &nbsp; 选项：-l 统计文件的行数&nbsp;<br />
+-w 统计文件的单词数&nbsp;<br />
+-c 统计文件的字符数&nbsp;<br />
+&nbsp; &nbsp; 注释：若缺省文件名则指标准输入&nbsp;<br />
+&nbsp; &nbsp; 例如：% wc -c ./test/run.sh&nbsp;<br />
+<br />
+16. 显示磁盘空间&nbsp;<br />
+&nbsp; &nbsp; 命令：df (disk free)&nbsp;<br />
+&nbsp; &nbsp; 格式：df [option]&nbsp;<br />
+&nbsp; &nbsp; 功能：显示磁盘空间的使用情况，包括文件系统安装的目录名、块设备名、总&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 字节数、已用字节数、剩余字节数占用百分比。&nbsp;<br />
+&nbsp; &nbsp; 选项：&nbsp;<br />
+-a：显示全部的档案系统和各分割区的磁盘使用情形&nbsp;<br />
+-i：显示i -nodes的使用量&nbsp;<br />
+-k：大小用k来表示 (默认值)&nbsp;<br />
+-t：显示某一个档案系统的所有分割区磁盘使用量&nbsp;<br />
+-x：显示不是某一个档案系统的所有分割区磁盘使用量&nbsp;<br />
+-T：显示每个分割区所属的档案系统名称&nbsp;<br />
+-h: 表示使用「Human-readable」的输出，也就是在档案系统大小使用 GB、MB 等易读的格式。&nbsp;<br />
+&nbsp; &nbsp; 注释：&nbsp;<br />
+&nbsp; &nbsp; 例如：% df -hi&nbsp;<br />
+<br />
+17. 查询档案或目录的磁盘使用空间&nbsp;<br />
+&nbsp; &nbsp; 命令：du (disk usage)&nbsp;<br />
+&nbsp; &nbsp; 格式：du [option] [filename]&nbsp;<br />
+&nbsp; &nbsp; 功能：以指定的目录下的子目录为单位，显示每个目录内所有档案所占用的磁盘空间大小&nbsp;<br />
+&nbsp; &nbsp; 选项：&nbsp;<br />
+-a：显示全部目录和其次目录下的每个档案所占的磁盘空间&nbsp;<br />
+-b：大小用bytes来表示 (默认值为k bytes)&nbsp;<br />
+-c：最后再加上总计 (默认值)&nbsp;<br />
+-s：只显示各档案大小的总合&nbsp;<br />
+-x：只计算同属同一个档案系统的档案&nbsp;<br />
+-L：计算所有的档案大小&nbsp;<br />
+-h: 表示档案系统大小使用 GB、MB 等易读的格式。&nbsp;<br />
+&nbsp; &nbsp; 例如：% du -a&nbsp;<br />
+% du -sh /etc 只显示该目录的总合&nbsp;<br />
+% du /etc | sort -nr | more 统计结果用sort 指令进行排序，&nbsp;<br />
+sort 的参数 -nr 表示要以数字排序法进行反向排序。&nbsp;<br />
+<br />
+18. 显示进程&nbsp;<br />
+&nbsp; &nbsp; 命令：ps&nbsp;<br />
+&nbsp; &nbsp; 格式：ps [option]&nbsp;<br />
+&nbsp; &nbsp; 功能：显示系统中进程的信息。包括进程ID、控制进程终端、执行时间和命令。&nbsp;<br />
+&nbsp; &nbsp; 选项：&nbsp;<br />
+&nbsp; -a 显示所有进程信息&nbsp;<br />
+&nbsp; -U uidlist 列出这个用户的所有进程&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -e 显示当前运行的每一个进程信息&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -f 显示一个完整的列表&nbsp;<br />
+&nbsp; -x 显示包括没有终端控制的进程状况 。&nbsp;<br />
+&nbsp; &nbsp; 注释：&nbsp;<br />
+&nbsp; &nbsp; 例如：% ps -ef&nbsp;<br />
+&nbsp; % ps -aux 然后再利用一个管道符号导向到grep去查找特定的进程,然后再对特定的进程进行操作。&nbsp;<br />
+<br />
+19. 终止进程&nbsp;<br />
+&nbsp; &nbsp; 命令：kill&nbsp;<br />
+&nbsp; &nbsp; 格式：kill [option] pid&nbsp;<br />
+&nbsp; &nbsp; 功能：向指定的进程送信号或终止进程。kill指令的用途是送一个signal给某一个process，&nbsp;<br />
+&nbsp; &nbsp; 因为大部份送的都是用来杀掉 process 的 SIGKILL 或 SIGHUP ，因此称为 kill&nbsp;&nbsp;<br />
+&nbsp; &nbsp; 选项：-9&nbsp; 强行终止进程&nbsp;<br />
+&nbsp; &nbsp; 注释：pid标示进程号，可由ps命令得到。&nbsp;<br />
+&nbsp; &nbsp; 例如：% kill -9 pid&nbsp;<br />
+&nbsp; &nbsp; 你也可以用 kill -l 来察看可代替 signal 号码的数目字。kill 的详细情形请参阅 man kill。&nbsp;<br />
+<br />
+20. 查看自己的IP地址&nbsp;<br />
+&nbsp; &nbsp; 命令：ifconfig&nbsp;<br />
+&nbsp; &nbsp; 格式：ifconfig -a&nbsp;<br />
+&nbsp; &nbsp;<br />
+21. 查看路由表&nbsp;<br />
+&nbsp; &nbsp; 命令：netstat&nbsp;<br />
+&nbsp; &nbsp; 格式：netstat -rn&nbsp;<br />
+<br />
+22. 远程登录&nbsp;<br />
+&nbsp; &nbsp; 命令：telnet&nbsp;<br />
+&nbsp; &nbsp; 格式：telnet hostname&nbsp;<br />
+<br />
+23. 文件传输&nbsp;<br />
+&nbsp; &nbsp; 命令：ftp (file transfer program)&nbsp;<br />
+&nbsp; &nbsp; 格式：ftp hostname&nbsp;<br />
+&nbsp; &nbsp; 功能：网络文件传输及远程操作。&nbsp;<br />
+&nbsp; &nbsp; 选项：ftp命令：&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;cd [dirname]&nbsp; 进入远程机的目录&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;lcd [dirname] 设置本地机的目录&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;dir/ls&nbsp; &nbsp; &nbsp; &nbsp; 显示远程的目录文件&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;bin&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;以二进制方式进行传输&nbsp;<br />
+&nbsp; &nbsp;asc&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;以文本文件方式进行传输&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;get/mget&nbsp; &nbsp; &nbsp; 从远程机取一个或多个文件&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;put/mput&nbsp; &nbsp; &nbsp; 向远程机送一个或多个文件&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;prompt&nbsp; &nbsp; &nbsp; &nbsp; 打开或关闭多个文件传送时的交互提示&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;close&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;关闭与远程机的连接&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;quit&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 退出ftp&nbsp;<br />
+&nbsp; &nbsp;!/exit ftp登陆状态下，!表示暂时退出ftp状态回到本地目录，exit表示返回ftp状态&nbsp;<br />
+&nbsp; &nbsp; 注释：&nbsp;<br />
+&nbsp; &nbsp; 例如：% ftp hostname&nbsp;<br />
+<br />
+24. 查看自己的电子邮件&nbsp;<br />
+&nbsp; &nbsp; 命令：mailx&nbsp;<br />
+&nbsp; &nbsp; 格式：mailx&nbsp;<br />
+&nbsp; &nbsp; 选项：&nbsp;<br />
+delete&nbsp; 删除&nbsp;<br />
+next&nbsp; &nbsp; 下一个&nbsp;<br />
+quit&nbsp; &nbsp; 退出&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;reply&nbsp; &nbsp;回复&nbsp; &nbsp;&nbsp;<br />
+<br />
+25. 回忆命令&nbsp;<br />
+&nbsp; &nbsp; 命令：history&nbsp;<br />
+&nbsp; &nbsp; 格式：history&nbsp;<br />
+&nbsp; &nbsp; 功能：帮助用户回忆执行过的命令。&nbsp;<br />
+&nbsp; &nbsp; 选项：&nbsp;<br />
+&nbsp; &nbsp; 注释：&nbsp;<br />
+&nbsp; &nbsp; 例如：% history&nbsp;<br />
+<br />
+26. 网上对话&nbsp;<br />
+&nbsp; &nbsp; 命令：talk&nbsp;<br />
+&nbsp; &nbsp; 格式：talk username&nbsp;<br />
+&nbsp; &nbsp; 功能：在网上与另一用户进行对话。&nbsp;<br />
+&nbsp; &nbsp; 选项：&nbsp;<br />
+&nbsp; &nbsp; 注释：对话时系统把终端分为上下两部分，上半部显示自己键入信息，下半部&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 显示对方用户键入的信息。键入delete或Ctrl+C则结束对话。&nbsp;<br />
+&nbsp; &nbsp; 例如：% talk username&nbsp;<br />
+<br />
+27. 允许或拒绝接受信息&nbsp;<br />
+&nbsp; &nbsp; 命令：mesg (message)&nbsp;<br />
+&nbsp; &nbsp; 格式：mesg [n/y]&nbsp;<br />
+&nbsp; &nbsp; 功能：允许或拒绝其它用户向自己所用的终端发送信息。&nbsp;<br />
+&nbsp; &nbsp; 选项：n 拒绝其它用户向自己所用的终端写信息&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; y 允许其它用户向自己所用的终端写信息（缺省值）&nbsp;<br />
+&nbsp; &nbsp; 注释：&nbsp;<br />
+&nbsp; &nbsp; 例如：% mesg n&nbsp;<br />
+<br />
+28. 给其他用户写信息&nbsp;<br />
+&nbsp; &nbsp; 命令：write&nbsp;<br />
+&nbsp; &nbsp; 格式：write username [ttyname]&nbsp;<br />
+&nbsp; &nbsp; 功能：给其他用户的终端写信息。&nbsp;<br />
+&nbsp; &nbsp; 选项：&nbsp;<br />
+&nbsp; &nbsp; 注释：若对方没有拒绝，两用户可进行交谈，键入EOF或Ctrl+C则结束对话。&nbsp;<br />
+&nbsp; &nbsp; 例如：write username&nbsp;<br />
+<br />
+29. 创建、修改、删除用户和群组&nbsp;<br />
+&nbsp; &nbsp; a. 创建群组：&nbsp;<br />
+例如： groupadd oinstall&nbsp; &nbsp; 创建群组名为oinstall的组&nbsp;<br />
+groupadd -g 344 dba&nbsp;&nbsp;<br />
+创建组号是344的组，此时在/etc/passwd文件中产生一个组ID（GID）是344的项目。&nbsp;<br />
+&nbsp; &nbsp; b. 修改群组：&nbsp;<br />
+groupmod:该命令用于改变用户组帐号的属性&nbsp;<br />
+groupmod –g 新的GID 用户组帐号名&nbsp;<br />
+groupmod –n 新组名 原组名：此命令由于改变用户组的名称&nbsp;<br />
+<br />
+&nbsp; &nbsp; c. 删除群组：&nbsp;<br />
+groupdel 组名：该命令用于删除指定的组帐号&nbsp;<br />
+<br />
+&nbsp; &nbsp; d. 新建用户：&nbsp;<br />
+命令： useradd [－d home] [－s shell] [－c comment] [－m [－k template]]&nbsp;<br />
+[－f inactive] [－e expire ] [－p passwd] [－r] name&nbsp;<br />
+主要参数&nbsp;<br />
+-c：加上备注文字，备注文字保存在passwd的备注栏中。　&nbsp;<br />
+-d：指定用户登入时的启始目录。&nbsp;<br />
+-D：变更预设值。&nbsp;<br />
+-e：指定账号的有效期限，缺省表示永久有效。&nbsp;<br />
+-f：指定在密码过期后多少天即关闭该账号。&nbsp;<br />
+-g：指定用户所属的群组。&nbsp;<br />
+-G：指定用户所属的附加群组。&nbsp;<br />
+-m：自动建立用户的登入目录。&nbsp;<br />
+-M：不要自动建立用户的登入目录。&nbsp;<br />
+-n：取消建立以用户名称为名的群组。&nbsp;<br />
+-r：建立系统账号。&nbsp;<br />
+-s：指定用户登入后所使用的shell。&nbsp;<br />
+-u：指定用户ID号。&nbsp;<br />
+<br />
+举例： # useradd -g oinstall -G dba oracle&nbsp; 创建Oracle用户&nbsp;<br />
+&nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; e. 删除用户&nbsp;<br />
+命令： userdel 用户名&nbsp;<br />
+删除指定的用户帐号&nbsp;<br />
+userdel –r 用户名(userdel 用户名;rm 用户名)：删除指定的用户帐号及宿主目录&nbsp;<br />
+例：#useradd -g root kkk //把kkk用户加入root组里&nbsp;<br />
+<br />
+&nbsp; &nbsp; f. 修改用户&nbsp;<br />
+命令： usermod<br />
+修改已有用户的信息&nbsp;<br />
+usermod –l 旧用户名 新用户名： 修改用户名&nbsp;<br />
+usermod –L 用户名： 用于锁定指定用户账号，使其不能登陆系统&nbsp;<br />
+usermod –U 用户名： 对锁定的用户帐号进行解锁&nbsp;<br />
+passwd –d 用户名： 使帐号无口令，即用户不需要口令就能登录系统&nbsp;<br />
+例：#usermod -l user2 user1 //把用户user2改名为user1&nbsp;<br />
+<br />
+30. 启动、关闭防火墙&nbsp;<br />
+永久打开或则关闭&nbsp;<br />
+chkconfig iptables on&nbsp;<br />
+chkconfig iptables off&nbsp;<br />
+即时生效：重启后还原&nbsp;<br />
+service iptables start&nbsp;<br />
+service iptables stop&nbsp;<br />
+&nbsp; &nbsp; &nbsp;或者：&nbsp;<br />
+/etc/init.d/iptables start&nbsp;<br />
+/etc/init.d/iptables stop&nbsp;<br />
+<br />
+31. 启动VSFTP服务&nbsp;<br />
+即时启动： /etc/init.d/vsftpd start&nbsp;<br />
+即时停止： /etc/init.d/vsftpd stop&nbsp;<br />
+<br />
+开机默认VSFTP服务自动启动:&nbsp;<br />
+方法一:(常用\方便)&nbsp;<br />
+[root@localhost etc]# chkconfig --list|grep vsftpd ( 查看情况)&nbsp;<br />
+vsftpd&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0:off&nbsp; &nbsp;1:off&nbsp; &nbsp;2:off&nbsp; &nbsp;3:off&nbsp; &nbsp;4:off&nbsp; &nbsp;5:off&nbsp; &nbsp;6:off&nbsp;<br />
+[root@localhost etc]# chkconfig vsftpd on&nbsp; (执行ON设置)&nbsp;<br />
+或者:方法二:&nbsp;<br />
+修改文件 /etc/rc.local , 把行/usr/local/sbin/vsftpd &amp; 插入文件中，以实现开机自动启动。&nbsp;<br />
+<br />
+32. vi技巧&nbsp;<br />
+a. 进入输入模式&nbsp;<br />
+新增 (append)&nbsp;<br />
+a ：从光标所在位置後面开始新增资料，光标後的资料随新增资料向後移动。&nbsp;<br />
+A：从光标所在列最後面的地方开始新增资料。&nbsp;<br />
+<br />
+插入 (insert)&nbsp;<br />
+i：从光标所在位置前面开始插入资料，光标後的资料随新增资料向後移动。&nbsp;<br />
+I ：从光标所在列的第一个非空白字元前面开始插入资料。&nbsp;<br />
+<br />
+开始 (open)&nbsp;<br />
+o ：在光标所在列下新增一列并进入输入模式。&nbsp;<br />
+O: 在光标所在列上方新增一列并进入输入模式。&nbsp;<br />
+b. 退出vi&nbsp;<br />
+在指令模式下键入:q,:q!,:wq或:x(注意:号），就会退出vi。其中:wq和:x是存盘退出，而:q是直接退出，如果文件已有新的变化，vi会提示你保存文件而:q命令也会失效，这时你可以用:w命令保存文件后再用:q 退出，或用:wq或:x命令退出，如果你不想保存改变后的文件，你就需要用:q!命令，这个命令将不保存文件而直接退出vi。&nbsp;<br />
+<br />
+c. 删除与修改文件的命令：&nbsp;<br />
+x：删除光标所在字符。&nbsp;<br />
+dd ：删除光标所在的列。&nbsp;<br />
+r ：修改光标所在字元，r 後接著要修正的字符。&nbsp;<br />
+R：进入取替换状态，新增文字会覆盖原先文字，直到按 [ESC] 回到指令模式下为止。&nbsp;<br />
+s：删除光标所在字元，并进入输入模式。&nbsp;<br />
+S：删除光标所在的列，并进入输入模式。&nbsp;<br />
+<br />
+d. 屏幕翻滚类命令&nbsp;<br />
+Ctrl+u: 向文件首翻半屏&nbsp;<br />
+Ctrl+d: 向文件尾翻半屏&nbsp;<br />
+Ctrl+f: 向文件尾翻一屏&nbsp;<br />
+Ctrl＋b: 向文件首翻一屏&nbsp;<br />
+nz: 将第n行滚至屏幕顶部，不指定n时将当前行滚至屏幕顶部。&nbsp;<br />
+<br />
+e. 删除命令&nbsp;<br />
+ndw或ndW: 删除光标处开始及其后的n-1个字&nbsp;<br />
+do: 删至行首&nbsp;<br />
+d$: 删至行尾&nbsp;<br />
+ndd: 删除当前行及其后n-1行&nbsp;<br />
+x或X: 删除一个字符，x删除光标后的，而X删除光标前的&nbsp;<br />
+Ctrl+u: 删除输入方式下所输入的文本&nbsp;<br />
+<br />
+f. 搜索及替换命令&nbsp;<br />
+/pattern: 从光标开始处向文件尾搜索pattern&nbsp;<br />
+?pattern: 从光标开始处向文件首搜索pattern&nbsp;<br />
+n: 在同一方向重复上一次搜索命令&nbsp;<br />
+N: 在反方向上重复上一次搜索命令&nbsp;<br />
+:s/p1/p2/g: 将当前行中所有p1均用p2替代&nbsp;<br />
+:n1,n2s/p1/p2/g: 将第n1至n2行中所有p1均用p2替代&nbsp;<br />
+:g/p1/s//p2/g: 将文件中所有p1均用p2替换&nbsp;<br />
+<br />
+g. 复制，黏贴&nbsp;<br />
+(1) 选定文本块，使用v进入可视模式；移动光标键选定内容&nbsp;<br />
+(2) 复制选定块到缓冲区，用y；复制整行，用yy&nbsp;<br />
+(3) 剪切选定块到缓冲区，用d；剪切整行用dd&nbsp;<br />
+(4) 粘贴缓冲区中的内容，用p&nbsp;<br />
+<br />
+h. 其他&nbsp;<br />
+在同一编辑窗打开第二个文件，用:sp [filename]&nbsp;<br />
+在多个编辑文件之间切换，用Ctrl+w&nbsp;<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1759.html">Linux启动过程详解</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1761.html">Linux环境下段错误的产生原因及调试方法小结</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.cnblogs.com/duhuo/p/4209572.html" target="_blank">https://www.cnblogs.com/duhuo/p/4209572.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="Linux查看CPU和内存使用情况">
+							<h2 style="display:inline;color:#5BC648;">Linux查看CPU和内存使用情况</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-09-26&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	<a href="https://www.cnblogs.com/mengchunchen/p/9669704.html">https://www.cnblogs.com/mengchunchen/p/9669704.html</a>
+</p>
+<p>
+	top命令<br />
+top命令是Linux下常用的性能分析工具，能够实时显示系统中各个进程的资源占用状况，类似于Windows的任务管理器。<br />
+运行 top 命令后，CPU 使用状态会以全屏的方式显示，并且会处在对话的模式 -- 用基于 top 的命令，可以控制显示方式等等。退出 top 的命令为 q （在 top 运行中敲 q 键一次）。
+</p>
+<p>
+	<br />
+ps命令<br />
+ps命令用于报告当前系统的进程状态。ps命令是最基本同时也是非常强大的进程查看命令，使用该命令可以确定有哪些进程正在运行和运行的状态、进程是否结束、进程有没有僵死、哪些进程占用了过多的资源等等，总之大部分信息都是可以通过执行该命令得到的。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	pmap命令<br />
+pmap命令用于报告进程的内存映射关系。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	free命令<br />
+free命令可以显示当前系统未使用的和已使用的内存数目，还可以显示被内核使用的内存缓冲区。<br />
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Linux查看CPU和内存使用情况">Linux查看CPU和内存使用情况</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

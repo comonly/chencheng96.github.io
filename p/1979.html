@@ -1,0 +1,223 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>通过Windows共享文件夹直接挂载到Linux中使用（实验操作）_comonly.cn</title>
+<meta name="keywords" content="通过Windows共享文件夹直接挂载到Linux中使用（实验操作）" />
+<meta name="description" content="通过Windows共享文件夹直接挂载到Linux中使用实验背景：如果在Windows上有下载的压缩包，我们可以直接通过Windows的共享直接挂载到Linux中直接使用实验环境：Windows系统宿主机，Linux系统虚拟机（安装操作前面有具体的文章介绍）先配置Windows系统主机的共享文件的环境（一）先将计算机管理中的Guest账户禁用状态关闭1，右击我的电脑管理，打开计算机管理2，在本地用户" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">通过Windows共享文件夹直接挂载到Linux中使用（实验操作）</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">一拳超人007</li>
+          <li class="lmname"><a href="https://blog.51cto.com/14080162/2430876" target="_blank">https://blog.51cto.com/14080162/2430876</a></li>
+          <li class="timer">2019-08-20</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>通过Windows共享文件夹直接挂载到Linux中使用实验背景：如果在Windows上有下载的压缩包，我们可以直接通过Windows的共享直接挂载到Linux中直接使用实验环境：Windows系统宿主机，Linux系统虚拟机（安装操作前面有具体的文章介绍）先配置Windows系统主机的共享文件的环境（一）先将计算机管理中的Guest账户禁用状态关闭1，右击我的电脑管理，打开计算机管理2，在本地用户</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <div class="con editor-preview-side" id="result"><p><br></p><p><strong><span style="font-size:36px;">通过Windows共享文件夹直接挂载到Linux中使用</span></strong></p><p><span style="font-size:24px;"><strong>实验背景：</strong>如果在Windows上有下载的压缩包，我们可以直接通过Windows的共享直接挂载到Linux中直接使用</span><br></p><p><span style="font-size:24px;"><strong>实验环境：</strong>Windows系统宿主机，Linux系统虚拟机（安装操作前面有具体的文章介绍）</span></p><p><span style="font-size:24px;"><br></span></p><p><strong><span style="font-size:24px;">先配置Windows系统主机的共享文件的环境</span></strong><span style="font-size:24px;"><br></span></p><p><strong><span style="font-size:20px;">（一）先将计算机管理中的Guest账户禁用状态关闭</span></strong></p><p><span style="font-size:20px;">1，右击我的电脑管理，打开计算机管理</span><strong><span style="font-size:24px;"><br></span></strong></p><p><span style="font-size:20px;">2，在本地用户和组中点开用户进行设置</span></p><p><span style="font-size:20px;">3，右击Guest右击属性进行修改</span></p><p><span style="font-size:20px;">4，将guest账户禁用关闭</span></p><p><span style="font-size:20px;"><img src="https://s1.51cto.com/images/20190819/1566224203125045.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" title="1566224203125045.png" alt="微信截图_20190819221356.png" style="cursor: pointer;"></span></p><p><strong><span style="font-size:20px;">（二）打开本地策略，修改用户权限的分配</span></strong></p><p><span style="font-size:20px;">1，按住win+r打开运行，输入secpol.msc，打开本地策略</span></p><p><span style="font-size:20px;">2，选择本地策略，打开用户权限分配</span></p><p><span style="font-size:20px;">3，双击“拒绝从网络访问这台计算机”进行设置</span></p><p><span style="font-size:20px;">4，将里面的Guest账户从此处删除，确定关闭</span></p><p><strong><span style="font-size:20px;"><img src="https://s1.51cto.com/images/20190819/1566224982676833.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" title="1566224982676833.png" alt="微信截图_20190819221356.png" style="cursor: pointer;"></span></strong></p><p><strong><span style="font-size:20px;"><img src="https://s1.51cto.com/images/20190819/1566224991770621.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" title="1566224991770621.png" alt="微信截图_20190819222859.png" style="cursor: pointer;"></span></strong></p><p><strong><span style="font-size:20px;">（三）打开网络中心，设置网络共享高级设置</span></strong></p><p><span style="font-size:20px;">1，控制面板-网络和Internet-网络和共享中心-高级共享设置</span></p><p><span style="font-size:20px;">2，专用（当前配置文件）：将网络发现和共享全部开启</span></p><p><span style="font-size:20px;">3，来宾或公用：全部开启</span></p><p><span style="font-size:20px;">4，所有网络中：将密码保护关闭，其余的全部开启，保存更改</span></p><p><strong><span style="font-size:20px;"><img src="https://s1.51cto.com/images/20190819/1566225820136190.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" title="1566225820136190.png" alt="微信截图_20190819221356.png" style="cursor: pointer;"></span></strong></p><p><strong><span style="font-size:20px;"><img src="https://s1.51cto.com/images/20190819/1566225825748041.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" title="1566225825748041.png" alt="微信截图_20190819222859.png" style="cursor: pointer;"></span></strong></p><p><strong><span style="font-size:20px;"><img src="https://s1.51cto.com/images/20190819/1566225830267584.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" title="1566225830267584.png" alt="微信截图_20190819224222.png" style="cursor: pointer;"></span></strong></p><p><strong><span style="font-size:20px;">（四）将Windows宿主机设置一个ip地址</span></strong></p><p><span style="font-size:20px;">1，控制面板-网络和Internet-网络连接</span></p><p><span style="font-size:20px;">2，右击vmnet1属性进行设置</span></p><p><span style="font-size:20px;">3，设置一个ip地址保存设置</span></p><p><span style="font-size:20px;">ip：192.168.100.99</span></p><p><span style="font-size:20px;">子网掩码：255.255.255.0</span></p><p><strong><span style="font-size:20px;"><img src="https://s1.51cto.com/images/20190819/1566226397764672.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" title="1566226397764672.png" alt="微信截图_20190819225115.png" style="cursor: pointer;"></span></strong></p><p><strong><span style="font-size:20px;">（五）在Windows创建一个共享文件夹</span></strong></p><p><span style="font-size:20px;">1，在Windows宿主机上创建一个share文件夹</span></p><p><span style="font-size:20px;">2，右击share属性，点击共享选择everyone共享用户</span></p><p><span style="font-size:20px;">3，在高级共享中选择共享此文件夹，确定共享</span></p><p><strong><span style="font-size:20px;"><img src="https://s1.51cto.com/images/20190819/1566227266989025.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" title="1566227266989025.png" alt="微信截图_20190819230537.png" style="cursor: pointer;"></span></strong></p><p><strong><span style="font-size:20px;"><img src="https://s1.51cto.com/images/20190819/1566227271483194.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" title="1566227271483194.png" alt="微信截图_20190819230736.png" style="cursor: pointer;"></span></strong></p><p><strong><span style="font-size:24px;">在Linux中使用命令访问Windows共享的文件夹</span></strong></p><p><strong><span style="font-size:20px;">（一）利用Linux访问Windows共享的文件</span></strong></p><div class="code-toolbar"><pre class="brush:bash;toolbar:false  language-bash"><code class="  language-bash"><span class="token punctuation">[</span>root@localhost ~<span class="token punctuation">]</span><span class="token comment"># smbclient -L //192.168.100.99/share    访问共享 </span>
+Enter SAMBA\root's password:                               密码</code></pre><div class="toolbar"></div></div><p><span style="font-size:24px;"><strong><img src="https://s1.51cto.com/images/20190819/1566227601282073.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" title="1566227601282073.png" alt="微信截图_20190819231210.png" style="cursor: pointer;"></strong></span></p><p><strong><span style="font-size:20px;">（二）将共享的文件挂载到Linux中，直接访问文件</span></strong></p><p><span style="font-size:20px;">1，创建一个挂载点目录/opt/share01</span></p><p><span style="font-size:20px;">2，将共享文件挂载到挂载点</span></p><p><span style="font-size:20px;">3，切换目录到/opt/share01</span></p><p><span style="font-size:20px;">4，用查看命令直接查看文件</span></p><div class="code-toolbar"><pre class="brush:bash;toolbar:false  language-bash"><code class="  language-bash"><span class="token punctuation">[</span>root@localhost ~<span class="token punctuation">]</span><span class="token comment"># mkdir -p /opt/share01   创建挂载点</span>
+<span class="token punctuation">[</span>root@localhost ~<span class="token punctuation">]</span><span class="token comment"># mount.cifs //192.168.100.99/share /opt/share01   将共享文件夹挂载到挂载点</span>
+Password <span class="token keyword">for</span> root@//192.168.100.99/share:  
+<span class="token punctuation">[</span>root@localhost ~<span class="token punctuation">]</span><span class="token comment"># cd /opt/share01    切换到挂载点</span>
+<span class="token punctuation">[</span>root@localhost share01<span class="token punctuation">]</span><span class="token comment"># ls</span>
+test.txt
+<span class="token punctuation">[</span>root@localhost share01<span class="token punctuation">]</span><span class="token comment"># cat test.txt    查看共享文件夹的文件内容</span>
+this is a test<span class="token operator">!</span><span class="token operator">!</span><span class="token operator">!</span><span class="token punctuation">[</span>root@localhost share01<span class="token punctuation">]</span><span class="token comment">#</span></code></pre><div class="toolbar"></div></div><p><strong style="font-size:24px;"><img src="https://s1.51cto.com/images/20190819/1566228061499841.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" title="1566228061499841.png" alt="微信截图_20190819231805.png" style="cursor: pointer;"></strong><br><span style="font-size:20px;"></span></p><p><strong style="font-size:24px;">此时我们就可以直接在Windows上共享文件夹直接挂载到Linux直接访问文件<br></strong></p><p><strong style="font-size:24px;">谢谢阅读！！！</strong></p></div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1978.html">pgsql 单机多版本的实验环境的搭建</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1980.html">在大公司做凤尾，还是在小公司做鸡头？</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.51cto.com/14080162/2430876" target="_blank">https://blog.51cto.com/14080162/2430876</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

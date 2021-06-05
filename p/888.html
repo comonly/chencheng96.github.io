@@ -1,0 +1,336 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Java工具类（字符串和日期，集合类）_comonly.cn</title>
+<meta name="keywords" content="Java工具类（字符串和日期，集合类）" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Java工具类（字符串和日期，集合类）</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-03-26</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	java-含工具类
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='Jv语言基础类'>
+	Java语言基础类
+</h2>
+<p>
+	java.lang包Java语言的核心类库，包含运行Java程序必不可少的系统类（基本数据类型，基本数学函数，字符串处理，线程，异常处理类）。这个包默认加载。
+</p>
+<p>
+	java.io包是Java语言的标准输入输出类库，包含实现Java程序与操作系统，用户界面及其他Java程序做数据交换所使用的类，如基本输入/输出流，文件输入输出流，过滤输入输出流，管道输入输出流，随机输入输出流。凡是需要完成与操作系统有关的较底层的输入/输出操作的Java程序，都要用到java.io包。
+</p>
+<p>
+	java.util包包括了Java语言中的一些底层的实用工具，如处理时间的Date类，处理变长数组的Vector类，实现栈和杂凑表的Stack类和HashTable类等。
+</p>
+<p>
+	java.awt及javax.swing包是Java语言用来构建图形用户界面（GUI）的类库，它包括了许多界面元素和资源，主要在三个方面提供界面设计的支持。
+</p>
+<p>
+	java.applet包用来实现运行于Internet浏览器中的Java Applet的工具类库，仅包含少量几个接口和一个非常有用的类java.applet.Applet。
+</p>
+<p>
+	java.net包用来实现网络功能的类库。主要有：底层的网络通信，如实现套接字通信的Socket类，ServerSocket类；编写用户自己的Telnet，FTP，邮件服务等实现网上通信的类；用于访问Internet上资源和进行CGI网关调用的类，如URL等。
+</p>
+<p>
+	java.security提供更完善的Java程序安全性控制和管理，该包可以对Java程序加密。
+</p>
+<p>
+	java.sql：实现JDBC的类库，可以使Java程序具有访问不同种类的数据库的功能，如Oracle,Sybase,DB2,SQL Server等。
+</p>
+<p>
+	<br />
+</p>
+<h4>
+	Object类
+</h4>
+<p>
+	所有类的直接或间接父类。包含了所有Java类的公共属性。
+</p>
+<p>
+	protected Object clone()：生成当前对象的一个备份，返回这个复制对象
+</p>
+<p>
+	public boolean equals(Object obj)：比较两个对象是否相等，是则返回true
+</p>
+<p>
+	public final Class getClass()：获取当前对象所属类的信息，返回class对象
+</p>
+<p>
+	protected void finalize()：定义回收当前对象时所需完成的清理工作
+</p>
+<p>
+	public String toString()：返回对象本身的有关信息，按字符串对象返回System.out.println(Thread.currentThread().toString);可以显示当前的线程。<span>System.out.println()如果带一个对象做参数，则自动调用对象的toString()方法。</span>
+</p>
+<p>
+	public finally void notify()：唤醒线程
+</p>
+<p>
+	public finally void notifyAll()：唤醒所有等待此对象的线程
+</p>
+<p>
+	public final void wait()throws InterruptedException：等待线程
+</p>
+<p>
+	<br />
+</p>
+<h4>
+	equals()方法与==运算符
+</h4>
+<p>
+	用来比较两个对象是否相同，如果相同，则返回true否则返回false。如果一个类没有覆盖equalsl()方法，那么它的“相等”意味着两个引用相等，即他们引用的是同一个对象，这时equals()方法的结果与相等运算符（==）的结果相同。
+</p>
+<p>
+	==运算符可用于基本数据类型（判断数据相等），也可以用于引用类型。当用于引用类型时，表示是否引用同一个对象（不是指内容），JDK中许多类在实现时覆盖了equals()方法，这时判断的是两个对象状态和功能上的相同（两对象类型相同，对象状态和功能相同），而不是引用上的相同。
+</p>
+<p>
+	<br />
+</p>
+<h4>
+	System类获取标准的输入输出，及系统信息
+</h4>
+<p>
+	public static InputStream in：系统的标准输入
+</p>
+<p>
+	public static PrintStream out：系统的标准输出
+</p>
+<p>
+	public static PrintStream err：系统的标准错误输出
+</p>
+<p>
+	<br />
+</p>
+<p>
+	public static long currentTimeMillis()：获取自1970年1月1日零时至当前系统时刻的微秒数，通常用于比较两事件发生的先后时间差。
+</p>
+<p>
+	public static void exit(int status)：在程序的线程执行完之前，强制Java虚拟机退出运行状态，并把状态信息status返回给运行虚拟机的操作系统。
+</p>
+<p>
+	public static void gc()：将在Java虚拟机的垃圾回收功能。
+</p>
+<p>
+	public static Properties getProperties()：得到系统的属性。
+</p>
+<p>
+	<br />
+</p>
+<h2 id='字符串和日期'>
+	字符串和日期
+</h2>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<h2 id='集合类'>
+	集合类
+</h2>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<h2 id='泛型及集合遍历'>
+	泛型及集合遍历
+</h2></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/887.html">PowerDesigner12数据库建模软件</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/891.html">JavaWeb——filter,listener</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Jv语言基础类">Jv语言基础类</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#字符串和日期">字符串和日期</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#集合类">集合类</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#泛型及集合遍历">泛型及集合遍历</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

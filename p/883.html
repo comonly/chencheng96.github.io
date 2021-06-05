@@ -1,0 +1,493 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Java访问控制符、非访问控制符_comonly.cn</title>
+<meta name="keywords" content="Java访问控制符、非访问控制符" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Java访问控制符、非访问控制符</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-03-15</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	java-含工具类
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='成员（成员变量和方法）访问控制符（rivte,默认,rotected,ublic）'>
+	成员（成员变量和方法）访问控制符（private, 默认, protected, public）
+</h2>
+<p>
+	<table cellpadding="1" cellspacing="0" border="1" bordercolor="#000000">
+		<tbody>
+			<tr>
+				<th>
+					访问控制符
+				</th>
+				<th>
+					同一类中
+				</th>
+				<th>
+					同一包中
+				</th>
+				<th>
+					同一子类中
+				</th>
+				<th>
+					其他
+				</th>
+			</tr>
+		</tbody>
+		<tbody>
+			<tr>
+				<td>
+					private
+				</td>
+				<td>
+					是
+				</td>
+				<td>
+					否
+				</td>
+				<td>
+					否
+				</td>
+				<td>
+					否
+				</td>
+			</tr>
+			<tr>
+				<td>
+					default
+				</td>
+				<td>
+					是
+				</td>
+				<td>
+					是
+				</td>
+				<td>
+					否
+				</td>
+				<td>
+					否
+				</td>
+			</tr>
+			<tr>
+				<td>
+					protected
+				</td>
+				<td>
+					是
+				</td>
+				<td>
+					是
+				</td>
+				<td>
+					是
+				</td>
+				<td>
+					否
+				</td>
+			</tr>
+			<tr>
+				<td>
+					public
+				</td>
+				<td>
+					是
+				</td>
+				<td>
+					是
+				</td>
+				<td>
+					是
+				</td>
+				<td>
+					是
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</p>
+<ul>
+	<li>
+		private(当前类访问权限)：如果类里的一个成员（包括成员变量、方法和构造器等）使用private访问控制符来修饰，则这个成员只能在当前类的内部被访问。很显然，这个访问控制符用于修饰成员变量最合适，使用它来修饰成员变量就可以把成员变量隐藏在该类的内部。
+	</li>
+	<li>
+		default(包（package）访问权限)：如果类里的一个成员（包括成员变量、方法和构造器等）或者一个外部类不使用任何访问控制修饰，就称它为包访问权限的，default访问控制的成员或外部类可以被相同包下的其他类访问。
+	</li>
+	<li>
+		protected（子类访问权限）：如果一个成员（包括成员变量、方法和构造器等）使用protected访问控制符修饰，那么这个成员既可以被同一个包中的其他类访问，也可以被不同包中的子类访问。在通常情况下，如果使用protected来修饰一个方法，通常是希望其子类来重写这个方法。
+	</li>
+	<li>
+		public（公共访问权限）：这是一个最宽松的访问控制级别，如果一个成员（包括成员变量、方法和构造器等）或者一个外部类使用public访问控制符修饰，那么这个成员或外部类就可以被所有类访问，不管访问类和被访问类是否处于同一个包中，是否具有父子继承关系。
+	</li>
+</ul>
+构造方法也可以用访问控制符修饰。private的构造方法，其他类不能生成该类的一个实例。
+<h2 id='类的访问控制符'>
+	类的访问控制符
+</h2>
+<p>
+	类的访问控制符或者为public，或者为默认。使用public修饰，该类可以被其他类访问；若默认，只能被同包中的类访问。
+</p>
+<h4>
+	setter与getter
+</h4>
+<p>
+	可以将类中的字段用private修饰。使用setXXX和getXXX方法对类的属性进行存取，分别称为setter与getter。
+</p>
+<h2 id='非访问控制符'>
+	非访问控制符
+</h2>
+<p>
+	<table cellpadding="1" cellspacing="0" border="1" bordercolor="#000000">
+		<tbody>
+			<tr>
+				<th>
+					非访问控制符
+				</th>
+				<th>
+					基本含义
+				</th>
+				<th>
+					修饰类
+				</th>
+				<th>
+					修饰成员
+				</th>
+				<th>
+					修饰局部变量
+				</th>
+			</tr>
+		</tbody>
+		<tbody>
+			<tr>
+				<td>
+					static
+				</td>
+				<td>
+					静态的、非实例的（本质）、类的
+				</td>
+				<td>
+					可以修饰内部类
+				</td>
+				<td>
+					Yes
+				</td>
+				<td>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					final
+				</td>
+				<td>
+					最终的、不可改变的
+				</td>
+				<td>
+					Yes
+				</td>
+				<td>
+					Yes
+				</td>
+				<td>
+					Yes
+				</td>
+			</tr>
+			<tr>
+				<td>
+					abstract
+				</td>
+				<td>
+					抽像的，不可实例的
+				</td>
+				<td>
+					Yes(修饰抽象的方法）
+				</td>
+				<td>
+					Yes
+				</td>
+				<td>
+					<br />
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</p>
+<h4>
+	static字段
+</h4>
+静态字段最本质的特点是：&nbsp;<br />
+<ul>
+	<li>
+		它们是类的字段，不属于任何一个对象实例。
+	</li>
+	<li>
+		它不保存在某人对象实例的内存区间中，而是保存在类的内存区域的公共存储单元。
+	</li>
+	<li>
+		类变量可以通过类名直接访问，也可以通过实例对象来访问，两种方法的结果是相同的。
+	</li>
+</ul>
+如System类的in和out对象，就是属于类的域，直接用类名来访问，即System.out。
+<h4>
+	static方法
+</h4>
+用static修饰符修饰的方法仅属于类的静态方法，又称为类方法。与此相对，不用static修饰的方法，则为实例方法。<br />
+类方法的本质是该方法是属于整个类的，不是属于某个实例的。<br />
+声明一个方法为static有以下几重含义。&nbsp;<br />
+<ul>
+	<li>
+		非static的 方法是属于某个对象的方法，则这个对象创建时，对象的方法在内存中拥有自己专用的代码段。而static的方法是属于整个类的，它在内存中的代码段将随着类的定义而进行分配和装载，不被任何一个对象专有。
+	</li>
+	<li>
+		由于static方法是属于整个类的，所以它不能操纵和处理属于某个对象的成员变量，而只能处理属于整个类的成员变量，即static方法只能处理本类中的static域或调用static方法。
+	</li>
+	<li>
+		static方法中，不能访问实例变量，不能使用this和super。因为this和super表示的是具体的某个实例的，所以在一定意义下，可以说static和this是对立关系的。
+	</li>
+	<li>
+		调用这个方法时，应该使用类名直接调用，也可以用某一个具体的对象。&nbsp;
+	</li>
+</ul>
+如：Math.random(), Integer.parseInt()等就是类方法，直接用类名进行访问。
+<h4>
+	final类&nbsp;
+</h4>
+如果一个类被final修饰符所修饰和限定，说明这个类不能被继承，即不可能有子类。<br />
+<h4>
+	final方法&nbsp;
+</h4>
+final修饰符所修饰的方法，是不能被子类所覆盖（override）的方法。<br />
+final字段及final局部变量<br />
+<h4>
+	final字段、final局部变量（方法中的变量）
+</h4>
+它们的值一旦给定，就不能更改。是只读量，能且只能被赋值一次，而不能多次赋值。<br />
+<ul>
+	<li>
+		一个字段被static final两个修饰符所限定时，可以表示常量，在Java中const虽然作为保留关键字，但是没有使用。如：Integer.MAX_VALUE、Math.PI
+	</li>
+	<li>
+		在定义static final域时，若不给定初始值，则按默认进行初始化（数值为0，boolean为false，引用型为null）。
+	</li>
+	<li>
+		在定义final字段时，若不是static的域，则必须且只能赋值一次，不能缺省。 这种域的赋值方式有两种：一是在定义变量时进行初始化，二是在每一个构造函数中进行赋值。
+	</li>
+	<li>
+		在定义final局部变量时，也必须且只能赋值一次，它的值可能不是常量，但它的取值在变量存在期间不会改变。
+	</li>
+</ul>
+<h4>
+	abstract类&nbsp;
+</h4>
+凡是用abstract修饰符修饰的类被称为抽象类。&nbsp;抽象类不能被实例化。<br />
+<h4>
+	abstract方法
+</h4>
+<ul>
+	<li>
+		被abstract修饰的方法称为抽象方法，抽象方法的作用在为子类定义一个统一的接口。对抽象方法只需声明，而不需要实现，即用分号( ; )而不是用{}，格式如下：abstract returnType abstractMethod([ paramlist ]);
+	</li>
+	<li>
+		抽象类中可以包含抽象方法，也可以不包含abstract方法。但是，一旦某个类中包含了abstract方法，则这个类必须声明为abstract类。
+	</li>
+	<li>
+		抽象方法在子类中必须被实现，否则子类仍然是abstract类。
+	</li>
+</ul></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/882.html">Java类、包、接口</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/884.html">Java异常处理</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#成员（成员变量和方法）访问控制符（rivte,默认,rotected,ublic）">成员（成员变量和方法）访问控制符（rivte,默认,rotected,ublic）</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#类的访问控制符">类的访问控制符</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#非访问控制符">非访问控制符</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

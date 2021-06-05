@@ -1,0 +1,293 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Javascript获取HTML静态页面参数传递值示例_comonly.cn</title>
+<meta name="keywords" content="Javascript获取HTML静态页面参数传递值示例" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Javascript获取HTML静态页面参数传递值示例</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-04-14</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">JavaScript,html,参数</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='tyle="lie-height:1.5;"例一：tyle="lie-height:1.5;"利用正则表达式来获取&b;'>
+	<span style="line-height:1.5;">例一 ：</span><span style="line-height:1.5;">利用正则表达式来获取&nbsp;</span> 
+</h2>
+<span>var LocString = String(window.document.location.href);&nbsp;</span><br />
+<span>function getQueryStr(str) {&nbsp;</span><br />
+<span>var rs = new RegExp("(^|)" + str + "=([^&amp;]*)(&amp;|$)", "gi").exec(LocString), tmp;&nbsp;</span><br />
+<span>if (tmp = rs) {&nbsp;</span><br />
+<span>return tmp[2];&nbsp;</span><br />
+<span>}&nbsp;</span><br />
+<span>// parameter cannot be found&nbsp;</span><br />
+<span>return "";&nbsp;</span><br />
+<span>}&nbsp;</span><br />
+<br />
+<span>调用方法&nbsp;</span><br />
+<span>document.getElementById("user").value = getQueryStr("user");&nbsp;</span><br />
+<span>document.getElementById("password").value = getQueryStr("password");&nbsp;</span><br />
+<span>document.getElementById("sysno").value = getQueryStr("sysno");&nbsp;</span><br />
+<span></span><span></span> 
+<h2 id='例二：利用lit函数来按参数切成数组&b;'>
+	例二 ：利用split函数来按参数切成数组&nbsp;
+</h2>
+<span>&lt;script&gt;&nbsp;</span><br />
+<span>urlinfo=window.location.href; //获取当前页面的url&nbsp;</span><br />
+<span>len=urlinfo.length;//获取url的长度&nbsp;</span><br />
+<span>offset=urlinfo.indexOf("?");//设置参数字符串开始的位置&nbsp;</span><br />
+<span>newsidinfo=urlinfo.substr(offset,len)//取出参数字符串 这里会获得类似“id=1”这样的字符串&nbsp;</span><br />
+<span>newsids=newsidinfo.split("=");//对获得的参数字符串按照“=”进行分割&nbsp;</span><br />
+<span>newsid=newsids[1];//得到参数值&nbsp;</span><br />
+<span>alert("您要传递的参数值是"+newsid);&nbsp;</span><br />
+<p>
+	&lt;/script&gt;&nbsp;
+</p>
+<p>
+	不过一定要记得 这个方法只是针对含有参数的url有用 ，如果对方用了POST方法传递参数， url中是不会含有参数的所以这个技巧只对GET方法或者指定了参数的url有用哦&nbsp;
+</p>
+<p>
+	<br />
+</p>
+<div>
+	对于这样一个URL：http://www.iyaka.cn/index.html?ver=1.0&amp;id=6#imhere
+</div>
+<div>
+	<h2 id='我们可以用jvcrit获得URL的各个部分'>
+		我们可以用javascript获得URL的各个部分
+	</h2>
+1, window.location.href<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;整个URl字符串(在浏览器中就是完整的地址栏)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本例返回值:&nbsp;http://www.iyaka.cn/index.html?ver=1.0&amp;id=6#imhere
+	<p>
+		2,window.location.protocol<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;URL 的协议部分<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本例返回值:http:
+	</p>
+	<p>
+		3,window.location.host<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;URL 的主机部分<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本例返回值:www.iyaka.cn
+	</p>
+	<p>
+		4,window.location.port<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;URL 的端口部分<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果采用默认的80端口(update:即使添加了:80)，那么返回值并不是默认的80而是空字符<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本例返回值:""
+	</p>
+	<p>
+		5,window.location.pathname<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;URL 的路径部分(就是文件地址)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本例返回值:/fisker/post/0703/window.location.html
+	</p>
+	<p>
+		6,window.location.search<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;查询(参数)部分<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;除了给动态语言赋值以外，我们同样可以给静态页面,并使用javascript来获得相信应的参数值<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本例返回值:?ver=1.0&amp;id=6
+	</p>
+	<p>
+		7,window.location.hash<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;锚点<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本例返回值:#imhere
+	</p>
+</div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/680.html">form表单无刷新提交的另一方法(除基于ajax)</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/682.html">js的form表单提交url传参数(包含+等特殊字符)的两种解决方法</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#tyle="lie-height:1.5;"例一：tyle="lie-height:1.5;"利用正则表达式来获取&b;">tyle="lie-height:1.5;"例一：tyle="lie-height:1.5;"利用正则表达式来获取&b;</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#例二：利用lit函数来按参数切成数组&b;">例二：利用lit函数来按参数切成数组&b;</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#我们可以用jvcrit获得URL的各个部分">我们可以用jvcrit获得URL的各个部分</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

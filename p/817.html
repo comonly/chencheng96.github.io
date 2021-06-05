@@ -1,0 +1,460 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>【待处理】Android设置Selector不同状态下颜色及图片_comonly.cn</title>
+<meta name="keywords" content="【待处理】Android设置Selector不同状态下颜色及图片" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">【待处理】Android设置Selector不同状态下颜色及图片</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-01-10</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	android
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">Android之drawable state各个属性详解</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h4>
+	Selector常用状态：
+</h4>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; android:state_selected 控件选中状态，可以为true或false
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; android:state_focused 控件获得焦点状态，可以为true或false
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; android:state_pressed 控件点击状态，可以为true或false
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; android:state_enabled 控件使能状态，可以为true或false
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; android:state_checkable 控件可勾选状态，可以为true或false
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; android:state_checked 控件勾选状态，可以为true或false
+</p>
+<p>
+	&nbsp;
+</p>
+<h4>
+	设置不同状态下颜色：
+</h4>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; btn_enabled.xml
+</p>
+<p>
+	&lt;?xml version="1.0" encoding="utf-8"?&gt;<br />
+&lt;selector xmlns:android="http://schemas.android.com/apk/res/android"&gt;&nbsp;&nbsp;&nbsp;
+</p>
+<p>
+	&lt;!-- 默认 --&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;item android:state_enabled="true"&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;color android:color="#e25050" /&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/item&gt;<br />
+&nbsp;&lt;item android:state_enabled="false"&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;color android:color="#908e8e" /&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/item&gt;<br />
+&lt;/selector&gt;
+</p>
+<h4>
+	设置不同状态下图片：
+</h4>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;btn_pressed.xml
+</p>
+<p>
+	&lt;?xml version="1.0" encoding="utf-8"?&gt;<br />
+&lt;selector xmlns:android="http://schemas.android.com/apk/res/android"&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;item android:state_pressed="true" android:drawable="@drawable/btn_arrow_left_pressed" /&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;item android:state_window_focused="true" android:state_focused="true" android:drawable="@drawable/btn_arrow_left_pressed" /&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;item android:state_window_focused="false" android:state_focused="false" android:drawable="@drawable/btn_arrow_left_normal" /&gt;
+</p>
+<p>
+	&lt;/selector&gt;
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	我们在定义一个drawable的时候可以通过xml定义的drawable对象。它使得一个图片能在不同的状态下显示不同的图案，比如一个Button，它有pressed，focused，或者其它状态，通过使用state list drawable，你就可以为每种状态提供不同的图片。
+</p>
+<p>
+	先看一个范例：
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	XML file saved at&nbsp;res/drawable/button.xml:
+</p>
+<div>
+	&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;selectorxmlns:android="http://schemas.android.com/apk/res/android"&gt;&lt;itemandroid:state_pressed="true"android:state_enabled="true"android:state_window_focused="false"android:drawable="@drawable/button_pressed"/&gt;&lt;!--pressed,enable等多个属性--&gt;&lt;itemandroid:state_focused="true"android:drawable="@drawable/button_focused"/&gt;&lt;!--focused--&gt;&lt;itemandroid:state_hovered="true"android:drawable="@drawable/button_focused"/&gt;&lt;!--hovered--&gt;&lt;itemandroid:drawable="@drawable/button_normal"/&gt;&lt;!--default--&gt;&lt;/selector&gt;
+</div>
+<p>
+	his layout XML applies the state list drawable to a Button:
+</p>
+<div>
+	&lt;Buttonandroid:layout_height="wrap_content"android:layout_width="wrap_content"android:background="@drawable/button"/&gt;
+</div>
+<p>
+	ndroid:drawable&nbsp;放一个drawable资源<br />
+android:state_pressed 是否按下，如一个按钮触摸或者点击。<br />
+android:state_focused 是否取得焦点，比如用户选择了一个文本框。<br />
+android:state_hovered 光标是否悬停，通常与focused state相同，它是4.0的新特性<br />
+android:state_selected 被选中，它与focus state并不完全一样，如一个list view 被选中的时候，它里面的各个子组件可能通过方向键，被选中了。<br />
+android:state_checkable 组件是否能被check。如：RadioButton是可以被check的。<br />
+android:state_checked 被checked了，如：一个RadioButton可以被check了。<br />
+android:state_enabled 能够接受触摸或者点击事件<br />
+android:state_activated 被激活(例子)<br />
+android:state_window_focused 应用程序是否在前台，当有通知栏被拉下来或者一个对话框弹出的时候应用程序就不在前台了
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	注意:如果有多个item，那么程序将自动从上到下进行匹配，最先匹配的将得到应用。（不是通过最佳匹配）<br />
+如果一个item没有任何的状态说明，那么它将可以被任何一个状态匹配。
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	详细的请看官方的API，那里写的更详细~！http://developer.android.com/guide/topics/resources/drawable-resource.html#StateList
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<h1>
+	Android之代码设置selector
+</h1>
+<p>
+	以一个textView为例：
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	TextView tv = new TextView(UIUtils.getContext());<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; tv.setText(data);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; tv.setTextSize(16);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; tv.setTextColor(Color.WHITE);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; tv.setGravity(Gravity.CENTER);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; tv.setClickable(true);<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; int padding = DensityUtil.dip2px(UIUtils.getContext(), 6);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; tv.setPadding(padding, padding, padding, padding);<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; GradientDrawable normalDrawable = new GradientDrawable();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //状态选择器<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; StateListDrawable stateListDrawable = new StateListDrawable();<br />
+<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; normalDrawable.setColor(Color.RED);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; normalDrawable.setShape(GradientDrawable.RECTANGLE);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; normalDrawable.setCornerRadius(DensityUtil.dip2px(UIUtils.getContext(), 5));<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //按下时的drawable<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; GradientDrawable pressedDrawable = new GradientDrawable();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; pressedDrawable.setColor(Color.DKGRAY);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; pressedDrawable.setShape(GradientDrawable.RECTANGLE);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; pressedDrawable.setCornerRadius(DensityUtil.dip2px(UIUtils.getContext(), 5));<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //给状态选择器添加状态<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; stateListDrawable.addState(new int[]{android.R.attr.state_pressed},pressedDrawable);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; stateListDrawable.addState(new int[]{}, normalDrawable);<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; tv.setBackgroundDrawable(stateListDrawable);<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; tv.setOnClickListener(new View.OnClickListener() {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; @Override<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; public void onClick(View v) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Toast.makeText(UIUtils.getContext(), data, Toast.LENGTH_SHORT).show();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/816.html">【待处理】Android studio中怎么将方形按钮设置成圆角以及渐变效果</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/818.html">Android 文件的读取和写入及文件夹的操作</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="">
+							<h2 style="display:inline;color:#5BC648;"></h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-01-12&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span>评论测试：
+
+     stateListDrawable.addState(new int[]{}, normalDrawable);
+
+            tv.setBackgroundDrawable(stateListDrawable);
+
+            tv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(UIUtils.getContext(), data, Toast.LENGTH_SHORT).show();
+                }
+            });
+
+</span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="">
+							<h2 style="display:inline;color:#5BC648;"></h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-01-12&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	<span style="font-family:&quot;font-size:medium;">评论测试：</span>
+</p>
+<p>
+	<span style="font-family:&quot;font-size:medium;">&nbsp; &nbsp; stateListDrawable.addState(new int[]{}, normalDrawable);&nbsp;</span>
+</p>
+<p>
+	<span style="font-family:&quot;font-size:medium;">&nbsp; &nbsp;tv.setBackgroundDrawable(stateListDrawable);&nbsp;</span>
+</p>
+<p>
+	<span style="font-family:&quot;font-size:medium;">&nbsp; &nbsp; &nbsp; tv.setOnClickListener(new View.OnClickListener() { @Override public void onClick(View v)&nbsp;</span>
+</p>
+<p>
+	<span style="font-family:&quot;font-size:medium;">&nbsp; &nbsp; &nbsp;{ Toast.makeText(UIUtils.getContext(), data, Toast.LENGTH_SHORT).show(); } });&nbsp;</span>
+</p>
+<span style="font-family:&quot;font-size:medium;">&nbsp; &nbsp; 2018-01-12 09:00:34.0</span></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

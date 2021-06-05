@@ -1,0 +1,336 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>java web编码问题解决方案_comonly.cn</title>
+<meta name="keywords" content="java web编码问题解决方案" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">java web编码问题解决方案</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-04-21</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	javaweb---jsp asp数据库框架
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	对于web应用程序，和编码有关的设置或者函数如下。
+</p>
+<ol>
+	<li>
+		jsp编译：指定文件的存储编码，很明显，该设置应该置于文件的开头。
+	</li>
+	<li>
+		jsp输出：指定文件输出到browser是使用的编码，该设置也应该置于文件的开头。例如：设置response.setCharacterEncoding（"GBK"）;
+	</li>
+	<li>
+		meta设置：指定网页使用的编码，该设置对静态网页尤其有作用，因为静态网页无法采用jsp的设置。如果同时采用了jsp输出和meta设置两种编码指定方式，则jsp指定的优先。因为jsp指定的直接体现在response中。需要注意的是，apache有一个设置可以给无编码指定的网页指定编码，该指定等同于jsp的编码指定方式，所以会覆盖静态网页中的meta指定。所以有人建议关闭该设置。
+	</li>
+	<li>
+		form设置：当浏览器提交表单的时候，可以指定相应的编码。一般不必不使用该设置，浏览器会直接使用网页的编码。
+	</li>
+</ol>
+<p>
+	在JSP/Servlet中主要有以下几个地方可以设置编 码，pageEncoding="UTF-8"、contentType="text/html;charset=UTF-8"、request.setCharacterEncoding("UTF-8")和 response.setCharacterEncoding("UTF-8")，其中前两个只能用于JSP中，而后两个都可以用。
+</p>
+<p>
+	对于一个java web项目，只需要设置以下几个部分统一整个系统的编码方式，即可以解决编码问题。使用过滤器，对每个请求设置response.setCharacterEncoding("UTF-8")和request.setCharacterEncoding("UTF-8")；然后对每个jsp页面（包括include的jsp页面）设置&nbsp;pageEncoding="UTF-8"；最后在Tomcat的配置文件的Connector标签中设置useBodyEncodingForURI为true。
+</p>
+<h2 id='客户端到服务器的乱码（接受数据）'>
+	客户端到服务器的乱码（接受数据）
+</h2>
+<p>
+	对于接收数据，要分三种情况。一种是浏览器直接用URL提交的数据，另外两种是用表单的GET和POST方式提交的数据。因为各种WEB服务器对这三种方式的处理也不相同，所以我们以Tomcat6.0为例。
+</p>
+<h3>
+	客户端发送数据的编码
+</h3>
+<p>
+	浏览器在发送数据时，对URL的参数会进行URL编码，对参数中的中文，浏览器也是使response.setCharacterEncoding参数来进行URL编码的。以百度和 GOOGLE为例，如果你在百度中搜索"汉字"，百度会将其编码为"%BA%BA%D7%D6"。而在GOOGLE中搜索"汉字"，GOOGLE会将其编 码为"%E6%B1%89%E5%AD%97"，这是因为百度的response.setCharacterEncoding参数为GBK，而 GOOGLE的的response.setCharacterEncoding参数为UTF-8。浏览器在接收服务器数据和发送数据到服务器时所使用的编码是相同的，默认情况下均为JSP页面的response.setCharacterEncoding参数（或者contentType和 pageEncoding参数），我们称其为浏览器编码。当然，在IE中可以修改浏览器编码（在IE的菜单中选择"查看(V)"à"编码(D)"中修 改），但通常情况下，修改该参数会使原本正确的页面中出现乱码。一个有趣的例子是，在IE中浏览GOOGLE的主页时，将浏览器编码修改为"简体中文 （GB2312）"，此时，页面上的中文会变成乱码，不理它，在文本框中输入"汉字"，提交，GOOGLE会将其编码为"%BA%BA%D7%D6"，可见，浏览器在对中文进行URL编码时，使用的就是浏览器编码。
+</p>
+<h3>
+	服务器接收数据的编码
+</h3>
+<p>
+	不管是request乱码还是response乱码，其实都是由于客户端（浏览器）跟服务器端采用的编码格式不一致造成的。以request乱码为例：浏览器向服务器发送请求，因为浏览器与服务器之间的通信实质上是socket流，所以要先将请求参数（字符）转换成字节，也就是编码过程，服务器接收到请求参数后进行解码（字节转字符），然后封装到request对象中。如果客户端的编码与服务器端的解码不统一，就会导致通过request获取到的请求参数的值是乱码。
+</p>
+<ol>
+	<li>
+		对于表单中POST方式提交的数据，只要在接收数据的JSP中正确request.setCharacterEncoding参数，即将对客户端请求进行重新编码的编码设置成浏览器编码，就可以保证得到的参数编码正确。在默认请情况下，浏览器编码就是你在响应该请求的JSP页面中response.setCharacterEncoding设置的值。所以对于POST表单提交的数据，在获得数据的JSP页面中request.setCharacterEncoding要和生成提交该表单的JSP页面的 response.setCharacterEncoding设置成相同的值。
+	</li>
+	<li>
+		对于URL提交的数据和表单中GET方式提交的数据，在接收数据的JSP中设置request.setCharacterEncoding参数是不行的，因为在Tomcat6.0中，默认情况下使用ISO- 8859-1对URL提交的数据和表单中GET方式提交的数据进行重新编码（解码），而不使用该参数对URL提交的数据和表单中GET方式提交的数据进行重新编码（解码）。
+	</li>
+</ol>
+<ol>
+	<li>
+		解决POST方式提交的数据编码问题可以用request.setCharacterEncoding("UTF-8")的作用是设置对客户端请求进行重新编码的编码。该方法用来指定对浏览器发送来的数据进行重新编码（或者称为解码）时，使用的编码，该设置仅对POST方式提交的数据有效。
+	</li>
+	<li>
+		解决URL提交的数据和表单中GET方式提交的数据的编码问题，应该在Tomcat的配置文件的Connector标签中设置useBodyEncodingForURI或者 URIEncoding属性，其中useBodyEncodingForURI参数表示是否用request.setCharacterEncoding参数对URL提交的数据和表单中GET方式提交的数据进行重新编码，不同的页面可以有不同的重新编码（解码）的编码，在默认情况下，该参数为false（Tomcat4.0中该参数默认为 true）；URIEncoding参数指定对所有GET方式请求（包括URL提交的数据和表单中GET方式提交的数据）进行统一的重新编码（解码）的编码。
+	</li>
+</ol>
+<p>
+	对于上面两种方式可以统一通过硬编码[不常用] --重构字符串（注:不要与上面的配置一起使用）解决编码问题String newInfo = new String(info.getBytes("iso-8859-1"),"UTF-8");
+</p>
+<h2 id='服务器到客户端的乱码（发送数据）'>
+	服务器到客户端的乱码（发送数据）
+</h2>
+<p>
+	对于发送数据，服务器按照以下三个编码属性的数组对jsp——servlet——发送到客户端——客户端的显示的编码方式进行设置。
+</p>
+<ol>
+	<li>
+		response.setCharacterEncoding<span>("UTF-8")</span>（指定浏览器根据该参数将接收到数据解码的方式，同样也是服务器在将数据发送到浏览器前，对数据进行重新编码时，使用的编码）。
+	</li>
+	<li>
+		contentType<span>="text/html;charset=UTF-8"</span>（指定服务器发送给客户端数据的编码）。可以通过<span>response.setContentType("text/html;charset=UTF-8");进行设置。</span> 
+	</li>
+	<li>
+		pageEncoding<span>="UTF-8"</span>（JSP文件的本身编码，告诉JSP编译器在将JSP文件编译成Servlet时使用的编码）。默认编码为iso-8859-1英文编码。
+	</li>
+</ol>
+<p>
+	JSP要经过两次的“编码”发送到浏览器需要经过三个阶段，第一阶段会用pageEncoding，第二阶段会用utf-8至utf-8，第三阶段就是由Tomcat出来的网页， 用的是contentType。
+</p>
+<ul>
+	<li>
+		第一阶段是jsp编译成.java，它会根据pageEncoding的设定读取jsp，结果是由指定的编码方案翻译成统一的UTF-8 JAVA源码（即.java），如果pageEncoding设定错了，或没有设定，出来的就是中文乱码。
+	</li>
+	<li>
+		第二阶段是由JAVAC的JAVA源码至java byteCode的编译，不论JSP编写时候用的是什么编码方案，经过这个阶段的结果全部是UTF-8的encoding的java源码。JAVAC用UTF-8的encoding读取java源码，编译成UTF-8 encoding的二进制码（即.class），这是JVM对常数字串在二进制码（java encoding）内表达的规范。
+	</li>
+	<li>
+		第三阶段是Tomcat（或其的application container）载入和执行阶段二的来的JAVA二进制码，输出的结果，也就是在客户端见到的，这时隐藏在阶段一和阶段二的参数contentType就发挥了功效。
+	</li>
+</ul>
+<h3>
+	<span>pageEncoding</span> 
+</h3>
+<p>
+	jsp文件不像.java，.java在被编译器读入的时候默认采用的是操作系统所设定的locale所对应的编码，比如中国大陆就是GBK，台湾就是BIG5或者MS950。而一般我们不管是在记事本还是在ue中写代码，如果没有经过特别转码的话，写出来的都是本地编码格式的内容。所以编译器采用的方法刚好可以让虚拟机得到正确的资料。但是jsp文件不是这样，它没有这个默认转码过程，但是指定了pageEncoding就可以实现正确转码了。
+</p>
+<p>
+	pageEncoding是jsp文件本身的编码，预设是 ISO8859-1如果用其他编码，在每个jsp页面（包括include的页面）都需要进行设置。在myeclipse进行开发中该参数需要和jsp文件的编码方式一致。
+</p>
+<p>
+	在jsp的第一行加上&lt;%@ page pageEncoding="UTF-8"%&gt;指定pageEncoding编码方式。
+</p>
+<h3>
+	<span><span>contentType设置</span>charset</span> 
+</h3>
+<p>
+	&lt;%@ page contentType="text/html;charset=UTF-8"%&gt;或response.setContentType("text/html;charset=UTF-8"); 后者会覆盖response.setCharacterEncoding("utf-8”);
+</p>
+<p>
+	contentType的charset是指服务器发送给客户端时的内容编码。在不使用response.setCharacterEncoding方法时，用该参数指定对服务器响应进行重新编码的编码。
+</p>
+<h3>
+	<span>response.setCharacterEncoding("UTF-8")</span> 
+</h3>
+<p>
+	response乱码指的是：服务器向浏览器发送的数据包含中文字符，浏览器中显示的是乱码；服务器发给浏览器的数据默认是按照ISO-8859-1编码，浏览器接收到数据后按照默认的字符集进行解码后显示，如果浏览器的默认解码字符集不是ISO-8859-1，就出现乱码。对于response乱码，只需要在服务器端指定一个编码字符集，然后通知浏览器按照这个字符集进行解码就可以了。有三种方式：
+</p>
+<ul>
+	<li>
+		response.setCharacterEncoding("utf-8”);作用是指定对服务器响应进行重新编码的编码。服务器在将数据发送到浏览器前，对数据进行重新编码时，使用的就是该编码。所以在无论你在 JSP中设置response.setCharacterEncoding("UTF-8")或者 response.setCharacterEncoding("GBK")，浏览器均能正确显示中文（前提是你发送到浏览器的数据编码是正确的，比如正确设置了pageEncoding参数等）。比如，在JSP中设置response.setCharacterEncoding("UTF- 8")，在IE中显示该页面时，在IE的菜单中选择"查看(V)"à"编码(D)"中可以查看到是" Unicode（UTF-8）"，而在在JSP中设置response.setCharacterEncoding("GBK")，在IE中显示该页面时，在IE的菜单中选择"查看(V)"à"编码(D)"中可以查看到是"简体中文（GB2312）"。
+	</li>
+	<li>
+		response.setHeader("contentType", "text/html; charset=utf-8”);通知浏览器服务器发送的数据格式。等同于response.setContentType("text/html;charset=utf-8”);
+	</li>
+</ul></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/921.html">数据库语法</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/923.html">java的4个作用域变量四大域</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#客户端到服务器的乱码（接受数据）">客户端到服务器的乱码（接受数据）</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#服务器到客户端的乱码（发送数据）">服务器到客户端的乱码（发送数据）</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

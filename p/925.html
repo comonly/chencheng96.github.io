@@ -1,0 +1,270 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>java servlet, jsp, js几种页面跳转的方法及传值_comonly.cn</title>
+<meta name="keywords" content="java servlet, jsp, js几种页面跳转的方法及传值" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">java servlet, jsp, js几种页面跳转的方法及传值</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-04-21</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	javaweb---jsp asp数据库框架
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='Servlet设置跳转'>
+	Servlet设置跳转
+</h2>
+<h3>
+	response.sendRedirect("url");（客户端作的重定向）
+</h3>
+<p>
+	sendRedirect可以将页面跳转到任何页面，不一定局限于本web应用中，如：response.sendRedirect("http://www.baidu.net");
+</p>
+<p>
+	跳转后浏览器地址栏变化。这种方式要传值出去的话，只能在url中带parameter或者放在session中，无法使用request.setAttribute来传递。
+</p>
+<p>
+	该方法通过修改HTTP协议的Header部分，对浏览器下达重定向指令，让浏览器对在location中指定的URL提出请求，使浏览器重定向网页的内容。该方法可以接受绝对的或者相对的URL。如果传递到该方法的参数是一个相对的URL，那么web container在将它发送到客户端前会把它转换成一个绝对的URL。
+</p>
+在使用response.sendRedirect时，前面不能有HTML被送到浏览器。事实上现在的server都有cache机制，一般在8k（jsp server），这意味着除非关闭cache，或者使用了out.flush()强制刷新，那么在使用sendRedirect之前，可以允许有少量HTML输出。。在response.sendRedirect()之后应该紧跟一句return;因为转向后的输出可能导致转向失败。<br />
+<h3>
+	request.getRequestDispatcher("this application url").forward(request, response); （服务器端作的重定向）
+</h3>
+RequestDispatcher dispatcher = request.getRequestDispatcher("/a.jsp"); dispatcher .forward(request, response);<br />
+<p>
+	页面的路径是相对路径。forward方式只能跳转到本web应用中的页面上。跳转后浏览器地址栏不会变化。使用这种方式跳转，传值可以使用三种方法：url中带parameter，session，request.setAttribute。
+</p>
+服务器往client发送数据的过程为：服务器在向客户端发送数据之前，是先将数据输出到缓冲区，然后将缓冲区中数据发送给client端。缓冲区中数据发送给client端的时机：<br />
+<ol>
+	<li>
+		当对来自client的request处理完，并把所有数据输出到缓冲区。
+	</li>
+	<li>
+		当缓冲区已满。
+	</li>
+	<li>
+		在程序中调用缓冲区的输出方法out.flush()或response.flushbuffer(),web container才将缓冲区中的数据发送给client。
+	</li>
+</ol>
+这种重定向方式是利用服务器端的缓冲区机制，在把缓冲区的数据发送到客户端之前，原来的数据不发送，将执行转向重定向页面，发送重定向页面的数据，重定向调用页的数据将被清除。（如果在forward之前有很多输出，前面的输出已使缓冲区满，将自动输出到客户端，那么这种重定向方式将不起作用）<br />
+<h2 id='JSP设置跳转'>
+	JSP设置跳转
+</h2>
+<h3>
+	response.sendRedirect("url");
+</h3>
+<p>
+	和servlet的response.sendRedirect()方式一样。此语句前不允许有out.flush()，如果有，会有异常：java.lang.IllegalStateException: Can't sendRedirect() after data has committed to the client.
+</p>
+跳转后浏览器地址栏变化。如果要跳到不同主机下，跳转后，此语句后面的语句会继续执行，如同新开了线程，但是对response的操作已经无意义了；如果要跳到相同主机下，此语句后面的语句执行完成后才会跳转；<br />
+<h3>
+	response.setHeader("Refresh","等待的秒数；url=绝对路径或者相对路径");
+</h3>
+此语句前不允许有out.flush()，如果有，页面不会跳转。<br />
+跳转后浏览器地址栏变化。此语句后面的语句执行完成后才会跳转。
+<h2 id='J跳转页面'>
+	Js跳转页面
+</h2>
+<p>
+	直接跳转&lt;script&gt;window.location.href='http://www.baidu.com';&lt;/script&gt;
+</p>
+<p>
+	指定自身跳转的页面top.location='xx.aspx';
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/924.html">页面分块的设计思想（使用include标签导入公用页面部分及域变量的使用策略）</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/926.html">Java Web会话机制——Cookie和Session</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Servlet设置跳转">Servlet设置跳转</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#JSP设置跳转">JSP设置跳转</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#J跳转页面">J跳转页面</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

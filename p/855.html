@@ -1,0 +1,776 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>C对文件的输入输出_comonly.cn</title>
+<meta name="keywords" content="C对文件的输入输出" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">C对文件的输入输出</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-02-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	c c++
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='打开与关闭文件'>
+	打开与关闭文件
+</h2>
+<p>
+	FILE *fp;&nbsp; &nbsp; //定义指向文件型数据的指针变量
+</p>
+<p>
+	fopen(文件名，使用文件的方式);&nbsp; &nbsp; //返回值是一个文件指针，打开失败返回空指针NULL。
+</p>
+<p>
+	fclose(文件指针);&nbsp; &nbsp; //关闭数据文件。成功返回0，失败返回EOF(-1)
+</p>
+<h4>
+	使用文件的方式
+</h4>
+<p>
+	<table style="width:100%;" cellpadding="1" cellspacing="0" border="1" bordercolor="#000000">
+		<tbody>
+			<tr>
+				<td>
+					文件使用方式
+				</td>
+				<td>
+					含义
+				</td>
+				<td>
+					如果文件不存在
+				</td>
+			</tr>
+			<tr>
+				<td>
+					“r”（只读）
+				</td>
+				<td>
+					为输入数据,打开一个已经存在的文件
+				</td>
+				<td>
+					出错
+				</td>
+			</tr>
+			<tr>
+				<td>
+					“w”（只写）
+				</td>
+				<td>
+					为输出数据,打开一个文本文件
+				</td>
+				<td>
+					建立新文件。若存在原文件，删除后在建立
+				</td>
+			</tr>
+			<tr>
+				<td>
+					“a”（追加）
+				</td>
+				<td>
+					向文本文件尾添加数据，文件打开后文件读写位置标记移动到文件末尾
+				</td>
+				<td>
+					出错
+				</td>
+			</tr>
+			<tr>
+				<td>
+					“rb”（只读）
+				</td>
+				<td>
+					为输入数据,打开一个二进制文件
+				</td>
+				<td>
+					出错
+				</td>
+			</tr>
+			<tr>
+				<td>
+					“wb”（只写）
+				</td>
+				<td>
+					为输出数据,打开一个二进制文件
+				</td>
+				<td>
+					建立新文件
+				</td>
+			</tr>
+			<tr>
+				<td>
+					“ab”（追加）
+				</td>
+				<td>
+					向二进制文件尾添加数据
+				</td>
+				<td>
+					出错
+				</td>
+			</tr>
+			<tr>
+				<td>
+					“r+”（读写）
+				</td>
+				<td>
+					为了读和写,打开一个文本文件
+				</td>
+				<td>
+					出错
+				</td>
+			</tr>
+			<tr>
+				<td>
+					“w+”（读写）
+				</td>
+				<td>
+					为了读和写,建立一个新的文本文件
+				</td>
+				<td>
+					建立新文件
+				</td>
+			</tr>
+			<tr>
+				<td>
+					“a+”（读写）
+				</td>
+				<td>
+					为了读和写,打开一个文本文件
+				</td>
+				<td>
+					出错
+				</td>
+			</tr>
+			<tr>
+				<td>
+					“rb+”（读写）
+				</td>
+				<td>
+					为了读和写，打开一个二进制文件
+				</td>
+				<td>
+					出错
+				</td>
+			</tr>
+			<tr>
+				<td>
+					“wb+”（读写）
+				</td>
+				<td>
+					为了读和写，建立一个新的二进制文件
+				</td>
+				<td>
+					建立新文件
+				</td>
+			</tr>
+			<tr>
+				<td>
+					“ab+”（读写）
+				</td>
+				<td>
+					为了读写,打开一个二进制文件
+				</td>
+				<td>
+					出错
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</p>
+<h2 id='读写文件'>
+	读写文件
+</h2>
+<h4>
+	向文件读写字符
+</h4>
+<p>
+	<table style="width:100%;" cellpadding="1" cellspacing="0" border="1" bordercolor="#000000">
+		<tbody>
+			<tr>
+				<td>
+					函数名
+				</td>
+				<td>
+					调用形式
+				</td>
+				<td>
+					功能
+				</td>
+				<td>
+					返回值
+				</td>
+			</tr>
+			<tr>
+				<td>
+					fgetc
+				</td>
+				<td>
+					fgetc(fp)
+				</td>
+				<td>
+					从fp指向的文件读取一个字符
+				</td>
+				<td>
+					成功返回所读的字符，失败返回文件结束符EOF（-1）
+				</td>
+			</tr>
+			<tr>
+				<td>
+					fputc
+				</td>
+				<td>
+					fputc(ch,fp)
+				</td>
+				<td>
+					把字符ch写到文件指针变量fp所指向的文件中
+				</td>
+				<td>
+					成功返回输出的字符串，失败返回EOF（-1）
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</p>
+<ul>
+	<li>
+		exit(0);&nbsp; &nbsp; //终止程序。使用应包含 stdlib.h 头文件
+	</li>
+	<li>
+		feof(fp);&nbsp; &nbsp; //检查文件的读写位置标记是否移到了文件的末尾。是返回1，否则返回0。
+	</li>
+</ul>
+<h4>
+	向文件读写字符串
+</h4>
+<p>
+	<table style="width:100%;" cellpadding="1" cellspacing="0" border="1" bordercolor="#000000">
+		<tbody>
+			<tr>
+				<td>
+					函数名
+				</td>
+				<td>
+					调用形式
+				</td>
+				<td>
+					功能
+				</td>
+				<td>
+					返回值
+				</td>
+			</tr>
+			<tr>
+				<td>
+					fgets
+				</td>
+				<td>
+					fgets(str, n, fp)
+				</td>
+				<td>
+					从fp指向的文件读入一个长度为（n-1）的字符串，最后加一个'\0'字符，存放到字符数组str中
+				</td>
+				<td>
+					成功返回str地址，失败返回NULL
+				</td>
+			</tr>
+			<tr>
+				<td>
+					fputs
+				</td>
+				<td>
+					fputs(str, fp )
+				</td>
+				<td>
+					把str所指向的字符串写到文件指针变量fp所指向的文件中，字符串末尾的'\0'不输出
+				</td>
+				<td>
+					成功返回0，否则返回非0值（EOF）
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</p>
+<p>
+	<br />
+</p>
+<pre class="prettyprint lang-cpp">#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+void main()
+{
+	FILE *in,*out;
+	char ch;
+	char str[5];
+	if((in=fopen("in.dat","r"))==NULL)
+	{
+		printf("无法打开文件\n");
+		exit(0);
+	}
+	if((out=fopen("out.dat","w"))==NULL)
+	{
+		printf("无法打开文件\n");
+		exit(0);
+	}
+	while(!feof(in))
+	{
+		ch=fgetc(in);	//逐个字符进行处理
+		fputc(ch,out);
+		putchar(ch);
+	}
+	rewind(in);
+	fgets(str,7,in);	//从in读7个字符给字符串str
+	fputs(str,out);		//通过字符串进行输入输出
+	putchar(10);	//输出换行符
+	puts(str);
+	putchar(10);
+	fclose(in);
+	fclose(out);
+}</pre>
+<p>
+	<br />
+</p>
+<h4>
+	格式方式读写文件
+</h4>
+<p>
+	类似于scanf和printf函数，格式化读写文件：
+</p>
+<ul>
+	<li>
+		fprintf(文件指针，格式化字符串，输出表列);
+	</li>
+	<li>
+		fscanf(文件指针，格式化字符串，输入表列);&nbsp;&nbsp;&nbsp;&nbsp;fscanf(fp, "%d,%f",&amp;i,&amp;j);&nbsp;&nbsp;&nbsp;&nbsp;//若磁盘文件为：2,4.5则把2赋值给i，4.5赋值给j
+	</li>
+</ul>
+<h4>
+	二进制方式向文件读写数据
+</h4>
+<p>
+	可以向文件中输入或输出一个数据块（数组或结构体），打开文件一般用二进制形式。执行成功返回输入输出数据项的个数
+</p>
+<ul>
+	<li>
+		fread(buffer, size, count, fp);&nbsp; &nbsp; //buffer是一个地址，存放从文件读入数据的存储区的地址
+	</li>
+	<li>
+		fwrite(buffer, size, count, fp);&nbsp; &nbsp; //把从buffer地址开始的存储区的数据向文件输出
+	</li>
+</ul>
+<ul>
+	<ul>
+		<li>
+			size：要读写的字节数
+		</li>
+		<li>
+			count：读写多少个数据项，每个数据项长度为size
+		</li>
+		<li>
+			fp：FILE类型指针
+		</li>
+	</ul>
+</ul>
+<h4>
+	随机读写文件
+</h4>
+<p>
+	文件位置标记，用来指示接下来要读写的下一个字符的位置。
+</p>
+<ul>
+	<li>
+		rewind(fp)函数使文件位置标记指向文件开头。
+	</li>
+	<li>
+		ftell(fp)函数测定文件位置标记的当前位置。返回文件的当前位置
+	</li>
+	<li>
+		fseek(文件类型指针，位移量，起始点)&nbsp; &nbsp; //改变文件位置标记。一般用于二进制文件
+	</li>
+	<ul>
+		<li>
+			位移量指以起始点为基点向前移动的字节数。位移量应是long型数据（在数字的末尾加上L，就是long型）
+		</li>
+		<li>
+			起始点用，0，1，2分别代替文件开始位置，当前位置，文件末尾位置。
+		</li>
+	</ul>
+</ul>
+<pre class="prettyprint lang-cpp">//二进制方式读写文件
+#include&lt;stdio.h&gt;
+#define SIZE 3
+struct Student_type {
+	char name[10];
+	int num;
+	int age;
+}stud[SIZE],stud_read[SIZE],stud_one;
+void save()
+{
+	FILE *fp;
+	int i;
+	if((fp=fopen("stu.dat","wb"))==NULL)
+	{
+		printf("can't open file\n");
+		return;
+	}
+	for(i=0;i&lt;SIZE;i++)
+		if(fwrite(&amp;stud[i],sizeof(struct Student_type),1,fp)!=1)
+			printf("file write error");
+	fclose(fp);
+}
+void read()
+{
+	FILE *fp;
+	int i;
+	if((fp=fopen("stu.dat","rb"))==NULL)
+	{
+		printf("can't open file\n");
+		return;
+	}
+	printf("the file saves:\n");
+	for(i=0;i&lt;SIZE;i++)
+		if(fread(&amp;stud_read[i],sizeof(struct Student_type),1,fp)!=1)
+			printf("file read error");
+	fclose(fp);
+	for(i=0;i&lt;SIZE;i++)
+		printf("%s %d %d\n",stud_read[i].name,stud_read[i].num,stud_read[i].age);
+}
+void get2nd()
+{	
+	FILE *fp;
+	printf("第二组信息");
+	if((fp=fopen("stu.dat","rb"))==NULL)
+	{
+		printf("can't open file\n");
+		return;
+	}
+	fseek(fp,sizeof(struct Student_type),0);	//移动文件标记
+	if(fread(&amp;stud_one,sizeof(struct Student_type),1,fp)!=1)
+		printf("file read error");
+	fclose(fp);
+	printf("%s %d %d\n",stud_one.name,stud_one.num,stud_one.age);
+}
+int main()
+{
+	int i;
+	printf("please input the data of students:\n");
+	for(i=0;i&lt;SIZE;i++)
+		scanf("%s%d%d",stud[i].name,&amp;stud[i].num,&amp;stud[i].age);
+	//stud[i].name本来就是一个数组，所以不用&amp;
+	save();
+	read();
+	get2nd();
+	return 0;
+}</pre>
+<h4>
+	文件读写出错检测
+</h4>
+<p>
+	ferror(fp);&nbsp; &nbsp; //调用各种输入输出函数时出现错误，则ferror函数返回值为0，表示未出错。否则表示出错。对同一文件每次输入输出都会产生一个新的ferror函数值
+</p>
+<p>
+	clearerr(fp);&nbsp; &nbsp; //使文件错误标志和文件结束标志置为0。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/854.html">C用户自己建立的数据类型（结构体）</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/856.html">Python数据类型</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="">
+							<h2 style="display:inline;color:#5BC648;"></h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-03-16&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><h2>
+	建文件夹
+</h2>
+<p>
+	int _mkdir(const char *path,mode_t mode);
+</p>
+<ul>
+	<li>
+		函数名: _mkdir
+	</li>
+	<li>
+		功 能: 建立一个目录
+	</li>
+	<li>
+		用 法: int _mkdir( const char *dirname );
+	</li>
+	<li>
+		头文件库：direct.h
+	</li>
+	<li>
+		返回值：创建一个目录，若成功则返回0，否则返回-1
+	</li>
+</ul>
+<h2>
+	C语言判断文件夹或者文件是否存在的方法
+</h2>
+<h4>
+	方法一：access函数判断文件夹或者文件是否存在
+</h4>
+函数原型： int access(const char *filename, int mode);<br />
+所属头文件：io.h<br />
+filename：可以填写文件夹路径或者文件路径<br />
+mode：0 （F_OK） 只判断是否存在<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2 （R_OK） 判断写入权限<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;4 （W_OK） 判断读取权限<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;6 （X_OK） 判断执行权限<br />
+用于判断文件夹是否存在的时候，mode取0，判断文件是否存在的时候，mode可以取0、2、4、6。 若存在或者具有权限，返回值为0；不存在或者无权限，返回值为-1。<br />
+错误代码<br />
+<ul>
+	<li>
+		EACCESS 参数pathname 所指定的文件不符合所要求测试的权限。
+	</li>
+	<li>
+		EROFS 欲测试写入权限的文件存在于只读文件系统内。
+	</li>
+	<li>
+		EFAULT 参数pathname指针超出可存取内存空间。
+	</li>
+	<li>
+		EINVAL 参数mode 不正确。
+	</li>
+	<li>
+		ENAMETOOLONG 参数pathname太长。
+	</li>
+	<li>
+		ENOTDIR 参数pathname为一目录。
+	</li>
+	<li>
+		ENOMEM 核心内存不足
+	</li>
+	<li>
+		ELOOP 参数pathname有过多符号连接问题。
+	</li>
+	<li>
+		EIO I/O 存取错误。
+	</li>
+</ul>
+特别提醒：使用access()作用户认证方面的判断要特别小心，例如在access()后再做open()的空文件可能会造成系统安全上的问题。<br />
+<br />
+实例：<br />
+<pre class="prettyprint lang-cpp">#include &lt;stdio.h&gt;
+#include &lt;io.h&gt;
+int main(void)
+{
+    if ( !access("C://windows",0) )
+         puts("C://windows EXISITS!");
+    else
+         puts("C://windows DOESN'T EXISIT!");
+    return 0;
+}</pre>
+<h4>
+	方法二：fopen函数判断文件是否存在
+</h4>
+函数原型：FILE *fopen (char *filename, char *type);<br />
+<ul>
+	<li>
+		filename：文件路径
+	</li>
+	<li>
+		type：打开文件的方式（有r、w、r+、w+、a、rb、wb等等）
+	</li>
+</ul>
+用于判断文件是否存在可以使用 r 或者 rb ，因为使用 其它方式的话，可能会自动建立文件。 返回值为NULL（打不开）和正数（能打开）。<br />
+特别提醒：用这种方法做出的判断是不完全正确的，因为有的文件存在，但是可能不可读。</span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#打开与关闭文件">打开与关闭文件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#读写文件">读写文件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

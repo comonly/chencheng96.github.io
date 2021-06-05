@@ -1,0 +1,310 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>为什么未初始化数据段不储存在磁盘中_comonly.cn</title>
+<meta name="keywords" content="为什么未初始化数据段不储存在磁盘中" />
+<meta name="description" content="引言
+
+
+	第一次接触到这个问题是在刚刚接触进程时 看到这条概念不禁非常迷惑　虽然当时查了些资料有了一些了解　但还是马马虎虎，知道学习了操作系统才对这条概念有了更深的认识　遂记录一篇博客
+
+
+	我们知道我们所写的代码在进过编译器和汇编器以后已经成了一个二进制文件，术语叫做可重定位目标文件ELF(Executable and Linkable Format)，它的组成包括一个ELF头与很多的节
+
+
+	 
+
+
+	像图片中的　.text , .data, ,rodata 等其实都是节&n" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">为什么未初始化数据段不储存在磁盘中</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">一个划水的人</li>
+          <li class="lmname"><a href="https://blog.csdn.net/weixin_43705457/article/details/99975913" target="_blank">https://blog.csdn.net/weixin_43705457/article/details/99975913</a></li>
+          <li class="timer">2020-10-03</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>引言
+
+
+	第一次接触到这个问题是在刚刚接触进程时 看到这条概念不禁非常迷惑　虽然当时查了些资料有了一些了解　但还是马马虎虎，知道学习了操作系统才对这条概念有了更深的认识　遂记录一篇博客
+
+
+	我们知道我们所写的代码在进过编译器和汇编器以后已经成了一个二进制文件，术语叫做可重定位目标文件ELF(Executable and Linkable Format)，它的组成包括一个ELF头与很多的节
+
+
+	 
+
+
+	像图片中的　.text , .data, ,rodata 等其实都是节&n</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h1>
+	引言
+</h1>
+<p>
+	第一次接触到这个问题是在刚刚接触进程时 看到这条概念不禁非常迷惑　虽然当时查了些资料有了一些了解　但还是马马虎虎，知道学习了操作系统才对这条概念有了更深的认识　遂记录一篇博客
+</p>
+<p>
+	我们知道我们所写的代码在进过编译器和汇编器以后已经成了一个二进制文件，术语叫做可重定位目标文件ELF(Executable and Linkable Format)，它的组成包括一个ELF头与很多的节
+</p>
+<p>
+	<img src="https://img-blog.csdnimg.cn/20190821170522517.png" alt="在这里插入图片描述" /> 
+</p>
+<p>
+	像图片中的　.text , .data, ,rodata 等其实都是节&nbsp;(section)&nbsp;，节在我的理解其实就是一些不同数据的集合，它们的信息被储存在文件最开始的ELF头的位置　如果你想动手试试　可以对一个文本文件(C程序)执行以下操作来查看ELF头　已加深理解
+</p>
+gcc-E test.c-o test.i
+gcc-S test.i-o test.s
+gcc-c test.s-o test.o
+objdump-h test.o
+<ul>
+	<li>
+		1
+	</li>
+	<li>
+		2
+	</li>
+	<li>
+		3
+	</li>
+	<li>
+		4
+	</li>
+</ul>
+<p>
+	<img src="https://img-blog.csdnimg.cn/20190821172014874.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzcwNTQ1Nw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /><br />
+为什么要解释何为节呢　因为我们问题的答案就藏在bss节，其实刚开始学习这一块的内容时很容易可以查到　data 与　bss 的用处
+</p>
+<ul>
+	<li>
+		bss&nbsp;未初始化的全局变量和静态变量以及初始化为零的全局变量和静态变量
+	</li>
+	<li>
+		data&nbsp;已初始化且不为零的全局变量与静态变量
+	</li>
+</ul>
+<p>
+	我们可以发现两者之间唯一的区别就是值是否为零(未初始化的全局变量和未初始化的静态变量值均为零)　这就有点意思了，为什么这么小的区别却要如此大费精力的把它们分成两个节呢?<br />
+原因是因为内存初始化的时候bss段映射的是匿名文件　其内容为填充的二进制零　也就是说其本身没有值　但data段映射的则是数据文件　其本身是有值的　所以为了节省内存(划重点)，我们不对bss段进行储存　这就是问题的答案
+</p>
+<p>
+	但有一个问题来了　就是不存储怎么知道有这么一个变量呢　这就引入了一个　“符号”　的概念　所有的全局变量　静态变量(包括函数)其都可以看做一个符号　在汇编后产生一个符号表(参数加上-g则还有一张调试符号表　想想gdb的过程)　所有的非局部变量都在其中站一个符号位　(所以说还是存储的)　在链接阶段进行符号解析和重定位　把每一个符号与运行时地址相对应　这其中并不涉及对内存的映射　在可执行文件期间才进行，也就是需要值的时候在可执行文件执行期间才需要　而我们已经把没有存储的值放入bss 在映射期间为匿名文件　这样当然在程序执行阶段就可以顺利的进行了　至此　我们的问题算是彻底解决了
+</p>
+<p>
+	可以再打印一个ELF头来加深印象<br />
+<img src="https://img-blog.csdnimg.cn/20190822113911714.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzcwNTQ1Nw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /><br />
+我们可以看到第二个Load中filesize段　也就是可执行文件中段的大小　十六进制表示为0x288 而在内存映像中却是0x298 这就又印证了bss段在目标文件中不分配存储空间
+</p>
+<p>
+	再提一个比较有意思的东西　bss段的由来是什么呢　其实最准确的应该是Block Storage Start（块存储开始），但这样你可能会更方便记忆Best Save Space<br />
+毕竟名字是方便人的嘛
+</p>
+<p>
+	参考资料:
+</p>
+<ul>
+	<li>
+		Computer Systems:A Programmer’s Perspective
+	</li>
+	<li>
+		Linux C 编程实战
+	</li>
+</ul></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1797.html">构造函数为什么不能是虚函数</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1799.html">位域字节对齐</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/weixin_43705457/article/details/99975913" target="_blank">https://blog.csdn.net/weixin_43705457/article/details/99975913</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

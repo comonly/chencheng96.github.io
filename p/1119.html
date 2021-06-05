@@ -1,0 +1,466 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>计算机网络tcp和udp流量控制_comonly.cn</title>
+<meta name="keywords" content="计算机网络tcp和udp流量控制" />
+<meta name="description" content="拥塞控制和流量控制的差别：
+
+
+
+	拥塞问题是一个全局性的问题,涉及到所有的主机、所有的路由器、以及与降低网络传输性能有关的所有因素。流量控制往往指的是点对点通信量的控制，是个端到端的问题。
+
+
+	流量控制所要做的就是控制发送端发送数据的速率，以便使接收端来得及接受。拥塞控制控制的是注入网络中的数据量。
+
+
+	流量窗口是接收方控制的，拥塞窗口是发送方控制的
+
+	
+TCP流量控制
+		
+所谓的流量控制就是接收方让发送方的发送速率不要太快，让接收方来得及接受。利用滑动窗口机制可以" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">计算机网络tcp和udp流量控制</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-10-13</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	计算机基础-网络等
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>拥塞控制和流量控制的差别：
+
+
+
+	拥塞问题是一个全局性的问题,涉及到所有的主机、所有的路由器、以及与降低网络传输性能有关的所有因素。流量控制往往指的是点对点通信量的控制，是个端到端的问题。
+
+
+	流量控制所要做的就是控制发送端发送数据的速率，以便使接收端来得及接受。拥塞控制控制的是注入网络中的数据量。
+
+
+	流量窗口是接收方控制的，拥塞窗口是发送方控制的
+
+	
+TCP流量控制
+		
+所谓的流量控制就是接收方让发送方的发送速率不要太快，让接收方来得及接受。利用滑动窗口机制可以</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p background-color:#ffffff;"="" style="white-space: normal;"><br />
+	</p>
+<p background-color:#ffffff;"="" style="white-space: normal;">拥塞控制和流量控制的差别：
+</p>
+<ul background-color:#ffffff;"="" style="white-space: normal;">
+<li>
+	拥塞问题是一个全局性的问题,涉及到所有的主机、所有的路由器、以及与降低网络传输性能有关的所有因素。流量控制往往指的是点对点通信量的控制，是个端到端的问题。
+</li>
+<li>
+	流量控制所要做的就是控制发送端发送数据的速率，以便使接收端来得及接受。拥塞控制控制的是注入网络中的数据量。
+</li>
+<li>
+	流量窗口是接收方控制的，拥塞窗口是发送方控制的
+</li>
+	</ul>
+<p background-color:#ffffff;"="" style="white-space: normal;">TCP流量控制
+		</p>
+<p background-color:#ffffff;"="" style="white-space: normal;">所谓的流量控制就是接收方让发送方的发送速率不要太快，让接收方来得及接受。利用滑动窗口机制可以很方便的在TCP连接上实现对发送方的流量控制。TCP的窗口单位是字节，不是报文段，发送方的发送窗口不能超过接收方给出的接收窗口的数值。
+	</p>
+<p background-color:#ffffff;"="" style="white-space: normal;"><img src="http://5b0988e595225.cdn.sohucs.com/images/20190107/c9b8181902d2406188c5f82a071ac36c.jpeg" style="height:auto;" /> 
+		</p>
+<p background-color:#ffffff;"="" style="white-space: normal;">假设主机A向主机B发送数据。双方确定的窗口值是400.再设每一个报文段为100字节长，序号的初始值为seq=1,图中的箭头上面大写ACK，表示首部中的却认为为ACK，小写ack表示确认字段的值。
+	</p>
+<p background-color:#ffffff;"="" style="white-space: normal;"><img src="http://5b0988e595225.cdn.sohucs.com/images/20190107/47915340024e44bf99e071a65d7f5032.jpeg" style="height:auto;" /> 
+		</p>
+<p background-color:#ffffff;"="" style="white-space: normal;">下面这张接收窗口(rwnd)图和上面的数据不是对应的，但是能说明窗口大小调整的过程，可以自己将下面的图进行修改，用上面的数据分析：
+	</p>
+<ol background-color:#ffffff;"="" style="white-space: normal;">
+	<li>
+		刚开始的窗口值为400字节，每段报文100字节，经过发送2次请求后，此时已发送但未被确认的报文seq=201为100字节，主机B向主机A发送接收情况并调整窗口大小为300字节。
+	</li>
+	<li>
+		主机A向主机B发送301-500，并且重发201-300，主机B向主机A发送接收情况，并调整窗口大小为100字节
+	</li>
+	<li>
+		主机A向主机B发送501-600,主机B向主机A发送接收情况，并且调整窗口大小为0，让A暂停发送
+	</li>
+		</ol>
+<p background-color:#ffffff;"="" style="white-space: normal;">假设B向A发送了rwnd=0的报文段后不久，B的接收缓存又有了一些存储空间。于是B向A发送了rwind=400的报文段，然而这个报文段在传送中丢失了。A一直等待收到B发送的非零窗口的通知，而B也一直等待A发送的数据。这样就死锁了。为了解决这种死锁状态，TCP为每个连接设有一个持续计时器。只要TCP连接的一方收到对方的零窗口通知，就启动持续计时器，若持续计时器设置的时间到期，就发送一个零窗口探测报文段（仅携带1字节的数据），而对方就在确认这个探测报文段时给出了现在的窗口值。
+			</p>
+<p background-color:#ffffff;"="" style="white-space: normal;">TCP拥塞控制
+		</p>
+<p background-color:#ffffff;"="" style="white-space: normal;">拥塞控制原理
+			</p>
+<p background-color:#ffffff;"="" style="white-space: normal;">发送方控制拥塞窗口的原则是：只要网络没有出现拥塞，拥塞窗口就增大一些，以便把更多的分组发送出去。但是只要网络出现拥塞，拥塞窗口就减小一些，以减少注入到网络的分组数。
+		</p>
+<p background-color:#ffffff;"="" style="white-space: normal;">拥塞控制设计
+			</p>
+<p background-color:#ffffff;"="" style="white-space: normal;">从控制理论的角度来看拥塞控制这个问题，可以分为开环控制和闭环控制两种方法：
+		</p>
+<ul background-color:#ffffff;"="" style="white-space: normal;">
+		<li>
+			开环控制就是在设计网络时事先将有关拥塞发生的所有因素考虑周到，一旦系统运行起来就不能在中途改正。
+		</li>
+		<li>
+			闭环控制是基于反馈环路的概念，包括如下措施：
+		</li>
+			</ul>
+<ol background-color:#ffffff;"="" style="white-space: normal;">
+			<li>
+				监测网路系统以便检测拥塞在何时、何地发生
+			</li>
+			<li>
+				把拥塞发生的信息传送到可采取行动的地方
+			</li>
+			<li>
+				调整网络系统的行动以解决出现的问题。
+			</li>
+				</ol>
+<p background-color:#ffffff;"="" style="white-space: normal;">拥塞控制方法
+					</p>
+<p background-color:#ffffff;"="" style="white-space: normal;">因特网建议标准RFC2581定义了进行拥塞控制的四种算法，即慢开始（Slow-start)、拥塞避免（Congestion Avoidance)、快重传（Fast Restrangsmit)和快回复（Fast Recovery）。我们假定：
+				</p>
+<ol background-color:#ffffff;"="" style="white-space: normal;">
+				<li>
+					数据是单方向传送，而另外一个方向只传送确认
+				</li>
+				<li>
+					接收方总是有足够大的缓存空间，因为发送窗口的大小由网络的拥塞程度来决定。
+				</li>
+			</ol>
+<p background-color:#ffffff;"="" style="white-space: normal;">慢开始算法
+				</p>
+<p background-color:#ffffff;"="" style="white-space: normal;">最初的TCP在连接建立成功后会向网络中发送大量的数据包，这样很容易导致网络中路由器缓存空间耗尽，从而发生拥塞。因此新建立的连接不能够一开始就大量发送数据包，而只能根据网络情况逐步增加每次发送的数据量，以避免上述现象的发生。具体来说，当新建连接时，cwnd初始化为1个最大报文段(MSS)大小，发送端开始按照拥塞窗口大小发送数据，每当有一个报文段被确认，cwnd就增加至多1个MSS大小。用这样的方法来逐步增大拥塞窗口CWND。这里用报文段的个数的拥塞窗口大小举例说明慢开始算法，实时拥塞窗口大小是以字节为单位的。如下图：
+			</p>
+<p background-color:#ffffff;"="" style="white-space: normal;"><img src="http://5b0988e595225.cdn.sohucs.com/images/20190107/05ff26b9dcef473483bbca083928a5a8.jpeg" style="height:auto;" /> 
+				</p>
+<p background-color:#ffffff;"="" style="white-space: normal;">拥塞避免算法
+			</p>
+<p background-color:#ffffff;"="" style="white-space: normal;">让拥塞窗口缓慢增长，即每经过一个往返时间RTT就把发送方的拥塞窗口cwnd加1，而不是加倍。这样拥塞窗口按线性规律缓慢增长。
+				</p>
+<p background-color:#ffffff;"="" style="white-space: normal;">慢开始和拥塞避免轮换机制
+			</p>
+<p background-color:#ffffff;"="" style="white-space: normal;">为了防止cwnd增长过大引起网络拥塞，还需设置一个慢开始门限ssthresh状态变量。ssthresh的用法如下：
+				</p>
+<ul background-color:#ffffff;"="" style="white-space: normal;">
+				<li>
+					当cwnd<ssthresh时，使用慢开始算法。< li=""></ssthresh时，使用慢开始算法。<>
+				</li>
+				<li>
+					当cwnd&gt;ssthresh时，改用拥塞避免算法。
+				</li>
+				<li>
+					当cwnd=ssthresh时，慢开始与拥塞避免算法任意。
+				</li>
+					</ul>
+<p background-color:#ffffff;"="" style="white-space: normal;">乘法减小和加法增大
+						</p>
+<p background-color:#ffffff;"="" style="white-space: normal;"><img src="http://5b0988e595225.cdn.sohucs.com/images/20190107/4d99a1a132b144fe9c3138a857fd9c3a.jpeg" style="height:auto;" /> 
+					</p>
+<ul background-color:#ffffff;"="" style="white-space: normal;">
+					<li>
+						乘法减小：是指不论在慢开始阶段还是拥塞避免阶段，只要出现超时，就把慢开始门限减半，即设置为当前的拥塞窗口的一半（于此同时，执行慢开始算法）。当网络出现频繁拥塞时，ssthresh值就下降的很快，以大大将小注入到网络中的分组数。
+					</li>
+					<li>
+						加法增大：是指执行拥塞避免算法后是拥塞窗口缓慢增大，以防止网络过早出现拥塞。
+					</li>
+				</ul>
+<p background-color:#ffffff;"="" style="white-space: normal;">快重传和快恢复
+			</p>
+<p background-color:#ffffff;"="" style="white-space: normal;">一条TCP连接有时会因等待重传计时器的超时而空闲较长的时间，慢开始和拥塞避免无法很好的解决这类问题，因此提出了快重传和快恢复的拥塞控制方法。
+				</p>
+<ul background-color:#ffffff;"="" style="white-space: normal;">
+				<li>
+					快重传算法并非取消了重传机制，只是在某些情况下更早的重传丢失的报文段（如果当发送端接收到三个重复的确认ACK时，则断定分组丢失，立即重传丢失的报文段，而不必等待重传计时器超时）。快重传要求接收方在收到一个失序的报文段后就立即发出重复确认（为的是使发送方及早知道有报文段没有到达对方）而不要等到自己发送数据时捎带确认。快重传算法规定，发送方只要一连收到三个重复确认就应当立即重传对方尚未收到的报文段，而不必继续等待设置的重传计时器时间到期。如下图：
+				</li>
+				<li>
+					快恢复算法:
+				</li>
+					</ul>
+<ol background-color:#ffffff;"="" style="white-space: normal;">
+					<li>
+						当发送方连续收到三个重复确认时，就执行“乘法减小”算法，把ssthresh门限减半。但是接下去并不执行慢开始算法。
+					</li>
+					<li>
+						考虑到如果网络出现拥塞的话就不会收到好几个重复的确认，所以发送方现在认为网络可能没有出现拥塞。所以此时不执行慢开始算法，而是将cwnd设置为ssthresh减半后的大小，然后执行拥塞避免算法。如下图：
+					</li>
+						</ol>
+<p background-color:#ffffff;"="" style="white-space: normal;">UDP
+							</p>
+<p background-color:#ffffff;"="" style="white-space: normal;">UDP应用
+						</p>
+<p background-color:#ffffff;"="" style="white-space: normal;">由于UDP是不可靠的、无连接的服务并且传输效率高，所以UDP应用的特点就是需要实时数据，可以允许丢包。所以QQ、视频软件、TFTP 简单文件传输协议(短信)等都是UDP应用。
+							</p>
+<p background-color:#ffffff;"="" style="white-space: normal;">UDP的实现
+						</p>
+<p background-color:#ffffff;"="" style="white-space: normal;">由于在IP地址中存在一些广播地址，UDP主要是通过它们来实现的
+							</p>
+<p background-color:#ffffff;"="" style="white-space: normal;"><br />
+						</p>
+<p background-color:#ffffff;"="" style="white-space: normal;">结语： IT即互联网技术，从事的工作和网络有很大的关系，前端要负责和后台(服务器)进行交互，其必然得经过网络，所以懂点网络知识有很大的帮助。
+							</p>
+<p background-color:#ffffff;"="" style="white-space: normal;"><br />
+						</p>
+<p background-color:#ffffff;"="" style="white-space: normal;"><br />
+							</p>
+							<p>
+								TCP流量控制
+							</p>
+							<p>
+								流量控制是为了控制发送方发送速率，保证接收方来得及接收。
+							</p>
+							<p>
+								接收方发送的确认报文中的窗口字段可以用来控制发送方窗口大小，从而影响发送方的发送速率。将窗口字段设置为 0，则发送方不能发送数据。
+							</p>
+							<p>
+								TCP拥塞控制
+							</p>
+							<p>
+								如果网络出现拥塞，分组将会丢失，此时发送方会继续重传，从而导致网络拥塞程度更高。因此当出现拥塞时，应当控制发送方的速率。这一点和流量控制很像，但是出发点不同。流量控制是为了让接收方能来得及接收，而拥塞控制是为了降低整个网络的拥塞程度。
+							</p>
+							<p>
+								TCP 主要通过四个算法来进行拥塞控制：慢开始、拥塞避免、快重传、快恢复。
+							</p>
+							<p>
+								发送方需要维护一个叫做拥塞窗口（cwnd）的状态变量，注意拥塞窗口与发送方窗口的区别：拥塞窗口只是一个状态变量，实际决定发送方能发送多少数据的是发送方窗口。
+							</p>
+							<p>
+								为了便于讨论，做如下假设：
+							</p>
+							<ul>
+								<li>
+									<p>
+										接收方有足够大的接收缓存，因此不会发生流量控制；
+									</p>
+								</li>
+								<li>
+									<p>
+										虽然 TCP 的窗口基于字节，但是这里设窗口的大小单位为报文段。
+									</p>
+								</li>
+							</ul>
+							<p>
+								1.慢开始与拥塞避免
+							</p>
+							<p>
+								发送的最初执行慢开始，令 cwnd = 1，发送方只能发送 1 个报文段；当收到确认后，将 cwnd 加倍，因此之后发送方能够发送的报文段数量为：2、4、8 ...
+							</p>
+							<p>
+								注意到慢开始每个轮次都将 cwnd 加倍，这样会让 cwnd 增长速度非常快，从而使得发送方发送的速度增长速度过快，网络拥塞的可能性也就更高。设置一个慢开始门限 ssthresh，当 cwnd &gt;= ssthresh 时，进入拥塞避免，每个轮次只将 cwnd 加 1。
+							</p>
+							<p>
+								如果出现了超时，则令 ssthresh = cwnd / 2，然后重新执行慢开始。
+							</p>
+							<p>
+								2.快重传与快恢复
+							</p>
+							<p>
+								在接收方，要求每次接收到报文段都应该对最后一个已收到的有序报文段进行确认。例如已经接收到 M1 和 M2，此时收到 M4，应当发送对 M2 的确认。
+							</p>
+							<p>
+								在发送方，如果收到三个重复确认，那么可以知道下一个报文段丢失，此时执行快重传，立即重传下一个报文段。例如收到三个 M2，则 M3 丢失，立即重传 M3。
+							</p>
+							<p>
+								在这种情况下，只是丢失个别报文段，而不是网络拥塞。因此执行快恢复，令 ssthresh = cwnd / 2 ，cwnd = ssthresh，注意到此时直接进入拥塞避免。
+							</p>
+							<p>
+								慢开始和快恢复的快慢指的是 cwnd 的设定值，而不是 cwnd 的增长速率。慢开始 cwnd 设定为 1，而快恢复 cwnd 设定为 ssthresh。
+							</p>
+							<p>
+								<br />
+							</p>
+<p background-color:#ffffff;"="" style="white-space: normal;"><br />
+						</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1118.html">计算机网络知识</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1120.html">计算机网络数据链路层</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

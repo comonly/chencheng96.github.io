@@ -1,0 +1,589 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>File Access（文件存取组件）_comonly.cn</title>
+<meta name="keywords" content="File Access（文件存取组件）" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">File Access（文件存取组件）</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-03-27</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	javaweb---jsp asp数据库框架
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">File Access,文件存取</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	对文件系统进行操作，可以取得和处理服务器上所有驱动器的相关信息；取得服务器上所有文件夹和子文件夹的相关信息；可以处理文件夹内的文件。文件存取组件涉及到以下几个对象：FileSystemObject,Drive,File,Folder,TextStream等。
+</p>
+<h1>
+	FileSystemObject
+</h1>
+<p>
+	用来访问服务器端文件系统的对象，它可以写入或使用文件，文件夹以及目录的路径；也可以获取系统信息。该对象需要配合TextStream对象一起使用，实现文件读写功能。
+</p>
+<p>
+	Set file 对象=Server.CreateObject("Scripting.FileSystemObject") &nbsp;//创建FileSystemObject
+</p>
+<p>
+	Set text 对象=file 对象.CreateTextFile(filename[,overwrite[,unicode]]) &nbsp; &nbsp;//创建TextStream对象
+</p>
+<p>
+	其中
+</p>
+<p>
+	filename：字符串表达式，用于指定待创建的文件
+</p>
+<p>
+	overwrite：可选参数，值为true或false，指定在文件名已经存在时是否覆盖原文件
+</p>
+<p>
+	Unicode：可选参数，子为true或false，指明是否以Unicode文件格式创建文件
+</p>
+<h2 id='文件写入操作'>
+	文件写入操作
+</h2>
+<p>
+	创建了TextStream对象后可以对该对象进入操作，可以使用的方法：
+</p>
+<p>
+	<table border="1" bordercolor="#CCCCCC" cellpadding="0" cellspacing="0">
+		<tbody>
+			<tr>
+				<td>
+					方法
+				</td>
+				<td>
+					说明
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Write
+				</td>
+				<td>
+					向文件中写入指定的字符串
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Writeln
+				</td>
+				<td>
+					向文件中写入一行字符串
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Writelines
+				</td>
+				<td>
+					向文件中写入指定行数的字符串
+				</td>
+			</tr>
+			<tr>
+				<td>
+					WriteBlankLines
+				</td>
+				<td>
+					向文件中写入指定行数的空行
+				</td>
+			</tr>
+		</tbody>
+	</table>
+创建文件的实例<br />
+<em>&lt;%</em><br />
+<em>Set fsol=Server.CreateObject("Scripting.FileSystemObject") &nbsp; &nbsp; &nbsp; //创建对象实例</em><br />
+<em>Set tsFile=fsol.CreateTextFile(Server.MapPath("WRITE.htm"),True) &nbsp; &nbsp;//创建一个文本文件并返回TextStream对象</em><br />
+<em>tsFile.WriteLine "&lt;HTML&gt;&lt;HEAD&gt;" &nbsp; &nbsp;//对文件执行写操作</em><br />
+<em>...</em><br />
+<em>tsFile.Close</em><br />
+<em>%&gt;</em> 
+</p>
+<h2 id='文件读取操作'>
+	文件读取操作
+</h2>
+<p>
+	从文件中读取信息，需要使用TextStream对象的OpenTextFile方法返回TextStream对象，然后进行文件的读取。创建打开文件对象的语法格式为：
+</p>
+<p>
+	Set text对象=file 对象.OpenTextFile(filename[,iomode[,create[,format]]])
+</p>
+<p>
+	其中
+</p>
+<p>
+	filename：是待打开文件的名称及路径
+</p>
+<p>
+	iomode：用于指定文件输入/输出的模式，为可选参数
+</p>
+<p>
+	create：可选参数，指明filename所指文件不存在时，是否要创建新文件
+</p>
+<p>
+	format：可选参数，指明以何种方式打开文件
+</p>
+<h3>
+	文件读取方法：
+</h3>
+<p>
+	<table cellpadding="0" cellspacing="0" border="1" bordercolor="#CCCCCC">
+		<tbody>
+			<tr>
+				<td>
+					方法
+				</td>
+				<td>
+					说明
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Read(n)
+				</td>
+				<td>
+					从文件中读取指定的字符数<br />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Readln
+				</td>
+				<td>
+					从文件中读出一行<br />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					ReadAll
+				</td>
+				<td>
+					将文件中的所有内容<span id="__kindeditor_bookmark_start_6__"></span>全部读出
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Skip(n)
+				</td>
+				<td>
+					在读取时跳过指定的行数
+				</td>
+			</tr>
+			<tr>
+				<td>
+					SkipLine
+				</td>
+				<td>
+					在读取时跳过一行
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</p>
+<h3>
+	TextStream对象的属性
+</h3>
+<p>
+	<table cellpadding="0" border="1" bordercolor="#CCCCCC" cellspacing="0">
+		<tbody>
+			<tr>
+				<td>
+					方法
+				</td>
+				<td>
+					说明
+				</td>
+			</tr>
+			<tr>
+				<td>
+					AtEndOfLine
+				</td>
+				<td>
+					文件指针是否到达了文件行的末尾，值为True/False
+				</td>
+			</tr>
+			<tr>
+				<td>
+					AtEndOfStream<br />
+				</td>
+				<td>
+					文件指针是否到达了文件的末尾，值为True/False
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Column
+				</td>
+				<td>
+					返回当前指针所在的行号
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Line
+				</td>
+				<td>
+					返回当前指针所在的列号
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</p>
+<p>
+	从文件中读取内容<br />
+<em>&lt;%</em><br />
+<em>Set fsol=Server.CreateObject("Scripting.FileSystemObject")</em><br />
+<em>Set tsFile=fsol.OpenTextFile(Server.MapPath("wite.htm"))</em><br />
+<em>While Not tsFile.AtEndOfStream</em><br />
+<em>&nbsp; &nbsp;Response.Write tsFile.ReadLine</em><br />
+<em>Wend</em><br />
+<em>tsFile.Close</em><br />
+<em>%&gt;</em> 
+</p>
+<h1>
+	Drive对象
+</h1>
+<p>
+	获取驱动的相关信息可以使用FileSystemObject对象，也可以使用Driver对象。可以使用DriveExists,GetDriveName等方法获得驱动器的信息。
+</p>
+<p>
+	file对象.DriveExists(驱动器)
+</p>
+<p>
+	&nbsp; &nbsp;若该驱动器存在，则该属性的值为true，否则为false
+</p>
+<p>
+	file对象.GetDriveName(path)
+</p>
+<p>
+	&nbsp; &nbsp;返回该path参数的驱动器的名称，若该路径不存在，返回“”（空串）。
+</p>
+<p>
+	Drive对象要获得驱动器的相关信息，需要使用FileSystemObject对象的GetDrive方法获得Drive对象。
+</p>
+<p>
+	&nbsp; &nbsp;Set drive 对象=file 对象.GetDrive(驱动器)
+</p>
+<h3>
+	Drive对象的属性
+</h3>
+<p>
+	<table cellpadding="0" border="1" bordercolor="#CCCCCC" cellspacing="0">
+		<tbody>
+			<tr>
+				<th>
+					属性
+				</th>
+				<th>
+					描述
+				</th>
+			</tr>
+			<tr>
+				<td>
+					AvailableSpace
+				</td>
+				<td>
+					向用户返回在指定的驱动器或网络共享驱动器上的可用空间容量。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					DriveLetter
+				</td>
+				<td>
+					返回识别本地驱动器或网络共享驱动器的大写字母。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					DriveType
+				</td>
+				<td>
+					返回指定驱动器的类型。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					FileSystem
+				</td>
+				<td>
+					返回指定驱动器所使用的文件系统类型。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					FreeSpace
+				</td>
+				<td>
+					向用户返回在指定的驱动器或网络共享驱动器上的剩余空间容量。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					IsReady
+				</td>
+				<td>
+					如果指定驱动器已就绪，则返回 true。否则返回 false。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Path
+				</td>
+				<td>
+					返回其后有一个冒号的大写字母，用来指示指定驱动器的路径名。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					RootFolder
+				</td>
+				<td>
+					返回一个文件夹对象，该文件夹代表指定驱动器的根文件夹。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					SerialNumber
+				</td>
+				<td>
+					返回指定驱动器的序列号。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					ShareName
+				</td>
+				<td>
+					返回指定驱动器的网络共享名。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					TotalSize
+				</td>
+				<td>
+					返回指定的驱动器或网络共享驱动器的总容量
+				</td>
+			</tr>
+			<tr>
+				<td>
+					VolumeName
+				</td>
+				<td>
+					设置或者返回指定驱动器的卷标名
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</p>
+<p>
+	创建FileSystemObject对象实例，采取GetDrive方法获取驱动器“C:”的实例，并将驱动器的符号和总容量写入浏览器<br />
+<em>&lt;%</em><br />
+<em>Dim fs,d</em><br />
+<em>Set fs=Server.CreateObject("Scripting.FileSystemObject")</em><br />
+<em>Set d=fs.GetDrive("c:")</em><br />
+<em>Response.Write("Drive"&amp;d&amp;":")</em><br />
+<em>Response.Write("Total size in bytes: " &amp;d.TotalSize)</em><br />
+<em>set d=nothing</em><br />
+<em>set fs=nothing</em><br />
+<em>%&gt;</em> 
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/652.html">ActiveX Server Components—ASP组件</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/655.html">URL静态化，URL伪静态，URL重写和页面静态化</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#文件写入操作">文件写入操作</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#文件读取操作">文件读取操作</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,355 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>组播MAC地址和各类IP地址_comonly.cn</title>
+<meta name="keywords" content="组播MAC地址和各类IP地址" />
+<meta name="description" content="MAC地址是以太网二层使用的一个48bit（6字节十六进制数）的地址，用来标识设备位置。MAC地址分成两部分，前24位是组织唯一标识符（OUI, Organizationally unique identifier），后24位由厂商自行分配。
+
+
+	&nbsp;&nbsp;&nbsp; MAC地址有单播、组播、广播之分。单播地址(unicast address)表示单一设备、节点，多播地址或者组播地址(multicast address、group address)表示一组设备、节点，广播地址(br" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">组播MAC地址和各类IP地址</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">苍月代表我</li>
+          <li class="lmname"><a href="https://www.cnblogs.com/lifan3a/articles/6650936.html" target="_blank">https://www.cnblogs.com/lifan3a/articles/6650936.html</a></li>
+          <li class="timer">2019-09-08</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>MAC地址是以太网二层使用的一个48bit（6字节十六进制数）的地址，用来标识设备位置。MAC地址分成两部分，前24位是组织唯一标识符（OUI, Organizationally unique identifier），后24位由厂商自行分配。
+
+
+	&nbsp;&nbsp;&nbsp; MAC地址有单播、组播、广播之分。单播地址(unicast address)表示单一设备、节点，多播地址或者组播地址(multicast address、group address)表示一组设备、节点，广播地址(br</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	MAC地址是以太网二层使用的一个48bit（6字节十六进制数）的地址，用来标识设备位置。MAC地址分成两部分，前24位是组织唯一标识符（OUI, Organizationally unique identifier），后24位由厂商自行分配。
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	&nbsp;&nbsp;&nbsp; MAC地址有单播、组播、广播之分。单播地址(unicast address)表示单一设备、节点，多播地址或者组播地址(multicast address、group address)表示一组设备、节点，广播地址(broadcast address)是组播的特例，表示所有地址，用全F表示：FF-FF-FF-FF-FF-FF。当然，三层的IP地址也有单播、组播、广播之分。
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	&nbsp;&nbsp;&nbsp; 48bit的MAC地址一般用6字节的十六进制来表示，如XX-XX-XX-XX-XX。IEEE 802.3规定：以太网的第48bit(2012-04-11修改为The first bit) 用于表示这个地址是组播地址还是单播地址。如果这一位是0，表示此MAC地址是单播地址，如果这位是1，表示此MAC地址是多播地址。见IEEE 802.3 3.2.3 Address fields：“The first bit (LSB) shall be used in the Destination Address field as an address type designation bit to identify the Destination Address either as an individual or as a group address. If this bit is 0, it shall indicate that the address field contains an individual address. If this bit is 1, it shall indicate that the address field contains a group address that identifies none, one or more, or all of the stations connected to the LAN. In the Source Address field, the first bit is reserved and set to 0.”
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	&nbsp;&nbsp;&nbsp; 以太网线路上按“Big Endian”字节序传送报文（也就是最高字节先传送，关于字节序请参考相关文档），而比特序是”Little Endian”（也就是最低位先传送）。一个十六进制表示法表示的MAC地址01-80-C2-00-00-00，传送时的bit顺序就是：1000 0000 0000 0001 0100 0011 0000 0000 0000 0000 0000 0000，如下面的图（从最左边开始传送）：
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	<img src="http://hi.csdn.net/attachment/201012/8/0_1291822827nCFr.gif" alt="" style="height:auto;" />
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	&nbsp;&nbsp;&nbsp; 注意图上的第47bit(2012-04-11修改为The second bit)，这一位表示MAC地址是全球唯一地址还是本地地址，0表示全球唯一地址，1表示本地唯一地址。这一位也叫G/L位。
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	&nbsp;&nbsp;&nbsp; 对于网络设备上固化的MAC地址，因为它唯一标识这个设备，所以只能是单播地址，也就是MAC帧里面的Source地址第48位(2012-04-11修改为The first bit)只能为0。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	&nbsp;&nbsp;&nbsp; 我们常说有2的48次方个MAC地址可供网络设备使用，这些地址可以多到给地球上每一粒沙子分配一个地址，其实这个数量要打折扣的，因为MAC地址虽然有这么多，但真正用在网卡上并且全球唯一的只有2的46次方个：第48bit一定是0，第47bit一定是0。
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	&nbsp;&nbsp;&nbsp; 这也就引出了一个有意思的现象：随便找一台PC，观察一下它的网卡地址，第1字节的十六进制数一般是4的倍数；查看一下IEEE分配的OUI(<a href="http://standards.ieee.org/develop/regauth/oui/oui.txt">http://standards.ieee.org/develop/regauth/oui/oui.txt</a>)，第1字节的十六进制数也一般是4的倍数（早期以太网没有本地地址的概念，所以分配的OUI里面G/L bit也可能是1），这种情况下就不是4的倍数了，但肯定是2的倍数，因为第48位只能是0。
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	&nbsp;&nbsp;&nbsp; 关于组播地址，有这么个误解：MAC地址第1字节必须是0x01才表示组播地址，连TCP/IP详解上也这么说（见中文版12.4.2第一段）。IEEE 802.3里面已经明确说明了只要第48bit是1就表示组播地址，所以无论MAC地址第1字节是0x01、0xC1或者是0x33都表示这个MAC地址 是组播地址（以0x33开头的表示IPV6对应的二层组播地址）。之所以有这样的误解，是因为到目前为止，大部分组播MAC地址的第1字节都是0x01。 如：
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	01-80-C2-00-00-00(STP协议使用)
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	01-80-C2-00-00-01(MAC Control的PAUSE帧使用)
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	01-80-C2-00-00-02(Slow Protocol: 802.3ah OAM/ LACP 协议都用这个地址，这个地址很有故事，有多少软件处理这个地址会出问题啊！)
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	01-00-5E-xx-xx-xx(IP组播地址对应的二层组播地址)。
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	完整的列表见<a href="http://standards.ieee.org/develop/regauth/grpmac/public.html">http://standards.ieee.org/develop/regauth/grpmac/public.html</a>
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	&nbsp;&nbsp;&nbsp; 之所以大部分组播地址都以01-80-C2和01-00-5E开头，那是因为使用这些组播地址的协议都是带头大哥IEEE和IANA名下的，它们的OUI 分别是00-80-C2和00-00-5E是，变成组播地址就是01-80-C2和01-00-5E了，当然，除了带头大哥霸占的这些组播地址，还有 01-00-0C-CC-CC-CC这样的地址，这个地址是Cisco霸占的，Cisco的OUI是00-00-0C。
+</p>
+<hr />
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	1、802.3标准上说明某个bit时都是按照网络传送顺序来说的，所以我文章里也按这个顺序来说明，而不是十六进制表示法中的bit位置，所以有了48bit的说法，为了防止误解，还是遵从标准使用"The first bit".&nbsp;<br />
+十六进制表示法的01-80-C2-00-00-00，其中的"第40位"标识是否是组播地址，但传送时bit顺序是这样的：<br />
+1000 0000 0000 0001 0100 0011 0000 0000 0000 0000 0000 0000<br />
+所以传送过程中最先发送的一位(上面最左边一位)标识是否是组播地址<br />
+2、00000001b传的时候从1开始传，然后再传7个0。网络上发送数据也是以比特为单位的，在网线上抓波形看不就是一个个方波吗？物理层也没办法一个波形带走8bit数据啊。
+</p>
+<hr />
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	1、先总的来看ip地址分类<br />
+<img src="http://blog.chinaunix.net/attachment/201305/7/25764156_1367922034vgqq.png" alt="" width="310" height="172" style="height:auto;" /><br />
+A类 ：00000000×××——01111111×××&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0.0.0.0 —— 127.255.255.255&nbsp;<br />
+B类 ：10000000,00000000×××——10111111,11111111×××&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; 128.0.0.0——191.255.255.255<br />
+C类 ：11000000,00000000,0000000×××——11011111,1111111,1111111×××&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 192.0.0.0——223.255.255.255<br />
+D类 ：11100000××——111011111××××<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;224.0.0.0——239.255.255.255 （组播地址）<br />
+E类 ：11110000×××——11110111×××&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;240.0.0.0——247.255.255.255 （科学实验）
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	IP组播和单播的目的地址不同，IP组播的目的地址是组地址——D类地址.
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	组播IP地址是本地管理组播地址：239.0.0.0～239.255.255.255
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	&nbsp;
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	D类地址是从224.0.0.0到239.255.255.255之间的IP地址
+</p>
+<div style="margin:0px;padding:0px;color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	<p>
+		其中224.0.0.0到224.0.0.255是被保留的地址
+	</p>
+	<p>
+		224.0.0.1表示子网中所有的组播组
+	</p>
+	<p>
+		224.0.0.2表示子网中的所有路由器
+	</p>
+	<p>
+		224.0.0.5表示OSPF（Open Shortest Path First）路由器
+	</p>
+	<p>
+		224.0.0.6表示OSPF指定路由器
+	</p>
+224.0.0.12表示DHCP(Dynamic Host Configuration Protocol)服务器.
+</div>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	<strong>2</strong><strong>层的</strong><strong>MAC</strong><strong>地址是如何与</strong><strong>3</strong><strong>层的</strong><strong>IP</strong><strong>地址进行映射的呢？</strong><strong>通过将</strong><strong>MAC</strong><strong>地址的前</strong><strong>25</strong><strong>位强行规定位</strong><strong>0100.5E</strong>，而后23位对应IP地址的后23位，而组播IP地址的前4位均相同如：<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP地址：1110yyyy.yxxxxxxx.xxxxxxx.xxxxxxxx<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MAC地址：00000001.00000000.01011110.0xxxxxxx.xxxxxxx.xxxxxxxx<br />
+例如：组播IP地址224.215.145.230应该映射到下列哪个组播MAC地址？( )
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	&nbsp;&nbsp;(A)　01-00-5e-57-91-e6　　　(B)　01-00-5e-d7-91-e6
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	&nbsp;(C)　01-00-5e-5b-91-e6　　　(D)　01-00-5e-55-91-e6
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	&nbsp;&nbsp;&nbsp;&nbsp;用二进制来换算，将215.145.230换算成1101，0111，1001，0001，1110，0110，取最后23位放到MAC地址中的23位可以计算得出答案是A。<br />
+&nbsp;&nbsp;&nbsp;&nbsp;显然有32个IP地址（有5个y可以不一样）对应一个MAC地址，所以要<strong>避免在同一网络中使用的多个组播</strong><strong>IP</strong><strong>地址对应一个</strong><strong>MAC</strong><strong>地址</strong>。
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	各类地址：
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	<strong>一、</strong><strong>127.0.0.1</strong><strong>&lt;span "=""&gt;<br />
+</strong><span><strong>127</strong><strong>是一个保留地址，该地址是指电脑本身，主要作用是预留下作为测试使用，用于网络软件测试以及本地机进程间通信</strong>。在<span>Windows系统下，该地址还有一个别名叫<span>“localhost”，无论是哪个程序，一旦使用该地址发送数据，协议软件会立即返回，不进行任何网络传输，除非出错，包含该网络号的分组是不能够出现在任何网络上的。&lt;span "=""&gt;<br />
+<strong>二、</strong><strong><span>10.*.*.*</span></strong><strong>，</strong><strong><span>172.16.*.*――172.31.*.*</span></strong><strong>，</strong><strong><span>192.168.*.*</span></strong>&lt;span "=""&gt;<br />
+上面三个网段是<strong>私有地址</strong>，可以用于自己组网使用，<strong>这些地址主要用于企业内部网络中，但不能够在</strong><span><strong>Internet</strong><strong>网上使用，</strong><span><strong>Internet</strong><strong>网没有这些地址的路由，而使用这三个网段的计算机要上网必须要通过地址翻译</strong><span><strong>(NAT)</strong><strong>，将私有地址翻译成公用合法的</strong><span><strong>IP</strong><strong>地址</strong>。一些带宽路由器或是其它的网络设备，往往使用<span>192.168.1.1作为缺省的地址，由于私有个人网络不会与外部互连，所以可以使用随意的<span>IP地址，保留这三个网段的<span>IP&nbsp;地址使其使用，是为了避免以后接入公网时引起地址混乱。&lt;span "=""&gt;<br />
+<br />
+<strong>三、</strong><strong>0.0.0.0</strong>&lt;span "=""&gt;<br />
+严格意义上来说，<span><strong>0.0.0.0</strong><strong>已经不是真正意义上的</strong><span><strong>ip</strong><strong>地址了</strong>。<strong>它表示的是这样一个集合，所有不清楚的主机和目的网络。这里的不清楚是指在本机的路由表里没有特定条目指明如何到达。对本机来说，它就是一个收容所，所有不认识的三无人员，一律送进去</strong>。如果你在网络设置中设置了缺省网关，那么<span>windows系统就会自动产生一个目的地址为<span>0.0.0.0的缺省路由。&lt;span "=""&gt;<br />
+<strong>四、</strong><strong>255.255.255.255</strong>&lt;span "=""&gt;<br />
+受限制的广播地址，对本机来说，这个地址指本网段内<span>(同一个广播域<span>)的所有主机，该地址用于主机配置过程中<span>IP数据包的目的地址，这时主机可能还不知道它所在网络的网络掩码，甚至连它的<span>IP地址也还不知道。在任何情况下，路由器都会禁止转发目的地址为受限的广播地址的数据包，这样的数据包仅会出现在本地网络中。&lt;span "=""&gt;<br />
+<strong>五、</strong><strong>224.0.0.0—239.255.255.255</strong>&lt;span "=""&gt;<br />
+这是一组<strong>组播地址</strong>，需要注意它<strong>与广播地址的区别</strong>，其中<span>224.0.0.1特指所有的主机，<span>224.0.0.2特指所有的路由器，<span>224.0.0.5指所有的<span>OSPF路由器地址，<span>224.0.0.13指<span>PIMV2路由器的地址。另外从<span><strong>224.0.0.0――224.0.0.255</strong><strong>只能用于局域网中路由器是不会转发的</strong>，<span><strong>239.0.0.0――239.255.255.255</strong><strong>是私有地址</strong>&nbsp;<span><strong>(</strong><strong>与</strong><span><strong>192.168. *.*</strong><strong>功能一样</strong><span><strong>)</strong>，<span><strong>224.0.1.0—238.255.255.255</strong><strong>可以用于</strong><span><strong>Internet</strong><strong>上</strong>。如果你的主机开启了<span>IRDp(Internet路由发现协议，使用组播功能<span>)功能，那么你的主机路由表中应该会有这样的一条路由。&lt;span "=""&gt;<br />
+<strong>六、</strong><strong>169.254.*.*</strong>&lt;span "=""&gt;<br />
+如果你的主机使用了<span>DHCP功能自动获得一个<span>ip地址，那么当你的<span>DHCP服务器发生故障或响应时间太长而超出系统规定的一个时间，<span>windows系统会为你分配这样一个地址。如果你发现你的主机<span>ip地址是个诸如此类的地址，很不幸，十有八九是你的网络不能正常运行了</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span>
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1410.html">1个网卡设置多个IP的作用  发送数据包时源ip的选择</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1412.html">arp表和mac地址的关系</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.cnblogs.com/lifan3a/articles/6650936.html" target="_blank">https://www.cnblogs.com/lifan3a/articles/6650936.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

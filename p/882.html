@@ -1,0 +1,477 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Java类、包、接口_comonly.cn</title>
+<meta name="keywords" content="Java类、包、接口" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Java类、包、接口</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-03-15</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	java-含工具类
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='类、字段、方法'>
+	类、字段、方法
+</h2>
+<p>
+	构造方法，与类同名的方法，专门用于创建对象，完成初始化工作。
+</p>
+<ul>
+	<li>
+		构造方法的方法名与类名相同。
+	</li>
+	<li>
+		没有返回类型，也不能写void。
+	</li>
+	<li>
+		构造方法的主要作用是完成类对象的初始化工作。
+	</li>
+	<li>
+		构造方法一般不能像普通函数那样调用，而是用new来调用。
+	</li>
+	<li>
+		在创建一个类的新对象的同时，系统会自动调用该类的构造方法为新对象初始化。
+	</li>
+</ul>
+<p>
+	如果没有定义构造方法，系统会自动产生一个不带参数，方法体为空的默认构造方法。如果用户有定义，系统不再生成默认的。
+</p>
+<h4>
+	方法的重载
+</h4>
+<p>
+	方法含义相同，但带有不同的参数，这些方法使用相同的名字，这就是方法的重载（overloading）。多个方法用相同的名字，但是参数列表必须不同（参数个数不同，参数类型不同，参数类型顺序不同），返回值类型可以相同可以不同。构造方法也是可以重载的，方法类似。
+</p>
+<h4>
+	this的使用
+</h4>
+<ul>
+	<li>
+		在方法及构造方法中，可以使用this来访问对象的字段和方法。
+	</li>
+	<li>
+		使用this可以解决局部变量或参数变量与字段变量同名的问题。常在构造方法中使用。
+	</li>
+	<li>
+		通过this("参数");来调用另一种构造方法，必须放在第一句。
+	</li>
+</ul>
+<p>
+	this指的是调用对象本身，在static方法中，不能使用this。在所有非static方法中，都隐含了一个参数this。
+</p>
+<h2 id='类的继承'>
+	类的继承
+</h2>
+<p>
+	继承（inheritance）是面向对象的程序设计中的重要特征。继承得到的类为子类（subclass），被继承的的类为父类或超类（supperclass），父类包括所有被直接或间接被继承的类。不支持多重继承。子类继承父类的状态和行为，也可以修改，并添加新的状态和行为。Java中所有的类都是直接或间接的继承java.lang.Object得到的。
+</p>
+<p>
+	通过在类的声明中加入extends子句来创建一个类的子类。如果没有extends子句，默认为java.lang.Object的子类。
+</p>
+<h4>
+	字段的继承、隐藏、添加
+</h4>
+<p>
+	子类可以继承父类的所有字段（没有private或static修饰）。子类重新定义一个从父类那里继承的完全相同的字段变量，称为变量的覆盖。
+</p>
+<p>
+	定义子类时，加上新的字段变量，使子类比父类多一些属性。
+</p>
+<h4>
+	方法的继承、覆盖、添加
+</h4>
+<p>
+	父类的非私有方法可以被子类自动继承。
+</p>
+<p>
+	重新定义与父类同名的方法，实现对父类方法的覆盖（Overriding）。
+</p>
+<p>
+	方法的重载（Overloading）。
+</p>
+<p>
+	可以添加新的方法。
+</p>
+<h4>
+	super的使用
+</h4>
+<p>
+	super可以区分与父类同名的域与方法。super可以访问被子类隐藏的同名变量。覆盖父类同名方法后，通过super可以调用父类的方法。
+</p>
+<p>
+	通过super();可以调用父类的构造方法，此时super只能放在第一句。
+</p>
+<p>
+	父类对象与子类对象的转换
+</p>
+<p>
+	需要父类对象时可以用一个子类对象来强制转换，反之不可。
+</p>
+<h2 id='包'>
+	包
+</h2>
+<p>
+	package语句作为Java源文件的第一条语句，指明该文件中定义的类所在的包。
+</p>
+<p>
+	使用Java中已经提供的类，需要import语句来引入所需要的类。Java编译器为所有程序自动引入java.lang。
+</p>
+<p>
+	import java.awt.*只能表示本层次的所有类，不包括子层次下的类。
+</p>
+<h2 id='接口'>
+	接口
+</h2>
+<p>
+	接口（interface）就是方法定义和常量值的集合。
+</p>
+<ul>
+	<li>
+		通过接口可以实现不相关类的相同行为，而不需要考虑这些类之间的层次关系。
+	</li>
+	<li>
+		通过接口可以指明多个类需要实现的方法。
+	</li>
+	<li>
+		通过接口可以了解对象的交互界面，而不需要了解对象所对应的类。
+	</li>
+</ul>
+<p>
+	可以把用于完成特定功能的若干特征组织成接口，凡需要实现这种特定功能的类，都可以继承这个接口。在继承接口的各个类中，要具体定义接口中各抽象方法的方法体。因而在Java中，把对接口的继承称为实现（implement）。
+</p>
+<h4>
+	定义接口
+</h4>
+<pre class="prettyprint lang-java">[public] interfance 接口名 [extends 父接口列表]
+{    //接口体
+//常量域声明
+[public][static][final]域类型域名=常量值；
+//抽象方法声明
+[public][abstract]返回值方法名(参数列表)[throw 异常列表];
+}</pre>
+<ul>
+	<li>
+		通常接口名以able或ible结尾，表示能完成一定的行为。
+	</li>
+	<li>
+		接口中的字段实际上是常量，字段前面即使省略修饰符，仍然默认为public static final。
+	</li>
+	<li>
+		接口中的方法都是抽象方法，不能有实现体；方法前面即使省略修饰符，仍然默认为public abstract。一般省略字段和方法的修饰符。
+	</li>
+</ul>
+<h4>
+	实现接口
+</h4>
+<ul>
+	<li>
+		在类的声明部分，用implements关键字声明将要实现哪些接口。
+	</li>
+	<li>
+		如果实现接口的类不是abstract的抽象类，则在类的定义部分必须实现所有抽象方法。
+	</li>
+	<li>
+		类在实现某接口的抽象方法时，必须使用相同的方法头。
+	</li>
+	<li>
+		接口的抽象方法的访问限制符都已指定为public，所以在类的实现方法时，必须显示地使用public修饰符。
+	</li>
+	<li>
+		一个类只能有一个类但是可以实现多个接口。在implements子句中用逗号分隔。
+	</li>
+</ul>
+<p>
+	接口可以作为一种引用类型来使用。任何实现该接口的类的实例都可以存储在该接口类型的变量中，通过这些变量可以访问类所实现的接口中的方法。
+</p>
+<h2 id='枚举'>
+	枚举
+</h2>
+<p>
+	枚举实际上是用一些符号来表示的常量。定义枚举可以使用关键字enum。enum Direction{EAST,SOUTH,WEST,NORTH} Direction dir=Direction.NORTH;
+</p>
+<p>
+	枚举类型不是整数，而是引用类型，本质是类实现的。所以可以定义成员方法及构造方法，也可以实现接口。所有枚举都继承了java.lang.Enum类，所以可以覆盖toString()方法，也可以使用values()方法来取得所有成员，每个成员都有ordianl()方法得到序号。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/881.html">Java基础 数据运算、流程控制和数组</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/883.html">Java访问控制符、非访问控制符</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="">
+							<h2 style="display:inline;color:#5BC648;"></h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-03-15&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><h4>
+	mainText.java
+</h4>
+<pre class="prettyprint lang-java">package vip.chencheng.book;
+
+enum Direction{
+			EAST,SOUTH,WEST,NORTH
+		}
+public class mainText {
+	
+	public static void main(String[] args){
+		Direction dir=Direction.NORTH;
+		System.out.println(dir);	//枚举类型不是一个整数
+		System.out.println(dir.ordinal());	//获得枚举成员的序号，输出3
+		Person p=new Person("chenc",22);	//创建对象
+		p.sayHello();	//使用对象
+		p.sayHello("chen");	//使用对象
+		Student s=new Student();
+		s.sayHello();
+		Collection c=new TestCollection();
+		//实现接口的类存放在接口类型的变量中
+		c.add(3);//接口作为数据类型，访问类所实现接口中的方法
+		System.out.println(c.currentCount());
+		
+	}
+}
+
+class Person{
+	String name;	//字段名
+	int age;
+	Person(){}
+	Person(String name,int age){//构造方法
+		this.name=name;
+		this.age=age;
+	}
+	public void sayHello(){	//方法
+		System.out.println("hello!");
+	}
+	public  void sayHello(String name){	//方法的重载
+		System.out.println("hello!"+name);
+		System.out.println("hello!"+this.name);//非static方法中使用this
+	}
+}
+
+class Student extends Person{
+	Student(){
+		super("name",22);
+		//因为父类没有无参的构造方法,子类必须用super来调用
+	}
+	String school;
+	public void sayHello(){	//覆盖父类的sayHello()方法
+		System.out.println("I'm child");
+	}
+}
+
+interface Collection{//定义一个接口
+	int MAX_NUM=100;
+	void add(int obj);
+	int currentCount();
+}
+class TestCollection implements Collection{
+	int a=0;
+	public void add(int obj){
+		a+=obj;
+	}
+	public int currentCount(){	//必须声明public
+		return a;
+	}
+}</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#类、字段、方法">类、字段、方法</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#类的继承">类的继承</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#包">包</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#接口">接口</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#枚举">枚举</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

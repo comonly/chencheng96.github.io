@@ -1,0 +1,286 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>umask权限使用_comonly.cn</title>
+<meta name="keywords" content="umask权限使用" />
+<meta name="description" content="很显然，系统中各种文件的权限设置对特定用户的数据安全有很大影响。但是要求用户逐一明确设置系统中每个文件的权限也是不现实的，为此，需要使用umask命令，该命令可以为用户账号中新文件的创建进行缺省设置。系统管理员必须要为你设置一个合理的u m a s k值，以确保你创建的文件具有所希望的缺省权限，防止其他非同组用户对你的文件具有写权限。具体来说，umask是用来设置权限掩码的，权限掩码由3个数字组成，将现有的存取权限减掉权限掩码后，即可产生建立文件时默认的权限。
+
+语　　法：umask [-S][权限掩" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">umask权限使用</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"> 樊伟胜</li>
+          <li class="lmname"><a href="https://www.cnblogs.com/fanweisheng/p/11108710.html" target="_blank">https://www.cnblogs.com/fanweisheng/p/11108710.html</a></li>
+          <li class="timer">2020-09-26</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>很显然，系统中各种文件的权限设置对特定用户的数据安全有很大影响。但是要求用户逐一明确设置系统中每个文件的权限也是不现实的，为此，需要使用umask命令，该命令可以为用户账号中新文件的创建进行缺省设置。系统管理员必须要为你设置一个合理的u m a s k值，以确保你创建的文件具有所希望的缺省权限，防止其他非同组用户对你的文件具有写权限。具体来说，umask是用来设置权限掩码的，权限掩码由3个数字组成，将现有的存取权限减掉权限掩码后，即可产生建立文件时默认的权限。
+
+语　　法：umask [-S][权限掩</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 很显然，系统中各种文件的权限设置对特定用户的数据安全有很大影响。但是要求用户逐一明确设置系统中每个文件的权限也是不现实的，为此，需要使用umask命令，该命令可以为用户账号中新文件的创建进行缺省设置。系统管理员必须要为你设置一个合理的u m a s k值，以确保你创建的文件具有所希望的缺省权限，防止其他非同组用户对你的文件具有写权限。具体来说，umask是用来设置权限掩码的，权限掩码由3个数字组成，将现有的存取权限减掉权限掩码后，即可产生建立文件时默认的权限。<br />
+<br />
+语　　法：umask [-S][权限掩码]<br />
+补充说明：umask可用来设定[权限掩码]。[权限掩码]是由3个八进制的数字所组成，将现有的存取权限减掉权限掩码后，即可产生建立文件时预设的权限。<br />
+参　　数：<br />
+-S 　以文字的方式来表示权限掩码。<br />
+<br />
+登录之后，可以按照个人的偏好使用u m a s k命令来改变文件创建的缺省权限。相应的改变直到退出该s h e l l或使用另外的u m a s k命令之前一直有效。一般来说，u m a s k命令是在/ e t c / p r o f i l e文件中设置的，每个用户在登录时都会引用这个文件，所以如果希望改变所有用户的u m a s k，可以在该文件中加入相应的条目。如果希望永久性地设置自己的u m a s k值，那么就把它放在自己$ H O M E目录下的. p r o f i l e或. b a s h _ p r o f i l e文件中。<br />
+<br />
+如何计算umask值<br />
+u m a s k命令允许你设定文件创建时的缺省模式，对应每一类用户(文件属主、同组用户、其他用户)存在一个相应的u m a s k值中的数字。对于文件来说，这一数字的最大值分别是6。系统不允许你在创建一个文本文件时就赋予它执行权限，必须在创建后用c h m o d命令增加这一权限。目录则允许设置执行权限，这样针对目录来说， u m a s k中各个数字最大可以到7。该命令的一般形式为：<br />
+<br />
+umask nnn<br />
+其中n n n为u m a s k置0 0 0 - 7 7 7。<br />
+计算u m a s k值：可以有几种计算u m a s k值的方法，通过设置u m a s k值，可以为新创建的文件和目录设置缺省权限。<br />
+<br />
+例如，对于u m a s k值0 0 2，相应的文件和目录缺省创建权限是什么呢？<br />
+第一步，我们首先写下具有全部权限的模式，即7 7 7 (所有用户都具有读、写和执行权限)。<br />
+第二步，在下面一行按照u m a s k值写下相应的位，在本例中是0 0 2。<br />
+第三步，在接下来的一行中记下上面两行中没有匹配的位。这就是目录的缺省创建权限。稍加练习就能够记住这种方法。<br />
+第四步，对于文件来说，在创建时不能具有文件权限，只要拿掉相应的执行权限比特即可。<br />
+<br />
+这就是上面的例子，其中u m a s k值为0 0 2：<br />
+1) 文件的最大权限rwx rwx rwx (777)<br />
+2) umask值为0 0 2 - - - - - - -w-<br />
+3) 目录权限rwx rwx r-x (775) 这就是目录创建缺省权限<br />
+4) 文件权限rw- rw- r-- (664) 这就是文件创建缺省权限<br />
+<br />
+系统默认的umask码是0022也就是：目录 755(rwx,rx,rx) ，文件：644(rw,r,r) 。<br />
+<br />
+umask码的换算<br />
+0022 + 0755 = 0777&nbsp; &nbsp;对应默认目录权限 反之 0777 - 0755 = 0022<br />
+0022 + 0644 +0111 = 0777 对应默认文件权限 反之 0777 - 0111 - 0644 = 0022<br />
+哈哈~~ 简单吧！假如我们要将默认目录权限设置为 744 那么对应的umask 是 0777 - 0744 = 0033 ，然后执行umask 0033命令就将umask码改成0033了。<br />
+<br />
+下面是另外一个例子，假设这次u m a s k值为0 2 2：<br />
+1) 文件的最大权限rwx rwx rwx (777)<br />
+2 ) u m a s k值为0 2 2 - - - -w- -w-<br />
+3) 目录权限rwx r-x r-x (755) 这就是目录创建缺省权限<br />
+4) 文件权限rw- r-- r-- (644) 这就是文件创建缺省权限<br />
+<br />
+下面是常用的u m a s k值及对应的文件和目录权限<br />
+umask值&nbsp; &nbsp;目录&nbsp; &nbsp;文件<br />
+0 2 2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 7 5 5&nbsp; &nbsp; &nbsp; &nbsp; 6 4 4<br />
+0 2 7&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 7 5 0&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;6 4 0<br />
+0 0 2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 7 7 5&nbsp; &nbsp; &nbsp; &nbsp; 6 6 4<br />
+0 0 6&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 7 7 1&nbsp; &nbsp; &nbsp; &nbsp; 6 6 0<br />
+0 0 7&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 7 7 0&nbsp; &nbsp; &nbsp; &nbsp; 6 6 0<br />
+<br />
+如果想知道当前的umask 值，可以使用u m a s k命令：如果想要改变u m a s k值，只要使用u m a s k命令设置一个新的值即可：<br />
+$ umask 002<br />
+<br />
+确认一下系统是否已经接受了新的u m a s k值：在使用u m a s k命令之前一定要弄清楚到底希望具有什么样的文件/目录创建缺省权限。否则可能会得到一些非常奇怪的结果；例如，如果将u m a s k值设置为6 0 0，那么所创建的文件/目录的缺省权限就是0 6 6！除非你有特殊需要，否则没有必要去管他，系统默认的值“022”umask是用的掩码，至于掩码的概念，从基础学吧，这里不说了。 <br />
+<br />
+linux中的文件/目录许可是用4位八进制数表示的。其中第一个八进制数用来表示特殊许可设置，第二个数字用来设置文件所有者的许可，第三个数字用来设置组许可，第四个数字用来设置所有人的许可。 <br />
+例如，root的权限为777，若权限掩码设为022，那么两都相减后可得755。下面是在我的系统更改umask的一些情况：<br />
+[root@linuxserver root]# umask<br />
+022<br />
+上述命令显示表示我的系统的umask值为022。<br />
+<br />
+[root@linuxserver root]# umask -S<br />
+u=rwx,g=rx,o=rx<br />
+当umask值为022时，默认情况下各用户的权限。注意这里的参数“S”是大写。<br />
+<br />
+[root@linuxserver root]# umask 177<br />
+[root@linuxserver root]# umask -S<br />
+u=rw,g=,o=<br />
+上述两行命令把umask值改为177，结果只有文件所有者具有读写文件的权限，其它用户不能访问该文件。这显然是一种非常安全的状态。<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1767.html">linux同步与异步、阻塞与非阻塞概念以及五种IO模型</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1769.html">程序计数器 (PC)</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.cnblogs.com/fanweisheng/p/11108710.html" target="_blank">https://www.cnblogs.com/fanweisheng/p/11108710.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

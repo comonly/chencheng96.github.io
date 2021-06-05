@@ -1,0 +1,321 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>WEB前端——CSS布局inline-block和float的共性和区别 页面元素的隐藏与显示（布局、按钮、:hover（实例））_comonly.cn</title>
+<meta name="keywords" content="WEB前端——CSS布局inline-block和float的共性和区别 页面元素的隐藏与显示（布局、按钮、:hover（实例））" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">WEB前端——CSS布局inline-block和float的共性和区别 页面元素的隐藏与显示（布局、按钮、:hover（实例））</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-04-17</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='dily属性值ilie-block和flot属性值（left,right）的共性和区别(布局的核心)'>
+	display属性值inline-block和float属性值（left,right）的共性和区别(布局的核心)
+</h2>
+在我们平时工作中，经常会遇到把一些块状元素在一行排列显示，这时候我们通常会用到float,或许会用inline-block等等。<br />
+共性：<br />
+<ol>
+	<li>
+		inline-block: 是把一个元素的display设置为块状内联元素，意思就是说，让一个元素的容器inline展示，并且里面的内容block展示；inline属性使元素内联展示，内联元素设置宽度无效，相邻的inline元素会在一行显示不换行，直到本行排满为止。block的元素始终会独占一行，呈块状显示，可设置宽高。所以inline-block的元素就是宽高可设置，相邻的元素会在一行显示，直到本行排满，也就是让元素的容器属性为block，内容为inline。
+	</li>
+	<li>
+		float： 设置元素的浮动为左或者右浮动，当设置元素浮动时，相邻元素会根据自身大小，排满一行，如果父容器宽度不够则会换行。当我们设置了元素的浮动时，这个元素就脱离了文档流，相邻元素会呈环绕装排列。
+	</li>
+	<li>
+		两者共同点是都可以实现元素在一行显示，并且可以自由设置元素大小。
+	</li>
+</ol>
+<p>
+	区别：
+</p>
+<ol>
+	<li>
+		inline-block: 水平排列一行，即使元素高度不一，也会以高度最大的元素高度为行高，即使高度小的元素周围留空，也不回有第二行元素上浮补位。可以设置默认的垂直对齐基线。
+	</li>
+	<li>
+		float: 让元素脱离当前文档流，呈环绕装排列，如遇上行有空白，而当前元素大小可以挤进去，这个元素会在上行补位排列。默认是顶部对齐。使用浮动后一定要用<span>style="clear: both"清除浮动。</span> 
+	</li>
+</ol>
+场景：<br />
+<ol>
+	<li>
+		inline-block： 当我们要设置某些元素在一行显示，并且排列方向一致的情况下，我们尽可能去用inline-block。因为inline-block的元素仍然在当前文档流里面，这样就减少了程序对DOM的更改操作，因为DOM的每一次更改，浏览器会重绘DOM树。理论上会增加性能消耗。这样也不用像flaot那样麻烦，需要清除flaot.
+	</li>
+	<li>
+		float： 即使inline-block为布局首选，但是也有inline-block所不能涉及的一些业务需求，比如：有两个元素，我们需要一个向左，一个向右排列，这时候我们就只能用float来实现，对于新手来说，会纠结float不好调，比较麻烦，想到达到预期效果，需要多次调整，有时候我们给元素设置了浮动，元素显示的顺序却变了，一时搞不清楚就改变HTML中元素的前后顺序等等。因为浏览器的解析顺序是逐行解析，当设置两个元素的右浮动时，顺序在前面的元素会先被解析，他是右浮动，那么在前边的元素就先往右浮动占位置，后边的元素依次被解析到以后，才往右排列，这样我们看到的顺序就是反的，当弄明白原因之后，调试就方便多了。
+	</li>
+</ol>
+<h3>
+	通过设置a标签背景为图片来设置“按钮”
+</h3>
+<p>
+	<span>background-position属性设置元素背景图片的起点，对于一组按钮，常用一张图片作为背景，然后通过该属性设置不同元素背景为图片的不同部分。</span>
+</p>
+<pre class="prettyprint lang-css">&lt;a class="btn-prev" href="javascript:prevbtn(document.getElementById('nowmoviecount').innerText)"&gt;&lt;/a&gt;
+
+a {
+    display: block;
+    float: left;
+    width: 18px;
+    height: 18px;
+    margin-right: 5px;
+    cursor: pointer;
+    background-image: url(/graduation_project/img/staticImg/slide_swithc_2.png);
+    background-repeat: no-repeat;
+}
+
+.ui-slide-control .btn-prev {
+    background-position: 0 0;
+}
+
+.ui-slide-control .btn-next {
+    background-position: -18px 0;
+}</pre>
+<h3>
+	将<span>radio用其他样式（图片或其他）表示</span> 
+</h3>
+<p>
+	将input的display属性设为none。然后对label设置相关样式即可以替换radio。对于选中状态可以使用一个js事件当点击是对显示样式进行修改。
+</p>
+<p>
+	&lt;label onclick="changeTag(this)"&gt;文艺&lt;input type="radio" name="tag" value="文艺"&gt;&lt;/label&gt;
+</p>
+<p>
+	选中label标签将会自动选中radio，所以这部分不需要进行js处理。
+</p>
+<h3>
+	设置ul标签的li在同一行并列显示，超过一行自动换行
+</h3>
+<p>
+	下面的布局为将li并列在一行，一般设置float属性为left，取消项目符号，设置宽度就可以实现。在结束后，要清除所有样式，一般加上&lt;div style="clear: both"&gt;&lt;/div&gt;防止对接下来的布局造成影响。li标签又嵌套ul和li标签，其中嵌套的ul标签为一个单独的元素块，而ul下的li又是元素块的每一个条目一般就竖直显示。
+</p>
+<p>
+	同样的可以使用inline-block来实现效果。
+</p>
+<h3>
+	左图片右内容相关布局
+</h3>
+<p>
+	两个容器，一个放图片，另一个放文本。还是设定float属性，然后设置width属性，可以用百分比表示。右侧内容如果需要换行显示，一般将标签的display属性设置为block。
+</p>
+<p>
+	ul下两个li标签&nbsp; &nbsp;只需要设置display: inline-block; 和 width: 20%;
+</p>
+<h2 id='CSS中如何让元素隐藏'>
+	CSS中如何让元素隐藏
+</h2>
+1、使用display:none来隐藏所有内容，""显示内容<br />
+display:none可以让网页中所有内容不显示，如代码、文字、链接、图片、div层，是推荐的内容隐藏方式。<br />
+2、使用visibility:hidden来隐藏内容，visible显示内容<br />
+visibility:hidden和display:none可以隐藏的内容几乎一样，但唯一区别是它虽然隐藏了内容，但被隐藏掉的内容仍旧占据空间，这段隐藏了内容却保留空间的位置会在网页中显示为空白。<br />
+3、使用overflow:hidden隐藏溢出内容<br />
+overflow:hidden这种方式可以隐藏掉固定区域外的内容，它可以有效控制显示区域。但应注意，使用它时需要给它定义宽度和高度，否则会无效。overflow用法中存在一个分支，overflow-x:hidden和overflow-y:hidden，x是横向范围，y是纵向范围，这两个属性经常用在需要隐藏滚动条时。
+<h4>
+	js中style.display=""无效的解决方法
+</h4>
+<p>
+	把id为name的样式用style这样内置到标签内，这样不管用display=""还是display="block"就都可以正常显示！
+</p>
+<pre class="prettyprint lang-js">&lt;div id="name" style="display:none" &gt;My name is smile.&lt;/div&gt;
+&lt;script&gt;
+     document.getElementById('name').style.display="";
+&lt;/script&gt;</pre></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/910.html">WEB前端——返回顶部相关问题 （实例）</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/912.html">WEB前端——拖拉页面元素改变页面布局 管理后台（实例）</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#dily属性值ilie-block和flot属性值（left,right）的共性和区别(布局的核心)">dily属性值ilie-block和flot属性值（left,right）的共性和区别(布局的核心)</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#CSS中如何让元素隐藏">CSS中如何让元素隐藏</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

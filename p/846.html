@@ -1,0 +1,827 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>c++面向对象程序设计-类和对象_comonly.cn</title>
+<meta name="keywords" content="c++面向对象程序设计-类和对象" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">c++面向对象程序设计-类和对象</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-02-09</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	c c++
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='类的数据成员和成员函数'>
+	类的数据成员和成员函数
+</h2>
+<pre class="prettyprint lang-cpp">class 类名
+{       //类体
+    private:
+        //&lt;私有数据成员，私有成员函数&gt;
+        int s;    //数据成员
+        void print(){cout&lt;&lt;"成员函数";}
+    public:
+        //&lt;公有数据成员，公有成员函数&gt;
+    protected:
+        //&lt;保护型数据成员，保护型成员函数&gt;
+}</pre>
+<ul>
+	<li>
+		私有成员（private）数据只能在类中的成员函数中使用，私有成员函数只能被类中其他成员函数调用，私有成员不能通过对象使用。类成员默认权限为private。
+	</li>
+	<li>
+		公有成员（public）可以在类中使用，也可以通过对象直接使用。
+	</li>
+	<li>
+		保护型成员（protected）可以在类体中使用，也可以在派生类中使用，但不能在其他类通过对象使用。
+	</li>
+</ul>
+<h3>
+	在类体之外定义成员函数
+</h3>
+类体中只保留成员函数的原型声明。也称为外联函数。可以访问操作私有成员数据。<br />
+<pre class="prettyprint lang-cpp">返回类型 类名 ::成员函数名(参数表){函数体}</pre>
+<h3>
+	内联函数
+</h3>
+程序编译时将函数代码插入函数调用处。<br />
+<ol>
+	<li>
+		在类体中定义函数体的成员默认为内联函数。
+	</li>
+	<li>
+		可以使用inline关键字定义内联函数（在类体之外定义函数体的成员函数）
+	</li>
+</ol>
+<pre class="prettyprint lang-cpp">class Sum
+{
+    private:
+        int s;
+    public:
+        int m;
+        void change(){s=0;}
+        void setSum(int x);  //成员函数的原型声明
+        void print();
+};    //这里有一个分号
+Sum :: setSum(int x)  //::为作用域解析运算符，实现成员函数
+
+{
+    s=x;
+}
+inline void Sum :: print(int x)
+{
+    s=x;
+    cout&lt;&lt;"s的值为"&lt;&lt;s;
+}</pre>
+<h2 id='对象的创建'>
+	对象的创建
+</h2>
+对象是类的实例化，定义一个类的对象：类名 对象名;<br />
+<h3>
+	类成员的访问
+</h3>
+<ul>
+	<li>
+		对象名.公有数据成员名;
+	</li>
+	<li>
+		对象名.公有成员函数名(实参表);
+	</li>
+</ul>
+<pre class="prettyprint lang-cpp">Sum a;
+a.m=3;
+a.print(8);</pre>
+<h2 id='构造函数和析构函数'>
+	构造函数和析构函数
+</h2>
+<ul>
+	<li>
+		构造函数作用在对象被创建时使用特定的值构造对象，将对象初始化一个特定的状态。名字必须与其所属的类名相同，并声明为公有成员函数，且没有任何类型的返回值。
+	</li>
+	<li>
+		作为类的一个成员函数，具有一般成员函数所有的特性，可以访问类的所有数据成员，可以是内联函数，可以带参数（参数在定义对象是带上），还可以带默认的形参值。
+	</li>
+	<li>
+		可以重载，重载的构造函数之间以所带参数的个数或类型的不同而区分。
+	</li>
+</ul>
+<pre class="prettyprint lang-cpp">class Sum
+{
+    private:
+        int m;
+    public:
+        Sum(){m=0;}    //没有返回值
+        Sum(int x);  //成员函数的原型声明
+        ~Sum(){cout&lt;&lt;"调用析构函数\n";}
+};    //这里有一个分号
+Sum :: Sum(int x)
+{
+    m=x;
+}
+void main(){
+    Sum a1;
+    Sum a2(10);
+}</pre>
+析构函数作用在类对象生命周期结束时，清理和释放类对象所占用的系统资源。析构函数有所属类同名，函数名前加一个逻辑非运算~，表示构造函数的逆。一个类中只能定义一个析构函数。<br />
+<h3>
+	复制构造函数
+</h3>
+具有一般构造函数所有的属性，创建新对象时被调用，其形参是本类的对象的引用。作用是用一个存在的对象初始化另一个正创建的同类对象，将已知对象的数据成员的值复制给另一个正在创建的另一个同类的对象。<br />
+<ul>
+	<li>
+		函数名与类名同名（也是一种构造函数），不指定返回类型。
+	</li>
+	<li>
+		只有一个参数，并且是对某对象的引用。
+	</li>
+	<li>
+		每个类都必须有一个复制初始化构造函数（若没有说明，编译系统会自动生成一个）。
+	</li>
+</ul>
+<pre class="prettyprint lang-cpp">class Sum
+{
+    private:
+        int s;
+    public:
+        void print(){cout &lt;&lt;"s为："&lt;
+        Sum(int x,int y){s=x*y;}
+        Sum(Sum &amp;p){s=2*p.s;};    //没有返回值
+        ~Sum(){cout&lt;&lt;"调用析构函数\n";}
+};
+void main(){
+    Sum a1(2,3);
+    Sum a2(a1);
+    a2.print();
+}</pre>
+<h2 id='对象指针'>
+	对象指针
+</h2>
+指向对象的指针，对象指针就是存放该对象地址的变量。<br />
+<pre class="prettyprint lang-cpp">类名 *对象指针名;</pre>
+用指针访问对象成员时用“-&gt;”运算符：对象指针名-&gt;类成员名;或(*对象指针名).类成员名;<br />
+<h3>
+	this指针
+</h3>
+类成员变量和类成员函数相同时用"this-&gt;"区别，指向调用成员函数对象的一个特殊的指针。<br />
+<pre class="prettyprint lang-cpp">class Test
+{
+    private:
+    int x;
+    public:
+    int m;
+    void setX(int m){this-&gt;m=m;}
+}
+void main()
+{
+    Test t,*p;
+    p=&amp;t; //通过地址赋值，使指针p指向对象t
+    t.setX(10);
+    cout&lt;&lt;"通过指针访问的m的值："&lt;&lt;p-&gt;m&lt;&lt;endl;
+}</pre>
+<h3>
+	静态类成员
+</h3>
+某类所有对象的静态数据成员都共用同一个存储空间，即静态数据成员被类的所有对象共享。<br />
+<ol>
+	<li>
+		static声明的静态成员在编译时分配存储空间，直到整个程序执行完才撤销。
+	</li>
+	<li>
+		static静态成员的初始化是在编译时进行的，一般在定义static静态成员时要给出初始值。
+	</li>
+</ol>
+<h3>
+	静态数据成员的声明，初始化与访问
+</h3>
+<pre class="prettyprint lang-cpp">static 数据类型 静态数据成员名;
+数据类型 类名::静态数据成员名=初值;    //必须在类外初始化
+类名::静态数据成员名;    //在类外只能通过类名访问(被声明为私有成员时，只能在类内直接引用)</pre>
+<pre class="prettyprint lang-cpp">#include
+using namespace std;
+class Student
+{
+    private:
+        int id;
+        static int sum;
+    public:
+        Student(int id){this.id=id;sum++;}
+        void printSum(){cout&lt;&lt;"学生总数："&lt;&lt;sum};
+}
+int Student :: sum=0;
+void main()
+{
+    Student stu1(1),stu(2),stu(3);
+    stu1.printSum();
+}</pre>
+<h3>
+	静态成员函数
+</h3>
+<p>
+	可以直接引用该类的静态数据和成员函数，不能引用非静态数据成员（要引用必须通过对象名来引用）。公有的静态函数成员可以通过类名或函数名来调用（非静态的只能通过对象名调用）。定义静态成员函数：
+</p>
+<pre class="prettyprint lang-cpp">static 返回类型 函数名(参数表){函数体}</pre>
+引用：类名::静态成员函数名（实参表） 或 对象名.静态成员函数名（实参表）<br />
+<ol>
+	<li>
+		静态成员函数无this指针
+	</li>
+	<li>
+		访问的基本上是静态数据成员或全局变量
+	</li>
+	<li>
+		在调用静态成员函数的前面，必须有对象名或类名
+	</li>
+</ol>
+<pre class="prettyprint lang-cpp">#include
+using namespace std;
+class Student
+{
+    private:
+        int id;
+        static int sum;
+    public:
+        Student(int id){this.id=id;sum++;}
+        void static printSum(){cout&lt;&lt;"学生总数："&lt;&lt;sum;
+}
+int Student :: sum=0;
+void main()
+{
+    Student stu1(1),stu(2),stu(3);
+    stu1.printSum();
+    Student ::printSum();
+}</pre>
+<h2 id='动态内存分配'>
+	动态内存分配
+</h2>
+new运算实现动态内存分配，其创建的对象是一个指向该区域的地址指针变量。<br />
+<pre class="prettyprint lang-cpp">类名 *指针对象名;
+指针对象名 = new 构造函数(参数列表);</pre>
+运算符delete用来删除由new建立的对象，释放指针所指向内存的空间，此时该对象的析构函数将被调用。<br />
+<pre class="prettyprint lang-cpp">delete 指针对象名;
+
+class Student
+{
+    private:
+        int id;
+    public:
+        Student(int id){this.id=id;}
+        void static printSum(){cout&lt;&lt;"学生id："&lt;&lt;id;
+        ~Student(){cout&lt;&lt;"对象将被销毁";}
+}
+void main()
+{
+    Student *p;
+    p=new Student(1);
+    p-&gt;printSum();
+    delete p;    //释放对象调用析构函数
+}</pre>
+基本数据类型动态分配内存区域<br />
+<pre class="prettyprint lang-cpp">指针变量 = new 数据类型(初值列表);
+delete 指针变量;</pre>
+<pre class="prettyprint lang-cpp">int *pi;
+pi=new int;
+*pi=3;
+cout&lt;&lt;pi;    //pi为3的地址
+cout&lt;&lt;*pi; //*pi为int数据的值
+为数组对象动态分配内存区域
+指针变量 = new 对象类型名[数组容量];
+delete[] 指针变量;
+
+int *p;
+p=new int[3];
+delete [] p;</pre></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/845.html">erp报表项目</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/847.html">c++指针与引用</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="初始化成员变量">
+							<h2 style="display:inline;color:#5BC648;">初始化成员变量</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-05-31&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	在构造函数实现时，在函数名后初始化成员变量。只能用于构造函数中。
+</p>
+<pre class="prettyprint lang-js">ClassName::ClassName(parameter):MemberVariable1(value),...{
+    MethodBody }</pre>
+<p>
+	初始化成员变量，比在{}中赋值效率要高。静态变量必须在外部声明，不能通过该方式初始化。
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="复制构造函数 默认浅复制">
+							<h2 style="display:inline;color:#5BC648;">复制构造函数 默认浅复制</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-05-31&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><pre class="prettyprint lang-cpp">ClassName(const ClassName &amp;className); 接收所属类对象引用。 //通过自定义复制构造函数，生成新的堆内存存放数据。
+var = new int; *var = 5;    //首先将指针变量指向新的堆内存，然后复制值。</pre>
+<p>
+	默认的复制构造函数将每个成员变量复制到新对象，只做浅复制（成员复制）。对于成员变量中指向堆中对象的指针，没有复制对应的堆数据，这样就会出现两个对象的成员指针变量指向同一内存区域。当定义指针成员变量时，当一个对象销毁调用析构函数后，另一个对象调用析构函数发生异常，程序会报错终止。
+</p>
+<pre class="prettyprint lang-cpp">class Book{
+    public:
+        double *money;
+        Book(const Book &amp;);
+        ~Book();
+};
+
+Book::Book(const Book &amp;book){ money = new double;
+    *money = *book.money;//重新生成一个double类型的堆内存并赋值
+}
+
+Book::~Book(){
+    delete money;
+    money = NULL;//删除指针指向的内容后将指针指向也清除
+}</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="运算符重载">
+							<h2 style="display:inline;color:#5BC648;">运算符重载</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-05-31&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><pre class="prettyprint lang-cpp">class Counter{
+    public:
+        int value;
+        Counter(int value);
+        const Counter&amp; operator++();
+        const Counter&amp; operator++(int);
+        Counter operator+(const Counter&amp;);
+        operator int();
+        Counter operator=(const Counter&amp;); };
+
+Counter::Counter(int value){
+    //构造函数初始化值
+    //同时可以直接将int类型数据赋值给Counter类型
+    this-&gt;value = value;
+}
+Counter::operator int(){
+    //int运算符
+    //将Counter类型数据转换成int
+    return value;
+}
+const Counter&amp; Counter::operator++(){
+    //定义前缀自增
+    ++value;
+    return *this;//返回值解除引用
+}
+const Counter&amp; Counter::operator++(int){
+    //定义后缀自增
+    Counter temp(*this);
+    ++value;
+    return temp;
+}
+Counter Counter::operator+(const Counter&amp; counter){
+    //加法
+    return Counter(value + counter.value);
+}
+Counter Counter::operator=(const Counter&amp; counter){
+    //赋值运算符，两个已存在对象，将其中一个值赋给另一个
+    //当=两边是同一对象时，直接返回当前对象。
+    if(this==&amp;counter)return *this;
+    //将当前对象成员变量值赋给新对象成员变量
+    value = counter.value;
+    //如果是指针类型成员变量，如果是变成对象需要重新生成堆空间
+    //delete value_address;
+    //value_address = new int;
+    //将指针指向的值赋过去
+    //*value_address = *counter.value_address
+    return *this;
+}</pre>
+<ul>
+	<li>
+		前缀运算符和后缀运算符通过int参数区分，但定义的变量在成员函数实现中并没有使用。
+	</li>
+	<li>
+		在使用赋值运算符时，需要考虑等号两边是同一个对象时的情况，这种情况对应指针类型成员变量不能删除堆内存空间。
+	</li>
+	<li>
+		将基本类型转换为对象，只需要定义构造函数即可，赋值时直接将基本构造函数参数赋值给对象即可转换。将对象转换为基本数据类型需要通过int运算符。
+	</li>
+</ul></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="继承、重写与重载">
+							<h2 style="display:inline;color:#5BC648;">继承、重写与重载</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-05-31&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><ul>
+	<li>
+		创建派生类对象时，将调用多个构造函数。先调用基类构造函数，再调用派生类构造函数。对象销毁时，先调用派生类析构函数，再调用基类析构函数。在派生类构造函数中，可以初始化基类构造函数。
+	</li>
+	<li>
+		重写，与基类函数返回类型和签名相同。签名包括函数名，参数列表（包括数据和类型）和关键字const（如果有）。重写和基类函数重名的函数时，需要重写同名的所有基类函数，否则会隐藏基类没有被重写的成员函数，但是可以使用全限定名调用。
+	</li>
+	<li>
+		重载，函数名称相同，签名不同。
+	</li>
+</ul>
+<pre class="prettyprint lang-cpp">class Book{
+    public:
+        double money;
+        Book(double);
+        void buy();
+};
+//Math继承Book
+class Math : public Book{ public:
+        Math(double);
+        void buy(int); void buy(char*);
+};
+
+Book::Book(double a){ money = a;
+}
+void Book::buy(){
+    cout&lt;&lt;"I hava bought a book!"&lt;&lt;endl;
+}
+
+//通过Book(a)初始化基类的构造函数，若没有定义构造函数则调用基类默认不带参数的构造方法
+Math::Math(double a):Book(a){}
+void Math::buy(int i){
+    cout&lt;&lt;"I hava bought "&lt;&lt;i&lt;&lt;" maths book!"&lt;&lt;endl;
+}
+//成员函数重载
+void Math::buy(char * name){
+    cout&lt;&lt;"I hava bought "&lt;&lt;name&lt;&lt;" book!"&lt;&lt;endl;
+}
+
+//主函数调用
+Book book(1);
+book.buy();
+Math math(1);
+math.Book::buy();//通过全限定定名调用隐藏的成员函数
+math.buy(3);
+math.buy("base math");
+//输出
+I hava bought a book!
+I hava bought a book!
+I hava bought 3 math books!
+I hava bought base math book!</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="多态">
+							<h2 style="display:inline;color:#5BC648;">多态</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-05-31&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><pre class="prettyprint lang-cpp">class Book{
+    public:
+        int page;
+        Book(){page = 0;}
+        Book(int i){page = i;}
+        virtual void read();
+        //定义虚复制构造函数可以通过基类对象指针创建派生类对象拷贝
+        virtual Book *clone(){return new Book(*this);}
+};
+class Math : public Book{
+    public:
+        Math():Book(100){} virtual void read();
+        Book *clone(){return new Math(*this);}//虚函数在派生类中重写时可以不带virtual
+};  void Book::read(){cout&lt;&lt;"I am reading a book!"&lt;&lt;endl;}
+void Math::read(){cout&lt;&lt;"I am reading a math book!"&lt;&lt;endl;};
+
+//函数调用
+Book book;
+book.read();
+cout&lt;&lt;book.page&lt;&lt;endl;
+
+Math math;
+math.read();
+cout&lt;&lt;math.page&lt;&lt;endl;
+
+Book *pBook = &amp;math;
+pBook-&gt;read();//基类指针指向派生类，通过指针访问的是派生类math对应的方法.不能访问派生类特有的方法
+cout&lt;&lt;pBook-&gt;page&lt;&lt;endl;
+
+//结果
+I am reading a book!
+0
+I am reading a math book!
+100
+I am reading a math book!
+100</pre>
+<h3>
+	虚成员函数
+</h3>
+<ul>
+	<li>
+		通过关键字virtual声明希望这个类最终是另一个类的基类。派生类可能重写该函数。
+	</li>
+	<li>
+		虚函数在类外实现时，不能带virtual关键字。
+	</li>
+	<li>
+		不能通过基类指针访问派生类特有的方法。可以通过将基类指针转为派生类指针。
+	</li>
+	<li>
+		使用虚成员函数时，必须维护一个v-table，并且这个表在声明第一个虚函数时创建，，
+	</li>
+	<li>
+		如果类中任何一个函数是虚成员函数，那么析构函数也应该是虚成员函数。
+	</li>
+	<li>
+		派生类重写虚成员函数是virtual不是必须的。
+	</li>
+</ul>
+<h3>
+	切除
+</h3>
+<p>
+	通过指针，引用和值传递的方式，按值传递会切除基类调用派生类的方法。
+</p>
+<h3>
+	虚复制构造函数
+</h3>
+<p>
+	将clone函数设为虚函数，对每个派生类分别实现。这样，在通过基类对象指针创建派生类对象拷贝时，可以复制完整的派生类对象。
+</p>
+<h3>
+	纯虚函数
+</h3>
+<pre class="prettyprint lang-cpp">class Book{
+    public:
+        int page;
+        Book(){page = 0;}
+        Book(int i){page = i;}
+        virtual void read()=0;//通过初始化为0，声明纯虚函数
+};
+class Math : public Book{
+    public:
+        Math():Book(100){}
+        virtual void read();
+};
+
+//基类纯虚函数的实现，可以在派生类实现中调用
+//如果派生类中无调用，可以省略。对应非纯虚函数，不能省略实现
+void Book::read(){cout&lt;&lt;"I am reading a book!"&lt;&lt;endl;}
+void Math::read(){
+    Book::read();
+    cout&lt;&lt;"I am reading a math book!"&lt;&lt;endl;
+}; //调用
+//Book book;//抽象数据类型不能创建实例
+Math math;
+math.read();
+cout&lt;&lt;math.page&lt;&lt;endl;
+
+//输出
+I am reading a book!
+I am reading a math book!
+100</pre>
+<p>
+	对应纯虚函数，必须在派生类中重写的虚函数，然后可以通过全限定名调用基类虚函数的实现。virtual void draw()=0;通过初始化虚函数值为0声明纯虚函数。
+</p>
+<h3>
+	抽象数据类型(ADT)
+</h3>
+<p>
+	包含一个或多个纯虚函数的类被称为抽象数据类型(ADT)。抽象数据类型无法创建实例。可以从ADT派生出其它ADT（构建多层抽象层次结构）：
+</p>
+<ol>
+	<li>
+		ADT虚函数1、虚函数2--&gt;ADT实现其中一个虚函数1--&gt;派生类无需必须实现函数1，但也可以实现，必须实现虚函数2
+	</li>
+	<li>
+		ADT虚函数1、虚函数2--&gt;派生类直接实现虚函数1和虚函数2
+	</li>
+</ol></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#类的数据成员和成员函数">类的数据成员和成员函数</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#对象的创建">对象的创建</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#构造函数和析构函数">构造函数和析构函数</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#对象指针">对象指针</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#动态内存分配">动态内存分配</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#初始化成员变量">初始化成员变量</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#复制构造函数 默认浅复制">复制构造函数 默认浅复制</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#运算符重载">运算符重载</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#继承、重写与重载">继承、重写与重载</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#多态">多态</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

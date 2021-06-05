@@ -1,0 +1,257 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>EnterCriticalSection 和 LeaveCriticalSection   CRITICAL_SECTION_comonly.cn</title>
+<meta name="keywords" content="EnterCriticalSection 和 LeaveCriticalSection   CRITICAL_SECTION" />
+<meta name="description" content="CRITICAL_SECTION cs;
+
+
+	InitializeCriticalSection(&amp;cs);//初始化临界区
+
+EnterCriticalSection(&amp;cs);//进入临界区
+//操作数据
+MyMoney*=10;//所有访问MyMoney变量的程序都需要这样写Enter.. Leave...
+LeaveCriticalSection(&amp;cs);//离开临界区
+
+	DeleteCriticalSection(&amp;cs);//删除临界区" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">EnterCriticalSection 和 LeaveCriticalSection   CRITICAL_SECTION</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-12-03</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>CRITICAL_SECTION cs;
+
+
+	InitializeCriticalSection(&amp;cs);//初始化临界区
+
+EnterCriticalSection(&amp;cs);//进入临界区
+//操作数据
+MyMoney*=10;//所有访问MyMoney变量的程序都需要这样写Enter.. Leave...
+LeaveCriticalSection(&amp;cs);//离开临界区
+
+	DeleteCriticalSection(&amp;cs);//删除临界区</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	CRITICAL_SECTION cs;
+</p>
+<p>
+	InitializeCriticalSection(&amp;cs);//初始化临界区
+</p>
+EnterCriticalSection(&amp;cs);//进入临界区<br />
+//操作数据<br />
+MyMoney*=10;//所有访问MyMoney变量的程序都需要这样写Enter.. Leave...<br />
+LeaveCriticalSection(&amp;cs);//离开临界区<br />
+<p>
+	DeleteCriticalSection(&amp;cs);//删除临界区
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	另外，很多人对CRITICAL_SECTION的理解是错误的，认为CRITICAL_SECTION是锁定了资源，其实，CRITICAL_SECTION是不能够“锁定”资源的，它能够完成的功能，是同步不同线程的代码段。简单说，当一个线程执行了EnterCritialSection之后，cs里面的信息便被修改了，以指明哪一个线程占用了它。而此时，并没有任何资源被“锁定”。不管什么资源，其它线程都还是可以访问的（当然，执行的结果可能是错误的）。只不过，在这个线程尚未执行LeaveCriticalSection之前，其它线程碰到EnterCritialSection语句的话，就会处于等待状态，相当于线程被挂起了。 这种情况下，就起到了保护共享资源的作用。<br />
+&nbsp; &nbsp; &nbsp; 也正由于CRITICAL_SECTION是这样发挥作用的，所以，必须把每一个线程中访问共享资源的语句都放在EnterCritialSection和LeaveCriticalSection之间。这是初学者很容易忽略的地方。<br />
+当然，上面说的都是对于同一个CRITICAL_SECTION而言的。 如果用到两个CRITICAL_SECTION，比如说：<br />
+第一个线程已经执行了EnterCriticalSection(&amp;cs)并且还没有执行LeaveCriticalSection(&amp;cs)，这时另一个线程想要执行EnterCriticalSection(&amp;cs2)，这种情况是可以的（除非cs2已经被第三个线程抢先占用了）。 这也就是多个CRITICAL_SECTION实现同步的思想。<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1586.html">CloseHandle</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1588.html">CreateSemaphore  window下线程同步之（Semaphores（信号量）)</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

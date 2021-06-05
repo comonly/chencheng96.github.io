@@ -1,0 +1,435 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>数据库的命脉——记录集_comonly.cn</title>
+<meta name="keywords" content="数据库的命脉——记录集" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">数据库的命脉——记录集</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">wlccomeon</li>
+          <li class="lmname"><a href="http://blog.csdn.net/wlccomeon/article/details/7942577" target="_blank">http://blog.csdn.net/wlccomeon/article/details/7942577</a></li>
+          <li class="timer">2017-04-14</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	数据库
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">数据库,记录集</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <span>数据库编程中应用的最多、最复杂的对象就是记录集，数据库中的数据都是通过记录集来输送到用户程序，也是通过记录集将更新的数据返回数据库。下面就来详细说明一下记录集：</span> 
+<h2 id='&b;1、记录集的属性和方法'>
+	&nbsp;1、记录集的属性和方法
+</h2>
+<h3>
+	&nbsp; &nbsp; &nbsp; （1）记录集的常用属性
+</h3>
+<ul>
+	<li>
+		&nbsp;&nbsp;&nbsp;BOF属性 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;当记录集记录指针指向第一条记录时返回True
+	</li>
+	<li>
+		&nbsp;&nbsp;&nbsp;EOF属性 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;当记录集记录指针指向最后一条记录时返回True
+	</li>
+	<li>
+		&nbsp;&nbsp;&nbsp;AbsloutePosition属性&nbsp;&nbsp;&nbsp; 返回当前记录集记录指针，第一条记录为0，是只读属性。
+	</li>
+	<li>
+		&nbsp;&nbsp;&nbsp;Bookmark属性 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;返回或设置当前记录集指针的书签，是字符型可读写属性。
+	</li>
+</ul>
+<p>
+	每一条记录都有自己唯一的书签，它与记录在记录集中的顺序无关。将Bookmark属性存放到变量中，后面可以通过将该变量赋值给Bookmark属性，并返回到这个记录。
+</p>
+<ul>
+	<li>
+		&nbsp;&nbsp;&nbsp;NoMatch属性 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 当我们使用Find方法查询时，如果未找到则返回True。
+	</li>
+	<li>
+		&nbsp;&nbsp;&nbsp;Index属性 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 在执行Seek操作时，需要给此属性设置索引的名字，可以为了不同的需要随时更换，<span style="line-height:1.5;">如果没有设置，Seek操作出错。</span> 
+	</li>
+	<li>
+		&nbsp;&nbsp;&nbsp;Filter属性 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;过滤器，用于筛选符合指定条件的记录。
+	</li>
+	<li>
+		<span style="line-height:1.5;">&nbsp; &nbsp;RecordCount属性 &nbsp; &nbsp; &nbsp; &nbsp; 返回记录集中的记录书。为了返回正确的记录数，有时需要先移动到最后一个记录，</span><span style="line-height:1.5;">&nbsp; 否则可能得不到正确的结果。</span> 
+	</li>
+	<li>
+		&nbsp;&nbsp;Sort属性 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;指定记录集的排序方式
+	</li>
+</ul>
+<h3>
+	&nbsp; &nbsp; &nbsp; （2）记录集的常用方法（注：个别方法不能适用于每种类型的记录集）
+</h3>
+<p>
+	&nbsp; &nbsp; &nbsp; &nbsp; 1）移动记录指针类方法
+</p>
+<ul>
+	<li>
+		&nbsp;MoveFirst&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;将记录集指针移动到第一条记录。
+	</li>
+	<li>
+		&nbsp;MoveLast&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;将记录集指针移动到最后一条记录。
+	</li>
+	<li>
+		&nbsp;MovePrevious&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;将记录集指针移动到前一条记录。
+	</li>
+	<li>
+		&nbsp;MoveNext&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;将记录集指针移动到下一条记录。
+	</li>
+</ul>
+<p>
+	&nbsp; &nbsp; &nbsp; &nbsp; 2）增加、删除、修改类方法
+</p>
+<ul>
+	<li>
+		&nbsp;AddNew&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;想记录及增加一条新纪录
+	</li>
+	<li>
+		&nbsp;Edit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对当前记录进行编辑，修改完成后要用Update方法更新记录。
+	</li>
+	<li>
+		&nbsp;Update&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果增加或修改了记录，必须用此方法更新。
+	</li>
+	<li>
+		&nbsp;CancelUpdate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;取消更新记录，在使用了Edit或者AddNew方法后放弃修改。
+	</li>
+	<li>
+		&nbsp;Delete&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;从记录集中将当前记录删除。
+	</li>
+</ul>
+<p>
+	在删除后常使用MoveNext方法移动指针，否则会出现无当前记录的情况，比如：
+</p>
+<p>
+	<em>&lt;span style="font-size:18px;"&gt;With Data1.Recordset</em><br />
+<em> .Delete</em><br />
+<em> .MoveNext</em><br />
+<em> If .EOF then .MoveLast</em><br />
+<em> End With&lt;/span&gt;</em>
+</p>
+<span>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;3）查找类方法</span><br />
+<ul>
+	<li>
+		&nbsp;Seek，在记录集中定位符合条件的特定记录，只能对经过索引的字段进行此操作。
+	</li>
+</ul>
+<span>&nbsp; &nbsp; &nbsp; &nbsp;它的语法如下：</span><br />
+<span>&nbsp; &nbsp; &nbsp; &nbsp;Recordset.Seekcomparison,key1,key2. . .key13</span>
+<p>
+	&nbsp; &nbsp; &nbsp; &nbsp;其中的comparison可以是6中关系运算符中除了“&lt;&gt;”外的其他运算符，如果建立的是复合索引，用Seek方法的时候可以给出多个键值。例如，要查找学号为970222的记录，可以采用下面操作：
+</p>
+<div>
+	<div>
+		<em>&lt;span style="font-size:18px;"&gt;With rsStudent</em><br />
+<em> .Index=”XH”</em><br />
+<em> .Seek “=”,”970222”</em><br />
+<em> If .NoMatch Then MsgBox”数据未找到”</em><br />
+<em> End With</em><br />
+<em> &lt;/span&gt;</em>
+	</div>
+</div>
+<ul>
+	<li>
+		&nbsp;FindFirst， &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;在记录集中查询符合条件的第一条记录
+	</li>
+	<li>
+		&nbsp;FindLast， &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;在记录集中查询符合条件的最后一条记录
+	</li>
+	<li>
+		&nbsp;FindPrevious， &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 在记录集中查询符合条件的前一条记录
+	</li>
+	<li>
+		&nbsp;FindNext， &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;在记录集中查询符合条件的下一条记录
+	</li>
+</ul>
+<p>
+	<br />
+</p>
+<p>
+	&nbsp; &nbsp; 例如，查找[XM]字段中第一个姓李的人的程序如下：
+</p>
+<div>
+	<div>
+		<em>&lt;span style="font-size:18px;"&gt;Dim S As String&nbsp;</em><br />
+<em> With Data1.Recordset</em><br />
+<em> S=.Bookmark					 &nbsp; &nbsp; &nbsp;‘记录当前位置</em><br />
+<em> .FindFirst “XM Like ‘李*’”			'查找姓李的人，用“XM=xx”可进行精确查找</em><br />
+<em> If .NoMatch then MsgBox “数据未找到”</em><br />
+<em> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.Bookmark=S 				 &nbsp; &nbsp; &nbsp;‘如果没找到，返回到原来的位置</em><br />
+<em> End If&nbsp;</em><br />
+<em> &lt;/span&gt;&lt;span style="font-size:18px;"&gt;End With</em><br />
+<em> &lt;/span&gt;</em>
+	</div>
+</div>
+<p>
+	&nbsp; &nbsp; &nbsp; &nbsp; 4）其他方法
+</p>
+<ul>
+	<li>
+		&nbsp;Clone， &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;克隆（建立一个复本）记录集
+	</li>
+	<li>
+		&nbsp;Close， &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;关闭记录集，不用的时候应该关闭，以释放资源
+	</li>
+	<li>
+		&nbsp;OpenRecordset， &nbsp; &nbsp; &nbsp;据本记录集按指定条件生成一个新记录集，如果要创建一个记录集的子集，应该使用此方法。
+	</li>
+</ul>
+<h2 id='2、记录集的使用举例'>
+	2、记录集的使用举例
+</h2>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;打开我们前面创建的数据库，并写一条记录在里面，本例是直接给记录赋值，完全可以设计一个界面，然后从上面的TextBox或者其他空间中取出值并赋值给记录，因为界面设计不是本章的主题，所以从略，程序如下： &nbsp;
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<span style="line-height:1.5;"><em>&lt;span style="font-size:18px;"&gt;&nbsp;</em><br />
+<em>Dim db As Database ‘数据库对象</em><br />
+<em>Dim rs As Recordset	 &nbsp; &nbsp; ‘记录集对象</em><br />
+<em>&lt;/span&gt;</em><br />
+</span>
+</p>
+<p>
+	<span style="line-height:1.5;"></span> 
+</p>
+<p>
+	<span style="line-height:1.5;"><br />
+</span> 
+</p>
+<p>
+	<span style="line-height:1.5;"><em>&lt;span style="font-size:18px;"&gt;		Set db=DBEngine.Workspaces(0).OpenDatabase(“Students.MDB”)</em><br />
+<em> Set rs=db.OpenRecordset(“students”,dbOpenTable) ‘表的名字也叫students</em><br />
+<em> rs.AddNew			‘增加一条新记录，如果是修改原有记录，则使用Edit方法</em><br />
+<em> With rs</em><br />
+<em> .Fields(“XH”)=CLng(970111)</em><br />
+<em> .Fields(“XM”)=”张思强”</em><br />
+<em> .Fields(“XB”)=”男”</em><br />
+<em> .Fields(“BORN”)=”河北石家庄”</em><br />
+<em> .Fields(“BIRTH”)=”1980-1-1”</em><br />
+<em> End With</em><br />
+<em> rs.Update		 &nbsp; &nbsp; &nbsp;‘修改或者增加新纪录后，必须更新数据库才能保存</em><br />
+<em> rs.Close			‘关闭记录集</em><br />
+<em> db.Close			‘关闭数据库</em><br />
+<em> &lt;/span&gt;</em><br />
+<br />
+</span> 
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;Recordset对象中所含的Fields集合包含了一个记录的各个字段，Fields集合中没有若干个Fields对象，Fields对象的Value属性代表了当前记录的该字段的值，上例中并没有写成像Fields(“XH”).Value或者Fields（0）.Value这种形式，是因为Value属性是对象的默认属性，在编写代码时可以省略。对于基本类型的数据可以至今进行赋值，对于超长类型的数据，如歌曲、电影、图片则需要用Field对象的AppendChunk方法和GetChunk方法来进行处理。
+</p>
+<h2 id='3、&b;记录集的种类'>
+	3、&nbsp; 记录集的种类
+</h2>
+<p>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Recordset对象有3中类型，即表（table）、动态集（dynaset）、快照（snapshot）。
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表类型的Recordset对象是指当前数据库中的表在创建表类型的记录集时数据库引擎打开的表。后续的数据操作都是直接对表进行的。只能对单个的表打开表类型的记录集，而不能对连接或者联合查询打开表类型的记录集。与其他类型的Recordset对象相比，表类型的搜索与排序速度最快。
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 动态集类型的Recordset对象可以是本地的表，也可以使返回的行查询结果。它实际上是对一个或者几个表中的记录的一些列引用。可用动态集从多个表中提取和更新数据，其中包括连接的其他数据库中的表。动态类型具有一种与众不同的特点：不同数据库的可更新连接。利用这种特性，可以对不同类型的数据库中的表进行可更新的连接查询。动态集和他的基本表可以互相更新。如果动态集中的记录发生改变，同样的变化也将在基本表中反映出来。在打开记录集的时候，如果其他的用户修改了基本表，那么动态集中也将反映出被修改过的记录。动态集类型是最灵活的，也是功能最强的Recordset类型。
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;快照类型的Recordset对象包含的数据是固定的，它反映了在产生快照的一瞬间数据库的状态。从Microsoft Jet数据源得到的快照是不可更新的，从开放数据库互连（ODBC）数据源得到的某些快照是可以更新的，这取决于所有数据库系统本身的能力。与动态集类型和表类型的Recordset对象相比，快照的处理开销较少。因此，它执行查询和返回数据的速度更快，特别是在使用ODBC数据源时。快照类型保存了表中所有记录的完整复本，因此，如果记录的个数很多，快照的性能将比动态集慢的多。
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 使用什么记录集，取决于需要完成的任务是要更改数据还是简单地查看数据。例如，如果必须对数据进行排序或者使用索引，可以使用表。因为表类型的Recordset对象是可以索引的，它定位数据的速度是最快的。如果希望能够对查询选定的一系列记录进行更新，可以使用动态集。如果在特殊的情况下不能使用表类型的记录集，或者只需对记录进行扫描，那么使用快照类型可能会快一些。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/676.html">XML是什么，它可以做什么？</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/678.html">recordset记录集操作方法</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="http://blog.csdn.net/wlccomeon/article/details/7942577" target="_blank">http://blog.csdn.net/wlccomeon/article/details/7942577</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#&b;1、记录集的属性和方法">&b;1、记录集的属性和方法</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#2、记录集的使用举例">2、记录集的使用举例</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#3、&b;记录集的种类">3、&b;记录集的种类</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,374 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>ubuntu 安装NVIDIA驱动 + CUDA  + cuDNN_comonly.cn</title>
+<meta name="keywords" content="ubuntu 安装NVIDIA驱动 + CUDA  + cuDNN" />
+<meta name="description" content="安装NVIDIA驱动和cuda部分参考&nbsp;https://blog.csdn.net/sinat_38640606/article/details/79940101 
+
+
+	安装cudnn部分参考&nbsp;https://blog.csdn.net/public669/article/details/98470857
+
+
+	
+
+
+	安装NVIDIA驱动
+
+安装驱动之前，一个很重要的工作，在开机启动的时候按住f10进入bios界面，系统设置-传统启动enable安全启动dis" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">ubuntu 安装NVIDIA驱动 + CUDA  + cuDNN</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2020-10-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>安装NVIDIA驱动和cuda部分参考&nbsp;https://blog.csdn.net/sinat_38640606/article/details/79940101 
+
+
+	安装cudnn部分参考&nbsp;https://blog.csdn.net/public669/article/details/98470857
+
+
+	
+
+
+	安装NVIDIA驱动
+
+安装驱动之前，一个很重要的工作，在开机启动的时候按住f10进入bios界面，系统设置-传统启动enable安全启动dis</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	安装NVIDIA驱动和cuda部分参考&nbsp;<a href="https://blog.csdn.net/sinat_38640606/article/details/79940101">https://blog.csdn.net/sinat_38640606/article/details/79940101</a> 
+</p>
+<p>
+	安装cudnn部分参考&nbsp;<a href="https://blog.csdn.net/public669/article/details/98470857">https://blog.csdn.net/public669/article/details/98470857</a>
+</p>
+<p>
+	<br />
+</p>
+<h2 id='安装NVIDIA驱动'>
+	安装NVIDIA驱动
+</h2>
+安装驱动之前，一个很重要的工作，在开机启动的时候按住f10进入bios界面，系统设置-传统启动enable安全启动disable<br />
+这个极其之重要，把安全启动关了。惠普的本子按住f10保存之后，还有什么数字然后回车确认。反正这个安全启动不关怎么都是错。<br />
+<br />
+1. 先卸载原有N卡驱动<br />
+#for case1: original driver installed by apt-get:<br />
+sudo apt-get remove --purge nvidia*<br />
+<br />
+#for case2: original driver installed by runfile:<br />
+sudo chmod +x *.run<br />
+sudo ./NVIDIA-Linux-x86_64-384.59.run --uninstall<br />
+如果原驱动是用apt-get安装的，就用第1种方法卸载。 <br />
+如果原驱动是用runfile安装的，就用–uninstall命令卸载。其实，用runfile安装的时候也会卸载掉之前的驱动，所以不手动卸载亦可。<br />
+<br />
+2. 禁用nouveau驱动<br />
+sudo gedit /etc/modprobe.d/blacklist.conf<br />
+在文本最后添加：（禁用nouveau第三方驱动，之后也不需要改回来）<br />
+blacklist nouveau<br />
+options nouveau modeset=0<br />
+然后执行：sudo update-initramfs -u<br />
+重启后，执行：lsmod | grep nouveau。如果没有屏幕输出，说明禁用nouveau成功。<br />
+<br />
+3. 禁用X-Window服务<br />
+sudo service lightdm stop #这会关闭图形界面，但不用紧张<br />
+大坑在这，关闭图形界面之前，看一下自己的驱动安装程序放在哪，对着文件夹点击右键属性能看见。<br />
+然后进入命令行，用cd一步一步进入然后再输命令<br />
+按Ctrl-Alt+F1进入命令行界面，输入用户名和密码登录即可。<br />
+<br />
+安装的过程中有很多的选择问题，这里没记录，上网查一下。<br />
+<br />
+小提示：在命令行输入：sudo service lightdm start ，然后按Ctrl-Alt+F7即可恢复到图形界面。<br />
+<br />
+4. 命令行安装驱动<br />
+#给驱动run文件赋予执行权限：<br />
+sudo chmod +x NVIDIA-Linux-x86_64-384.59.run<br />
+#后面的参数非常重要，不可省略：<br />
+sudo ./NVIDIA-Linux-x86_64-384.59.run –-no-opengl-files --no-x-check –-no-nouveau-check（大坑！！！！）<br />
+--no-opengl-files：表示只安装驱动文件，不安装OpenGL文件。这个参数不可省略，否则会导致登陆界面死循环，英语一般称为”login loop”或者”stuck in login”。（no前面是双杠！！！！！）<br />
+--no-x-check：表示安装驱动时不检查X服务，非必需。<br />
+--no-nouveau-check：表示安装驱动时不检查nouveau，非必需。<br />
+-Z, --disable-nouveau：禁用nouveau。此参数非必需，因为之前已经手动禁用了nouveau。<br />
+-A：查看更多高级选项。<br />
+必选参数解释：因为NVIDIA的驱动默认会安装OpenGL，而Ubuntu的内核本身也有OpenGL、且与GUI显示息息相关，一旦NVIDIA的驱动覆写了OpenGL，在GUI需要动态链接OpenGL库的时候就引起问题。<br />
+<br />
+按照如下步骤安装<br />
+<br />
+(1)Accept<br />
+(2)contiuned install<br />
+(3) Unable to find a suitable destination to install 32-bit compatibility libraries. Your system may not be set up for 32-bit compatibility. 32-bit compatibility files will not be installed; if you wish to install them, re-run the installation and set a valid directory with the --compat32-libdir option.<br />
+然后这里也没什么事，直接继续就可以了，想要解决的话，也可以尝试一下安装下面的东西（没试过）<br />
+sudo optitude install ia32-libs<br />
+(4)would you like to run the nvidia-xconfig utility to automatically update your X configuration file so that the NVIDIA X driver will be used when you restart X ? Any pre-existing X configuration file will be backed up <br />
+直接选择 NO，意思是安装驱动时不检查X服务<br />
+(5) Installation of the NVIDIA Accelerated Graphics Driver for Linux-x86_64(version:390.25) is now complete.&nbsp; Please update your XF86Config or xorg.conf file as appropriate;see the file<br />
+/usr/share/doc/NVIDIA_GLX-1.0/README.txt for details.<br />
+只有一个选项，选择Ok就行了。<br />
+然后键入重启<br />
+sudo reboot<br />
+<br />
+最后重新启动图形环境<br />
+$sudo service lightdm start<br />
+之后，按照提示安装，成功后重启即可。 <br />
+如果提示安装失败，不要急着重启电脑，重复以上步骤，多安装几次即可。<br />
+Driver测试：<br />
+nvidia-smi #若列出GPU的信息列表，表示驱动安装成功<br />
+nvidia-settings #若弹出设置对话框，亦表示驱动安装成功<br />
+<h2 id='安装CUDA'>
+	安装CUDA
+</h2>
+sudo chmod +x cuda_8.0.61_375.26_linux.run <br />
+sudo ./cuda_8.0.61_375.26_linux.run --no-opengl-libs<br />
+--no-opengl-libs：表示只安装驱动文件，不安装OpenGL文件。必需参数，原因同上。注意：不是-no-opengl-files。<br />
+这之后它显示more（0百分之），按q弹出选项栏继续<br />
+之后，按照提示安装即可。我依次选择了：<br />
+<br />
+accept #同意安装<br />
+n #不安装Driver，因为已安装最新驱动<br />
+y #安装CUDA Toolkit<br />
+#安装到默认目录<br />
+y #创建安装目录的软链接<br />
+n #不复制Samples，因为在安装目录下有/samples<br />
+<br />
+CUDA Sample测试：（很可能要装完环境变量才能用）<br />
+<br />
+#编译并测试设备 deviceQuery：<br />
+cd /usr/local/cuda-8.0/samples/1_Utilities/deviceQuery<br />
+sudo make<br />
+./deviceQuery<br />
+#编译并测试带宽 bandwidthTest：<br />
+cd ../bandwidthTest<br />
+sudo make<br />
+./bandwidthTest<br />
+<p>
+	如果这两个测试的最后结果都是Result = PASS，说明CUDA安装成功啦。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<h2 id='安装CUDNN'>
+	安装CUDNN
+</h2>
+地址：https://developer.nvidia.com/rdp/cudnn-archive<br />
+选择符合自己cuda版本的<br />
+下载“cuDNN Library for Linux”那一个,<br />
+安装cudnn<br />
+安装过程实际上是把cudnn的头文件复制到CUDA的头文件目录里面去；把cuDNN的库复制到CUDA的库目录里面去。<br />
+<p>
+	首先需要将下载的cudnn解压，之后再执行如下命令：（大家也可以一个一个的移动到相应的cuda文件下）
+</p>
+<p>
+	注意cuda版本不同对应的目录也不同
+</p>
+<br />
+# 复制cudnn头文件<br />
+sudo cp cuda/include/* /usr/local/cuda-11.1/include/<br />
+# 复制cudnn的库<br />
+sudo cp cuda/lib64/* /usr/local/cuda-11.1/lib64/<br />
+# 添加可执行权限<br />
+sudo chmod +x /usr/local/cuda-11.1/include/cudnn.h<br />
+sudo chmod +x /usr/local/cuda-11.1/lib64/libcudnn*<br />
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1867.html">ubuntu下添加新用户、解决远程登录问题（方向键 tab键等显示乱码）</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1869.html">Ubuntu系统下查看显卡相关信息（未安装驱动、已安装驱动）</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#安装NVIDIA驱动">安装NVIDIA驱动</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#安装CUDA">安装CUDA</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#安装CUDNN">安装CUDNN</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

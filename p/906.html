@@ -1,0 +1,866 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>WEB前端——js获元素属性（元素位置，宽高等属性）、鼠标位置、Event 对象及js函数传参_comonly.cn</title>
+<meta name="keywords" content="WEB前端——js获元素属性（元素位置，宽高等属性）、鼠标位置、Event 对象及js函数传参" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">WEB前端——js获元素属性（元素位置，宽高等属性）、鼠标位置、Event 对象及js函数传参</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-04-17</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='获取元素属性及相对窗口位置'>
+	获取元素属性及相对窗口位置
+</h2>
+<p>
+	JS获取元素的offsetTop,offsetLeft等属性
+</p>
+<ol>
+	<li>
+		obj.clientWidth //获取元素的宽度
+	</li>
+	<li>
+		obj.clientHeight //元素的高度
+	</li>
+	<li>
+		obj.offsetLeft //元素相对于父元素的left
+	</li>
+	<li>
+		obj.offsetTop //元素相对于父元素的top
+	</li>
+	<li>
+		obj.offsetWidth //元素的宽度
+	</li>
+	<li>
+		obj.offsetHeight //元素的高度
+	</li>
+</ol>
+区别：<br />
+<ul>
+	<li>
+		clientWidth = width + padding
+	</li>
+	<li>
+		clientHeight = height + padding
+	</li>
+	<li>
+		offsetWidth = width + padding + border
+	</li>
+	<li>
+		offsetHeight = width + padding + border
+	</li>
+	<li>
+		offset比client多了border的宽度
+	</li>
+</ul>
+<h3>
+	<span>元素相对窗口的位置</span>（通过父元素遍历）
+</h3>
+JS获取元素的offsetTop,offsetLeft等属性，我们可以通过offsetTop和offsetLeft属性获取元素相对窗口的位置，但offsetTop和offsetLeft属性都是相对于父元素定位的，而通常需要获取位置的元素都不是在最外层，所以遍历上级元素的offset相关属性少不了。那效率就成问题了。<br />
+<pre class="prettyprint lang-js">//获取元素的纵坐标（相对于窗口）
+function getTop(e){
+    var offset=e.offsetTop;
+    if(e.offsetParent!=null) offset+=getTop(e.offsetParent);
+    return offset;
+}
+//获取元素的横坐标（相对于窗口）
+function getLeft(e){
+    varoffset=e.offsetLeft;
+    if(e.offsetParent!=null) offset+=getLeft(e.offsetParent);
+    return offset;
+}</pre>
+<h3>
+	元素相对窗口的位置（直接使用<span>getBoundingClientRect</span>）
+</h3>
+好在浏览器给我提供了相应的接口getBoundingClientRect，这个方法最早出现在IE浏览器中，后来的浏览器也跟着支持了这个方法，而且还更加完善。这里要注意的是，bottom是元素底部相对于窗口顶部的距离，而不是像css里面position的bottom相对于窗口底部，同理，rihgt属性是元素最右边相对于窗口左边的距离。<br />
+var pos = <span>document.getElementById("box")</span>.getBoundingClientRect();<br />
+<ul>
+	<li>
+		pos.top
+	</li>
+	<li>
+		pos.left
+	</li>
+	<li>
+		pos.bottom
+	</li>
+	<li>
+		pos.right
+	</li>
+	<li>
+		pos.width
+	</li>
+	<li>
+		pos.height
+	</li>
+</ul>
+<h2 id='获取的鼠标坐标'>
+	获取的鼠标坐标
+</h2>
+简单点的方法就是定义两个全局变量接受鼠标的x和y坐标，然后定义一个方法在获取有效的事件对象后将鼠标坐标赋给定义好的全局变量，然后将这个方法赋给document.onmouseover事件：<br />
+复制代码<br />
+<pre class="prettyprint lang-js">var movex; var movey;      //用来接受鼠标位置的全局变量
+function mousemove(e)
+{
+       e=e  || window.event;
+       if(e.pageX || e.pageY)
+       {
+                movex=e.pageX;
+                movey=e.pageY;
+       }
+}</pre>
+e=e&nbsp; || window.event; 这句话的目的是照顾到浏览器的兼容性，不同的浏览器解释js代码的方式不同，这句话将触发的事件对象赋予e这个变量，在ie中事件对象定义为window.event，而在其他一些浏览器，该对象需要作为参数传入(在W3C标准支持的浏览器下事件对向是引发事件涵数的第一个参数)，即_e,传入的时候传event。去掉这句话在ie下依然可以的原因是 event == window.event,所有对象都是window对象的属性，所以加不加ie浏览器都能认出来。&nbsp;<br />
+<h3>
+	鼠标位置的相关属性
+</h3>
+<ol>
+	<li>
+		pageX/pageX:鼠标在页面上的位置,从页面左上角开始,即是以页面为参考点,不随滑动条移动而变化
+	</li>
+	<li>
+		clientX/clientY:鼠标在页面上可视区域的位置,从浏览器可视区域左上角开始,即是以浏览器滑动条此刻的滑动到的位置为参考点,随滑动条移动 而变化.可是悲剧的是,PageX在ie下没有（？？？）
+	</li>
+	<li>
+		screenX/screenY：鼠标在屏幕上的位置,从屏幕左上角开始（w3c标准）
+	</li>
+	<li>
+		offsetX/offsetY:IE特有,鼠标相比较于触发事件的元素的位置,以元素盒子模型的内容区域的左上角为参考点,如果有boder,可能出现负值
+	</li>
+	<li>
+		layerX/layerY：FF特有(???),鼠标相比较于当前坐标系的位置,即如果触发元素没有设置绝对定位或相对定位,以页面为参考点,如果有,将改变参考坐标系,从触发元素盒子模型的border区域的左上角为参考点。也就是当触发元素设置了相对或者绝对定位后,layerX和offsetX几乎相等,唯一不同就是一个从border为参考点,一个以内容为参考点
+	</li>
+</ol>
+<p>
+	chrome和safari一条龙通杀!完全支持所有属性.其中(offsetX和layerX都是以border为参考点)（ie11和edge应该不会这么悲剧吧！）
+</p>
+<h2 id='Evet对象'>
+	Event 对象
+</h2>
+<p>
+	Event 对象代表事件的状态，比如事件在其中发生的元素、键盘按键的状态、鼠标的位置、鼠标按钮的状态。事件通常与函数结合使用，函数不会在事件发生前被执行！
+</p>
+<h3>
+	事件冒泡
+</h3>
+官方的定义就是从最特定的事件目标到最不特定的事件目标。意思就是说,假如用户单击了一个元素,该元素拥有一个click事件,那么同样的事件也将会被它的祖先触发,这个事件从该元素开始一直冒泡到DOM树的最上层,这一过程称为事件冒泡。
+<div>
+	<h3>
+		事件句柄　(Event Handlers)
+	</h3>
+	<p>
+		HTML 4.0 的新特性之一是能够使 HTML 事件触发浏览器中的行为，比如当用户点击某个 HTML 元素时启动一段 JavaScript。下面是一个属性列表，可将之插入 HTML 标签以定义事件的行为。
+	</p>
+	<table cellpadding="0" cellspacing="0" border="1" bordercolor="#000000">
+		<tbody>
+			<tr>
+				<th>
+					属性
+				</th>
+				<th>
+					此事件发生在何时...
+				</th>
+			</tr>
+			<tr>
+				<td>
+					onabort
+				</td>
+				<td>
+					图像的加载被中断。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					onblur
+				</td>
+				<td>
+					元素失去焦点。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					onchange
+				</td>
+				<td>
+					域的内容被改变。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					onclick
+				</td>
+				<td>
+					当用户点击某个对象时调用的事件句柄。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					ondblclick
+				</td>
+				<td>
+					当用户双击某个对象时调用的事件句柄。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					onerror
+				</td>
+				<td>
+					在加载文档或图像时发生错误。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					onfocus
+				</td>
+				<td>
+					元素获得焦点。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					onkeydown
+				</td>
+				<td>
+					某个键盘按键被按下。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					onkeypress
+				</td>
+				<td>
+					某个键盘按键被按下并松开。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					onkeyup
+				</td>
+				<td>
+					某个键盘按键被松开。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					onload
+				</td>
+				<td>
+					一张页面或一幅图像完成加载。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					onmousedown
+				</td>
+				<td>
+					鼠标按钮被按下。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					onmousemove
+				</td>
+				<td>
+					鼠标被移动。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					onmouseout
+				</td>
+				<td>
+					鼠标从某元素移开。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					onmouseover
+				</td>
+				<td>
+					鼠标移到某元素之上。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					onmouseup
+				</td>
+				<td>
+					鼠标按键被松开。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					onreset
+				</td>
+				<td>
+					重置按钮被点击。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					onresize
+				</td>
+				<td>
+					窗口或框架被重新调整大小。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					onselect
+				</td>
+				<td>
+					文本被选中。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					onsubmit
+				</td>
+				<td>
+					确认按钮被点击。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					onunload
+				</td>
+				<td>
+					用户退出页面。
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div>
+	<h3>
+		鼠标 / 键盘属性
+	</h3>
+	<table cellpadding="0" cellspacing="0" border="1" bordercolor="#000000">
+		<tbody>
+			<tr>
+				<th>
+					属性
+				</th>
+				<th>
+					描述
+				</th>
+			</tr>
+			<tr>
+				<td>
+					altKey
+				</td>
+				<td>
+					返回当事件被触发时，"ALT" 是否被按下。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					button
+				</td>
+				<td>
+					返回当事件被触发时，哪个鼠标按钮被点击。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					clientX
+				</td>
+				<td>
+					返回当事件被触发时，鼠标指针的水平坐标。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					clientY
+				</td>
+				<td>
+					返回当事件被触发时，鼠标指针的垂直坐标。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					ctrlKey
+				</td>
+				<td>
+					返回当事件被触发时，"CTRL" 键是否被按下。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					metaKey
+				</td>
+				<td>
+					返回当事件被触发时，"meta" 键是否被按下。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					relatedTarget
+				</td>
+				<td>
+					返回与事件的目标节点相关的节点。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					screenX
+				</td>
+				<td>
+					返回当某个事件被触发时，鼠标指针的水平坐标。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					screenY
+				</td>
+				<td>
+					返回当某个事件被触发时，鼠标指针的垂直坐标。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					shiftKey
+				</td>
+				<td>
+					返回当事件被触发时，"SHIFT" 键是否被按下。
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div>
+	<h3>
+		IE 属性
+	</h3>
+	<p>
+		除了上面的鼠标/事件属性，IE 浏览器还支持下面的属性：
+	</p>
+	<table cellpadding="0" cellspacing="0" border="1" bordercolor="#000000">
+		<tbody>
+			<tr>
+				<th>
+					<strong>属性</strong> 
+				</th>
+				<th>
+					描述
+				</th>
+			</tr>
+			<tr>
+				<td>
+					cancelBubble
+				</td>
+				<td>
+					如果事件句柄想阻止事件传播到包容对象，必须把该属性设为 true。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					fromElement
+				</td>
+				<td>
+					对于 mouseover 和 mouseout 事件，fromElement 引用移出鼠标的元素。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					keyCode
+				</td>
+				<td>
+					对于 keypress 事件，该属性声明了被敲击的键生成的 Unicode 字符码。对于 keydown 和 keyup 事件，它指定了被敲击的键的虚拟键盘码。虚拟键盘码可能和使用的键盘的布局相关。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					offsetX,offsetY
+				</td>
+				<td>
+					发生事件的地点在事件源元素的坐标系统中的 x 坐标和 y 坐标。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					returnValue
+				</td>
+				<td>
+					如果设置了该属性，它的值比事件句柄的返回值优先级高。把这个属性设置为 fasle，可以取消发生事件的源元素的默认动作。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					srcElement
+				</td>
+				<td>
+					对于生成事件的 Window 对象、Document 对象或 Element 对象的引用。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					toElement
+				</td>
+				<td>
+					对于 mouseover 和 mouseout 事件，该属性引用移入鼠标的元素。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					x,y
+				</td>
+				<td>
+					事件发生的位置的 x 坐标和 y 坐标，它们相对于用CSS动态定位的最内层包容元素。
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div>
+	<h3>
+		标准 Event 属性
+	</h3>
+	<p>
+		下面列出了 2 级 DOM 事件标准定义的属性。
+	</p>
+	<table cellpadding="0" cellspacing="0" border="1" bordercolor="#000000">
+		<tbody>
+			<tr>
+				<th>
+					属性
+				</th>
+				<th>
+					描述
+				</th>
+			</tr>
+			<tr>
+				<td>
+					bubbles
+				</td>
+				<td>
+					返回布尔值，指示事件是否是起泡事件类型。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					cancelable
+				</td>
+				<td>
+					返回布尔值，指示事件是否可拥可取消的默认动作。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					currentTarget
+				</td>
+				<td>
+					返回其事件监听器触发该事件的元素。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					eventPhase
+				</td>
+				<td>
+					返回事件传播的当前阶段。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					target
+				</td>
+				<td>
+					返回触发此事件的元素（事件的目标节点）。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					timeStamp
+				</td>
+				<td>
+					返回事件生成的日期和时间。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					type
+				</td>
+				<td>
+					返回当前 Event 对象表示的事件的名称。
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div>
+	<h3>
+		标准 Event 方法
+	</h3>
+	<p>
+		下面列出了 2 级 DOM 事件标准定义的方法。IE 的事件模型不支持这些方法：
+	</p>
+	<table cellpadding="0" cellspacing="0" border="1" bordercolor="#000000">
+		<tbody>
+			<tr>
+				<th>
+					方法
+				</th>
+				<th>
+					描述
+				</th>
+			</tr>
+			<tr>
+				<td>
+					initEvent()
+				</td>
+				<td>
+					初始化新创建的 Event 对象的属性。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					preventDefault()
+				</td>
+				<td>
+					通知浏览器不要执行与事件关联的默认动作。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					stopPropagation()
+				</td>
+				<td>
+					不再派发事件。
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<h2 id='joclick事件传参数的方法分析'>
+	js onclick事件传参数的方法分析
+</h2>
+在页面中给方法传参数，有如下的两种方法：<br />
+<ol>
+	<li>
+		onclick="cancel(this,id,patientId)"&nbsp; &nbsp; //通过参数
+	</li>
+	<li>
+		在js中通过id获取
+	</li>
+</ol>
+<h3>
+	a标签中通过href和onclick传递的this对象实现思路
+</h3>
+想传递当前对象给一个函数，于是就将这个URL写成"Javascript:shoControlSidebar(this)"，可是结果发现这并不可行，下面分析这种方法的问题：在href属性中传递this参数，传递的是整个文档的根元素，而onclick事件传递的this是该对象本身。<br />
+<p>
+	&lt;a href="Javascript:shoControlSidebar(this)"&gt;和&lt;a href="javascript:void(0)" onclick="shoControlSidebar(this)"&gt;是不同的，前者的this不是当前的a标签，后者才能正确传递。形参不能用this做变量名。
+</p>
+<h3>
+	this和event(.target)作为参数的区别的区别
+</h3>
+<ol>
+	<li>
+		this是Javascript语言的一个关键字。
+	</li>
+	<li>
+		this代表函数运行时，自动生成的一个内部对象，只能在函数内部使用。
+	</li>
+	<li>
+		this和event.target的区别：js中事件是会冒泡的，所以this是可以变化的，但event.target不会变化（在事件触发时，只传递当前event对象的引用），它永远是直接接受事件的目标DOM元素；
+	</li>
+</ol></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/905.html">WEB前端——js获取页面元素，给页面元素结点赋值，设置元素css,style.,classonclick事件</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/908.html">WEB前端——拖拉页面元素</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#获取元素属性及相对窗口位置">获取元素属性及相对窗口位置</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#获取的鼠标坐标">获取的鼠标坐标</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Evet对象">Evet对象</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#joclick事件传参数的方法分析">joclick事件传参数的方法分析</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

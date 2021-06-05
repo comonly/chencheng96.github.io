@@ -1,0 +1,402 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>混合高斯背景建模 -- 运动目标检测背景提取_comonly.cn</title>
+<meta name="keywords" content="混合高斯背景建模 -- 运动目标检测背景提取" />
+<meta name="description" content="在运动目标检测提取中，背景目标对于目标的识别和跟踪至关重要。而建模正是背景目标提取的一个重要环节。
+
+
+	前景是指在假设背景为静止的情况下，任何有意义的运动物体即为前景。
+
+
+	运动物体检测的问题主要分为两类，摄像机固定和摄像机运动。对于摄像机运动的运动物体检测问题，比较著名的解决方案是光流法，通过求解偏微分方程求的图像序列的光流场，从而预测摄像机的运动状态。对于摄像机固定的情形，当然也可以用光流法，但是由于光流法的复杂性，往往难以实时的计算。而混合高斯背景建模适合于在摄像机固定的情况下从图像" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">混合高斯背景建模 -- 运动目标检测背景提取</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">moffis</li>
+          <li class="lmname"><a href="https://www.cnblogs.com/walccott/p/4956929.html" target="_blank">https://www.cnblogs.com/walccott/p/4956929.html</a></li>
+          <li class="timer">2020-11-20</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	机器学习算法分析
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>在运动目标检测提取中，背景目标对于目标的识别和跟踪至关重要。而建模正是背景目标提取的一个重要环节。
+
+
+	前景是指在假设背景为静止的情况下，任何有意义的运动物体即为前景。
+
+
+	运动物体检测的问题主要分为两类，摄像机固定和摄像机运动。对于摄像机运动的运动物体检测问题，比较著名的解决方案是光流法，通过求解偏微分方程求的图像序列的光流场，从而预测摄像机的运动状态。对于摄像机固定的情形，当然也可以用光流法，但是由于光流法的复杂性，往往难以实时的计算。而混合高斯背景建模适合于在摄像机固定的情况下从图像</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	在运动目标检测提取中，背景目标对于目标的识别和跟踪至关重要。而建模正是背景目标提取的一个重要环节。
+</p>
+<p>
+	前景是指在假设背景为静止的情况下，任何有意义的运动物体即为前景。
+</p>
+<p>
+	运动物体检测的问题主要分为两类，摄像机固定和摄像机运动。对于摄像机运动的运动物体检测问题，比较著名的解决方案是光流法，通过求解偏微分方程求的图像序列的光流场，从而预测摄像机的运动状态。对于摄像机固定的情形，当然也可以用光流法，但是由于光流法的复杂性，往往难以实时的计算。而混合高斯背景建模适合于在摄像机固定的情况下从图像序列中分离出背景和前景。在摄像机固定的情况下，背景的变化是缓慢的，而且大都是光照，风等等的影响，通过对背景建模，对一幅给定图像分离前景和背景，一般来说，前景就是运动物体，从而达到运动物体检测的目的。
+</p>
+<p>
+	混合高斯模型已经广泛应用于鲁棒的复杂场景背景建模,特别是在有微小重复运动的场合,如摇动的树叶、灌木丛、旋转的风扇、海面波涛、雨雪天气、光线反射等。基于像素的混合高斯模型对多峰分布背景进行建模很有效,能适应背景的变化如光线渐变,并能基本满足实际应用中对算法的实时性要求。
+</p>
+<p>
+	<br />
+</p>
+<h2 id='算法基本思想'>
+	算法基本思想
+</h2>
+<p>
+	用GMM对背景建模的基本思想是把每一个像素点所呈现的颜色用K个高斯分布的叠加来表示，通常K取3-5之间。将像素点所呈现的颜色X认为是随机变量，则在每时刻t=1,…,T所得到视频帧图像的像素值只是随机变量X的采样值（观值）。
+</p>
+<p>
+	在进行前景检测前，先对背景进行训练，对每一帧图像中每个背景采用一个混合高斯模型进行模拟，背景一旦提取出来，前景的检测就简单了，检查像素是否与背景的高斯模型匹配，匹配是背景，不匹配就是前景。
+</p>
+<p>
+	所以关键就是混合高斯背景模型的建立。
+</p>
+<p>
+	GMM之所以能够将前景和背景分开是基于如下两点事实的：<br />
+(1)在长期观测的场景中，背景占大多数时间，更多的数据是支持背景分布的<br />
+(2)即使是相对颜色一致的运动物体也会比背景产生更多变化，况且一般情况下物体都是带有不同颜色的
+</p>
+<p>
+	<br />
+</p>
+<p>
+	算法大致这样：
+</p>
+<p>
+	首先初始化预先定义的几个高斯模型，对高斯模型中的参数进行初始化，并求出之后将要用到的参数。其次，对于每一帧中的每一个像素进行处理，看其是否匹配某个模型，若匹配，则将其归入该模型中，并对该模型根据新的像素值进行新，若不匹配，则以该像素建立一个高斯模型，初始化参数，代替原有模型中最不可能的模型。最后选择前面几个最有可能的模型作为背景模型，为背景目标提取做铺垫。
+</p>
+<p>
+	<br />
+</p>
+<h2 id='算法原理'>
+	算法原理
+</h2>
+<p>
+	背景图像的每一个像素分别用由K个高斯分布构成的混合高斯模型来建模, 即:
+</p>
+<p>
+	<img src="http://img.blog.csdn.net/20150629175858310" alt="" style="height:auto;" /> 
+</p>
+<p>
+	Xj表示像素j在t时刻的取值，如果像素为RGB三通道，则xj为向量，xj=[xjR xjG xjB]，<img src="http://img.blog.csdn.net/20150629175915637" alt="" style="height:auto;" />表示时刻t混合高斯模型中第i个高斯分布的权系数的估计值，<img src="http://img.blog.csdn.net/20150629175939262" alt="" style="height:auto;" />和<img src="http://img.blog.csdn.net/20150629180000109" alt="" style="height:auto;" />分别表示时刻t混合高斯模型中第i个高斯分布的均值向量和协方差矩阵(此处假定像素的红、绿、蓝分量相互独立);η表示高斯分布概率密度函数。
+</p>
+<p>
+	<img src="http://img.blog.csdn.net/20150629180026614" alt="" style="height:auto;" /> 
+</p>
+<p>
+	<img src="http://img.blog.csdn.net/20150629180046516" alt="" style="height:auto;" /> 
+</p>
+<p>
+	<img src="http://img.blog.csdn.net/20150629180110910" alt="" style="height:auto;" /> 
+</p>
+<p>
+	<br />
+</p>
+<h2 id='参数初始化'>
+	参数初始化
+</h2>
+<p>
+	在第一帧图像时每个像素对应的第一个高斯分布进行初始化，均值赋为当前像素的值，权值赋为1，除第一以外的高斯分布函数的均值、权值和都初始化零。
+</p>
+<p>
+	<br />
+</p>
+<h2 id='参数更新'>
+	参数更新
+</h2>
+<p>
+	在时刻t对图像帧的每个像素Xt与它对应的高斯模型进行匹配，
+</p>
+<p>
+	匹配规则为：
+</p>
+<p>
+	如果像素值Xt 与混合高斯模型中第i个高斯分布Gi均值的距离小于其标准差的2.5倍, 则定义该高斯分布Gi 与像素值Xt 匹配。
+</p>
+<p>
+	如果检验出该像素混合高斯模型中至少有一个高斯分布与像素值Xt 匹配, 那么混合高斯模型的参数更新规则为:
+</p>
+<p>
+	1)对于不匹配的高斯分布, 它们的均值μ和协方差矩阵<img src="http://img.blog.csdn.net/20150629180328978" alt="" style="height:auto;" />保持不变;
+</p>
+<p>
+	2)匹配的高斯分布Gi 的均值μ和协方差矩阵<img src="http://img.blog.csdn.net/20150629180328978" alt="" style="height:auto;" />按下式更新:
+</p>
+<p>
+	<img src="http://img.blog.csdn.net/20150629180439761" alt="" style="height:auto;" /> 
+</p>
+<p>
+	<img src="http://img.blog.csdn.net/20150629180507195" alt="" style="height:auto;" /> 
+</p>
+<p>
+	α为参数估计的学习速率。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	如果该像素对应的混合高斯模型中没有高斯分布与像素值Xt 匹配, 那么将最不可能代表背景过程的高斯分布Gj重新赋值, 即
+</p>
+<p>
+	<img src="http://img.blog.csdn.net/20150629180554804" alt="" style="height:auto;" /> 
+</p>
+<p>
+	式中, W0 和V0是预先给定的正值;I为一个3 ×3单位矩阵。
+</p>
+<p>
+	然后按下式更新所有K 个高斯分布在时刻t的权系数ωi,t:
+</p>
+<p>
+	<img src="http://img.blog.csdn.net/20150629180628970" alt="" style="height:auto;" /> 
+</p>
+<p>
+	式中, 如果高斯分布Gi与t时刻像素值Xt匹配, 则Mi,t取值1,否则取值为0。后一式完成权重的归一化，保证权重和为1。
+</p>
+<p>
+	<br />
+</p>
+<h2 id='背景模型估计及运动分割'>
+	背景模型估计及运动分割
+</h2>
+<div>
+	图像帧中每个像素的混合高斯模型的参数更新后, 要确定混合高斯模型中哪些高斯分布是由背景过程产生的, 或者说能最佳描述背景过程。<br />
+</div>
+<div>
+	对于K个分布，必须估计出其中哪些代表背景模型．在实际应用中，处理完当前帧后，模型的参数要进行必要的更新，所以每一帧都要进行背景模型的重新估计。一般的，我们会对有较多数据支持且方差较小的高斯分布感兴趣，因为它们代表背景模型的可能性较大。考虑两种情况，一是当背景物体是持久静止的时候，这时该物体表面产生的高斯分布代表着背景分布，那么支持这个分布的数据会持续累积，而且它的方差也会越来越小。第二种情况，当一个新的物体遮挡了原来的背景物体时，一般会导致两种结果：要么产生一个新的分布，要么把一个己存在的分布的方差增大。另外，当新的物体是一个运动物体时，它一般也会比背景像素保持更大的变化直到它停下来。从以上两种情况可以看出，影响一个分布是否背景分布的重要因素有两个:
+</div>
+<div>
+	(1)该分布产生的数据所占的比例大小
+</div>
+<div>
+	(2)该分布的方差大小
+</div>
+<div>
+	<br />
+</div>
+<div>
+	基于这两个因素，采取如下的方法进行估计：<br />
+</div>
+<p>
+	首先按ωk&nbsp;/ |<img src="http://img.blog.csdn.net/20150629180328978" alt="" style="height:auto;" />k|的比值由大到小将组成每个像素混合高斯模型的K 个高斯分布排序,&nbsp;ωk代表了第k个分布产生的数据所占的比例，<img src="http://img.blog.csdn.net/20150629180328978" alt="" style="height:auto;" />k代表第k个分布的方差，ωk&nbsp;/ |<img src="http://img.blog.csdn.net/20150629180328978" alt="" style="height:auto;" />k|的值越大，第k个分布是背景模型的可能性就越大。一个分布的权值增大或方差减小，都可以使ωk&nbsp;/ |<img src="http://img.blog.csdn.net/20150629180328978" alt="" style="height:auto;" />k|的值增大。
+</p>
+<p>
+	那么最有可能描述稳定背景过程的高斯分布将位于序列的顶部, 而由背景暂态扰动产生的分布将滑向序列的底部, 最终被新赋值的高斯分布所取代。
+</p>
+<p>
+	这样, 我们选择上述序列中前B 个高斯分布作为背景像素模型:
+</p>
+<p>
+	<img src="http://img.blog.csdn.net/20150629180932403" alt="" style="height:auto;" /> 
+</p>
+<p>
+	式中, T为预定的阈值(0. 5≤ T ≤ 1);B的含义是, 排序后的K个高斯分布中的前B 个高斯分布是该背景像素的最佳描述。
+</p>
+<p>
+	<br />
+</p>
+<h2 id='前景(运动)分割'>
+	前景(运动)分割
+</h2>
+<p>
+	现在, 从新检验t时刻每一个像素值Xt与其得到的前B 个高斯分布的匹配关系, 如果该像素值Xt与前B个高斯分布之一匹配, 则该像素为背景点, 否则该像素被分类为前景, 即运动物体。这样, 就完成了将运动物体从背景中分割出来的任务。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1191.html">高斯混合模型原理</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1193.html">3D卷积神经网络</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.cnblogs.com/walccott/p/4956929.html" target="_blank">https://www.cnblogs.com/walccott/p/4956929.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#算法基本思想">算法基本思想</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#算法原理">算法原理</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#参数初始化">参数初始化</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#参数更新">参数更新</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#背景模型估计及运动分割">背景模型估计及运动分割</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#前景(运动)分割">前景(运动)分割</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

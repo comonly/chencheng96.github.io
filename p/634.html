@@ -1,0 +1,346 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>下拉列表框—JavaScript_comonly.cn</title>
+<meta name="keywords" content="下拉列表框—JavaScript" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">下拉列表框—JavaScript</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-03-13</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">JavaScript,下拉列表</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	下拉列表框对象（select）有很多选项，但是下拉列表框整体是对象的一个子对象，下拉列表框中的选项（option）是下拉列表框的子对象。
+</p>
+<h2 id='下拉列表框的属性'>
+	下拉列表框的属性
+</h2>
+<blockquote>
+	<p>
+		accesskey：返回或设置下拉列表框的快捷键
+	</p>
+	<p>
+		disabled：返回或设置<span>下拉列表框</span>是否被禁用，属性为布尔值
+	</p>
+	<p>
+		form：返回包含<span>下拉列表框</span>元素的form对象的引用
+	</p>
+	<p>
+		id：返回或设置<span>下拉列表框</span>的id属性
+	</p>
+	<p>
+		length：返回一组<span>下拉列表框</span>中选项的个数
+	</p>
+	<p>
+		multiple：返回或设置下拉列表框的选项是否允许多谢，属性值为布尔值
+	</p>
+	<p>
+		name：返回或设置<span>下拉列表框</span>的名称
+	</p>
+	<p>
+		options：返回一个数组，数组中的元素为下拉列表框中的选项
+	</p>
+	<p>
+		selectedindex：返回或设置下拉列表框中当前选中的选项在options[]数组中的下标
+	</p>
+	<p>
+		tabindex：返回或设置<span>下拉列表框</span>的Tab键顺序
+	</p>
+	<p>
+		value：返回或设置显示在<span>下拉列表框</span>上的值
+	</p>
+	<p>
+		type：返回<span>下拉列表框</span>的类型，当只允许选择一个选项时，返回“select-one”，当允许多个选项时，返回“select-multiple”
+	</p>
+</blockquote>
+<h2 id='下拉列表框的方法'>
+	下拉列表框的方法
+</h2>
+<blockquote>
+	<p>
+		blur()：将焦点从<span>下拉列表框</span>移开
+	</p>
+	<p>
+		click()：模拟<span>下拉列表框</span>被鼠标点击
+	</p>
+	<p>
+		focus()：将焦点赋给该<span>下拉列表框</span> 
+	</p>
+	<p>
+		<span>remove(i)：可以删除下拉列表中的选项，参数i为options[]数组的下标</span>
+	</p>
+</blockquote>
+<h2 id='下拉列表框的事件'>
+	下拉列表框的事件
+</h2>
+<blockquote>
+	<p>
+		blur：当焦点从<span>下拉列表框</span>移开时激发的事件
+	</p>
+	<p>
+		change：当选中下拉列表框中的一个选项或取消对下拉列表框中某个选项选中状态时激发的事件
+	</p>
+	<p>
+		click：单击<span>下拉列表框</span>时激发的事件
+	</p>
+	<p>
+		dbclick：双击<span>下拉列表框</span>时激发的事件
+	</p>
+	<p>
+		focus：当焦点赋给<span>下拉列表框</span>时激发的事件
+	</p>
+	<p>
+		keydown：用户按下键盘键时激发的事件
+	</p>
+	<p>
+		keypress：按下并释放键盘键时所激发的事件
+	</p>
+	<p>
+		keyup：释放键盘时所激发的事件
+	</p>
+	<p>
+		mousedown：按下鼠标键（并没有释放）时所激发的事件
+	</p>
+	<p>
+		mousemove：移动鼠标时激发的事件
+	</p>
+	<p>
+		mouseover：鼠标从<span>下拉列表框</span>对象上移开时所激发的事件
+	</p>
+	<p>
+		mouseup：释放鼠标键时所激发的事件
+	</p>
+	<p>
+		mouseout：鼠标从<span>下拉列表框</span>对象上移开时激发的事件
+	</p>
+</blockquote>
+<h2 id='选项对象'>
+	选项对象
+</h2>
+<p>
+	下拉列表的HTML元素有两个，select标签用于声明下拉列表，option标签用于创建下拉列表框中的选项。可以把下拉列表的选项（option）看成是下拉列表对象的子对象。
+</p>
+<p>
+	document.form.select.options[i]; &nbsp; &nbsp; //i是options[]数组的下标，数值从0开始。用于访问下拉列表
+</p>
+<p>
+	选项对象的属性
+</p>
+<blockquote>
+	<p>
+		defaultselected：表示该选项是否是默认的选项，属性是布尔值
+	</p>
+	<p>
+		index：返回当前的option对象在options[]数组中的位置
+	</p>
+	<p>
+		selected：返回或设置当前option对象是否被选中，属性为布尔值
+	</p>
+	<p>
+		text：返回或设置选项中的文字
+	</p>
+	<p>
+		value：返回或设置选项中的值
+	</p>
+</blockquote></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/633.html">单选框和复选框—JavaScript</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/635.html">文件上传框—JavaScript</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#下拉列表框的属性">下拉列表框的属性</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#下拉列表框的方法">下拉列表框的方法</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#下拉列表框的事件">下拉列表框的事件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#选项对象">选项对象</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

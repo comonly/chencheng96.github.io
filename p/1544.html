@@ -1,0 +1,482 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>express搭建nodeJS中间层_comonly.cn</title>
+<meta name="keywords" content="express搭建nodeJS中间层" />
+<meta name="description" content="项目代码可以github上下载：https://github.com/comonly/javaweb_blog/tree/master/blog_nodejs
+
+
+	
+
+
+	express框架介绍
+
+express框架是nodeJS出来不久就诞生的webServer构建框架，目前的版本是 4.x。项目时间紧迫，这次就不从零开始搞了，站在巨人的肩膀上解决问题，可以帮我们节省些底层工作。
+
+@ express API官方网站 http://www.expressjs.com.cn
+
+安" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">express搭建nodeJS中间层</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">Jafeney Lou</li>
+          <li class="lmname"><a href="http://jafeney.com/2016/01/10/2016-01-10-express-1/" target="_blank">http://jafeney.com/2016/01/10/2016-01-10-express-1/</a></li>
+          <li class="timer">2019-11-14</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>项目代码可以github上下载：https://github.com/comonly/javaweb_blog/tree/master/blog_nodejs
+
+
+	
+
+
+	express框架介绍
+
+express框架是nodeJS出来不久就诞生的webServer构建框架，目前的版本是 4.x。项目时间紧迫，这次就不从零开始搞了，站在巨人的肩膀上解决问题，可以帮我们节省些底层工作。
+
+@ express API官方网站 http://www.expressjs.com.cn
+
+安</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	项目代码可以github上下载：<a href="https://github.com/comonly/javaweb_blog/tree/master/blog_nodejs" target="_blank">https://github.com/comonly/javaweb_blog/tree/master/blog_nodejs</a>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	express框架介绍
+</p>
+express框架是nodeJS出来不久就诞生的webServer构建框架，目前的版本是 4.x。项目时间紧迫，这次就不从零开始搞了，站在巨人的肩膀上解决问题，可以帮我们节省些底层工作。<br />
+<br />
+@ express API官方网站 http://www.expressjs.com.cn<br />
+<br />
+安装环境<br />
+如果你还没有安装node，先把它安装好。然后用npm 全局安装express和express-generator。<br />
+<br />
+1<br />
+2<br />
+$ npm install exprss -g --save<br />
+$ npm install express-generator -g --save<br />
+文件部署<br />
+通过express-generator生成器工具 express 可以快速创建一个应用的骨架：（我的项目名是 node_hk）<br />
+<br />
+1<br />
+$ express node_hk<br />
+默认生成的目录是这样的：<br />
+<br />
+.<br />
+├── app.js<br />
+├── bin<br />
+│&nbsp; &nbsp;└── www<br />
+├── package.json<br />
+├── public<br />
+│&nbsp; &nbsp;├── images<br />
+│&nbsp; &nbsp;├── javascripts<br />
+│&nbsp; &nbsp;└── stylesheets<br />
+│&nbsp; &nbsp; &nbsp; &nbsp;└── style.css<br />
+├── routes<br />
+│&nbsp; &nbsp;├── index.js<br />
+│&nbsp; &nbsp;└── users.js<br />
+└── views<br />
+&nbsp; &nbsp; ├── error.jade<br />
+&nbsp; &nbsp; ├── index.jade<br />
+&nbsp; &nbsp; └── layout.jade<br />
+更改依赖包配置<br />
+因为我的前端项目用的是artTemplate模板引擎，为了很前后端复用，因此node这边也采用这款模板引擎。所以需要把express默认的jade改成了art-template：<br />
+<br />
+{<br />
+&nbsp; "name": "node_hk",<br />
+&nbsp; "version": "0.0.0",<br />
+&nbsp; "private": true,<br />
+&nbsp; "scripts": {<br />
+&nbsp; &nbsp; "start": "node ./bin/www"<br />
+&nbsp; },<br />
+&nbsp; "dependencies": {<br />
+&nbsp; &nbsp; "body-parser": "~1.13.2",<br />
+&nbsp; &nbsp; "cookie-parser": "~1.3.5",<br />
+&nbsp; &nbsp; "debug": "~2.2.0",<br />
+&nbsp; &nbsp; "express": "~4.13.1",<br />
+&nbsp; &nbsp; "art-template": "~3.0.3",<br />
+&nbsp; &nbsp; "morgan": "~1.6.1",<br />
+&nbsp; &nbsp; "serve-favicon": "~2.3.0"<br />
+&nbsp; }<br />
+}<br />
+安装node_modules<br />
+配置好了 package.json，下面我们就用npm 依次安装它们吧！<br />
+<br />
+$ npm install<br />
+启动项目<br />
+启动这个应用（MacOS 或 Linux 平台）：<br />
+<br />
+$ DEBUG=myapp npm start<br />
+Windows 平台使用如下命令：<br />
+<br />
+$ set DEBUG=myapp &amp; npm start<br />
+然后在浏览器中打开 http://localhost:3000/ 网址就可以看到这个应用了（等等 报错了对不对 _ ，别着急，往下看）。<br />
+<br />
+把默认的jade模板引擎改成artTemplate<br />
+改造app.js<br />
+app.js是express的主要文件，这个文件里包含了指定模板引擎、指定视图文件默认路径的代码。需要将指定模板引擎的代码改为指定用art-template引擎。视图文件默认路径保持不变，因此无需改动。<br />
+<br />
+新的app.js如下（懒得看就直接copy吧）：<br />
+<br />
+<br />
+var express = require('express');<br />
+var path = require('path');<br />
+var favicon = require('serve-favicon');<br />
+var logger = require('morgan');<br />
+var cookieParser = require('cookie-parser');<br />
+var bodyParser = require('body-parser');<br />
+/*引用artTemplate模板*/<br />
+var template=require('art-template');<br />
+var routes = require('./routes/index');<br />
+var users = require('./routes/users');<br />
+var app = express();<br />
+// view engine setup<br />
+app.set('views', path.join(__dirname, 'views'));<br />
+/*把jade模板引擎改成artTemplate*/<br />
+//app.set('view engine', 'jade');<br />
+template.config('base','');<br />
+template.config('extname','.html');<br />
+app.engine('.html',template.__express);<br />
+app.set('view engine','html');<br />
+// uncomment after placing your favicon in /public<br />
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));<br />
+app.use(logger('dev'));<br />
+app.use(bodyParser.json());<br />
+app.use(bodyParser.urlencoded({ extended: false }));<br />
+app.use(cookieParser());<br />
+app.use(express.static(path.join(__dirname, 'public')));<br />
+app.use('/', routes);<br />
+app.use('/users', users);<br />
+// catch 404 and forward to error handler<br />
+app.use(function(req, res, next) {<br />
+&nbsp; var err = new Error('Not Found');<br />
+&nbsp; err.status = 404;<br />
+&nbsp; next(err);<br />
+});<br />
+// error handlers<br />
+// development error handler<br />
+// will print stacktrace<br />
+if (app.get('env') === 'development') {<br />
+&nbsp; app.use(function(err, req, res, next) {<br />
+&nbsp; &nbsp; res.status(err.status || 500);<br />
+&nbsp; &nbsp; res.render('error', {<br />
+&nbsp; &nbsp; &nbsp; message: err.message,<br />
+&nbsp; &nbsp; &nbsp; error: err<br />
+&nbsp; &nbsp; });<br />
+&nbsp; });<br />
+}<br />
+// production error handler<br />
+// no stacktraces leaked to user<br />
+app.use(function(err, req, res, next) {<br />
+&nbsp; res.status(err.status || 500);<br />
+&nbsp; res.render('error', {<br />
+&nbsp; &nbsp; message: err.message,<br />
+&nbsp; &nbsp; error: {}<br />
+&nbsp; });<br />
+});<br />
+module.exports = app;<br />
+编写artTemplate模板文件<br />
+在工作区下，进入express文件夹中的views子文件夹，创建index.html，并将如下代码输入index.html，并保存。<br />
+<br />
+注意，views文件夹下会有index.jade等三个后缀是.jade的文件存在，可以忽视它们。因为express默认支持的模板引擎是jade，所以初始化的框架中的模板是以.jade结尾的文件。也可以删除它们。<br />
+<br />
+这里举个简单的 index.html 例子：<br />
+<br />
+<br />
+&lt;!DOCTYPE html&gt;<br />
+&lt;html&gt;<br />
+&lt;head&gt;<br />
+<span> </span>&lt;meta charset="utf-8" /&gt;<br />
+<span> </span>&lt;title&gt;hello express &amp; art-template&lt;/title&gt;<br />
+&lt;/head&gt;<br />
+&lt;body&gt;<br />
+<span> </span>&lt;h2&gt;Hello express &amp; art-template&lt;/h2&gt;<br />
+<span> </span>&lt;div id='main'&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;ul&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {{each list}}<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span> </span>&lt;li&gt;编号：{{$value.id}} &amp;nbsp;&amp;nbsp;姓名：{{$value.name}}&lt;/a&gt;&lt;/li&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span> </span>{{/each}}<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;/ul&gt;<br />
+<span> </span>&lt;/div&gt;<br />
+&lt;/body&gt;<br />
+&lt;/html&gt;<br />
+渲染模板<br />
+express默认访问index路由。我们需要在index路由方法中，渲染模板。<br />
+<br />
+进入routes文件夹，打开index.js，增加渲染模板的代码，如下：<br />
+<br />
+var express = require('express');<br />
+var router = express.Router();<br />
+/* GET home page. */<br />
+router.get('/', function(req, res, next) {<br />
+<span> </span>//数据<br />
+&nbsp; &nbsp; var data = {<br />
+&nbsp; &nbsp; <span> </span>title: '国内要闻',<br />
+&nbsp; &nbsp; &nbsp;<span> </span>time: (new Date).toString(),<br />
+&nbsp; &nbsp; &nbsp;<span> </span>list: [<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span> </span>{<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span> </span>id: '1',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span> </span>name: '张三'<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span> </span>},<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span> </span>{<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span> </span>id: '2',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span> </span>name: '李四'<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span> </span>}<br />
+&nbsp; &nbsp; &nbsp;<span> </span>]<br />
+&nbsp; &nbsp; };<br />
+&nbsp; &nbsp; //渲染模板<br />
+&nbsp; &nbsp; res.render('index', data);<br />
+});<br />
+module.exports = router;<br />
+代码中的res.render(‘index’, data)调用，会调用artTemple模块中的template.express方法，并传入模板文件名、数据。<br />
+template.express方法是在app.js中注册给express框架的。<br />
+<br />
+在Windows命令行下，进入工作区，执行 npm start ，服务器就启动了。<br />
+<p>
+	此时在本地机器上使用浏览器访问http://localhost:3000将会看到Html输出了，服务器端的命令行工具上同时也会显示“New request arrived.”字样。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	按Ctl+C退出服务器
+</p>
+<h2 id='服务端渲染'>
+	服务端渲染
+</h2>
+<p>
+	<br />
+我们的数据本来是通过调取Java接口获取到的，所以这里 服务端 要用到 nodeJS的 request 模块，先安装它：<br />
+<br />
+<br />
+$ npm install request<br />
+有了request，我们就能在nodeJS里随意调用 Java写好的数据接口了。<br />
+<br />
+接下里打开路由目录下的index.js 文件，在首页的路由里把模板渲染的工作 完成<br />
+<br />
+<br />
+var express = require('express');<br />
+var request= require('request');<br />
+var router = express.Router();<br />
+/* GET home page. */<br />
+router.get('/', function(req, res, next) {<br />
+<span> </span>/*正式数据*/<br />
+&nbsp; request('http://test.webapp.baai.com/hk/index.json',function(error,response,body){<br />
+&nbsp; &nbsp; /*判断请求是否成功*/<br />
+&nbsp; &nbsp; if (!error &amp;&amp; response.statusCode == 200) {<br />
+&nbsp; &nbsp; &nbsp; /*把字符串转换为json*/<br />
+&nbsp; &nbsp; &nbsp; var data=JSON.parse(body);<br />
+&nbsp; &nbsp; &nbsp; /*渲染模板*/<br />
+&nbsp; &nbsp; &nbsp; res.render('index', data);<br />
+&nbsp; &nbsp; }<br />
+&nbsp; });<br />
+});<br />
+注意： 返回的数据默认格式是string，如果需要json格式，要用JSON.parse()进行处理，不然就会报错
+</p>
+<p>
+	<br />
+</p>
+<p>
+	github上代码参照<a href="http://jafeney.com/2016/01/10/2016-01-10-express-1/" target="_blank">http://jafeney.com/2016/01/10/2016-01-10-express-1/</a>。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1543.html">linux 查看、关闭 ssh pts/n登录的用户</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1545.html">art-template绑定json数据</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="http://jafeney.com/2016/01/10/2016-01-10-express-1/" target="_blank">http://jafeney.com/2016/01/10/2016-01-10-express-1/</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#服务端渲染">服务端渲染</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

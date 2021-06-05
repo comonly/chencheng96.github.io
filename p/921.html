@@ -1,0 +1,328 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>数据库语法_comonly.cn</title>
+<meta name="keywords" content="数据库语法" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">数据库语法</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-04-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	数据库
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	String sql="select * from house_if order by Hid desc;";<br />
+<span> </span><br />
+<span> </span>try {<br />
+<span> </span>conn=DBUtil.getConnection();<br />
+<span> </span>stmt=conn.createStatement();<br />
+<span> </span>rs=stmt.executeQuery(sql);<br />
+<span> </span><br />
+<span> </span>Listhouselist=new ArrayList();<br />
+<span> </span>//HouseInfo houseinfo=new HouseInfo();<br />
+<span> </span>while(rs.next()){<br />
+<span> </span>HouseInfo houseinfo=new HouseInfo();<br />
+<span> </span>houseinfo.setPrice(rs.getInt(1));<br />
+<span> </span>houseinfo.setPlace(rs.getString(2));<br />
+<span> </span>houseinfo.setAreaId(rs.getInt(3));<br />
+<span> </span>houseinfo.setId(rs.getInt(4));<br />
+<span> </span>//<br />
+<span> </span>houseinfo.setTitle(rs.getString(6));<br />
+<span> </span>houseinfo.setKind(rs.getString(7));<br />
+<span> </span>houseinfo.setData(rs.getDate(8));<br />
+<span> </span>houseinfo.setDetail(rs.getString(9));<br />
+<span> </span>houseinfo.setPhone(rs.getString(10));<br />
+<span> </span><br />
+<span> </span>houselist.add(houseinfo);<br />
+<span> </span>}<br />
+<span> </span>return houselist;<br />
+<span> </span><br />
+<span> </span>} catch (SQLException e) {<br />
+<span> </span>e.printStackTrace();<br />
+<span> </span>}finally{<br />
+<span> </span>DBUtil.closeAll(rs, stmt, null, null);<br />
+<span> </span>}
+</p>
+<p>
+	<br />
+</p>
+<hr />
+<p>
+	<br />
+</p>
+<p>
+	String sql="insert into house_if(Harea,Uid,Htitle,HsetData,Hdetail) values(?,?,?,?,?)";<br />
+<span> </span>try {<br />
+<span> </span>conn=DBUtil.getConnection();<br />
+<span> </span>pstmt=conn.prepareStatement(sql);<span> </span>//stmt = conn.createStatement(); <br />
+<span> </span>pstmt.setInt(1, house.getAreaId());<br />
+<span> </span>pstmt.setInt(2, 1);<br />
+<span> </span>pstmt.setString(3, house.getTitle());<br />
+<span> </span>pstmt.setDate(4, new java.sql.Date(house.getData().getTime()));<br />
+<span> </span>pstmt.setString(5, house.getDetail());<br />
+<br />
+<span> </span>pstmt.executeUpdate();<br />
+<br />
+<span> </span>return true;<br />
+<span> </span>} catch (SQLException e) {<br />
+<span> </span>e.printStackTrace();<br />
+<span> </span>} finally{<br />
+<span> </span>DBUtil.closeAll(rs,null,pstmt,conn);<br />
+<span> </span>}
+</p>
+<hr />
+String sql="update house_if set Harea=?,Uid=?,Htitle=?,HsetData=?,Hdetail=?,Hphone=? where Hid=?";<br />
+<span> </span>try {<br />
+<span> </span>conn=DBUtil.getConnection();<br />
+<span> </span>pstmt=conn.prepareStatement(sql);<span> </span>//stmt = conn.createStatement(); <br />
+<span> </span>pstmt.setInt(1, house.getAreaId());<br />
+<span> </span>pstmt.setInt(2, 1);<br />
+<span> </span>pstmt.setString(3, house.getTitle());<br />
+<span> </span>pstmt.setDate(4, new java.sql.Date(house.getData().getTime()));<br />
+<span> </span>pstmt.setString(5, house.getDetail());<br />
+<span> </span>pstmt.setString(6, house.getPhone());<br />
+<span> </span>pstmt.setInt(7, house.getId());<br />
+<br />
+<span> </span>pstmt.executeUpdate();<br />
+<br />
+<span> </span>return true;<br />
+<span> </span>} catch (SQLException e) {<br />
+<span> </span>e.printStackTrace();<br />
+<span> </span>} finally{<br />
+<span> </span>DBUtil.closeAll(rs,null,pstmt,conn);<br />
+<span> </span>}<br />
+<hr />
+String sql="delete from house_if where Hid="+id;<br />
+<span> </span>try {<br />
+<span> </span>conn=DBUtil.getConnection();<br />
+<span> </span>stmt=conn.createStatement();<br />
+<span> </span>stmt.executeUpdate(sql);<br />
+<br />
+<span> </span>return true;<br />
+<span> </span>} catch (SQLException e) {<br />
+<span> </span>e.printStackTrace();<br />
+<span> </span>} finally{<br />
+<span> </span>DBUtil.closeAll(rs,stmt,null,conn);<br />
+<span> </span>}<br />
+<hr />
+<p>
+	<br />
+</p>
+<p>
+	根据a的取值进行分组select a,count(*) from A where a=2 group by a<br />
+	<hr />
+	查询某范围内的数据select * from tb_article where id between 2 and 3
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/920.html">Jsoup是一款比较好的Java版HTML解析器</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/922.html">java web编码问题解决方案</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,913 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Hibernate框架使用方法_comonly.cn</title>
+<meta name="keywords" content="Hibernate框架使用方法" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Hibernate框架使用方法</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">宇的季节</li>
+          <li class="lmname"><a href="https://www.cnblogs.com/chenkeyu/p/7874998.html" target="_blank">https://www.cnblogs.com/chenkeyu/p/7874998.html</a></li>
+          <li class="timer">2018-09-13</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	javaweb---jsp asp数据库框架
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	Hibernate最基本的项目结构
+</p>
+<p>
+	<img src="/File/ForKindEditor/image/20180913173400_39.jpg" alt="" />
+</p>
+<p>
+	1.创建项目。这里由于使用了JBoss，所以简化了很多。hibernate.cfg.xml是hibernate中非常重要的一个xml文件，里面是一些hibernate的配置，其中session-factory最重要。试想一下我们以前用JDBC连接数据库时候的操作，加载驱动、url、用户名、密码等等，这里也是一样，你既然要操作数据库，最根本的就是连接数据库，所以hibernate的根就是在这个xml中，这里面让jvm知道用的驱动、url、用户名、密码、以及数据库方言（也就是数据库种类mysql啊还是oracle还是sqlserver啊）。hibernate简化了jdbc中一系列操作，直接通过xml配置文件来配置这些信息。<br />
+<br />
+2.编写POJO类（持久化类）。首先要明确hibernate是服务于持久层，什么是持久层，持久层就是存储数据的，在一个项目中，数据要持久地保存。操作数据库实际上是在操作我们面向的对象也就是POJO类，比如我们有一堆桌子，面向对象设计这个桌子，桌子的重量啊，形状啊等信息会被看作是桌子的属性，而数据库里存的也是这些东西。<br />
+<br />
+3.生成映射文件User.hbm.xml。数据库和我们的类（也就是POJO类）是对应的，但是即使我们知道对应，jvm不知道啊，怎么让他知道，用mapping来匹配。一个POJO类对应一个table，既然对应了，那POJO里面的属性和table的字段肯定也是要对应的，因为属性和字段表示的都是桌子的实际性质。所以映射文件的配置，就是让jvm知道那个POJO类对应哪个table。所以看看这个xml里面的配置，是不是和数据库中的字段配置很相似。<br />
+<br />
+4.编写hibernate.cfg.xml文件。一开始生成了一个xml文件，但是这个xml只是在有数据库的时候生成的，但是我们要具体操作哪一个表的时候，xml就不知道了。现在我们的目的是添加一个user进入，那也就是说我们要操作user类，user类对应数据库里的user表，但是jvm现在只知道要操作mysql数据库，而上一步里面，我们让jvm知道了user类和user表是对应的，可是user表在哪个数据库里面存着呢？mysql还是oracle？mysql下的db还是oracle下的db？很自然的，现在只需要让jvm把mysql数据库和mapping对应起来，而这个mapping就是user类和user表的映射。现在整个逻辑通了，操作user类---映射到mysql数据库--映射到user表。<br />
+<br />
+5.编写辅助工具类。刚才我们说的那些东西，都是保存在hibernate.cfg.xml下面，而那下面的标签是，这个SessionFactory是很重要也很重的一个东西，既然刚才说的东西都保存在这里面，我们用的时候肯定也都是从这里面取，所以这个辅助工具类的就是为了取处这个SessionFactory。<br />
+<br />
+6.编写DAO层接口。在三层视图层、业务层、持久层的逻辑中，DAO也就是database access object，直接面向数据库。成熟的编程方式是先写接口，再写实现类。所以DAO层接口和实现分开。<br />
+<br />
+7.DAO层实现类。这个就是利用取出的SessionFactory，再取出SessionFactory中我们需要的元素，操作这些元素也就是直接面向了数据库，通过这个实现类来完成我们的目的。<br />
+<br />
+8.一个Junit测试类。没啥说的，测试项目。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/972.html">PLSQL连接远程oracle数据库</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/974.html">Hibernate对数据库的操作</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.cnblogs.com/chenkeyu/p/7874998.html" target="_blank">https://www.cnblogs.com/chenkeyu/p/7874998.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="Hibernate所需jar包及简介">
+							<h2 style="display:inline;color:#5BC648;">Hibernate所需jar包及简介</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-09-13&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	实现Hibernate所需要的包
+</p>
+<p>
+	<img src="/File/ForKindEditor/image/20180913165504_467.png" alt="" /> 
+</p>
+<p>
+	有了这些jar包，Hibernate的功能就全了，但是Hibernate是操作数据库的，所以我们还需要提供我们要使用的数据库的对应的驱动。如mysql的驱动包。如果是maven项目可以直接配置pom.xml文件：
+</p>
+<pre class="prettyprint lang-xml">&lt;!-- hibernate5 --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.hibernate&lt;/groupId&gt;
+    &lt;artifactId&gt;hibernate-core&lt;/artifactId&gt;
+    &lt;version&gt;5.4.1.Final&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;dom4j&lt;/groupId&gt;
+    &lt;artifactId&gt;dom4j&lt;/artifactId&gt;
+    &lt;version&gt;1.6.1&lt;/version&gt;
+&lt;/dependency&gt;</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="Hibernate与数据库的连接配置">
+							<h2 style="display:inline;color:#5BC648;">Hibernate与数据库的连接配置</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-09-13&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><span>//参考 转：http://beckham-xiao.iteye.com/blog/355476</span><br />
+<span>//转自 转：https://blog.csdn.net/shl7765856/article/details/7411987</span><br />
+<h4>
+	1. MySql连接配置
+</h4>
+<span>MySql数据库的hibernate连接设置，在hibernate.cfg.xml文件中：</span><br />
+<span>&lt;hibernate-configuration&gt;</span><br />
+<span>&lt;session-factory&gt;</span><br />
+<span>&lt;!--各属性的配置--&gt;</span><br />
+<span>&lt;!—为true表示将Hibernate发送给数据库的sql显示出来 --&gt;</span><br />
+<span>&lt;property name="show_sql"&gt;true&lt;/property&gt;</span><br />
+<span>&lt;!-- SQL方言，这边设定的是MySQL --&gt;</span><br />
+<span>&lt;property name="dialect"&gt;net.sf.hibernate.dialect.MySQLDialect&lt;/property&gt;</span><br />
+<span>&lt;!--一次读的数据库记录数 --&gt;</span><br />
+<span>&lt;property name="jdbc.fetch_size"&gt;50&lt;/property&gt;</span><br />
+<span>&lt;!--设定对数据库进行批量删除 --&gt;</span><br />
+<span>&lt;property name="jdbc.batch_size"&gt;30&lt;/property&gt;</span><br />
+<span>&lt;!--驱动程序--&gt;</span><br />
+<span>&lt;property name="connection.driver_class"&gt;com.mysql.jdbc.Driver&lt;/property&gt;</span><br />
+<span>&lt;!-- JDBC URL --&gt;</span><br />
+<span>&lt;property name="connection.url"&gt;jdbc:mysql://localhost/dbname?characterEncoding=gb2312&lt;/property&gt;</span><br />
+<span>&lt;!--数据库用户名--&gt;</span><br />
+<span>&lt;property name="connection.username"&gt;root&lt;/property&gt;</span><br />
+<span>&lt;!--数据库密码--&gt;</span><br />
+<span>&lt;property name="connection.password"&gt;root&lt;/property&gt;</span><br />
+<span>&lt;!—映射文件 --&gt;</span><br />
+<span>&lt;mapping resource="com/amigo/pojo/User.hbm.xml"/&gt;</span><br />
+<span>&lt;mapping resource="com/amigo/pojo/Org.hbm.xml"/&gt;</span><br />
+<span>&lt;/session-factory&gt;</span><br />
+<span>&lt;/hibernate-configuration&gt;</span><br />
+<span>上面使用的驱动类是com.mysql.jdbc.Driver.需要将MySql的连接器jar包（eg. mysql-connector-java-5.0.4-bin.jar）加入到classpath中。 Dbname为数据库名字</span><br />
+<h4>
+	2. Sql Server连接配置
+</h4>
+<span>Sql Server数据库的hibernate在配置文件中配置。连接部分：</span><br />
+<span>&lt;!--驱动程序--&gt;</span><br />
+<span>&lt;property name="connection.driver_class"&gt;net.sourceforge.jtds.jdbc.Driver&lt;/property&gt;</span><br />
+<span>&lt;!-- JDBC URL --&gt;</span><br />
+<span>&lt;property name="connection.url"&gt;jdbc:jtds:sqlserver://localhost:1433;DatabaseName=dbname&lt;/property&gt;</span><br />
+<span>&lt;!--数据库用户名--&gt;</span><br />
+<span>&lt;property name="connection.username"&gt;sa&lt;/property&gt;</span><br />
+<span>&lt;!--数据库密码--&gt;</span><br />
+<span>&lt;property name="connection.password"&gt;&lt;/property&gt;</span><br />
+<span>上例的驱动类使用的是jtds的驱动类，因此读者需要将jtds的jar包（eg. jtds-1.2.jar）加入到classpath中</span><br />
+<h4>
+	3. Oracle连接配置
+</h4>
+<span>Oracler数据库的hibernate在配置文件中配置。连接部分：</span><br />
+<span>&lt;!--驱动程序--&gt;</span><br />
+<span>&lt;property name="connection.driver_class"&gt;oracle.jdbc.driver.OracleDriver&lt;/property&gt;</span><br />
+<span>&lt;!-- JDBC URL --&gt;</span><br />
+<span>&lt;property name="connection.url"&gt;jdbc:oracle:thin:@localhost:1521:dbname&lt;/property&gt;</span><br />
+<span>&lt;!--数据库用户名--&gt;</span><br />
+<span>&lt;property name="connection.username"&gt;test&lt;/property&gt;</span><br />
+<span>&lt;!--数据库密码--&gt;</span><br />
+<span>&lt;property name="connection.password"&gt;test&lt;/property&gt;</span><br />
+<span>上例使用的驱动类为：oracle.jdbc.driver.OracleDriver，开发人员需要将相关的jar包（ojdbc14.jar）加入到classpath中。</span><br />
+<h4>
+	4. DB2连接配置
+</h4>
+<span>DB2数据库的hibernate在配置文件中配置。连接部分：</span><br />
+<span>&lt;!--驱动程序--&gt;</span><br />
+<span>&lt;property name="connection.driver_class"&gt; com.ibm.db2.jdbc.app.DB2Driver&lt;/property&gt;</span><br />
+<span>&lt;!-- JDBC URL --&gt;</span><br />
+<span>&lt;property name="connection.url"&gt; jdbc:db2://localhost:5000/sample &lt;/property&gt;&nbsp; //sample为数据库名</span><br />
+<span>&lt;!--数据库用户名--&gt;</span><br />
+<span>&lt;property name="connection.username"&gt;admin&lt;/property&gt;</span><br />
+<span>&lt;!--数据库密码--&gt;</span><br />
+<span>&lt;property name="connection.password"&gt;&lt;/property&gt;</span><br />
+<span>上例使用的驱动类为：com.ibm.db2.jdbc.app.DB2Driver，开发人员需要将相关的jar包（db2jcc.jar）加入到classpath中。</span><br />
+<h4>
+	5. sybase连接配置
+</h4>
+<span>sybase数据库的hibernate在配置文件中配置。连接部分：</span><br />
+<span>&lt;!--驱动程序--&gt;</span><br />
+<span>&lt;property name="connection.driver_class"&gt;com.sybase.jdbc.SybDrive&lt;/property&gt;</span><br />
+<span>&lt;!-- JDBC URL --&gt;</span><br />
+<span>&lt;property name="connection.url"&gt; jdbc:sybase:Tds:localhost:5007/myDB&lt;/property&gt; ;//myDB为数据库名</span><br />
+<span>&lt;!--数据库用户名--&gt;</span><br />
+<span>&lt;property name="connection.username"&gt;userid&lt;/property&gt;</span><br />
+<span>&lt;!--数据库密码--&gt;</span><br />
+<span>&lt;property name="connection.password"&gt;user_password&lt;/property&gt;</span><br />
+<span>上例使用的驱动类为：com.sybase.jdbc.SybDrive，开发人员需要将相关的jar包（jconn3.jar）加入到classpath中。</span><br />
+<h4>
+	6. informix连接配置
+</h4>
+<span>informix数据库的hibernate在配置文件中配置。连接部分：</span><br />
+<span>&lt;!--驱动程序--&gt;</span><br />
+<span>&lt;property name="connection.driver_class"&gt;com.informix.jdbc.IfxDrive&lt;/property&gt;</span><br />
+<span>&lt;!-- JDBC URL --&gt;</span><br />
+<span>&lt;property name="connection.url"&gt;jdbc:informix-sqli://123.45.67.89:1533/myDB:INFORMIXSERVER=myserver &lt;/property&gt; ;//myDB为数据库名</span><br />
+<span>&lt;!--数据库用户名--&gt;</span><br />
+<span>&lt;property name="connection.username"&gt;testuser&lt;/property&gt;</span><br />
+<span>&lt;!--数据库密码--&gt;</span><br />
+<span>&lt;property name="connection.password"&gt;testpassword&lt;/property&gt;</span><br />
+<span>上例使用的驱动类为：com.informix.jdbc.IfxDrive，开发人员需要将相关的jar包（ifxjdbc.jar）加入到classpath中。</span><br />
+<h4>
+	7.PostgreSQL连接配置
+</h4>
+<span>PostpreSQL数据库的hibernate在配置文件中配置。连接部分：</span><br />
+<span>&lt;!--驱动程序--&gt;</span><br />
+<span>&lt;property name="connection.driver_class"&gt;org.postgresql.Driver&lt;/property&gt;</span><br />
+<span>&lt;!-- JDBC URL --&gt;</span><br />
+<span>&lt;property name="connection.url"&gt;jdbc:postgresql://localhost/myDB&lt;/property&gt;;//myDB为数据库名</span><br />
+<span>&lt;!--数据库用户名--&gt;</span><br />
+<span>&lt;property name="connection.username"&gt;myuser&lt;/property&gt;</span><br />
+<span>&lt;!--数据库密码--&gt;</span><br />
+<span>&lt;property name="connection.password"&gt;mypassword&lt;/property&gt;</span><br />
+<span>上例使用的驱动类为：com.informix.jdbc.IfxDrive，开发人员需要将相关的jar包（postgresql-8.1-405.jdbc3）加入到classpath中。</span><br />
+<h4>
+	8.access连接配置
+</h4>
+<span>access数据库的hibernate在配置文件中配置。连接部分：</span><br />
+<span>&lt;!--驱动程序--&gt;</span><br />
+<span>&lt;property name="connection.driver_class"&gt;sun.jdbc.odbc.JdbcOdbcDriver&lt;/property&gt;</span><br />
+<span>&lt;!-- JDBC URL --&gt;</span><br />
+<span>&lt;property name="connection.url"&gt;jdbc:odbc:Driver={MicroSoft..Access..Driver(*.mdb)};DBQ="+application.getRealPath("/Data/ReportDemo.mdb")&lt;/property&gt; ;//myDB为数据库名</span><br />
+<span>&lt;!--数据库用户名--&gt;</span><br />
+<span>&lt;property name="connection.username"&gt;myuser&lt;/property&gt;</span><br />
+<span>&lt;!--数据库密码--&gt;</span><br />
+<span>&lt;property name="connection.password"&gt;mypassword&lt;/property&gt;</span><br />
+<span>access数据库的驱动为：sun.jdbc.odbc.JdbcOdbcDriver或者是com.hxtt.sql.access.AccessDriver</span><br />
+<span>jar包：Access_JDBC30.jar地址：http://www.hxtt.com/access.zip。access的方言包（hibernate.jar）地址：http://www.hxtt.com/test/hibernate.zip</span><br /></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="实体类Student.java">
+							<h2 style="display:inline;color:#5BC648;">实体类Student.java</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-09-13&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+<pre class="prettyprint lang-java">package vip.chencheng.entity;
+
+public class Student {
+	private int id;
+	private String name;
+	private Integer age;
+
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Integer getAge() {
+		return age;
+	}
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+}</pre>
+在创建实体类时，属性最好使用包装类，例如：Integer，因为与基本类型(int)相比，包装类多了一种null状态。可以表示不存在，而基本类型带有默认值（如int默认0），这时就会有歧义,不知道是值为0还是不存在。
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="Hibernate配置文件">
+							<h2 style="display:inline;color:#5BC648;">Hibernate配置文件</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-09-13&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	在项目鼠标右键-new-SourceFolder，创建一个资源文件。通过项目右键new一个Hibernate Configuration File文件会自动生成约束（即&lt;!DOCTYPE...）。资源文件是为了方便我们阅读而设计的，当程序编译后，所有的资源文件会进行合并最后全部放到classes文件中，所以我们可以通过classpath进行获取。创建hibernate.cfg.xml文件，这个文件名是hibernate默认文件名，当程序启动时，hibernate会自动在classpath中寻找名为hibernate.cfg.xml的文件，如果不是这个名字，就需要后期手动指定，会比较麻烦。
+</p>
+<pre class="prettyprint lang-xml">&lt;?xml version='1.0' encoding='UTF-8'?&gt;
+&lt;!DOCTYPE hibernate-configuration PUBLIC
+          "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd"&gt; 
+&lt;!-- Generated by MyEclipse Hibernate Tools.                   --&gt;
+
+&lt;hibernate-configuration&gt;
+    &lt;!-- 先配置SessionFactory标签，一个数据库对应一个SessionFactory标签 --&gt;
+    &lt;session-factory&gt;
+        &lt;!-- 必须的配置的参数5个，4大参数，数据库方言  --&gt;
+        &lt;!--
+        #hibernate.connection.driver_class com.mysql.jdbc.Driver
+        #hibernate.connection.url jdbc:mysql:///test
+        #hibernate.connection.username gavin
+        #hibernate.connection.password 
+        数据库方言
+        #hibernate.dialect org.hibernate.dialect.MySQLDialect
+         --&gt;
+        &lt;property name="hibernate.connection.driver_class"&gt;com.mysql.jdbc.Driver&lt;/property&gt;
+        &lt;property name="hibernate.connection.url"&gt;jdbc:mysql:///housedb&lt;/property&gt;
+        &lt;property name="hibernate.connection.username"&gt;root&lt;/property&gt;
+        &lt;property name="hibernate.connection.password"&gt;123456&lt;/property&gt;
+         &lt;property name="hibernate.dialect"&gt;org.hibernate.dialect.MySQLDialect&lt;/property&gt;
+        &lt;!-- 可选配置 --&gt;
+        &lt;!-- 程序执行的时候是否显示真正的sql语句--&gt;
+        &lt;property name="hibernate.show_sql"&gt;true&lt;/property&gt;
+        &lt;!-- 格式化sql语句 --&gt;
+        &lt;property name="hibernate.format_sql"&gt;true&lt;/property&gt;
+        &lt;!-- 生成数据库的表结构 
+        (hbm2dd全称hibernate mapping to db define language auto create)
+        update 没表会自动创建，有表添加数据。
+            如果开发中间需要添加字段，可以在实体类添加属性。update会自动在数据库添加字段，并且不改变原来数据库值
+        validate 校验实体属性和数据库是否一致
+        --&gt;
+        &lt;property name="hibernate.hbm2ddl.auto"&gt;update&lt;/property&gt;
+        
+        &lt;!-- 映射配置文件，可以在map配置文件右键copy qualified name--&gt;
+        &lt;mapping resource="vip/chencheng/entity/Student.hbm.xml"/&gt;
+    &lt;/session-factory&gt;
+&lt;/hibernate-configuration&gt;</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="mapping映射文件.hbm.xm文件">
+							<h2 style="display:inline;color:#5BC648;">mapping映射文件.hbm.xm文件</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-09-13&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	关于mapping映射文件的一些默认的规则。
+</p>
+<p>
+	1、Hibernate的mapping映射文件默认需要和实体类在同一文件夹中。
+</p>
+<p>
+	2、mapping映射文件默认命名规则：实体类名.hbm.xml。hbm（全称：hibernate mapping）
+</p>
+<pre class="prettyprint lang-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"&gt;
+    
+&lt;hibernate-mapping&gt; &lt;class name="vip.chencheng.entity.Student" table="student"&gt;
+&lt;!-- 配置id
+    name实体类属性，column表字段，如果一样，column可以省略。
+ --&gt;
+    &lt;id name="id" column="id"&gt;
+    &lt;!-- 主键生成策略 --&gt;
+        &lt;generator class="native"&gt;&lt;/generator&gt;
+    &lt;/id&gt;
+    &lt;!--&lt;property name="id" column="id"&gt;&lt;/property&gt;
+    定义主键的映射在实际操作中可能会出现错误--&gt;
+    &lt;property name="name" column="name"&gt;&lt;/property&gt;
+    &lt;property name="age" column="age"&gt;&lt;/property&gt;
+&lt;/class&gt;
+&lt;/hibernate-mapping&gt;</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="Hibernate各种主键生成策略与配置详解">
+							<h2 style="display:inline;color:#5BC648;">Hibernate各种主键生成策略与配置详解</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-09-13&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	//转 转：https://www.cnblogs.com/hoobey/p/5508992.html
+</p>
+<p>
+	1、assigned<br />
+主键由外部程序负责生成，在 save() 之前必须指定一个。Hibernate不负责维护主键生成。与Hibernate和底层数据库都无关，可以跨数据库。在存储对象前，必须要使用主键的setter方法给主键赋值，至于这个值怎么生成，完全由自己决定，这种方法应该尽量避免。<br />
+&lt;id name="id" column="id"&gt;<br />
+&lt;generator class="assigned" /&gt;<br />
+&lt;/id&gt;<br />
+“ud”是自定义的策略名，人为起的名字，后面均用“ud”表示。<br />
+特点：可以跨数据库，人为控制主键生成，应尽量避免。<br />
+<br />
+2、increment<br />
+由Hibernate从数据库中取出主键的最大值（每个session只取1次），以该值为基础，每次增量为1，在内存中生成主键，不依赖于底层的数据库，因此可以跨数据库。<br />
+&lt;id name="id" column="id"&gt;<br />
+&lt;generator class="increment" /&gt;<br />
+&lt;/id&gt;<br />
+Hibernate调用org.hibernate.id.IncrementGenerator类里面的generate()方法，使用select max(idColumnName) from tableName语句获取主键最大值。该方法被声明成了synchronized，所以在一个独立的Java虚拟机内部是没有问题的，然而，在多个JVM同时并发访问数据库select max时就可能取出相同的值，再insert就会发生Dumplicate entry的错误。所以只能有一个Hibernate应用进程访问数据库，否则就可能产生主键冲突，所以不适合多进程并发更新数据库，适合单一进程访问数据库，不能用于群集环境。<br />
+官方文档：只有在没有其他进程往同一张表中插入数据时才能使用，在集群下不要使用。<br />
+特点：跨数据库，不适合多进程并发更新数据库，适合单一进程访问数据库，不能用于群集环境。<br />
+<br />
+3、hilo<br />
+hilo（高低位方式high low）是hibernate中最常用的一种生成方式，需要一张额外的表保存hi的值。保存hi值的表至少有一条记录（只与第一条记录有关），否则会出现错误。可以跨数据库。<br />
+&lt;id name="id" column="id"&gt;<br />
+&lt;generator class="hilo"&gt;<br />
+&lt;param name="table"&gt;hibernate_hilo&lt;/param&gt;<br />
+&lt;param name="column"&gt;next_hi&lt;/param&gt;<br />
+&lt;param name="max_lo"&gt;100&lt;/param&gt;<br />
+&lt;/generator&gt;<br />
+&lt;/id&gt;<br />
+&lt;param name="table"&gt;hibernate_hilo&lt;/param&gt; 指定保存hi值的表名<br />
+&lt;param name="column"&gt;next_hi&lt;/param&gt; 指定保存hi值的列名<br />
+&lt;param name="max_lo"&gt;100&lt;/param&gt; 指定低位的最大值<br />
+也可以省略table和column配置，其默认的表为hibernate_unique_key，列为next_hi<br />
+&lt;id name="id" column="id"&gt;<br />
+&lt;generator class="hilo"&gt;<br />
+&lt;param name="max_lo"&gt;100&lt;/param&gt;<br />
+&lt;/generator&gt;<br />
+&lt;/id&gt;<br />
+hilo生成器生成主键的过程（以hibernate_unique_key表，next_hi列为例）：<br />
+1. 获得hi值：读取并记录数据库的hibernate_unique_key表中next_hi字段的值，数据库中此字段值加1保存。<br />
+2. 获得lo值：从0到max_lo循环取值，差值为1，当值为max_lo值时，重新获取hi值，然后lo值继续从0到max_lo循环。<br />
+3. 根据公式 hi * (max_lo + 1) + lo计算生成主键值。<br />
+注意：当hi值是0的时候，那么第一个值不是0*(max_lo+1)+0=0，而是lo跳过0从1开始，直接是1、2、3……<br />
+那max_lo配置多大合适呢？<br />
+这要根据具体情况而定，如果系统一般不重启，而且需要用此表建立大量的主键，可以吧max_lo配置大一点，这样可以减少读取数据表的次数，提高效率；反之，如果服务器经常重启，可以吧max_lo配置小一点，可以避免每次重启主键之间的间隔太大，造成主键值主键不连贯。<br />
+特点：跨数据库，hilo算法生成的标志只能在一个数据库中保证唯一。<br />
+<br />
+4、seqhilo<br />
+与hilo类似，通过hi/lo算法实现的主键生成机制，只是将hilo中的数据表换成了序列sequence，需要数据库中先创建sequence，适用于支持sequence的数据库，如Oracle。<br />
+&lt;id name="id" column="id"&gt;<br />
+&lt;generator class="seqhilo"&gt;<br />
+&lt;param name="sequence"&gt;hibernate_seq&lt;/param&gt;<br />
+&lt;param name="max_lo"&gt;100&lt;/param&gt;<br />
+&lt;/generator&gt;<br />
+&lt;/id&gt;<br />
+特点：与hilo类似，只能在支持序列的数据库中使用。
+</p>
+<p>
+	<br />
+5、sequence<br />
+采用数据库提供的sequence机制生成主键，需要数据库支持sequence。如oralce、DB、SAP DB、PostgerSQL、McKoi中的sequence。MySQL这种不支持sequence的数据库则不行（可以使用identity）。<br />
+&lt;generator class="sequence"&gt;<br />
+&lt;param name="sequence"&gt;hibernate_id&lt;/param&gt;<br />
+&lt;/generator&gt;<br />
+&lt;param name="sequence"&gt;hibernate_id&lt;/param&gt; 指定sequence的名称<br />
+Hibernate生成主键时，查找sequence并赋给主键值，主键值由数据库生成，Hibernate不负责维护，使用时必须先创建一个sequence，如果不指定sequence名称，则使用Hibernate默认的sequence，名称为hibernate_sequence，前提要在数据库中创建该sequence。<br />
+特点：只能在支持序列的数据库中使用，如Oracle。<br />
+<br />
+6、identity<br />
+identity由底层数据库生成标识符。identity是由数据库自己生成的，但这个主键必须设置为自增长，使用identity的前提条件是底层数据库支持自动增长字段类型，如DB2、SQL Server、MySQL、Sybase和HypersonicSQL等，Oracle这类没有自增字段的则不支持。<br />
+&lt;id name="id" column="id"&gt;<br />
+&lt;generator class="identity" /&gt;<br />
+&lt;/id&gt;<br />
+例：如果使用MySQL数据库，则主键字段必须设置成auto_increment。<br />
+id int(11) primary key auto_increment<br />
+特点：只能用在支持自动增长的字段数据库中使用，如MySQL。<br />
+<br />
+7、native<br />
+native由hibernate根据使用的数据库自行判断采用identity、hilo、sequence其中一种作为主键生成方式，灵活性很强。如果能支持identity则使用identity，如果支持sequence则使用sequence。<br />
+&lt;id name="id" column="id"&gt;<br />
+&lt;generator class="native" /&gt;<br />
+&lt;/id&gt;<br />
+例如MySQL使用identity，Oracle使用sequence<br />
+注意：如果Hibernate自动选择sequence或者hilo，则所有的表的主键都会从Hibernate默认的sequence或hilo表中取。并且，有的数据库对于默认情况主键生成测试的支持，效率并不是很高。<br />
+使用sequence或hilo时，可以加入参数，指定sequence名称或hi值表名称等，如<br />
+&lt;param name="sequence"&gt;hibernate_id&lt;/param&gt;<br />
+特点：根据数据库自动选择，项目中如果用到多个数据库时，可以使用这种方式，使用时需要设置表的自增字段或建立序列，建立表等。<br />
+<br />
+8、uuid<br />
+UUID：Universally Unique Identifier，是指在一台机器上生成的数字，它保证对在同一时空中的所有机器都是唯一的。按照开放软件基金会(OSF)制定的标准计算，用到了以太网卡地址、纳秒级时间、芯片ID码和许多可能的数字，标准的UUID格式为：<br />
+xxxxxxxx-xxxx-xxxx-xxxxxx-xxxxxxxxxx (8-4-4-4-12)<br />
+其中每个 x 是 0-9 或 a-f 范围内的一个十六进制的数字。<br />
+&lt;id name="id" column="id"&gt;<br />
+&lt;generator class="uuid" /&gt;<br />
+&lt;/id&gt;<br />
+Hibernate在保存对象时，生成一个UUID字符串作为主键，保证了唯一性，但其并无任何业务逻辑意义，只能作为主键，唯一缺点长度较大，32位（Hibernate将UUID中间的“-”删除了）的字符串，占用存储空间大，但是有两个很重要的优点，Hibernate在维护主键时，不用去数据库查询，从而提高效率，而且它是跨数据库的，以后切换数据库极其方便。<br />
+特点：uuid长度大，占用空间大，跨数据库，不用访问数据库就生成主键值，所以效率高且能保证唯一性，移植非常方便，推荐使用。<br />
+<br />
+9、guid<br />
+GUID：Globally Unique Identifier全球唯一标识符，也称作 UUID，是一个128位长的数字，用16进制表示。算法的核心思想是结合机器的网卡、当地时间、一个随即数来生成GUID。从理论上讲，如果一台机器每秒产生10000000个GUID，则可以保证（概率意义上）3240年不重复。<br />
+&lt;id name="id" column="id"&gt;<br />
+&lt;generator class="guid" /&gt;<br />
+&lt;/id&gt;<br />
+Hibernate在维护主键时，先查询数据库，获得一个uuid字符串，该字符串就是主键值，该值唯一，缺点长度较大，支持数据库有限，优点同uuid，跨数据库，但是仍然需要访问数据库。<br />
+注意：长度因数据库不同而不同<br />
+MySQL中使用select uuid()语句获得的为36位（包含标准格式的“-”）<br />
+Oracle中，使用select rawtohex(sys_guid()) from dual语句获得的为32位（不包含“-”）&nbsp;<br />
+特点：需要数据库支持查询uuid，生成时需要查询数据库，效率没有uuid高，推荐使用uuid。<br />
+<br />
+10、foreign<br />
+使用另外一个相关联的对象的主键作为该对象主键。主要用于一对一关系中。<br />
+&lt;id name="id" column="id"&gt;<br />
+&lt;generator class="foreign"&gt;<br />
+&lt;param name="property"&gt;user&lt;/param&gt;<br />
+&lt;/generator&gt;<br />
+&lt;/id&gt;<br />
+&lt;one-to-one name="user" class="domain.User" constrained="true" /&gt;<br />
+该例使用domain.User的主键作为本类映射的主键。<br />
+特点：很少使用，大多用在一对一关系中。<br />
+<br />
+11、select<br />
+使用触发器生成主键，主要用于早期的数据库主键生成机制，能用到的地方非常少。<br />
+<br />
+12、其他注释方式配置<br />
+注释方式与配置文件底层实现方式相同，只是配置的方式换成了注释方式<br />
+自动增长，适用于支持自增字段的数据库<br />
+@Id<br />
+@GeneratedValue(strategy = GenerationType.IDENTITY)<br />
+根据底层数据库自动选择方式，需要底层数据库的设置<br />
+如MySQL，会使用自增字段，需要将主键设置成auto_increment。<br />
+@Id<br />
+@GeneratedValue(strategy = GenerationType.AUTO)<br />
+使用表存储生成的主键，可以跨数据库。<br />
+每次需要主键值时，查询名为"hibernate_table"的表，查找主键列"gen_pk"值为"2"记录，得到这条记录的"gen_val"值，根据这个值，和allocationSize的值生成主键值。<br />
+@Id<br />
+@GeneratedValue(strategy = GenerationType.TABLE, generator = "ud")<br />
+@TableGenerator(name = "ud",<br />
+table = "hibernate_table",<br />
+pkColumnName = "gen_pk",<br />
+pkColumnValue = "2",<br />
+valueColumnName = "gen_val",<br />
+initialValue = 2,<br />
+allocationSize = 5)<br />
+使用序列存储主键值<br />
+@Id<br />
+@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ud")<br />
+@SequenceGenerator(name = "ud",<br />
+sequenceName = "hibernate_seq",<br />
+allocationSize = 1,<br />
+initialValue = 2)<br />
+<br />
+13、小结<br />
+1、为了保证对象标识符的唯一性与不可变性，应该让Hibernate来为主键赋值，而不是程序。<br />
+2、正常使用Hibernate维护主键，最好将主键的setter方法设置成private，从而避免人为或程序修改主键，而使用assigned方式，就不能用private，否则无法给主键赋值。<br />
+2、Hibernate中唯一一种最简单通用的主键生成器就是uuid。虽然是个32位难读的长字符串，但是它没有跨数据库的问题，将来切换数据库极其简单方便，推荐使用！<br />
+3、自动增长字段类型与序列<br />
+	<table border="1" cellpadding="0" cellspacing="0" bordercolor="#000000">
+		<tbody>
+			<tr>
+				<td>
+					<p>
+						数据库
+					</p>
+				</td>
+				<td>
+					<p>
+						自动增长字段
+					</p>
+				</td>
+				<td>
+					<p>
+						序列
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>
+						MySQL
+					</p>
+				</td>
+				<td>
+					<p>
+						是
+					</p>
+				</td>
+				<td>
+					&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>
+						Oracle
+					</p>
+				</td>
+				<td>
+					&nbsp;
+				</td>
+				<td>
+					<p>
+						是
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>
+						DB2
+					</p>
+				</td>
+				<td>
+					<p>
+						是
+					</p>
+				</td>
+				<td>
+					<p>
+						是
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>
+						MS SQL Server
+					</p>
+				</td>
+				<td>
+					<p>
+						是
+					</p>
+				</td>
+				<td>
+					&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>
+						Sybase
+					</p>
+				</td>
+				<td>
+					<p>
+						是
+					</p>
+				</td>
+				<td>
+					&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>
+						HypersonicSQL
+					</p>
+				</td>
+				<td>
+					<p>
+						是
+					</p>
+				</td>
+				<td>
+					&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>
+						PostgreSQL
+					</p>
+				</td>
+				<td>
+					&nbsp;
+				</td>
+				<td>
+					<p>
+						是
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>
+						SAP DB
+					</p>
+				</td>
+				<td>
+					&nbsp;
+				</td>
+				<td>
+					<p>
+						是
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>
+						HSQLDB
+					</p>
+				</td>
+				<td>
+					<p>
+						是
+					</p>
+				</td>
+				<td>
+					&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>
+						Infomix
+					</p>
+				</td>
+				<td>
+					<p>
+						是
+					</p>
+				</td>
+				<td>
+					&nbsp;
+				</td>
+			</tr>
+		</tbody>
+	</table>
+<br />
+4、关于hilo机制注意：<br />
+hilo算法生成的标志只能在一个数据库中保证唯一。<br />
+当用户为Hibernate自行提供连接，或者Hibernate通过JTA，从应用服务器的数据源获取数据库连接时，无法使用hilo，因为这不能保证hilo单独在新的数据库连接的事务中访问hi值表，这种情况，如果数据库支持序列，可以使用seqhilo。<br />
+5、使用identity、native、GenerationType.AUTO等方式生成主键时，只要用到自增字段，数据库表的字段必须设置成自动增加的，否则出错。<br />
+6、还有一些方法未列出来，例如uuid.hex，sequence-identity等，这些方法不是很常用，且已被其他方法代替，如uuid.hex，官方文档里建议不使用，而直接使用uuid方法。<br />
+7、Hibernate的各版本主键生成策略配置有略微差别，但实现基本相同。如，有的版本默认sequence不指定序列名，则使用名为hibernate_sequence的序列，有的版本则必须指定序列名。<br />
+8、还可以自定义主键生成策略，这里暂时不讨论，只讨论官方自带生成策略。
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Hibernate所需jar包及简介">Hibernate所需jar包及简介</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Hibernate与数据库的连接配置">Hibernate与数据库的连接配置</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#实体类Student.java">实体类Student.java</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Hibernate配置文件">Hibernate配置文件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#mapping映射文件.hbm.xm文件">mapping映射文件.hbm.xm文件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Hibernate各种主键生成策略与配置详解">Hibernate各种主键生成策略与配置详解</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

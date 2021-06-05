@@ -1,0 +1,288 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>框架—HTML基础知识_comonly.cn</title>
+<meta name="keywords" content="框架—HTML基础知识" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">框架—HTML基础知识</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-03-04</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">网页,语法,html,框架</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>将浏览器主窗口分成几个独立的窗口框架（frame），每个框架同时显示一个不同的HTML网页，这样就可以同时浏览不同的框架网页。</p>
+<p><font size="7">框架的基本结构</font></p>
+<p>&lt;html&gt;</p>
+<p>&lt;head&gt;&lt;/head&gt;</p>
+<p>&lt;frameset rows="300,*" &nbsp;border="5" bordercolor="red"&gt; &nbsp; &nbsp; //框架集</p>
+<p>frameset cols="100,20%,*" border="5" bordercolor="red"&gt;<br>
+</p>
+<p>&lt;frame src="http://www.iyaka.cn/list/14"marginwidth="20" marginheight="20"&gt; &nbsp; &nbsp; &nbsp; &nbsp;//框架</p>
+<p>&lt;frame src="http://www.iyaka.cn/" noresize="noresize" scrolling="yes" frameborder="1" name="text"&gt;</p>
+<p>&lt;noframes&gt;很抱歉！您的浏览器不支持框架显示&lt;/noframes&gt;</p>
+<p>&lt;/frameset&gt;<br>
+</p>
+<p>&lt;/frameset&gt;</p>
+<p>&lt;/html&gt;</p>
+<p><font size="5"><b>&lt;frameset&gt;属性设置</b></font></p>
+<p>
+</p>
+<ul>
+<li>rows="300,*"创建两行框架，第一行300px高，剩下的为第二行。<br>
+</li>
+<li>cols="100,20%,*"创建三列框架，第一列100px,第二列宽度占剩下空间的20%，其余的给第三列。<br>
+</li>
+<li>border="5" 设置边框的粗细，当为0时消除边框。默认为1<br>
+</li>
+<li>bordercolor="red"控制框架边框的颜色。<br>
+</li></ul>
+<p></p>
+<p><font size="5"><b>&lt;frame&gt;属性设置</b></font></p>
+<p>
+</p>
+<ul>
+<li>src属性来指定显示在框架中的网页文件路径。<br>
+</li>
+<li>name属性给框架,&lt;frameset&gt;标签一个自定义的名字，以便随后target的引用。<br>
+</li>
+<li>noresize属性禁止设置框架的宽度，屏蔽框架集中的设置。<br>
+</li>
+<li>scrolling属性设置滚动条：auto自动添加滚动条，yes添加滚动条，no不添加滚动条，即使无法完全显示。<br>
+</li>
+<li>marginwidth和marginheight设置框架左右边缘的宽度和上下边缘的宽度<br>
+</li>
+<li>frameborder属性对单一的框架来添加或删除边框，值"yes"或"1","no"或"0"<br>
+</li></ul>
+<p></p>
+<p><font size="5"><b>&lt;noframes&gt;属性设置</b></font></p>
+<p>
+</p>
+<ul>
+<li>当浏览器不支持框架网页时，会显示该标签内的内容。<br>
+</li></ul>
+<p></p>
+<p><br>
+</p>
+<p><font size="5"><b>内联框架（浮动框架）&lt;iframe&gt;</b></font></p>
+<p>在一个网页中嵌入一个框架窗口来显示另一个网页。</p>
+<p>用&lt;iframe&gt;标签定义，不包含在&lt;frameset&gt;内，可以出现在网页文档的任何地方，相当于在网页中定义了一个矩形区域，显示一个单独的网页文档，包括滚动条和边框。</p>
+<p>&lt;iframe src="http://www.iyaka.cn" name="left" width="300" height="300" align="middle"&gt;&lt;/iframe&gt;</p>
+<p>
+</p>
+<ul>
+<li>src定义需要加载文件的路径<br>
+</li>
+<li>name给内联框架自定义一个名称<br>
+</li>
+<li>width和height属性设置高度<br>
+</li>
+<li>align属性控制内联框架与网页上相邻的文字位置关系：top，middle，bottom，left，right<br>
+</li>
+<li>框架的相关属性基本都对内联框架适用。<br>
+</li></ul>
+<p></p>
+<p><br>
+</p>
+<p><font size="6">框架的链接</font></p>
+<p>&lt;a href="http://www.iyaka.cn/" target="text"&gt;本站首页&lt;/a&gt;</p>
+<p>text是在框架中定义的框架名，点击链接后网页就在名称为text的框架中出现。</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/572.html">表单—HTML基础知识</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/574.html">网站web标准，改善现有网页</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

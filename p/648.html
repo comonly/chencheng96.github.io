@@ -1,0 +1,299 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Sever对象—ASP_comonly.cn</title>
+<meta name="keywords" content="Sever对象—ASP" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Sever对象—ASP</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-03-26</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	javaweb---jsp asp数据库框架
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">Sever对象,ASP</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	<span style="line-height:1.5;">可以用来创建各种服务器组件实例，同时也为访问数据库、创建文件系统等功能提供了方法。</span> 
+</p>
+<h2 id='Server对象的属性'>
+	Server对象的属性
+</h2>
+<p>
+	&nbsp; &nbsp;只有一个ScriptTimeOut。该属性是整型值，用来设置或者返回页面中的脚步在服务器上终止前可以运行的最长的秒数。默认值为90s（可以在iis中设置），当脚本运行时间超过这个时间时，即做超时处理。
+</p>
+<p>
+	&nbsp; &nbsp;Server.ScriptTimeOut=value。设置脚本超时秒数，如果设为-1，脚本永远不会过期。该属性可以读写。
+</p>
+<p>
+	&nbsp; &nbsp;&lt;%&nbsp;Server.ScriptTimeOut=20; response.write&nbsp;Server.ScriptTimeOut %&gt; &nbsp; //设置为20s过期
+</p>
+<h2 id='Server对象的方法'>
+	Server对象的方法
+</h2>
+<h4>
+	CreateObject方法：创建一个组件，应用或者脚本对象的实例。
+</h4>
+<p>
+	&nbsp; &nbsp;该方法创建的对象存在一个有效期的限制。当服务器终止执行当前使用CreateObject方法的ASP页面时，被创建的对象实例将被抛弃。在Global.asa文件中使用&lt;object&gt;标签在session或application范围内建立一个对象，那么这种方法创建的对象将在这个应用程序级别有效。
+</p>
+<p>
+	&nbsp; &nbsp;Server.CreateObject(progID)，其中，“progID”是必选参数，描述要建立对象类型，该方法返回一个会话级或者应用级范围的对象。
+</p>
+<p>
+	&nbsp; &nbsp;Set obj=Server.CreateObject(progID)为某个变量设置所创建对象的实例，需用Set关键字。
+</p>
+<h4>
+	Execute方法：执行其他ASP程序。当其他ASP文件内的程序被请求执行完毕之后，控制器将返回最初发出请求的原始文件。
+</h4>
+<p>
+	&nbsp; &nbsp;Server.Execute("URL")可以完成类似函数调用的功能，只不过调用的是一个ASP文件，当被调用程序执行完毕后，将返回到主调程序中继续执行。URL指定待执行的ASP文件。
+</p>
+<h4>
+	GetLastError方法：返回一个描述ASP错误状况的ASPError（ASP错误）对象
+</h4>
+<p>
+	&nbsp; &nbsp;默认情况下，ASP网站使用“\iishelp\common\500-100.asp”文件来描述在执行ASP过程中发生的错误。
+</p>
+<p>
+	&nbsp; &nbsp;Server.GetLastError() 该方法仅在ASP页面没有任何数据发送给浏览器之前才有效。该方法给出的出错信息内容包括：文件名，行号，错误代码等。
+</p>
+<p>
+	&nbsp; &nbsp;错误信息可以通过IIS编辑。
+</p>
+<h4>
+	HTMLEncode方法：将HTML代码转换为相应的字符串编码
+</h4>
+<p>
+	&nbsp; &nbsp;可以对特定的字符串进行HTML编码，虽然HTML可以显示大部分写入ASP文件中的文本，但是当需要包含HTML标记中的字符时，就会遇到错误。当浏览器遇到这样的字符串时会试图进行解释。
+</p>
+<p>
+	&nbsp; &nbsp;Server.HTMLEncode("string") string是需要转换编码的字符串。
+</p>
+<h4>
+	MapPath方法：显示指定路径的物理路径（绝对路径）
+</h4>
+<p>
+	&nbsp; &nbsp;Server.MapPath("URL") 将指定的相对或虚拟路径映射到服务器上相应的物理目录。若URL以/或者\开始，则MapPath方法返回路径时将URL视为完整的虚拟路径。否则返回.asp文件已有路径的相对路径。
+</p>
+<p>
+	<span>&nbsp; &nbsp;Server.MapPath("/") &nbsp; &nbsp;获取服务器主目录</span> 
+</p>
+<p>
+	<span>&nbsp; &nbsp;Server.MapPath("now.asp") &nbsp; &nbsp; 显示具体文件目录</span> 
+</p>
+<p>
+	<span>&nbsp; &nbsp;Server.MapPath(".\")&nbsp;</span> &nbsp; &nbsp;显示当前文件所在路径的父目录
+</p>
+<h4>
+	Transfer方法：将所有的陈述信息（包括application或session变量以及request集合中的所有项目）从其中一个ASP文件发送到另一个ASP文件
+</h4>
+<p>
+	&nbsp; &nbsp;Server.Transfer("URL") &nbsp; &nbsp;URL参数是要跳转的ASP文件，可以包含文件名及路径。
+</p>
+<p>
+	&nbsp; &nbsp;使用该方法在跳转之后并不返回前一个文件。该方法有效地替代了Response.Redirect方法，重定向方法是强制网络服务器执行这个特殊请求，而Server.Transfer方法可以将程序转移到服务器另外一个不同的ASP页面上执行，从而避免其他特殊访问。
+</p>
+<h4>
+	URLEncode：将URL转换为指定的字符串代码
+</h4>
+<p>
+	&nbsp; &nbsp;Server.URLEncode("string")将URL转换为指定的字符串代码，它能够将URL中出现的不合法的字符，如？、&amp;和空格都转换成对应的URL实体。如&lt;%response.write(Server.URLEncode("http://"))%&gt; &nbsp; 会输出 http%3A%2F%2F
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/647.html">Application与Session对象的应用—统计访问次数</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/649.html">ObjectContext对象—ASP【待处理】</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Server对象的属性">Server对象的属性</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Server对象的方法">Server对象的方法</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

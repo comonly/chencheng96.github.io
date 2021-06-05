@@ -1,0 +1,221 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>pgsql 单机多版本的实验环境的搭建_comonly.cn</title>
+<meta name="keywords" content="pgsql 单机多版本的实验环境的搭建" />
+<meta name="description" content="pgsql 单机多版本的实验环境的搭建" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">pgsql 单机多版本的实验环境的搭建</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">我的二狗呢</li>
+          <li class="lmname"><a href="https://blog.51cto.com/lee90/2430877" target="_blank">https://blog.51cto.com/lee90/2430877</a></li>
+          <li class="timer">2019-08-20</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>pgsql 单机多版本的实验环境的搭建</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <div class="con editor-preview-side" id="result"><p>实验的时候，我们通常需要运行多个版本的pg实例。<br></p><p><br></p><p>最近试用了下pgenv 发现这个虚拟环境并不是很好用，pg自身的多实例更好用，具体方法如下：</p><p><br></p><p>这里以我们编译安装好的pgsql11.5为例（其它rpm安装的pg也可以的）。我的pgsql原始安装路径在/usr/local/pgsql/ 目录下</p><p><br></p><p><strong>切换到postgres账户下</strong></p><p>su - postgres</p><p><br></p><p><strong>创建相关目录</strong></p><div class="code-toolbar"><pre class="brush:bash;toolbar:false  language-bash"><code class="  language-bash"><span class="token function">cd</span> /usr/local/pgsql/
+<span class="token function">mkdir</span> pg1
+mkdig pg2</code></pre><div class="toolbar"></div></div><p><br></p><p><strong>初始化</strong></p><div class="code-toolbar"><pre class="brush:bash;toolbar:false  language-bash"><code class="  language-bash">initdb -D usr/local/pgsql/pg1/
+initdb -D usr/local/pgsql/pg2/</code></pre><div class="toolbar"></div></div><p style="white-space:normal;"><br></p><p style="white-space:normal;"><strong>启动pg：</strong></p><div class="code-toolbar"><pre class="brush:bash;toolbar:false  language-bash"><code class="  language-bash">pg_ctl -D /usr/local/pgsql/pg1/ -o <span class="token string">"-p 5433"</span> -l /usr/local/pgsql/pg1/pg.log start
+pg_ctl -D /usr/local/pgsql/pg2/ -o <span class="token string">"-p 5434"</span> -l /usr/local/pgsql/pg2/pg.log start</code></pre><div class="toolbar"></div></div><p><br></p><p><strong>登录到PG</strong></p><div class="code-toolbar"><pre class="brush:bash;toolbar:false  language-bash"><code class="  language-bash">./bin/psql -p  5433
+./bin/psql -p  5434</code></pre><div class="toolbar"></div></div><p><br></p><p><strong>停止PG：</strong></p><div class="code-toolbar"><pre class="brush:bash;toolbar:false  language-bash"><code class="  language-bash">pg_ctl stop -m fast -D /usr/local/pgsql/pg1/
+pg_ctl stop -m fast -D /usr/local/pgsql/pg2/</code></pre><div class="toolbar"></div></div><p><br></p><p>日常我们可以在服务器上编译多个不同版本的pg，使用上面的方法即可启动多个实例，只要我们的端口不冲突就行。</p><p><br></p><p><br></p><p><br></p></div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1977.html">3个Spring Boot核心注解，你知道几个？</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1979.html">通过Windows共享文件夹直接挂载到Linux中使用（实验操作）</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.51cto.com/lee90/2430877" target="_blank">https://blog.51cto.com/lee90/2430877</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

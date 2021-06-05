@@ -1,0 +1,323 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Session对象—ASP_comonly.cn</title>
+<meta name="keywords" content="Session对象—ASP" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Session对象—ASP</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-03-23</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	javaweb---jsp asp数据库框架
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">Session,ASP</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	ASP为每个用户建立一个完全独立的Cookie，并把这些Cookie发送到客户端，保存了所有能辨别用户的信息。Session对象用来存储用户会话，它可以对用户会话进行改变和设置。
+</p>
+<h2 id='Seio对象的集合'>
+	Session对象的集合
+</h2>
+<p>
+	Contents集合：没有用&lt;OBJECT&gt;标记定义的，存储在Session对象中所有变量及值的集合。
+</p>
+<p>
+	&nbsp; &nbsp;&lt;% Session.Contents("test")="test0" %&gt;
+</p>
+<p>
+	&nbsp; &nbsp;<span>&lt;% =Session.Contents("test")</span><span>&nbsp;%&gt;设置变量和取出变量。</span> 
+</p>
+<p>
+	StaticObject集合：使用&lt;OBJECT&gt;标记定义的存放在Session对象中的所有变量的集合。
+</p>
+<h2 id='Seio对象的属性'>
+	Session对象的属性
+</h2>
+<p>
+	SessionID属性：返回此会话的会话标识符，它由服务器在建立会话时创建
+</p>
+<p>
+	&nbsp; &nbsp;一个只读属性，返回由服务器为每个会话创建的唯一标识符。实际存储在客户端的Cookie中，当会话超时时终止。
+</p>
+<p>
+	&nbsp; &nbsp;&lt;% response.write Session.SessionID%&gt;向客户端输出当前会话的ID。在相同的服务器周期中，所有的SessionID具有相同的值。
+</p>
+<p>
+	TimeOut属性：定义此会话的超时时间，以分为单位
+</p>
+<p>
+	&nbsp; &nbsp;&lt;% session.Timeout=20%&gt;设置分配给Session对象的超时时间，以分为单位。
+</p>
+<p>
+	CodePage属性：定义用来在浏览器中显示页面内容的代码页
+</p>
+<p>
+	&nbsp; &nbsp;用来确定显示内容的代码页（代码页是用来完成显示在屏幕上的字符和内部表之间的映射）。
+</p>
+<p>
+	LCID属性：定义发送到浏览器的页面的地区标识符
+</p>
+<p>
+	<br />
+</p>
+<p>
+	&lt;% if(session.Contents("count")="")session.Contents("count")=1 else session.Contents("count")=session.Contents("count")+1;&nbsp;%&gt; &nbsp;可以用来统计页面的刷新次数。
+</p>
+<h2 id='Seio对象的方法'>
+	Session对象的方法
+</h2>
+<p>
+	Abandon方法：结束当前会话，删除Session对象
+</p>
+<p>
+	&nbsp; &nbsp;可以删除存储在Session对象中的所有对象，并释放服务器资源。如果没有调用，在会话超时时1，服务器自动删除Session对象。
+</p>
+<p>
+	&nbsp; &nbsp;session.Abandon(); response.Redirect("test.asp"); &nbsp;一旦调用该方法1，则会删除所有的Session变量。
+</p>
+<p>
+	Contents.Remove方法：从Session变量集合中删除变量
+</p>
+<p>
+	&nbsp; &nbsp;session.Contents("name")="vlue"; session.Contents.remove("name"); &nbsp; 删除会话变量的名字。
+</p>
+<p>
+	Contents.RemoveAll方法：删除Session变量集合中的所有变量
+</p>
+<p>
+	&nbsp; &nbsp;session.Contents.removeall &nbsp; 删除所有已经建立的Session变量。
+</p>
+<p>
+	不能在页面运行时删除所有会话变量。
+</p>
+<h2 id='Seio对象的事件'>
+	Session对象的事件
+</h2>
+<p>
+	onStart事件：在一个用户会话开始时，将触发该事件，可以在该事件中初始化会话变量
+</p>
+<p>
+	&nbsp; &nbsp;当用户打开应用程序的第一个页面时，在"Application_OnStart"事件触发之后发生。
+</p>
+<p>
+	&nbsp; &nbsp;Sub Session_onStart
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp;session("count")=session("count")+1
+</p>
+<p>
+	&nbsp; &nbsp;End Sub
+</p>
+<p>
+	onEnd事件：当结束用户会话时或者会话超时时，将触发该事件。可以在该事件中删除所有的会话变量
+</p>
+<p>
+	&nbsp; &nbsp;当会话结束或者会话超时时，都将调用该事件。
+</p>
+<p>
+	&nbsp; &nbsp;Sub Session_onEnd
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp;session("count")=session("count")-1
+</p>
+<p>
+	&nbsp; &nbsp;End Sub
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/645.html">global.asa文件</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/647.html">Application与Session对象的应用—统计访问次数</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Seio对象的集合">Seio对象的集合</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Seio对象的属性">Seio对象的属性</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Seio对象的方法">Seio对象的方法</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Seio对象的事件">Seio对象的事件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

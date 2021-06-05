@@ -1,0 +1,343 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Apache Ant 简介和配置_comonly.cn</title>
+<meta name="keywords" content="Apache Ant 简介和配置" />
+<meta name="description" content="Apache Ant 简介
+
+
+
+	
+		&nbsp;&nbsp; &nbsp;Apache Ant是目前事实上的Java应用的标准build脚本工具。使它大受欢迎的一个主要愿意是它的和灵活，允许程序员创建自己的Task来对Ant进行扩展。
+	
+	
+		&nbsp;&nbsp; &nbsp;本文主要内容有：
+	
+	
+		
+			
+				对Ant的简介
+			
+			
+				介绍常用的Ant脚本
+			
+		
+	
+	
+		Ant的安装
+	
+	
+		Apac" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Apache Ant 简介和配置</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">天马3798</li>
+          <li class="lmname"><a href="https://www.cnblogs.com/tianma3798/p/6361045.html" target="_blank">https://www.cnblogs.com/tianma3798/p/6361045.html</a></li>
+          <li class="timer">2020-03-25</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>Apache Ant 简介
+
+
+
+	
+		&nbsp;&nbsp; &nbsp;Apache Ant是目前事实上的Java应用的标准build脚本工具。使它大受欢迎的一个主要愿意是它的和灵活，允许程序员创建自己的Task来对Ant进行扩展。
+	
+	
+		&nbsp;&nbsp; &nbsp;本文主要内容有：
+	
+	
+		
+			
+				对Ant的简介
+			
+			
+				介绍常用的Ant脚本
+			
+		
+	
+	
+		Ant的安装
+	
+	
+		Apac</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 style="font-size:21px;font-family:verdana, Arial, Helvetica, sans-serif;background-color:#FFFFFF;">
+	Apache Ant 简介
+</h2>
+<span style="color:#333333;font-family:verdana, Arial, Helvetica, sans-serif;font-size:14px;background-color:#FFFFFF;"></span>
+<div style="margin:0px;padding:0px;color:#333333;font-family:verdana, Arial, Helvetica, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	<div style="margin:0px;padding:0px;">
+		&nbsp;&nbsp; &nbsp;Apache Ant是目前事实上的Java应用的标准build脚本工具。使它大受欢迎的一个主要愿意是它的和灵活，允许程序员创建自己的Task来对Ant进行扩展。
+	</div>
+	<div style="margin:0px;padding:0px;">
+		&nbsp;&nbsp; &nbsp;本文主要内容有：
+	</div>
+	<div style="margin:0px;padding:0px;">
+		<ul>
+			<li>
+				对Ant的简介
+			</li>
+			<li>
+				介绍常用的Ant脚本
+			</li>
+		</ul>
+	</div>
+	<h3 style="color:#000000;font-size:16px;">
+		Ant的安装
+	</h3>
+	<div style="margin:0px;padding:0px;">
+		Apache Ant是Apache基金会下的一个项目，
+	</div>
+	<div style="margin:0px;padding:0px;">
+		官网：<a href="http://ant.apache.org/" target="_blank">http://ant.apache.org/</a>
+	</div>
+	<div style="margin:0px;padding:0px;">
+		下载地址：<a href="http://ant.apache.org/bindownload.cgi" target="_blank">http://ant.apache.org/bindownload.cgi</a>
+	</div>
+	<div style="margin:0px;padding:0px;">
+		根据不同的平台下载不同的压缩包，直接解压到安装目录就可以了，不需要安装。解压后，在PATH环境变量中添加Ant的安装目录。
+	</div>
+	<div style="margin:0px;padding:0px;">
+		<strong>环境变量配置：</strong>
+	</div>
+	<div style="margin:0px;padding:0px;">
+		<p>
+			ANT_HOME D:\SWE\apache-ant-1.8.4
+		</p>
+		<p>
+			CLASSPATH ;%ANT_HOME%lib;
+		</p>
+		<p>
+			PATH&nbsp;&nbsp;;%ANT_HOME%bin;
+		</p>
+		<p>
+			<strong>测试是否安装成功</strong>
+		</p>
+		<p>
+			在cmd命令方式下输入：ant -version
+		</p>
+		<p>
+			<img src="https://images2015.cnblogs.com/blog/470800/201702/470800-20170202115708339-414207600.png" alt="" style="height:auto;" />
+		</p>
+	</div>
+	<h3 style="color:#000000;font-size:16px;">
+		Ant简介
+	</h3>
+&nbsp;&nbsp; &nbsp;我想大家都听说过很多build工具，如make，maven等。那么为什么我们选择Ant呢？简单说，Ant有以下这两个优点。<br />
+	<div style="margin:0px;padding:0px;">
+		<ul>
+			<li>
+				使用java开发，并用xml存储build信息，因此是跨平台的。
+			</li>
+			<li>
+				程序员可以自己扩展Ant。程序员可以自己写java程序来扩展Ant，创建自己的tasks。
+			</li>
+		</ul>
+	</div>
+<br />
+	<div style="margin:0px;padding:0px;">
+		&nbsp;&nbsp; &nbsp;make这一类的工具是基于操作系统shell的，因此移植性不好。并且Ant也可以通过&lt;exec&gt;标签来实现调用shell，但这样会是以可移植性为代价的。
+	</div>
+	<div style="margin:0px;padding:0px;">
+		&nbsp;&nbsp; &nbsp;Ant使用XML来存储build信息，在xml文件里有很多task的定义，默认使用的文件是build.xml。
+	</div>
+</div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1696.html">大白话，心理因素等</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1698.html">.Net框架和.Net Core,程序员该如何选？</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.cnblogs.com/tianma3798/p/6361045.html" target="_blank">https://www.cnblogs.com/tianma3798/p/6361045.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

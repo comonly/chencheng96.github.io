@@ -1,0 +1,391 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>TCP/IP数据包结构详解_comonly.cn</title>
+<meta name="keywords" content="TCP/IP数据包结构详解" />
+<meta name="description" content="一般来说，网络编程我们只需要调用一些封装好的函数或者组件就能完成大部分的工作，但是一些特殊的情况下，就需要深入的理解网络数据包的结构，以及协议分析。如：网络监控，故障排查等……
+
+
+	IP包是不安全的，但是它是互联网的基础，在各方面都有广泛的应用。由IP协议衍生的协议族有10数种（据我所知），以后还会出现更多的基于IP的协议…
+
+
+	先从实际出发吧！
+
+
+	一般我们在谈上网速度的时候，专业上用带宽来描述，其实无论说网速或者带宽都是不准确的，呵呵。比如：1兆，512K……有些在学校的学生，" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">TCP/IP数据包结构详解</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">dream_fly_info</li>
+          <li class="lmname"><a href="https://www.cnblogs.com/larry-luo/p/10983633.html" target="_blank">https://www.cnblogs.com/larry-luo/p/10983633.html</a></li>
+          <li class="timer">2019-09-08</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>一般来说，网络编程我们只需要调用一些封装好的函数或者组件就能完成大部分的工作，但是一些特殊的情况下，就需要深入的理解网络数据包的结构，以及协议分析。如：网络监控，故障排查等……
+
+
+	IP包是不安全的，但是它是互联网的基础，在各方面都有广泛的应用。由IP协议衍生的协议族有10数种（据我所知），以后还会出现更多的基于IP的协议…
+
+
+	先从实际出发吧！
+
+
+	一般我们在谈上网速度的时候，专业上用带宽来描述，其实无论说网速或者带宽都是不准确的，呵呵。比如：1兆，512K……有些在学校的学生，</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	一般来说，网络编程我们只需要调用一些封装好的函数或者组件就能完成大部分的工作，但是一些特殊的情况下，就需要深入的理解网络数据包的结构，以及协议分析。如：网络监控，故障排查等……
+</p>
+<p>
+	IP包是不安全的，但是它是互联网的基础，在各方面都有广泛的应用。由IP协议衍生的协议族有10数种（据我所知），以后还会出现更多的基于IP的协议…
+</p>
+<p>
+	先从实际出发吧！
+</p>
+<p>
+	一般我们在谈上网速度的时候，专业上用带宽来描述，其实无论说网速或者带宽都是不准确的，呵呵。比如：1兆，512K……有些在学校的学生，也许会有疑问，明明我的业务是1M，为什么下载速度到100K就飙不上去了？512K的为什么50多K就封顶了？…
+</p>
+<p>
+	这里所说的1M是指1Mbps = 1 Million Bits Per Second，也就是1M比特每秒，即一秒钟传输1048576个二进制位。我们知道一个字节是8个二进制位。
+</p>
+<p>
+	好，又来问题了。即便这样子，1M=1048756÷8=131072÷1024=128K。那也应该有128K啊，为什么下载速度还是很少到120K，110K都谢天谢地了。看完本文，你的帐就对了……
+</p>
+<h2 id='IP数据包结构：'>
+	IP数据包结构：
+</h2>
+<p>
+	<img src="https://images0.cnblogs.com/blog/8649/201307/18152419-54f72c90dd2843af9bc3358cfacf154b.png" alt="" style="height:auto;" /> 
+</p>
+<p>
+	如图，一个刻度表示1个二进制位（比特）。
+</p>
+<p>
+	1-1.版本4位，表示版本号，目前最广泛的是4=B1000，即常说的IPv4；相信IPv6以后会广泛应用，它能给世界上每个纽扣都分配一个IP地址。
+</p>
+<p>
+	1-2.头长4位，数据包头部长度。它表示数据包头部包括多少个32位长整型，也就是多少个4字节的数据。无选项则为5（红色部分）。
+</p>
+<p>
+	1-3.服务类型，包括8个二进制位，每个位的意义如下：
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 过程字段：3位，设置了数据包的重要性，取值越大数据越重要，取值范围为：0（正常）~ 7（网络控制）
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 延迟字段：1位，取值：0（正常）、1（期特低的延迟）
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 流量字段：1位，取值：0（正常）、1（期特高的流量）
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 可靠性字段：1位，取值：0（正常）、1（期特高的可靠性）
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 成本字段：1位，取值：0（正常）、1（期特最小成本）
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 保留字段：1位 ，未使用
+</p>
+<p>
+	1-4.包裹总长16位，当前数据包的总长度，单位是字节。当然最大只能是65535，及64KB。
+</p>
+<p>
+	2-1.重组标识16位，发送主机赋予的标识，以便接收方进行分片重组。
+</p>
+<p>
+	2-2.标志3位，他们各自的意义如下：
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 保留段位(2)：1位，未使用
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 不分段位(1)：1位，取值：0（允许数据报分段）、1（数据报不能分段）
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 更多段位(0)：1位，取值：0（数据包后面没有包，该包为最后的包）、1（数据包后面有更多的包）
+</p>
+<p>
+	2-3.段偏移量13位，与更多段位组合，帮助接收方组合分段的报文，以字节为单位。
+</p>
+<p>
+	3-1.生存时间8位，经常ping命令看到的TTL（Time To Live）就是这个，每经过一个路由器，该值就减一，到零丢弃。
+</p>
+<p>
+	3-2.协议代码8位，表明使用该包裹的上层协议，如TCP=6，ICMP=1，UDP=17等。
+</p>
+<p>
+	3-3.头检验和16位，是IPv4数据包头部的校验和。
+</p>
+<p>
+	4-1.源始地址，32位4字节，我们常看到的IP是将每个字节用点（.）分开，如此而已。
+</p>
+<p>
+	5-1.目的地址，32位，同上。
+</p>
+<p>
+	6-1.可选选项，主要是给一些特殊的情况使用，往往安全路由会当作攻击而过滤掉，普联（TP_LINK）的TL-ER5110路由就能这么做。
+</p>
+<p>
+	7-1.用户数据。
+</p>
+<h2 id='TCP数据包结构：'>
+	TCP数据包结构：
+</h2>
+<p>
+	<img src="https://images0.cnblogs.com/blog/8649/201307/18152432-9e6db744a7934c5882b47305cf9be286.png" alt="" style="height:auto;" /> 
+</p>
+<p>
+	1-1.源始端口16位，范围当然是0-65535啦。
+</p>
+<p>
+	1-2.目的端口，同上。
+</p>
+<p>
+	2-1.数据序号32位，TCP为发送的每个字节都编一个号码，这里存储当前数据包数据第一个字节的序号。
+</p>
+<p>
+	3-1.确认序号32位，为了安全，TCP告诉接受者希望他下次接到数据包的第一个字节的序号。
+</p>
+<p>
+	4-1.偏移4位，类似IP，表明数据距包头有多少个32位。
+</p>
+<p>
+	4-2.保留6位，未使用，应置零。
+</p>
+<p>
+	4-3.紧急比特URG—当URG＝1时，表明紧急指针字段有效。它告诉系统此报文段中有紧急数据，应尽快传送(相当于高优先级的数据)。
+</p>
+<p>
+	4-3.确认比特ACK—只有当ACK＝1时确认号字段才有效。当ACK＝0时，确认号无效。参考TCP三次握手
+</p>
+<p>
+	4-4.复位比特RST(Reset) —当RST＝1时，表明TCP连接中出现严重差错（如由于主机崩溃或其他原因），必须释放连接，然后再重新建立运输连接。参考TCP三次握手
+</p>
+<p>
+	4-5.同步比特SYN—同步比特SYN置为1，就表示这是一个连接请求或连接接受报文。参考TCP三次握手
+</p>
+<p>
+	4-6.终止比特FIN(FINal)—用来释放一个连接。当FIN＝1时，表明此报文段的发送端的数据已发送完毕，并要求释放运输连接。
+</p>
+<p>
+	4-7.窗口字段16位，窗口字段用来控制对方发送的数据量，单位为字节。TCP连接的一端根据设置的缓存空间大小确定自己的接收窗口大小，然后通知对方以确定对方的发送窗口的上限。
+</p>
+<p>
+	5-1.包校验和16位，包括首部和数据这两部分。在计算检验和时，要在TCP报文段的前面加上12字节的伪首部。
+</p>
+<p>
+	5-2.紧急指针16位，紧急指针指出在本报文段中的紧急数据的最后一个字节的序号。
+</p>
+<p>
+	6-1.可选选项24位，类似IP，是可选选项。
+</p>
+<p>
+	6-2.填充8位，使选项凑足32位。
+</p>
+<p>
+	7-1.用户数据……
+</p>
+<p>
+	可以看出，每个IP包至少要20字节的头部长度，这些与下载内容无关，加上目前多数传输，包括http协议（就是IE直接下载），都是基于TCP协议的，所以IP包裹还要从用户数据中扣除20字节的TCP包头，这里已经是40字节，加上其他程序的连接，状态确认等等包裹，因而算出来要比理论值要小。
+</p>
+<p>
+	另外网络环境（包括稳定因素和传输节点的转发率）也是影响下载速度的重要原因……
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1415.html">string与cstring有什么区别</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1417.html">路由器和交换机的区别？路由器的作用和工作原理！</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.cnblogs.com/larry-luo/p/10983633.html" target="_blank">https://www.cnblogs.com/larry-luo/p/10983633.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#IP数据包结构：">IP数据包结构：</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#TCP数据包结构：">TCP数据包结构：</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

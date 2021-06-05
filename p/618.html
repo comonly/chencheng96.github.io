@@ -1,0 +1,321 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>window对象事件—JavaScript_comonly.cn</title>
+<meta name="keywords" content="window对象事件—JavaScript" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">window对象事件—JavaScript</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-03-12</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">JavaScript,对象事件</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='装载文档（olod）和卸载文档（oulod）'>
+	装载文档（onload）和卸载文档（onunload）
+</h2>
+<p>
+	一般作用在body标签中。
+</p>
+<p>
+	当打开浏览器窗口时就会激发装载文件
+</p>
+<p>
+	激发卸载事件的3种情况：
+</p>
+<blockquote>
+	<p>
+		1.当浏览器从一个内容跳转到另一个内容时
+	</p>
+	<p>
+		2.浏览器窗口关闭时
+	</p>
+	<p>
+		3.刷新浏览器窗口时
+	</p>
+</blockquote>
+<p>
+	&lt;script type="text/javascript"&gt;<br />
+function on(){window.alert("欢迎访问网站");}<br />
+function un(){window.alert("谢谢！欢迎下次再来");}<br />
+&lt;/script&gt;<br />
+&lt;body onload="on()" onunload="un()"/&gt;
+</p>
+<p>
+	复制代码<a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank"><span style="background-color:#FFE500;">在线测试效果</span></a> 
+</p>
+<h2 id='得到焦点（focu）和失去焦点（blur）'>
+	得到焦点（focus）和失去焦点（blur）
+</h2>
+<p>
+	焦点指浏览器窗口为当前活动窗口。当浏览器窗口得到焦点时激发onfocus事件，当浏览器窗口失去焦点时激发onblur事件。
+</p>
+<p>
+	&lt;script type="text/javascript"&gt;<br />
+function on(){<br />
+if(document.myform.mytext.value=="输入内容")document.myform.mytext.value="";<br />
+}<br />
+function un(){<br />
+if(document.myform.mytext.value=="")document.myform.mytext.value="输入内容";<br />
+}<br />
+&lt;/script&gt;<br />
+&lt;form name="myform"&gt;<br />
+&lt;input type="text" name="mytext" value="输入内容" onfocus="on()" onblur="un()"&gt;<br />
+&lt;/form&gt;
+</p>
+<p>
+	复制代码<span style="background-color:#FFE500;"><a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank">在线测试效果</a></span> 
+</p>
+<h2 id='调整窗口大小'>
+	调整窗口大小
+</h2>
+<p>
+	当浏览器窗口被调整大小时，激发onresize事件。
+</p>
+<p>
+	<span>&lt;script type="text/javascript"&gt;<br />
+function win(){<br />
+if(window.confirm("是否把窗口调整到1024*768大小？"))window.resizeTo(1024,768);<br />
+}<br />
+&lt;/script&gt;<br />
+&lt;body onresize="win()"&gt;</span> 
+</p>
+<p>
+	<span><span>复制代码</span><span style="background-color:#FFE500;"><a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank">在线测试效果</a></span></span> 
+</p>
+<h2 id='错误事件'>
+	错误事件
+</h2>
+<p>
+	window对象的错误事件由浏览器产生。如果发生JavaScript代码错误，会在浏览器左下角出现提示，双击错误区域，可以看到详细错误信息。
+</p>
+<p>
+	error事件可以由下列3个参数给出错误处理函数
+</p>
+<ul>
+	<li>
+		<span style="line-height:1.5;">详细的错误信息</span> 
+	</li>
+	<li>
+		<span style="line-height:1.5;">参数错误的的网页地址</span> 
+	</li>
+	<li>
+		<span style="line-height:1.5;">产生错误的行数</span>
+	</li>
+</ul>
+<p>
+	&lt;script type="text/javascript"&gt;<br />
+window.onerror=check; &nbsp;//直接在window对象中调用错误事件<br />
+function check(e1,e2,e3){<br />
+var str="发生错误信息\n";<br />
+str+="错误信息："+e1+"\n";<br />
+str+="发生错误的文件是："+e2+"\n";<br />
+str+="错误代码的行数："+e3+"\n";<br />
+window.alert(str);<br />
+return true;<br />
+}<br />
+var err=a+b; &nbsp; &nbsp; &nbsp;//a+b没有定义<br />
+&lt;/script&gt;
+</p>
+<p>
+	复制代码<span style="background-color:#FFE500;"><a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank">在线测试效果</a></span> 
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/617.html">window对象—JavaScript</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/619.html">window对话框—JavaScript</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#装载文档（olod）和卸载文档（oulod）">装载文档（olod）和卸载文档（oulod）</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#得到焦点（focu）和失去焦点（blur）">得到焦点（focu）和失去焦点（blur）</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#调整窗口大小">调整窗口大小</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#错误事件">错误事件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

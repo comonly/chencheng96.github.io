@@ -1,0 +1,517 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>制作连续滚动图片_comonly.cn</title>
+<meta name="keywords" content="制作连续滚动图片" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">制作连续滚动图片</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-05-20</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p class="STYLE4">
+	一，Dreamweaver制作连续滚动文字或图片
+</p>
+<p>
+	可以用marquee,你可以试一下：&lt;marquee&gt; ... &lt;/marquee&gt;移动属性的设置 ,这种移动不仅仅局限于文字，也可以应用于图片，表格等1、onMouseOut=this.start() ........鼠标移出状态滚动onMouseOver=this.stop() .........鼠标经过时停止滚动
+</p>
+<p>
+	2、方向 &lt;direction=#&gt; #=left, right ,up ,down &lt;marquee direction=left&gt;从右向左移！&lt;/marquee&gt;
+</p>
+<p>
+	3、方式 &lt;bihavior=#&gt; #=scroll, slide, alternate &lt;marquee behavior=scroll&gt;一圈一圈绕着走！&lt;/marquee&gt;&lt;marquee behavior=slide&gt;只走一次就歇了！&lt;/marquee&gt;&lt;marquee behavior=alternate&gt;来回走&lt;/marquee&gt;
+</p>
+<p>
+	4、循环&lt;loop=#&gt; #=次数；若未指定则循环不止(infinite)&lt;marquee loop=3 width=50% behavior=scroll&gt;.....&lt;/marquee&gt;&lt;marquee loop=3 width=50% behavior=slide&gt;......&lt;/marquee&gt;&lt;marquee loop=3 width=50% behavior=alternate&gt;.....&lt;/marquee&gt;
+</p>
+<p>
+	5、速度&lt;scrollamount=#&gt; &lt;marquee scrollamount=20&gt;.....&lt;/marquee&gt;延时&lt;scrolldelay=#&gt; &lt;marquee scrolldelay=500 scrollamount=100&gt;.....&lt;/marquee&gt;外观(Layout)设置
+</p>
+<p>
+	6、对齐方式(Align)&lt;align=#&gt; #=top, middle, bottom &lt;font size=6&gt;&lt;marquee align=# width=400&gt;......&lt;/marquee&gt;&lt;/font&gt;以上是marquee的属性设置，你看看你可以看懂吗？另外你说的情况可以看一下第四条。
+</p>
+<p class="STYLE4">
+	方法/步骤
+</p>
+<p>
+	1.建立第一个滚动字幕。一般的使用代码：&lt;marquee width="160" height="60" direction="right" behavior="alternate" scrollamount="6" scrolldelay="60"&gt;VBC&lt;/marquee&gt;
+</p>
+<p>
+	下面为步骤一实际测试
+</p>
+<div>
+	<p>
+		此为步骤一设置的结果，没有具体设置，根据需要，各参数解释看步骤2
+	</p>
+</div>
+<p>
+	&nbsp;
+</p>
+<div>
+	<p>
+		2.各参数详解：
+	</p>
+	<p>
+		a)scrollAmount。它表示速度，值越大速度越快。建议设为1～3比较好。
+	</p>
+	<p>
+		b)width和height，表示滚动区域的大小，width是宽度，height是高度。特别是在做垂直滚动的时候，一定要设height的值。
+	</p>
+	<p>
+		c)direction。表示滚动的方向，默认为从右向左：←。可选的值有right、down、up。滚动方向分别为：right表示→，up表示↑，down表示↓。
+	</p>
+	<p>
+		d)scrollDelay，这也是用来控制速度的，不添加，即默认为90。值越大，速度越慢。通常scrollDelay是不需要设置的。
+	</p>
+	<p>
+		e)behavior。用它来控制属性，默认为循环滚动，可选的值有alternate(交替滚动)、slide(幻灯片效果，指的是滚动一次，然后停止滚动)
+	</p>
+</div>
+<p>
+	&nbsp;
+</p>
+<div>
+	<p>
+		3.实例：
+	</p>
+	<p>
+		a)文字滚动，并有链接。只要在文字外面加上&lt;a href=***&gt;和&lt;/a&gt;就可以了。代码如下：&lt;marquee scrollAmount=2 width=160&gt;&lt;a href=ab.html&gt;精英宽带俱乐部&lt;/a&gt;&lt;/marquee&gt;
+	</p>
+	<p>
+		b)当鼠标停留在文字上，文字停止滚动代码：&lt;marquee scrollAmount=2 width=300 onmouseover=stop() onmouseout=start()&gt;ZHVBC&lt;/marquee&gt;
+	</p>
+	<p>
+		c)交替效果,循环代码如：&lt;marquee scrollAmount=2 width=160 behavior=alternate&gt;ZHVBC&lt;/marquee&gt;
+	</p>
+	<p>
+		d)多行文本向上滚动。代码如：&lt;marquee scrollAmount=2 width=300 height=50 direction=up&gt;·此为步骤3的测试效果，精英宽带！&lt;br&gt;·自由港&lt;br&gt;&lt;a href=ah.html&gt;客服网站&lt;/a&gt;&lt;/marquee&gt;
+	</p>
+	<p>
+		e)改变滚动字幕的颜色？我们可以用样式表来控制。代码是：&lt;marquee scrollAmount=2 width=300&gt;&lt;a style=color:FF0000&gt;精英宽带欢迎您&lt;/a&gt;&lt;/marquee&gt;
+	</p>
+</div>
+<p>
+	&nbsp;
+</p>
+<p>
+	下面为步骤三的实际测试效果
+</p>
+<div>
+	<p>
+		a)文字滚动，并有链接。只要在文字外面加上<a href="../../../www" root="" direction="" web="" myself="" page="" ***="">和</a>就可以了。代码如下：<a href="../../../www" root="" direction="" home.asp="">a的测试效果***************</a> 
+	</p>
+	<p>
+		b)当鼠标停留在文字上，文字停止滚动代码：b的测试效果***************
+	</p>
+	<p>
+		c)交替效果,循环代码如：c交替效果*******************
+	</p>
+	<p>
+		d)多行文本向上滚动。代码如：·d的测试效果************<br />
+·多行文本向上滚动<br />
+·的测试效果************<br />
+·多行文本向上滚动<br />
+<a href="../../../www" root="" direction="" home.asp="">客服网站<br />
+<br />
+</a> 
+	</p>
+	<p>
+		e)改变滚动字幕的颜色？我们可以用样式表来控制。代码是：<a>e的测试效果</a> 
+	</p>
+</div>
+<p>
+	&nbsp;
+</p>
+<p>
+	下面 为滚动图片的测试效果，是一张图片的滚动，并不是几张图片的交换
+</p>
+<p>
+	经测试对呀文字使用的也可以对图片使用
+</p>
+<div>
+	<img src="http://www.iyaka.cn/www root direction/images/long_term_necessary/横标.gif" width="334" height="100" /> 
+</div>
+<p class="STYLE4">
+	&nbsp;
+</p>
+<p class="STYLE4">
+	&nbsp;
+</p>
+<p class="STYLE4">
+	&nbsp;
+</p>
+<h1>
+	二，Dreamweaver 怎么制作滚动图片 左右滚动的
+</h1>
+<pre id="recommend-content-1436571718">&lt;marquee &lt;!--在这个标签里面在设置一下属性 ,和上面的文字设置差不多--&gt;&gt;
+&lt;img src="****.jpg"&gt; 
+&lt;img src="****.jpg"&gt; 
+&lt;img src="****.jpg"&gt; 
+&lt;img src="****.jpg"&gt; 
+&lt;/marquee&gt; 
+
+&lt;marquee&gt;要把&lt;table&gt;包到里面 
+既&lt;marquee&gt;在外面&lt;table&gt;在里面
+
+
+</pre>
+<div>
+	<!--在这个标签里面在设置一下属性 --> <a href="http://www.iyaka.cn/www root direction/home.asp"><img src="http://www.iyaka.cn/www root direction/images/long_term_necessary/for_page/text_1.jpg" width="300" height="300" border="0" /></a> <a href="http://www.iyaka.cn/www root direction/home.asp"><img src="http://www.iyaka.cn/www root direction/images/long_term_necessary/for_page/text_2.jpg" width="300" height="300" border="0" /></a> <a href="http://www.iyaka.cn/www root direction/home.asp"><img src="http://www.iyaka.cn/www root direction/images/long_term_necessary/for_page/flash1.jpg" width="386" height="354" border="0" /></a> <a href="http://www.iyaka.cn/www root direction/home.asp"><img src="http://www.iyaka.cn/www root direction/images/long_term_necessary/for_page/flash2.jpg" width="356" height="309" border="0" /></a> 
+</div>
+<pre>&nbsp;
+
+
+
+
+
+
+
+                    </pre>
+<h1>
+	三，网页中如何插入滚动图像
+</h1>
+<p>
+	插入图像查看器
+</p>
+<div>
+	<div>
+		<div>
+			<div>
+				<p>
+					滚动图像通过插入图像查看器来实现，也就是让几张图片不停的滚动播放，如下图所示，一起学习怎么实现这个效果吧。
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div>
+	<h2 id='方法步骤'>
+		方法/步骤
+	</h2>
+	<div>
+		<ol>
+			<li>
+				<div>
+					<p>
+						调整图像查看器适当的大小。点击播放，看到没有放置图片的状态。
+					</p>
+				</div>
+			</li>
+			<li>
+				<div>
+					<p>
+						插入图片。选中图像查看器，发现窗口的右侧出现flash元素设计，点击图像地址栏，打开编辑数组窗口，分别插入图片，点击+或-可以增加或减少图片。<img src="http://www.iyaka.cn/www root direction/images/long_term_necessary/for_page/flash1.jpg" width="386" height="354" />
+					</p>
+				</div>
+			</li>
+			<li>
+				<div>
+					<p>
+						点击F12可以预览，发现图像查看器已经加入了。可以点击上面的键来进行操控图像。
+					</p>
+				</div>
+			</li>
+			<li>
+				<div>
+					<p>
+						设置图像查看器的属性。回到flash元素，对其属性进一步更改设置，可以实现自动滚动播放的效果。<img src="http://www.iyaka.cn/www root direction/images/long_term_necessary/for_page/flash2.jpg" width="356" height="309" />
+					</p>
+				</div>
+			</li>
+			<li>
+				<div>
+					<p>
+						再点击F12预览可以看到达到了预期的效果，flash还提供了其他一些属性的更改，比如图像更换的样式等等，可以去设置。
+					</p>
+				</div>
+			</li>
+		</ol>
+		<p>
+			<br />
+		</p>
+	</div>
+</div>
+<p>
+	<embed src="http://www.iyaka.cn/www root direction/images/long_term_necessary/for_page/text.swf" quality="high" type="application/x-shockwave-flash" width="400" height="325" /> 
+</p>
+<p>
+	bgColor???????????指定背景颜色。
+</p>
+<p>
+	frameColor????????指定图像边框的颜色。
+</p>
+<p>
+	将frameShow?参数设置为“Yes”可显示边框。
+</p>
+<p>
+	frameShow?????????指示每个图像四周是否显示边框。
+</p>
+<p>
+	frameThickness????指定每个图像四周边框的宽度，以像素为单位。
+</p>
+<p>
+	captionColor??????指定imageCaptions?中包含的图像题注的颜色。
+</p>
+<p>
+	captionFont???????指定imageCaptions?中包含的图像题注的字体。
+</p>
+<p>
+	captionSize???????指示imageCaptions?中包含的图像题注的点数。
+</p>
+<p>
+	?imageCaptions?????包含imageURLs?中指定的每个图像的题注。题注可用于部分或所有图像，或者不用于任何图像。
+</p>
+<p>
+	imageLinks????????包含在?imageURLs?中指定的每个图像的URL。
+</p>
+<p>
+	LinkURLs?可用于部分或所有图像，或者不用于任何图像。
+</p>
+<p>
+	?imageURLs????????包含在图像查看器中显示的图像的位置。只能使用非渐进式的
+</p>
+<p>
+	?JPEG?或SWF?文件。
+</p>
+<p>
+	imgLinkTarget?????指定浏览器窗口，将在其中加载在
+</p>
+<p>
+	?linkURLs?中指定的URL。可以将此参数设置为_blank，_self、_top?或_parent。
+</p>
+<p>
+	showControls??????指示在用户播放Flash?元素时是否出现图像查看器控件。
+</p>
+<p>
+	slideAutoPlay????确定是否以幻灯片放映形式播放图像。如果设置为
+</p>
+<p>
+	true，则在第一幅图像加载完毕后，图像就开始以幻灯片形式播放。
+</p>
+<p>
+	slideDelay???????指示在按下“播放”按钮或启用autoPlay?时，每两个图像之间等待的时间长度（以秒为单位）。如果图像需要更长的时间进行加载，则图像的更改频率可以小于此参数指定的时间。
+</p>
+<p>
+	slideLoop???????指定图像幻灯片放映以连续循环方式进行播放。
+</p>
+<p>
+	title????指定在图像查看器顶部显示的标题。
+</p>
+<p>
+	titleColor??????指定title中包含的标题的颜色。
+</p>
+<p>
+	titleFont???????指定title?中包含的图像查看器标题的字体。
+</p>
+<p>
+	titleSize???????指示?title?中包含的图像查看器标题的点数。
+</p>
+<p>
+	transitionsType???指示图像在图像查看器中的显示方式。可从几种加载选项中进行选择。
+</p>
+图像查看器是插入flash之类的对象的，不能放图片吧，如果要放图片直接用 img 标签就OK了
+<p>
+	&nbsp;
+</p>
+<p>
+	&nbsp;
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/721.html">css介绍与图层的嵌套  单一超链接样式</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/723.html">JavaScript实现的多个图片广告交替显示效果代码</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#方法步骤">方法步骤</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

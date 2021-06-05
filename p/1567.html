@@ -1,0 +1,298 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>pycharm的system/cache下的content.dat.storageData数据过大，且默认在系统盘下，导致C盘占用很高_comonly.cn</title>
+<meta name="keywords" content="pycharm的system/cache下的content.dat.storageData数据过大，且默认在系统盘下，导致C盘占用很高" />
+<meta name="description" content="pycharm怎么设置某目录不被索引，当机器学习等项目存在大量的训练图片路径在工程目录下面时，pycharm的加载会很耗时，同时可能会增大pycharm的索引文件，通过忽略索引文件夹解决这个问题&nbsp;&nbsp;http://comonly.cn/l/p/1533.html
+
+
+	
+
+
+	解决方案，为C盘下的system和config文件夹创建副本文件夹，
+
+
+	具体方法：
+
+
+	1.在pycharm中点击Help-&gt;edit custom properties，然后点" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">pycharm的system/cache下的content.dat.storageData数据过大，且默认在系统盘下，导致C盘占用很高</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">烽火四起，烟雨平生</li>
+          <li class="lmname"><a href="https://blog.csdn.net/qq_43724644/article/details/105448539" target="_blank">https://blog.csdn.net/qq_43724644/article/details/105448539</a></li>
+          <li class="timer">2019-11-26</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	软件介绍及安装流程
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>pycharm怎么设置某目录不被索引，当机器学习等项目存在大量的训练图片路径在工程目录下面时，pycharm的加载会很耗时，同时可能会增大pycharm的索引文件，通过忽略索引文件夹解决这个问题&nbsp;&nbsp;http://comonly.cn/l/p/1533.html
+
+
+	
+
+
+	解决方案，为C盘下的system和config文件夹创建副本文件夹，
+
+
+	具体方法：
+
+
+	1.在pycharm中点击Help-&gt;edit custom properties，然后点</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	<br />
+pycharm怎么设置某目录不被索引，当机器学习等项目存在大量的训练图片路径在工程目录下面时，pycharm的加载会很耗时，同时可能会增大pycharm的索引文件，通过忽略索引文件夹解决这个问题&nbsp;&nbsp;<a href="http://comonly.cn/l/p/1533.html" target="_blank">http://comonly.cn/l/p/1533.html</a>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	解决方案，为C盘下的system和config文件夹创建副本文件夹，
+</p>
+<p>
+	具体方法：
+</p>
+<p>
+	1.在pycharm中点击Help-&gt;edit custom properties，然后点击create，在新文件中输入以下内容：
+</p>
+<p>
+	idea.config.path = pathname/config
+</p>
+<p>
+	idea.config.path = pathname/system
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<img alt="image.png" src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4ubmxhcmsuY29tL3l1cXVlLzAvMjAyMC9wbmcvNjY1NjU2LzE1ODYxNDc4MTAxNjQtM2RlNDIyYjMtNTNmMi00MTJjLTk4N2UtNTVkM2EwNDk0ZGQ3LnBuZw?x-oss-process=image/format,png" style="height:auto;" /> 
+</p>
+<p>
+	注：建议输入的内容，将图中最后的trunk-删去
+</p>
+<p>
+	原因：经过我的操作，系统后自动在这个文件夹中再次创建config和system文件夹，所以trunk-的文件夹可能就没用了。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	2.找到自己pycharm的主目录，如下：
+</p>
+<p>
+	<img alt="image.png" src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4ubmxhcmsuY29tL3l1cXVlLzAvMjAyMC9wbmcvNjY1NjU2LzE1ODYxNDc4ODkzNTYtNTMxY2UyZjMtMTA1ZC00ZTM5LTgyYzYtYTQwNThkZGQ1YjQ0LnBuZw?x-oss-process=image/format,png" style="height:auto;" /> 
+</p>
+<p>
+	3.以记事本方式打开idea.properties,然后将红色圈出的两行的#注释取消掉，然后保存退出：
+</p>
+<p>
+	idea.config.path = ****<br />
+idea.config.path = ****<br />
+</p>
+<p>
+	<img alt="image.png" src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4ubmxhcmsuY29tL3l1cXVlLzAvMjAyMC9wbmcvNjY1NjU2LzE1ODYxNDgxNjI0ODYtYmQ1MGVmNjEtM2YwYy00NDYwLWExYTQtZjM0NjM5NTFiZmI3LnBuZw?x-oss-process=image/format,png" style="height:auto;" /> 
+</p>
+<p>
+	4.然后就可以了，但是你可以将c盘下的config和system文件夹复制到新的文件夹下，并删除就文件夹下那个最大的文件（content.dat.storageData）就可以了（建议不要删除整个文件夹，可能会有不好的后果）。
+</p>
+<p>
+	上面新建的配置文件&nbsp;idea.properties 一定不要删除
+</p>
+<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1566.html">配置本地静态ip以及多个DNS服务器配置 - 局域网中使用</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1568.html">基本软件介绍</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/qq_43724644/article/details/105448539" target="_blank">https://blog.csdn.net/qq_43724644/article/details/105448539</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

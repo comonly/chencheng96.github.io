@@ -1,0 +1,631 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>计算机网络数据链路层_comonly.cn</title>
+<meta name="keywords" content="计算机网络数据链路层" />
+<meta name="description" content="基本问题
+
+
+	1.封装成帧
+
+
+	将网络层传下来的分组添加首部和尾部，用于标记帧的开始和结束。
+
+
+	 
+
+
+	2.透明传输
+
+
+	透明表示一个实际存在的事物看起来好像不存在一样。
+
+
+	帧使用首部和尾部进行定界，如果帧的数据部分含有和首部尾部相同的内容，那么帧的开始和结束位置就会被错误的判定。需要在数据部分出现首部尾部相同的内容前面插入转义字符。如果数据部分出现转义字符，那么就在转义字符前面再加个转义字符。在接收端进行处理之后可以还原出原始数据。这个过程透明传输的内" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">计算机网络数据链路层</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-10-13</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	计算机基础-网络等
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>基本问题
+
+
+	1.封装成帧
+
+
+	将网络层传下来的分组添加首部和尾部，用于标记帧的开始和结束。
+
+
+	 
+
+
+	2.透明传输
+
+
+	透明表示一个实际存在的事物看起来好像不存在一样。
+
+
+	帧使用首部和尾部进行定界，如果帧的数据部分含有和首部尾部相同的内容，那么帧的开始和结束位置就会被错误的判定。需要在数据部分出现首部尾部相同的内容前面插入转义字符。如果数据部分出现转义字符，那么就在转义字符前面再加个转义字符。在接收端进行处理之后可以还原出原始数据。这个过程透明传输的内</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	基本问题
+</p>
+<p>
+	1.封装成帧
+</p>
+<p>
+	将网络层传下来的分组添加首部和尾部，用于标记帧的开始和结束。
+</p>
+<p>
+	<img src="http://pic.rmb.bdstatic.com/00f6eb99f369eadd2364da3669b4a019.jpeg@wm_2,t_55m+5a625Y+3L+W3puaCoA==,fc_ffffff,ff_U2ltSGVp,sz_26,x_17,y_17" style="width:600px;" /> 
+</p>
+<p>
+	2.透明传输
+</p>
+<p>
+	透明表示一个实际存在的事物看起来好像不存在一样。
+</p>
+<p>
+	帧使用首部和尾部进行定界，如果帧的数据部分含有和首部尾部相同的内容，那么帧的开始和结束位置就会被错误的判定。需要在数据部分出现首部尾部相同的内容前面插入转义字符。如果数据部分出现转义字符，那么就在转义字符前面再加个转义字符。在接收端进行处理之后可以还原出原始数据。这个过程透明传输的内容是转义字符，用户察觉不到转义字符的存在。
+</p>
+<p>
+	<img src="http://pic.rmb.bdstatic.com/034b22f2e0f2026f14617234141d10fe.jpeg@wm_2,t_55m+5a625Y+3L+W3puaCoA==,fc_ffffff,ff_U2ltSGVp,sz_49,x_31,y_31" style="width:600px;" /> 
+</p>
+<p>
+	3.差错检测
+</p>
+<p>
+	目前数据链路层广泛使用了循环冗余检验（CRC）来检查比特差错。
+</p>
+<p>
+	信道分类
+</p>
+<p>
+	1.广播信道
+</p>
+<p>
+	一对多通信，一个节点发送的数据能够被广播信道上所有的节点接收到。
+</p>
+<p>
+	所有的节点都在同一个广播信道上发送数据，因此需要有专门的控制方法进行协调，避免发生冲突（冲突也叫碰撞）。
+</p>
+<p>
+	主要有两种控制方法进行协调，一个是使用信道复用技术，一是使用 CSMA/CD 协议。
+</p>
+<p>
+	2.点对点信道
+</p>
+<p>
+	一对一通信。
+</p>
+<p>
+	因为不会发生碰撞，因此也比较简单，使用 PPP 协议进行控制。
+</p>
+<p>
+	信道复用技术
+</p>
+<p>
+	1.频分复用
+</p>
+<p>
+	频分复用的所有主机在相同的时间占用不同的频率带宽资源。
+</p>
+<p>
+	<img src="http://pic.rmb.bdstatic.com/b7878b1020192399227020cbba97b5cf.jpeg@wm_2,t_55m+5a625Y+3L+W3puaCoA==,fc_ffffff,ff_U2ltSGVp,sz_17,x_11,y_11" style="width:600px;" /> 
+</p>
+<p>
+	2.时分复用
+</p>
+<p>
+	时分复用的所有主机在不同的时间占用相同的频率带宽资源。
+</p>
+<p>
+	<img src="http://pic.rmb.bdstatic.com/22cf8cf09430a753ad20d8a0855d99d5.jpeg@wm_2,t_55m+5a625Y+3L+W3puaCoA==,fc_ffffff,ff_U2ltSGVp,sz_17,x_11,y_11" style="width:600px;" /> 
+</p>
+<p>
+	使用频分复用和时分复用进行通信，在通信的过程中主机会一直占用一部分信道资源。但是由于计算机数据的突发性质，通信过程没必要一直占用信道资源而不让出给其它用户使用，因此这两种方式对信道的利用率都不高。
+</p>
+<p>
+	3.统计时分复用
+</p>
+<p>
+	是对时分复用的一种改进，不固定每个用户在时分复用帧中的位置，只要有数据就集中起来组成统计时分复用帧然后发送。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<img src="http://pic.rmb.bdstatic.com/943e53d9ec0fefdf36a02999dccef69a.png@wm_2,t_55m+5a625Y+3L+W3puaCoA==,fc_ffffff,ff_U2ltSGVp,sz_64,x_40,y_40" style="width:600px;" /> 
+</p>
+<p>
+	4.波分复用
+</p>
+<p>
+	光的频分复用。由于光的频率很高，因此习惯上用波长而不是频率来表示所使用的光载波。
+</p>
+<p>
+	<img src="http://pic.rmb.bdstatic.com/65f97d21a457c7b2d4dfa3c98fb0f6e9.png@wm_2,t_55m+5a625Y+3L+W3puaCoA==,fc_ffffff,ff_U2ltSGVp,sz_67,x_42,y_42" style="width:600px;" /> 
+</p>
+<p>
+	5.码分复用
+</p>
+<p>
+	为每个用户分配 m bit 的码片，并且所有的码片正交，对于任意两个码片 s 和 t有
+</p>
+<p>
+	为了讨论方便，取 m=8，设码片 为 00011011。在拥有该码片的用户发送比特 1 时就发送该码片，发送比特 0 时就发送该码片的反码 11100100。
+</p>
+<p>
+	在计算时将 00011011 记作 (-1 -1 -1 +1 +1 -1 +1 +1)，可以得到其中 s'为 s的反码。
+</p>
+<p>
+	利用上面的式子我们知道，当接收端使用码片 对接收到的数据进行内积运算时，结果为 0 的是其它用户发送的数据，结果为 1 的是用户发送的比特 1，结果为 -1 的是用户发送的比特 0。
+</p>
+<p>
+	码分复用需要发送的数据量为原先的 m 倍。
+</p>
+<p>
+	<img src="http://pic.rmb.bdstatic.com/82796e1fcb2a798db0ad06a2d73a0173.png@wm_2,t_55m+5a625Y+3L+W3puaCoA==,fc_ffffff,ff_U2ltSGVp,sz_29,x_19,y_19" style="width:600px;" /> 
+</p>
+<p>
+	CSMA/CD协议
+</p>
+<p>
+	CSMA/CD 表示载波监听多点接入 / 碰撞检测。
+</p>
+<ul>
+	<li>
+		<p>
+			多点接入：说明这是总线型网络，许多主机以多点的方式连接到总线上。
+		</p>
+	</li>
+	<li>
+		<p>
+			载波监听：每个主机都必须不停地监听信道。在发送前，如果监听到信道正在使用，就必须等待。
+		</p>
+	</li>
+	<li>
+		<p>
+			碰撞检测：在发送中，如果监听到信道已有其它主机正在发送数据，就表示发生了碰撞。虽然每个主机在发送数据之前都已经监听到信道为空闲，但是由于电磁波的传播时延的存在，还是有可能会发生碰撞。
+		</p>
+	</li>
+</ul>
+<p>
+	记端到端的传播时延为 τ，最先发送的站点最多经过 2τ 就可以知道是否发生了碰撞，称 2τ 为争用期。只有经过争用期之后还没有检测到碰撞，才能肯定这次发送不会发生碰撞。
+</p>
+<p>
+	当发生碰撞时，站点要停止发送，等待一段时间再发送。这个时间采用截断二进制指数退避算法来确定。从离散的整数集合 {0, 1, .., (2k-1)} 中随机取出一个数，记作 r，然后取 r 倍的争用期作为重传等待时间。
+</p>
+<p>
+	<img src="http://pic.rmb.bdstatic.com/460aff801f1a6a3c09fbbb58dbe060e8.png@wm_2,t_55m+5a625Y+3L+W3puaCoA==,fc_ffffff,ff_U2ltSGVp,sz_26,x_17,y_17" style="width:600px;" /> 
+</p>
+<p>
+	PPP协议
+</p>
+<p>
+	互联网用户通常需要连接到某个 ISP 之后才能接入到互联网，PPP 协议是用户计算机和 ISP 进行通信时所使用的数据链路层协议。
+</p>
+<p>
+	<img src="http://pic.rmb.bdstatic.com/f35a4cba17ef6c90393b09821360b7d4.jpeg@wm_2,t_55m+5a625Y+3L+W3puaCoA==,fc_ffffff,ff_U2ltSGVp,sz_34,x_22,y_22" style="width:600px;" /> 
+</p>
+<p>
+	PPP 的帧格式：
+</p>
+<ul>
+	<li>
+		<p>
+			F 字段为帧的定界符
+		</p>
+	</li>
+	<li>
+		<p>
+			A 和 C 字段暂时没有意义
+		</p>
+	</li>
+	<li>
+		<p>
+			FCS 字段是使用 CRC 的检验序列
+		</p>
+	</li>
+	<li>
+		<p>
+			信息部分的长度不超过 1500
+		</p>
+	</li>
+</ul>
+<p>
+	<img src="http://pic.rmb.bdstatic.com/ba25837b9482cb9e8f460deb3728e787.jpeg@wm_2,t_55m+5a625Y+3L+W3puaCoA==,fc_ffffff,ff_U2ltSGVp,sz_37,x_24,y_24" style="width:600px;" /> 
+</p>
+<p>
+	MAC地址
+</p>
+<p>
+	MAC 地址是链路层地址，长度为 6 字节（48 位），用于唯一标识网络适配器（网卡）。
+</p>
+<p>
+	一台主机拥有多少个网络适配器就有多少个 MAC 地址。例如笔记本电脑普遍存在无线网络适配器和有线网络适配器，因此就有两个 MAC 地址。
+</p>
+<p>
+	局域网
+</p>
+<p>
+	局域网是一种典型的广播信道，主要特点是网络为一个单位所拥有，且地理范围和站点数目均有限。
+</p>
+<p>
+	主要有以太网、令牌环网、FDDI 和 ATM 等局域网技术，目前以太网占领着有线局域网市场。
+</p>
+<p>
+	可以按照网络拓扑结构对局域网进行分类：
+</p>
+<p>
+	<img src="http://pic.rmb.bdstatic.com/c588772889d572a2ae3103c1de69ecd7.jpeg@wm_2,t_55m+5a625Y+3L+W3puaCoA==,fc_ffffff,ff_U2ltSGVp,sz_31,x_20,y_20" style="width:600px;" /> 
+</p>
+<p>
+	以太网
+</p>
+<p>
+	以太网是一种星型拓扑结构局域网。
+</p>
+<p>
+	早期使用集线器进行连接，集线器是一种物理层设备， 作用于比特而不是帧，当一个比特到达接口时，集线器重新生成这个比特，并将其能量强度放大，从而扩大网络的传输距离，之后再将这个比特发送到其它所有接口。如果集线器同时收到两个不同接口的帧，那么就发生了碰撞。
+</p>
+<p>
+	目前以太网使用交换机替代了集线器，交换机是一种链路层设备，它不会发生碰撞，能根据 MAC 地址进行存储转发。
+</p>
+<p>
+	以太网帧格式：
+</p>
+<ul>
+	<li>
+		<p>
+			类型：标记上层使用的协议；
+		</p>
+	</li>
+	<li>
+		<p>
+			数据：长度在 46-1500 之间，如果太小则需要填充；
+		</p>
+	</li>
+	<li>
+		<p>
+			FCS：帧检验序列，使用的是 CRC 检验方法；
+		</p>
+	</li>
+	<li>
+		<p>
+			前同步码：只是为了计算 FCS 临时加入的，计算结束之后会丢弃。
+		</p>
+	</li>
+</ul>
+<p>
+	<img src="http://pic.rmb.bdstatic.com/669c2bb79937f7c0e230140738a8f8f8.jpeg@wm_2,t_55m+5a625Y+3L+W3puaCoA==,fc_ffffff,ff_U2ltSGVp,sz_28,x_18,y_18" style="width:600px;" /> 
+</p>
+<p>
+	交换机
+</p>
+<p>
+	交换机具有自学习能力，学习的是交换表的内容，交换表中存储着 MAC 地址到接口的映射。
+</p>
+<p>
+	正是由于这种自学习能力，因此交换机是一种即插即用设备，不需要网络管理员手动配置交换表内容。
+</p>
+<p>
+	下图中，交换机有 4 个接口，主机 A 向主机 B 发送数据帧时，交换机把主机 A 到接口 1 的映射写入交换表中。为了发送数据帧到 B，先查交换表，此时没有主机 B 的表项，那么主机 A 就发送广播帧，主机 C 和主机 D 会丢弃该帧。主机 B 收下之后，查找交换表得到主机 A 映射的接口为 1，就发送数据帧到接口 1，同时交换机添加主机 B 到接口 3 的映射。
+</p>
+<p>
+	<img src="http://pic.rmb.bdstatic.com/a190f1412cca2f4cec6817f8deded0e6.jpeg@wm_2,t_55m+5a625Y+3L+W3puaCoA==,fc_ffffff,ff_U2ltSGVp,sz_20,x_13,y_13" style="width:600px;" /> 
+</p>
+<p>
+	虚拟局域网
+</p>
+<p>
+	虚拟局域网可以建立与物理位置无关的逻辑组，只有在同一个虚拟局域网中的成员才会收到链路层广播信息。
+</p>
+<p>
+	例如下图中 (A1, A2, A3, A4) 属于一个虚拟局域网，A1 发送的广播会被 A2、A3、A4 收到，而其它站点收不到。
+</p>
+<p>
+	使用 VLAN 干线连接来建立虚拟局域网，每台交换机上的一个特殊接口被设置为干线接口，以互连 VLAN 交换机。IEEE 定义了一种扩展的以太网帧格式 802.1Q，它在标准以太网帧上加进了 4 字节首部 VLAN 标签，用于表示该帧属于哪一个虚拟局域网。
+</p>
+<p>
+	<img src="http://pic.rmb.bdstatic.com/93f8b3d99a6f77be4fe0118b6fbce2ef.png@wm_2,t_55m+5a625Y+3L+W3puaCoA==,fc_ffffff,ff_U2ltSGVp,sz_18,x_12,y_12" style="width:600px;" /> 
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1119.html">计算机网络tcp和udp流量控制</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1121.html">计算机网络 网络层</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="交换">
+							<h2 style="display:inline;color:#5BC648;">交换</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-10-14&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><h2 style="font-size:24px;font-family:&quot;color:#4F4F4F;background-color:#FFFFFF;">
+	电路交换与分组交换
+</h2>
+<p style="font-family:&quot;font-size:16px;color:#4D4D4D;background-color:#FFFFFF;">
+	<a href="https://github.com/CyC2018/InterviewNotes/blob/master/pics/b97958dd-3e43-45f7-97f5-3ec20f3f8b88.jpg"><img src="https://github.com/CyC2018/InterviewNotes/raw/master/pics/b97958dd-3e43-45f7-97f5-3ec20f3f8b88.jpg" alt="" /></a>
+</p>
+<h3 style="font-size:22px;font-family:&quot;color:#4F4F4F;background-color:#FFFFFF;">
+	<a name="t6"></a><a href="https://github.com/CyC2018/InterviewNotes/blob/master/notes/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.md#1-%E7%94%B5%E8%B7%AF%E4%BA%A4%E6%8D%A2" class="anchor"></a>1. 电路交换
+</h3>
+<p style="font-family:&quot;font-size:16px;color:#4D4D4D;background-color:#FFFFFF;">
+	电路交换用于电话通信系统，两个用户要通信之前需要建立一条专用的物理链路，并且在整个通信过程中始终占用该链路。由于通信的过程中不可能一直在使用传输线路，因此电路交换对线路的利用率很低，往往不到 10%。
+</p>
+<h3 style="font-size:22px;font-family:&quot;color:#4F4F4F;background-color:#FFFFFF;">
+	<a name="t7"></a><a href="https://github.com/CyC2018/InterviewNotes/blob/master/notes/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.md#2-%E6%8A%A5%E6%96%87%E4%BA%A4%E6%8D%A2" class="anchor"></a>2. 报文交换
+</h3>
+<p style="font-family:&quot;font-size:16px;color:#4D4D4D;background-color:#FFFFFF;">
+	报文交换用于邮局通信系统，邮局接收到一份报文之后，先存储下来，然后把相同目的地的报文一起转发到下一个目的地，这个过程就是存储转发过程。
+</p>
+<h3 style="font-size:22px;font-family:&quot;color:#4F4F4F;background-color:#FFFFFF;">
+	<a name="t8"></a><a href="https://github.com/CyC2018/InterviewNotes/blob/master/notes/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.md#3-%E5%88%86%E7%BB%84%E4%BA%A4%E6%8D%A2" class="anchor"></a>3. 分组交换
+</h3>
+<p style="font-family:&quot;font-size:16px;color:#4D4D4D;background-color:#FFFFFF;">
+	分组交换也使用了存储转发，但是转发的是分组而不是报文。把整块数据称为一个报文，由于一个报文可能很长，需要先进行切分，来满足分组能处理的大小。在每个切分的数据前面加上首部之后就成为了分组，首部包含了目的地址和源地址等控制信息。
+</p>
+<p style="font-family:&quot;font-size:16px;color:#4D4D4D;background-color:#FFFFFF;">
+	<a href="https://github.com/CyC2018/InterviewNotes/blob/master/pics/6f4af159-8b03-4246-8d0e-222db65bb83c.jpg"><img src="https://github.com/CyC2018/InterviewNotes/raw/master/pics/6f4af159-8b03-4246-8d0e-222db65bb83c.jpg" alt="" /></a>
+</p>
+<p style="font-family:&quot;font-size:16px;color:#4D4D4D;background-color:#FFFFFF;">
+	存储转发允许在一条传输线路上传送多个主机的分组，因此不需要占用端到端的线路资源。
+</p>
+<p style="font-family:&quot;font-size:16px;color:#4D4D4D;background-color:#FFFFFF;">
+	相比于报文交换，由于分组比报文更小，存储转发的速度也就更快。
+</p>
+<h2 style="font-size:24px;font-family:&quot;color:#4F4F4F;background-color:#FFFFFF;">
+	<a name="t9"></a><a href="https://github.com/CyC2018/InterviewNotes/blob/master/notes/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.md#%E6%97%B6%E5%BB%B6" class="anchor"></a>时延
+</h2>
+<p style="font-family:&quot;font-size:16px;color:#4D4D4D;background-color:#FFFFFF;">
+	总时延 = 发送时延 + 传播时延 + 处理时延 + 排队时延
+</p>
+<p style="font-family:&quot;font-size:16px;color:#4D4D4D;background-color:#FFFFFF;">
+	<a href="https://github.com/CyC2018/InterviewNotes/blob/master/pics/ceee91c2-da26-4169-94c3-e4608b46b9ac.png"><img src="https://github.com/CyC2018/InterviewNotes/raw/master/pics/ceee91c2-da26-4169-94c3-e4608b46b9ac.png" alt="" /></a>
+</p>
+<h3 style="font-size:22px;font-family:&quot;color:#4F4F4F;background-color:#FFFFFF;">
+	<a name="t10"></a><a href="https://github.com/CyC2018/InterviewNotes/blob/master/notes/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.md#1-%E5%8F%91%E9%80%81%E6%97%B6%E5%BB%B6" class="anchor"></a>1. 发送时延
+</h3>
+<p style="font-family:&quot;font-size:16px;color:#4D4D4D;background-color:#FFFFFF;">
+	主机或路由器发送数据帧所需要的时间。
+</p>
+<p style="font-family:&quot;font-size:16px;color:#4D4D4D;background-color:#FFFFFF;">
+	<a href="https://camo.githubusercontent.com/cc0e5ae036ffc237058399ea3f9efdcd067861e4/687474703a2f2f6c617465782e636f6465636f67732e636f6d2f6769662e6c617465783f25354325354364656c61793d253543667261632537426c286269742925374425374276286269742f7329253744"><img src="https://camo.githubusercontent.com/cc0e5ae036ffc237058399ea3f9efdcd067861e4/687474703a2f2f6c617465782e636f6465636f67732e636f6d2f6769662e6c617465783f25354325354364656c61793d253543667261632537426c286269742925374425374276286269742f7329253744" alt="" /></a>
+</p>
+<p style="font-family:&quot;font-size:16px;color:#4D4D4D;background-color:#FFFFFF;">
+	其中 l 表示数据帧的长度，v 表示发送速率。
+</p>
+<h3 style="font-size:22px;font-family:&quot;color:#4F4F4F;background-color:#FFFFFF;">
+	<a name="t11"></a><a href="https://github.com/CyC2018/InterviewNotes/blob/master/notes/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.md#2-%E4%BC%A0%E6%92%AD%E6%97%B6%E5%BB%B6" class="anchor"></a>2. 传播时延
+</h3>
+<p style="font-family:&quot;font-size:16px;color:#4D4D4D;background-color:#FFFFFF;">
+	电磁波在信道中传播一定的距离需要花费的时间，电磁波传播速度接近光速。
+</p>
+<p style="font-family:&quot;font-size:16px;color:#4D4D4D;background-color:#FFFFFF;">
+	<a href="https://camo.githubusercontent.com/48e9937d965f290f9d01e1aa9b8f505e16685c5e/687474703a2f2f6c617465782e636f6465636f67732e636f6d2f6769662e6c617465783f25354325354364656c61793d253543667261632537426c286d2925374425374276286d2f7329253744"><img src="https://camo.githubusercontent.com/48e9937d965f290f9d01e1aa9b8f505e16685c5e/687474703a2f2f6c617465782e636f6465636f67732e636f6d2f6769662e6c617465783f25354325354364656c61793d253543667261632537426c286d2925374425374276286d2f7329253744" alt="" /></a>
+</p>
+<p style="font-family:&quot;font-size:16px;color:#4D4D4D;background-color:#FFFFFF;">
+	其中 l 表示信道长度，v 表示电磁波在信道上的传播速率。
+</p>
+<h3 style="font-size:22px;font-family:&quot;color:#4F4F4F;background-color:#FFFFFF;">
+	<a name="t12"></a><a href="https://github.com/CyC2018/InterviewNotes/blob/master/notes/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.md#3-%E5%A4%84%E7%90%86%E6%97%B6%E5%BB%B6" class="anchor"></a>3. 处理时延
+</h3>
+<p style="font-family:&quot;font-size:16px;color:#4D4D4D;background-color:#FFFFFF;">
+	主机或路由器收到分组时进行处理所需要的时间，例如分析首部，从分组中提取数据部分等。
+</p>
+<h3 style="font-size:22px;font-family:&quot;color:#4F4F4F;background-color:#FFFFFF;">
+	<a name="t13"></a><a href="https://github.com/CyC2018/InterviewNotes/blob/master/notes/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.md#4-%E6%8E%92%E9%98%9F%E6%97%B6%E5%BB%B6" class="anchor"></a>4. 排队时延
+</h3>
+<p style="font-family:&quot;font-size:16px;color:#4D4D4D;background-color:#FFFFFF;">
+	分组在路由器的输入队列和输出队列中排队等待的时间，取决于网络当前的通信量。
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#交换">交换</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

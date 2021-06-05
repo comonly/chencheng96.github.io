@@ -1,0 +1,277 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Linux磁盘管理与文件系统（精简理论部分，浓缩的精华！）_comonly.cn</title>
+<meta name="keywords" content="Linux磁盘管理与文件系统（精简理论部分，浓缩的精华！）" />
+<meta name="description" content="今天和大家分享的是Linux操作系统中的磁盘管理与文件系统的相关知识，将会从以下几点和大家进行说明：磁盘基础检测并确认新磁盘规划硬盘中的分区创建文件系统挂载、卸载文件系统首先先和大家说一下磁盘的结构1.硬盘的物理结构盘片：硬盘有多个盘片、每盘片2面磁头：每面一个磁头2.硬盘的数据结构扇区：盘片被分为多个扇形区域，每个扇区存放512字节的数据（磁盘的最小组成单元通常是512字节，部分厂商设定的是40" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Linux磁盘管理与文件系统（精简理论部分，浓缩的精华！）</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">JarryZ</li>
+          <li class="lmname"><a href="https://blog.51cto.com/14464303/2430854" target="_blank">https://blog.51cto.com/14464303/2430854</a></li>
+          <li class="timer">2019-08-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>今天和大家分享的是Linux操作系统中的磁盘管理与文件系统的相关知识，将会从以下几点和大家进行说明：磁盘基础检测并确认新磁盘规划硬盘中的分区创建文件系统挂载、卸载文件系统首先先和大家说一下磁盘的结构1.硬盘的物理结构盘片：硬盘有多个盘片、每盘片2面磁头：每面一个磁头2.硬盘的数据结构扇区：盘片被分为多个扇形区域，每个扇区存放512字节的数据（磁盘的最小组成单元通常是512字节，部分厂商设定的是40</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <div class="con artical-content editor-preview-side"><p><strong>今天和大家分享的是Linux操作系统中的磁盘管理与文件系统的相关知识，将会从以下几点和大家进行说明：</strong></p>
+<ol>
+<li>磁盘基础</li>
+<li>检测并确认新磁盘</li>
+<li>规划硬盘中的分区</li>
+<li>创建文件系统</li>
+<li>挂载、卸载文件系统</li>
+</ol>
+<p><strong>首先先和大家说一下磁盘的结构</strong><br>1.硬盘的物理结构</p>
+<ul>
+<li>盘片：硬盘有多个盘片、每盘片2面</li>
+<li>磁头：每面一个磁头<br>2.硬盘的数据结构</li>
+<li>扇区：盘片被分为多个扇形区域，每个扇区存放512字节的数据（磁盘的最小组成单元通常是512字节，部分厂商设定的是4096个字节）</li>
+<li>磁道：同一盘片不同半径的同心圆</li>
+<li>柱面：不同盘片相同半径构成的圆柱面（垂直方向看的为柱面，由多个磁道组成）</li>
+</ul>
+<p>1.硬盘存储容量=磁头数x磁道（柱面）数x每道扇区数x每扇区字节数<br>2.可以用柱面/磁头/扇区来唯一定位磁盘上每一个区域<br>3.磁盘接口类型：</p>
+<ul>
+<li>IDE（并口）</li>
+<li>SATA（串口）</li>
+<li>SCSI</li>
+</ul>
+<p><strong>扇区、块/簇、page之间的关系</strong><br>1.扇区：是硬盘最小读写单元<br>2.块/簇：是操作系统针对硬盘读写的最小单元<br>3.page：是内存与操作系统之间操作的最小单元<br>扇区≤块/簇≤Page</p>
+<p><strong>MBR与磁盘分区表示</strong><br>1.主引导记录</p>
+<ul>
+<li>MBR位于硬盘第一个物理扇区处</li>
+<li>MBR中包含硬盘的主引导程序和硬盘分区表</li>
+<li>分区表友弍分区记录区，每个分区记录占16个字节<br>2.Linux中将硬盘、分区等设备均表示为文件：/dev/hda5</li>
+</ul>
+<p><strong>磁盘分区结构：</strong><br>1.硬盘中的主分区数目只有4个<br>2.因此主分区和扩展分区的序号也就限制在1~4<br>3.扩展分区再分为逻辑分区<br>3.逻辑分区的序号始终从5开始<br><img src="https://s1.51cto.com/images/blog/201908/19/db43a21ddc80fa6a0fef0354a6078fec.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="Linux磁盘管理与文件系统（精简理论部分，浓缩的精华！）" style="cursor: pointer;"></p>
+<p>文件系统类型<br>1.XFS文件系统</p>
+<ul>
+<li>存放文件和目录数据的分区</li>
+<li>高性能的日志文件系统</li>
+<li>CentOS 7系统中默认的文件系统<br>2.SWAP，交换文件系统</li>
+<li>为Linux系统建立交换分区<br>3.Linux支持的其它文件系统类型</li>
+<li>FAT16、FAT32、NTFS</li>
+<li>EXT4、JFS</li>
+</ul>
+<p><strong>检测并确认新硬盘：</strong><br>1.fdisk命令：查看或管理磁盘分区<br>fdisk -l [磁盘设备] 或 fdisk [磁盘设备]<br>2.交互模式常用的指令</p>
+<ul>
+<li>m：帮助信息</li>
+<li>p：显示分区列表</li>
+<li>n：创建新分区</li>
+<li>d：删除分区</li>
+<li>t：转换分区类型（通过ID号进行转换）</li>
+<li>w：保存修改</li>
+<li>q：退出</li>
+</ul>
+<p><strong>mkfs命令：</strong><br>1.Make Filesystem，创建文件系统（格式化）</p>
+<ul>
+<li>mkfs -t（type） 我呢间系统类型  分区设备<br>2.示例：<br>[root@localhost～]#ls /sbin/mkfs*<br>/sbin/mkfs     /sbin/mkfs.cramfs<br>/sbin/mkfs.ext3  /sbin/mkfs.minix<br>/sbin/mkfa.btrfs  /sbin/mkfs.ext2<br>/sbin/mkfs.ext4  /sbin/mkfs.xfs<br>[root@localhost～]#mkfs -t xfs /dev/sdb1</li>
+</ul>
+<p><strong>mkswap命令:</strong><br>1.make swap（创建交换文件系统）：mkswap 分区设备<br>2.示例：<br>[root@localhost~]#mkswap /dev/sdb5<br>[root@localhost~]#cat /proc/meminfo | grep Swap Total<br>Swap Total:   8257532kB<br>[root@localhost ~]#swapon /dev/sdb5<br>[root@localhost ~]#cat /proc/meminfo | grep Swap Total<br>Swap Total:  10354680kB<br>[root@localhost ~]#swapoff /dev/sdb5</p>
+<p><strong>挂载、卸载文件系统:</strong><br>1.mount命令：<br>挂载文件系统、ISO镜像指定文件夹</p>
+<ul>
+<li>mount [-t类型] 存储设备 挂载点目录</li>
+<li>mount -o loop ISO镜像文件 挂载点目录<br>2.umount命令：<br>卸载已挂载的文件系统</li>
+<li>umount 存储设备位置</li>
+<li>umount 挂载点 目录</li>
+</ul>
+<p><strong>设置文件系统的自动挂载</strong><br>1./etc/fstab配置文件：包含需要开机后自动挂载的文件系统记录<br>[root@localhost～]#vi /etc/fstab<br>……//省略部分内容<br>/dev/sdb1  /mailbox   xfs  defaults  0 0</p>
+<p><strong>各位看官不要走开，后面还有相关的操作步骤，敬请期待，谢谢捧场！</strong></p></div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1991.html">SpringBoot2.0 基础案例(13)：基于Cache注解模式，管理Redis缓存</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1993.html">ELK报错及解决方案</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.51cto.com/14464303/2430854" target="_blank">https://blog.51cto.com/14464303/2430854</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

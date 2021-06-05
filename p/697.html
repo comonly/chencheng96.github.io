@@ -1,0 +1,306 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>按键精灵常用语法介绍_comonly.cn</title>
+<meta name="keywords" content="按键精灵常用语法介绍" />
+<meta name="description" content="1.MessageBox "excel已经打开，请继续操作" &nbsp; &nbsp;//弹窗输出内容
+
+
+	2.SayString "优惠券总量" &nbsp; //填写表单时输出数据
+
+
+	3.Call Plugin.Pic.PrintScreen(0, 0, 1365, 767, "F:\wk\"×&amp;"4.jpg") &nbsp; //截屏，
+
+
+	4.Key=WaitKey() &nbsp; &nbsp;//等待按键并记录
+
+
+	
+
+
+	//等待某确定键按下" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">按键精灵常用语法介绍</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-05-08</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	电脑配置设置  软件使用 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">SayString,截屏,split分割字符串,循环</a></div>
+      
+      
+        <div class="news_about"><strong>简介</strong>1.MessageBox "excel已经打开，请继续操作" &nbsp; &nbsp;//弹窗输出内容
+
+
+	2.SayString "优惠券总量" &nbsp; //填写表单时输出数据
+
+
+	3.Call Plugin.Pic.PrintScreen(0, 0, 1365, 767, "F:\wk\"×&amp;"4.jpg") &nbsp; //截屏，
+
+
+	4.Key=WaitKey() &nbsp; &nbsp;//等待按键并记录
+
+
+	
+
+
+	//等待某确定键按下</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	1.MessageBox "excel已经打开，请继续操作" &nbsp; &nbsp;//弹窗输出内容
+</p>
+<p>
+	2.SayString "优惠券总量" &nbsp; //填写表单时输出数据
+</p>
+<p>
+	3.Call Plugin.Pic.PrintScreen(0, 0, 1365, 767, "F:\wk\"×&amp;"4.jpg") &nbsp; //截屏，
+</p>
+<p>
+	4.Key=WaitKey() &nbsp; &nbsp;//等待按键并记录
+</p>
+<p>
+	<br />
+</p>
+<p>
+	//等待某确定键按下。按键码可以在基本命令，按键命令，查询按键码进行获取。
+</p>
+<p>
+	Rem q9 &nbsp;//标记,就是做个记号<br />
+Key=WaitKey() &nbsp;//等待一个键的出现，把那个键命名为key<br />
+If Key = 32 Then &nbsp;//如果代号key是13号键的话(13号键就是enter,就是回车键),那么......(这里是要你填的,你想按了回车之后做什么就在这里填)<br />
+Else &nbsp;//否则(意思就是如果你执行了按键精灵后按的不是回车键,就...)<br />
+Goto q9 //返回到标记q开始执行(意思就是回到刚开始的标记q再来执行一次)<br />
+End If
+</p>
+<p>
+	<br />
+</p>
+<p>
+	For i = 5 To 200&nbsp;//循环
+</p>
+<p>
+	....循环内容
+</p>
+<p>
+	Next
+</p>
+<p>
+	<br />
+</p>
+<p>
+	//判断能否被整除
+</p>
+<p>
+	Dim n<br />
+n = 500<br />
+If n Mod 100 = 0 Then <br />
+MsgBox "OK"<br />
+Else <br />
+MsgBox "不能被100整除"<br />
+End If
+</p>
+<p>
+	<br />
+</p>
+<p>
+	split分割字符串。返回值数组 = Split("字符串","分割符")
+</p>
+MyArray =&nbsp;Split(sRect,&nbsp;"|") &nbsp; &nbsp;//将变量<span>sRect以|进行分割<br />
+MyArray(0) &nbsp; //分割出的第一个元素<br />
+L = Clng(MyArray(0)) &nbsp; //下面这句将字符串转换成数值</span></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/696.html">按键精灵常用插件介绍</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/698.html">IMacros脚本入门教程</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

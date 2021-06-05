@@ -1,0 +1,313 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>IIS Apache Unix 服务器实现301 重定向_comonly.cn</title>
+<meta name="keywords" content="IIS Apache Unix 服务器实现301 重定向" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">IIS Apache Unix 服务器实现301 重定向</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">kaifa123</li>
+          <li class="lmname"><a href="http://blog.csdn.net/kaifa123/article/details/10500301" target="_blank">http://blog.csdn.net/kaifa123/article/details/10500301</a></li>
+          <li class="timer">2017-03-31</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	服务器apache等
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">301,重定向</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	1：IIS 服务器实现301 重定向
+</p>
+<p>
+	打开IIS，右键-属性-网站-IP地址哪里点编辑增加一个站点，增加一个站点，绑定的一下主机头，也可以绑定多个闲置域名。
+</p>
+<p>
+	打开IIS，首先新建立一个站点，随便对应一个目录E:\wwwroot\301web。该目录下只需要2个文件，一个 default.html，一个404.htm。在欲重定向的网页或目录上按右键；选中“重定向到URL”；在对话框中输入目标页面的地址；切记，记得选 中“资源的永久重定向”；当然，最后要点击“应用”，完成。
+</p>
+<p>
+	2：Apache 服务器实现301 重定向
+</p>
+<p>
+	在Apache 中，有个很重要的文件.htaccess，通过对它的设置，可以实现很多强大的功能，301 重定向只是其中之一。找到redirect permanent / http://iyaka.cn：<br />
+redirect permanent /old.html http://iyaka.cn：修改这句即可。
+</p>
+<p>
+	3：在.htaccess文件中增加301重定向指令
+</p>
+<p>
+	采用“mod_rewrite”技术，形如：
+</p>
+<blockquote>
+	<p>
+		RewriteEngine on&nbsp;
+	</p>
+	<p>
+		RewriteRule ^(.*)$ http://iyaka.cn/$1 [R=301,L]
+	</p>
+</blockquote>
+<p>
+	4：适用于使用Unix网络服务器的用户
+</p>
+<p>
+	通过此指令通知搜索引擎的spider你的站点文件不在此地址下。这是较为常用的办法。
+</p>
+<blockquote>
+	<p>
+		形如：Redirect 301 / http://iyaka.cn/
+	</p>
+</blockquote>
+<p>
+	5：在服务器软件的系统管理员配置区完成301重定向
+</p>
+<p>
+	适用于使用Window网络服务器的用户
+</p>
+<p>
+	6：绑定/本地DNS
+</p>
+<p>
+	如果具有对本地DNS记录进行编辑修改的权限，则只要添加一个记录就可以解决此问题。若无此权限，则可要求网站托管服务商对DNS服务器进行相应设置。
+</p>
+<p>
+	DNS服务器的设置
+</p>
+<p>
+	若要将blog.iyaka.com指向iyaka.cn，则只需在DNS服务中应增加一个别名记录，可写成：blog IN CNAME iyaka.cn。
+</p>
+<p>
+	如需配置大量的虚拟域名，则可写成：* IN CNAME lusongsong.com.这样就可将所有未设置的以iyaka.cn结尾的记录全部重定向到iyaka.cn上。
+</p>
+<p>
+	7：用ASP/PHP实现301重定向：
+</p>
+<blockquote>
+	<p>
+		ASP：
+	</p>
+	<p>
+		Response.Status="301 Moved Permanently"&nbsp;
+	</p>
+	<p>
+		Response.AddHeader "Location","http://iyaka.cn/"&nbsp;
+	</p>
+	<p>
+		Response.End
+	</p>
+</blockquote>
+<blockquote>
+	<p>
+		PHP：
+	</p>
+	<p>
+		header("HTTP/1.1 301 Moved Permanently")；
+	</p>
+	<p>
+		header("Location：http://<span>iyaka.cn</span>/")；
+	</p>
+	<p>
+		exit()；&nbsp;
+	</p>
+</blockquote>
+<p>
+	用HTML跳转：&lt;META HTTP-EQUIV=REFRESH CONTENT="5;URL=http://www.iyaka.cn"&gt;， 表示5秒后自动跳转到首页，你也可以把时间设置的更短，但也很容易被搜寻引擎容易误判为spam而遭到惩罚。
+</p>
+<p>
+	用JavaScript跳 转：&lt;script language="javascript"&gt;location.href='http://www.iyaka.cn'&lt;/script&gt;
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/665.html">301重定向的使用条件和方式</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/667.html">css控制div显示/隐藏的方法</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="http://blog.csdn.net/kaifa123/article/details/10500301" target="_blank">http://blog.csdn.net/kaifa123/article/details/10500301</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

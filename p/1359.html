@@ -1,0 +1,355 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>.bat批处理相关用法_comonly.cn</title>
+<meta name="keywords" content=".bat批处理相关用法" />
+<meta name="description" content="Findstr使用正则表达式搜索文件中的文本模式。语法&nbsp;
+
+	findstr [/b] [/e] [/l] [/r] [/s] [/i] [/x] [/v] [/n] [/m] [/o] [/p] [/offline] [/g:File] [/f:File] [/c:String] [/d:DirList] [/a:ColorAttribute] [Strings] [[Drive:][Path] FileName [...]]&nbsp;
+
+
+	
+
+
+	是否使用回显@echo " />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">.bat批处理相关用法</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-08-29</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>Findstr使用正则表达式搜索文件中的文本模式。语法&nbsp;
+
+	findstr [/b] [/e] [/l] [/r] [/s] [/i] [/x] [/v] [/n] [/m] [/o] [/p] [/offline] [/g:File] [/f:File] [/c:String] [/d:DirList] [/a:ColorAttribute] [Strings] [[Drive:][Path] FileName [...]]&nbsp;
+
+
+	
+
+
+	是否使用回显@echo </div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> Findstr使用正则表达式搜索文件中的文本模式。语法&nbsp;<br />
+<p>
+	findstr [/b] [/e] [/l] [/r] [/s] [/i] [/x] [/v] [/n] [/m] [/o] [/p] [/offline] [/g:File] [/f:File] [/c:String] [/d:DirList] [/a:ColorAttribute] [Strings] [[Drive:][Path] FileName [...]]&nbsp;
+</p>
+<p>
+	<br />
+</p>
+<p>
+	是否使用回显@echo off
+</p>
+<p>
+	<br />
+</p>
+<p>
+	定义变量&nbsp; &nbsp;：&nbsp; &nbsp;set&nbsp; name=“yingying”&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+</p>
+<p>
+	----&nbsp; 等号左边不允许有空格，等号右边的所有包括空格会全部赋值给变量。调用变量 ：&nbsp; &nbsp;
+</p>
+<p>
+	%name%&nbsp; &nbsp; &nbsp;
+</p>
+<p>
+	----用%将要调用的变量包起来就可以调用此变量
+</p>
+<p>
+	%%name表示name为 for 里面的循环变量
+</p>
+<p>
+	！name！表示延迟变量（在复合语句中用到，挖坑）<br />
+<br />
+	<p>
+		DOS批处理for循环的时候 为何不能正确显示变量?&nbsp;（不能有空格）
+	</p>
+	<p>
+		set var =%%i<br />
+--&gt;<br />
+set var=%%i<br />
+	</p>
+	<p>
+		批处理判断变量中是否包含字符串
+	</p>
+	<p>
+		set EXISTS_FLAG=false<br />
+echo %JAVA_OPTS%|find "Xdebug"&gt;nul&amp;&amp;set EXISTS_FLAG=true<br />
+if "%EXISTS_FLAG%"=="true" (<br />
+<span> </span>echo 1<br />
+) else (<br />
+<span> </span>echo 2<br />
+)<br />
+	</p>
+</p>
+<p>
+	for循环中Delims和Tokens用法：
+</p>
+<p>
+	for /f命令之—Delims和Tokens用法&amp;总结：<a href="https://blog.csdn.net/hutuchongaini/article/details/35290989">https://blog.csdn.net/hutuchongaini/article/details/35290989</a>
+</p>
+<p>
+	批处理 FOR参数/F之tokens详解：<a href="https://www.jb51.net/article/17928.htm">https://www.jb51.net/article/17928.htm</a>
+</p>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1358.html">宏定义，变参宏实现宏重载</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1360.html">TortoiseSVN通过SubWCRev命令获取版本号</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="批处理中set /a和set /p的区别介绍">
+							<h2 style="display:inline;color:#5BC648;">批处理中set /a和set /p的区别介绍</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-11-15&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span>@echo off<br />
+set /p b=输入一个数字：<br />
+echo %b%<br />
+set /a a=2*%b%<br />
+echo %b%+%b%=%a%<br />
+pause&gt;nul<br />
+set /a 执行数学计算<br />
+<p>
+	set /p 提示用户输入
+</p>
+<p>
+	<br />
+</p>
+比如 set /p a=等待POP输入： ，然后窗口提示“等待POP输入：” ，输入完后 按回车<br /></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="for循环">
+							<h2 style="display:inline;color:#5BC648;">for循环</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-11-15&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span>for /L %%变量 in (起始值，每次增值，结束时的比较值) do 命令<br />
+（上面L也可用小写，主要为了视觉上不与数字1混淆而没用小写）<br />
+(起始值，每次增值，结束时的比较值)相当于一个等差数字序列，从“起始值”的数字开始，每次增加多少（也可设定为负数）为“每次增值”，并与“结束时的比较值”比较，超出则退出for循环（也不执行本轮后面的do 命令）<br />
+例如 (1,1,3) 将产生序列 （1 2 3）；（1,2,9）将产生序列（1 3 5 7 9）；(5,-1,1) 将产生序列 (5 4 3 2 1)；（1,3,18）将产生序列（1 7 10 13 16）<br />
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+@echo off<br />
+::在D盘建立aa1~ aa5五个文件夹<br />
+for /L %%i in (1,1,5) do md d:\aa %%i<br />
+pause<br />
+<br />
+注：在行首，单个冒号:接一名称，是标号行，对应于批处理中go后指向的位置，而双冒号::一般是用来作注释用，注释在批处理中可以用rem加空格来表达，二者稍有不同，rem注释在未关闭命令回显时会在屏幕显示出来，而::则什么情况下都不会显示。<br />
+<br /></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#批处理中set /a和set /p的区别介绍">批处理中set /a和set /p的区别介绍</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#for循环">for循环</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

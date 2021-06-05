@@ -1,0 +1,373 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>windows下编译nginx 使用msys_comonly.cn</title>
+<meta name="keywords" content="windows下编译nginx 使用msys" />
+<meta name="description" content="Prerequisites
+
+
+	To build nginx on the Microsoft Win32&reg;&nbsp;platform you need:
+
+
+	
+		Microsoft Visual C compiler. Microsoft Visual Studio&reg;&nbsp;8 and 10 are known to work.
+	
+	
+		MSYS.
+	
+	
+		Perl, if you want to build OpenSSL&reg;&nbs" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">windows下编译nginx 使用msys</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">Building nginx on the Win32 platform with Visual C</li>
+          <li class="lmname"><a href="http://nginx.org/en/docs/howto_build_on_win32.html" target="_blank">http://nginx.org/en/docs/howto_build_on_win32.html</a></li>
+          <li class="timer">2020-01-03</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>Prerequisites
+
+
+	To build nginx on the Microsoft Win32&reg;&nbsp;platform you need:
+
+
+	
+		Microsoft Visual C compiler. Microsoft Visual Studio&reg;&nbsp;8 and 10 are known to work.
+	
+	
+		MSYS.
+	
+	
+		Perl, if you want to build OpenSSL&reg;&nbs</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h4>
+	Prerequisites
+</h4>
+<p>
+	To build nginx on the Microsoft Win32&reg;&nbsp;platform you need:
+</p>
+<ul>
+	<li>
+		Microsoft Visual C compiler. Microsoft Visual Studio&reg;&nbsp;8 and 10 are known to work.
+	</li>
+	<li>
+		<a href="http://www.mingw.org/wiki/MSYS">MSYS</a>.
+	</li>
+	<li>
+		Perl, if you want to build OpenSSL&reg;&nbsp;and nginx with SSL support. For example&nbsp;<a href="http://www.activestate.com/activeperl">ActivePerl</a>&nbsp;or&nbsp;<a href="http://strawberryperl.com/">Strawberry Perl</a>.
+	</li>
+	<li>
+		<a href="https://www.mercurial-scm.org/">Mercurial</a>&nbsp;client.
+	</li>
+	<li>
+		<a href="http://www.pcre.org/">PCRE</a>,&nbsp;<a href="http://zlib.net/">zlib</a>&nbsp;and&nbsp;<a href="http://www.openssl.org/">OpenSSL</a>&nbsp;libraries sources.
+	</li>
+</ul>
+<a></a> 
+<h4>
+	Build steps
+</h4>
+<p>
+	Ensure that paths to Perl, Mercurial and MSYS bin directories are added to PATH environment variable before you start build. To set Visual C environment run vcvarsall.bat script from Visual C directory.
+</p>
+<p>
+	To build nginx:
+</p>
+<ul>
+	<li>
+		Start MSYS bash.
+	</li>
+	<li>
+		Check out nginx sources from the hg.nginx.org repository. For example:
+		<blockquote>
+			hg clone http://hg.nginx.org/nginx
+		</blockquote>
+	</li>
+	<li>
+		Create a build and lib directories, and unpack zlib, PCRE and OpenSSL libraries sources into lib directory:
+		<blockquote>
+			mkdir objs
+mkdir objs/lib
+cd objs/lib
+tar -xzf ../../pcre-8.43.tar.gz
+tar -xzf ../../zlib-1.2.11.tar.gz
+tar -xzf ../../openssl-1.1.1c.tar.gz
+		</blockquote>
+	</li>
+	<li>
+		Run configure script:
+		<blockquote>
+			auto/configure \
+    --with-cc=cl \
+    --with-debug \
+    --prefix= \
+    --conf-path=conf/nginx.conf \
+    --pid-path=logs/nginx.pid \
+    --http-log-path=logs/access.log \
+    --error-log-path=logs/error.log \
+    --sbin-path=nginx.exe \
+    --http-client-body-temp-path=temp/client_body_temp \
+    --http-proxy-temp-path=temp/proxy_temp \
+    --http-fastcgi-temp-path=temp/fastcgi_temp \
+    --http-scgi-temp-path=temp/scgi_temp \
+    --http-uwsgi-temp-path=temp/uwsgi_temp \
+    --with-cc-opt=-DFD_SETSIZE=1024 \
+    --with-pcre=objs/lib/pcre-8.43 \
+    --with-zlib=objs/lib/zlib-1.2.11 \
+    --with-openssl=objs/lib/openssl-1.1.1c \
+    --with-openssl-opt=no-asm \
+    --with-http_ssl_module
+		</blockquote>
+	</li>
+	<li>
+		Run make:
+		<blockquote>
+			nmake
+		</blockquote>
+	</li>
+</ul></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1620.html">Windows下查看代码工具：Source Insight</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1622.html">nginx-rtmp-module 集成 nginx windows环境下</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="http://nginx.org/en/docs/howto_build_on_win32.html" target="_blank">http://nginx.org/en/docs/howto_build_on_win32.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="Makefile文件生成指令">
+							<h2 style="display:inline;color:#5BC648;">Makefile文件生成指令</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-01-10&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	<br />
+</p>
+<p>
+<pre class="prettyprint">auto/configure \
+    --with-cc=cl \
+    --with-debug \
+    --prefix= \
+    --conf-path=conf/nginx.conf \
+    --pid-path=logs/nginx.pid \
+    --http-log-path=logs/access.log \
+    --error-log-path=logs/error.log \
+    --sbin-path=nginx.exe \
+    --http-client-body-temp-path=temp/client_body_temp \
+    --http-proxy-temp-path=temp/proxy_temp \
+    --http-fastcgi-temp-path=temp/fastcgi_temp \
+    --http-scgi-temp-path=temp/scgi_temp \
+    --http-uwsgi-temp-path=temp/uwsgi_temp \
+    --with-cc-opt=-DFD_SETSIZE=1024 \
+    --with-pcre=objs/lib/pcre-8.41 \
+    --with-zlib=objs/lib/zlib-1.2.11 \
+    --with-openssl=objs/lib/openssl-1.0.2u \
+    --with-openssl-opt=no-asm \
+    --with-select_module --with-http_ssl_module --add-module=objs/lib/nginx-rtmp-module-master  --with-debug --add-module=objs/lib/ngx_http_mytest_module
+
+
+</pre>
+</p>
+<p>
+	<br />
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Makefile文件生成指令">Makefile文件生成指令</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

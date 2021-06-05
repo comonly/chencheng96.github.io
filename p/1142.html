@@ -1,0 +1,300 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>linux基本文件文件夹操作_comonly.cn</title>
+<meta name="keywords" content="linux基本文件文件夹操作" />
+<meta name="description" content="Linux 删除文件夹和文件的命令
+-r 就是向下递归，不管有多少级目录，一并删除
+-f 就是直接强行删除，不作任何提示的意思
+删除文件夹实例：
+rm -rf /var/log/httpd/access
+将会删除/var/log/httpd/access目录以及其下所有文件、文件夹
+删除文件使用实例：
+rm -f /var/log/httpd/access.log
+
+	将会强制删除/var/log/httpd/access.log这个文件
+
+
+	
+
+
+	mv命令的功能有以下两" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">linux基本文件文件夹操作</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2020-03-14</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	linux-工具
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>Linux 删除文件夹和文件的命令
+-r 就是向下递归，不管有多少级目录，一并删除
+-f 就是直接强行删除，不作任何提示的意思
+删除文件夹实例：
+rm -rf /var/log/httpd/access
+将会删除/var/log/httpd/access目录以及其下所有文件、文件夹
+删除文件使用实例：
+rm -f /var/log/httpd/access.log
+
+	将会强制删除/var/log/httpd/access.log这个文件
+
+
+	
+
+
+	mv命令的功能有以下两</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> Linux 删除文件夹和文件的命令<br />
+-r 就是向下递归，不管有多少级目录，一并删除<br />
+-f 就是直接强行删除，不作任何提示的意思<br />
+删除文件夹实例：<br />
+rm -rf /var/log/httpd/access<br />
+将会删除/var/log/httpd/access目录以及其下所有文件、文件夹<br />
+删除文件使用实例：<br />
+rm -f /var/log/httpd/access.log<br />
+<p>
+	将会强制删除/var/log/httpd/access.log这个文件
+</p>
+<p>
+	<br />
+</p>
+<p>
+	mv命令的功能有以下两种：<br />
+mv&nbsp; &nbsp; &nbsp; source&nbsp; &nbsp; &nbsp;target<br />
+1.对文件或目录重新命名<br />
+2.将文件从一个目录移到另一个目录中<br />
+--backup=&lt;备份模式&gt;：若需覆盖文件，则覆盖前先行备份；<br />
+-b：当文件存在时，覆盖前，为其创建一个备份；<br />
+-f：若目标文件或目录与现有的文件或目录重复，则直接覆盖现有的文件或目录；<br />
+-i：交互式操作，覆盖前先行询问用户，如果源文件与目标文件或目标目录中的文件同名，则询问用户是否覆盖目标文件。用户输入”y”，表示将覆盖目标文件；输入”n”，表示取消对源文件的移动。这样可以避免误将文件覆盖。<br />
+--strip-trailing-slashes：删除源文件中的斜杠“/”；<br />
+-S&lt;后缀&gt;：为备份文件指定后缀，而不使用默认的后缀；<br />
+--target-directory=&lt;目录&gt;：指定源文件要移动到目标目录；<br />
+-u：当源文件比目标文件新或者目标文件不存在时，才执行移动操作。
+</p>
+<p>
+	rm [选项] 文件
+</p>
+<p>
+	-f　　　　-force　　　　　　忽略不存在的文件，强制删除，无任何提示<br />
+-i　　　　--interactive　　　 进行交互式地删除<br />
+-r | -R　　--recursive　　　&nbsp; 递归式地删除列出的目录下的所有目录和文件<br />
+-v　　　&nbsp; &nbsp;--verbose　　　　详细显示进行的步骤
+</p>
+<p>
+	Linux cp命令
+</p>
+<p>
+	cp [options] source dest
+</p>
+<p>
+	-a：此选项通常在复制目录时使用，它保留链接、文件属性，并复制目录下的所有内容。其作用等于dpR参数组合。<br />
+-d：复制时保留链接。这里所说的链接相当于Windows系统中的快捷方式。<br />
+-f：覆盖已经存在的目标文件而不给出提示。<br />
+-i：与-f选项相反，在覆盖目标文件之前给出提示，要求用户确认是否覆盖，回答"y"时目标文件将被覆盖。<br />
+-p：除复制文件的内容外，还把修改时间和访问权限也复制到新文件中。<br />
+-r：若给出的源文件是一个目录文件，此时将复制该目录下所有的子目录和文件。<br />
+-l：不复制文件，只是生成链接文件。<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1141.html">ubuntu16.04彻底卸载mysql并且重新安装mysql</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1143.html">putty远程linux连接工具包含psftp上传下载文件及文件夹</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,276 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Dreamweaver如何设计自动关闭的网页_comonly.cn</title>
+<meta name="keywords" content="Dreamweaver如何设计自动关闭的网页" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Dreamweaver如何设计自动关闭的网页</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">三联</li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2016-04-11</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	ide -- myeclipse相关
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">网页技术</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;">
+	设计页面时，经常会从一个页面打开一个子窗口以供浏览者查看。通常，这种子窗口中的内容一经浏览者看过，对于浏览者而言就不再需要，而他们常常会忘记关掉这些小窗口，致使许多的浏览器窗口打开着，耗用大量的资源。因此我们可以将子窗口设计成经过一段时间后可以自动关闭的形式。
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;">
+	本例中制作了两个页面，如图1所示， Index.html是显示于子窗口中的页面，而在名
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;">
+	为firstpage.html的页面中，包含在子窗口中打开Index.html的链接。单击链接时，将在子窗口中打开index.html。可以直接单击子窗口中的“关闭”链接关闭子窗口，也可以不去理睬它，在15秒之后，子窗口也会自动关闭。
+</p>
+<img width="400" height="255" alt="" src="http://img13.3lian.com/edu201308/c/c102/201308/1c73ea25cd4f89748f7c1a86483afeca.jpg" style="border:1px solid #CCCCCC;" /><br />
+<p>
+	图1 浏览器的弹出页面
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;">
+	具体操作如下：
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;">
+	1. 在本地站点中生成一个Smlple文件夹。
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;">
+	2. 在Smlple文件夹中，生成名为Index.html以及名为firstpage.html的文件。
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;">
+	3. 双击Index.html，打开该文档，进入到文档的设计视图窗口中。
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;">
+	4. 单击菜单View/Head Content，显示文档的头部区域。
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;">
+	5. 单击设计视图窗口中的文档头部窗格。选择菜单Insert/Invisible Tags/Script，打开Inset Script对话框。如图2所示，在Language下拉列表框中选择javascript选项，并在Coctento文本框中输入“setTimeout("self.close()"，15000)”。单击OK按钮，完成在文档头部插入15秒后自动关闭子窗口的脚本。在代码中，15000表示15000毫秒，也即15秒，也可以根据需要将之修改为自己需要的时间毫秒数。
+</p>
+<img width="400" height="167" alt="" src="http://img13.3lian.com/edu201308/c/c102/201308/f2881a5c4404e568d3c86b12b1507315.jpg" style="border:1px solid #CCCCCC;" />
+<p>
+	图2 设置时间
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;">
+	6. 在文档窗口中输入“关闭”字样，在属性面板上的Link文本框中输入“###”，将其设置为一个空链接。
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;">
+	7. 在状态栏左端的快速标记编辑器上，单击标记按钮。选中“关闭”链接，然后按下Ctrl+T组合键，打开快速标记编辑器，进入到快速标记编辑器的编辑标记模式。然后在“&gt;”前输入“onclick="selfclose()"”。 如图3所示，设置完毕，单击OK按钮，确认操作。这样在Index.html被作为子窗口打开后，单击该链接就可以立刻关闭该子窗口。
+</p>
+<img width="400" height="94" alt="" src="http://img13.3lian.com/edu201308/c/c102/201308/f1fc2b7bfd566596725726996d925043.jpg" style="border:1px solid #CCCCCC;" />
+<p>
+	图3 设置时间
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;">
+	8. 保存Index.html文件，并退出index.html的Dremweaver窗口。
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;">
+	9. 现在开始设计fristpage.html页面。在本地站点的Smlple文件夹中，双击 fristpage.html，打开该文档，进入到文档的设计视图窗口中。
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;">
+	10. 在文档中输入“单击这里打开会自动关闭的子窗口”字样。然后在属性面板上的 Link文本框中输入“###”，将之设置为空链接。
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;">
+	11. 可以通过为该链接应用Open Browser Window行为来设置单击链接时打开Index.html窗口，不过更方便的方法是利用快速标识编辑器。方法是首先将插入点放置到链接中，然后在状态栏左端的标识选择器上，单击标识按钮，选中整个链接。然后按下Ctrl+T组合键，打开快速标记编辑器，进入到快速标记编辑器的 编辑标识模式。再在“&gt;”前输入“onclick="window.open('index.html',null','width=200px，height=200px')"”(如图4所示)。设置完毕，按下回车键，确认操作。
+</p>
+<img width="400" height="109" alt="" src="http://img13.3lian.com/edu201308/c/c102/201308/68a60d1a9753459df540b1eee4941b1f.jpg" style="border:1px solid #CCCCCC;" />
+<p>
+	图4 设置单击链接时打开
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;">
+	12.上述操作就完成了本例的设置。可以单击菜单用File/save，保存所做的工作。然后按下F12键，在浏览器中预览页面效果。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/286.html">ASPjpeg组件使用方法</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/288.html">控制图片在页面显示的大小&防止dreamweaver表格不被内容撑大而变形的代码</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

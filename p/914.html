@@ -1,0 +1,908 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>EL & JSTL_comonly.cn</title>
+<meta name="keywords" content="EL & JSTL" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">EL & JSTL</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-04-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	javaweb---jsp asp数据库框架
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> EL –Expression Language 表达式语言。可以简化对变量或对象的访问前提: 所访问的变量和对象必须是属于作用域[四种]中的一种。由JSP 标准标签库专家组和JSP 2.0 专家组两个组开发。<br />
+JSTL –Jsp&lt;Java Server Page&gt;标准Standard标签Tag Library。可以使用标签和表达式语言实现页面无脚本&lt;%%&gt;。JSTL规范由sun公司规定，Apache的Jakarta小组负责实现。JSTL1.1需要支持javaServlet2.4和JSP2.0的Web容器。JSTL的目标是为了简化jsp页面的设计，为页面设计人员和程序开发人员的分工协作提供了便利。<br />
+<h2 id='EL表达式'>
+	EL表达式
+</h2>
+<p>
+	语法:${变量或对象}
+</p>
+<p>
+	在JSP页面禁用EL：&lt;%@ page isELIgnored =“true" %&gt; 为true表示当前JSP页面不执行EL表达式。所以使用前需要在页面开头设置为false。
+</p>
+<h3>
+	EL表达式使用的情形
+</h3>
+<ol>
+	<li>
+		输出静态文本，${ 123 }
+	</li>
+	<li>
+		用于标准标签和自定义标签，输出作用域变量${ name }当name为null时会自动转换成空字符串""，而在表达式输出需要进行相关的判断: &lt;%=pageContext.getAttribute("name")==null ? "" : pageContext.getAttribute("name")%&gt;
+	</li>
+	<li>
+		EL不能在脚本元素中使用
+	</li>
+	<li>
+		输出JavaBean对象:${ pb["name"] }或${pb.name}
+	</li>
+</ol>
+<p>
+	EL操作的对象可以是常量，变量，作用域中的变量。比如对于${username}，在这里并没有指定变量的范围所以它的默认值会先从Page 范围找，假如找不到，再依序到Request、Session、Application范围。假如途中找到username，就直接回传，不再继续找下去，但是假如全部的范围都没有找到时，就回传。访问作用域中的变量: ${ applicationScope.value }。
+</p>
+<h3>
+	EL中的运算符（在${ }中进行相关运算）
+</h3>
+算术运算：&nbsp;+,-,*,&nbsp;&nbsp;/ 或 div ，% 或 mod<br />
+<p>
+	关系运算
+</p>
+<ol>
+	<li>
+		&gt; 或 gt（great than）&nbsp;
+	</li>
+	<li>
+		&lt; 或 lt（less than）&nbsp;
+	</li>
+	<li>
+		&gt;=&nbsp; 或 ge（great&nbsp;equal）
+	</li>
+	<li>
+		&lt;=&nbsp; 或 le&nbsp;（less&nbsp;equal）
+	</li>
+	<li>
+		==&nbsp; 或&nbsp; eq（equals）
+	</li>
+	<li>
+		!= 或&nbsp; ne（not equals）
+	</li>
+</ol>
+逻辑运算：&amp;&amp;（and），||（or），!（not）<br />
+empty运算符:&nbsp; 判空。 ${ empty name }判断是否存在属性name
+<h3>
+	EL中的隐式对象
+</h3>
+EL 中有11个隐式对象，可分为三类:<br />
+<ol>
+	<li>
+		与作用域范围有关：pageScope,requestScope,sessionScope,applicationScope
+	</li>
+	<li>
+		与输入有关：param ,paramValues。与param等同的代码:String request.getParameter()。与paramValues等同的代码: String[] request.getParameterValues()通过一个name获取多个值
+	</li>
+	<li>
+		其他隐式对象：initParam,header,headerValues,pageContext, cookie。cookie.name.value获取cookie对应名称的值。
+	</li>
+</ol>
+<h2 id='JSTL'>
+	JSTL
+</h2>
+<p>
+	在使用前需要导入相关的jar包。在web开发中，有许多功能都是开发人员经常要用到的，JSTL就是定义的一套标准的标签库。当前执行一个JSTL标签时,实质上是在执行一段Java代码,完成相应的功能。JSTL支持通用的、结构化的任务，比如迭代，条件判断，XML文档操作，国际化标签，SQL标签。 除了这些，它还提供了一个框架来使用集成JSTL的自定义标签。
+</p>
+<p>
+	根据JSTL标签所提供的功能，可以将其分为5个类别：核心标签，格式化标签，SQL 标签，XML 标签，JSTL 函数。
+</p>
+<p>
+	使用步骤:
+</p>
+<ol>
+	<li>
+		准备好JSTL的库文件 jar包&nbsp; &lt;jstl.jar , standard.jar&gt;&nbsp;
+	</li>
+	<li>
+		在需要使用JSTL的页面前面&lt;%@ page %&gt;后面添加&lt;%@ taglib %&gt;指令引用标签库。&lt;%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %&gt;说明:uri的取值,可以从jar中的META-INF文件夹中找到c.tld文件中有描述:
+	</li>
+</ol>
+<h3>
+	核心标签
+</h3>
+<p>
+	核心标签是最常用的JSTL标签。引用核心标签库的语法如下：&lt;%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %&gt;<br />
+	<table cellpadding="0" cellspacing="0" border="1" bordercolor="#000000">
+		<tbody>
+			<tr>
+				<th>
+					标签
+				</th>
+				<th>
+					描述
+				</th>
+			</tr>
+			<tr>
+				<td>
+					&lt;c:out&gt;
+				</td>
+				<td>
+					用于在JSP中显示数据，就像&lt;%= ... &gt;
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&lt;c:set&gt;
+				</td>
+				<td>
+					用于保存数据，用于在某个范围(Request,Session,Application等)中设置某个值，或者设置某个对象的属性。&lt;c:set var="str" value="hello" scope="page"/&gt;，相当于&lt;% pageContext.setAttribute("str","hello"); %&gt;
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&lt;c:remove&gt;
+				</td>
+				<td>
+					用于删除某个变量或者属性。&lt;c:remove var="str" scope="page|request|session|application" /&gt;，相当于 &lt;%pageContext.removeAttribute("str")%&gt;
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&lt;c:catch&gt;
+				</td>
+				<td>
+					用来处理产生错误的异常状况，并且将错误信息储存起来。将可能抛出异常的代码放置在&lt;c:catch&gt;和&lt;/c:catch&gt;之间，如果其中的代码抛出异常，异常将被捕获，并被保存到var所标识的范围变量中, 变量总是有page范围。&nbsp;&lt;c:catch var="e"&gt;，错误消息: ${ e.message }
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&lt;c:if&gt;
+				</td>
+				<td>
+					与我们在一般程序中用的if一样。&lt;c:if test="${param.score ge 90}"&gt;优秀!&lt;/c:if&gt;
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&lt;c:choose&gt;
+				</td>
+				<td>
+					本身只当做&lt;c:when&gt;和&lt;c:otherwise&gt;的父标签。&lt;c:choose&gt;&lt;c:when test="${param.score &gt;= 90}"&gt;优秀!&lt;/c:when&gt;&lt;c:otherwise&gt;不优秀!&lt;/c:otherwise&gt;&lt;/c:choose&gt;
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&lt;c:when&gt;
+				</td>
+				<td>
+					&lt;c:choose&gt;的子标签，用来判断条件是否成立
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&lt;c:otherwise&gt;
+				</td>
+				<td>
+					&lt;c:choose&gt;的子标签，接在&lt;c:when&gt;标签后，当&lt;c:when&gt;标签判断为false时被执行
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&lt;c:import&gt;
+				</td>
+				<td>
+					检索一个绝对或相对 URL，然后将其内容暴露给页面
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&lt;c:forEach&gt;
+				</td>
+				<td>
+					基础迭代标签，接受多种集合类型
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&lt;c:forTokens&gt;
+				</td>
+				<td>
+					根据指定的分隔符来分隔内容并迭代输出
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&lt;c:param&gt;
+				</td>
+				<td>
+					用来给包含或重定向的页面传递参数
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&lt;c:redirect&gt;
+				</td>
+				<td>
+					重定向至一个新的URL.
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&lt;c:url&gt;
+				</td>
+				<td>
+					使用可选的查询参数来创造一个URL
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</p>
+<h4>
+	forEach属性说明
+</h4>
+<p>
+	<span>&lt;c:forEach&nbsp; var="s" items="${pageScope.strArr}" begin="0" end="4" step="1"&nbsp;</span><span>varStatus="vs"&gt;</span>&lt;/c:forEach&gt;
+</p>
+&nbsp; &nbsp;var –单个变量的名<br />
+&nbsp; &nbsp;items – 作用域中的集合或数组对象<br />
+&nbsp; &nbsp;begin&nbsp; -起始下标<br />
+&nbsp; &nbsp;end&nbsp; &nbsp;-截止下标<br />
+&nbsp; &nbsp;step –步长 ?默认为1<br />
+&nbsp; &nbsp;varStatus – 当前取出单个变量的状态信息.<br />
+&nbsp; &nbsp; |_ index&nbsp; -- 下标从0开始<br />
+&nbsp; &nbsp; &nbsp; &nbsp; Count&nbsp; -- 从1 开始计数<br />
+&nbsp; &nbsp; &nbsp; &nbsp; first&nbsp; --当前取出的变量是否是第一个,如果是则为true<br />
+&nbsp; &nbsp; &nbsp; &nbsp; last&nbsp; &nbsp;--当前取出的变量是否是最后一个,如果是则为true<br />
+示例:<br />
+<pre class="prettyprint lang-java">&lt;%
+    String[] strArr = new String[]{"aaa","bbb","ccc","ddd"};
+    pageContext.setAttribute("strArr",strArr);
+ %&gt;
+迭代数组:
+&lt;c:forEach var="s" items="${pageScope.strArr}"&gt;
+    ${ s } &lt;br/&gt;
+&lt;/c:forEach&gt;
+相当于:
+for(String s : strArr){
+    out.println(s);
+}
+
+&lt;%
+    HashMap&lt;Integer,String&gt; hm = new HashMap&lt;Integer,String&gt;();
+    hm.put(111,"aaa");
+    hm.put(222,"bbb");
+    pageContext.setAttribute("hm",hm);
+%&gt;
+迭代Map:
+&lt;c:forEach var="m" items="${pageScope.hm}"&gt;
+    键: ${ m.key } ---&gt;值: ${ m.value } &lt;br/&gt;
+&lt;/c:forEach&gt;</pre>
+<h4>
+	forTokens用于迭代字符串中由分隔符的各个成员
+</h4>
+<pre class="prettyprint lang-java">&lt;%--
+    String str="abc;1234:EFG|678";
+    String[] sArr = str.split(";|:|\\|");
+    for(String s: sArr){
+    out.println(s+"&lt;br&gt;");
+    }
+ --%&gt;
+ 使用forTokens迭代:
+ &lt;%
+ String str="abc;1234:EFG|678";
+     pageContext.setAttribute("str",str);
+ %&gt;
+&lt;c:forTokens items="${str}" delims=";:|" var="s"&gt;
+    ${ s } &lt;br/&gt;
+&lt;/c:forTokens&gt;</pre>
+<h3>
+	格式化标签
+</h3>
+JSTL格式化标签用来格式化并输出文本、日期、时间、数字。引用格式化标签库的语法如下：&lt;%@ taglib prefix="fmt"&nbsp;&nbsp;uri="http://java.sun.com/jsp/jstl/fmt" %&gt;。
+<p>
+	<table cellpadding="0" cellspacing="0" border="1" bordercolor="#000000">
+		<tbody>
+			<tr>
+				<th>
+					标签
+				</th>
+				<th>
+					描述
+				</th>
+			</tr>
+			<tr>
+				<td>
+					&lt;fmt:formatNumber&gt;
+				</td>
+				<td>
+					使用指定的格式或精度格式化数字
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&lt;fmt:parseNumber&gt;
+				</td>
+				<td>
+					解析一个代表着数字，货币或百分比的字符串
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&lt;fmt:formatDate&gt;
+				</td>
+				<td>
+					使用指定的风格或模式格式化日期和时间
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&lt;fmt:parseDate&gt;
+				</td>
+				<td>
+					解析一个代表着日期或时间的字符串
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&lt;fmt:bundle&gt;
+				</td>
+				<td>
+					绑定资源
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&lt;fmt:setLocale&gt;
+				</td>
+				<td>
+					指定地区
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&lt;fmt:setBundle&gt;
+				</td>
+				<td>
+					绑定资源
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&lt;fmt:timeZone&gt;
+				</td>
+				<td>
+					指定时区
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&lt;fmt:setTimeZone&gt;
+				</td>
+				<td>
+					指定时区
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&lt;fmt:message&gt;
+				</td>
+				<td>
+					显示资源配置文件信息
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&lt;fmt:requestEncoding&gt;
+				</td>
+				<td>
+					设置request的字符编码
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</p>
+<h3>
+	SQL标签
+</h3>
+JSTL SQL标签库提供了与关系型数据库（Oracle，MySQL，SQL Server等等）进行交互的标签。引用SQL标签库的语法如下：&lt;%@ taglib prefix="sql"&nbsp;&nbsp;uri="http://java.sun.com/jsp/jstl/sql" %&gt;。<br />
+<table cellpadding="0" cellspacing="0" border="1" bordercolor="#000000">
+	<tbody>
+		<tr>
+			<th>
+				标签
+			</th>
+			<th>
+				描述
+			</th>
+		</tr>
+		<tr>
+			<td>
+				&lt;sql:setDataSource&gt;
+			</td>
+			<td>
+				指定数据源
+			</td>
+		</tr>
+		<tr>
+			<td>
+				&lt;sql:query&gt;
+			</td>
+			<td>
+				运行SQL查询语句
+			</td>
+		</tr>
+		<tr>
+			<td>
+				&lt;sql:update&gt;
+			</td>
+			<td>
+				运行SQL更新语句
+			</td>
+		</tr>
+		<tr>
+			<td>
+				&lt;sql:param&gt;
+			</td>
+			<td>
+				将SQL语句中的参数设为指定值
+			</td>
+		</tr>
+		<tr>
+			<td>
+				&lt;sql:dateParam&gt;
+			</td>
+			<td>
+				将SQL语句中的日期参数设为指定的java.util.Date&nbsp;对象值
+			</td>
+		</tr>
+		<tr>
+			<td>
+				&lt;sql:transaction&gt;
+			</td>
+			<td>
+				在共享数据库连接中提供嵌套的数据库行为元素，将所有语句以一个事务的形式来运行
+			</td>
+		</tr>
+	</tbody>
+</table>
+<h3>
+	XML 标签
+</h3>
+JSTL XML标签库提供了创建和操作XML文档的标签。引用XML标签库的语法如下：&lt;%@ taglib prefix="x"&nbsp;&nbsp;uri="http://java.sun.com/jsp/jstl/xml" %&gt;。<br />
+在使用xml标签前，你必须将XML 和 XPath 的相关包（XercesImpl.jar和xalan.jar）拷贝至你的&lt;Tomcat 安装目录&gt;\lib下。
+<p>
+	<table cellpadding="0" cellspacing="0" border="1" bordercolor="#000000">
+		<tbody>
+			<tr>
+				<th>
+					标签
+				</th>
+				<th>
+					描述
+				</th>
+			</tr>
+			<tr>
+				<td>
+					&lt;x:out&gt;
+				</td>
+				<td>
+					与&lt;%= ... &gt;,类似，不过只用于XPath表达式
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&lt;x:parse&gt;
+				</td>
+				<td>
+					解析 XML 数据
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&lt;x:set&gt;
+				</td>
+				<td>
+					设置XPath表达式
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&lt;x:if&gt;
+				</td>
+				<td>
+					判断XPath表达式，若为真，则执行本体中的内容，否则跳过本体
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&lt;x:forEach&gt;
+				</td>
+				<td>
+					迭代XML文档中的节点
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&lt;x:choose&gt;
+				</td>
+				<td>
+					&lt;x:when&gt;和&lt;x:otherwise&gt;的父标签
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&lt;x:when&gt;
+				</td>
+				<td>
+					&lt;x:choose&gt;的子标签，用来进行条件判断
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&lt;x:otherwise&gt;
+				</td>
+				<td>
+					&lt;x:choose&gt;的子标签，当&lt;x:when&gt;判断为false时被执行
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&lt;x:transform&gt;
+				</td>
+				<td>
+					将XSL转换应用在XML文档中
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&lt;x:param&gt;
+				</td>
+				<td>
+					与&lt;x:transform&gt;共同使用，用于设置XSL样式表
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</p>
+<h3>
+	JSTL函数
+</h3>
+JSTL包含一系列标准函数，大部分是通用的字符串处理函数。引用JSTL函数库的语法如下：&lt;%@ taglib prefix="fn"&nbsp;&nbsp;uri="http://java.sun.com/jsp/jstl/functions" %&gt;。
+<p>
+	<table cellpadding="0" cellspacing="0" border="1" bordercolor="#000000">
+		<tbody>
+			<tr>
+				<th>
+					函数
+				</th>
+				<th>
+					描述
+				</th>
+			</tr>
+			<tr>
+				<td>
+					fn:contains(name, searchString)
+				</td>
+				<td>
+					测试输入的字符串是否包含指定的子串
+				</td>
+			</tr>
+			<tr>
+				<td>
+					fn:containsIgnoreCase(name, searchString)
+				</td>
+				<td>
+					测试输入的字符串是否包含指定的子串，大小写不敏感
+				</td>
+			</tr>
+			<tr>
+				<td>
+					fn:endsWith(filename, ".txt")
+				</td>
+				<td>
+					测试输入的字符串是否以指定的后缀结尾
+				</td>
+			</tr>
+			<tr>
+				<td>
+					fn:escapeXml(str)
+				</td>
+				<td>
+					跳过可以作为XML标记的字符
+				</td>
+			</tr>
+			<tr>
+				<td>
+					fn:indexOf(name, "-")
+				</td>
+				<td>
+					返回指定字符串在输入字符串中出现的位置
+				</td>
+			</tr>
+			<tr>
+				<td>
+					fn:join(array, ";")
+				</td>
+				<td>
+					将数组中的元素合成一个字符串然后输出
+				</td>
+			</tr>
+			<tr>
+				<td>
+					fn:length(str)
+				</td>
+				<td>
+					返回字符串长度，或者数组的大小
+				</td>
+			</tr>
+			<tr>
+				<td>
+					fn:replace(text, "-", "&amp;#149;)
+				</td>
+				<td>
+					将输入字符串中指定的位置替换为指定的字符串然后返回
+				</td>
+			</tr>
+			<tr>
+				<td>
+					fn:split(customerNames, ";")
+				</td>
+				<td>
+					将字符串用指定的分隔符分隔然后组成一个子字符串数组并返回
+				</td>
+			</tr>
+			<tr>
+				<td>
+					fn:startsWith(product.id, "100-")
+				</td>
+				<td>
+					测试输入字符串是否以指定的前缀开始
+				</td>
+			</tr>
+			<tr>
+				<td>
+					fn:substring("你要截取的字符串",beginIndex,endIndex)
+				</td>
+				<td>
+					返回字符串的子集
+				</td>
+			</tr>
+			<tr>
+				<td>
+					fn:substringAfter(zip, "-")
+				</td>
+				<td>
+					返回字符串在指定子串之后的子集
+				</td>
+			</tr>
+			<tr>
+				<td>
+					fn:substringBefore(zip, "-")
+				</td>
+				<td>
+					返回字符串在指定子串之前的子集
+				</td>
+			</tr>
+			<tr>
+				<td>
+					fn:toLowerCase(str)
+				</td>
+				<td>
+					将字符串中的字符转为小写
+				</td>
+			</tr>
+			<tr>
+				<td>
+					fn:toUpperCase(str)
+				</td>
+				<td>
+					将字符串中的字符转为大写
+				</td>
+			</tr>
+			<tr>
+				<td>
+					fn:trim(str)
+				</td>
+				<td>
+					移除首位的空白符
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/913.html">后端相关汇总_plan</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/915.html"> Servlet</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#EL表达式">EL表达式</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#JSTL">JSTL</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

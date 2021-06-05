@@ -1,0 +1,257 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Logger.getLogger和LogFactory.getLog的区别_comonly.cn</title>
+<meta name="keywords" content="Logger.getLogger和LogFactory.getLog的区别" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Logger.getLogger和LogFactory.getLog的区别</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">zhidao</li>
+          <li class="lmname"><a href="https://zhidao.baidu.com/question/1175197127803935259.html" target="_blank">https://zhidao.baidu.com/question/1175197127803935259.html</a></li>
+          <li class="timer">2019-02-23</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	java-含工具类
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">应用中不可直接使用</span><a href="https://www.baidu.com/s?wd=%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F&amp;tn=SE_PcZhidaonwhc_ngpagmjz&amp;rsv_dl=gh_pc_zhidao" target="_blank" class="baidu-highlight">日志系统</a><span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">（Log4j、Logback）中的API，而应依赖使用日志框架SLF4J中的API，使用门面模式的日志框架，有利于维护和</span><span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">各个</span><span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">类的日志处理</span><span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">方式统一。</span>
+</p>
+<p>
+	<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;"><br />
+</span>
+</p>
+<p>
+	<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">
+	<div class="line number1 index0 alt2" style="font-family:Monaco, Menlo, Consolas, &quot;background-color:#F5F5F5;font-size:13px;color:#333333;border:0px !important;vertical-align:baseline !important;margin:0px !important;padding:0px 1em !important;">
+		import&nbsp;org.slf4j.Logger;
+	</div>
+	<div class="line number2 index1 alt1" style="font-family:Monaco, Menlo, Consolas, &quot;background-color:#F5F5F5;font-size:13px;color:#333333;border:0px !important;vertical-align:baseline !important;margin:0px !important;padding:0px 1em !important;">
+		import&nbsp;org.slf4j.LoggerFactory;
+	</div>
+	<div class="line number3 index2 alt2" style="font-family:Monaco, Menlo, Consolas, &quot;background-color:#F5F5F5;font-size:13px;color:#333333;border:0px !important;vertical-align:baseline !important;margin:0px !important;padding:0px 1em !important;">
+		private&nbsp;static&nbsp;final&nbsp;Logger&nbsp;logger&nbsp;=&nbsp;LoggerFactory.getLogger(Abc.class);
+	</div>
+<br />
+</span>
+</p>
+<p>
+	<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;"><br />
+</span>
+</p>
+<p>
+	<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;"><span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">Logger来自log4j自己的包。如果用Logger.getLogger，需要一个log4j的jar包，用此方式你只能依靠log4j：</span><br />
+<br />
+<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">LogFactory来自common-logging包。如果用LogFactory</span><span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">.getLog，你可以用任何实现了通用日志接口的日志记录器替换log4j，而程序不受影响。apache的common-logging包是通用日志接口，通过这个中间层，</span><span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">你可以随便指定到底用哪个</span><a href="https://www.baidu.com/s?wd=%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F&amp;tn=SE_PcZhidaonwhc_ngpagmjz&amp;rsv_dl=gh_pc_zhidao" target="_blank" class="baidu-highlight">日志系统</a><span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">。增加系统的灵活性。若log4j它不存在, commons-logging 会另行选择其它的日志实现类。 这样保证了程序中不一定要使用log4j这个日志文件了</span><br />
+<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">增强灵活性的理由：</span><br />
+<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">1)首先在 classpath 下寻找自己的配置文件 commons-logging.properties ，如果找到，则使用其中定义的 Log 实现类；</span><br />
+<br />
+<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">2) 如果找不到 commons-logging.properties 文件，则在查找是否已定义系统环境变量 org.apache.commons.logging.Log ，找到则使用其定义的 Log 实现类；</span><br />
+<br />
+<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">3) 否则，查看 classpath 中是否有 Log4j 的包，如果发现，则自动使用 Log4j 作为日志实现类；</span><br />
+<br />
+<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">4) 否则，使用 JDK 自身的日志实现类（ JDK1.4 以后才有日</span><span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">志实现类）；</span><br />
+<br />
+<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">5) 否则，使用 commons-logging 自己提供的一个简单的日志实现类 SimpleLog ；</span><br />
+<br />
+<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">为了简化配置 commons-logging ，一般不使用 commons-logging 的配置文件，也不设置与 commons-logging 相</span><span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">关的系统环境变量，而只需将 Log4j 的 Jar 包放置到 classpash 中就可以了。这样就很简单地完成了 commons-logging 与 Log4j 的融合。</span><br />
+<br />
+<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">根据不同的性质，日志信息通常被分成不同的级别，从低到高依次是：“调试（ DEBUG ）”“信息（ INFO ）”“警告（ WARN ）”“错误（ERROR ）”“致命错误（ FATAL ）”。</span><br />
+</span>
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1071.html">log4j日志配置文件log4j.properties</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1073.html">slf4j的使用</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://zhidao.baidu.com/question/1175197127803935259.html" target="_blank">https://zhidao.baidu.com/question/1175197127803935259.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

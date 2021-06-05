@@ -1,0 +1,384 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>WEB前端——HTML的TextArea标记跟随文本内容自动设置高度，去除右侧滑动条 （实例）_comonly.cn</title>
+<meta name="keywords" content="WEB前端——HTML的TextArea标记跟随文本内容自动设置高度，去除右侧滑动条 （实例）" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">WEB前端——HTML的TextArea标记跟随文本内容自动设置高度，去除右侧滑动条 （实例）</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-04-17</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='取消滑动块，实现文本框随内容高度自动变化'>
+	取消滑动块，实现文本框随内容高度自动变化
+</h2>
+<pre class="prettyprint lang-html">&lt;textarea id="viewTextarea"  oninput="viewChangeHeight()" 
+   style="border: 1px solid #D6B79D;box-sizing: border-box; background:#F9F9F9; width:98%; overflow-y:hidden; margin:5px"&gt;
+&lt;/textarea&gt;  /*填写文本域自动更改高度*/
+function viewChangeHeight(){
+//document.getElementById("viewTextarea")可以直接用id（viewTextarea）代替
+viewTextarea.style.height=viewTextarea.scrollHeight + 'px'; }</pre>
+<h3>
+	<textareaname="textarea"id="textarea"style='overflow-y: hidden;height:20px'onpropertychange="this.style.height = this.scrollHeight + 'px';" oninput="this.style.height = this.scrollHeight + 'px';">overflow-y属性用于去掉右侧滑动块</textareaname="textarea"id="textarea"style='overflow-y:>
+</h3>
+<p>
+	<textareaname="textarea"id="textarea"style='overflow-y: hidden;height:20px'onpropertychange="this.style.height = this.scrollHeight + 'px';" oninput="this.style.height = this.scrollHeight + 'px';">
+	<table border="1" cellpadding="0" cellspacing="0" bordercolor="#000000">
+		<tbody>
+			<tr>
+				<th>
+					overflow-y属性的值
+				</th>
+				<th>
+					描述
+				</th>
+			</tr>
+			<tr>
+				<td>
+					visible
+				</td>
+				<td>
+					不裁剪内容，可能会显示在内容框之外。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					hidden
+				</td>
+				<td>
+					裁剪内容 - 不提供滚动机制。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					scroll
+				</td>
+				<td>
+					裁剪内容 - 提供滚动机制。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					auto
+				</td>
+				<td>
+					如果溢出框，则应该提供滚动机制。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					no-display
+				</td>
+				<td>
+					如果内容不适合内容框，则删除整个框。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					no-content
+				</td>
+				<td>
+					如果内容不适合内容框，则隐藏整个内容。
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</textareaname="textarea"id="textarea"style='overflow-y:>
+</p>
+<h3>
+	offset***、client***、scroll***三类的属性
+</h3>
+<p>
+	<textareaname="textarea"id="textarea"style='overflow-y: hidden;height:20px'onpropertychange="this.style.height = this.scrollHeight + 'px';" oninput="this.style.height = this.scrollHeight + 'px';"></textareaname="textarea"id="textarea"style='overflow-y:>
+</p>
+<ol>
+	<li>
+		client***属性（clientWidth、clientHeight）:表示元素可以看到内容的可见区域部分，与页面内容无关，且它会直接返回属性的数值大小，可直接进行计算。若元素大小小于父元素，大小包括padding、content部分，不包括border；若元素大小大于父元素，则表示可以看到的部分的高或宽。
+	</li>
+	<li>
+		offset***属性（offsetWidth、offsetHeight、offsetTop、offsetLeft）：对于offsetWidth和offsetHeight，都表示当前对象的宽度/高度。offsetWidth与style.widtht的区别是：若对象的宽度设定值为百分百宽度，无论页面变大或变小，style.width都返回此百分比；而offsetWidth则返回页面中对象的宽度值而不是百分比。对于offsetTop和offsetLeft，都表示当前元素对象相对于其定位元素的垂直/水平偏移量。
+	</li>
+	<li>
+		scroll***属性（scrollTop、scrollLeft、scrollHeight、scrollWidth）:scroll是滚动的意思，也就是scrollWidth、scrollHeight属性代表元素对象真实的宽高，即使有一部分看不到；scrollTop、scrollLeft代表元素对象最顶端/最左端到对象到当前窗口显示的局限内的距顶部/左边距的间隔，也是元素垂直/水平滚动了的距离。scrollHeight同scrollTop属性一样，只有DOM元素才有，window/document没有。不同的是scrollHeight是只读，不可设置。兼容性问题：获取整个文档scrollHeight，IE/FF/CH都可以通过document.documentElement.scrollHeight或document.body.scrollHeight获得。此外还有scrollLeft，scrollWidth，道理是一样的。
+	</li>
+	<ul>
+		<li>
+			scrollHeight - scrollTop = clientHeight：当这两个条件成立时，也就代表垂直滚动条走到底了
+		</li>
+		<li>
+			scrollWidth - scrollLeft = clientWidth：当这两个条件成立时，也就代表水平滚动条走到底了
+		</li>
+	</ul>
+</ol>
+<h4>
+	<textareaname="textarea"id="textarea"style='overflow-y: hidden;height:20px'onpropertychange="this.style.height = this.scrollHeight + 'px';" oninput="this.style.height = this.scrollHeight + 'px';">scrollheight, clientheight 的值为何会自动增加</textareaname="textarea"id="textarea"style='overflow-y:>
+</h4>
+<p>
+	<textareaname="textarea"id="textarea"style='overflow-y: hidden;height:20px'onpropertychange="this.style.height = this.scrollHeight + 'px';" oninput="this.style.height = this.scrollHeight + 'px';">每按一次键，textarea 高度会自动增加，但文字内容并未增加，为何高度会变？</textareaname="textarea"id="textarea"style='overflow-y:>
+</p>
+<textareaname="textarea"id="textarea"style='overflow-y: hidden;height:20px'onpropertychange="this.style.height = this.scrollHeight + 'px';" oninput="this.style.height = this.scrollHeight + 'px';"> clientHeight 获取对象可视区高度包括padding，不包括滚动条，不包括边框。scrollHeight 获取的是真实内容的高度 。导致这种情况的原因是 textarea 默认height设置的内容content的高度不包括padding 所以会一直增加，加上box-sizing: border-box; 就不会出现这种情况。<br />
+</textareaname="textarea"id="textarea"style='overflow-y:>
+<h4>
+	<textareaname="textarea"id="textarea"style='overflow-y: hidden;height:20px'onpropertychange="this.style.height = this.scrollHeight + 'px';" oninput="this.style.height = this.scrollHeight + 'px';">box-sizing属性以特定的方式定义匹配某个区域的特定元素</textareaname="textarea"id="textarea"style='overflow-y:>
+</h4>
+<p>
+	<textareaname="textarea"id="textarea"style='overflow-y: hidden;height:20px'onpropertychange="this.style.height = this.scrollHeight + 'px';" oninput="this.style.height = this.scrollHeight + 'px';">
+	<table cellpadding="0" cellspacing="0" border="1" bordercolor="#000000">
+		<tbody>
+			<tr>
+				<th>
+					值
+				</th>
+				<th>
+					描述
+				</th>
+			</tr>
+			<tr>
+				<td>
+					content-box&nbsp;
+				</td>
+				<td>
+					<p>
+						这是由 CSS2.1 规定的宽度高度行为。宽度和高度分别应用到元素的内容框。在宽度和高度之外绘制元素的内边距和边框。
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					border-box
+				</td>
+				<td>
+					<p>
+						为元素设定的宽度和高度决定了元素的边框盒。就是说，为元素指定的任何内边距和边框都将在已设定的宽度和高度内进行绘制。通过从已设定的宽度和高度分别减去边框和内边距才能得到内容的宽度和高度。
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					inherit
+				</td>
+				<td>
+					规定应从父元素继承 box-sizing 属性的值。
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</textareaname="textarea"id="textarea"style='overflow-y:>
+</p>
+<h2 id='实时监听iut和textre输入框值的变化'>
+	实时监听 input 和 textarea输入框值的变化
+</h2>
+<p>
+	在实际前端开发中我们经常会遇到要实时监听用户的输入，根据不同的输入值来采取不同的措施。举一个常见的例子：我们在使用Google 搜索框进行搜索时，每多输入一个字，搜索框下方显示的匹配结果会实时变化。这样的效果就是通过实时监听搜索框的输入值变化从而提取不同的匹配结果来实现的。<br />
+那么，一般使用最多的输入框就是 input 和 textarea 了。要想实时监听这两种输入框的值变化，就不得不提到在输入框元素的值发生改变时触发的事件（更多Event 对象在前面以及进行了介绍）。
+</p>
+<ol>
+	<li>
+		oninput 事件是 IE 之外的大多数浏览器支持的事件，在 value 改变时触发，实时的，即每增加或删除一个字符就会触发，然而通过 js 改变 value 时，却不会触发。从浏览器的自动下拉提示中选取时，不会触发。可以在输入框（ textarea, input:text/password/search等）的value值发生变化时（通过 JS修改输入值除外）立即触发，所以可以监听右键粘贴复制操作。但 IE9.0以下版本不支持，此时需要用到IE特有的 onpropertychange事件。在 Safari5.0以下版本，oninput 不支持 textarea 元素。
+	</li>
+	<li>
+		onchange 事件在内容改变（两次内容有可能还是相等的）且失去焦点时触发，故无法实时监听。
+	</li>
+	<li>
+		onpropertychange 事件却是实时触发，即每增加或删除一个字符就会触发，通过 js 改变也会触发该事件，但是该事件 IE 专有。与 oninput不同的是，只要绑定对象的相关属性（不单 value 值）发生变化（包括 通过JS脚本来修改）都会触发此事件。
+	</li>
+</ol></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/908.html">WEB前端——拖拉页面元素</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/910.html">WEB前端——返回顶部相关问题 （实例）</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#取消滑动块，实现文本框随内容高度自动变化">取消滑动块，实现文本框随内容高度自动变化</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#实时监听iut和textre输入框值的变化">实时监听iut和textre输入框值的变化</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

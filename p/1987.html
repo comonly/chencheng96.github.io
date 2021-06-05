@@ -1,0 +1,252 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>shell训练day 4 8.16_comonly.cn</title>
+<meta name="keywords" content="shell训练day 4 8.16" />
+<meta name="description" content="shell训练day4day4学习任务【视频】1.正则介绍_grep（上）【视频】2.正则介绍_grep（中）【视频】3.正则介绍_grep（下）【视频】4.sed（上）【视频】5.sed（下）正则就是一串有规律的字符串掌握好正则对于编写shell脚本有很大帮助各种编程语言中都有正则，原理是一样的grepsedawk三剑客•grep[-cinvABC]'word'filename•" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">shell训练day 4 8.16</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">hammer_cx</li>
+          <li class="lmname"><a href="https://blog.51cto.com/testdb/2430865" target="_blank">https://blog.51cto.com/testdb/2430865</a></li>
+          <li class="timer">2019-08-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>shell训练day4day4学习任务【视频】1.正则介绍_grep（上）【视频】2.正则介绍_grep（中）【视频】3.正则介绍_grep（下）【视频】4.sed（上）【视频】5.sed（下）正则就是一串有规律的字符串掌握好正则对于编写shell脚本有很大帮助各种编程语言中都有正则，原理是一样的grepsedawk三剑客•grep[-cinvABC]'word'filename•</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <div class="con artical-content editor-preview-side"><p>shell训练day 4</p>
+<p>day4学习任务<br>【视频】1.正则介绍_grep（上）<br>【视频】2.正则介绍_grep（中）<br>【视频】3.正则介绍_grep（下）<br>【视频】4.sed（上）<br>【视频】5.sed（下）</p>
+<p>正则就是一串有规律的字符串<br>掌握好正则对于编写shell脚本有很大帮助<br>各种编程语言中都有正则，原理是一样的</p>
+<p>grep sed awk 三剑客</p>
+<p>•grep [-cinvABC] 'word' filename<br>• -c 行数<br>• -i 不区分大小写<br>• -n 显示行号<br>• -v 取反<br>• -r 遍历所有子目录<br>• -A 后面跟数字，过滤出符合要求的行以及下面n行<br>• -B 同上，过滤出符合要求的行以及上面n行<br>• -C 同上，同时过滤出符合要求的行以及上下各n行<br>-r  遍历某个目录下的所有文件查找.</p>
+<p>[root@docker grep]# grep -cn 'nologin' passwd<br>21</p>
+<p>[root@docker grep]# grep -n 'nologin' passwd  <br>2:bin:x:1:1:bin:/bin:/sbin/nologin<br>3:daemon:x:2:2:daemon:/sbin:/sbin/nologin<br>4:adm:x:3:4:adm:/var/adm:/sbin/nologin</p>
+<p>[root@docker grep]# grep -c 'nologin' passwd    <br>20<br>[root@docker grep]# grep -ic 'nologin' passwd  <br>21</p>
+<p>[root@docker grep]# grep -v 'nologin' passwd   <br>root:x:0:0:root:/root:/bin/bash<br>daemon:x:2:2:daemon:/sbin:/sbin/NOLOGIN<br>sync:x:5:0:sync:/sbin:/bin/sync<br>shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown<br>halt:x:7:0:halt:/sbin:/sbin/halt</p>
+<p>[root@docker grep]# grep -A2 'root' passwd         <br>root:x:0:0:root:/root:/bin/bash<br>bin:x:1:1:bin:/bin:/sbin/nologin<br>daemon:x:2:2:daemon:/sbin:/sbin/NOLOGIN</p>
+<p>常用<br>grep '[0-9]' /etc/passwd </p>
+<p>grep -v '[0-9]' /etc/passwd</p>
+<p>grep -v '^#' /etc/init </p>
+<p>[root@docker grep]# grep -vn '^#' inittab<br>11:asdasdas</p>
+<p>grep '^[^a-zA-Z]' test.txt </p>
+<p>^放在[]里代表非，在方括号外代表以什么开头。</p>
+<p>[root@docker grep]# grep 'r.o' passwd<br>root:x:0:0:root:/root:/bin/bash<br>operator:x:11:0:operator:/root:/sbin/nologin</p>
+<p>.代表任意一个字符。</p>
+<p>grep 'ro*o' passwd </p>
+<p>[root@docker grep]# grep 'o{2}' passwd<br>{}里的数字表示前面的字符出现的次数{}<br>root:x:0:0:root:/root:/bin/bash<br>lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin<br>mail:x:8:12:mail:/var/spool/mail:/sbin/nologin<br>operator:x:11:0:operator:/root:/sbin/nologin<br>postfix:x:89:89::/var/spool/postfix:/sbin/nologin</p>
+<p>egrep 'o{2}' passwd 和grep -E  'o{2}' passwd 一样</p>
+<p>[root@docker shelllearn]# egrep  'o{2}' testfunc.sh</p>
+<h1>url:www.runoob.com</h1>
+<p>grep'o+o' passwd   +表示前面的字符出现过1次或多次</p>
+<p>•egrep 'oo?' /etc/passwd    ？代表0个或1个？前面的字符</p>
+<p>•egrep 'root|nologin' /etc/passwd  <br>grep -E 'root|nologin' /etc/passwd    | 表示或者</p>
+<p>sed ---替换</p>
+<p>[root@docker sed]# sed -n '/root/'p passwd<br>root:x:0:0:root:/root:/bin/bash<br>operator:x:11:0:operator:/root:/sbin/nologin</p>
+<p>-r 参数可以不使用转义了。</p>
+<p>[root@docker sed]# sed -n '2'p passwd<br>bin:x:1:1:bin:/bin:/sbin/nologin</p>
+<p>sed -n '25,$'p paaswd   打印25-末行</p>
+<p>其他特殊符号和grep一样</p>
+<p>-e 参数可以写多个表达式<br>[root@docker sed]# sed -e '1'p -e '/bus/'p -n passwd  <br>root:x:0:0:root:/root:/bin/bash<br>systemd-bus-proxy:x:999:997:systemd Bus Proxy:/:/sbin/nologin<br>dbus:x:81:81:System message bus:/:/sbin/nologin</p>
+<p>sed -n  '/bus/'Ip passwd   不区分大小写</p>
+<p>sed '1,3'd passwd   删掉1-3行，但是实际不删除文件中的内容</p>
+<p>sed -i '/user2/'d passwd.txt</p>
+<p>sed '1,10s/root/toor/g' passwd.txt   替换</p>
+<p>sed -r 's/[a-zA-Z]//g paswd</p></div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1986.html">Docker最佳实战，容器级虚拟化</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1988.html">Docker环境下的前后端分离部署与运维</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.51cto.com/testdb/2430865" target="_blank">https://blog.51cto.com/testdb/2430865</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

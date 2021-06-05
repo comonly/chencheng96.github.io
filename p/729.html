@@ -1,0 +1,272 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>结构化查询语言SQL_comonly.cn</title>
+<meta name="keywords" content="结构化查询语言SQL" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">结构化查询语言SQL</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-05-20</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	数据库
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>SQL是英文Structured Query Language的缩写，标准的数据库语言</p>
+              <p>SQL语言用来同各种数据库建立联系，进行沟通。可以执行各种各样的操作，如更新数据，从数据库提取数据等</p>
+              <p>绝大多数流行的关系型数据库管理系统，如Oracle,Sybase,Microsoft SQL Server ,Access等都采用SQL语言标准。</p>
+              <p>数据库表格，创建表格 ，SQL语言中的create table语句用来建立新的数据库表格。</p>
+              <p>create table tablename (column1 data&nbsp; type, column2 data&nbsp; type, column3 data&nbsp; type, ...);</p>
+              <p>例如</p>
+              <p>create table stu_information (stu_name varchar(10),stu_number varchar(8),major varchar(20),score varchar(4));</p>
+              <p>简单的说，创建新表格时，在关键词create table后面加入所要建立表格的名称，然后在括号内顺次设定各列的名称，数据类型，以及可选的限制条件等。</p>
+              <p>所有的SQL语句在结尾处都要使用；。</p>
+              <p>使用SQL语句创建的数据库表格和表格中列的名称必须以字母开头，后面可以使用字母，数字，下划线，名称长度不能超过30个字符。表格名称不要使用SQL语言保留关键词，如select,create,insert等作为表格或列的名称。</p>
+              <p>&nbsp;</p>
+              <p>向表格中插入数据</p>
+              <p>SQL语言使用insert语句向数据库表格中插入或添加新的数据行。insert语句的格式：</p>
+              <p>insert into tablename(first_column,...last_column) values(first_value,...last_value);</p>
+              <p>向数据库表格中添加新记录，在关键词insert into 后面输入所要添加的表格名称，然后在括号中列出将要添加新值的列的名称。最后，在关键词values的后面按照前面输入的列的顺序对应输入所有要添加的记录值。</p>
+              <p>values后的记录值如果是字符串类型数据(char,varchar,text,blob)都必须使用单引号，否则会弹出错误信息。而对于整数int类型的数据则不用单引号。</p>
+              <p>&nbsp;</p>
+              <p>更新记录</p>
+              <p>SQL语言使用update语句更新或修改满足规定条件的现有记录。使用update语句时，关键一点就是要设定好用于进行判断的where条件从句。update语句格式：</p>
+              <p>updatentablename</p>
+              <p>set columnname=newvalue[,nextcolumn=newvalue2...]</p>
+              <p>where columnname OPERATOR value[and/or column OPERATOR value];</p>
+              <p>&nbsp;</p>
+              <p>删除记录</p>
+              <p>SQL语言使用delete语句删除数据库表格中的行或记录。delete语句格式：</p>
+              <p>delete from tablename where columnname OPERATOR value[and/or column OPERATOR value];</p>
+              <p>在delete from关键词之后输入表格名称，然后在where从句中设定删除记录的判断条件。！如果用户在使用delete语句时不设定where从句，则表格中的所有记录将全部被删除。</p>
+              <p>&nbsp;</p>
+              <p>删除数据库表格</p>
+              <p>SQL语言中使用drop table命令删除某个表格以及该表格中的所有记录。drop table命令格式：</p>
+              <p>drop table tablename;</p>
+              <p>例如</p>
+              <p>drop table stu_information;</p>
+              <p>如果用户希望某个数据库表格完全删除，只需要在drop table 命令后输入希望删除的表格名称即可。将会删除整个表格所有信息。</p>
+              <p>&nbsp;</p>
+              <p>&nbsp;</p>
+              <p>数据查询</p>
+              <p>select语句主要被用来对数据库进行查询并返回符号用户查询标准的结果数据，select语句的语法格式：</p>
+              <p>select column1[,column2,ect] from tablename [where condition];（[]表示可选项）  </p>
+              <p>select语句中位于select关键词之后的列名用来决定那些列将作为查询结果返回。用户可以按照自己的需要选择任意列，还可以使用通配符“*”来设定返回表格中的所有列。</p>
+              <p>select语句中位于from关键词之后的表格名称用来决定将要进行查询操作的目标表格。select语句中的where可选从句用来规定哪些数据值或哪些行将被作为查询结果返回或显示。</p>
+              <p>在where条件从句中可以使用一些运算符来设定查询标准，它们包括：=,&gt;,&lt;,&gt;=,&lt;=,&lt;&gt;（不等号）。</p>
+              <p>like运算符在WHERE条件从句中也非常重要。like运算符的功能非常强大，通过使用like运算符可以设定只选择与用户规格格式相同的记录。此外，还可以使用通配符“%”代替任意字符串。例如：</p>
+              <p>select*from stu_information where name like'聂%';字符串必须包含在单引号内，上传SQL语句将会查询所有名称以聂开头的姓名。</p>
+              <p>&nbsp;</p>
+              <p>SQL语言可以连接多个数据表，实现对多个数据表的查询，即组合查询，格式如下：</p>
+              <p>SELECT *FROM table1,table2 WHERE table1.colum1=table2.coumn1;</p>
+              <p>&nbsp;</p>
+              <p>&nbsp;</p>
+              <p>运算函数</p>
+              <p>SQL提供了众多实用的运算函数。例如，可以调用SUM或AVG这两个分别计算总是和平均数的函数，语法格式如下：</p>
+              <p>SELECT&quot;function type&quot;(&quot;column_name&quot;)FROM&quot;table_name&quot;;</p>
+              <p>查询stu_information数据表中的所有学生的平均成绩可以使用</p>
+              <p>SELECT AVG(score)FROM&quot;table_name&quot;</p>
+              <p>COUNT函数用来计算数据表中指定字段所包含的记录数目。语法格式：</p>
+              <p>SELECT COUNT(&quot;column_name&quot;)FROM &quot;table_name&quot;</p>
+              <p>查询stu_information数据表中所有学生的记录条数时，可以使用如下命令：</p>
+              <p>SELECT COUNT(name)FROM stu_information;</p>
+              <p>MAX函数和MIN函数：MAX（字段名）取得一个表格栏的最大值；MIN（字段名）取得一个表格栏最小值。</p>
+              <p>&nbsp;</p>
+              <p>&nbsp;</p>
+</div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/728.html">ODBC接口技术/ADO接口技术  用ADO实现访问数据库</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/735.html">管理员登录</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

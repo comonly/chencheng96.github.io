@@ -1,0 +1,542 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>string char*  CString互相转换_comonly.cn</title>
+<meta name="keywords" content="string char*  CString互相转换" />
+<meta name="description" content="string to char*
+
+https://stackoverflow.com/a/7352131/9288778
+
+std::string str = "string";
+const char *cstr = str.c_str();
+
+Note that it returns a const char *; you aren’t allowed to change the C-style string returned by c_str(). If you want to proc" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">string char*  CString互相转换</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"> string char*互相转换</li>
+          <li class="lmname"><a href="https://blog.csdn.net/grllery/article/details/89043618" target="_blank">https://blog.csdn.net/grllery/article/details/89043618</a></li>
+          <li class="timer">2019-11-07</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>string to char*
+
+https://stackoverflow.com/a/7352131/9288778
+
+std::string str = "string";
+const char *cstr = str.c_str();
+
+Note that it returns a const char *; you aren’t allowed to change the C-style string returned by c_str(). If you want to proc</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='trigtochr'>
+	string to char*
+</h2>
+https://stackoverflow.com/a/7352131/9288778<br />
+<br />
+std::string str = "string";<br />
+const char *cstr = str.c_str();<br />
+<br />
+Note that it returns a const char *; you aren’t allowed to change the C-style string returned by c_str(). If you want to process it you’ll have to copy it first:<br />
+<br />
+std::string str = "string";<br />
+char *cstr = new char[str.length() + 1];<br />
+strcpy(cstr, str.c_str());<br />
+// do stuff<br />
+delete [] cstr;<br />
+<br />
+Or in modern C++:<br />
+<br />
+std::vectorcstr(str.c_str(), str.c_str() + str.size() + 1);<br />
+// use &amp;chars[0] as a char*<br />
+<br />
+或者https://stackoverflow.com/a/42308974/9288778<br />
+<br />
+std::string str = "string";<br />
+char* chr = const_cast<char*>(str.c_str())<br />
+</char*>
+<p>
+	<char*><br />
+</char*>
+</p>
+<p>
+	<char*><span style="color:#E53333;">c_str()返回的是一个临时指针,不能对其进行操作.</span><span style="color:#E53333;"></span><br />
+</char*>
+</p>
+<char*>
+<h2 id='chrtotrig'>
+	char* to string
+</h2>
+https://stackoverflow.com/questions/8438686/convert-char-to-string-c<br />
+<br />
+std::string str(buffer, buffer + length);<br />
+<br />
+Or, if the string already exists:<br />
+<br />
+str.assign(buffer, buffer + length);<br />
+<br />
+Edit: I’m still not completely sure I understand the question. But if it’s something like what JoshG is suggesting, that you want up to length characters, or until a null terminator, whichever comes first, then you can use this:<br />
+<br />
+std::string str(buffer, std::find(buffer, buffer + length, '\0'));<br />
+<br />
+<h2 id='同理cotchr转trig：'>
+	同理const char*转string：
+</h2>
+<br />
+const char* cc = "this is a const exp";<br />
+string s(cc, cc + strlen(cc));<br />
+<br />
+char* 和const char*<br />
+const char* src = "this is a const exp";<br />
+char* ch = const_cast<char*>(src);<br />
+const char* dst = static_cast<const char*="">(ch);<br />
+cout &lt;&lt; ch &lt;&lt; endl;<br />
+cout &lt;&lt; dst &lt;&lt; endl;<br />
+</char*></char*>
+<p>
+	<char*><char*><const char*=""><br />
+</char*></char*>
+</p>
+<p>
+	<char*><char*><const char*=""><br />
+</char*></char*>
+</p>
+<p>
+	<char*><char*><const char*="">Unicode下：<br />
+</char*></char*>
+	<h2 id='chrchrcotchr=""CStrig转trigchrchr'>
+		<char*><char*><const char*="">CString 转 string</char*></char*>
+	</h2>
+<char*><char*><const char*=""><br />
+CString cstrTest = _T("test");<br />
+string strTest;<br />
+string = CW2A(cstrTest.GetString());<br />
+<br />
+</char*></char*>
+	<h2 id='chrchrcotchr=""trig转CStrigchrchr'>
+		<char*><char*><const char*="">string 转 CString</char*></char*>
+	</h2>
+<char*><char*><const char*=""><br />
+string strTest="test";<br />
+CString cstrTest;<br />
+cstrTest= CA2W(strTest.c_str());<br />
+<br />
+</char*></char*>
+</p>
+<p>
+	<char*><char*><const char*=""><br />
+</char*></char*>
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1537.html">安卓任务列表中清除怎么识别 检测APP状态</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1539.html">windows线程状态 互斥 锁 互斥mutex锁  synchronized在C++中的实现方法</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/grllery/article/details/89043618" target="_blank">https://blog.csdn.net/grllery/article/details/89043618</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="C++中string的连续加法对于char *">
+							<h2 style="display:inline;color:#5BC648;">C++中string的连续加法对于char *</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-11-15&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	char* 可以自动转为string, 但是：
+</p>
+<p>
+	<br />
+</p>
+<p>
+	C++中的string重载了+,+=,但是在进行连加的时候有一个限制，就是连加的时候前两项中必须有一项是string类型。
+</p>
+<br />
+例如：<br />
+<br />
+&nbsp; &nbsp; &nbsp;string a="a"+"b";//编译不通过，因为两项都是const char*,而const char*并没有重载+.<br />
+<br />
+&nbsp; &nbsp; &nbsp;string b="b";string a="a"+b;//编译通过，因为b为string,系统遇到+,会把const char*转换为临时的string.<br />
+<br /></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="ATL字符串转换宏">
+							<h2 style="display:inline;color:#5BC648;">ATL字符串转换宏</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-11-15&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	使用 ATL 提供的转换宏。
+</p>
+<div>
+	<div>
+		<div>
+			<table border="1">
+				<tbody>
+					<tr>
+						<td>
+							A2BSTR
+						</td>
+						<td>
+							OLE2A
+						</td>
+						<td>
+							T2A
+						</td>
+						<td>
+							W2A
+						</td>
+					</tr>
+					<tr>
+						<td>
+							A2COLE
+						</td>
+						<td>
+							OLE2BSTR
+						</td>
+						<td>
+							T2BSTR
+						</td>
+						<td>
+							W2BSTR
+						</td>
+					</tr>
+					<tr>
+						<td>
+							A2CT
+						</td>
+						<td>
+							OLE2CA
+						</td>
+						<td>
+							T2CA
+						</td>
+						<td>
+							W2CA
+						</td>
+					</tr>
+					<tr>
+						<td>
+							A2CW
+						</td>
+						<td>
+							OLE2CT
+						</td>
+						<td>
+							T2COLE
+						</td>
+						<td>
+							W2COLE
+						</td>
+					</tr>
+					<tr>
+						<td>
+							A2OLE
+						</td>
+						<td>
+							OLE2CW
+						</td>
+						<td>
+							T2CW
+						</td>
+						<td>
+							W2CT
+						</td>
+					</tr>
+					<tr>
+						<td>
+							A2T
+						</td>
+						<td>
+							OLE2T
+						</td>
+						<td>
+							T2OLE
+						</td>
+						<td>
+							W2OLE
+						</td>
+					</tr>
+					<tr>
+						<td>
+							A2W
+						</td>
+						<td>
+							OLE2W
+						</td>
+						<td>
+							T2W
+						</td>
+						<td>
+							W2T
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+<br />
+上表中的宏函数，其实非常容易记忆：
+	<div>
+		<table border="1">
+			<tbody>
+				<tr>
+					<td>
+						2
+					</td>
+					<td>
+						好搞笑的缩写，to 的发音和 2 一样，所以借用来表示“转换为、转换到”的含义。
+					</td>
+				</tr>
+				<tr>
+					<td>
+						A
+					</td>
+					<td>
+						ANSI 字符串，也就是 MBCS。
+					</td>
+				</tr>
+				<tr>
+					<td>
+						W、OLE
+					</td>
+					<td>
+						宽字符串，也就是 UNICODE。
+					</td>
+				</tr>
+				<tr>
+					<td>
+						T
+					</td>
+					<td>
+						中间类型T。如果定义了 _UNICODE，则T表示W；如果定义了 _MBCS，则T表示A
+					</td>
+				</tr>
+				<tr>
+					<td>
+						C
+					</td>
+					<td>
+						const 的缩写
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+<br />
+</div>
+<p>
+	<p>
+		ATL字符串转换宏：<a href="https://blog.csdn.net/earbao/article/details/11696929" target="_blank">https://blog.csdn.net/earbao/article/details/11696929</a>
+	</p>
+	<p>
+		ATL and MFC String Conversion Macros：<a href="https://docs.microsoft.com/en-us/previous-versions/visualstudio/visual-studio-2010/87zae4a3(v=vs.100)" target="_blank">https://docs.microsoft.com/en-us/previous-versions/visualstudio/visual-studio-2010/87zae4a3(v=vs.100)</a>
+	</p>
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#trigtochr">trigtochr</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#chrtotrig">chrtotrig</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#同理cotchr转trig：">同理cotchr转trig：</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#chrchrcotchr=""CStrig转trigchrchr">chrchrcotchr=""CStrig转trigchrchr</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#chrchrcotchr=""trig转CStrigchrchr">chrchrcotchr=""trig转CStrigchrchr</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#C++中string的连续加法对于char *">C++中string的连续加法对于char *</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#ATL字符串转换宏">ATL字符串转换宏</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

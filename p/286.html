@@ -1,0 +1,412 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>ASPjpeg组件使用方法_comonly.cn</title>
+<meta name="keywords" content="ASPjpeg组件使用方法" />
+<meta name="description" content="AspJpeg使用方法
+1、AspJpeg是一款功能强大的基于Microsoft IIS环境的图片处理组件，网络上对其进行详细和深入介绍的中文文章并不多，即使有一般也只是牵涉到图片缩略图和图片水印，这与其为英文版本有着密切的关系。
+AspJpeg可以使用很少的代码在您的ASP/ASP.Net应用程序上动态的创建高质量的缩略图象，支持的图象格式有：JPEG, GIF, BMP, TIFF, PNG。
+
+
+	&nbsp;
+
+
+	AspJpeg主要可以做到：生成缩略图片、生成水印图片、图片合并、" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">ASPjpeg组件使用方法</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">ITeye</li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2016-04-11</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	javaweb---jsp asp数据库框架
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">网页技术</a></div>
+      
+      
+        <div class="news_about"><strong>简介</strong>AspJpeg使用方法
+1、AspJpeg是一款功能强大的基于Microsoft IIS环境的图片处理组件，网络上对其进行详细和深入介绍的中文文章并不多，即使有一般也只是牵涉到图片缩略图和图片水印，这与其为英文版本有着密切的关系。
+AspJpeg可以使用很少的代码在您的ASP/ASP.Net应用程序上动态的创建高质量的缩略图象，支持的图象格式有：JPEG, GIF, BMP, TIFF, PNG。
+
+
+	&nbsp;
+
+
+	AspJpeg主要可以做到：生成缩略图片、生成水印图片、图片合并、</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p style="color:#555555;font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	<strong>AspJpeg使用方法<br />
+</strong>1、AspJpeg是一款功能强大的基于Microsoft IIS环境的图片处理组件，网络上对其进行详细和深入介绍的中文文章并不多，即使有一般也只是牵涉到图片缩略图和图片水印，这与其为英文版本有着密切的关系。<br />
+AspJpeg可以使用很少的代码在您的ASP/ASP.Net应用程序上动态的创建高质量的缩略图象，支持的图象格式有：JPEG, GIF, BMP, TIFF, PNG。
+</p>
+<p style="color:#555555;font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;background-color:#FFFFFF;">
+	&nbsp;
+</p>
+<p style="color:#555555;font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:9pt;background-color:#FFFFFF;">
+	AspJpeg主要可以做到：生成缩略图片、生成水印图片、图片合并、图片切割、数据库支持、安全码技术
+</p>
+<p style="color:#555555;font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:9pt;background-color:#FFFFFF;">
+	2、AspJpeg功能摘要<br />
+支持JPEG, GIF, BMP, TIFF 和 PNG 格式图片. 输出格式始终为 JPEG<br />
+源图片可以来源于磁盘、内存、或者记录集（数据库）<br />
+缩略图片可以保存到磁盘、内存、或者HTTP流<br />
+支持三种更改大小方式: nearest-neighbor, bilinear, and bicubic.&nbsp;<br />
+可以在图片之上添加图片或者文字.&nbsp;<br />
+支持画中画<br />
+支持复制，反转，旋转，锐化，灰度调节.<br />
+可以调节压缩比率，以得到最佳输出效果和大小.&nbsp;<br />
+从Jpeg图片中抽取EXIF 和 IPTC数据.<br />
+CMYK-RGB转换<br />
+Read/write access to individual pixels of an image. （从图象中对任意象素进行读/写存取。）
+</p>
+<p style="color:#555555;font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:9pt;background-color:#FFFFFF;">
+	3、AspJpeg系统需求<br />
+Windows 95/98/NT/2000/XP/2003, and&nbsp;<br />
+IIS 4.0+ and ASP/ASP.NET, or<br />
+Visual Basic 5.0+, or<br />
+Visual C++ 5.0+, or<br />
+any development environment supporting COM.
+</p>
+<p style="color:#555555;font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:9pt;background-color:#FFFFFF;">
+	4、AspJpeg安装<br />
+全新安装：<br />
+在AspJpeg安装过程中输入序列号即可，如果安装位置磁盘格式为NTFS，则可能出现访问权限问题，需手工设置安装目录对Everyone有访问权限。
+</p>
+<p style="color:#555555;font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:9pt;background-color:#FFFFFF;">
+	更新安装：<br />
+如果之前有装过其它版本的AspJpeg组件，则需要先卸载原来的组件，再进行新版本的安装。<br />
+先停止IIS<br />
+Net Stop iisadmin /y<br />
+卸载旧版组件<br />
+regsvr32 /u Path/aspjpeg.dl（Path为安装路径）<br />
+重启IIS<br />
+Net Start w3svc
+</p>
+<p style="color:#555555;font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:9pt;background-color:#FFFFFF;">
+	然后再进行全新安装或复制AspJpeg.dll文件到安装目录进行手工安装：<br />
+regsvr32 Path/aspjpeg.dll（Path为安装路径）
+</p>
+<p style="color:#555555;font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:9pt;background-color:#FFFFFF;">
+	如果在正常安装过程中没有输入序列号或手工安装则必须在注册表中加入以下项，为方便起见您可以直接将以下代码保存为.reg文档并导入注册表：<br />
+Windows Registry Editor Version 5.00
+</p>
+<p style="color:#555555;font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:9pt;background-color:#FFFFFF;">
+	[HKEY_LOCAL_MACHINE\SOFTWARE\Persits Software\AspUpload3\RegKey]<br />
+@="21764-40765-60456"<br />
+5、如何创建一个AspJpeg实例？<br />
+Set Jpeg = Server.CreateObject("Persits.Jpeg")
+</p>
+<p style="color:#555555;font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:9pt;background-color:#FFFFFF;">
+	6、如何查看到期时间（是否注册成功）？<br />
+Set Jpeg = Server.CreateObject("Persits.Jpeg")<br />
+Response.Write Jpeg.Expires<br />
+注册成功则到期时间为：9999-9-9<br />
+否则为：安装日期加1个月期限
+</p>
+<p style="color:#555555;font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:9pt;background-color:#FFFFFF;">
+	7、如何用AspJpeg组件生成图片缩略图？<br />
+&lt;%&nbsp;<br />
+Set Jpeg = Server.CreateObject("Persits.Jpeg") '创建实例<br />
+Path = Server.MapPath("../images/apple.jpg") '处理图片路径<br />
+Jpeg.Open Path '打开图片<br />
+'调整宽度和高度为原来的50%<br />
+Jpeg.Width = Jpeg.OriginalWidth / 2<br />
+Jpeg.Height = Jpeg.OriginalHeight / 2<br />
+Jpeg.Save Server.MapPath("apple_small.jpg") '保存图片到磁盘<br />
+Jpeg.Close:Set Jpeg = Nothing<br />
+%&gt;&nbsp;<br />
+8、如何用AspJpeg组件生成图片水印？<br />
+&lt;%&nbsp;<br />
+Set Jpeg = Server.CreateObject("Persits.Jpeg")&nbsp;<br />
+Jpeg.Open Server.MapPath("images/dodge_viper.jpg")&nbsp;<br />
+开始写文字&nbsp;<br />
+Jpeg.Canvas.Font.Color = &amp;000000'' red 颜色&nbsp;<br />
+Jpeg.Canvas.Font.Family = "Courier New" 字体&nbsp;<br />
+Jpeg.Canvas.Font.Bold = True 是否加粗&nbsp;<br />
+Jpeg.Canvas.Print 10, 10, "Copyright (c) XYZ, Inc."&nbsp;<br />
+打印坐标x 打印坐标y 需要打印的字符&nbsp;<br />
+以下是对图片进行边框处理&nbsp;<br />
+Jpeg.Canvas.Pen.Color = &amp;H000000'' black 颜色&nbsp;<br />
+Jpeg.Canvas.Pen.Width = 2 画笔宽度&nbsp;<br />
+Jpeg.Canvas.Brush.Solid = False 是否加粗处理&nbsp;<br />
+Jpeg.Canvas.Bar 1, 1, Jpeg.Width, Jpeg.Height&nbsp;<br />
+起始X坐标 起始Y坐标 输入长度 输入高度&nbsp;<br />
+Jpeg.Save Server.MapPath("images/dodge_viper_framed.jpg") 保存&nbsp;<br />
+%&gt;<br />
+9、如何用AspJpeg组件进行图片合并？<br />
+AspJpeg 1.3+ enables you to place images on top of each other via the method DrawImage. To use this method, you must create two instances of the AspJpeg objects and populate both of them with images via calls to Open (or OpenBinary). When calling Canvas.DrawImage, the 2nd instance of AspJpeg is passed as an argument to this method, along with the X and Y offsets (in pixels):&nbsp;<br />
+使用该方法，您必需创建两个AspJpeg实例对象<br />
+&lt;%<br />
+Set Jpeg1 = Server.CreateObject("Persits.Jpeg")<br />
+Set Jpeg2 = Server.CreateObject("Persits.Jpeg")<br />
+Jpeg1.Open Server.MapPath("t.jpg")<br />
+Jpeg2.Open Server.MapPath("t1.jpg")<br />
+Jpeg1.Canvas.DrawImage 10, 10, Jpeg2 ' optional arguments omitted<br />
+jpeg1.save Server.mappath("tt.jpg")<br />
+%&gt;<br />
+10、如何用AspJpeg组件进行图片切割？<br />
+AspJpeg 1.1+ is also capable of cutting off edges from, or cropping, the resultant thumbnails via the method Crop(x0, y0, x1, y1). The size of the cropped image is specified by the coordinates of the upper-left and lower-right corners within the resultant thumbnail, not the original large image.&nbsp;<br />
+&lt;%<br />
+Set Jpeg = Server.CreateObject("Persits.Jpeg")<br />
+Jpeg.Open Server.MapPath("t.jpg")<br />
+jpeg.Crop 20, 30, jpeg.Width - 20, jpeg.Height - 10&nbsp;<br />
+jpeg.save Server.mappath("tt.jpg")<br />
+Response.write("&lt;img src=tt.jpg&gt;")<br />
+%&gt;<br />
+11、如何用AspJpeg组件创建安全码？<br />
+创建安全码原理上和创建水印差不多。<br />
+&lt;%<br />
+function make_randomize(max_len,w_n) 'max_len 生成长度，w_n：0 可能包含字母，1：只为数字&nbsp;<br />
+randomize&nbsp;<br />
+for intcounter=1 to max_len&nbsp;<br />
+whatnext=int((1-0+1)*rnd+w_n)&nbsp;<br />
+if whatnext=0 then&nbsp;<br />
+upper=122&nbsp;<br />
+lower=97&nbsp;<br />
+else&nbsp;<br />
+upper=57&nbsp;<br />
+lower=48&nbsp;<br />
+end if&nbsp;<br />
+strnewpass=strnewpass &amp; chr(int((upper-lower+1)*rnd)+lower)&nbsp;<br />
+next&nbsp;<br />
+make_randomize=strnewpass&nbsp;<br />
+end function
+</p>
+<p style="color:#555555;font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:9pt;background-color:#FFFFFF;">
+	'生成安全码的图片。<br />
+random_num=make_randomize(4,1) ''生成4位数字的安全码&nbsp;<br />
+session("random_num")=random_num '为么调用session，没有session的安全码是完全没有意义的。呵呵 .
+</p>
+<p style="color:#555555;font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:9pt;background-color:#FFFFFF;">
+	Set Jpeg = Server.CreateObject("Persits.Jpeg") '调用组件&nbsp;<br />
+Jpeg.Open Server.MapPath("t.jpg") '打开准备的图片&nbsp;<br />
+Jpeg.Canvas.Font.Color = &amp;HFFFFFF&nbsp;<br />
+Jpeg.Canvas.Font.Family = "Arial Black"&nbsp;<br />
+Jpeg.Canvas.Font.Bold = false&nbsp;<br />
+Jpeg.Canvas.PrintText 0, -2, random_num&nbsp;<br />
+jpeg.save Server.MapPath("tt.jpg") '保存&nbsp;<br />
+%&gt;&nbsp;<br />
+&lt;img src="tt.jpg" border="0" align="absmiddle"&gt;&nbsp;<br />
+12、如何让AspJpeg组件支援数据库？<br />
+图片存进数据库只能以二进制数据保存，这里即利用AspJpeg的Binary方法，下面以两个AspJpeg用户手册上的代码为例，具体请参考AspJpeg用户手册：<br />
+Opening Images from Memory&nbsp;<br />
+&lt;% ' Using ADO, open database with an image blob<br />
+strConnect = "DRIVER={Microsoft Access Driver (*.mdb)};DBQ=" &amp; Server.MapPath("../db/aspjpeg.mdb")<br />
+Set rs = Server.CreateObject("adodb.recordset")<br />
+SQL = "select image_blob from images2 where id = " &amp; Request("id")<br />
+rs.Open SQL, strConnect, 1, 3<br />
+Set Jpeg = Server.CreateObject("Persits.Jpeg")<br />
+' Open image directly from recordset<br />
+Jpeg.OpenBinary rs("image_blob").Value<br />
+' Resize<br />
+jpeg.Width = Request("Width")<br />
+' Set new height, preserve original aspect ratio<br />
+jpeg.Height = jpeg.OriginalHeight * jpeg.Width / jpeg.OriginalWidth<br />
+Jpeg.SendBinary<br />
+rs.Close<br />
+%&gt;&nbsp;<br />
+Output to Memory&nbsp;<br />
+&lt;%<br />
+...<br />
+Set rs = Server.CreateObject("adodb.recordset")<br />
+rs.Open "images", strConnect, 1, 3<br />
+rs.AddNew<br />
+rs("image_blob").Value = Jpeg.Binary<br />
+rs.Update<br />
+...<br />
+%&gt;
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/285.html">webuploader与uploadify合体的上传插件</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/287.html">Dreamweaver如何设计自动关闭的网页</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

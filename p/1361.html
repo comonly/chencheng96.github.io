@@ -1,0 +1,266 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>C++中HRESULT相关介绍_comonly.cn</title>
+<meta name="keywords" content="C++中HRESULT相关介绍" />
+<meta name="description" content="函数返回值。如果这个函数是执行完返回的话将包含具有实际意义的数据，如果立即返回则包含状态信息--发送成功与否，并不能说明执行的如何。
+
+
+	
+
+
+	1. HRESULT 返回值有哪些、及其含义：
+S_OK 操作成功 0x00000000
+S_FALSE&nbsp; &nbsp;函数调用成功&nbsp; #define S_FALSE&nbsp; &nbsp; ((HRESULT)1L)
+E_UNEXPECTED 意外的失败 0x8000FFFF 
+E_NOTIMPL 未实现 0x800" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">C++中HRESULT相关介绍</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-08-29</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>函数返回值。如果这个函数是执行完返回的话将包含具有实际意义的数据，如果立即返回则包含状态信息--发送成功与否，并不能说明执行的如何。
+
+
+	
+
+
+	1. HRESULT 返回值有哪些、及其含义：
+S_OK 操作成功 0x00000000
+S_FALSE&nbsp; &nbsp;函数调用成功&nbsp; #define S_FALSE&nbsp; &nbsp; ((HRESULT)1L)
+E_UNEXPECTED 意外的失败 0x8000FFFF 
+E_NOTIMPL 未实现 0x800</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	函数返回值。如果这个函数是执行完返回的话将包含具有实际意义的数据，如果立即返回则包含状态信息--发送成功与否，并不能说明执行的如何。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	1. HRESULT 返回值有哪些、及其含义：<br />
+S_OK 操作成功 0x00000000<br />
+S_FALSE&nbsp; &nbsp;函数调用成功&nbsp; #define S_FALSE&nbsp; &nbsp; ((HRESULT)1L)<br />
+E_UNEXPECTED 意外的失败 0x8000FFFF <br />
+E_NOTIMPL 未实现 0x80004001 <br />
+E_OUTOFMEMORY 未能分配所需的内存 0x8007000E <br />
+E_INVALIDARG 一个或多个参数无效 0x80070057 <br />
+E_NOINTERFACE 不支持此接口 0x80004002 <br />
+E_POINTER 无效指针 0x80004003 <br />
+E_HANDLE 无效句柄 0x80070006 <br />
+E_ABORT 操作已中止 0x80004004 <br />
+E_FAIL 未指定的失败 0x80004005 <br />
+E_ACCESSDENIED 一般的访问被拒绝错误 0x80070005&nbsp;
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<span>2.HRESULT使用方法：</span><br />
+<span>其中最常用的是S_OK,S_FALSE,E_FAIL.</span><br />
+<span>S_OK 操作成功，调用成功。需要用SUCCEEDED(hr) 来判断。</span><br />
+<span>#define SUCCEEDED(hr) (((HRESULT)(hr)) &gt;= 0)</span><br />
+<span>S_FALSE 函数调用成功，可以处理有问题。需要用（hr == S_FALSE）来判断</span><br />
+<span>E_FAIL 未指定的失败，一般来讲是函数调用错误。需要用（hr == E_FAIL） 来判断。</span><br />
+<span>从以上分析可以看出，FAILED 泛指一切错误。</span><br />
+<span>#define FAILED(hr) (((HRESULT)(hr)) &lt; 0)</span>
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1360.html">TortoiseSVN通过SubWCRev命令获取版本号</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1362.html">WaitForSingleObject等待某信号量</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

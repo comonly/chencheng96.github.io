@@ -1,0 +1,790 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Android中的Context_comonly.cn</title>
+<meta name="keywords" content="Android中的Context" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Android中的Context</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">鹤鹤有明</li>
+          <li class="lmname"><a href="https://blog.csdn.net/u011630575/article/details/50825005?" target="_blank">https://blog.csdn.net/u011630575/article/details/50825005?</a></li>
+          <li class="timer">2018-10-04</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	android
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	Context，中文直译为“上下文”，SDK中对其说明如下：Interface to global information about an application environment. This is an abstract class whose implementation is provided by the Android system. It allows access to application-specific resources and classes, as well as up-calls for application-level operations such as launching activities, broadcasting and receiving intents, etc.&nbsp;
+</p>
+<p>
+	从上可知：
+</p>
+<ol>
+	<li>
+		它描述的是一个应用程序环境的信息，即上下文。
+	</li>
+	<li>
+		该类是一个抽象(abstract class)类，Android提供了该抽象类的具体实现类(后面我们会讲到是ContextIml类)。
+	</li>
+	<li>
+		通过它我们可以获取应用程序的资源和类，也包括一些应用级别操作，例如：启动一个Activity，发送广播，接受Intent&nbsp;信息等。
+	</li>
+</ol>
+于是，我们可以利用该Context对象去构建应用级别操作(application-level operations) 。
+<h2 id='Cotext概述'>
+	Context概述
+</h2>
+Context是一个抽象类，其通用实现在ContextImpl类中。它的主要作用是一个访问application环境全局信息的接口，通过它可以访问application的资源和相关的类，其主要功能如下：<br />
+<ul>
+	<li>
+		启动Activity
+	</li>
+	<li>
+		启动和停止Service
+	</li>
+	<li>
+		发送广播消息
+	</li>
+	<li>
+		注册广播消息接受者
+	</li>
+	<li>
+		访问APK中各种资源
+	</li>
+	<li>
+		访问Package的相关信息
+	</li>
+	<li>
+		APK的各种权限管理
+	</li>
+</ul>
+简单的说：Context负责Activity，Service，Intent，资源，Package和权限。<br />
+<h2 id='Cotext家族关系'>
+	Context家族关系
+</h2>
+<img src="/File/ForKindEditor/image/20181004161116_532.jpg" alt="" /><br />
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	第一层：一个Context抽象类。<br />
+第二层：一个ContextImpl的实现类，里面拥有一个PackageInfo类的实例，PackageInfo类是关于整个包信息的类。一个ContextWraper是Context的一个包装类，里面有一个ContextImpl类的实例，通过整个实例去调用ContextImpl里面的方法。<br />
+第三层：Service和Application直接继承ContextWrapper，但是Activity需要先引入主题，所以有了ContextThemeImpl类。
+</p>
+<h2 id='Cotext使用'>
+	Context使用
+</h2>
+应用程序在以下几种情况下创建Context实例：<br />
+<ul>
+	<li>
+		创建Application 对象时， 而且整个App共一个Application对象
+	</li>
+	<li>
+		创建Service对象时
+	</li>
+	<li>
+		创建Activity对象时
+	</li>
+</ul>
+所以Context个数=Activity数+Service数+1(Application)。每个Context各有不同。
+<p>
+	<img src="/File/ForKindEditor/image/20181004161457_476.jpg" alt="" width="800" height="438" title="" align="" />
+</p>
+<p>
+	大家注意看到有一些NO上添加了一些数字，其实这些从能力上来说是YES，但是为什么说是NO呢？
+</p>
+<ul>
+	<li>
+		数字1：启动Activity在这些类中是可以的，但是需要创建一个新的task。一般情况不推荐。
+	</li>
+	<li>
+		数字2：在这些类中去layout inflate是合法的，但是会使用系统默认的主题样式，如果你自定义了某些样式可能不会被使用。
+	</li>
+	<li>
+		数字3：在receiver为null时允许，在4.2或以上的版本中，用于获取黏性广播的当前值。（可以无视）
+	</li>
+</ul>
+<p>
+	注：ContentProvider、BroadcastReceiver之所以在上述表格中，是因为在其内部方法中都有一个context用于使用
+</p>
+好了，这里我们看下表格，重点看Activity和Application，可以看到，和UI相关的方法基本都不建议或者不可使用Application，并且，前三个操作基本不可能在Application中出现。实际上，只要把握住一点，凡是跟UI相关的，都应该使用Activity做为Context来处理；其他的一些操作，Service,Activity,Application等实例都可以，当然了，注意Context引用的持有，防止内存泄漏。
+<h2 id='获取Cotext'>
+	获取Context
+</h2>
+<ol>
+	<li>
+		getContext：这是View的一个方法，获取视图上下文，view一般是依托于Activity，所以这个方法返回的是当前Activity实例，一般在Activity中可以使用YourActivityName.this代替。
+	</li>
+	<li>
+		getApplicationContext：这个是获取整个app生命周期的上下文，一般用于application中，获取app相关的基础信息。
+	</li>
+	<li>
+		getBaseContext：是ContextWrapper中的方法，基本不用，Google也不推荐使用，是一种委托，在一个context获取另一个context。
+	</li>
+	<li>
+		getApplication：这个是获取当前进程的Application实例，可以去操作自己写的Application中的方法。
+	</li>
+</ol></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/995.html">Java Web之请求和响应【转】</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/997.html">算法分析</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/u011630575/article/details/50825005?" target="_blank">https://blog.csdn.net/u011630575/article/details/50825005?</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="Context关键函数">
+							<h2 style="display:inline;color:#5BC648;">Context关键函数</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-10-04&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	转：//https://www.cnblogs.com/tsingke/p/9127758.html
+</p>
+<pre class="prettyprint lang-java">public abstract class Context {
+
+	// 获取应用程序包的AssetManager实例
+	public abstract AssetManager getAssets(); // 获取应用程序包的Resources实例
+	public abstract Resources getResources();
+
+	// 获取PackageManager实例，以查看全局package信息
+	public abstract PackageManager getPackageManager();
+
+	// 获取应用程序包的ContentResolver实例
+	public abstract ContentResolver getContentResolver();
+
+	// 它返回当前进程的主线程的Looper，此线程分发调用给应用组件(activities, services等)
+	public abstract Looper getMainLooper();
+
+	// 返回当前进程的单实例全局Application对象的Context
+	public abstract Context getApplicationContext();
+
+	// 从string表中获取本地化的、格式化的字符序列
+	public final CharSequence getText(int resId) {
+		return getResources().getText(resId);
+	}
+
+	// 从string表中获取本地化的字符串
+	public final String getString(int resId) {
+		return getResources().getString(resId);
+	}
+
+	public final String getString(int resId, Object... formatArgs) {
+		return getResources().getString(resId, formatArgs);
+	}
+
+	// 返回一个可用于获取包中类信息的class loader
+	public abstract ClassLoader getClassLoader();
+
+	// 返回应用程序包名
+	public abstract String getPackageName();
+
+	// 返回应用程序信息
+	public abstract ApplicationInfo getApplicationInfo();
+
+	// 根据文件名获取SharedPreferences
+	public abstract SharedPreferences getSharedPreferences(String name, int mode);
+
+	// 其根目录为: Environment.getExternalStorageDirectory()
+	/*
+	* @param type The type of files directory to return.  May be null for
+	* the root of the files directory or one of
+	* the following Environment constants for a subdirectory:
+	* {@link android.os.Environment#DIRECTORY_MUSIC},
+	* {@link android.os.Environment#DIRECTORY_PODCASTS},
+	* {@link android.os.Environment#DIRECTORY_RINGTONES},
+	* {@link android.os.Environment#DIRECTORY_ALARMS},
+	* {@link android.os.Environment#DIRECTORY_NOTIFICATIONS},
+	* {@link android.os.Environment#DIRECTORY_PICTURES}, or
+	* {@link android.os.Environment#DIRECTORY_MOVIES}.
+	*/
+	public abstract File getExternalFilesDir(String type);
+
+	// 返回应用程序obb文件路径
+	public abstract File getObbDir();
+
+	// 启动一个新的activity
+	public abstract void startActivity(Intent intent);
+
+	// 启动一个新的activity
+	public void startActivityAsUser(Intent intent, UserHandle user) {
+		throw new RuntimeException("Not implemented. Must override in a subclass.");
+	}
+
+	// 启动一个新的activity
+	// intent: 将被启动的activity的描述信息
+	// options: 描述activity将如何被启动
+	public abstract void startActivity(Intent intent, Bundle options);
+
+	// 启动多个新的activity
+	public abstract void startActivities(Intent[] intents);
+
+	// 启动多个新的activity
+	public abstract void startActivities(Intent[] intents, Bundle options);
+
+	// 广播一个intent给所有感兴趣的接收者，异步机制
+	public abstract void sendBroadcast(Intent intent);
+
+	// 广播一个intent给所有感兴趣的接收者，异步机制
+	public abstract void sendBroadcast(Intent intent,String receiverPermission);
+
+	public abstract void sendOrderedBroadcast(Intent intent,String receiverPermission);
+
+	public abstract void sendOrderedBroadcast(Intent intent,
+		String receiverPermission, BroadcastReceiver resultReceiver,
+		Handler scheduler, int initialCode, String initialData,
+		Bundle initialExtras);
+
+	public abstract void sendBroadcastAsUser(Intent intent, UserHandle user);
+
+	public abstract void sendBroadcastAsUser(Intent intent, UserHandle user,
+		String receiverPermission);
+
+	// 注册一个BroadcastReceiver，且它将在主activity线程中运行
+	public abstract Intent registerReceiver(BroadcastReceiver receiver,
+		IntentFilter filter);
+
+	public abstract Intent registerReceiver(BroadcastReceiver receiver,
+		IntentFilter filter, String broadcastPermission, Handler scheduler);
+
+	public abstract void unregisterReceiver(BroadcastReceiver receiver);
+
+	// 请求启动一个application service
+	public abstract ComponentName startService(Intent service);
+
+	// 请求停止一个application service
+	public abstract boolean stopService(Intent service);
+
+	// 连接一个应用服务，它定义了application和service间的依赖关系
+	public abstract boolean bindService(Intent service, ServiceConnection conn,
+		int flags);
+
+	// 断开一个应用服务，当服务重新开始时，将不再接收到调用，
+	// 且服务允许随时停止
+	public abstract void unbindService(ServiceConnection conn);
+
+	// 返回系统级service句柄
+	/*
+	* @see #WINDOW_SERVICE
+	* @see android.view.WindowManager
+	* @see #LAYOUT_INFLATER_SERVICE
+	* @see android.view.LayoutInflater
+	* @see #ACTIVITY_SERVICE
+	* @see android.app.ActivityManager
+	* @see #POWER_SERVICE
+	* @see android.os.PowerManager
+	* @see #ALARM_SERVICE
+	* @see android.app.AlarmManager
+	* @see #NOTIFICATION_SERVICE
+	* @see android.app.NotificationManager
+	* @see #KEYGUARD_SERVICE
+	* @see android.app.KeyguardManager
+	* @see #LOCATION_SERVICE
+	* @see android.location.LocationManager
+	* @see #SEARCH_SERVICE
+	* @see android.app.SearchManager
+	* @see #SENSOR_SERVICE
+	* @see android.hardware.SensorManager
+	* @see #STORAGE_SERVICE
+	* @see android.os.storage.StorageManager
+	* @see #VIBRATOR_SERVICE
+	* @see android.os.Vibrator
+	* @see #CONNECTIVITY_SERVICE
+	* @see android.net.ConnectivityManager
+	* @see #WIFI_SERVICE
+	* @see android.net.wifi.WifiManager
+	* @see #AUDIO_SERVICE
+	* @see android.media.AudioManager
+	* @see #MEDIA_ROUTER_SERVICE
+	* @see android.media.MediaRouter
+	* @see #TELEPHONY_SERVICE
+	* @see android.telephony.TelephonyManager
+	* @see #INPUT_METHOD_SERVICE
+	* @see android.view.inputmethod.InputMethodManager
+	* @see #UI_MODE_SERVICE
+	* @see android.app.UiModeManager
+	* @see #DOWNLOAD_SERVICE
+	* @see android.app.DownloadManager
+	*/
+	public abstract Object getSystemService(String name);
+
+	public abstract int checkPermission(String permission, int pid, int uid);
+
+	// 返回一个新的与application name对应的Context对象
+	public abstract Context createPackageContext(String packageName,
+		int flags) throws PackageManager.NameNotFoundException;
+
+	// 返回基于当前Context对象的新对象，其资源与display相匹配
+	public abstract Context createDisplayContext(Display display);
+}</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="ContextImpl关键成员和函数">
+							<h2 style="display:inline;color:#5BC648;">ContextImpl关键成员和函数</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-10-04&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><pre class="prettyprint lang-java">/**
+* Common implementation of Context API, which provides the base
+* context object for Activity and other application components.
+*/
+class ContextImpl extends Context {
+	private final static String TAG = "ContextImpl";
+	private final static boolean DEBUG = false;
+
+	private static final HashMap&lt;String, SharedPreferencesImpl&gt; sSharedPrefs =
+		new HashMap&lt;String, SharedPreferencesImpl&gt;();
+
+	/*package*/ LoadedApk mPackageInfo; // 关键数据成员
+	private String mBasePackageName;
+	private Resources mResources;
+	/*package*/ ActivityThread mMainThread; // 主线程 @Override
+	public AssetManager getAssets() {
+		return getResources().getAssets();
+	}
+
+	@Override
+	public Looper getMainLooper() {
+		return mMainThread.getLooper();
+	}
+
+	@Override
+	public Object getSystemService(String name) {
+		ServiceFetcher fetcher = SYSTEM_SERVICE_MAP.get(name);
+		return fetcher == null ? null : fetcher.getService(this);
+	}
+
+	@Override
+	public void startActivity(Intent intent, Bundle options) {
+		warnIfCallingFromSystemProcess();
+		if ((intent.getFlags()&amp;Intent.FLAG_ACTIVITY_NEW_TASK) == 0) {
+			throw new AndroidRuntimeException(
+			"Calling startActivity() from outside of an Activity "
+			+ " context requires the FLAG_ACTIVITY_NEW_TASK flag."
+			+ " Is this really what you want?");
+		}
+		mMainThread.getInstrumentation().execStartActivity(
+			getOuterContext(), mMainThread.getApplicationThread(), null,
+			(Activity)null, intent, -1, options);
+	}
+}</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="ContextWrapper">
+							<h2 style="display:inline;color:#5BC648;">ContextWrapper</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-10-04&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	它只是对Context类的一种封装，它的构造函数包含了一个真正的Context引用，即ContextImpl对象。
+</p>
+<pre class="prettyprint lang-java">/**
+* Proxying implementation of Context that simply delegates all of its calls to
+* another Context.  Can be subclassed to modify behavior without changing
+* the original Context.
+*/
+public class ContextWrapper extends Context {
+	Context mBase; //该属性指向一个ContextIml实例
+
+	public ContextWrapper(Context base) {
+		mBase = base;
+	} /**
+	* Set the base context for this ContextWrapper.  All calls will then be
+	* delegated to the base context.  Throws
+	* IllegalStateException if a base context has already been set.
+	*
+	* @param base The new base context for this wrapper.
+	* 创建Application、Service、Activity，会调用该方法给mBase属性赋值
+	*/
+	protected void attachBaseContext(Context base) {
+		if (mBase != null) { throw new IllegalStateException("Base context already set");
+		}
+		mBase = base;
+	}
+
+	@Override
+	public Looper getMainLooper() {
+		return mBase.getMainLooper();
+	}
+
+	@Override
+	public Object getSystemService(String name) {
+		return mBase.getSystemService(name);
+	}
+
+	@Override
+	public void startActivity(Intent intent) {
+		mBase.startActivity(intent);
+	}
+}</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="ContextThemeWrapper">
+							<h2 style="display:inline;color:#5BC648;">ContextThemeWrapper</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-10-04&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	该类内部包含了主题(Theme)相关的接口，即android:theme属性指定的。只有Activity需要主题，Service不需要主题，所以Service直接继承于ContextWrapper类。
+</p>
+<pre class="prettyprint lang-java">/**
+* A ContextWrapper that allows you to modify the theme from what is in the
+* wrapped context.
+*/
+public class ContextThemeWrapper extends ContextWrapper {
+	private Context mBase;
+	private int mThemeResource;
+	private Resources.Theme mTheme;
+	private LayoutInflater mInflater;
+	private Configuration mOverrideConfiguration;
+	private Resources mResources;
+
+	public ContextThemeWrapper() {
+		super(null);
+	}
+
+	public ContextThemeWrapper(Context base, int themeres) {
+		super(base);
+		mBase = base;
+		mThemeResource = themeres;
+	}  @Override 
+	protected void attachBaseContext(Context newBase) {
+		super.attachBaseContext(newBase);
+		mBase = newBase; }
+
+	@Override 
+	public void setTheme(int resid) {
+		mThemeResource = resid;
+		initializeTheme();
+	}
+
+	@Override 
+	public Resources.Theme getTheme() {
+		if (mTheme != null) {
+		return mTheme;
+	}
+
+	mThemeResource = Resources.selectDefaultTheme(mThemeResource,
+		getApplicationInfo().targetSdkVersion);
+		initializeTheme();
+
+		return mTheme;
+	}
+}</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="Context内存泄露问题">
+							<h2 style="display:inline;color:#5BC648;">Context内存泄露问题</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-10-04&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	转：//<span>KaelQ-</span><span>https://www.jianshu.com/p/f24707874b04</span>
+</p>
+<h4>
+	静态资源导致的内存泄漏
+</h4>
+有时候旋转屏幕时候，会先销毁原来的Activity，重新建立一个Activity，这时候图片我们并不想重新加载，所以将图片设置为静态对象。<br />
+但是静态对象的view.setBackgroundDrawable();方法很容易造成内存泄露。<br />
+public class MyCustomResource {<br />
+&nbsp; &nbsp; //静态变量drawable<br />
+&nbsp; &nbsp; private static Drawable drawable;<br />
+&nbsp; &nbsp; private View view；<br />
+&nbsp; &nbsp; public MyCustomResource(Context context) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; Resources resources = context.getResources();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; drawable = resources.getDrawable(R.drawable.ic_launcher);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; view = new View(context);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; view.setBackgroundDrawable(drawable);<br />
+&nbsp; &nbsp; }<br />
+}<br />
+public void setBackgroundDrawable(Drawable background) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;..........<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/**此处的this就是当前View对象，而View对象又是有Context对象获得<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;因此，变量background持有View对象的引用，View持有Context的引用，<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;所有background间接持有Context对象的引用了*/<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;background.setCallback(this);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.......<br />
+&nbsp; &nbsp; }<br />
+这时候想要销毁原来的Activity时，发现静态对象Drawable间接持有Context对象的引用，导致Activity的内存无法完全释放内存，这时候就造成了内存泄露。<br />
+因此，Android系统在在3.0版本之后修改了setBackgroundDrawable内部方法中的 background.setCallback(this);方法，里面的实现使用了弱引用来持有View对象的引用，从而避免了内存泄漏隐患。所以，以后代码中避免使用静态资源，或者使用弱引用来解决相应的问题也是可以的。<br />
+<br />
+<h4>
+	单例模式导致内存泄漏
+</h4>
+public class CustomManager {<br />
+&nbsp; &nbsp; private static CustomManager sInstance;<br />
+&nbsp; &nbsp; public static CustomManager getInstance(Context context) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; if (sInstance == null) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; sInstance = new CustomManager(context);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; return sInstance;<br />
+&nbsp; &nbsp; }<br />
+&nbsp; &nbsp; private Context mContext;<br />
+&nbsp; &nbsp; private CustomManager(Context context) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; mContext = context;<br />
+&nbsp; &nbsp; }<br />
+}<br />
+这样单例，有内存泄露的隐患，如果是在Activity中创建这个单例的话，传入的context为Activity的context，如果想要销毁Activity，但是单例的生命周期是整个APP，导致Activity的内存释放不完全。<br />
+所以需要修改成如下：<br />
+<br />
+public class CustomManager {<br />
+&nbsp; &nbsp; private static CustomManager sInstance;<br />
+&nbsp; &nbsp; public static CustomManager getInstance(Context context) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; if (sInstance == null) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; sInstance = new CustomManager(context.getApplicationContext());<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; return sInstance;<br />
+&nbsp; &nbsp; }<br />
+&nbsp; &nbsp; private Context mContext;<br />
+&nbsp; &nbsp; private CustomManager(Context context) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; mContext = context;<br />
+&nbsp; &nbsp; }<br />
+}<br />
+将context改为整个Application的Context，这时候单例与Activity就无关了，Activity释放的时候就不会出现内存泄露的问题了。<br />
+<br />
+总结<br />
+<p>
+	以后在使用Context对象获取静态资源，创建单例对象或者静态方法的时候，请多考虑Context的生命周期，一定要记得不要使用Activity的Context，切记要使用生命周期长的Application的Context对象。但是并不是所有情况使用Application的Context对象，在创建Dialog，View控件的时候都必须使用Activity的Context对象。
+</p>
+<p>
+	根据生命周期选择适合的Context类型。
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Cotext概述">Cotext概述</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Cotext家族关系">Cotext家族关系</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Cotext使用">Cotext使用</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#获取Cotext">获取Cotext</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Context关键函数">Context关键函数</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#ContextImpl关键成员和函数">ContextImpl关键成员和函数</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#ContextWrapper">ContextWrapper</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#ContextThemeWrapper">ContextThemeWrapper</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Context内存泄露问题">Context内存泄露问题</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

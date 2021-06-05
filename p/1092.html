@@ -1,0 +1,402 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>solr在Java中使用_comonly.cn</title>
+<meta name="keywords" content="solr在Java中使用" />
+<meta name="description" content="&lt;!-- 配置SolrServer对象 --&gt;
+&lt;!-- 单机版 --&gt;
+&lt;bean id="httpSolrClient" class="org.apache.solr.client.solrj.impl.HttpSolrClient"&gt;
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;constructor-arg name="baseURL" value="http://192.168.25.154:8080/solr"&gt;&lt;/co" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">solr在Java中使用</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-03-27</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	服务器apache等
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>&lt;!-- 配置SolrServer对象 --&gt;
+&lt;!-- 单机版 --&gt;
+&lt;bean id="httpSolrClient" class="org.apache.solr.client.solrj.impl.HttpSolrClient"&gt;
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;constructor-arg name="baseURL" value="http://192.168.25.154:8080/solr"&gt;&lt;/co</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <span style="color:#555555;font-size:16px;background-color:#FFFFFF;">&lt;!-- 配置SolrServer对象 --&gt;</span><br />
+<span style="color:#555555;font-size:16px;background-color:#FFFFFF;">&lt;!-- 单机版 --&gt;</span><br />
+<span style="color:#555555;font-size:16px;background-color:#FFFFFF;">&lt;bean id="httpSolrClient" class="org.apache.solr.client.solrj.impl.HttpSolrClient"&gt;</span><br />
+<span style="color:#555555;font-size:16px;background-color:#FFFFFF;">&nbsp; &nbsp; &nbsp; &nbsp; &lt;constructor-arg name="baseURL" value="http://192.168.25.154:8080/solr"&gt;&lt;/constructor-arg&gt;</span><br />
+<span style="color:#555555;font-size:16px;background-color:#FFFFFF;">&lt;/bean&gt;</span><br />
+<br />
+<span style="color:#555555;font-size:16px;background-color:#FFFFFF;">&nbsp; &nbsp; @Autowired</span><br />
+<span style="color:#555555;font-size:16px;background-color:#FFFFFF;">&nbsp; &nbsp; private HttpSolrClient httpSolrClient;</span></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1091.html">solr安装启动及可视化界面介绍</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1093.html">BigDecimal相关汇总Java中double精度问题</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="查询参数">
+							<h2 style="display:inline;color:#5BC648;">查询参数</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-03-27&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><pre class="prettyprint lang-java">//创建查询对象
+SolrQuery solrQuery = new SolrQuery();
+//设置查询条件
+solrQuery.setQuery("Pcount:数据库测试mvc");
+//设置分页
+solrQuery.setStart((page - 1) * rows);
+//设置返回数量
+solrQuery.setRows(rows);
+//设置返回域
+solrParams.addField("id");
+solrParams.addField("screen_name");
+和add效果相同
+query.setFields(newString[]{“name”,”age”});//只返回docs中name，age两个field。
+//设置排序
+solrQuery.addSort("id", SolrQuery.ORDER.desc);
+//设置默认搜素域
+solrQuery.set("df", "Pcount");
+
+//设置高亮显示
+solrQuery.setHighlight(true);
+solrQuery.addHighlightField("Pcount");
+solrQuery.setHighlightSimplePre("&lt;em style=\"color:red\"&gt;");
+solrQuery.setHighlightSimplePost("&lt;/em&gt;");
+//根据查询条件查询索引库
+QueryResponse queryResponse = solrClient.query(coreName,query);
+
+
+//通过MapSolrParams方式传递参数
+Map&lt;String, String&gt; queryParamMap = new HashMap&lt;&gt;();
+queryParamMap.put("q", "*:*");//表示查询条件
+queryParamMap.put("fl", "id,Ptitle");//要显示的内容
+queryParamMap.put("sort", "id asc");//排序方式
+MapSolrParams solrParams = new MapSolrParams(queryParamMap);
+QueryResponse response = solrClient.query(coreName, solrParams);</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="处理查询结果">
+							<h2 style="display:inline;color:#5BC648;">处理查询结果</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-03-27&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><pre class="prettyprint lang-java">//处理查询结果
+SolrDocumentList solrDocumentList = response.getResults();
+solrDocumentList.getNumFound();//获取查到的文档数目
+for (SolrDocument document : solrDocumentList) {
+    //获取某文档某一参数值
+    String id = (String) document.getFirstValue("id");
+}
+
+//商品列表
+List&lt;ProductInfo&gt; itemList = new ArrayList&lt;&gt;();
+//取高亮显示
+Map&lt;String, Map&lt;String, List&lt;String&gt;&gt;&gt; highlighting = queryResponse.getHighlighting();
+//取商品列表
+for (SolrDocument solrDocument : solrDocumentList) {
+    //获取循环内该文档的Pcount字段
+    List&lt;String&gt; list = highlighting.get(solrDocument.get("id")).get("Pcount");
+
+    if (list != null &amp;&amp; list.size()&gt;0) {
+        title = list.get(0); //获取高亮字段
+    } else {
+        //没有高亮字段（该字段没有匹配）
+    }
+}</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="添加">
+							<h2 style="display:inline;color:#5BC648;">添加</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-03-27&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><pre class="prettyprint lang-java">//新增
+SolrInputDocument inputDocument = new SolrInputDocument();
+inputDocument.addField("sourceType", "test");
+inputDocument.addField("id", "test_big_data");
+// 执行添加, 如果id相同，则执行更新操作
+UpdateResponse add = solrClient.add(coreName, inputDocument);
+//添加一个SolrInputDocument列表
+//solrClient.add(coreName, docs)
+//提交添加/更新
+solrClient.commit(coreName);</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="删除">
+							<h2 style="display:inline;color:#5BC648;">删除</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-03-27&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><pre class="prettyprint lang-java">//删除(方式一：基于查询)
+solrClient.deleteByQuery(coreName,"*:*");
+solrClient.commit(coreName);
+//删除(方式二：基于唯一id）
+solrClient.deleteById(coreName,"6");
+solrClient.commit(coreName);</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="通过Java对象操作">
+							<h2 style="display:inline;color:#5BC648;">通过Java对象操作</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-03-29&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><pre class="prettyprint lang-java">根据对象新增
+//java对象
+public static class Info {
+    @Field
+    public String id;
+    @Field
+    public String screen_name;
+
+    public Info(String id, String screen_name) {
+        this.id = id;
+        this.screen_name = screen_name;
+    }
+}
+//新增数据
+Info info = new Info("4", "lala");
+solrClient.addBean(coreName, info);
+solrClient.commit(coreName, true, true); 
+List&lt;Info&gt; infoList =new ArrayList&lt;Info&gt;();
+solrClient.addBeans(coreName, info);
+solrClient.commit(coreName, true, true); 
+//查询数据
+QueryResponse response = solrClient.query(coreName, solrParams);
+List&lt;Info&gt; beans = response.getBeans(Info.class);</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#查询参数">查询参数</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#处理查询结果">处理查询结果</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#添加">添加</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#删除">删除</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#通过Java对象操作">通过Java对象操作</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

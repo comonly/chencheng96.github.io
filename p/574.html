@@ -1,0 +1,280 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>网站web标准，改善现有网页_comonly.cn</title>
+<meta name="keywords" content="网站web标准，改善现有网页" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">网站web标准，改善现有网页</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">w3cn</li>
+          <li class="lmname"><a href="http://www.w3cn.org/" target="_blank">http://www.w3cn.org/</a></li>
+          <li class="timer">2017-03-04</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">html,css,标准</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p><span style="font-size: 14.8px; line-height: 20.72px;">我们大部分的设计师依旧在采用传统的表格布局、表现与结构混杂在一起的方式来建立网站。学习使用XHTML+CSS的方法需要一个过程，使现有网站符合网站标准也不可能一步到位。最好的方法是循序渐进，分阶段来逐步达到完全符合网站标准的目标。如果你是新手，或者对代码不是很熟悉，也可以采用遵循标准的编辑工具，例如Dreamweaver MX 2004，它是目前支持CSS标准最完善的工具。</span><br>
+</p>
+<h4 style="font-size: 14.8px; line-height: 20.72px;">1．初级改善</h4>
+<ul style="font-size: 14.8px; line-height: 20.72px;">
+<li>为页面添加正确的DOCTYPE</li></ul>
+<p style="font-size: 14.8px; line-height: 20.72px;">很多设计师和开发者都不知道什么是DOCTYPE，DOCTYPE有什么用。DOCTYPE是document type的简写。主要用来说明你用的XHTML或者HTML是什么版本。浏览器根据你DOCTYPE定义的DTD(文档类型定义)来解释页面代码。所以，如果你不注意设置了错误的DOCTYPE，结果会让你大吃一惊。XHTML1.0提供了三种DOCTYPE可选择：</p>
+<p style="font-size: 14.8px; line-height: 20.72px;">(1)过渡型（Transitional ）</p>
+<p><span class="code" style="font-family: Verdana, 'Courier New', Courier, mono; font-size: 12px; line-height: 18px; margin: 5px; padding: 5px; width: 480px; border: 1px solid rgb(0, 153, 204); display: block; background-color: rgb(221, 237, 251);">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</span></p>
+<p style="font-size: 14.8px; line-height: 20.72px;">(2)严格型（Strict ）</p>
+<p><span class="code" style="font-family: Verdana, 'Courier New', Courier, mono; font-size: 12px; line-height: 18px; margin: 5px; padding: 5px; width: 480px; border: 1px solid rgb(0, 153, 204); display: block; background-color: rgb(221, 237, 251);">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;</span></p>
+<p style="font-size: 14.8px; line-height: 20.72px;">(3)框架型（Frameset ）</p>
+<p><span class="code" style="font-family: Verdana, 'Courier New', Courier, mono; font-size: 12px; line-height: 18px; margin: 5px; padding: 5px; width: 480px; border: 1px solid rgb(0, 153, 204); display: block; background-color: rgb(221, 237, 251);">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd"&gt;</span></p>
+<p style="font-size: 14.8px; line-height: 20.72px;">对于我们初级改善来说，只要选用过渡型的声明就可以了。它依然可以兼容你的表格布局、表现标识等，不至于让你觉得变化太大，难以掌握。</p>
+<p style="font-size: 14.8px; line-height: 20.72px;">Tip:你懒得输入上面过渡型代码的话，可以访问http://www.macromedia.com/网站的首页，然后查看源代码，把head区同样的代码拷贝粘贴就可以了。</p>
+<ul style="font-size: 14.8px; line-height: 20.72px;">
+<li>设定一个名字空间（Namespace）</li></ul>
+<p style="font-size: 14.8px; line-height: 20.72px;">直接在DOCTYPE声明后面添加如下代码：</p>
+<p><span class="code" style="font-family: Verdana, 'Courier New', Courier, mono; font-size: 12px; line-height: 18px; margin: 5px; padding: 5px; width: 480px; border: 1px solid rgb(0, 153, 204); display: block; background-color: rgb(221, 237, 251);">&lt;html XMLns="http://www.w3.org/1999/xhtml" &gt;</span></p>
+<p style="font-size: 14.8px; line-height: 20.72px;">一个namespace是收集元素类型和属性名字的一个详细的DTD，namespace声明允许你通过一个在线地址指向来识别你的namespace。只要照样输入代码就可以。</p>
+<ul style="font-size: 14.8px; line-height: 20.72px;">
+<li>声明你的编码语言</li></ul>
+<p style="font-size: 14.8px; line-height: 20.72px;">为了被浏览器正确解释和通过标识校验，所有的XHTML文档都必须声明它们所使用的编码语言。代码如下：</p>
+<p><span class="code" style="font-family: Verdana, 'Courier New', Courier, mono; font-size: 12px; line-height: 18px; margin: 5px; padding: 5px; width: 480px; border: 1px solid rgb(0, 153, 204); display: block; background-color: rgb(221, 237, 251);">&lt;meta http-equiv="Content-Type" content="text/html; charset=GB2312" /&gt;</span></p>
+<p style="font-size: 14.8px; line-height: 20.72px;">这里声明的编码语言是简体中文GB2312，你如果需要制作繁体内容，可以定义为BIG5。</p>
+<ul style="font-size: 14.8px; line-height: 20.72px;">
+<li>用小写字母书写所有的标签</li></ul>
+<p style="font-size: 14.8px; line-height: 20.72px;">XML对大小写是敏感的，所以，XHTML也是大小写有区别的。所有的XHTML元素和属性的名字都必须使用小写。否则你的文档将被W3C校验认为是无效的。例如下面的代码是不正确的：</p>
+<p><span class="code" style="font-family: Verdana, 'Courier New', Courier, mono; font-size: 12px; line-height: 18px; margin: 5px; padding: 5px; width: 480px; border: 1px solid rgb(0, 153, 204); display: block; background-color: rgb(221, 237, 251);">&lt;TITLE&gt;公司简介&lt;/TITLE&gt;</span></p>
+<p style="font-size: 14.8px; line-height: 20.72px;">正确的写法是：</p>
+<p><span class="code" style="font-family: Verdana, 'Courier New', Courier, mono; font-size: 12px; line-height: 18px; margin: 5px; padding: 5px; width: 480px; border: 1px solid rgb(0, 153, 204); display: block; background-color: rgb(221, 237, 251);">&lt;title&gt;公司简介&lt;/title&gt;</span><span style="font-size: 14.8px; line-height: 20.72px;">同样的，&lt;P&gt;改成&lt;p&gt;，&lt;B&gt;改成&lt;b&gt;等等。这步转换很简单。</span></p>
+<ul style="font-size: 14.8px; line-height: 20.72px;">
+<li>为图片添加 alt 属性</li></ul>
+<p style="font-size: 14.8px; line-height: 20.72px;">为所有图片添加alt属性。alt属性指定了当图片不能显示的时候就显示供替换文本，这样做对正常用户可有可无，但对纯文本浏览器和使用屏幕阅读机的用户来说是至关重要的。只有添加了alt属性，代码才会被W3C正确性校验通过。注意的是我们要添加有意义的alt属性，象下面这样的写法毫无意义：</p>
+<p><span class="code" style="font-family: Verdana, 'Courier New', Courier, mono; font-size: 12px; line-height: 18px; margin: 5px; padding: 5px; width: 480px; border: 1px solid rgb(0, 153, 204); display: block; background-color: rgb(221, 237, 251);">&lt;img src="logo_unc_120x30.gif" alt="logo_unc_120x30.gif"&gt;</span></p>
+<p style="font-size: 14.8px; line-height: 20.72px;">正确的写法：</p>
+<p><span class="code" style="font-family: Verdana, 'Courier New', Courier, mono; font-size: 12px; line-height: 18px; margin: 5px; padding: 5px; width: 480px; border: 1px solid rgb(0, 153, 204); display: block; background-color: rgb(221, 237, 251);">&lt;img src="logo_unc_120x30.gif" alt="UNC公司标志，点击返回首页"&gt;</span></p>
+<ul style="font-size: 14.8px; line-height: 20.72px;">
+<li>给所有属性值加引号</li></ul>
+<p style="font-size: 14.8px; line-height: 20.72px;">在HTML中，你可以不需要给属性值加引号，但是在XHTML中，它们必须被加引号。</p>
+<p style="font-size: 14.8px; line-height: 20.72px;">例：height="100"，而不能是height=100。</p>
+<ul style="font-size: 14.8px; line-height: 20.72px;">
+<li>关闭所有的标签</li></ul>
+<p style="font-size: 14.8px; line-height: 20.72px;">在XHTML中，每一个打开的标签都必须关闭。就象这样：</p>
+<p><span class="code" style="font-family: Verdana, 'Courier New', Courier, mono; font-size: 12px; line-height: 18px; margin: 5px; padding: 5px; width: 480px; border: 1px solid rgb(0, 153, 204); display: block; background-color: rgb(221, 237, 251);">&lt;p&gt;每一个打开的标签都必须关闭。&lt;/p&gt;</span><span class="code" style="font-family: Verdana, 'Courier New', Courier, mono; font-size: 12px; line-height: 18px; margin: 5px; padding: 5px; width: 480px; border: 1px solid rgb(0, 153, 204); display: block; background-color: rgb(221, 237, 251);">&lt;b&gt;HTML可以接受不关闭的标，XHTML就不可以。&lt;/b&gt;</span></p>
+<p style="font-size: 14.8px; line-height: 20.72px;">这个规则可以避免HTML的混乱和麻烦。举例来说：如果你不关闭图像标签，在一些浏览器中就可能出现CSS显示问题。用这种方法能确保页面和你设计的一样显示。需要说明的是：空标签也要关闭，在标签尾部使用一个正斜杠"/"来关闭它们自己。例如：</p>
+<p><span class="code" style="font-family: Verdana, 'Courier New', Courier, mono; font-size: 12px; line-height: 18px; margin: 5px; padding: 5px; width: 480px; border: 1px solid rgb(0, 153, 204); display: block; background-color: rgb(221, 237, 251);">&lt;br /&gt;</span><span class="code" style="font-family: Verdana, 'Courier New', Courier, mono; font-size: 12px; line-height: 18px; margin: 5px; padding: 5px; width: 480px; border: 1px solid rgb(0, 153, 204); display: block; background-color: rgb(221, 237, 251);">&lt;img src="webstandards.gif" /&gt;</span></p>
+<p style="font-size: 14.8px; line-height: 20.72px;">经过上述七个规则处理后，页面就基本符合XHTML1.0的要求。但我们还需要校验一下是否真的符合标准了。我们可以利用W3C提供免费校验服务（http://validator.w3.org/）。发现错误后逐个修改。在后面的资源列表中我们也提供了其他校验服务和对校验进行指导的网址，可以作为W3C校验的补充。当最后通过了XHTML验证，恭喜你已经向网站标准迈出了一大步。不是想象中的那么难吧！</p>
+<h4 style="font-size: 14.8px; line-height: 20.72px;">2．中级改善</h4>
+<p style="font-size: 14.8px; line-height: 20.72px;">接下来我们的改善主要在结构和表现相分离上，这一步不象第一步那么容易实现，我们需要观念上的转变，以及对CSS2技术的学习和运用。但学习任何新知识都需要花点时间的，不是吗？诀窍在于边做边学。假如你一直采用表格布局，根本没用过 CSS，也不必急于跟表格布局说再见，你可以先用样式表代替 font 标签。随着你学到的越多，你能做的就越多。好，一起来看看我们需要做哪些事：</p>
+<ul style="font-size: 14.8px; line-height: 20.72px;">
+<li>用CSS定义元素外观</li></ul>
+<p style="font-size: 14.8px; line-height: 20.72px;">我们在写标识时已经养成习惯，当希望字体大点就用&lt;h1&gt;，希望在前面加个点符号就用&lt;li&gt;。我们总是想&lt; h1&gt;的意思是大的，&lt;li&gt;的意思是圆点，&lt;b&gt;的意思是“加粗文本”。而实际上， &lt;h1&gt;能变成你想要的任何样子，通过CSS，&lt;h1&gt;能变成小的字体，&lt;p&gt;文本能够变成巨大的、粗体的， &lt;li&gt;能够变成一张图片等等。我们不能强迫用结构元素实现表现效果，我们应该使用CSS来确定那些元素的外观。例如，我们可以使原来默认的 6级标题可以看起来大小一样：</p>
+<p><span class="code" style="font-family: Verdana, 'Courier New', Courier, mono; font-size: 12px; line-height: 18px; margin: 5px; padding: 5px; width: 480px; border: 1px solid rgb(0, 153, 204); display: block; background-color: rgb(221, 237, 251);">h1, h2, h3, h4, h5, h6{ font-family: 宋体, serif; font-size: 12px; }</span></p>
+<ul style="font-size: 14.8px; line-height: 20.72px;">
+<li>用结构化元素代替无意义的垃圾</li></ul>
+<p style="font-size: 14.8px; line-height: 20.72px;">许多人可能从来都不知道HTML和XHTML元素设计本意是用来表达结构的。我们很多人已经习惯用元素来控制表现，而不是结构。例如，一段列表内容可能会使用下面这样的标识：</p>
+<p><span class="code" style="font-family: Verdana, 'Courier New', Courier, mono; font-size: 12px; line-height: 18px; margin: 5px; padding: 5px; width: 480px; border: 1px solid rgb(0, 153, 204); display: block; background-color: rgb(221, 237, 251);">句子一&lt;br /&gt; 句子二&lt;br /&gt; 句子三&lt;br /&gt;</span></p>
+<p style="font-size: 14.8px; line-height: 20.72px;">如果我们采用一个无序列表代替会更好：</p>
+<p><span class="code" style="font-family: Verdana, 'Courier New', Courier, mono; font-size: 12px; line-height: 18px; margin: 5px; padding: 5px; width: 480px; border: 1px solid rgb(0, 153, 204); display: block; background-color: rgb(221, 237, 251);">&lt;ul&gt; &lt;li&gt;句子一&lt;/li&gt; &lt;li&gt;句子二&lt;/li&gt; &lt;li&gt;句子三&lt;/li&gt; &lt;/ul&gt;</span></p>
+<p style="font-size: 14.8px; line-height: 20.72px;">你或许会说“但是&lt;li&gt;显示的是一个圆点，我不想用圆点”。事实上，CSS没有设定元素看起来是什么样子，你完全可以用CSS关掉圆点。</p>
+<ul style="font-size: 14.8px; line-height: 20.72px;">
+<li>给每个表格和表单加上id</li></ul>
+<p style="font-size: 14.8px; line-height: 20.72px;">给表格或表单赋予一个唯一的、结构的标记，例如</p>
+<p><span class="code" style="font-family: Verdana, 'Courier New', Courier, mono; font-size: 12px; line-height: 18px; margin: 5px; padding: 5px; width: 480px; border: 1px solid rgb(0, 153, 204); display: block; background-color: rgb(221, 237, 251);">&lt;table id="menu"&gt;</span></p>
+<p style="font-size: 14.8px; line-height: 20.72px;">接下来，在书写样式表的时候，你就可以创建一个“menu”的选择器，并且关联一个CSS规则，用来告诉表格单元、文本标签和所有其他元素怎么去显示。这样，不需要对每个%lt;td&gt;标签附带一些多余的、占用带宽的表现层的高、宽、对齐和背景颜色等等属性。只需要一个附着的标记（标记 “menu”的id标记），你就可以在一个分离的样式表内为干净的、紧凑的代码标记进行特别的表现层处理。</p>
+<p style="font-size: 14.8px; line-height: 20.72px;">中级改善我们这里先列主要的三点，但其中包含的内容和知识点非常多，需要我们逐步学习和掌握，直到最后实现完全采用CSS而不才用任何表格实现布局。</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/573.html">框架—HTML基础知识</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/575.html">css样式表基础</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="http://www.w3cn.org/" target="_blank">http://www.w3cn.org/</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

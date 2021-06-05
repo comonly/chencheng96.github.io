@@ -1,0 +1,896 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Python正则表达式_comonly.cn</title>
+<meta name="keywords" content="Python正则表达式" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Python正则表达式</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-02-27</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	python  perl
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	正则表达式（regexes）是使用mini-language定义的，Python包含的re模块可用无缝的创建并使用regexes。
+</p>
+<h4>
+	Regexes主要有5种用途：
+</h4>
+<ol>
+	<li>
+		分析：识别并提取符合特定标准的文本——正则表达式用于创建各种情况的分析器，包括传统的分析工具。
+	</li>
+	<li>
+		搜索：定位可以有不止一种形式的子字符串，比如搜索"pet.png", "pet.jpg"中的任意一种，或相似的形式。
+	</li>
+	<li>
+		搜索与替代：使用一个字符串对与regexe匹配的对象进行替代。
+	</li>
+	<li>
+		字符串分割：在与regex匹配的地方对字符串进行分割。
+	</li>
+	<li>
+		验证：检测某段文本是否符合某些标准。
+	</li>
+</ol>
+<h2 id='正则表达式语言'>
+	正则表达式语言
+</h2>
+<h4>
+	字符与字符类
+</h4>
+<p>
+	最简单的表达式就是字面意义上的字符，比如a和5，如果没有指定量词，就匹配一次。
+</p>
+<p>
+	对于regex中的特殊字符，必须进行转义处理，即在前面加一个反斜线（\），以便体现字符的字面意义。特殊字符包括 \.^$?+*{}[]()|。Python大多数标准字符转义也可以应用于regexes中，比如\n, \t...
+</p>
+<p>
+	如果不是匹配某个特定的字符，而是字符集中的任意一个。可以使用包含在一个方括号（[]）中的一个或多个字符实现，这样的一个字符类是一个表达式，如果没显示的指定量词，就只匹配一个字符（字符类中的任意一个字符）。比如r[ea]d只能匹配rea和rad而不能匹配read。 可以使用连字符指定某个范围的字符，比如[0-9]可以匹配任意一个数字，[^0-9]可以匹配任意非数字的字符。
+</p>
+<p>
+	在一个字符类内部，除\外，特殊字符不再具有特殊含义。不过有特殊的情况：
+</p>
+<ul>
+	<li>
+		^如果在字符类的第一个字符，表示其特殊含义否定，其他情况下表现其字面含义
+	</li>
+	<li>
+		-表示一个字符范围，如果作为字符类的第一个字符，表现其字面含义。
+	</li>
+	<li>
+		. 是字符类外的一个速记形式，在字符类内匹配其字面意义。
+	</li>
+</ul>
+<p>
+	对那些频繁使用的字符集，具有一些速记形式：
+</p>
+<p>
+	<table border="1" cellspacing="0" bordercolor="#000000">
+		<tbody>
+			<tr>
+				<td>
+					符号
+				</td>
+				<td>
+					含义
+				</td>
+			</tr>
+			<tr>
+				<td>
+					.
+				</td>
+				<td>
+					可以匹配除换行符之外的任意字符，或者带re.DOTALL标记的任意字符，或匹配字符内部的字面意义
+				</td>
+			</tr>
+			<tr>
+				<td>
+					\d
+				</td>
+				<td>
+					匹配一个Unicode数字，或带re.ASCII标记的[0-9]
+				</td>
+			</tr>
+			<tr>
+				<td>
+					\D
+				</td>
+				<td>
+					匹配一个Unicode非数字，或带re.ASCII标记的[^0-9]<br />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					\s
+				</td>
+				<td>
+					匹配Unicode空白，或带re.ASCII标记的[\t\n\r\f\v]<br />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					\S
+				</td>
+				<td>
+					匹配Unicode非空白，或带re.ASCII标记的[\t\n\r\f\v]<br />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					\w
+				</td>
+				<td>
+					匹配一个Unicode单词字符，或带re.ASCII标记的[^a-zA-Z0-9]<br />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					\W
+				</td>
+				<td>
+					匹配一个Unicode非单词字符，或带re.ASCII标记的[^a-zA-Z0-9]<br />
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</p>
+<h4>
+	量词
+</h4>
+<p>
+	量词形式为{m,n}，其中m,n分别表示该量词表达式必须匹配的最少和最多次数。比如e{2,2}可以匹配feel,但是不能匹配felt。
+</p>
+<p>
+	如果量词中只给定一个数字，那么该数字同时作为最小值和最大值。比如e{2,2}与e{2}等价。
+</p>
+<p>
+	对于常见的量词有其速记形式：
+</p>
+<ul>
+	<li>
+		+表示{1,n}（至少一次）。比如\d+可以匹配任意整数
+	</li>
+	<li>
+		*表示{0,n}（任意次数）。比如#*可以匹配任意行包括空白
+	</li>
+	<li>
+		?表示{0,1}
+	</li>
+</ul>
+<p>
+	<table border="1" cellspacing="0" bordercolor="#000000">
+		<tbody>
+			<tr>
+				<td>
+					语法
+				</td>
+				<td>
+					含义
+				</td>
+			</tr>
+			<tr>
+				<td>
+					e? or e{0,1}
+				</td>
+				<td>
+					贪婪地匹配表达式e的0次或一次出现
+				</td>
+			</tr>
+			<tr>
+				<td>
+					e?? or e{0,1}?
+				</td>
+				<td>
+					非贪婪地匹配表达式e e+或e{1,}的0次或1次出现，贪婪地匹配表达式e的1次或多次出现
+				</td>
+			</tr>
+			<tr>
+				<td>
+					e+? or e{1,}?
+				</td>
+				<td>
+					<span>非贪婪地匹配表达式e的1次或多次出现</span><br />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					e* or e{0,}
+				</td>
+				<td>
+					<span>贪婪地匹配表达式e的0次或一次出现</span><br />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					e*? or e{0,}?
+				</td>
+				<td>
+					<span>非贪婪地匹配表达式e的0次或多次出现</span><br />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					e{m}
+				</td>
+				<td>
+					准确匹配表达式e的m次出现
+				</td>
+			</tr>
+			<tr>
+				<td>
+					e{m,}
+				</td>
+				<td>
+					<span>贪婪地匹配表达式e的至少m次出现</span><br />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					e{m,}?
+				</td>
+				<td>
+					<span>非贪婪地匹配表达式e的至少m次出现</span><span></span><br />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					e{,n}
+				</td>
+				<td>
+					<span>贪婪地匹配表达式e的至多n次出现</span><span></span><br />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					e{,n}?
+				</td>
+				<td>
+					<span>非贪婪地匹配表达式e的至多n次出现</span><span></span><br />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					e{m,n}
+				</td>
+				<td>
+					贪婪的匹配表达式e的至少m次，至多n次出现
+				</td>
+			</tr>
+			<tr>
+				<td>
+					e{m,n}?
+				</td>
+				<td>
+					<span>非贪婪的匹配表达式e的至少m次，至多n次出现</span><br />
+				</td>
+			</tr>
+		</tbody>
+	</table>
+默认情况，所有量词都是贪婪的——总会匹配尽可能多的字符（像\d+可以匹配123），通过在量词后跟随一个符号 ? 可以将任意量词转换为非贪婪的（也称最小化）（比如\d+?对于123会匹配3个位置1,2,3）。
+</p>
+<h4>
+	组与捕获
+</h4>
+<p>
+	匹配多个方案中的任意内容，或者将某个量词应用于多个表达式，可以使用()进行组合完成。在多种方案中选一个的情况使用交替字符|。比如air(craft|plane)|jet可以用来表示aircraft|airplane|jet相同的含义。圆括号对表达式进行分组。
+</p>
+<p>
+	圆括号可以实现两种不同的目标——对表达式进行组合，捕获匹配某个表达式的文本。
+</p>
+<p>
+	对于air(craft|plane)|jet如果第一个表达式匹配，那么aircraft或airplane将作为第一次捕获，craft或plane作为第二次捕获。如果有表达式匹配jet就有一次捕获。通过在左括号后面跟随一个 ?: 可以关闭捕获效果（air(?:craft|plane)|jet在匹配时，aircraft，airplane或jet只有一次捕获）
+</p>
+<p>
+	对多次捕获（比如键值对），对于前面的捕获，可以通过反向引用对其进行引用（对前面的捕获组进行引用），反向引用不能在字符类（[]）内部使用。反向引用是在正则表达式本身内部使用\i，这里i是前面的捕获组号。每次捕获进行编号，从1开始。每次新捕获到一个左圆括号时进行一次新的捕获编号。(\w+)\s+\1，可以匹配一个单词，之后至少一个空白字符，再之后是和捕获单词相同的单词。
+</p>
+<p>
+	也可以对捕获进行命名而不是编号。可以在左圆括号后面跟随 ?P。对于命名捕获的反向引用是(?P=name)。(?P\w+)\s+(?P=word)可以使用“word”的捕获来匹配重复的单词。
+</p>
+<h4>
+	断言与标记
+</h4>
+<p>
+	\b（word边界）是一种断言，含义是要求在其之前的字符必须是一个单词（\w），其后跟随的一定是一个非单词（\W）。比如\bjet\b匹配文本“the jet jetski are noisy”将子匹配jet单词。
+</p>
+<p>
+	<table border="1" cellspacing="0" bordercolor="#000000">
+		<tbody>
+			<tr>
+				<td>
+					正则表达式断言符号
+				</td>
+				<td>
+					含义
+				</td>
+			</tr>
+			<tr>
+				<td>
+					^
+				</td>
+				<td>
+					在起始处匹配，也可以在带MULTILINE标记的每个换行符后匹配
+				</td>
+			</tr>
+			<tr>
+				<td>
+					$
+				</td>
+				<td>
+					<span>在结尾处匹配，也可以在带MULTILINE标记的每个换行符前匹配</span><br />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					\A
+				</td>
+				<td>
+					在起始处匹配
+				</td>
+			</tr>
+			<tr>
+				<td>
+					\b
+				</td>
+				<td>
+					在单词边界匹配，受re.ASCII标记影响——在字符类内部，则是backspace字符的转义字符
+				</td>
+			</tr>
+			<tr>
+				<td>
+					\B
+				</td>
+				<td>
+					<span>在非单词边界匹配，受re.ASCII标记影响</span><br />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					\Z
+				</td>
+				<td>
+					在结尾处匹配
+				</td>
+			</tr>
+			<tr>
+				<td>
+					(?=e)
+				</td>
+				<td>
+					如果表达式e在次断言处匹配，但没有超越此处——称为前瞻或正前瞻，则匹配
+				</td>
+			</tr>
+			<tr>
+				<td>
+					(?!e)
+				</td>
+				<td>
+					<span>如果表达式e在次断言处不匹配，也没有超越此处——称为负前瞻，则匹配</span><br />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					(?&lt;=e)
+				</td>
+				<td>
+					<span>如果表达式e恰在本断言之前匹配——称为正回顾，则匹配</span><br />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					(?&lt;!e)
+				</td>
+				<td>
+					<span>如果表达式e恰在本断言之前不匹配——称为负回顾，则匹配</span><br />
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</p>
+<p>
+	为使正则表达式便于理解与维护，可以在其中包含注释(?#the comment)添加内联注释。另一种更好的解决方案是使用re.VERBOSE标记（该标记允许我们在正则表达式中自由地使用空白与通常的Python注释，但存在一个约束，即如果需要匹配空白字符，必须使用\s或字符类[ ]）。
+</p>
+<p>
+	下面是一些带注释的key=value表达式，一般用"""引起这样不需要双写反斜线，并且可以跨多行
+</p>
+<pre class="prettyprint lang-py">"""
+^[\t]*      #start of line and optional leading whitespace
+(?P&lt;key&gt;\w+)   #the key text
+[\t]*=[\t]*    #the equals with optional surrounding whitespace
+(?P&lt;value&gt;[^\n]+) #the value text
+(?&lt;![\t])   #negative lookbehind to avoid trailing whitespace
+
+"""</pre>
+<p>
+	还有一些附加断言可以查看断言前后的文本，以便确定其是否与我们指定的表达式匹配。可以用于后顾断言的表达式必须是固定长度（故一些量词不能使用）。
+</p>
+<h2 id='正则表达式模块'>
+	正则表达式模块
+</h2>
+<p>
+	re模块提供了两种操纵正则表达式的方法，一种是使用正则表达式模块的函数，每个函数都将正则表达式转换为一种内部格式（编译）之后进一步处理。
+</p>
+<p>
+	如果需要重复使用某一表达式，就可以先对其编译，之后直接使用编译后的表达式：
+</p>
+<pre class="prettyprint lang-py">import re
+color_re=re.compile(r"#[\da-fA-F]{6}\b")
+match=color_re.search("text#111aac")
+print(match)
+运行结果：
+&lt;_sre.SRE_Match object; span=(4, 11), match='#111aac'&gt;</pre></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/864.html">Python数据库设计</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/866.html">c++ 知识点待巩固</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="">
+							<h2 style="display:inline;color:#5BC648;"></h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-02-27&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><h4>
+	Python正则表达式模块的函数
+</h4>
+<table border="1" class="" cellspacing="0" bordercolor="#000000">
+	<tbody>
+		<tr>
+			<td>
+				正则表达式函数
+			</td>
+			<td>
+				释义
+			</td>
+		</tr>
+		<tr>
+			<td>
+				re.match(r,s,f)
+			</td>
+			<td>
+				从头开始匹配，匹配失败返回None,匹配成功可通过group(0)返回匹配成功的字符串
+			</td>
+		</tr>
+		<tr>
+			<td>
+				re.search(r,s,f)
+			</td>
+			<td>
+				扫描整个字符串，并返回第一个匹配的字符串
+			</td>
+		</tr>
+		<tr>
+			<td>
+				re.sub(r,x,s,m)
+			</td>
+			<td>
+				对正则表达式r的每次匹配（最多m次），返回字符串s的一个副本，并将其替换为x。对符合要求的所有子串进行替换
+			</td>
+		</tr>
+		<tr>
+			<td>
+				re.findall(r,s,f)
+			</td>
+			<td>
+				返回正则表达式r在字符串s中所有非交叠的匹配，每次匹配作为一个匹配元组返回。
+			</td>
+		</tr>
+		<tr>
+			<td>
+				re.split(r,s,f)
+			</td>
+			<td>
+				以模式作为切分符号切分字符串，并返回列表
+			</td>
+		</tr>
+		<tr>
+			<td>
+				re.finditer()
+			</td>
+			<td>
+				正则表达式r在字符串s中所有非交叠的匹配，都返回一个匹配对象，把它们作为一个迭代器返回
+			</td>
+		</tr>
+		<tr>
+			<td>
+				re.compile(r,f)
+			</td>
+			<td>
+				返回编译后的正则表达式r，如果指定将标记设为f
+			</td>
+		</tr>
+		<tr>
+			<td>
+				re.group()
+			</td>
+			<td>
+				返回被 RE 匹配的字符串
+			</td>
+		</tr>
+		<tr>
+			<td>
+				re.start()
+			</td>
+			<td>
+				返回匹配开始的位置
+			</td>
+		</tr>
+		<tr>
+			<td>
+				re.end()
+			</td>
+			<td>
+				返回匹配结束的位置
+			</td>
+		</tr>
+		<tr>
+			<td>
+				re.span()
+			</td>
+			<td>
+				返回一个元组包含匹配 (开始,结束) 的位置<br />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				re.escape(s)
+			</td>
+			<td>
+				返回字符串s,其中所有非字母数字的字符都使用反斜线进行了转义处理。因此，返回的字符串中没有特殊的正则表达式字符
+			</td>
+		</tr>
+	</tbody>
+</table>
+<h4>
+	Python正则表达式模块的标记
+</h4>
+<table cellspacing="0" border="1" bordercolor="#000000">
+	<tbody>
+		<tr>
+			<td>
+				re.A、 re.ASCII
+			</td>
+			<td>
+				使\b, \B, \s, \S, \w, \W都假定字符串为ASCII，默认为这些字符类的速记法，依赖于Unicode规范
+			</td>
+		</tr>
+		<tr>
+			<td>
+				re.I、&nbsp;re.IGNORECASE
+			</td>
+			<td>
+				不区分大小写的匹配
+			</td>
+		</tr>
+		<tr>
+			<td>
+				re.L、&nbsp;re.LOCALE
+			</td>
+			<td>
+				根据所使用的本地语言环境通过\w、\W、\b、\B、\s、\S实现匹配
+			</td>
+		</tr>
+		<tr>
+			<td>
+				re.M、&nbsp;re.MULTILINE
+			</td>
+			<td>
+				^和$分别匹配目标字符串中行的起始和结尾，而不是严格匹配整个字符串本身的起始和结尾
+			</td>
+		</tr>
+		<tr>
+			<td>
+				re.S、&nbsp;rer.DOTALL
+			</td>
+			<td>
+				“.” （点号）通常匹配除了\n（换行符）之外的所有单个字符；该标记表示“.” （点号）能够匹配全部字符
+			</td>
+		</tr>
+		<tr>
+			<td>
+				re.X、&nbsp;re.VERBOSE
+			</td>
+			<td>
+				通过反斜线转义， 否则所有空格加上#（以及在该行中所有后续文字）都被忽略，除非在一个字符类中或者允许注释并且提高可读性
+			</td>
+		</tr>
+	</tbody>
+</table>
+<h4>
+	Python正则表达式对象方法
+</h4>
+<table cellspacing="0" border="1" bordercolor="#000000">
+	<tbody>
+		<tr>
+			<td>
+				match(pattern，string，flags=0)
+			</td>
+			<td>
+				尝试使用带有可选的标记的正则表达式的模式来匹配字符串。如果匹配成功，就返回匹配对象； 如果失败，就返回&nbsp;None
+			</td>
+		</tr>
+		<tr>
+			<td>
+				search(pattern，string，flags=0)
+			</td>
+			<td>
+				使用可选标记搜索字符串中第一次出现的正则表达式模式。 如果匹配成功，则返回匹配对象； 如果失败，则返回&nbsp;None
+			</td>
+		</tr>
+		<tr>
+			<td>
+				findall(pattern，string[, flags] )①
+			</td>
+			<td>
+				查找字符串中所有（非重复）出现的正则表达式模式，并返回一个匹配列表
+			</td>
+		</tr>
+		<tr>
+			<td>
+				finditer(pattern，string[, flags] )②
+			</td>
+			<td>
+				与&nbsp;findall()函数相同，但返回的不是一个列表，而是一个迭代器。 对于每一次匹配，迭代器都返回一个匹配对象
+			</td>
+		</tr>
+		<tr>
+			<td>
+				split(pattern，string，max=0)③
+			</td>
+			<td>
+				根据正则表达式的模式分隔符，&nbsp;split函数将字符串分割为列表，然后返回成功匹配的列表，分隔最多操作&nbsp;max&nbsp;次（默认分割所有匹配成功的位置）
+			</td>
+		</tr>
+		<tr>
+			<td>
+				sub(pattern，repl，string，count=0)③
+			</td>
+			<td>
+				使用&nbsp;repl&nbsp;替换所有正则表达式的模式在字符串中出现的位置，除非定义&nbsp;count， 否则就将替换所有出现的位置（ 另见&nbsp;subn()函数，该函数返回替换操作的数目）
+			</td>
+		</tr>
+		<tr>
+			<td>
+				rx.subn(x,s,m)
+			</td>
+			<td>
+				与sub()相同，区别在于返回的是二元组，其中一项是结果字符串，一项是所做替换的个数
+			</td>
+		</tr>
+		<tr>
+			<td>
+				purge()
+			</td>
+			<td>
+				清除隐式编译的正则表达式模式
+			</td>
+		</tr>
+		<tr>
+			<td>
+				rx.flags
+			</td>
+			<td>
+				正则表达式编译时设置的标记
+			</td>
+		</tr>
+		<tr>
+			<td>
+				rx.groupindex
+			</td>
+			<td>
+				一个字典，其键位捕获组名，值为捕获组编号，如果没有使用名称就为空
+			</td>
+		</tr>
+		<tr>
+			<td>
+				rx.pattern
+			</td>
+			<td>
+				正则表达式被编译时使用的字符串
+			</td>
+		</tr>
+	</tbody>
+</table></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#正则表达式语言">正则表达式语言</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#正则表达式模块">正则表达式模块</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,441 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>利用URL重写实现参数目录化—实例_comonly.cn</title>
+<meta name="keywords" content="利用URL重写实现参数目录化—实例" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">利用URL重写实现参数目录化—实例</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">左直拳_C博客</li>
+          <li class="lmname"><a href="http://blog.csdn.net/leftfist/article/details/9283141" target="_blank">http://blog.csdn.net/leftfist/article/details/9283141</a></li>
+          <li class="timer">2017-03-30</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	javaweb---jsp asp数据库框架
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">URL,重写</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	用微软的&nbsp;Microsoft URL 重写模块 2.0，但只能给IIS7使用，IIS6不行。
+</p>
+<p>
+	64位：<a target="_blank" href="http://www.microsoft.com/downloads/zh-cn/details.aspx?familyid=1b8c7bd8-8824-4408-b8fc-49dc7f951a00">http://www.microsoft.com/downloads/zh-cn/details.aspx?familyid=1b8c7bd8-8824-4408-b8fc-49dc7f951a00</a> 
+</p>
+<p>
+	32位：<a target="_blank" href="http://www.microsoft.com/zh-cn/download/details.aspx?id=5747">http://www.microsoft.com/zh-cn/download/details.aspx?id=5747</a>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	安装好之后，就可以改写网站下的web.config了。
+</p>
+<p>
+	&lt;configuration&gt;<br />
+&nbsp; &lt;system.web&gt;<br />
+&nbsp; &nbsp; &lt;compilation debug="true" targetFramework="4.0"/&gt;<br />
+&nbsp; &nbsp; &lt;httpRuntime/&gt;<br />
+&nbsp; &lt;/system.web&gt;<br />
+&nbsp; &lt;system.webServer&gt;<br />
+&nbsp; &nbsp; &lt;rewrite&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;rules&gt;<br />
+&lt;!-- 实现http://localhost/1024 ==&gt; http://localhost/store/store.aspx?id=1024 --&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;rule name="storecode"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;match url="^([1-9][0-9]*)/?$" ignoreCase="true"/&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;action type="Rewrite" url="/store/store.aspx?id={R:1}"/&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;/rule&gt;<br />
+&lt;!-- 实现http://localhost/1024/p=1&amp;c=1 ==&gt; http://localhost/store/store.aspx?id=1024&amp;p=1&amp;c=1 --&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;rule name="storecode with param"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;match url="^([1-9][0-9]*)/([^/]+)/?$" ignoreCase="true"/&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;action type="Rewrite" url="/store/store.aspx?id={R:1}&amp;{R:2}"/&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;/rule&gt;<br />
+&lt;!-- 下面这些据说是从Discuz论坛里导出来的，肯定是正确的，供学习借鉴 --&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;!--<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;rule name="已导入的规则 1"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;match url="^userinfo-([0-9]+)\.html$" ignoreCase="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;action type="Rewrite" url="userinfo.aspx?userid={R:1}"&nbsp;<br />
+<br />
+appendQueryString="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/rule&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;rule name="已导入的规则 2"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;match url="^showforum-([0-9]+)\.html$" ignoreCase="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;action type="Rewrite" url="showforum.aspx?forumid={R:1}"&nbsp;<br />
+<br />
+appendQueryString="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/rule&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;rule name="已导入的规则 3"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;match url="^showtopic-([0-9]+)\.html$" ignoreCase="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;action type="Rewrite" url="showtopic.aspx?topicid={R:1}"&nbsp;<br />
+<br />
+appendQueryString="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/rule&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;rule name="已导入的规则 4"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;match url="^showforum-([0-9]+)-([0-9]+)\.html$" ignoreCase="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;action type="Rewrite" url="showforum.aspx?forumid={R:1}&amp;page=<br />
+<br />
+{R:2}" appendQueryString="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/rule&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;rule name="已导入的规则 5"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;match url="^showtopic-([0-9]+)-([0-9]+)\.html$" ignoreCase="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;action type="Rewrite" url="showtopic.aspx?topicid={R:1}&amp;page=<br />
+<br />
+{R:2}" appendQueryString="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/rule&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;rule name="已导入的规则 6"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;match url="^archiver/showforum-([0-9]+)\.html$" ignoreCase="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;action type="Rewrite" url="archiver/showforum.aspx?forumid={R:1}"&nbsp;<br />
+<br />
+appendQueryString="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/rule&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;rule name="已导入的规则 7"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;match url="^archiver/showtopic-([0-9]+)\.html$" ignoreCase="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;action type="Rewrite" url="archiver/showtopic.aspx?topicid={R:1}"&nbsp;<br />
+<br />
+appendQueryString="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/rule&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;rule name="已导入的规则 8"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;match url="^archiver/showtopic-([0-9]+)-([0-9]+)\.html$"&nbsp;<br />
+<br />
+ignoreCase="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;action type="Rewrite" url="archiver/showtopic.aspx?topicid={R:1}<br />
+<br />
+&amp;page={R:2}" appendQueryString="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/rule&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;rule name="已导入的规则 9"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;match url="^archiver/showforum-([0-9]+)-([0-9]+)\.html$"&nbsp;<br />
+<br />
+ignoreCase="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;action type="Rewrite" url="archiver/showforum.aspx?forumid={R:1}<br />
+<br />
+&amp;page={R:2}" appendQueryString="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/rule&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;rule name="已导入的规则 10"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;match url="^tools/rss-([0-9]+)\.html$" ignoreCase="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;action type="Rewrite" url="tools/rss.aspx?forumid={R:1}"&nbsp;<br />
+<br />
+appendQueryString="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/rule&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;rule name="已导入的规则 11"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;match url="^tools/spacerss-([0-9]+)\.html$" ignoreCase="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;action type="Rewrite" url="tools/rss.aspx?uid={R:1}&amp;type=space"&nbsp;<br />
+<br />
+appendQueryString="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/rule&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;rule name="已导入的规则 12"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;match url="^tools/photorss-([0-9]+)\.html$" ignoreCase="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;action type="Rewrite" url="tools/rss.aspx?uid={R:1}&amp;type=photo"&nbsp;<br />
+<br />
+appendQueryString="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/rule&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;rule name="已导入的规则 13"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;match url="^space\/((\w|\s)+)((\/?))?$" ignoreCase="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;action type="Rewrite" url="space/index.aspx?user={R:1}"&nbsp;<br />
+<br />
+appendQueryString="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/rule&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;rule name="已导入的规则 14"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;match url="^space\/((\w|\s|-)+)((\/?))?\?((.*)+)$" ignoreCase="false"&nbsp;<br />
+<br />
+/&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;action type="Rewrite" url="space/index.aspx?user={R:1}&amp;{R:5}"&nbsp;<br />
+<br />
+appendQueryString="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/rule&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;rule name="已导入的规则 15"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;match url="^showdebate-([0-9]+)\.html$" ignoreCase="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;action type="Rewrite" url="showdebate.aspx?topicid={R:1}"&nbsp;<br />
+<br />
+appendQueryString="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/rule&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;rule name="已导入的规则 16"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;match url="^showbonus-([0-9]+)\.html$" ignoreCase="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;action type="Rewrite" url="showbonus.aspx?topicid={R:1}"&nbsp;<br />
+<br />
+appendQueryString="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/rule&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;rule name="已导入的规则 17"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;match url="^postgoods-(\d+)*.html$" ignoreCase="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;action type="Rewrite" url="postgoods.aspx?categoryid={R:1}"&nbsp;<br />
+<br />
+appendQueryString="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/rule&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;rule name="已导入的规则 18"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;match url="^showgoodslist-(\d+)(-(\d+))?.html$" ignoreCase="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;action type="Rewrite" url="showgoodslist.aspx?categoryid={R:1}<br />
+<br />
+&amp;page={R:3}" appendQueryString="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/rule&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;rule name="已导入的规则 19"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;match url="^showgoods-(\d+)*.html$" ignoreCase="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;action type="Rewrite" url="showgoods.aspx?goodsid={R:1}"&nbsp;<br />
+<br />
+appendQueryString="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/rule&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;rule name="已导入的规则 20"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;match url="^install((\/?))?$" ignoreCase="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;action type="Rewrite" url="/install{R:1}" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/rule&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;rule name="已导入的规则 21"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;match url="^upgrade((\/?))?$" ignoreCase="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;action type="Rewrite" url="/upgrade{R:1}" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/rule&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;rule name="已导入的规则 22"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;match url="^aspx/([0-9]+)((\/?))?$" ignoreCase="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;action type="Rewrite" url="/aspx/{R:1}{R:2}" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/rule&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;rule name="已导入的规则 23"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;match url="^archiver((\/?))?$" ignoreCase="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;action type="Rewrite" url="/archiver{R:1}" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/rule&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;rule name="已导入的规则 24"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;match url="^space((\/?))?$" ignoreCase="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;action type="Rewrite" url="/space{R:1}" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/rule&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;rule name="已导入的规则 25"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;match url="^doc((\/?))?$" ignoreCase="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;action type="Rewrite" url="/doc{R:1}" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/rule&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;rule name="已导入的规则 26"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;match url="^(([\w|\-|_])+)((\/?))?$" ignoreCase="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;action type="Rewrite" url="/{R:1}/list.aspx" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/rule&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;rule name="已导入的规则 27"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;match url="^(([\w|\-|_])+)((\/?))?\?(.)*$" ignoreCase="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;action type="Rewrite" url="/{R:1}/list.aspx?{R:2}"&nbsp;<br />
+<br />
+appendQueryString="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/rule&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;rule name="已导入的规则 28"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;match url="^(([\w|\-|_])+)/([0-9]+)((\/?))?$" ignoreCase="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;action type="Rewrite" url="/{R:1}/{R:3}/list.aspx" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/rule&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;rule name="已导入的规则 29"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;match url="^(([\w|\-|_])+)/([0-9]+)((\/?))?\?(.)*$" ignoreCase="false"&nbsp;<br />
+<br />
+/&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;action type="Rewrite" url="/{R:1}/{R:3}/list.aspx?{R:4}"&nbsp;<br />
+<br />
+appendQueryString="false" /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/rule&gt;<br />
+--&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/rules&gt;<br />
+&nbsp; &nbsp; &lt;/rewrite&gt;<br />
+&nbsp; &lt;/system.webServer&gt;<br />
+&lt;/configuration&gt;
+</p>
+<p>
+	<br />
+</p>
+<h2 style="font-size:1.7em;color:#CC0000;font-family:Verdana, Arial, Helvetica, sans-serif;background-color:#FFFFFF;">
+	HTTP 错误 404.0 - Not Found
+</h2>
+<h3 style="font-size:1.4em;color:#CC0000;font-family:Verdana, Arial, Helvetica, sans-serif;background-color:#FFFFFF;">
+	您要找的资源已被删除、已更名或暂时不可用。
+</h3>
+关键是要写对正则表达式，否则系统会报无法找到资源的404错误。
+<p>
+	同一站内的，就用Rewrite，目标页面在另一站点的，则用 Redirect。如
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;rule name="img show"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;match url="^showimg/([a-zA-Z_0-9]+)/([1-9][0-9]*)/?$" ignoreCase="true"/&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;action type="Redirect" url="http://localhost:8006/handler.ashx?{R:1}={R:2}"/&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/rule&gt;
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/659.html">IIS中URL重写工具的匹配URL-规则模式(rule patterns)</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/661.html">jquery uploadify插件多文件上传</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="http://blog.csdn.net/leftfist/article/details/9283141" target="_blank">http://blog.csdn.net/leftfist/article/details/9283141</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

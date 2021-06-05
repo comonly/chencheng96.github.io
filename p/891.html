@@ -1,0 +1,448 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>JavaWeb——filter,listener_comonly.cn</title>
+<meta name="keywords" content="JavaWeb——filter,listener" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">JavaWeb——filter,listener</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-03-26</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	javaweb---jsp asp数据库框架
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	Servlet中过滤器技术
+</p>
+<p>
+	https://blog.csdn.net/jpzhu16/article/details/52540857
+</p>
+<p>
+	https://www.oschina.net/question/565065_86538
+</p>
+<p>
+	https://blog.csdn.net/m0_38039437/article/details/75271692
+</p>
+<p>
+	https://www.cnblogs.com/jianjianyang/p/5001471.html
+</p>
+<p>
+	过滤器检测用户是否登录https://www.cnblogs.com/hemingwang0902/archive/2012/01/09/session-filter.html
+</p>
+<p>
+	<br />
+</p>
+<p>
+	Java中HttpServletRequest接口是ServletRequest子接口，HttpServletRequest接口遵循http协议。<br />
+相比于HttpServletRequest接口，ServletRequest的应用范围更加广泛，HttpServletRequest只适合在web开发中的http协议的请求，而ServletRequest则没有具体要求。<br />
+HttpServletRequest接口是继承自ServletRequest接口的。增加了和HTTP相关的一些方法。<br />
+而所谓的request（在JSP中使用的）其实只是规范中的一个名称而已。它当然是一个对象，但并不是SUN提供的，这是由各个不同的Servlet提供商编写的，SUN只是规定这个类要实现HttpServletRequest接口，并且规定了各个方法的用途，但具体是什么类是由各个提供商自己决定的。<br />
+ServletResponse与HttpServletResponse的同上
+</p>
+<p>
+	<br />
+</p>
+<p>
+	Filter过滤器中访问getSession()要转化
+</p>
+<p>
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {<br />
+HttpServletRequest req = (HttpServletRequest)request;<br />
+<span> </span>HttpServletResponse res = (HttpServletResponse)response;<br />
+<span> </span><br />
+<span> </span>User user = (User)req.getSession().getAttribute("user");<br />
+}
+</p>
+<div>
+	<br />
+</div>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	在一个web应用中，可以开发编写多个Filter，这些Filter组合起来称之为一个Filter链。<br />
+web服务器根据Filter在web.xml文件中的注册顺序，决定先调用哪个Filter，当第一个Filter的doFilter方法被调用时，web服务器会创建一个代表Filter链的FilterChain对象传递给该方法。在doFilter方法中，开发人员如果调用了FilterChain对象的doFilter方法，则web服务器会检查FilterChain对象中是否还有filter，如果有，则调用第2个filter，如果没有，则调用目标资源。<br />
+Filter链实验（查看filterChain API文档）<br />
+Filter的部署-注册Filter<br />
+&lt;filter&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;filter-name&gt;testFitler&lt;/filter-name&gt;<br />
+&nbsp; &nbsp; &lt;filter-class&gt;org.test.TestFiter&lt;/filter-class&gt;<br />
+&nbsp; &nbsp; &lt;init-param&gt;<br />
+&lt;param-name&gt;word_file&lt;/param-name&gt;<br />
+&lt;param-value&gt;/WEB-INF/word.txt&lt;/param-value&gt;<br />
+&nbsp; &nbsp; &lt;/init-param&gt;<br />
+&lt;/filter&gt;<br />
+1.&lt;filter-name&gt;用于为过滤器指定一个名字，该元素的内容不能为空。<br />
+2.&lt;filter-class&gt;元素用于指定过滤器的完整的限定类名。<br />
+3.&lt;init-param&gt;元素用于为过滤器指定初始化参数，它的子元素&lt;param-name&gt;指定参数的名字，&lt;param-value&gt;指定参数的值。在过滤器中，可以使用FilterConfig接口对象来访问初始化参数。<br />
+&lt;filter-mapping&gt;元素用于设置一个 Filter 所负责拦截的资源。一个Filter拦截的资源可通过两种方式来指定：Servlet 名称和资源访问的请求路径<br />
+&lt;filter-name&gt;子元素用于设置filter的注册名称。该值必须是在&lt;filter&gt;元素中声明过的过滤器的名字<br />
+&lt;url-pattern&gt;设置 filter 所拦截的请求路径(过滤器关联的URL样式)<br />
+&lt;servlet-name&gt;指定过滤器所拦截的Servlet名称。<br />
+&lt;dispatcher&gt;指定过滤器所拦截的资源被 Servlet 容器调用的方式，可以是REQUEST,INCLUDE,FORWARD和ERROR之一，默认REQUEST。用户可以设置多个&lt;dispatcher&gt; 子元素用来指定 Filter 对资源的多种调用方式进行拦截。<br />
+&lt;dispatcher&gt; 子元素可以设置的值及其意义：<br />
+REQUEST：当用户直接访问页面时，Web容器将会调用过滤器。如果目标资源是通过RequestDispatcher的include()或forward()方法访问时，那么该过滤器就不会被调用。<br />
+INCLUDE：如果目标资源是通过RequestDispatcher的include()方法访问时，那么该过滤器将被调用。除此之外，该过滤器不会被调用。<br />
+FORWARD：如果目标资源是通过RequestDispatcher的forward()方法访问时，那么该过滤器将被调用，除此之外，该过滤器不会被调用。<br />
+ERROR：如果目标资源是通过声明式异常处理机制调用时，那么该过滤器将被调用。除此之外，过滤器不会被调用。<br />
+Tip：Filter的部署—映射Filter示例：<br />
+&lt;filter-mapping&gt;<br />
+&nbsp; &nbsp; &nbsp;&lt;filter-name&gt;testFilter&lt;/filter-name&gt;<br />
+&nbsp; &nbsp; &nbsp;&lt;url-pattern&gt;/test.jsp&lt;/url-pattern&gt;<br />
+&lt;/filter-mapping&gt;<br />
+&lt;filter-mapping&gt;<br />
+&nbsp; &nbsp; &nbsp;&lt;filter-name&gt;testFilter&lt;/filter-name&gt;<br />
+&nbsp; &nbsp; &nbsp;&lt;url-pattern&gt;/index.jsp&lt;/url-pattern&gt;<br />
+&nbsp; &nbsp; &nbsp;&lt;dispatcher&gt;REQUEST&lt;/dispatcher&gt;<br />
+&nbsp; &nbsp; &nbsp;&lt;dispatcher&gt;FORWARD&lt;/dispatcher&gt;<br />
+&lt;/filter-mapping&gt;<br />
+FilterConfig接口:<br />
+用户在配置filter时，可以使用&lt;init-param&gt;为filter配置一些初始化参数，当web容器实例化Filter对象，调用其init方法时，会把封装了filter初始化参数的filterConfig对象传递进来。因此开发人员在编写filter时，通过filterConfig对象的方法，就可获得：<br />
+String getFilterName()：得到filter的名称。<br />
+String getInitParameter(String name)： 返回在部署描述中指定名称的初始化参数的值。如果不存在返回null.<br />
+Enumeration getInitParameterNames()：返回过滤器的所有初始化参数的名字的枚举集合。<br />
+public ServletContext getServletContext()：返回Servlet上下文对象的引用。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/888.html">Java工具类（字符串和日期，集合类）</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/892.html">JavaWeb——Session（待处理）</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="JavaWeb 启动时自动执行代码的几种方式（总有些代码需要在虚拟机启动时执行）">
+							<h2 style="display:inline;color:#5BC648;">JavaWeb 启动时自动执行代码的几种方式（总有些代码需要在虚拟机启动时执行）</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-03-26&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><h3>
+	JavaWeb 启动时自动执行代码的几种方式（待处理......）
+</h3>
+<p>
+	Web容器启动后执行代码的几种方式
+</p>
+其执行顺序为：<br />
+4===&gt;5===&gt;1===&gt;2===&gt;3<br />
+即指定init-method的Bean开始执行<br />
+接着实现Spring的Bean后置处理器开始执行<br />
+然后是Servlet的监听器执行<br />
+再接下来是Servlet的过滤器执行<br />
+<p>
+	最后才是Servlet执行
+</p>
+<h4>
+	1、实现Servlet监听器接口ServletContextListener
+</h4>
+<p>
+	public class InitListener implements ServletContextListener {<br />
+<br />
+&nbsp; &nbsp; @Override<br />
+&nbsp; &nbsp; public void contextDestroyed(ServletContextEvent context) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; }<br />
+<br />
+&nbsp; &nbsp; @Override<br />
+&nbsp; &nbsp; public void contextInitialized(ServletContextEvent context) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; // 上下文初始化执行<br />
+&nbsp; &nbsp; &nbsp; &nbsp; System.out.println("================&gt;[ServletContextListener]自动加载启动开始.");<br />
+&nbsp; &nbsp; &nbsp; &nbsp;SpringUtil.getInstance().setContext(<br />
+&lt;span style="white-space:pre;"&gt;<span> </span>&lt;/span&gt;WebApplicationContextUtils.getWebApplicationContext(arg0.getServletContext())<br />
+&lt;span style="white-space:pre;"&gt;<span> </span>&lt;/span&gt;);<br />
+&nbsp; &nbsp; }<br />
+<br />
+}<br />
+然后在web.xml文件配置该监听器
+</p>
+<p>
+	&lt;listener&gt;<br />
+<span> </span>&lt;listener-class&gt;com.test.init.InitListener&lt;/listener-class&gt;<br />
+<span> </span>&lt;/listener&gt;
+</p>
+<h4>
+	2、实现Servlet的过滤器Filter
+</h4>
+<p>
+	public class InitFilter implements Filter {<br />
+<br />
+&nbsp; &nbsp; @Override<br />
+&nbsp; &nbsp; public void destroy() {<br />
+<br />
+&nbsp; &nbsp; }<br />
+<br />
+&nbsp; &nbsp; @Override<br />
+&nbsp; &nbsp; public void doFilter(ServletRequest arg0, ServletResponse arg1, FilterChain arg2) throws IOException,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ServletException {<br />
+<br />
+&nbsp; &nbsp; }<br />
+<br />
+&nbsp; &nbsp; @Override<br />
+&nbsp; &nbsp; public void init(FilterConfig config) throws ServletException {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; System.out.println("================&gt;[Filter]自动加载启动开始.");<br />
+&nbsp; &nbsp; &nbsp; &nbsp; // 读取Spring容器中的Bean[此时Bean已加载,可以使用]<br />
+&nbsp; &nbsp; &nbsp; &nbsp;//写启动需要执行的代码<br />
+&nbsp; &nbsp; &nbsp; &nbsp; System.out.println("================&gt;[Filter]自动加载启动结束.");<br />
+&nbsp; &nbsp; }<br />
+<br />
+}<br />
+然后在web.xml文件配置过滤器即可
+</p>
+<p>
+	&lt;filter&gt;<br />
+<span> </span>&lt;filter-name&gt;InitFilter&lt;/filter-name&gt;<br />
+<span> </span>&lt;filter-class&gt;com.test.init.InitFilter&lt;/filter-class&gt;<br />
+<span> </span>&lt;/filter&gt;<br />
+<span> </span>&lt;filter-mapping&gt;<br />
+<span> </span>&lt;filter-name&gt;InitFilter&lt;/filter-name&gt;<br />
+<span> </span>&lt;url-pattern&gt;/&lt;/url-pattern&gt;<br />
+<span> </span>&lt;/filter-mapping&gt;
+</p>
+<h4>
+	3、编写一个Servlet,在web.xml里面配置容器启动后执行即可
+</h4>
+<p>
+	public class InitServlet extends HttpServlet {<br />
+<br />
+&nbsp; &nbsp; /**<br />
+&nbsp; &nbsp; &nbsp;*/<br />
+&nbsp; &nbsp; private static final long serialVersionUID = 1L;<br />
+<br />
+&nbsp; &nbsp; @Override<br />
+&nbsp; &nbsp; public void init(ServletConfig config) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; try {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; super.init();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; } catch (ServletException e) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; e.printStackTrace();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; System.out.println("================&gt;[Servlet]自动加载启动开始.");<br />
+&nbsp; &nbsp; &nbsp; &nbsp; // 读取Spring容器中的Bean[此时Bean已加载,可以使用]<br />
+&nbsp; &nbsp; &nbsp; &nbsp;//执行想要的代码<br />
+&nbsp; &nbsp; &nbsp; &nbsp; System.out.println("================&gt;[Servlet]自动加载启动结束.");<br />
+&nbsp; &nbsp; }<br />
+}<br />
+&nbsp;<br />
+然后在web.xml文件配置该Servlet的启动方式为：容器启动后执行<br />
+<span> </span>&lt;servlet&gt;<br />
+<span> </span>&lt;servlet-name&gt;InitServlet&lt;/servlet-name&gt;<br />
+<span> </span>&lt;servlet-class&gt;com.test.init.InitServlet&lt;/servlet-class&gt;<br />
+<span> </span>&lt;init-param&gt;<br />
+<span> </span>&lt;param-name&gt;username&lt;/param-name&gt;<br />
+<span> </span>&lt;param-value&gt;test&lt;/param-value&gt;<br />
+<span> </span>&lt;/init-param&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;!-- 此处指定加载顺序为2,表明还有优先级更高的Servlet要先执行 --&gt;<br />
+<span> </span>&lt;load-on-startup&gt;2&lt;/load-on-startup&gt;<br />
+<span> </span>&lt;/servlet&gt;<br />
+<span> </span>&lt;servlet-mapping&gt;<br />
+<span> </span>&lt;servlet-name&gt;InitServlet&lt;/servlet-name&gt;<br />
+<span> </span>&lt;url-pattern&gt;/&lt;/url-pattern&gt;<br />
+<span> </span>&lt;/servlet-mapping&gt;<br />
+&nbsp;关于启动后执行，由load-on-startup指定：<br />
+（1）当值为0或者大于0时，表示容器在应用启动时就加载这个servlet。值越小，启动优先级越高；<br />
+（2）当是一个负数时或者没有指定时，表示该servlet被调用时才加载。
+</p>
+<p>
+	<br />
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#JavaWeb 启动时自动执行代码的几种方式（总有些代码需要在虚拟机启动时执行）">JavaWeb 启动时自动执行代码的几种方式（总有些代码需要在虚拟机启动时执行）</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

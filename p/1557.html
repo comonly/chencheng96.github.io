@@ -1,0 +1,323 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>测试端口连通性_comonly.cn</title>
+<meta name="keywords" content="测试端口连通性" />
+<meta name="description" content="windows
+常用telnet测试，步骤如下：
+
+启用telnet
+位置：控制面板 &gt; 程序和功能 &gt; 启用或关闭windows功能 &gt; telnet客户端
+cmd下输入如下命令测试
+&gt; telnet ip（域名） 端口号
+linux：
+&gt; telnet ip port # 方法1
+&gt; wget ip:端口号 # 方法2
+&gt; ssh -v -p port username@ip # 方法3
+&gt; nmap ... # 方法4（略）
+
+" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">测试端口连通性</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-11-23</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>windows
+常用telnet测试，步骤如下：
+
+启用telnet
+位置：控制面板 &gt; 程序和功能 &gt; 启用或关闭windows功能 &gt; telnet客户端
+cmd下输入如下命令测试
+&gt; telnet ip（域名） 端口号
+linux：
+&gt; telnet ip port # 方法1
+&gt; wget ip:端口号 # 方法2
+&gt; ssh -v -p port username@ip # 方法3
+&gt; nmap ... # 方法4（略）
+
+</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> windows<br />
+常用telnet测试，步骤如下：<br />
+<br />
+启用telnet<br />
+位置：控制面板 &gt; 程序和功能 &gt; 启用或关闭windows功能 &gt; telnet客户端<br />
+cmd下输入如下命令测试<br />
+&gt; telnet ip（域名） 端口号<br />
+linux：<br />
+&gt; telnet ip port # 方法1<br />
+&gt; wget ip:端口号 # 方法2<br />
+&gt; ssh -v -p port username@ip # 方法3<br />
+&gt; nmap ... # 方法4（略）<br />
+<p>
+	<br />
+</p>
+<p>
+	方法三、curl法<br />
+curl是利用URL语法在命令行方式下工作的开源文件传输工具。也可以用来测试端口的连通性，具体用法:<br />
+curl ip:port<br />
+说明：<br />
+ip：是测试主机的ip地址<br />
+port：是端口，比如80<br />
+如果远程主机开通了相应的端口，都会输出信息，如果没有开通相应的端口，则没有任何提示，需要CTRL+C断开。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	telnet使用的是tcp协议，换句话说telnet只能检测tcp的这个端口打开了没。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	nc（netcat）也可查看端口是否打开。同样查看tcp 22端口是否打开，可以运行nc&nbsp; -z 192.192.193.211 22
+</p>
+<p>
+	nc 也可以噢～ 运行 nc –uz 192.192.193.211 22（u代表UDP）
+</p>
+<p>
+	nc 还可以一次性查看多了端口
+</p>
+<p>
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1556.html">原子变量和非原子变量</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1558.html">音视频编解码</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="Linux Netcat 命令">
+							<h2 style="display:inline;color:#5BC648;">Linux Netcat 命令</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-11-23&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span>1，端口扫描<br />
+端口扫描经常被系统管理员和黑客用来发现在一些机器上开放的端口，帮助他们识别系统中的漏洞。<br />
+<br />
+$nc -z -v -n 172.31.100.7 21-25<br />
+可以运行在TCP或者UDP模式，默认是TCP，-u参数调整为udp.<br />
+z 参数告诉netcat使用0 IO,连接成功后立即关闭连接， 不进行数据交换(谢谢@jxing 指点)<br />
+<br />
+v 参数指使用冗余选项（译者注：即详细输出）<br />
+<br />
+n 参数告诉netcat 不要使用DNS反向查询IP地址的域名<br />
+<br />
+这个命令会打印21到25 所有开放的端口。Banner是一个文本，Banner是一个你连接的服务发送给你的文本信息。当你试图鉴别漏洞或者服务的类型和版本的时候，Banner信息是非常有用的。但是，并不是所有的服务都会发送banner。<br />
+<br />
+一旦你发现开放的端口，你可以容易的使用netcat 连接服务抓取他们的banner。<br />
+<br />
+$ nc -v 172.31.100.7 21<br />
+<p>
+	netcat 命令会连接开放端口21并且打印运行在这个端口上服务的banner信息。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	创建对话、文件传输等：<a href="https://www.oschina.net/translate/linux-netcat-command" target="_blank">https://www.oschina.net/translate/linux-netcat-command</a>
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Linux Netcat 命令">Linux Netcat 命令</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,241 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Andriod使用webview控件往APP里内嵌网页_comonly.cn</title>
+<meta name="keywords" content="Andriod使用webview控件往APP里内嵌网页" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Andriod使用webview控件往APP里内嵌网页</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">June's New World</li>
+          <li class="lmname"><a href="http://www.cnblogs.com/JuneZhang/p/4148542.html" target="_blank">http://www.cnblogs.com/JuneZhang/p/4148542.html</a></li>
+          <li class="timer">2017-05-05</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	android
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">Andriod,webview控件,APP</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 1.布局文件片段：res-layout<br />
+<p>
+	&lt;WebViewandroid:id="@+id/Toweb"android:layout_width="fill_parent"android:layout_height="fill_parent"/&gt;
+</p>
+<p>
+	<br />
+</p>
+2.Java片段：src<br />
+&nbsp; @Override protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; setContentView(R.layout.activity_main); //WebView WebView browser=(WebView)findViewById(R.id.Toweb); &nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; browser.loadUrl("http://www.baidu.com"); //设置可自由缩放网页 &nbsp;browser.getSettings().setSupportZoom(true); &nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; browser.getSettings().setBuiltInZoomControls(true); // 如果页面中链接，如果希望点击链接继续在当前browser中响应， // 而不是新开Android的系统browser中响应该链接，必须覆盖webview的WebViewClient对象 &nbsp;browser.setWebViewClient(new WebViewClient() { public boolean shouldOverrideUrlLoading(WebView view, String url) &nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { // 重写此方法表明点击网页里面的链接还是在当前的webview里跳转，不跳到浏览器那边 &nbsp; view.loadUrl(url); return true; &nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;});&nbsp;<br />
+&nbsp; &nbsp; } //go back &nbsp;@Override public boolean onKeyDown(int keyCode, KeyEvent event) { &nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; WebView browser=(WebView)findViewById(R.id.Toweb); // Check if the key event was the Back button and if there's history &nbsp;if ((keyCode == KeyEvent.KEYCODE_BACK) &amp;&amp; browser.canGoBack()) { &nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; browser.goBack(); return true; &nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; } // return true; // If it wasn't the Back key or there's no web page history, bubble up to the default // system behavior (probably exit the activity) &nbsp;return super.onKeyDown(keyCode, event); &nbsp;<br />
+<p>
+	&nbsp; &nbsp; }&nbsp;
+</p>
+<p>
+	<br />
+</p>
+3. AndroidManifest.xml 设置权限，否则无法访问<br />
+&lt;!--添加该权限，webview可以访问网页--&gt;&lt;uses-permissionandroid:name="android.permission.INTERNET"&gt;&lt;/uses-permission&gt;<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/693.html">湖北省2014年普通高校招生志愿表（部分）外</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/695.html">怎么制作手机网页</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="http://www.cnblogs.com/JuneZhang/p/4148542.html" target="_blank">http://www.cnblogs.com/JuneZhang/p/4148542.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

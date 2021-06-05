@@ -1,0 +1,561 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>JSP向ACCESS插入记录的报SQL语法错误_comonly.cn</title>
+<meta name="keywords" content="JSP向ACCESS插入记录的报SQL语法错误" />
+<meta name="description" content="提示：javax.servlet.ServletException: java.sql.SQLException: [Microsoft][ODBC Microsoft Access 驱动程序] INSERT INTO 语句的语法错误。
+
+
+	
+
+
+	使用了Access的关键字:
+这种异常通常提示为:"XX语句有错误",比如:
+java.sql.SQLException: [Microsoft][ODBC Microsoft Access Driver] FROM 子句语法错误。
+jav" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">JSP向ACCESS插入记录的报SQL语法错误</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-07-03</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	数据库
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>提示：javax.servlet.ServletException: java.sql.SQLException: [Microsoft][ODBC Microsoft Access 驱动程序] INSERT INTO 语句的语法错误。
+
+
+	
+
+
+	使用了Access的关键字:
+这种异常通常提示为:"XX语句有错误",比如:
+java.sql.SQLException: [Microsoft][ODBC Microsoft Access Driver] FROM 子句语法错误。
+jav</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	提示：javax.servlet.ServletException: java.sql.SQLException: [Microsoft][ODBC Microsoft Access 驱动程序] INSERT INTO 语句的语法错误。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	使用了Access的关键字:<br />
+这种异常通常提示为:"XX语句有错误",比如:<br />
+java.sql.SQLException: [Microsoft][ODBC Microsoft Access Driver] FROM 子句语法错误。<br />
+java.sql.SQLException: [Microsoft][ODBC Microsoft Access Driver] INSERT INTO 语句的语法错误。<br />
+Access数据库表名不能为text. <br />
+如果非要使用text这个关键字,则在拼写SQL语句时使用转义字符[],写为:<br />
+String strupd = "INSERT INTO &nbsp;[text](Name,Password) values("+str1+","+str2+")";<br />
+也就是将表名text用[]括起来.<br />
+Access保留字=====================================<br />
+-A<br />
+ABSOLUTE<br />
+ACTION<br />
+ADD<br />
+ADMINDB<br />
+ALL<br />
+ALLOCATE<br />
+ALPHANUMERIC<br />
+ALTER<br />
+AND<br />
+ANY<br />
+ARE<br />
+AS<br />
+ASC<br />
+ASSERTION<br />
+AT<br />
+AUTHORIZATION<br />
+AUTOINCREMENT<br />
+AVG<br />
+-B<br />
+BAND<br />
+BEGIN<br />
+BETWEEN<br />
+BINARY<br />
+BIT<br />
+BIT_LENGTH<br />
+BNOT<br />
+BOR<br />
+BOTH<br />
+BXOR<br />
+BY<br />
+BYTE<br />
+-C<br />
+CASCADE<br />
+CASCADED<br />
+CASE<br />
+CAST<br />
+CATALOG<br />
+CHAR<br />
+CHARACTER<br />
+CHAR_LENGTH<br />
+CHARACTER_LENGTH<br />
+CHECK<br />
+CLOSE<br />
+COALESCE<br />
+COLLATE<br />
+COLLATION<br />
+COLUMN<br />
+COMMIT<br />
+COMP<br />
+COMPRESSION<br />
+CONNECT<br />
+CONNECTION<br />
+CONSTRAINT<br />
+CONSTRAINTS<br />
+CONTAINER<br />
+CONTINUE<br />
+CONVERT<br />
+CORRESPONDING<br />
+COUNT<br />
+COUNTER<br />
+CREATE<br />
+CREATEDB<br />
+CROSS<br />
+CURRENCY<br />
+CURRENT<br />
+CURRENT_DATE<br />
+CURRENT_TIME<br />
+CURRENT_TIMESTAMP<br />
+CURRENT_USER<br />
+CURSOR<br />
+-D<br />
+DATABASE<br />
+DATE<br />
+DATETIME<br />
+DAY<br />
+DEALLOCATE<br />
+DEC<br />
+DECIMAL<br />
+DECLARE<br />
+DEFAULT<br />
+DEFERRABLE<br />
+DEFERRED<br />
+DELETE<br />
+DESC<br />
+DESCRIBE<br />
+DESCRIPTOR<br />
+DIAGNOSTICS<br />
+DISALLOW<br />
+DISCONNECT<br />
+DISTINCT<br />
+DOMAIN<br />
+DOUBLE<br />
+DROP<br />
+-E<br />
+ELSE<br />
+END<br />
+END-EXEC<br />
+ESCAPE<br />
+EXCEPT<br />
+EXCEPTION<br />
+EXCLUSIVECONNECT<br />
+EXEC<br />
+EXECUTE<br />
+EXISTS<br />
+EXTERNAL<br />
+EXTRACT<br />
+-F<br />
+FALSE<br />
+FETCH<br />
+FIRST<br />
+FLOAT<br />
+FLOAT4<br />
+FLOAT8<br />
+FOR<br />
+FOREIGN<br />
+FOUND<br />
+FROM<br />
+FULL<br />
+-G<br />
+GENERAL<br />
+GET<br />
+GLOBAL<br />
+GO<br />
+GOTO<br />
+GRANT<br />
+GROUP<br />
+GUID<br />
+-H<br />
+HAVING<br />
+HOUR<br />
+-I<br />
+IDENTITY<br />
+IEEEDOUBLE<br />
+IEEESINGLE<br />
+IGNORE<br />
+IMAGE<br />
+IMMEDIATE<br />
+ININDEX<br />
+INDICATOR<br />
+INHERITABLE<br />
+INITIALLY<br />
+INNER<br />
+INPUT<br />
+INSENSITIVE<br />
+INSERT<br />
+INT<br />
+INTEGER<br />
+INTEGER1<br />
+INTEGER2<br />
+INTEGER4<br />
+INTERSECT<br />
+INTERVAL<br />
+INTO <br />
+IS<br />
+ISOLATION<br />
+-J<br />
+JOIN<br />
+-K<br />
+KEY<br />
+-L<br />
+LANGUAGE<br />
+LAST<br />
+LEADING<br />
+LEFT<br />
+LEVEL<br />
+LIKE<br />
+LOCAL<br />
+LOGICAL<br />
+LOGICAL1<br />
+LONG<br />
+LONGBINARY<br />
+LONGCHAR<br />
+LONGTEXT<br />
+LOWER<br />
+-M<br />
+MATCH<br />
+MAX<br />
+MEMO<br />
+MIN<br />
+MINUTE<br />
+MODULE<br />
+MONEY<br />
+MONTH<br />
+-N<br />
+NAMES<br />
+NATIONAL<br />
+NATURAL<br />
+NCHAR<br />
+NEXT<br />
+NO<br />
+NOT<br />
+NOTE<br />
+NULL<br />
+NULLIF<br />
+NUMBER<br />
+NUMERIC<br />
+-O<br />
+OBJECT<br />
+OCTET_LENGTH<br />
+OFOLEOBJECT<br />
+ONONLY<br />
+OPEN<br />
+OPTION<br />
+ORORDER<br />
+OUTER<br />
+OUTPUT<br />
+OVERLAPS<br />
+OWNERACCESS<br />
+-P<br />
+PAD<br />
+PARAMETERS<br />
+PARTIAL<br />
+PASSWORD<br />
+PERCENT<br />
+PIVOT<br />
+POSITION<br />
+PRECISION<br />
+PREPARE<br />
+PRESERVE<br />
+PRIMARY<br />
+PRIOR<br />
+PRIVILEGES<br />
+PROC<br />
+PROCEDURE<br />
+PUBLIC<br />
+-Q<br />
+-R<br />
+READ<br />
+REAL<br />
+REFERENCES<br />
+RELATIVE<br />
+RESTRICT<br />
+REVOKE<br />
+RIGHT<br />
+ROLLBACK<br />
+ROWS<br />
+-S<br />
+SCHEMA<br />
+SCROLL<br />
+SECOND<br />
+SECTION<br />
+SELECT<br />
+SELECTSCHEMA<br />
+SELECTSECURITY<br />
+SESSION<br />
+SESSION_USER<br />
+SET<br />
+SHORT<br />
+SINGLE<br />
+SIZE<br />
+SMALLINT<br />
+SOME<br />
+SPACE<br />
+SQL<br />
+SQLCODE<br />
+SQLERROR<br />
+SQLSTATE<br />
+STRING<br />
+SUBSTRING<br />
+SUM<br />
+SYSTEM_USER<br />
+-T<br />
+TABLE<br />
+TABLEID<br />
+TEMPORARY<br />
+TEXT<br />
+THEN<br />
+TIME<br />
+TIMESTAMP<br />
+TIMEZONE_HOUR<br />
+TIMEZONE_MINUTE<br />
+TO<br />
+TOP<br />
+TRAILING<br />
+TRANSACTION<br />
+TRANSFORM<br />
+TRANSLATE<br />
+TRANSLATION<br />
+TRIM<br />
+TRUE<br />
+-U<br />
+UNION<br />
+UNIQUE<br />
+UNIQUEIDENTIFIER<br />
+UNKNOWN<br />
+UPDATE<br />
+UPDATEIDENTITY<br />
+UPDATEOWNER<br />
+UPDATESECURITY<br />
+UPPER<br />
+USAGE<br />
+USER<br />
+USING<br />
+-V<br />
+VALUE<br />
+VALUES<br />
+VARBINARY<br />
+VARCHAR<br />
+VARYING<br />
+VIEW<br />
+-W<br />
+WHEN<br />
+WHENEVER<br />
+WHERE<br />
+WITH<br />
+WORK <br />
+WRITE<br />
+-X<br />
+-Y<br />
+YEAR<br />
+YESNO<br />
+-Z<br />
+ZONE
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/760.html">怎样在网页中插入音乐,HTML5 标签audio添加网页背景音乐代码</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/765.html">jsp页面输出的内容被截断</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

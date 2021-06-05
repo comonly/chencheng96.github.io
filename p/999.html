@@ -1,0 +1,596 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Java中的包装类和基本类_comonly.cn</title>
+<meta name="keywords" content="Java中的包装类和基本类" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Java中的包装类和基本类</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">KeloLin</li>
+          <li class="lmname"><a href="https://blog.csdn.net/qq_22253853/article/details/78741217" target="_blank">https://blog.csdn.net/qq_22253853/article/details/78741217</a></li>
+          <li class="timer">2018-10-04</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	java-含工具类
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 包装类（Wrapper Class）： Java是一个面向对象的编程语言，但是Java中的八种基本数据类型却是不面向对象的，为了使用方便和解决这个不足，在设计类时为每个基本数据类型设计了一个对应的类进行代表，这样八种基本数据类型对应的类统称为包装类(Wrapper Class)，包装类均位于java.lang包。Java语言提供了八种基本类型。六种数字类型（四个整数型，两个浮点型），一种字符类型，还有一种布尔型。&nbsp;
+<ul>
+	<li>
+		整数：包括int,short,byte,long ,初始值为0
+	</li>
+	<li>
+		浮点型：float,double ,初始值为0.0
+	</li>
+	<li>
+		字符：char ,初始值为空格，即'' "，如果输出，在Console上是看不到效果的。
+	</li>
+	<li>
+		布尔：boolean ,初始值为false
+	</li>
+</ul>
+<table border="1" cellpadding="0" cellspacing="0" bordercolor="#000000">
+	<tbody>
+		<tr>
+			<td>
+				<p>
+					基本类型
+				</p>
+				<p>
+					包装类型
+				</p>
+				<p>
+					大小
+				</p>
+			</td>
+			<td>
+				<p>
+					最小值
+				</p>
+				<p>
+					<span>最大值</span> 
+				</p>
+			</td>
+			<td>
+				其他
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<p>
+					boolean
+				</p>
+				<p>
+					Boolean
+				</p>
+				<p>
+					-----
+				</p>
+			</td>
+			<td>
+				<p>
+					-----
+				</p>
+				<p>
+					-----
+				</p>
+			</td>
+			<td>
+				<p>
+					<span>boolean数据类型表示一位的信息； 只有两个取值：true和false；</span>这种类型只作为一种标志来记录true/false情况；默认值是false； 例子：boolean one = true。其构造方法可以是用boolean类型作为参数，也可以传入字符串作为参数，当只有传入的字符串是“true”的时候，对应的值才是true。
+				</p>
+				<p>
+					Boolean a = new Boolean(true);&nbsp; //true<br />
+Boolean b = new Boolean("true");&nbsp; &nbsp; //true<br />
+Boolean c = new Boolean("1");&nbsp; &nbsp;//false123<br />
+当以boolean存入HashMap中时，是将boolean自动装箱成Boolean再存入，所以取值的时候需要强制转换为Boolean。<br />
+boolean a = true;<br />
+Map map = new HashMap();<br />
+map.put("a", a);<br />
+Boolean t1 = (Boolean) map.get(a);1234<br />
+Boolean类的成员方法包括了toString()、compareTo()、valueOf()、equals()、hashCode()、getBoolean()等方法。
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<p>
+					char
+				</p>
+				<p>
+					Character
+				</p>
+				<p>
+					<span>16-bit</span> 
+				</p>
+			</td>
+			<td>
+				<p>
+					Unicode 0
+				</p>
+				<p>
+					Unicode 2^16-1
+				</p>
+			</td>
+			<td>
+				<p>
+					<span>char类型是一个单一的16位Unicode字符</span>； 最小值是’\u0000’（即为0）； 最大值是’\uffff’（即为65,535）；&nbsp;
+				</p>
+				<p>
+					char数据类型可以储存任何字符； 例子：char letter = ‘A’。注意：String不是基本类型。
+				</p>
+				<p>
+					char在定义时，需要用单引号作为引用（双引号为String类，单引号为char） 。&nbsp;Character中支持很多编码。但建议在程序中不适用此类型。<br />
+（1）成员变量&nbsp;<br />
+static int MIN_RADIX ：返回最小基数。&nbsp;&nbsp;<br />
+static int MAX_RADIX ：返回最大基数。&nbsp;&nbsp;<br />
+static char MAX_VALUE ：字符类型的最大值。&nbsp;&nbsp;<br />
+static char MIN_VALUE ：字符类型的最小值。&nbsp;&nbsp;<br />
+static Class&lt; Character &gt; TYPE ：返回当前类型。&nbsp;<br />
+类中还有很多成员变量，此处不做过多表述。<br />
+（2）方法&nbsp;isDigit(char ch)、isDefined(char ch)、isLetter(char ch) 、getType(char ch)、toString()等等方法。&nbsp;<br />
+（3）转义字符&nbsp;前面有反斜杠（\）的字符代表转义字符，它对编译器来说是有特殊含义的。&nbsp;
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<p>
+					byte
+				</p>
+				<p>
+					Byte
+				</p>
+				<p>
+					8-bit
+				</p>
+			</td>
+			<td>
+				<p>
+					-128
+				</p>
+				<p>
+					+127
+				</p>
+			</td>
+			<td>
+				<span>byte数据类型是8位、有符号的，以二进制补码表示的整数；</span>&nbsp;默认值是0；&nbsp;
+				<p>
+					<span>byte类型用在大型数组中节约空间，主要代替整数，因为byte变量占用的空间只有int类型的四分之一；</span>例子：byte a = 100，byte b = -50。
+				</p>
+				<p>
+					byte主要用于特定应用场合，如I/O操作中的输入输出流。&nbsp;。
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<p>
+					short
+				</p>
+				<p>
+					Short
+				</p>
+				<p>
+					16-bit
+				</p>
+			</td>
+			<td>
+				<p>
+					-2^15
+				</p>
+				<p>
+					+2^15-1
+				</p>
+			</td>
+			<td>
+				<span>short数据类型是16位、有符号的以二进制补码表示的整数。</span>Short数据类型也可以像byte那样节省空间。一个short变量是int型变量所占空间的二分之一；默认值是0； 例子：short s = 1000，short r = -20000。
+				<p>
+					short类型也是主要用于特定的应用场合。&nbsp;存储需求为2个字节（16位）。&nbsp;
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<p>
+					int
+				</p>
+				<p>
+					Integer
+				</p>
+				<p>
+					32-bit
+				</p>
+			</td>
+			<td>
+				<p>
+					-2^31
+				</p>
+				<p>
+					+2^31-1
+				</p>
+			</td>
+			<td>
+				<span>int数据类型是32位、有符号的以二进制补码表示的整数；</span><br />
+				<p>
+					<span>一般地整型变量默认为int类型； 默认值是0； 例子：int a = 100000, int b = -200000。</span> 
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<p>
+					long
+				</p>
+				<p>
+					Long
+				</p>
+				<p>
+					64-bit
+				</p>
+				<p>
+					<br />
+				</p>
+				<p>
+					<br />
+				</p>
+			</td>
+			<td>
+				<p>
+					-2^63
+				</p>
+				<p>
+					+2^63-1
+				</p>
+			</td>
+			<td>
+				<span>long数据类型是64位、有符号的以二进制补码表示的整数；</span><br />
+				<p>
+					<span>这种类型主要使用在需要比较大整数的系统上； 默认值是0L；后面加L或者l,就表示是long长整型；&nbsp;</span> 
+				</p>
+				<p>
+					<span>例子： long a = 100000L，Long b = -200000L。</span> 
+				</p>
+				<p>
+					long属于长整型。在赋值时使用后缀 L（如40000000000L）。&nbsp;
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<p>
+					float
+				</p>
+				<p>
+					Float
+				</p>
+				<p>
+					32-bit
+				</p>
+			</td>
+			<td>
+				<p>
+					IEEE754
+				</p>
+				<p>
+					IEEE754
+				</p>
+			</td>
+			<td>
+				<p>
+					float在储存大型浮点数组的时候可节省内存空间； 默认值是0.0f；后面加F或者f,表示float类型；&nbsp;
+				</p>
+				<p>
+					<span>浮点数不能用来表示精确的值，如货币； 例子：float f1 = 234.5f</span>
+				</p>
+				<p>
+					float的数值有后缀F（如3.14F），没有后缀F的默认为double类型。&nbsp;
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<p>
+					double
+				</p>
+				<p>
+					Double
+				</p>
+				<p>
+					64-bit
+				</p>
+			</td>
+			<td>
+				<p>
+					IEEE754
+				</p>
+				<p>
+					IEEE754
+				</p>
+			</td>
+			<td>
+				<p>
+					<span>浮点数的默认类型为double类型； double类型同样不能表示精确的值，如货币；&nbsp;</span>默认值是0.0d；后面加D或者d,表示double类型； 例子：double d1 = 123.4。
+				</p>
+				<p>
+					double的数值精度是float类型的两倍。也有人称之为双精度。绝大部分情况都是使用double作为浮点型数据类型。&nbsp;
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				void
+			</td>
+			<td>
+				&nbsp;
+			</td>
+			<td>
+				<br />
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	注意：表格里的^代表的是次方; java采用unicode，2个字节来表示一个字符。
+</p>
+<p>
+	<span>其中BigInteger、BigDecimal没有相对应的基本类型，主要应用于高精度的运算，BigInteger 支持任意精度的整数，BigDecimal支持任意精度带小数点的运算。</span> 
+</p>
+<h2 id='自动装箱和拆箱'>
+	自动装箱和拆箱
+</h2>
+<ol>
+	<li>
+		装箱：自动将基本数据类型转换为其对应的包装类.&nbsp;
+	</li>
+	<li>
+		拆箱：自动将包装类型转换为基本数据类型.
+	</li>
+</ol>
+包装类与基本数据类型之间可以实现数据类型的自动转换，即装箱和拆箱。<br />
+<h2 id='数据类型之间的转换'>
+	数据类型之间的转换
+</h2>
+1. boolean型不能与其他类型的数据进行转换，否则会出错。&nbsp;基本数据类型的级别从低到高如下：&nbsp;byte &lt; char &lt; short &lt; int &lt; long &lt; float &lt; double&nbsp;<br />
+<ul>
+	<li>
+		级别低到级别高的（从左到右）类型自动转换（隐式转换）。&nbsp;
+	</li>
+	<li>
+		级别高到级别低的（从右到左）类型需要强制类型转换。&nbsp;
+	</li>
+	<li>
+		整型向浮点型转换时，可能会有精度损失的转换。
+	</li>
+</ul>
+2. 参与计算时的转换。byte、char、short的数据在参与运算时会自动转换为int。但在使用“+=”运算时，就不会发生类型转换。<br />
+byte a = 1;<br />
+//a = a + 1;&nbsp; &nbsp; //编译出错<br />
+a = (byte) (a+1);<br />
+a += 1;1234<br />
+<p>
+	上述的编译出错是因为 a+1 时，已经把a隐式转换为int类型，计算后的结果为int，需要强制转换为byte之后才能赋值。short、char类型也同理。
+</p>
+3. 级别高的往级别低的转换的时候的溢出问题。<br />
+short a = 128;<br />
+byte b = (byte) a;<br />
+System.out.println(a);<br />
+<p>
+	System.out.println(b);1234
+</p>
+<p>
+	上面的结果是：a = 128 ; b = -128 。在Java中正数用源码表示，负数用补码表示，第一位是符号位。a的编码是：0000 0000 0000 0000 0000 0000 1000 0000，而强转为byte之后，只取byte的最大范围值，就是1000 0000，1000 0000是负数（第一位为1），所以是-128。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/998.html">关于Java测试Junit</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1001.html">fiddler 拦截电脑非浏览器请求</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/qq_22253853/article/details/78741217" target="_blank">https://blog.csdn.net/qq_22253853/article/details/78741217</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id=" Integer 实例的 toString 方法">
+							<h2 style="display:inline;color:#5BC648;"> Integer 实例的 toString 方法</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-10-04&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span>https://www.cnblogs.com/yangming1996/p/8830305.html</span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#自动装箱和拆箱">自动装箱和拆箱</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#数据类型之间的转换">数据类型之间的转换</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="# Integer 实例的 toString 方法"> Integer 实例的 toString 方法</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

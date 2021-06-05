@@ -1,0 +1,341 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>redis单线程为什么能做到高性能 和 io多路复用_comonly.cn</title>
+<meta name="keywords" content="redis单线程为什么能做到高性能 和 io多路复用" />
+<meta name="description" content="1：io多路复用epoll&nbsp;
+
+
+	io多路复用简单来说就是一个线程处理多个网络请求。
+
+
+	我们知道epoll in 的事件触发是可读了，这个比较好理解，比如一个连接过来，或者一个数据发送过来了，那么in事件就触发了，那么out事件是如何触发的呢？缓冲区可写(有空的区域)，就可以触发，epoll有两种模式LT(水平触发)和ET(边缘触发)，LT模式下，主要缓冲区数据一次没有处理完，那么下次epoll_wait返回时，还会返回这个句柄；而ET模式下，缓冲区数据处理一次就结束，下次是不" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">redis单线程为什么能做到高性能 和 io多路复用</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">陈太汉</li>
+          <li class="lmname"><a href="https://www.cnblogs.com/hlxs/p/13631219.html" target="_blank">https://www.cnblogs.com/hlxs/p/13631219.html</a></li>
+          <li class="timer">2020-10-16</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>1：io多路复用epoll&nbsp;
+
+
+	io多路复用简单来说就是一个线程处理多个网络请求。
+
+
+	我们知道epoll in 的事件触发是可读了，这个比较好理解，比如一个连接过来，或者一个数据发送过来了，那么in事件就触发了，那么out事件是如何触发的呢？缓冲区可写(有空的区域)，就可以触发，epoll有两种模式LT(水平触发)和ET(边缘触发)，LT模式下，主要缓冲区数据一次没有处理完，那么下次epoll_wait返回时，还会返回这个句柄；而ET模式下，缓冲区数据处理一次就结束，下次是不</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <div>
+	1：io多路复用epoll&nbsp;
+</div>
+<div>
+	io多路复用简单来说就是一个线程处理多个网络请求。
+</div>
+<div>
+	我们知道epoll in 的事件触发是可读了，这个比较好理解，比如一个连接过来，或者一个数据发送过来了，那么in事件就触发了，那么out事件是如何触发的呢？缓冲区可写(有空的区域)，就可以触发，epoll有两种模式LT(水平触发)和ET(边缘触发)，LT模式下，主要缓冲区数据一次没有处理完，那么下次epoll_wait返回时，还会返回这个句柄；而ET模式下，缓冲区数据处理一次就结束，下次是不会再通知了，只在第一次返回．所以在ET模式下，一般是通过while循环，一次性读完全部数据．epoll默认使用的是LT。
+</div>
+<div>
+	socket的缓冲区已经满了，此时无法继续send。此时异步程序的正确处理流程是调用epoll_wait，当socket缓冲区中的数据被对方接收之后，缓冲区就会有空闲空间可以继续往里面写数据，此时epoll_wait就会返回这个socket的EPOLLOUT事件，获得这个事件时，你就可以继续往socket中写出数据。
+</div>
+<div>
+	redis的epoll使用的是默认的LT模式，只要写缓冲区可写时，就会不断的触发可写事件，为了避免一直触发可写事件，redis是在有数据可写的时候注册写事件，写完之后就取消写事件的注册
+</div>
+<div>
+	epoll内部数据结构为红黑树和链表，红黑树保存了所有socket和监听的事件信息，链表保存的是就绪的socket信息，就是那些就绪socket已经帮你整理好了。
+</div>
+<div>
+	那么，这个准备就绪list链表是怎么维护的呢？当我们执行epoll_ctl时，除了把socket放到epoll文件系统里file对象对应的红黑树上之外，还会给内核中断处理程序注册一个回调函数，告诉内核，如果这个句柄的中断到了，就把它放到准备就绪list链表里。所以，当一个socket上有数据到了，内核在把网卡上的数据copy到内核中后就来把socket插入到准备就绪链表里了。
+</div>
+<div>
+	如此，一颗红黑树，一张准备就绪句柄链表，少量的内核cache，就帮我们解决了大并发下的socket处理问题。执行epoll_create时，创建了红黑树和就绪链表，执行epoll_ctl时，如果增加socket句柄，则检查在红黑树中是否存在，存在立即返回，不存在则添加到树干上，然后向内核注册回调函数，用于当中断事件来临时向准备就绪链表中插入数据。执行epoll_wait时立刻返回准备就绪链表里的数据即可。
+</div>
+<div>
+	&nbsp;
+</div>
+<div>
+	<div>
+		2：读写事件的注册与删除
+	</div>
+	<div>
+		当一个新的连接建立后，redis会创建一个redisClient对象，然后为这个socket向epoll注册一个读事件，直到RedisClient对象销毁时才删除读事件，当redis读到一个完整的命令并解析完成后，就会为socket向epoll注册写事件，将回复信息发给client之后，就会从epoll删除刚注册的写事件，下个命令来了之后又会重复这个增删写事件的动作。
+	</div>
+	<div>
+		所以每个socket向epoll注册销毁一次读事件，多次注册销毁写事件，这样做的目的：在我没什么可写的情况下你就别叫我写了，我知道什么时候可写&nbsp;
+	</div>
+</div>
+<div>
+	&nbsp;
+</div>
+<div>
+	3：redis单线程是怎么做到高性能的呢？
+</div>
+<div>
+	以前我一直在想一个问题：如果一个redis命令很长，redis接收处理这个命令就要100毫秒，那么别的命令会不会延迟100毫秒呢？后续命令处理会不会像消息队列一样积压呢？
+</div>
+<div>
+	答案：不会。
+</div>
+<div>
+	上面我们已经说了epoll的原理，它不是让我们一次处理完一个命令后，再去处理另一个命令，epoll是帮我们一次接收多个命令的部分数据（如果命令很短则是完整的数据），每个socket都有一个缓冲区，写满了就不能写了，需要读出来后才能继续往里面写，redis为每个client分配了一个变长缓冲区，从socket中读出后存在缓冲区中，当接收到一个完整的命令，就解析并执行这个命令，然后把缓冲区后面的数据往前移动，反复利用这块内存，当这块内存超过一定值后就会释放，在需要的时候重新分配一块内存
+</div>
+<div>
+	也就是说epoll的水平触发模式将一个较长的命令请求分成了多次接收，一次能接收多个命令的请求，天生就只支持高并发的，加上redis会将耗时的命令会分多次处理，保证了我们的读写操作都很快。
+</div>
+<div>
+	综述单线程高性能的原因：
+</div>
+<div>
+	<ul>
+		<li>
+			1：纯内存操作本来就很快
+		</li>
+		<li>
+			2：redis使用epoll支持io多路复用，天生支持高并发请求
+		</li>
+		<li>
+			3：redis将耗时的操作分多次处理，保证每次处理的时间都很短，保证了读写性能，如果数据很长的话处理时间就会变长，所以redis不建议保存太长的数据
+		</li>
+	</ul>
+</div>
+<div>
+	还有redis6.0实现了多线程的功能，性能至少翻倍，那你还要问题单线程为什么性能高吗？而且还是在数据的接收解析和数据的发送使用多线程的情况下，性能就至少翻倍了。可能是为了保证代码的简洁性，作者不愿意使用多线程，为了提升性能用了多线程，也是部分功能使用多线程，操作redis数据库的逻辑还是单线程，如果数据是写少读多的情况下，采用多线程读写锁性能会不会提升很多呢？
+</div>
+<div>
+	所以redis一开始采用单线程的原因：
+</div>
+<div>
+	<ul>
+		<li>
+			1：代码简洁又简单&nbsp;
+		</li>
+		<li>
+			2：性能已经很好了
+		</li>
+		<li>
+			3：性能不够我再搞多线程吗
+		</li>
+	</ul>
+</div>
+<div>
+	&nbsp;
+</div>
+<div>
+	4：redis单线程是怎么同时处理文件事件和时间事件
+</div>
+<div>
+	文件事件主要是网络I/O的读写，请求的接收和回复。时间事件就是单次/多次执行的定时器，如主从复制、定时删除过期数据、字典rehash等。
+</div>
+<div>
+	redis所有核心功能都是跑在主线程中的，像aof文件落盘操作是在子线程中执行的，那么在高并发情况下它是怎么做到高性能的呢？
+</div>
+<div>
+	由于这两种事件在同一个线程中执行，就会出现互相影响的问题，如时间事件到了还在等待/执行文件事件，或者文件事件已经就绪却在执行时间事件，这就是单线程的缺点，所以在实现上要将这些影响降到最低。那么redis是怎么实现的呢？
+</div>
+<div>
+	定时执行的时间事件保存在一个链表中，由于链表中任务没有按照执行时间排序，所以每次需要扫描单链表，找到最近需要执行的任务，时间复杂度是O(N)，redis敢这么实现就是因为这个链表很短，大部分定时任务都是在serverCron方法中被调用。从现在开始到最近需要执行的任务的开始时间，时长定位T，这段时间就是属于文件事件的处理时间，以epoll为例，执行epoll_wait最多等待的时长为T，如果有就绪任务epoll会返回所有就绪的网络任务，存在一个数组中，这时我们知道了所有就绪的socket和对应的事件（读、写、错误、挂断），然后就可以接收数据，解析，执行对应的命令函数。
+</div>
+<div>
+	如果最近要执行的定时任务时间已经过了，那么epoll就不会阻塞，直接返回已经就绪的网络事件，即不等待。
+</div>
+<div>
+	总之单线程，定时事件和网络事件还是会互相影响的，正在处理定时事件网络任务来了，正在处理网络事件定时任务的时间到了。所以redis必须保证每个任务的处理时间不能太长。
+</div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1856.html">互斥量和信号量的区别</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1858.html">C++编译期多态与运行期多态</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.cnblogs.com/hlxs/p/13631219.html" target="_blank">https://www.cnblogs.com/hlxs/p/13631219.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

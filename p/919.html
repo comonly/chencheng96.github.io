@@ -1,0 +1,293 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>用户注册——发送邮件验证码（含实例）_comonly.cn</title>
+<meta name="keywords" content="用户注册——发送邮件验证码（含实例）" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">用户注册——发送邮件验证码（含实例）</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-04-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	javaweb---jsp asp数据库框架
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	使用Java应用程序发送 E-mail 十分简单，但是首先你应该在你的机器上安装 JavaMail。
+</p>
+<h2 id='JvMil的安装'>
+	JavaMail的安装
+</h2>
+<p>
+	下载apache-james-2.3.2的zip包，直接解压到你想要安装的位置目录即可。双击或在命令行下执行bin 目录下的 run.bat文件(Linux 系统 执行run.sh)，即可启动 James 服务器。
+</p>
+<h2 id='j发送邮件'>
+	jsp发送邮件
+</h2>
+<h3>
+	需要导入的包
+</h3>
+<p>
+	需要在项目中导入JavaMail mail.jar和activation.jar。需要注意的是导入该包在web项目中运行时会出现java.lang.NoClassDefFoundError: com/sun/mail/util/LineInputStream报错。这是因为J2EE5的库里面已经含有javaee.jar文件。javaee5里面的javaee.jar里面的mail和我们放入的 mail.jar和activation.jar冲突下面是对该问题的解决：
+</p>
+<p>
+	打开"..Genuitec\Common\plugins\com.genuitec.eclipse.j2eedt.core_8.5.0.me201007292038\data\libraryset\EE_5"下面的javaee.jar，删除里面的mail目录！之后就可以正常使用。
+</p>
+<h3>
+	邮件验证码的发送
+</h3>
+<pre class="prettyprint lang-js">String str="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+String emailSessionCode="";
+Random rand=new Random();//6位的验证码
+emailSessionCode+=str.charAt(rand.nextInt(str.length()));
+//...通过随机数生成验证码
+
+request.getSession().setAttribute("emailSessionCode", emailSessionCode);
+//将获取的验证码保存到session变量中
+
+String to = request.getParameter("email");// 收件人电子邮箱
+System.out.println(to);
+String from = "info@movie.vip";// 发件人电子邮箱
+String host = "localhost";// 指定发送邮件的主机为 localhost
+// 获取系统属性
+Properties properties = System.getProperties();
+// 设置邮件服务器
+properties.setProperty("mail.smtp.host", host);
+// 获取默认session对象
+Session session = Session.getDefaultInstance(properties);
+int state=1;   //标记发送状态1表示失败，发送完成后的逻辑处理
+try{
+	 // 创建默认的 MimeMessage 对象
+	 MimeMessage message = new MimeMessage(session);
+	 // Set From: 头部头字段
+	 message.setFrom(new InternetAddress(from));
+	 // Set To: 头部头字段
+	 message.addRecipient(Message.RecipientType.TO,
+	                          new InternetAddress(to));
+	 // Set Subject: 头部头字段
+	 message.setSubject("电影网验证码");
+	 // 设置消息体
+	 message.setText("您的验证码是："+emailSessionCode);
+	 // 发送消息
+	 Transport.send(message);
+	 state=0;//发送成功
+}catch (MessagingException mex) {
+	mex.printStackTrace();
+}</pre>
+<h3>
+	验证码在项目的实际处理
+</h3>
+<pre class="prettyprint lang-java">//判断邮件验证码是否正确
+String emailSessionCode="";
+String emailCode=request.getParameter("emailcode");	//获取用户提交的验证码
+try{
+	emailSessionCode=request.getSession().getAttribute("emailSessionCode").toString();
+	//获取session中存放的验证码。
+}catch(Exception e){
+	emailSessionCode="@@@#$%*&amp;^&amp;￥";	//防止未提交验证码导致的异常
+}
+if(!emailCode.toLowerCase().equals(emailSessionCode.toLowerCase())){
+	//如果用户输入的验证码错误进行的处理
+}
+
+//使用完邮件验证码后，在合适的时机让其失效
+request.getSession().setAttribute("emailSessionCode","@@@#$%*&amp;^&amp;￥");</pre>
+<p>
+	在生成验证码成功发送给用户后，将验证码保存到session变量中，待用户提交表单后对提交的内容进行验证。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/918.html">分页技术Access数据库</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/920.html">Jsoup是一款比较好的Java版HTML解析器</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#JvMil的安装">JvMil的安装</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#j发送邮件">j发送邮件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

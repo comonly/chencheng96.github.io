@@ -1,0 +1,364 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>js使用中基本的语法规则—弹出对话框  获取URL参数_comonly.cn</title>
+<meta name="keywords" content="js使用中基本的语法规则—弹出对话框  获取URL参数" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">js使用中基本的语法规则—弹出对话框  获取URL参数</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-06-02</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">js,机器名,弹输入框,prompt,confirm,url参数</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='如何用JS判断网页中某个id的网页元素是否存在'>
+	如何用JS判断网页中某个id的网页元素是否存在
+</h2>
+<p>
+	1.先用id获取element对象<br />
+var element=document.getElementById("id");<br />
+2.判断该element对象是否为null<br />
+if (typeof(element)== "undefined" || element == null){<br />
+alert("存在");<br />
+}else{<br />
+alert("不存在");<br />
+}
+</p>
+<p>
+	获取这个对象的Id，用if语句判断，如果存在就为true，否则false
+</p>
+<h2 id='JS获取客户端机器名和用户名信息'>
+	JS 获取客户端机器名和用户名信息
+</h2>
+<p>
+	<span style="color:#E53333;">这些代码的前提是IE的设置里 启用了Activex控件选项</span> 
+</p>
+<p>
+	var WshNetwork = new ActiveXObject("WScript.Network");<br />
+var user_Domain =&nbsp;&nbsp; WshNetwork.UserDomain&nbsp; ;<br />
+var Computer_Name =&nbsp; WshNetwork.ComputerName ;<br />
+var User_Name =&nbsp;&nbsp; WshNetwork.UserName ;
+</p>
+<p>
+	首先声明了一个 ActiveX对象
+</p>
+<p>
+	WshNetwork.UserDomain&nbsp; 表示计算机所在的域名信息
+</p>
+<p>
+	WshNetwork.ComputerName 表示机器名
+</p>
+<p>
+	WshNetwork.UserName&nbsp; 表示机器的当前用户名
+</p>
+<h2 id='JS实现在网页中弹出一个输入框的方法'>
+	JS实现在网页中弹出一个输入框的方法
+</h2>
+<p>
+	<br />
+</p>
+<div>
+	var age; age = prompt("请输入你的年龄:","20"); &nbsp; &nbsp;//输入结果保存在变量age中，年龄默认20
+</div>
+<h2 id='JvScrit弹出对话框的三种方式'>
+	JavaScript弹出对话框的三种方式
+</h2>
+<p>
+	javascript的三种对话框是通过调用window对象的三个方法alert()，confirm()和prompt()来获得，可以利用这些对话框来完成js的输入和输出，实现与用户能进行交互的js代码。
+</p>
+<p>
+	<br />
+</p>
+<div>
+	第一种：alert()方法
+</div>
+<div>
+	alert()方法是这三种对话框中最容易使用的一种，她可以用来简单而明了地将alert()括号内的文本信息显示在对话框中，我们将它称为警示对话框，要显示的信息放置在括号内，该对话框上包含一个“确认”按钮，用户阅读完所显示的信息后，只需单击该按钮就可以关闭对话框。下面来看一个使用alert()方法的例子，代码如下所示：
+</div>
+<div>
+	alert("弹出框显示的内容");//在页面上提示内容<br />
+</div>
+<div>
+	<br />
+</div>
+<div>
+	第二种：confirm()方法
+</div>
+<div>
+	confirm()方法与alert()方法的使用十分类似，不同点是在该种对话框上除了包含一个“确认”按钮外，还有一个“取消”按钮，这种对话框称为确认对话框，在调用window对象的confirm()方法以及后面介绍的prompt()方法时也可以不写window。下面来看一个关于confirm()的小例子,代码如下所示：
+</div>
+<div>
+	confirm("是否进行继续操作"); //在页面上弹出确认对话框
+</div>
+<div>
+	<span style="line-height:1.5;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果用户单击“确认”按钮，则confirm()方法会返回true，如果用户单击“取消”按钮，则confirm()方法会返回false，无论用户选择哪个按钮，都会关闭对话框，而继续执行javascript代码。</span> 
+</div>
+<div>
+	<br />
+&lt;script language="javascript"&gt; //js脚本标注<br />
+var con;<br />
+con=confirm("你喜欢玫瑰花么?"); //在页面上弹出对话框<br />
+if(con==true)alert("非常喜欢!");<br />
+else alert("不喜欢!");<br />
+&lt;/script&gt;
+</div>
+<p>
+	<br />
+</p>
+<p>
+	<strong>三种弹出框的比较</strong> 
+</p>
+<div>
+	alert是警告框，只有一个按钮“确定”无返回值，警告框经常用于确保用户可以得到某些信息。当警告框出现后，用户需要点击确定按钮才能继续进行操作。语法：alert("文本")。
+</div>
+<div>
+	confirm是确认框，两个按钮，确定或者取消，返回true或false。确认框用于使用户可以验证或者接受某些信息。当确认框出现后，用户需要点击确定或者取消按钮才能继续进行操作。如果用户点击确认，那么返回值为 true。如果用户点击取消，那么返回值为 false。语法：confirm("文本")
+</div>
+<div>
+	prompt是提示框，返回输入的消息，或者其默认值提示框经常用于提示用户在进入页面前输入某个值。当提示框出现后，用户需要输入某个值，然后点击确认或取消按钮才能继续操纵。如果用户点击确认，那么返回值为输入的值。如果用户点击取消，那么返回值为 null。语法：prompt("文本","默认值")
+</div>
+<h2 id='j获取url参数值的两种方式'>
+	js获取url参数值的两种方式
+</h2>
+<div>
+	方法一：正则分析法
+</div>
+<div>
+	function getQueryString(name) {&nbsp;<br />
+var reg = new RegExp("(^|&amp;)" + name + "=([^&amp;]*)(&amp;|$)", "i");&nbsp;<br />
+var r = window.location.search.substr(1).match(reg);&nbsp;<br />
+if (r != null) return unescape(r[2]); return null;&nbsp;<br />
+}&nbsp;<br />
+调用方法：&nbsp;<br />
+alert(GetQueryString("参数名1"));alert(GetQueryString("参数名2"));&nbsp;<br />
+alert(GetQueryString("参数名3"));&nbsp;<br />
+方法二
+</div>
+<div>
+	&lt;Script language="javascript"&gt;&nbsp;<br />
+function GetRequest() {&nbsp;<br />
+var url = location.search; //获取url中"?"符后的字串&nbsp;<br />
+var theRequest = new Object();&nbsp;<br />
+if (url.indexOf("?") != -1) {&nbsp;<br />
+var str = url.substr(1);&nbsp;<br />
+strs = str.split("&amp;");&nbsp;<br />
+for(var i = 0; i &lt; strs.length; i ++) {&nbsp;<br />
+theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);&nbsp;<br />
+}&nbsp;<br />
+}&nbsp;<br />
+return theRequest;&nbsp;<br />
+}&nbsp;<br />
+&lt;/Script&gt;&nbsp;<br />
+调用方法：&nbsp;<br />
+&lt;Script language="javascript"&gt;&nbsp;<br />
+var Request = new Object();&nbsp;<br />
+Request = GetRequest();&nbsp;<br />
+var 参数1,参数2,参数3,参数N;&nbsp;<br />
+参数1 = Request['参数1'];&nbsp;<br />
+参数2 = Request['参数2'];&nbsp;<br />
+参数3 = Request['参数3'];&nbsp;<br />
+参数N = Request['参数N'];&nbsp;<br />
+&lt;/Script&gt;
+</div>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/747.html">在浏览器中调用js</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/749.html">ESFramework 使用技巧 －－ 部署P2P服务器</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#如何用JS判断网页中某个id的网页元素是否存在">如何用JS判断网页中某个id的网页元素是否存在</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#JS获取客户端机器名和用户名信息">JS获取客户端机器名和用户名信息</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#JS实现在网页中弹出一个输入框的方法">JS实现在网页中弹出一个输入框的方法</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#JvScrit弹出对话框的三种方式">JvScrit弹出对话框的三种方式</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#j获取url参数值的两种方式">j获取url参数值的两种方式</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

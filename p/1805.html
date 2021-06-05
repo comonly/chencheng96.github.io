@@ -1,0 +1,338 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>线程私有资源_comonly.cn</title>
+<meta name="keywords" content="线程私有资源" />
+<meta name="description" content="在多线程环境下，每个线程拥有一个栈和一个程序计数器。栈和程序计数器用来保存线程的执行历史和线程的执行状态，是线程私有的资源。其他的资源（比如堆、地址空间、全局变量）是由同一个进程内的多个线程共享。
+
+
+	线程是操作系统能够进行运算调度的最小单位。它被包含在进程之中，是进程中的实际运作单位。一条线程指的是进程中一个单一顺序的控制流，一个进程中可以并发多个线程，每条线程并行执行不同的任务。在Unix &nbsp;System V及SunOS中也被称为轻量进程（lightweight processes）" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">线程私有资源</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">cocoabird</li>
+          <li class="lmname"><a href="https://www.cnblogs.com/cocoabird/p/6063059.html" target="_blank">https://www.cnblogs.com/cocoabird/p/6063059.html</a></li>
+          <li class="timer">2020-10-04</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>在多线程环境下，每个线程拥有一个栈和一个程序计数器。栈和程序计数器用来保存线程的执行历史和线程的执行状态，是线程私有的资源。其他的资源（比如堆、地址空间、全局变量）是由同一个进程内的多个线程共享。
+
+
+	线程是操作系统能够进行运算调度的最小单位。它被包含在进程之中，是进程中的实际运作单位。一条线程指的是进程中一个单一顺序的控制流，一个进程中可以并发多个线程，每条线程并行执行不同的任务。在Unix &nbsp;System V及SunOS中也被称为轻量进程（lightweight processes）</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <div>
+	在多线程环境下，每个线程拥有一个栈和一个程序计数器。栈和程序计数器用来保存线程的执行历史和线程的执行状态，是线程私有的资源。其他的资源（比如堆、地址空间、全局变量）是由同一个进程内的多个线程共享。
+</div>
+<div>
+	线程是操作系统能够进行运算调度的最小单位。它被包含在进程之中，是进程中的实际运作单位。一条线程指的是进程中一个单一顺序的控制流，一个进程中可以并发多个线程，每条线程并行执行不同的任务。在Unix &nbsp;System V及SunOS中也被称为轻量进程（lightweight processes），但轻量进程更多指内核线程(kernel thread)，而把用户线程(user thread)称为线程。
+</div>
+<div>
+	&nbsp;
+</div>
+<div>
+	对于多数合作性任务，多线程比多个独立的进程更优越
+</div>
+<div>
+	<div>
+		&nbsp; &nbsp;线程共享相同的内存空间。不同的线程可以存取内存中的同一个变量。所以，程序中的所有线程都可以读或写声明过的全局变量。如果曾用fork()编写过重要代码，就会认识到这个工具的重要性。为什么呢？虽然fork()允许创建多个进程，但它还会带来以下通信问题，如何让多个进程相互通信，这里每个进程都有自己独立的内存空间。对这个问题没有一个简单的答案。虽然有许多不同种类的本地IPC(进程间通信)，但他们都遇到两个重要的障碍：
+	</div>
+	<div>
+		&nbsp;
+	</div>
+	<div>
+		1.加强了某种形式的额外内核开销，从而降低性能。
+	</div>
+	<div>
+		2.对于大多数情形，IPC不是对于代码的“自然”扩展，通常极大地增加了程序的复杂性。
+	</div>
+	<div>
+		&nbsp;
+	</div>
+	<div>
+		<p>
+			线程共享资源包括：
+		</p>
+		<p>
+			&nbsp; 1.进程代码段&nbsp;
+		</p>
+		<p>
+			&nbsp; 2.进程的公有数据(利用这些共享的数据，线程很容易的实现相互之间的通讯)&nbsp;
+		</p>
+		<p>
+			&nbsp; 3.进程打开的文件描述符、信号的处理器、进程的当前目录和进程用户ID与进程组ID。
+		</p>
+		<p>
+			线程独立资源包括：
+		</p>
+		<p>
+			1.线程ID
+		</p>
+		<p>
+			每个线程都有自己的线程ID，这个ID在本进程中是唯一的。进程用此来标识线程。
+		</p>
+		<p>
+			2.寄存器组的值
+		</p>
+		<p>
+			由于线程间是并发运行的，每个线程有自己不同的运行线索，当从一个线程切换到另一个线程上 时，必须将原有的线程的寄存器集合的状态保存，以便将来该线程在被重新切换到时能得以恢复。
+		</p>
+		<p>
+			3.线程的堆栈
+		</p>
+		<p>
+			堆栈是保证线程独立运行所必须的。线程函数可以调用函数，而被调用函数中又是可以层层嵌套的，所以线程必须拥有自己的函数堆栈， 使得函数调用可以正常执行，不受其他线程的影响。
+		</p>
+		<p>
+			4.错误返回码
+		</p>
+		<p>
+			由于同一个进程中有很多个线程在同时运行，可能某个线程进行系统调用后设置了errno值，而在该 线程还没有处理这个错误，另外一个线程就在此时被调度器投入运行，这样错误值就有可能被修改。所以，不同的线程应该拥有自己的错误返回码变量。
+		</p>
+		<p>
+			5.线程的信号屏蔽码
+		</p>
+		<p>
+			由于每个线程所感兴趣的信号不同，所以线程的信号屏蔽码应该由线程自己管理。但所有的线程都 共享同样的信号处理器。
+		</p>
+		<p>
+			6.线程的优先级
+		</p>
+		<p>
+			由于线程需要像进程那样能够被调度，那么就必须要有可供调度使用的参数，这个参数就是线程的优先级。
+		</p>
+		<p>
+			&nbsp;
+		</p>
+		<p>
+			线程与进程区别：
+		</p>
+		<p>
+			1，进程是系统进行资源分配和调度的一个独立单位。线程是进程的一个实体，是CPU调度和分派的基本单位。线程自己基本上不拥有系统资源，但是它可与同属一个进程的其他的线程共享进程所拥有的全部资源。
+		</p>
+		<p>
+			由于线程比进程更小，基本上不拥有系统资源，线程上下文切换比进程上下文切换要快得多，故对它的调度所付出的开销就会小得多，从而显著提高系统资源的利用率和吞吐量。
+		</p>
+		<p>
+			2，一个程序至少有一个进程，一个进程至少有一个线程。进程在执行过程中拥有独立的内存单元地址空间，而多个线程共享内存，从而极大地提高了程序的运行效率。
+		</p>
+		<p>
+			3，进程间通信IPC需要特别的方法，线程间可以直接读写进程数据段（如全局变量）来进行通信。
+		</p>
+		<p>
+			&nbsp;
+		</p>
+		<p>
+			进程的实现只能由操作系统内核来实现，而不存在用户态实现的情况。而线程可以分为内核态和用户态。
+		</p>
+		<p>
+			内核态创建线程比较浪费系统空间资源，因为系统需要维护线程列表，而线程的数量要远远大于进程的数量，过多的线程创建会使系统资源耗尽而瘫痪。其次内核态实现会修改操作系统。
+		</p>
+		<p>
+			使用用户态创建线程就不必太担心系统资源耗尽的问题，内核不需要知道有多少线程创建。用户创建方便。缺点：
+		</p>
+		<p>
+			如果在执行过程中一个线程受阻，它将无法将控制权交出来，这样整个进程都无法推进。操作系统随即把CPU控制权交给另外一个进程。
+		</p>
+		<p>
+			这样，一个线程受阻造成整个进程受阻，我们期望的通过线程对进程实施分身的计划就失败了。这是用户态线程致命的缺点。
+		</p>
+	</div>
+</div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1804.html">进程的三种状态以及状态之间的切换</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1806.html">cpu的用户态和内核态和内存的用户空间内核空间</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.cnblogs.com/cocoabird/p/6063059.html" target="_blank">https://www.cnblogs.com/cocoabird/p/6063059.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

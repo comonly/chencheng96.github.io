@@ -1,0 +1,221 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>3个Spring Boot核心注解，你知道几个？_comonly.cn</title>
+<meta name="keywords" content="3个Spring Boot核心注解，你知道几个？" />
+<meta name="description" content="3个Spring Boot核心注解，你知道几个？" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">3个Spring Boot核心注解，你知道几个？</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">架构师追风</li>
+          <li class="lmname"><a href="https://blog.51cto.com/14442094/2430845" target="_blank">https://blog.51cto.com/14442094/2430845</a></li>
+          <li class="timer">2019-08-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>3个Spring Boot核心注解，你知道几个？</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <div class="con editor-preview-side" id="result"><h2 class="Editable-styled" style="margin:0px 0px 1.16667em;font-size:1.2em;line-height:1.5;font-family:'-apple-system', BlinkMacSystemFont, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', 'Source Han Sans SC', 'Noto Sans CJK SC', 'WenQuanYi Micro Hei', sans-serif;clear:left;color:rgb(26,26,26);white-space:pre-wrap;background-color:rgb(255,255,255);"></h2><p>Spring Boot 核心注解讲解</p><p>Spring Boot 最大的特点是无需 XML 配置文件，能自动扫描包路径装载并注入对象，并能做到根据 classpath 下的 jar 包自动配置。</p><p>所以 Spring Boot 最核心的 3 个注解就是：</p><h3 class="Editable-styled" style="margin:1.90909em 0px 1.27273em;font-size:1.1em;line-height:1.5;font-family:'-apple-system', BlinkMacSystemFont, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', 'Source Han Sans SC', 'Noto Sans CJK SC', 'WenQuanYi Micro Hei', sans-serif;clear:left;color:rgb(26,26,26);white-space:pre-wrap;background-color:rgb(255,255,255);"></h3><p>1、@Configuration</p><blockquote class="Editable-styled" style="margin:1.4em 0px;padding-left:1em;color:rgb(100,100,100);border-left:3px solid rgb(211,211,211);font-family:'-apple-system', BlinkMacSystemFont, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', 'Source Han Sans SC', 'Noto Sans CJK SC', 'WenQuanYi Micro Hei', sans-serif;white-space:pre-wrap;background-color:rgb(255,255,255);"><p>org.springframework.context.annotation.Configuration</p></blockquote><p>这是 Spring 3.0 添加的一个注解，用来代替 applicationContext.xml 配置文件，所有这个配置文件里面能做到的事情都可以通过这个注解所在类来进行注册。</p><p>下面几个相关注解也是非常重要的！</p><p><span style="font-weight:bold;">@Bean</span></p><p>用来代替 XML 配置文件里面的 <span style="margin:0px 2px;padding:3px 4px;font-family:Menlo, Monaco, Consolas, 'Andale Mono', 'lucida console', 'Courier New', monospace;background-color:rgb(246,246,246);">&lt;bean ...&gt;</span> 配置。</p><p><span style="font-weight:bold;">@ImportResource</span></p><p>如果有些通过类的注册方式配置不了的，可以通过这个注解引入额外的 XML 配置文件，有些老的配置文件无法通过 <span style="margin:0px 2px;padding:3px 4px;font-family:Menlo, Monaco, Consolas, 'Andale Mono', 'lucida console', 'Courier New', monospace;background-color:rgb(246,246,246);">@Configuration</span> 方式配置的非常管用。</p><p><span style="font-weight:bold;">@Import</span></p><p>用来引入额外的一个或者多个 <span style="margin:0px 2px;padding:3px 4px;font-family:Menlo, Monaco, Consolas, 'Andale Mono', 'lucida console', 'Courier New', monospace;background-color:rgb(246,246,246);">@Configuration</span> 修饰的配置文件类。</p><p><span style="font-weight:bold;">@SpringBootConfiguration</span></p><p>这个注解就是 <span style="margin:0px 2px;padding:3px 4px;font-family:Menlo, Monaco, Consolas, 'Andale Mono', 'lucida console', 'Courier New', monospace;background-color:rgb(246,246,246);">@Configuration</span> 注解的变体，只是用来修饰是 Spring Boot 配置而已，或者可利于 Spring Boot 后续的扩展，源码如下。</p><div class="code-toolbar"><pre class="public-DraftStyleDefault-pre  language-public" style="margin-top:1.4em;margin-bottom:1.4em;padding:.88889em;font-size:.9em;background-color:rgb(246,246,246);color:rgb(26,26,26);"><code class="  language-public">@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Configuration
+public&nbsp;@interface&nbsp;SpringBootConfiguration&nbsp;{
+
+}</code></pre><div class="toolbar"></div></div><h3 class="Editable-styled" style="margin:1.90909em 0px 1.27273em;font-size:1.1em;line-height:1.5;font-family:'-apple-system', BlinkMacSystemFont, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', 'Source Han Sans SC', 'Noto Sans CJK SC', 'WenQuanYi Micro Hei', sans-serif;clear:left;color:rgb(26,26,26);white-space:pre-wrap;background-color:rgb(255,255,255);"></h3><p>2、@ComponentScan</p><blockquote class="Editable-styled" style="margin:1.4em 0px;padding-left:1em;color:rgb(100,100,100);border-left:3px solid rgb(211,211,211);font-family:'-apple-system', BlinkMacSystemFont, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', 'Source Han Sans SC', 'Noto Sans CJK SC', 'WenQuanYi Micro Hei', sans-serif;white-space:pre-wrap;background-color:rgb(255,255,255);"><p>org.springframework.context.annotation.ComponentScan</p></blockquote><p>这是 Spring 3.1 添加的一个注解，用来代替配置文件中的 <span style="margin:0px 2px;padding:3px 4px;font-family:Menlo, Monaco, Consolas, 'Andale Mono', 'lucida console', 'Courier New', monospace;background-color:rgb(246,246,246);">component-scan</span> 配置，开启组件扫描，即自动扫描包路径下的 <span style="margin:0px 2px;padding:3px 4px;font-family:Menlo, Monaco, Consolas, 'Andale Mono', 'lucida console', 'Courier New', monospace;background-color:rgb(246,246,246);">@Component</span> 注解进行注册 bean 实例到 context 中。</p><p>另外，<span style="margin:0px 2px;padding:3px 4px;font-family:Menlo, Monaco, Consolas, 'Andale Mono', 'lucida console', 'Courier New', monospace;background-color:rgb(246,246,246);">@ComponentScans</span> 是可重复注解，即可以配置多个，用来配置注册不同的子包。</p><p><br></p><h3 class="Editable-styled" style="margin:1.90909em 0px 1.27273em;font-size:1.1em;line-height:1.5;font-family:'-apple-system', BlinkMacSystemFont, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', 'Source Han Sans SC', 'Noto Sans CJK SC', 'WenQuanYi Micro Hei', sans-serif;clear:left;color:rgb(26,26,26);white-space:pre-wrap;background-color:rgb(255,255,255);"></h3><p>3、@EnableAutoConfiguration</p><blockquote class="Editable-styled" style="margin:1.4em 0px;padding-left:1em;color:rgb(100,100,100);border-left:3px solid rgb(211,211,211);font-family:'-apple-system', BlinkMacSystemFont, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', 'Source Han Sans SC', 'Noto Sans CJK SC', 'WenQuanYi Micro Hei', sans-serif;white-space:pre-wrap;background-color:rgb(255,255,255);"><p>org.springframework.boot.autoconfigure.EnableAutoConfiguration</p></blockquote><p>看全路径就知道，这是自 Spring Boot 诞生时添加的注解，用来提供自动配置，上面的两个都是 <span style="margin:0px 2px;padding:3px 4px;font-family:Menlo, Monaco, Consolas, 'Andale Mono', 'lucida console', 'Courier New', monospace;background-color:rgb(246,246,246);">spring-context</span> 包下的，不属于 Spring Boot，所以 Spring 3.0 之后的去 XML 配置方式已经为 Spring Boot 埋下了伏笔！<br><br>最后<br>欢迎大家一起交流，喜欢文章记得点个赞哟，感谢支持！</p><p><br></p></div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1976.html">一文了解OOM及解决方案</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1978.html">pgsql 单机多版本的实验环境的搭建</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.51cto.com/14442094/2430845" target="_blank">https://blog.51cto.com/14442094/2430845</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

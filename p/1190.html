@@ -1,0 +1,475 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>卷积神经网络CNN经典模型整理Lenet，Alexnet，Googlenet，VGG，Deep Residual Learning_comonly.cn</title>
+<meta name="keywords" content="卷积神经网络CNN经典模型整理Lenet，Alexnet，Googlenet，VGG，Deep Residual Learning" />
+<meta name="description" content="关于卷积神经网络CNN，网络和文献中有非常多的资料，我在工作/研究中也用了好一段时间各种常见的model了，就想着简单整理一下，以备查阅之需。
+
+
+	
+		
+			Lenet，1986年
+		
+	
+	
+		
+			Alexnet，2012年
+		
+	
+	
+		
+			GoogleNet，2014年
+		
+	
+	
+		
+			VGG，2014年
+		
+	
+	
+		
+			Deep Residual Learning，2015年
+		
+	
+
+
+	Le" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">卷积神经网络CNN经典模型整理Lenet，Alexnet，Googlenet，VGG，Deep Residual Learning</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">大饼博士X</li>
+          <li class="lmname"><a href="https://blog.csdn.net/xbinworld/article/details/45619685" target="_blank">https://blog.csdn.net/xbinworld/article/details/45619685</a></li>
+          <li class="timer">2020-11-20</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	机器学习算法分析
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>关于卷积神经网络CNN，网络和文献中有非常多的资料，我在工作/研究中也用了好一段时间各种常见的model了，就想着简单整理一下，以备查阅之需。
+
+
+	
+		
+			Lenet，1986年
+		
+	
+	
+		
+			Alexnet，2012年
+		
+	
+	
+		
+			GoogleNet，2014年
+		
+	
+	
+		
+			VGG，2014年
+		
+	
+	
+		
+			Deep Residual Learning，2015年
+		
+	
+
+
+	Le</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	关于卷积神经网络CNN，网络和文献中有非常多的资料，我在工作/研究中也用了好一段时间各种常见的model了，就想着简单整理一下，以备查阅之需。
+</p>
+<ol>
+	<li>
+		<p>
+			Lenet，1986年
+		</p>
+	</li>
+	<li>
+		<p>
+			Alexnet，2012年
+		</p>
+	</li>
+	<li>
+		<p>
+			GoogleNet，2014年
+		</p>
+	</li>
+	<li>
+		<p>
+			VGG，2014年
+		</p>
+	</li>
+	<li>
+		<p>
+			Deep Residual Learning，2015年
+		</p>
+	</li>
+</ol>
+<p>
+	Lenet
+</p>
+<p>
+	就从Lenet说起，可以看下caffe中lenet的配置文件（1），可以试着理解每一层的大小，和各种参数。由两个卷积层，两个池化层，以及两个全连接层组成。 卷积都是5*5的模板，stride=1，池化都是MAX。下图是一个类似的结构，可以帮助理解层次结构（和caffe不完全一致，不过基本上差不多）
+</p>
+<p>
+	（1）网址：https://github.com/BVLC/caffe/blob/master/examples/mnist/lenet_train_test.prototxt
+</p>
+<p>
+	<img src="http://img.mp.itc.cn/upload/20170416/b41478d96ef340289d24dc78bdffb0f1_th.jpeg" style="height:auto;" /> 
+</p>
+<p>
+	Alexnet
+</p>
+<p>
+	2012年，Imagenet比赛冠军的model——Alexnet [2]（以第一作者alex命名）。caffe的model文件在（2）。说实话，这个model的意义比后面那些model都大很多，首先它证明了CNN在复杂模型下的有效性，然后GPU实现使得训练在可接受的时间范围内得到结果，确实让CNN和GPU都大火了一把，顺便推动了有监督DL的发展。
+</p>
+<p>
+	（2）https://github.com/BVLC/caffe/blob/master/models/bvlc_alexnet/deploy.prototxt
+</p>
+<p>
+	模型结构见下图，别看只有寥寥八层（不算input层），但是它有60M以上的参数总量，事实上在参数量上比后面的网络都大。
+</p>
+<p>
+	<img src="http://img.mp.itc.cn/upload/20170416/25b31c8f2f874ee19b408ca95529d3e1_th.jpeg" style="height:auto;" /> 
+</p>
+<p>
+	这个图有点点特殊的地方是卷积部分都是画成上下两块，意思是说吧这一层计算出来的feature map分开，但是前一层用到的数据要看连接的虚线，如图中input层之后的第一层第二层之间的虚线是分开的，是说二层上面的128map是由一层上面的48map计算的，下面同理；而第三层前面的虚线是完全交叉的，就是说每一个192map都是由前面的128+128=256map同时计算得到的。
+</p>
+<p>
+	Alexnet有一个特殊的计算层，LRN层，做的事是对当前层的输出结果做平滑处理。下面是我画的示意图：
+</p>
+<p>
+	<img src="http://img.mp.itc.cn/upload/20170416/60232c3551694c609ad71669dd2d1e98_th.png" style="height:auto;" /> 
+</p>
+<p>
+	前后几层（对应位置的点）对中间这一层做一下平滑约束，计算方法是：
+</p>
+<p>
+	<img src="http://img.mp.itc.cn/upload/20170416/8ac1ca6800a7485194624beb95d1a12a.png" style="height:auto;" /> 
+</p>
+<p>
+	具体打开Alexnet的每一阶段（含一次卷积主要计算）来看[2][3]：
+</p>
+<p>
+	（1）con - relu - pooling - LRN
+</p>
+<p>
+	<img src="http://img.mp.itc.cn/upload/20170416/e7f342507e4a4edd8070a110fa733dfe_th.jpeg" style="height:auto;" /> 
+</p>
+<p>
+	具体计算都在图里面写了，要注意的是input层是227*227，而不是paper里面的224*224，这里可以算一下，主要是227可以整除后面的conv1计算，224不整除。如果一定要用224可以通过自动补边实现，不过在input就补边感觉没有意义，补得也是0。
+</p>
+<p>
+	（2）conv - relu - pool - LRN
+</p>
+<p>
+	<img src="http://img.mp.itc.cn/upload/20170416/aaedd9bff37a4cab8c70149943cee57e_th.jpeg" style="height:auto;" /> 
+</p>
+<p>
+	和上面基本一样，唯独需要注意的是group=2，这个属性强行把前面结果的feature map分开，卷积部分分成两部分做。
+</p>
+<p>
+	（3）conv - relu
+</p>
+<p>
+	<img src="http://img.mp.itc.cn/upload/20170416/92c84ddc86e34714b20e65988b231616_th.jpeg" style="height:auto;" /> 
+</p>
+<p>
+	（4）conv-relu
+</p>
+<p>
+	<img src="http://img.mp.itc.cn/upload/20170416/779ec1c3175a4ddb8131365e98df5988_th.jpeg" style="height:auto;" /> 
+</p>
+<p>
+	（5）conv - relu - pool
+</p>
+<p>
+	<img src="http://img.mp.itc.cn/upload/20170416/6a988d0c2fc946b49ccae885cb2a7e8c_th.jpeg" style="height:auto;" /> 
+</p>
+<p>
+	（6）fc - relu - dropout
+</p>
+<p>
+	<img src="http://img.mp.itc.cn/upload/20170416/d536431d144e4ac6a688fc2f5b56ab2d_th.jpeg" style="height:auto;" /> 
+</p>
+<p>
+	这里有一层特殊的dropout层，在alexnet中是说在训练的以1/2概率使得隐藏层的某些neuron的输出为0，这样就丢到了一半节点的输出，BP的时候也不更新这些节点。
+</p>
+<p>
+	（7） fc - relu - dropout
+</p>
+<p>
+	<img src="http://img.mp.itc.cn/upload/20170416/1408ca140f964c83a18a27c8b332477c_th.jpeg" style="height:auto;" /> 
+</p>
+<p>
+	（8）fc - softmax
+</p>
+<p>
+	<img src="http://img.mp.itc.cn/upload/20170416/f940ba2c669b456290599f7264fd9025_th.png" style="height:auto;" /> 
+</p>
+<p>
+	以上图借用[3]，感谢。
+</p>
+<p>
+	GoogleNet
+</p>
+<p>
+	googlenet[4][5]，14年比赛冠军的model，这个model证明了一件事：用更多的卷积，更深的层次可以得到更好的结构。（当然，它并没有证明浅的层次不能达到这样的效果）
+</p>
+<p>
+	<img src="http://img.mp.itc.cn/upload/20170416/fde6c43388a74e7cabf362ae3b0ac74a_th.jpeg" style="height:auto;" /> 
+</p>
+<p>
+	这个model基本上构成部件和alexnet差不多，不过中间有好几个inception的结构：
+</p>
+<p>
+	<img src="http://img.mp.itc.cn/upload/20170416/5adfebd4898b464fa9cea476401abbd5_th.png" style="height:auto;" /> 
+</p>
+<p>
+	是说一分四，然后做一些不同大小的卷积，之后再堆叠feature map。
+</p>
+<p>
+	计算量如下图，可以看到参数总量并不大，但是计算次数是非常大的。
+</p>
+<p>
+	<img src="http://img.mp.itc.cn/upload/20170416/7a013d438f234f12be62c6f22074fb5b_th.jpeg" style="height:auto;" /> 
+</p>
+<p>
+	VGG
+</p>
+<p>
+	VGG有很多个版本，也算是比较稳定和经典的model。它的特点也是连续conv多，计算量巨大（比前面几个都大很多）。具体的model结构可以参考[6]，这里给一个简图。基本上组成构建就是前面alexnet用到的。
+</p>
+<p>
+	<img src="http://img.mp.itc.cn/upload/20170416/0e418682136d48758a6a88dd1492f47b_th.jpeg" style="height:auto;" /> 
+</p>
+<p>
+	下面是几个model的具体结构，可以查阅，很容易看懂。
+</p>
+<p>
+	<img src="http://img.mp.itc.cn/upload/20170416/90ba0e2946f14d6b9d146508ed0c1b1f_th.jpeg" style="height:auto;" /> 
+</p>
+<p>
+	Deep Residual Learning
+</p>
+<p>
+	这个model是2015年底最新给出的，也是15年的imagenet比赛冠军。可以说是进一步将conv进行到底，其特殊之处在于设计了“bottleneck”形式的block（有跨越几层的直连）。最深的model采用的152层！！下面是一个34层的例子，更深的model见表格。
+</p>
+<p>
+	<img src="http://img.mp.itc.cn/upload/20170416/0036945cc69f41d8b08b60a774ab2153.png" style="height:auto;" /> 
+</p>
+<p>
+	其实这个model构成上更加简单，连LRN这样的layer都没有了。
+</p>
+<p>
+	<img src="http://img.mp.itc.cn/upload/20170416/6d73dde67a1f46cc9422d6985997deea_th.jpeg" style="height:auto;" /> 
+</p>
+<p>
+	block的构成见下图：
+</p>
+<p>
+	<img src="http://img.mp.itc.cn/upload/20170416/f58c4079344c4deea71f2f89a12f2116_th.png" style="height:auto;" /> 
+</p>
+<p>
+	总结
+</p>
+<p>
+	OK，到这里把常见的最新的几个model都介绍完了，可以看到，目前cnn model的设计思路基本上朝着深度的网络以及更多的卷积计算方向发展。虽然有点暴力，但是效果上确实是提升了。当然，我认为以后会出现更优秀的model，方向应该不是更深，而是简化。是时候动一动卷积计算的形式了。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1189.html">AlexNet网络</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1191.html">高斯混合模型原理</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/xbinworld/article/details/45619685" target="_blank">https://blog.csdn.net/xbinworld/article/details/45619685</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

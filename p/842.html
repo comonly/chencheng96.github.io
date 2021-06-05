@@ -1,0 +1,291 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>数据库相关汇总_comonly.cn</title>
+<meta name="keywords" content="数据库相关汇总" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">数据库相关汇总</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-01-15</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	数据库
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h3>
+	如何把数据库中某个字段的值修改为NULL？
+</h3>
+<p>
+	NULL，空，值不存在等不同的状态该怎么处理，能不能实现将付过值的字段值变成空
+</p>
+<h3>
+	access数据库怎么设置密码？
+</h3>
+<p>
+	<br />
+</p>
+<div>
+	一直弹出提示：要设置或删除数据库密码，必须以独占方式打开数据库。
+</div>
+<div>
+	<div>
+		第一步：单击菜单栏上的【文件】，选择【信息】，再单击“用密码进行加密”，这时，如果不是刚刚新建的数据库，而是对以前建立的access文件进行加密，则会弹出提示：要设置或删除数据库密码，必须以独占方式打开数据库。2017/4/14 13:56:260
+	</div>
+	<div>
+		thefirst第二步：用独占方式打开数据库。<br />
+1）首先退出Test.accdb文件。<br />
+2）新建一个新的access数据库（或打开一个任意一个access文件），单击菜单栏上的【文件】，选择【打开】项。选中要设置密码的文件，单击右下角的【打开(O)】右边的下拉箭头，选择【以独占方式打开(V)】打开文件<br />
+第三步，单击菜单栏上的【文件】，选择【信息】，再单击“用密码进行加密”<br />
+这时，就会弹出密码设置画面，就可以进行密码设置了
+	</div>
+</div>
+<h3>
+	记录集怎么选取第一条记录?
+</h3>
+<p>
+	select top 1 字段名 from 表名
+</p>
+<h3>
+	sql的where条件中包含中文，查询不出来的处理方法
+</h3>
+<p>
+	<br />
+</p>
+<div>
+	SELECT &nbsp;*
+</div>
+<div>
+	FROM phonenumber_info
+</div>
+<div>
+	where PROVANCE=N'广东' and &nbsp;CITY=N'中山市'
+</div>
+<h3>
+	access数据库，查找记录通配符是什么。
+</h3>
+<p>
+	like "%张三%"
+</p>
+<h3>
+	怎么判断从数据库获得的记录集是否为空
+</h3>
+<p>
+	BOF属性：当记录集记录指针指向第一条记录时返回True<br />
+EOF属性：当记录集记录指针指向最后一条记录时返回True<br />
+if (记录集.EOF &amp;&amp; 记录集.BOF)如果记录集为空，则当前指针即指向第一条记录，也指向最后一条记录。这样就满足了判断条件。
+</p>
+<h3>
+	记录集里的数据按一行5个循环
+</h3>
+<p>
+	<br />
+</p>
+<div>
+	用javascript服务器端语言给你个参考：fro(var i=0;i&lt;10;i++) { Response.Write("aspjavascript"); if(i%5==0){ Response.Write("<br />
+"); } }2017/3/30 18:11:080
+</div>
+<div>
+	thefirst最多显示30条每5条换行,rs_nav为记录集<br />
+&lt;%var numRows = 30,index = 1;rs_nav_numRows += numRows;%&gt;<br />
+&lt;% while ((numRows-- != 0) &amp;&amp; (!rs_nav.EOF)) { %&gt;<br />
+此处为重复数据<br />
+&lt;% if(index % 5==0)Response.Write("<br />
+");index++; //每5行输出一个换行<br />
+rs_nav.MoveNext();} %
+</div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/841.html">js相关汇总</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/843.html">从小白创建网站的流程</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

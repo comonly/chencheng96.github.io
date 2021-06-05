@@ -1,0 +1,255 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>python中list, array的转换_comonly.cn</title>
+<meta name="keywords" content="python中list, array的转换" />
+<meta name="description" content="在python中，list无疑是最强大和最常用的一个数据类型。但是在编写一些数据型操作的时候，比如矩阵乘法或者其它的操作的时候，就需要我们用到array类型。
+这个时候，也常常牵涉到如何进行list与array的转换？转换非常简单，如下
+
+import numpy as np
+list_temp = [[1,2,3],[4,5,6]]
+上面的list_temp就是一个list类型，如果要进行numpy的一些数值运算，我们就需要将它转换为array类型。
+转换如下：
+
+import nump" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">python中list, array的转换</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">忆臻</li>
+          <li class="lmname"><a href="https://zhuanlan.zhihu.com/p/26988972" target="_blank">https://zhuanlan.zhihu.com/p/26988972</a></li>
+          <li class="timer">2020-11-24</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>在python中，list无疑是最强大和最常用的一个数据类型。但是在编写一些数据型操作的时候，比如矩阵乘法或者其它的操作的时候，就需要我们用到array类型。
+这个时候，也常常牵涉到如何进行list与array的转换？转换非常简单，如下
+
+import numpy as np
+list_temp = [[1,2,3],[4,5,6]]
+上面的list_temp就是一个list类型，如果要进行numpy的一些数值运算，我们就需要将它转换为array类型。
+转换如下：
+
+import nump</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 在python中，list无疑是最强大和最常用的一个数据类型。但是在编写一些数据型操作的时候，比如矩阵乘法或者其它的操作的时候，就需要我们用到array类型。<br />
+这个时候，也常常牵涉到如何进行list与array的转换？转换非常简单，如下<br />
+<br />
+import numpy as np<br />
+list_temp = [[1,2,3],[4,5,6]]<br />
+上面的list_temp就是一个list类型，如果要进行numpy的一些数值运算，我们就需要将它转换为array类型。<br />
+转换如下：<br />
+<br />
+import numpy as np<br />
+list_temp = [[1,2,3],[4,5,6]]<br />
+list_temp = np.array(list_temp)<br />
+print list_temp<br />
+上面的list_temp就变成了array类型了。<br />
+这里说一个我原来碰到的小trick，就是在list转换为array的过程中，当list的维度不一样的时候，array并不能将其解释为数组形式，而是解释为一个object类型。<br />
+<br />
+比如说如下：<br />
+<br />
+import numpy as np<br />
+list_temp = [[1,2,3],[4,5,6,7]]<br />
+list_temp = np.array(list_temp)<br />
+print list_temp.shape<br />
+这个时候打印出的list_temp.shape并不是（2L,3L），而是(2L,)并没有第二维了。因为你俩个维度的数个数是不一样的。<br />
+这个时候就将[1,2,3]解释为一个object，将[4,5,6,7]解释为一个object，上面的(2L,)就是相当于俩行，没有第二列。<br />
+<br />
+而不是像将[1,2,3],[4,5,6]解释为2维三列的数组。<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1899.html">tensorflow中tensor与数组之间的转换</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1901.html">为什么加了sudo tensorflow-gpu 就无法导入了 ?</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://zhuanlan.zhihu.com/p/26988972" target="_blank">https://zhuanlan.zhihu.com/p/26988972</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,328 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>从NLP终生学习开始，谈谈深度学习中记忆结构的设计和使用_comonly.cn</title>
+<meta name="keywords" content="从NLP终生学习开始，谈谈深度学习中记忆结构的设计和使用" />
+<meta name="description" content="雷锋网(公众号：雷锋网)&nbsp;AI 科技评论按：终生学习，简单说是让模型有能力持续地学习新的信息，但更重要的是让模型学习新信息的同时还不要完全忘记以往学习过的内容（避免「灾难性遗忘」），是深度学习的长期发展和大规模应用中必不可少的一项模型能力。
+
+
+	近期，「NLP 网红」Sebastian Ruder 小哥把终生学习能力融入了语言模型中，方法是加入一个片段式记忆存储模块。实际上类似的做法也并不是第一次得到应用了，雷锋网 AI 科技评论一并介绍几篇相关论文。
+
+
+	Episodic Me" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">从NLP终生学习开始，谈谈深度学习中记忆结构的设计和使用</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">杨晓凡</li>
+          <li class="lmname"><a href="https://www.leiphone.com/news/201909/YviIbmvZGEKcAoSK.html" target="_blank">https://www.leiphone.com/news/201909/YviIbmvZGEKcAoSK.html</a></li>
+          <li class="timer">2021-02-07</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	机器学习算法分析
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>雷锋网(公众号：雷锋网)&nbsp;AI 科技评论按：终生学习，简单说是让模型有能力持续地学习新的信息，但更重要的是让模型学习新信息的同时还不要完全忘记以往学习过的内容（避免「灾难性遗忘」），是深度学习的长期发展和大规模应用中必不可少的一项模型能力。
+
+
+	近期，「NLP 网红」Sebastian Ruder 小哥把终生学习能力融入了语言模型中，方法是加入一个片段式记忆存储模块。实际上类似的做法也并不是第一次得到应用了，雷锋网 AI 科技评论一并介绍几篇相关论文。
+
+
+	Episodic Me</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	雷锋网(公众号：雷锋网)&nbsp;AI 科技评论按：终生学习，简单说是让模型有能力持续地学习新的信息，但更重要的是让模型学习新信息的同时还不要完全忘记以往学习过的内容（避免「灾难性遗忘」），是深度学习的长期发展和大规模应用中必不可少的一项模型能力。
+</p>
+<p>
+	近期，「NLP 网红」Sebastian Ruder 小哥把终生学习能力融入了语言模型中，方法是加入一个片段式记忆存储模块。实际上类似的做法也并不是第一次得到应用了，雷锋网 AI 科技评论一并介绍几篇相关论文。
+</p>
+<h3>
+	Episodic Memory in Lifelong Language Learning
+</h3>
+<p>
+	终生语言学习中片段式记忆的作用
+</p>
+<p>
+	论文地址：<a href="https://arxiv.org/abs/1906.01076" target="_blank">https://arxiv.org/abs/1906.01076</a> 
+</p>
+<p>
+	内容简介：首先我们把「终生语言学习」（lifelong language learning）任务定义为：模型需要从连续的文本样本流中学习，其中不会指明数据集的边界。作者们提出了一个用片段式记忆存储结构增强语言模型的方式，模型中的存储可以进行稀疏经验重放，也可以进行局部适应，以减缓这种任务中的灾难性遗忘现象。另外，作者们也表明，这个记忆存储结构的空间复杂度可以进行大幅简化（可以降低 50% 到 90%），只需要随机选择把哪些样本存储在记忆中，这种做法对性能的影响非常小。作者们认为片段式记忆存储部件是通用语言智能模型中不可或缺的重要组件。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	通过记忆能力增强模型表现其实并不是新鲜事，「经验重放（experience replay）」的思路最早可以追溯到 1990 年代的强化学习机器人控制论文&nbsp;《Programming Robots Using Reinforcement Learning and Teaching》（<a href="https://www.aaai.org/Papers/AAAI/1991/AAAI91-122.pdf" target="_blank">https://www.aaai.org/Papers/AAAI/1991/AAAI91-122.pdf</a>&nbsp;）以及《Self-Improving Reactive Agents Based On Reinforcement Learning, Planning and Teaching》 （<a href="http://www.incompleteideas.net/lin-92.pdf" target="_blank">http://www.incompleteideas.net/lin-92.pdf</a>&nbsp;），论文中用教学的方式让机器人学会新的技能，那么记忆能力就与教学过程相配合，记录已经学会的技能。
+</p>
+<p>
+	下面我们再介绍几个新一些的成果
+</p>
+<h3>
+	Human Level Control Through Deep Reinforcement Learning
+</h3>
+<p>
+	通过深度强化学习实现人类级别的控制
+</p>
+<p>
+	论文地址：<a href="https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf" target="_blank">https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf</a> 
+</p>
+<p>
+	论文亮点：DeepMind 发表在《Nature》的鼎鼎大名的 DQN 论文中也使用了经验重放。在强化学习的设定中，智能体通过与环境交互获得数据（相当于监督学习中的标注数据集），经验重放可以让智能体重放、排练曾经执行过的动作，更高效地使用已经采集到的数据。当然了，DQN 的另一大贡献是学习到原始输入的高维表征，不再需要人工的特征工程。
+</p>
+<h3>
+	Memory-Augmented Monte Carlo Tree Search
+</h3>
+<p>
+	记忆增强的蒙特卡洛树搜索
+</p>
+<p>
+	论文地址：<a href="https://webdocs.cs.ualberta.ca/~mmueller/ps/2018/Chenjun-Xiao-M-MCTS-aaai18-final.pdf" target="_blank">https://webdocs.cs.ualberta.ca/~mmueller/ps/2018/Chenjun-Xiao-M-MCTS-aaai18-final.pdf</a> 
+</p>
+<p>
+	AAAI 2018 杰出论文
+</p>
+<p>
+	论文简介：这篇论文把一个记忆结构和蒙特卡洛树搜索结合起来，为在线实时搜索提出了一种新的利用泛化性的方式。记忆结构中的每个存储位置都可以包含某个特定状态的信息。通过综合类似的状态的估计结果，这些记忆可以生成逼近的估计值。作者们展示了，在随机情况下，基于记忆的逼近值有更高可能性比原始的蒙特卡洛树搜索表现更好。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	经验重放还有一些高级改进
+</p>
+<h3>
+	Prioritized Experience Replay
+</h3>
+<p>
+	优先经验重放
+</p>
+<p>
+	论文地址：<a href="https://arxiv.org/abs/1511.05952" target="_blank">https://arxiv.org/abs/1511.05952</a> 
+</p>
+<p>
+	论文亮点：这篇论文的作者们提出，在之前的研究中，智能体学习到的经验是均匀地从重放记忆中采样的。而既然记忆的存储来自于智能体实际的探索活动，这就意味着智能体进行活动、获得记忆的分布和从记忆中采样、利用记忆的分布是一样的。作者们认为，智能体获得的记忆中肯定有一些是重要的、有一些是不那么重要的，我们应当更多地利用比较重要的记忆，这样可以用同样多的记忆提高智能体的表现。这篇论文中作者们就设计了一个为记忆的优先程度排序的框架，更多地重放重要的记忆，以便更快地学习。作者们在 DQN 上做了这个实验，改进后的 DQN 比原来的（均一记忆）的 DQN 在绝大多数游戏中都取得了更好的表现。
+</p>
+<p>
+	<br />
+</p>
+<h3>
+	Hindsight Experience Replay
+</h3>
+<p>
+	后见经验重放
+</p>
+<p>
+	论文地址：<a href="https://arxiv.org/abs/1707.01495" target="_blank">https://arxiv.org/abs/1707.01495</a> 
+</p>
+<p>
+	论文亮点：假想要让机械臂执行一个用末端在桌面上推方块到指定地点的任务。对于强化学习模型来说，初次尝试基本是注定失败的；如果不是特别的幸运，接下来的几次尝试也同样会失败。典型的强化学习算法是无法从这些失败经验中学习的，因为它们一直接收到固定的失败（-1）反馈，也就不含有任何可以指导学习的信号。
+</p>
+<p>
+	人类在执行任务的时候其实有一个直觉的感受是：即便我没有达成原来那个给定的目标，我起码还是完成了另外一个目标的。HER&nbsp;的核心思想就是把这一人类直觉公式化。在这里，HER&nbsp;会把实际达到的目标暂且看成要达到的目标；进行这个替换以后，算法认为自己毕竟达到了某个目标，从而可以得到一个学习信号进行学习，即便达到的目标并不是最开始任务要求的那个目标。如果持续进行这个过程，最终算法可以学会达成任意一个目标，其中也自然就包括了我们最开始要求的目标。
+</p>
+<p>
+	依靠这样的办法，即便最开始的时候机械臂根本就碰不到圆盘、以及反馈是稀疏的，最终它也学会了如何把圆盘拨到桌子上的指定位置。这个算法之所以称为&nbsp;Hindsight Experience Replay 后见经验重放，就是因为它是在完成了一次动作之后再选定目标、重放经验进行学习。也所以，HER&nbsp;可以和任何策略无关的强化学习算法结合起来使用，比如&nbsp;DDPG+HER。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	这 7 篇论文打包下载：<a href="https://www.yanxishe.com/resourceDetail/1005" target="_blank">https://www.yanxishe.com/resourceDetail/1005</a> 
+</p>
+<p>
+	雷锋网 AI 科技评论整理
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1937.html">异常处理数据集</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1941.html">期货交易时间</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.leiphone.com/news/201909/YviIbmvZGEKcAoSK.html" target="_blank">https://www.leiphone.com/news/201909/YviIbmvZGEKcAoSK.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

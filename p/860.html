@@ -1,0 +1,1082 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Python面向对象_comonly.cn</title>
+<meta name="keywords" content="Python面向对象" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Python面向对象</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-02-26</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	python  perl
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">Python,面向对象</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='自定义类'>
+	自定义类
+</h2>
+<pre class="prettyprint lang-py">class className:
+   suite
+class className(base_class):
+   suite</pre>
+class同def一样也是一条语句。类的方法是使用def在类的suite中创建。类的实例是使用必要的参数对类进行调用来创建的（比如：x=complex(4, 8)创建一个复数，x为该复数的引用。）。
+<p>
+	Python的所有类都直接或间接的继承自object类。
+</p>
+<pre class="prettyprint lang-py">import math
+class Point:
+   def __init__(self,x=0,y=0):
+      self.x=x
+      self.y=y
+   def distance_from_origin(self):
+      return math.hypot(self.x,self.y)
+   def __eq__(self,other):    #若没有重写该方法会返回False
+      return self.x==other.x and self.y==other.y
+   def __repr__(self):
+      return "Point({0.x!r},{0.y!r})".format(self)
+   def __str__(self):
+      return "({0.x!r},{0.y!r})".format(self)
+
+y=Point(1,1)
+z=Point(1,1)
+print(y.distance_from_origin())
+print(repr(y))
+print(str(y))
+print(y==z)
+print(isinstance(y,Point))
+
+运行结果：
+1.4142135623730951
+Point(1,1)
+(1,1)
+True
+True</pre>
+<p>
+	创建一个对象需要分两步：创建对象和初始化。创建对象通过特殊方法__new__()，之后调用特殊方法__init__()对其初始化。若不提供__new__()方法（通常是这样），Python会自动调用object.__new__()方法。而__init__()方法一般需要我们自己首先。
+</p>
+<p>
+	方法的实现过程也是逐级向上实现的，直到基类object。如果一直找不到该方法，就产生一个AttributeError异常。
+</p>
+<p>
+	在自定义类的__init__()方法的起始处，调用super().__init__()是有用的（一般用于创建那些不是直接继承自object的类）。一般自己定义的方法名起始结尾不应该有两个下划线（除非是预定义的特殊方法，对所有的比较操作符，Python都提供了特殊方法）
+</p>
+<p>
+	<table cellpadding="2" cellspacing="0" border="1" bordercolor="#000000" style="width:80%;">
+		<tbody>
+			<tr>
+				<td>
+					比较的特殊方法&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+				</td>
+				<td>
+					使用&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</td>
+				<td>
+					描述
+				</td>
+			</tr>
+			<tr>
+				<td>
+					__lt__(self,other)
+				</td>
+				<td>
+					x&lt;y
+				</td>
+				<td>
+					如果x比y小，则返回True。
+				</td>
+			</tr>
+			<tr>
+				<td>
+					__le<span>__(self,other)</span> 
+				</td>
+				<td>
+					x&lt;=y
+				</td>
+				<td>
+					<br />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					__eq<span>__(self,other)</span> 
+				</td>
+				<td>
+					x==y
+				</td>
+				<td>
+					<br />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					__ne<span>__(self,other)</span> 
+				</td>
+				<td>
+					x!=y
+				</td>
+				<td>
+					<br />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					__ge<span>__(self,other)</span> 
+				</td>
+				<td>
+					x&gt;=y
+				</td>
+				<td>
+					<br />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					__gt<span>__(self,other)</span> 
+				</td>
+				<td>
+					x&gt;y
+				</td>
+				<td>
+					<br />
+				</td>
+			</tr>
+		</tbody>
+	</table>
+<br />
+默认情况，自定义类所有实例都支持==，但是总返回False。通过重写__eq__()可以改变这一行为。实现__eq__()后，Python会自动提供__ne__()以及（！=）
+</p>
+<p>
+	默认情况，自定义类所有实例都是可哈希运算的，因此可对其调用hash()，也可以将其作为字典的键，或存储在集合中。当如果重新实现__eq__()后，实例就不再是可哈希的了。
+</p>
+<ul>
+	<li>
+		内置的isinstance()函数以一个对象与一个类为参数，如果该对象属于给定的类，或属于给定类的基类，就返回True。
+	</li>
+	<li>
+		内置的repr()函数会对给定的对象调用__repr__()特殊方法，并返回相应结果。结果字符串有两种类型：一种可以使用内置对象eval()函数评估，并生成一个与repr()调用对象等价的对象。否则返回另一种字符串。
+	</li>
+	<li>
+		内置的str()函数调用的是对象的__str__()特殊方法，方法一个字符串结果。
+	</li>
+</ul>
+<h4>
+	继承与多态
+</h4>
+<p>
+	在__init__()方法内部，使用super()来调用基类的__init__()方法。对对象初始化。
+</p>
+<p>
+	多态意味着，给定类的任意对象在使用时都可以看作该类的任意某个基类的对象。
+</p>
+<p>
+	对方法进行重新实现后，如果有必要使用基类的方法版本，可以在实现中调用super()。
+</p>
+<h4>
+	使用特性进行属性存取控制
+</h4>
+<p>
+	修饰器是一个函数，该函数以一个函数或方法为参数，并返回参数的“修饰后”版本，也就是对该函数或方法修改后的版本。decorator是通过在名字前使用@符合引导来进行标记的。
+</p>
+<p>
+	property()修饰器函数是一个内置函数，至多可以接受4个参数，一个获取者函数，一个设置者函数，一个删除者函数以及一个docstrings。使用@property的效果与仅使用一个参数（获取者函数）调用property()的效果相同。
+</p>
+<pre class="prettyprint lang-py">def area(self):
+    return math.pi*(self.radius**2)
+area=property(area)</pre>
+为将属性转换为可读/可写的特性，必须创建一个私有的属性，其中实际存放数据，并提供获取者方法与设置者方法。
+<h4>
+	创建完全整合的数据类型
+</h4>
+<p>
+	两种方法：
+</p>
+<ol>
+	<li>
+		从头开始创建（继承自object），该数据类型所需的每个数据属性及方法（除__new__()外）都必须提供。
+	</li>
+	<li>
+		继承自现有的数据类型，这种数据类型与我们将要创建的数据类型相似。
+	</li>
+</ol>
+<p>
+	若继承来的很多方法对你创建的数据类型而言是没有意义的多于方法，可以取消该方法的实现，尽管这样会破坏多态性。
+</p>
+<pre class="prettyprint lang-py">def __add__(self,other):
+   raise NotlmplementedError()   #NotlmplementedError是一个标准的异常
+
+def __idd__(self,other):
+   raise TypeError("unsupported operand type(s) for +:"
+                   "'{0}'and '{1}'".format(
+                      self.__class__.__name__,other.__class__.__name__))
+
+#对于单值运算，可以模拟内置类型的方式取消其方法实现
+def __neg__(self):
+   raise TypeError("bad operand type for unary -:'{0}'".format(
+      self.__class__.__name__))
+
+#对于比较操作符，可以更简单
+def __eq__(self,other):
+   return Notlmplemented</pre>
+NotlmplementedError是一个标准的异常，与Notlmplemented对象是不同的。若实现比较操作符（&lt;, &lt;=, ==, !=, &gt;=, &gt;）的方法返回一个内置的<span></span><span>Notlmplemented对象</span>，并且尝试实现该方法，那么Python会先交换操作数来反转这种比较，如果任然不能正常工作，产生一个TypeError异常，并给出异常消息解释。
+<p>
+	多个取消实现的方法处理可以通过exec()函数动态执行。
+</p>
+<h2 id='自定义组合类'>
+	自定义组合类
+</h2>
+<h4>
+	使用聚集创建组合类
+</h4>
+<p>
+	创建自定义类时，总可以从某个类似的类进行集成，或从头开始创建，并在其中聚集任意其他类的实例。
+</p>
+<h4>
+	使用继承创建组合类
+</h4></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/859.html">Python函数，模块与包</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/861.html">Python文件处理</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="">
+							<h2 style="display:inline;color:#5BC648;"></h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-02-26&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><h4>
+	继承与多态实例
+</h4>
+<pre class="prettyprint lang-py">import math
+class Point:
+   def __init__(self,x=0,y=0):
+      self.x=x
+      self.y=y
+   def distance_from_origin(self):
+      return math.hypot(self.x,self.y)
+   def __eq__(self,other):    #若没有重写该方法会返回False
+      return self.x==other.x and self.y==other.y
+   def __repr__(self):
+      return "Point({0.x!r},{0.y!r})".format(self)
+   def __str__(self):
+      return "({0.x!r},{0.y!r})".format(self)
+
+class Circle(Point):
+   def __init__(self,radius,x=0,y=0):
+      super().__init__(x,y)
+      self.radius=radius
+   def area(self):
+      return math.pi*(self.radius**2)
+   def __eq__(self,other):
+      return self.radius==other.radius and super().__eq__(other)
+   def __str__(self):   #方法覆盖
+      return repr(self)+" Circle"
+
+y=Point(1,1)
+z=Circle(1,1,1)
+print(z.distance_from_origin())  #继承基类的方法
+print(repr(z))
+print(str(z))
+print(z.area())
+#print(y==z)   # AttributeError: 'Point' object has no attribute 'radius'
+print(isinstance(z,Point))
+
+运行结果：
+1.4142135623730951
+Point(1,1)
+Point(1,1) Circle
+3.141592653589793
+True</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="">
+							<h2 style="display:inline;color:#5BC648;"></h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-02-26&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><h4>
+	使用特性进行属性存取控制
+</h4>
+<pre class="prettyprint lang-py">import math
+class Circle:
+   def __init__(self,radius,x=0,y=0):
+      self.x=x
+      self.y=y
+      self.radius=radius
+   @property
+   def radius(self):
+      """The circle'radius
+
+      &gt;&gt;&gt; circle=Circle(-2)
+      Traceback (most recent call last):
+        File "F:\myPython\test.py", line 34, in &lt;module&gt;
+          circle=Circle(-2)
+        File "F:\myPython\test.py", line 6, in __init__
+          self.radius=radius
+        File "F:\myPython\test.py", line 28, in radius
+          assert radius&gt;0,"radius must be nonzero and non-negative"
+      AssertionError: radius must be nonzero and non-negative
+      &gt;&gt;&gt; circle=Circle(2)
+      &gt;&gt;&gt; circle.radius=-2
+      Traceback (most recent call last):
+        File "&lt;pyshell#3&gt;", line 1, in &lt;module&gt;
+          circle.radius=-2
+        File "F:\myPython\test.py", line 28, in radius
+          assert radius&gt;0,"radius must be nonzero and non-negative"
+      AssertionError: radius must be nonzero and non-negative
+      &gt;&gt;&gt; circle.radius=2
+      
+      """
+      return self._radius
+   @radius.setter
+   def radius(self,radius):
+      assert radius&gt;0,"radius must be nonzero and non-negative"
+      self._radius=radius
+   def __str__(self):   #方法覆盖
+      return "({0.x!r},{0.y!r},{0.radius!r})".format(self)
+
+circle=Circle(2)
+print(circle) #会调用__str__方法。</pre>
+<p>
+	<span>使用assert语句来确保radius取值为非0非负，并把该值存在私有属性self._radius中。获取者与设置者（如果需要，还需要一个删除者）有同样的名称，修饰器会对其进行区分。每个创建的特性都包含getter, setter, deleter等属性。因此在用@property创建了radius特性后，radius.getter, radius.setter, radius.deleter等属性都是可用的。</span> 
+</p>
+<p>
+	<span>Circle的初始化程序（Circle.__init__()）包括self.radius=radius语句，将调用radius特性的设置者方法，因此给定无效值时会产生AssertionError异常。docstrings中包含了doctests（测试这些情况下是否正确产生异常）</span>
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="">
+							<h2 style="display:inline;color:#5BC648;"></h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-02-26&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><h4>
+	<span>基本的特殊方法</span> 
+</h4>
+<table cellpadding="2" cellspacing="0" border="1" bordercolor="#000000" style="width:80%;">
+	<tbody>
+		<tr>
+			<td>
+				<span>特殊方法</span><br />
+			</td>
+			<td>
+				使用
+			</td>
+			<td>
+				描述
+			</td>
+		</tr>
+		<tr>
+			<td>
+				__bool__(self)
+			</td>
+			<td>
+				bool(x)
+			</td>
+			<td>
+				如果提供，返回x的真值，对if x: ...是有用的
+			</td>
+		</tr>
+		<tr>
+			<td>
+				__format__(self, format_spec)
+			</td>
+			<td>
+				"{0}".format(x)
+			</td>
+			<td>
+				为自定义类提供str.format()支持
+			</td>
+		</tr>
+		<tr>
+			<td>
+				__hash__(self)
+			</td>
+			<td>
+				hash(x)
+			</td>
+			<td>
+				如果提供，那么x可用作字典的键或存放在集合中
+			</td>
+		</tr>
+		<tr>
+			<td>
+				__init__(self, args)
+			</td>
+			<td>
+				x=X(args)
+			</td>
+			<td>
+				对象初始化时调用
+			</td>
+		</tr>
+		<tr>
+			<td>
+				__new__(cls, args)
+			</td>
+			<td>
+				x=X(args)
+			</td>
+			<td>
+				创建对象时调用
+			</td>
+		</tr>
+		<tr>
+			<td>
+				__repr__(self)
+			</td>
+			<td>
+				repr(x)
+			</td>
+			<td>
+				返回x的字符串表示，在可能的地方eval(repr(x))==x
+			</td>
+		</tr>
+		<tr>
+			<td>
+				__repr__(self)
+			</td>
+			<td>
+				ascii(x)
+			</td>
+			<td>
+				仅使用ASCII字符返回x的字符串表示
+			</td>
+		</tr>
+		<tr>
+			<td>
+				__str__(self)
+			</td>
+			<td>
+				str(x)
+			</td>
+			<td>
+				返回x适合阅读的字符串表示形式
+			</td>
+		</tr>
+	</tbody>
+</table>
+<h4>
+	数值型与位逻辑运算的特殊方法
+</h4>
+<table cellpadding="2" cellspacing="0" border="1" bordercolor="#000000" style="width:100%;">
+	<tbody>
+		<tr>
+			<td>
+				特殊方法
+			</td>
+			<td>
+				使用
+			</td>
+			<td>
+				特殊方法
+			</td>
+			<td>
+				使用
+			</td>
+			<td>
+				特殊方法
+			</td>
+			<td>
+				使用
+			</td>
+		</tr>
+		<tr>
+			<td>
+				__abs__(self)
+			</td>
+			<td>
+				abs(x)
+			</td>
+			<td>
+				__complex__(self)
+			</td>
+			<td>
+				complex(x)
+			</td>
+			<td>
+				__float__(self)
+			</td>
+			<td>
+				float(x)
+			</td>
+		</tr>
+		<tr>
+			<td>
+				__int__(self)
+			</td>
+			<td>
+				int(x)
+			</td>
+			<td>
+				__index__(self)
+			</td>
+			<td>
+				bin(x)oct(x)hex(x)
+			</td>
+			<td>
+				__round__(self,digits)
+			</td>
+			<td>
+				round(x, digits)
+			</td>
+		</tr>
+		<tr>
+			<td>
+				__pos__(self)
+			</td>
+			<td>
+				+x
+			</td>
+			<td>
+				__neg__(self)
+			</td>
+			<td>
+				-x
+			</td>
+			<td>
+				__add__(self,other)
+			</td>
+			<td>
+				x+y
+			</td>
+		</tr>
+		<tr>
+			<td>
+				__sub__(self,other)
+			</td>
+			<td>
+				x-y
+			</td>
+			<td>
+				__iadd__(self,other)
+			</td>
+			<td>
+				x+=y
+			</td>
+			<td>
+				__isub__(self,other)
+			</td>
+			<td>
+				x-=y
+			</td>
+		</tr>
+		<tr>
+			<td>
+				__radd__(self,other)
+			</td>
+			<td>
+				y+x
+			</td>
+			<td>
+				__rsub(self,other)
+			</td>
+			<td>
+				y-x
+			</td>
+			<td>
+				__mul__(self,other)
+			</td>
+			<td>
+				x*y
+			</td>
+		</tr>
+		<tr>
+			<td>
+				__mod__(self,other)
+			</td>
+			<td>
+				x%y
+			</td>
+			<td>
+				__imul__(self,other)
+			</td>
+			<td>
+				x*=y
+			</td>
+			<td>
+				__imod__(self,other)
+			</td>
+			<td>
+				x%=y
+			</td>
+		</tr>
+		<tr>
+			<td>
+				__rmul__(self,other)
+			</td>
+			<td>
+				y*x
+			</td>
+			<td>
+				__rmod__(self,other)
+			</td>
+			<td>
+				y%x
+			</td>
+			<td>
+				__floordiv__(self, other)
+			</td>
+			<td>
+				x//y
+			</td>
+		</tr>
+		<tr>
+			<td>
+				__truediv__(self,other)
+			</td>
+			<td>
+				x/y
+			</td>
+			<td>
+				__ifloordiv__(self,other)
+			</td>
+			<td>
+				x//=y
+			</td>
+			<td>
+				__itruediv__(self,other)
+			</td>
+			<td>
+				x/=y
+			</td>
+		</tr>
+		<tr>
+			<td>
+				__rfloordiv__(self,other)<br />
+			</td>
+			<td>
+				y//x
+			</td>
+			<td>
+				__rtruediv__(self,other)
+			</td>
+			<td>
+				y/x
+			</td>
+			<td>
+				__divmod__(self,other)
+			</td>
+			<td>
+				divmod(x,y)
+			</td>
+		</tr>
+		<tr>
+			<td>
+				__rdivmod__(self,other)
+			</td>
+			<td>
+				divmod(y,x)
+			</td>
+			<td>
+				__pow__(self,other)
+			</td>
+			<td>
+				x**y
+			</td>
+			<td>
+				__and__(self,other)
+			</td>
+			<td>
+				x&amp;y
+			</td>
+		</tr>
+		<tr>
+			<td>
+				__ipow__(self,other)
+			</td>
+			<td>
+				x**=y
+			</td>
+			<td>
+				__iand__(self,other)
+			</td>
+			<td>
+				x&amp;=y
+			</td>
+			<td>
+				__rpow__(self,other)
+			</td>
+			<td>
+				y**x
+			</td>
+		</tr>
+		<tr>
+			<td>
+				__rand__(self,other)<br />
+			</td>
+			<td>
+				y&amp;x
+			</td>
+			<td>
+				__xor__(self,other)
+			</td>
+			<td>
+				x^y
+			</td>
+			<td>
+				__or__(self,other)
+			</td>
+			<td>
+				x|y
+			</td>
+		</tr>
+		<tr>
+			<td>
+				__ixor__(self,other)
+			</td>
+			<td>
+				x^=y
+			</td>
+			<td>
+				__ior__(self,other)
+			</td>
+			<td>
+				x|=y
+			</td>
+			<td>
+				__rxor__(self,other)
+			</td>
+			<td>
+				y^x
+			</td>
+		</tr>
+		<tr>
+			<td>
+				__ror__(self,other)<br />
+			</td>
+			<td>
+				y|x
+			</td>
+			<td>
+				__lshift__(self,other)
+			</td>
+			<td>
+				x&lt;<y< td=""></y<>
+			</td>
+			<td>
+				__rshift__(self,other)
+			</td>
+			<td>
+				x&gt;&gt;y
+			</td>
+		</tr>
+		<tr>
+			<td>
+				__ilshift__(self,other)
+			</td>
+			<td>
+				x&lt;&lt;=y
+			</td>
+			<td>
+				__irshift__(self,other)
+			</td>
+			<td>
+				x&gt;&gt;=y
+			</td>
+			<td>
+				__rlshift__(self,other)
+			</td>
+			<td>
+				y&lt;<x< td=""></x<>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				__rrshift__(self,other)
+			</td>
+			<td>
+				y&gt;&gt;x
+			</td>
+			<td>
+				__invert__(self)
+			</td>
+			<td>
+				~x
+			</td>
+			<td>
+				<br />
+			</td>
+			<td>
+				<br />
+			</td>
+		</tr>
+	</tbody>
+</table></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="">
+							<h2 style="display:inline;color:#5BC648;"></h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-02-26&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><h4>
+	取消多个实现方法（exec()函数动态执行）
+</h4>
+<pre class="prettyprint lang-py">for name,operator in(("__neg__","-"),
+                     ("__index__","index()")):
+   message=("bad operand type for unary {0}:'{{self}}'"
+            .format(operator))
+   exec("def {0}(self):raise TypeError(\"{1}\".format("
+        "self=self.__class__.__name__))".format(name,message))</pre>
+<p>
+	内置的exec()函数动态执行从给定对象传递来的代码，这里是一个字符串对象，也可以传递其他类型的对象。
+</p>
+<p>
+	第一个元组("__neg__","-")生成的代码为：
+</p>
+<pre class="prettyprint lang-py">def __neg__(self):
+   raise TypeError("bad operand type for unary -: '{self}'"
+                   .format(self=self.__class__.__name__))</pre>
+下面给出一个从int继承来的类changInt，按上述方式取消 - 的实现，产生异常： TypeError: bad operand type for unary -:'changeInt'
+<pre class="prettyprint lang-py">class changInt(int):
+   for name,operator in(("__neg__","-"),
+                     ("__index__","index()")):
+      message=("bad operand type for unary {0}:'{{self}}'"
+            .format(operator))
+      exec("def {0}(self):raise TypeError(\"{1}\".format("
+        "self=self.__class__.__name__))".format(name,message))
+
+a=int(2)
+b=changInt(2)
+print(-a)
+print(-b)
+
+输出结果：
+-2
+Traceback (most recent call last):
+  File "F:\myPython\test.py", line 12, in &lt;module&gt;
+    print(-b)
+  File "&lt;string&gt;", line 1, in __neg__
+TypeError: bad operand type for unary -:'changInt'</pre>
+同样，用于处理二元方法，以及n元函数，遵循类似的模式，区别的仅仅是给出不同的错误信息。</span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#自定义类">自定义类</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#自定义组合类">自定义组合类</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

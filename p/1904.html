@@ -1,0 +1,286 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>YOLOv4在Linux (Ubuntu)上编译_comonly.cn</title>
+<meta name="keywords" content="YOLOv4在Linux (Ubuntu)上编译" />
+<meta name="description" content="1. 直接当程序使用
+
+
+	YOLO V4代码的初步使用，直接生成可执行文件，然后通过命令行传入图片直接得到结果。
+
+
+	https://www.freesion.com/article/3502867297/ 
+
+
+	1、从如下网址下载darknetAB源码：
+https://github.com/AlexeyAB/darknet
+2、下载 Yolo v4训练权重：Yolo v4训练权重，将下载好的权重放到darknet目录下即可；
+3、打开makefile文件，在编译之前可以修" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">YOLOv4在Linux (Ubuntu)上编译</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2020-11-26</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	机器学习算法分析
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>1. 直接当程序使用
+
+
+	YOLO V4代码的初步使用，直接生成可执行文件，然后通过命令行传入图片直接得到结果。
+
+
+	https://www.freesion.com/article/3502867297/ 
+
+
+	1、从如下网址下载darknetAB源码：
+https://github.com/AlexeyAB/darknet
+2、下载 Yolo v4训练权重：Yolo v4训练权重，将下载好的权重放到darknet目录下即可；
+3、打开makefile文件，在编译之前可以修</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='1.直接当程序使用'>
+	1. 直接当程序使用
+</h2>
+<p>
+	YOLO V4代码的初步使用，直接生成可执行文件，然后通过命令行传入图片直接得到结果。
+</p>
+<p>
+	<a href="https://www.freesion.com/article/3502867297/" target="_blank">https://www.freesion.com/article/3502867297/</a> 
+</p>
+<p>
+	1、从如下网址下载darknetAB源码：<br />
+https://github.com/AlexeyAB/darknet<br />
+2、下载 Yolo v4训练权重：Yolo v4训练权重，将下载好的权重放到darknet目录下即可；<br />
+3、打开makefile文件，在编译之前可以修改可选参数以适应于自己的计算机：<br />
+(1)GPU=1，采用GPU加速，采用CUDA进行编译；<br />
+(2)CUDNN=1，采用cuDNN v5-v7进行编译，进行加速训练；<br />
+(3)CUDNN_HALF=1，在Titan V、Tesla V100、DGX-2及更高版本上使用；<br />
+(4)OPENCV=1，使用OpenCV，支持各个版本的OpenCV(4.x/3.x/2.4.x)，可以检测来自网络摄像机或web-cams的视频文件与视频流。<br />
+上述这4个参数是主要修改的，其他参数使用得较少，可暂时不用修改。<br />
+4、在darknet目录下执行make进行编译：<br />
+make<br />
+编译完成后， 可以看到在当前目录下生成了darknet可执行文件：<br />
+5、执行如下指令进行图片检测：<br />
+./darknet detector test ./cfg/coco.data ./cfg/yolov4.cfg ./yolov4.weights data/dog.jpg
+</p>
+<h2 id='2.通过ytho调用'>
+	2. 通过python调用
+</h2>
+<p>
+	通过python调用so库进行使用
+</p>
+<p>
+	将Yolo用作DLL和SO库<br />
+在Linux上
+</p>
+<ul>
+	<li>
+		使用build.sh或
+	</li>
+	<li>
+		darknet使用cmake建立或
+	</li>
+	<li>
+		设置LIBSO=1在Makefile做make
+	</li>
+</ul>
+官方文档当查看github的readme：https://github.com/AlexeyAB/darknet
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1903.html">YOLOv4在Windows上编译 DLL 库 之后通过python调用</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1905.html">linux里挂载（mount）和取消挂载（umount）命令的使用 -- 可以解决文件权限问题</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#1.直接当程序使用">1.直接当程序使用</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#2.通过ytho调用">2.通过ytho调用</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

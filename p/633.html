@@ -1,0 +1,424 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>单选框和复选框—JavaScript_comonly.cn</title>
+<meta name="keywords" content="单选框和复选框—JavaScript" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">单选框和复选框—JavaScript</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-03-13</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">JavaScript,单选框,复选框</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	单选框对象（radio）和复选框对象（checkbox）的属性，方法和事件几乎完全相同。
+</p>
+<h2 id='单选框和复选框的属性'>
+	单选框和复选框的属性
+</h2>
+<blockquote>
+	<p>
+		accesskey：返回或设置单选框或复选框的快捷键
+	</p>
+	<p>
+		checked：返回或设置单选框或者复选框是否处在被选中的状态，属性值为布尔值
+	</p>
+	<p>
+		defaultchecked：<span style="line-height:1.5;">返回在默认情况下</span><span style="line-height:1.5;">单选框或复选框</span><span style="line-height:1.5;">上是否处于被选中状态</span>
+	</p>
+	<p>
+		defaultvalue：<span>返回或设置<span>单选框或者复选框</span>的初始值</span>
+	</p>
+	<p>
+		disabled：返回或设置<span>单选框或复选框</span>是否被禁用，属性为布尔值
+	</p>
+	<p>
+		form：返回包含<span>单选框或复选框</span>元素的form对象的引用
+	</p>
+	<p>
+		id：返回或设置<span>单选框或复选框</span>的id属性
+	</p>
+	<p>
+		length：返回一组单选框或复选框中包含多少个单选框或复选框
+	</p>
+	<p>
+		name：返回或设置<span>单选框或复选框</span>的名称
+	</p>
+	<p>
+		tabindex：返回或设置<span>单选框或复选框</span>的Tab键顺序
+	</p>
+	<p>
+		value：返回或设置显示在<span>单选框或复选框</span>上的值
+	</p>
+	<p>
+		type：返回<span>单选框或者复选框</span>的类型，单选框返回radio，复选框返回checkbox
+	</p>
+</blockquote>
+<h2 id='单选框和复选框的方法'>
+	单选框和复选框的方法
+</h2>
+<blockquote>
+	<p>
+		blur()：将焦点从<span>单选框或复选框</span>移开
+	</p>
+	<p>
+		click()：模拟<span>单选框或复选框</span>被鼠标点击
+	</p>
+	<p>
+		focus()：将焦点赋给该<span>单选框或复选框</span>
+	</p>
+</blockquote>
+<h2 id='单选框和复选框的事件'>
+	单选框和复选框的事件
+</h2>
+<blockquote>
+	<p>
+		blur：当焦点从<span>单选框或复选框</span>移开时激发的事件
+	</p>
+	<p>
+		click：单击<span>单选框或复选框</span>时激发的事件
+	</p>
+	<p>
+		dbclick：双击<span>单选框或复选框</span>时激发的事件
+	</p>
+	<p>
+		focus：当焦点赋给<span>单选框或复选框</span>时激发的事件
+	</p>
+	<p>
+		keydown：用户按下键盘键时激发的事件
+	</p>
+	<p>
+		keypress：按下并释放键盘键时所激发的事件
+	</p>
+	<p>
+		keyup：释放键盘时所激发的事件
+	</p>
+	<p>
+		mousedown：按下鼠标键（并没有释放）时所激发的事件
+	</p>
+	<p>
+		mousemove：移动鼠标时激发的事件
+	</p>
+	<p>
+		mouseover：鼠标从<span>单选框或复选框</span>对象上移开时所激发的事件
+	</p>
+	<p>
+		mouseup：释放鼠标键时所激发的事件
+	</p>
+	<p>
+		mouseout：鼠标从<span>单选框或复选框</span>对象上移开时激发的事件
+	</p>
+</blockquote>
+<h2 id='单选框和复选框组'>
+	单选框和复选框组
+</h2>
+<p>
+	大多数单选框和复选框都是以组的形式出现的，只要将单选框和复选框的name属性设置成相同就可以创建单选框和复选框。
+</p>
+<p>
+	单选框组：
+</p>
+<p>
+	&lt;input type="radio" value="男" name="sex"&gt;男
+</p>
+<p>
+	<span>&lt;input type="radio" value="女" name="sex"&gt;女</span> 
+</p>
+<p>
+	复选框组：
+</p>
+<p>
+	<span>&lt;input type="checkbox" value="篮球" name="xq"&gt;篮球</span> 
+</p>
+<p>
+	<span><span>&lt;input type="checkbox" value="足球" name="xq"&gt;足球</span></span> 
+</p>
+<p>
+	<span><span>&lt;input type="checkbox" value="游戏" name="xq"&gt;游戏</span><br />
+</span> 
+</p>
+<p>
+	<span>在表单对象中，会将每个单选框与复选框看成是一个独立的对象，而不是将每个单选框与复选框组看成一个独立的对象。</span> 
+</p>
+<h2 id='获取单选框和复选框的值'>
+	获取单选框和复选框的值
+</h2>
+<p>
+	在JavaScript中，将name属性值相同的单选框与复选框都放在一个数组中，通过访问数组中的元素就可以访问单选框或复选框的值。
+</p>
+<p>
+	&lt;form name="myform"&gt;
+</p>
+<p>
+	&lt;input type="radio" value="男" name="sex"&gt;男
+</p>
+<p>
+	&lt;input type="radio" value="女" name="sex"&gt;女
+</p>
+&lt;/form&gt;
+<p>
+	document.myform.sex &nbsp; &nbsp; &nbsp; &nbsp;//获取单选框数组
+</p>
+<p>
+	<span>document.myform.sex[0] &nbsp; //获取单选框数组的第一个数组</span> 
+</p>
+<p>
+	<span>document.myform.sex[1] &nbsp; &nbsp;//获取单选框数组的第二个元素</span> 
+</p>
+<p>
+	<span>document.myform.sex</span>.length//获取单选框数组的长度
+</p>
+<h2 id='限制复选框的选项数'>
+	限制复选框的选项数
+</h2>
+<p>
+	&lt;script language="javascript"&gt;
+</p>
+<p>
+	function check(){
+</p>
+<p>
+	var count=0;
+</p>
+<p>
+	for(var i=0;i&lt;document.form1.kc.length;i++){
+</p>
+<p>
+	if(document.form1.kc[i].checked)count++;}
+</p>
+<p>
+	if(count&gt;4){window.alert("你好，最多只能选择四项！请重新选择");return false;}
+</p>
+<p>
+	}
+</p>
+<p>
+	&lt;/script&gt;
+</p>
+<p>
+	&lt;form action="" method="post" name="form1"&gt;
+</p>
+<p>
+	&lt;input name="kc" type="checkbox" value="the1" onclick="return check()"/&gt;test1&lt;/br&gt;
+</p>
+<p>
+	<span>&lt;input name="kc" type="checkbox" value="the2" onclick="return check()"/&gt;test2&lt;/br&gt;</span> 
+</p>
+<p>
+	<span>&lt;input name="kc" type="checkbox" value="the3" onclick="return check()"/&gt;test3&lt;/br&gt;</span> 
+</p>
+<p>
+	<span>&lt;input name="kc" type="checkbox" value="the4" onclick="return check()"/&gt;test4&lt;/br&gt;</span> 
+</p>
+<p>
+	<span>&lt;input name="kc" type="checkbox" value="the5" onclick="return check()"/&gt;test5&lt;/br&gt;</span> 
+</p>
+<p>
+	<span>&lt;input name="kc" type="checkbox" value="the6" onclick="return check()"/&gt;test6&lt;/br&gt;</span> 
+</p>
+<p>
+	&lt;/form&gt;
+</p>
+<p>
+	复制代码<a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank"><span style="background-color:#FFE500;">在线测试运行效果</span></a> 
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/632.html">按钮—JavaScript</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/634.html">下拉列表框—JavaScript</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#单选框和复选框的属性">单选框和复选框的属性</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#单选框和复选框的方法">单选框和复选框的方法</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#单选框和复选框的事件">单选框和复选框的事件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#单选框和复选框组">单选框和复选框组</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#获取单选框和复选框的值">获取单选框和复选框的值</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#限制复选框的选项数">限制复选框的选项数</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

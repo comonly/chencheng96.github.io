@@ -1,0 +1,312 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>安装和使用URL重写工具-URL Rewrite_comonly.cn</title>
+<meta name="keywords" content="安装和使用URL重写工具-URL Rewrite" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">安装和使用URL重写工具-URL Rewrite</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">十有三</li>
+          <li class="lmname"><a href="http://shiyousan.com/post/635646254870261696" target="_blank">http://shiyousan.com/post/635646254870261696</a></li>
+          <li class="timer">2017-03-30</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	服务器apache等
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">URL Rewrite</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	<span style="line-height:1.5;">本文记录了在IIS8下安装和使用URL Rewrite插件的步骤，详细举例说明如何使用URL重写工具实现301重定向的功能。</span>
+</p>
+<h2 class="radius_h2">
+	下载和安装URL Rewrite
+</h2>
+<p>
+	IIS8默认是没有安装URL重写工具的，必须要自己下载安装。
+</p>
+<p>
+	手动下载URL Rewrite插件，这是官方地址：<a href="http://www.iis.net/downloads/microsoft/url-rewrite" target="_blank">URL Rewrite下载</a> 
+</p>
+<p>
+	这里有两种方式，一种是下载Web平台安装程序的插件包进行在线安装，点击下载页面中的Install this extension按钮下载urlrewrite2.exe安装程序，双击后会自动运行Web平台安装程序安装URL重写工具2.0。
+</p>
+<p>
+	<img alt="安装插件" class="img-thumbnail" src="http://shiyousan.com/UserFiles/images/2015/04/635646254870261696/12_635646254870261696.jpg" style="border:1px solid #DDDDDD;height:134px;width:633px;" /> 
+</p>
+<p>
+	<img alt="使用Web平台安装程序安装URL重写工具" class="img-thumbnail" src="http://shiyousan.com/UserFiles/images/2015/04/635646254870261696/01_635646254870261696.JPG" style="border:1px solid #DDDDDD;height:337px;width:550px;" /> 
+</p>
+<p>
+	另外一种方式是下载离线安装包，下载地址在页面靠近底部的Download URL Rewrite Module 2.0区块。不过要选择对应自己网站服务器的版本，比如笔者的服务器是64位，中文简体，就要选择如图所示的版本：
+</p>
+<p>
+	<img alt="选择URL重写工具版本" class="img-thumbnail" src="http://shiyousan.com/UserFiles/images/2015/04/635646254870261696/02_635646254870261696.JPG" style="border:1px solid #DDDDDD;height:285px;width:332px;" /> 
+</p>
+<p>
+	这两种方式都没有什么复杂的步骤，基本一直点击下一步直到完成就可以了。
+</p>
+<hr />
+<p>
+	2015/10/21更新，现在下载链接只有版本的区别，没有语言区别了，语言会根据服务器自动判断：
+</p>
+<p>
+	<img alt="选择URL重写工具插件的系统版本" class="img-thumbnail" src="http://shiyousan.com/UserFiles/images/2015/04/635646254870261696/11_635646254870261696.jpg" style="border:1px solid #DDDDDD;height:135px;width:328px;" /> 
+</p>
+<hr />
+<h2 class="radius_h2">
+	在IIS上使用URL重写工具的具体步骤
+</h2>
+<p>
+	URL Rewrite重写工具主要是使用正则或者通配符进行匹配，对于正则和通配符要有一定的了解，可以网上查下相关的资料，这里建议看官方的帮助文档：<a href="http://www.iis.net/learn/extensions/url-rewrite-module/url-rewrite-module-configuration-reference" target="_blank">URL Rewrite Module Configuration</a> 和 <a href="https://technet.microsoft.com/zh-cn/library/ee215194(v=ws.10).aspx" target="_blank">IIS URL 重写模块</a> 
+</p>
+<p>
+	首先打开IIS下网站的URL重写功能：
+</p>
+<p>
+	<img alt="url重写图标" src="http://shiyousan.com/UserFiles/images/2015/04/635646254870261696/03_635646254870261696.JPG" style="height:81px;width:69px;" /> 
+</p>
+<hr />
+<p>
+	我们右键或者右边的操作菜单栏中选择添加规则，我们可以看到默认有提供很多规则模板，这里我们选择一个空白规则作为添加301重定向的重写演示：
+</p>
+<p>
+	<img alt="重写的选择规则模板" class="img-thumbnail" src="http://shiyousan.com/UserFiles/images/2015/04/635646254870261696/04_635646254870261696.JPG" style="border:1px solid #DDDDDD;height:313px;width:412px;" /> 
+</p>
+<hr />
+<p>
+	打开编辑入站规则的界面后，我们输入自己定义的名称，选择匹配URL的方式和使用的规则，规则可以选择正则表达式、通配符和完全匹配，这里使用的是正则作为示例。最后在匹配URL模式输入.*（正则表达式，表示匹配所有的路径，这里就是文档中的rule patterns）。
+</p>
+<p>
+	<img alt="设置rule patterns" class="img-thumbnail" src="http://shiyousan.com/UserFiles/images/2015/04/635646254870261696/05_635646254870261696.JPG" style="border:1px solid #DDDDDD;height:367px;width:692px;" /> 
+</p>
+<p>
+	关于这里的规则模式，这里建议看这篇文章：<a href="http://www.iyaka.cn/blog/14_658.html" target="_blank">详解IIS中URL重写工具的匹配URL-规则模式(rule patterns)</a> 
+</p>
+<hr />
+<p>
+	接下来添加URL过滤条件，逻辑分组那根据自己的需求选择，比如笔者是打算做全站301跳转，所以这里用任意匹配。点击添加按钮，设置输入为{HTTP_HOST} ，类型为与模式匹配，模式为^www.shiyousan.com$， 由于之前选择了使用正则作为匹配规则，所以这里要注意使用正确匹配规则。这里主要是设置匹配所有带www的二级域名路径，无论是否有带参数或者目录全部都会匹配到，等于二级域名全站匹配进行重定向跳转。
+</p>
+<p>
+	PS:
+</p>
+<ol>
+	<li>
+		服务器变量如果没有就放空不设置。
+	</li>
+	<li>
+		{HTTP_HOST}服务器变量类型，表示所请求的主机，是规则条件输入的值。如果选择的类型为与模式匹配，一般常用有QUERY_STRING、HTTP_HOST、SERVER_PORT、SERVER_PORT_SECURE、REQUEST_URI等服务变量，建议看这篇文章：<a href="http://www.iyaka.cn/blog/14_657.html" target="_blank">详解IIS中URL重写工具的规则条件(Rule conditions)</a>，里面有更加详细的说明。
+	</li>
+</ol>
+<p>
+	<img alt="设置condition patterns" class="img-thumbnail" src="http://shiyousan.com/UserFiles/images/2015/04/635646254870261696/06_635646254870261696.JPG" style="border:1px solid #DDDDDD;height:171px;width:678px;" /> 
+</p>
+<hr />
+<p>
+	最后一步就是设置操作，操作类型有五个选项：重写、无、重定向、自定义响应、中止请求。笔者选择的是重定向，然后设置重定向URL，这里的URL是：http://shiyousan.com/{R:0} 。表示所有www.shiyousan.com的URL地址(包括有带参数的地址以及多级目录的地址)都要跳转到shiyousan.com这个顶级域名的URL中。最后重定向类型选择永久301就大功告成了！！！
+</p>
+<p>
+	<img alt="" class="img-thumbnail" src="http://shiyousan.com/UserFiles/images/2015/04/635646254870261696/07_635646254870261696.JPG" style="border:1px solid #DDDDDD;height:301px;width:234px;" /> 
+</p>
+<p>
+	PS:{R:0}是反向引用，表示与匹配url模式.*的正则全部匹配，也就是rule patterns的匹配规则，具体可以看这篇文章：<a href="http://shiyousan.com/post/635648886502897428" target="_blank">详解IIS中的URL重写工具下关于操作重定向URL中的{R:N}与{C:N}</a>，也可以看官方的文档：<a href="http://www.iis.net/learn/extensions/url-rewrite-module/url-rewrite-module-configuration-reference#Using_back-references_in_rewrite_rules" target="_blank">Using back-references in rewrite rules</a> 
+</p>
+<p>
+	<img alt="R:0与rule patterns" class="img-thumbnail" src="http://shiyousan.com/UserFiles/images/2015/04/635646254870261696/08_635646254870261696.JPG" style="border:1px solid #DDDDDD;height:186px;width:156px;" />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/655.html">URL静态化，URL伪静态，URL重写和页面静态化</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/657.html">IIS中URL重写工具的规则条件(Rule conditions)</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="http://shiyousan.com/post/635646254870261696" target="_blank">http://shiyousan.com/post/635646254870261696</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

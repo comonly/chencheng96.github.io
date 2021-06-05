@@ -1,0 +1,308 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>SetUnhandledExceptionFilter 异常处理函数_comonly.cn</title>
+<meta name="keywords" content="SetUnhandledExceptionFilter 异常处理函数" />
+<meta name="description" content="1、SetUnhandleExceptionFilter函数
+
+&nbsp; &nbsp; Windows平台下的C++程序异常通常可分为两种：结构化异常（Structured Exception，可以理解为与操作系统相关的异常）和C++异常。对于结构化异常处理（SEH），可以找到很多资料，在此不细说。对于crash错 误，一般由未被正常捕获的异常引起，Windows操作系统提供了一个API函数可以在程序crash之前有机会处理这些异常，就是 SetUnhandleExceptionFilter函数。" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">SetUnhandledExceptionFilter 异常处理函数</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-11-15</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>1、SetUnhandleExceptionFilter函数
+
+&nbsp; &nbsp; Windows平台下的C++程序异常通常可分为两种：结构化异常（Structured Exception，可以理解为与操作系统相关的异常）和C++异常。对于结构化异常处理（SEH），可以找到很多资料，在此不细说。对于crash错 误，一般由未被正常捕获的异常引起，Windows操作系统提供了一个API函数可以在程序crash之前有机会处理这些异常，就是 SetUnhandleExceptionFilter函数。</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 1、SetUnhandleExceptionFilter函数<br />
+<br />
+&nbsp; &nbsp; Windows平台下的C++程序异常通常可分为两种：结构化异常（Structured Exception，可以理解为与操作系统相关的异常）和C++异常。对于结构化异常处理（SEH），可以找到很多资料，在此不细说。对于crash错 误，一般由未被正常捕获的异常引起，Windows操作系统提供了一个API函数可以在程序crash之前有机会处理这些异常，就是 SetUnhandleExceptionFilter函数。（C++也有一个类似函数set_terminate可以处理未被捕获的C++异常。）<br />
+<br />
+&nbsp; &nbsp; SetUnhandleExceptionFilter函数声明如下：<br />
+<br />
+&nbsp; &nbsp; LPTOP_LEVEL_EXCEPTION_FILTER WINAPI SetUnhandledExceptionFilter(<br />
+&nbsp; &nbsp; &nbsp; __in&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; LPTOP_LEVEL_EXCEPTION_FILTER lpTopLevelExceptionFilter<br />
+&nbsp; &nbsp; );<br />
+<br />
+&nbsp; &nbsp; 其中 LPTOP_LEVEL_EXCEPTION_FILTER 定义如下：<br />
+<br />
+&nbsp; &nbsp; typedef LONG (WINAPI *PTOP_LEVEL_EXCEPTION_FILTER)(<br />
+&nbsp; &nbsp; &nbsp; &nbsp; __in struct _EXCEPTION_POINTERS *ExceptionInfo<br />
+&nbsp; &nbsp; );<br />
+&nbsp; &nbsp; typedef PTOP_LEVEL_EXCEPTION_FILTER LPTOP_LEVEL_EXCEPTION_FILTER;<br />
+<br />
+&nbsp; &nbsp; 简单来说，SetUnhandleExceptionFilter允许我们设置一个自己的函数作为全局SEH过滤函数，当程序crash前会调用我们的函 数进行处理。我们可以利用的是 _EXCEPTION_POINTERS 结构类型的变量ExceptionInfo，它包含了对异常的描述以及发生异常的线程状态，过滤函数可以通过返回不同的值来让系统继续运行或退出应用程 序。<br />
+<br />
+&nbsp; &nbsp; 关于 SetUnhandleExceptionFilter 函数的具体用法和示例请参考MSDN。<br />
+<br />
+&nbsp; &nbsp; &nbsp; 首先看下百度上的对此函数的解释。<br />
+<br />
+设置异常捕获函数.<br />
+<br />
+当异常没有处理的时候,系统就会调用SetUnhandledExceptionFilter所设置异常处理函数.<br />
+<br />
+例如一些程序在出错的时候,会向用户报告说程序那出错就是利用这个.例如QQ..<br />
+<br />
+异常处理中的一部分<br />
+<br />
+当发生异常时，比如内存访问违例时，CPU硬件会发现此问题，并产生一个异常（你可以把它理解为中断）<br />
+<br />
+然后CPU会把代码流程切换到异常处理服务例程。操作系统异常处理服务例程会查看当前进程是否处于调试状态<br />
+<br />
+如果时，则通知调试器发生了异常，如果不是则操作系统会查看当前线程是否安装了的异常帧链(FS[0])，如果安装了SEH（try.... catch....），则调用SEH，并根据返回结果决定是否全局展开活局部展开。如果异常链中所有的SEH都没有处理此异常，而且此进程还处于调试状态，则操作系统会再次通知调试器发生异常（二次异常）。如果还没人处理，则调用操作系统的默认异常处理代码UnhandledExceptionHandler，不过操作系统允许你Hook这个函数，就是通过SetUnhandledExceptionFilter函数来设置。大部分异常通过此种方法都能捕获，不过栈溢出、覆盖的有可能捕获不到。<br />
+<br />
+大部分保护壳都采用异常处理技术，跳出正常的代码指令流程，来迷惑Cracker。<br />
+<br />
+&nbsp; &nbsp;说的有点粗略。<br />
+<br />
+下面根据自己的理解阐述下。<br />
+<br />
+&nbsp; &nbsp;SetUnhandledExceptionFilter，根据函数的名字能看出是设置异常处理函数，其实如果程序没设置异常处理函数，程序会调用默认的处理函数处理异常，然后程序终止，一般情况下就弹出个对话框。<br />
+<br />
+如何设置自己的异常处理函数？<br />
+<br />
+LPTOP_LEVEL_EXCEPTION_FILTER SetUnhandledExceptionFilter(<br />
+LPTOP_LEVEL_EXCEPTION_FILTER lpTopLevelExceptionFilter&nbsp;<br />
+);<br />
+<br />
+参数是一个函数指针，定义如下<br />
+<br />
+LONG UnhandledExceptionFilter(<br />
+STRUCT _EXCEPTION_POINTERS *ExceptionInfo&nbsp;<br />
+);<br />
+<br />
+函数类型<br />
+<br />
+ExceptionInfo 是对异常描述的一个结构体<br />
+<br />
+typedef struct _EXCEPTION_POINTERS {<br />
+PEXCEPTION_RECORD ExceptionRecord;&nbsp;<br />
+PCONTEXT ContextRecord;&nbsp;<br />
+} EXCEPTION_POINTERS, *PEXCEPTION_POINTERS;<br />
+<br />
+异常捕获函数有三种返回值<br />
+<br />
+EXCEPTION_EXECUTE_HANDLER：表明异常处理完毕，程序可以退出<br />
+<br />
+EXCEPTION_CONTINUE_EXECUTION：忽略此异常，从异常点继续运行。如果此时再发生异常，还会调用异常处理函数<br />
+<br />
+EXCEPTION_CONTINUE_SEARCH：异常没被识别，交由上一级处理函数处理；<br />
+<br />
+SetUnhandledExceptionFilter返回值，如果为0，表明此时没有附加额外的处理函数（除默认的处理函数），如果非空，则存放到当前顶层的处理函数地址。<br />
+<br />
+需要注意的是，SetUnhandledExceptionFilter设置的异常处理函数为全局的处理函数，是异常发生后，最后一次处理异常的机会。如果程序被调试器附加。调试器将优先于SetUnhandledExceptionFilter设置的异常处理函数处理异常。C++自定义的try{}Catch{}比较。这是C++自定义的异常处理过程，利用SEH来处理发生的异常，如果异常发生，又出现在try{}Catch{}中 将得到优先处理。<br />
+<p>
+	<br />
+</p>
+<p>
+	在VS中正确设置SetUnhandledExceptionFilter函数&nbsp;&nbsp;绕过VC++的重置：<a href="https://my.oschina.net/u/3489228/blog/1580985" target="_blank">https://my.oschina.net/u/3489228/blog/1580985</a>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1545.html">art-template绑定json数据</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1547.html">windows下编译运行c c++ java程序【待处理】</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

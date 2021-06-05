@@ -1,0 +1,266 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>多线程线程中，等待另一线程结束后，调用回调函数的处理流程_comonly.cn</title>
+<meta name="keywords" content="多线程线程中，等待另一线程结束后，调用回调函数的处理流程" />
+<meta name="description" content="多个并列的线程T_1，由主程序启动。
+
+
+主程序
+
+&nbsp; &nbsp; ：可以并列多个线程
+
+&nbsp; &nbsp; 创建线程类Thread_i,&nbsp;
+
+&nbsp; &nbsp; &nbsp; &nbsp; 保存信息，线程的全部信息,&nbsp; 运行时参数&nbsp; P_run (包括回调函数、函数指针)
+
+&nbsp; &nbsp; &nbsp; &nbsp; 启动真正的任务执行线程，返回句柄 H_real
+
+&nbsp; &nbsp; &nbsp; " />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">多线程线程中，等待另一线程结束后，调用回调函数的处理流程</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2020-11-07</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	经典代码段解析
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>多个并列的线程T_1，由主程序启动。
+
+
+主程序
+
+&nbsp; &nbsp; ：可以并列多个线程
+
+&nbsp; &nbsp; 创建线程类Thread_i,&nbsp;
+
+&nbsp; &nbsp; &nbsp; &nbsp; 保存信息，线程的全部信息,&nbsp; 运行时参数&nbsp; P_run (包括回调函数、函数指针)
+
+&nbsp; &nbsp; &nbsp; &nbsp; 启动真正的任务执行线程，返回句柄 H_real
+
+&nbsp; &nbsp; &nbsp; </div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 多个并列的线程T_1，由主程序启动。<br />
+<br />
+<br />
+主程序<br />
+<br />
+&nbsp; &nbsp; ：可以并列多个线程<br />
+<br />
+&nbsp; &nbsp; 创建线程类Thread_i,&nbsp;<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; 保存信息，线程的全部信息,&nbsp; 运行时参数&nbsp; P_run (包括回调函数、函数指针)<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; 启动真正的任务执行线程，返回句柄 H_real<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; 检测进程（循环检测） ，发现上述创建的进程句柄H_real为某种状态，表示结束，进行处理。<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; c++等待线程结束后，使用进程中保存的参数 P_run ,进行处理。参数中有回调函数，函数指针传参数 P_run 中的值进去执行。<br />
+<br />
+<br />
+<br />
+HANDLE hthread =&nbsp; ExecuteCMD(str_cmd);//创建事件处理进程<br />
+<br />
+while(WAIT_TIMEOUT == WaitForSingleObject(hthread, 1000)) //等待上面进程完成<br />
+{<br />
+&nbsp; &nbsp; if(WAIT_OBJECT_0 == WaitForSingleObject(pThis-&gt;m_hStopEvent, 1000)) //等待手动停止事件，线程外 主动干预 改变状态。<br />
+&nbsp; &nbsp; {<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; TerminateProcess(hFFmpeg, 0);&nbsp; //停止需要等待结束的线程，下次循环时就推出了。<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; bAutoStop = false;&nbsp; &nbsp;//标识是自动退的，还是外界干扰退掉的<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1169.html">数据库分页实现 后台</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1171.html">HOG方向梯度直方图、光流、HOF与MBH特征简述</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,290 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>JAVA自己实现List接口Stack_comonly.cn</title>
+<meta name="keywords" content="JAVA自己实现List接口Stack" />
+<meta name="description" content="package集合.Stack;importjava.util.Arrays;importjava.util.EmptyStackException;importjava.util.Vector;publicclassMyStack{//底层数组默认长度为0privateObject[]myStack=newObject[10];//sizeprivateintsize=0;publicMySta" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">JAVA自己实现List接口Stack</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">kepp007</li>
+          <li class="lmname"><a href="https://blog.51cto.com/12013190/2430837" target="_blank">https://blog.51cto.com/12013190/2430837</a></li>
+          <li class="timer">2019-08-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>package集合.Stack;importjava.util.Arrays;importjava.util.EmptyStackException;importjava.util.Vector;publicclassMyStack{//底层数组默认长度为0privateObject[]myStack=newObject[10];//sizeprivateintsize=0;publicMySta</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <div class="con artical-content editor-preview-side"><hr>
+<p><img src="https://s1.51cto.com/images/blog/201908/19/d951717262e54e682e94bc37f36ecf9b.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="JAVA自己实现List接口Stack" style="cursor: pointer;"></p>
+<hr>
+<pre><code class="hljs java"><span class="hljs-keyword">package</span> 集合.Stack;
+
+<span class="hljs-keyword">import</span> java.util.Arrays;
+<span class="hljs-keyword">import</span> java.util.EmptyStackException;
+<span class="hljs-keyword">import</span> java.util.Vector;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyStack</span> </span>{
+    <span class="hljs-comment">//底层数组默认长度为10</span>
+    <span class="hljs-keyword">private</span> Object[] myStack = <span class="hljs-keyword">new</span> Object[<span class="hljs-number">10</span>];
+    <span class="hljs-comment">//size</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> size = <span class="hljs-number">0</span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MyStack</span><span class="hljs-params">()</span> </span>{
+
+    }
+
+    <span class="hljs-comment">//push</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">push</span><span class="hljs-params">(Object obj)</span> </span>{
+        <span class="hljs-comment">//先判断是否需要扩容</span>
+        <span class="hljs-keyword">if</span>(size&gt;=myStack.length){
+            myStack = Arrays.copyOf(myStack,myStack.length*<span class="hljs-number">2</span>);
+        }
+        <span class="hljs-comment">//添加元素</span>
+        myStack[size++] = obj;
+        <span class="hljs-comment">//size++;</span>
+        <span class="hljs-keyword">return</span> obj;
+    }
+
+    <span class="hljs-comment">//pop弹出栈顶元素</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">pop</span><span class="hljs-params">()</span> </span>{
+        Object obj = peek();
+        <span class="hljs-comment">//忽略栈顶元素</span>
+        size--;
+        <span class="hljs-keyword">return</span> obj;
+    }
+
+    <span class="hljs-comment">//peek查找栈顶元素</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">peek</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">if</span>(empty()){
+           <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> EmptyStackException();
+        }
+        <span class="hljs-keyword">return</span> myStack[size - <span class="hljs-number">1</span>];
+    }
+
+    <span class="hljs-comment">//empty判断栈是否为空</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">empty</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> size == <span class="hljs-number">0</span>;
+    }
+
+    <span class="hljs-comment">//search查找栈中第一出线的元素</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span>  <span class="hljs-title">search</span><span class="hljs-params">(Object obj)</span> </span>{
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = size -<span class="hljs-number">1</span>,j=<span class="hljs-number">1</span>;i&gt;=<span class="hljs-number">0</span>;i--,j++){
+            <span class="hljs-keyword">if</span>(myStack[i] == obj||myStack[i]!=<span class="hljs-keyword">null</span>&amp;&amp;myStack[i].equals(obj)){
+                <span class="hljs-keyword">return</span>  j;
+            }
+        }
+        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">toString</span><span class="hljs-params">()</span> </span>{
+        Object[] strstack = <span class="hljs-keyword">new</span> Object[size];
+        System.arraycopy(myStack,<span class="hljs-number">0</span>,strstack,<span class="hljs-number">0</span>,size);
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=size-<span class="hljs-number">1</span>;i&gt;=size/<span class="hljs-number">2</span>;i--){
+            Object temp = strstack[i];
+            strstack[i] = strstack[size-i-<span class="hljs-number">1</span>];
+            strstack[size-i-<span class="hljs-number">1</span>] = temp;
+        }
+
+        <span class="hljs-keyword">return</span> Arrays.toString(strstack);
+    }
+}
+</code></pre></div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1958.html">linux必备高级技能——linux挂载共享文件，自动挂载</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1960.html">推荐系统如何处理数据？</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.51cto.com/12013190/2430837" target="_blank">https://blog.51cto.com/12013190/2430837</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

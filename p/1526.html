@@ -1,0 +1,334 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>C/C++内存泄漏及检测_CrtCheckMemory_comonly.cn</title>
+<meta name="keywords" content="C/C++内存泄漏及检测_CrtCheckMemory" />
+<meta name="description" content="确定分配在调试堆得内存块的完整性(仅限调试版本)。
+
+
+	复制
+
+int&nbsp;_CrtCheckMemory( void&nbsp;);
+
+	返回值
+
+
+	如果成功，则&nbsp;_CrtCheckMemory&nbsp;返回 TRUE；否则函数返回 FALSE。
+
+
+	备注
+
+
+	_CrtCheckMemory&nbsp;函数通过验证基本堆和检查每个内存块来确定调试堆管理器分配的内存。 如果在基础堆、调试头信息或是重写缓冲区中遇到错误或是内存不一致，则&nbsp;_" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">C/C++内存泄漏及检测_CrtCheckMemory</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">_CrtCheckMemory</li>
+          <li class="lmname"><a href="https://docs.microsoft.com/zh-cn/previous-versions/e73x0s4b(v=vs.120)" target="_blank">https://docs.microsoft.com/zh-cn/previous-versions/e73x0s4b(v=vs.120)</a></li>
+          <li class="timer">2019-10-31</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>确定分配在调试堆得内存块的完整性(仅限调试版本)。
+
+
+	复制
+
+int&nbsp;_CrtCheckMemory( void&nbsp;);
+
+	返回值
+
+
+	如果成功，则&nbsp;_CrtCheckMemory&nbsp;返回 TRUE；否则函数返回 FALSE。
+
+
+	备注
+
+
+	_CrtCheckMemory&nbsp;函数通过验证基本堆和检查每个内存块来确定调试堆管理器分配的内存。 如果在基础堆、调试头信息或是重写缓冲区中遇到错误或是内存不一致，则&nbsp;_</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p style="color:#171717;font-family:&quot;font-size:16px;background-color:#FFFFFF;">
+	确定分配在调试堆得内存块的完整性(仅限调试版本)。
+</p>
+<div class="codeHeader" id="code-try-0" style="color:#171717;font-size:0.8rem;font-family:&quot;">
+	<span class="language"></span><span class="docon docon-edit-copy" style="font-family:docons;font-size:inherit;line-height:16px;"></span><span>复制</span>
+</div>
+<pre class="has-inner-focus">int&nbsp;_CrtCheckMemory( void&nbsp;);</pre>
+<h2 id="返回值" style="font-size:1.75rem;color:#171717;font-family:&quot;background-color:#FFFFFF;">
+	返回值<a class="docon docon-link heading-anchor" href="https://docs.microsoft.com/zh-cn/previous-versions/e73x0s4b(v=vs.120)?redirectedfrom=MSDN#%E8%BF%94%E5%9B%9E%E5%80%BC"></a>
+</h2>
+<p style="color:#171717;font-family:&quot;font-size:16px;background-color:#FFFFFF;">
+	如果成功，则&nbsp;<span style="font-weight:bolder;">_CrtCheckMemory</span>&nbsp;返回 TRUE；否则函数返回 FALSE。
+</p>
+<h2 id="备注" style="font-size:1.75rem;color:#171717;font-family:&quot;background-color:#FFFFFF;">
+	备注<a class="docon docon-link heading-anchor" href="https://docs.microsoft.com/zh-cn/previous-versions/e73x0s4b(v=vs.120)?redirectedfrom=MSDN#%E5%A4%87%E6%B3%A8"></a>
+</h2>
+<p style="color:#171717;font-family:&quot;font-size:16px;background-color:#FFFFFF;">
+	<span style="font-weight:bolder;">_CrtCheckMemory</span>&nbsp;函数通过验证基本堆和检查每个内存块来确定调试堆管理器分配的内存。 如果在基础堆、调试头信息或是重写缓冲区中遇到错误或是内存不一致，则&nbsp;<span style="font-weight:bolder;">_CrtCheckMemory</span>&nbsp;生成描述错误情况信息的调试报告。 当&nbsp;<a href="https://docs.microsoft.com/zh-cn/previous-versions/0b98s6w8%28v%3dvs.120%29">_DEBUG</a>&nbsp;未定义时，在预处理期间移除对&nbsp;<span style="font-weight:bolder;">_CrtCheckMemory</span>&nbsp;的调用。
+</p>
+<p style="color:#171717;font-family:&quot;font-size:16px;background-color:#FFFFFF;">
+	通过使用<a href="https://docs.microsoft.com/zh-cn/previous-versions/5at7yxcs%28v%3dvs.120%29">_CrtSetDbgFlag</a>&nbsp;设置<a href="https://docs.microsoft.com/zh-cn/previous-versions/hhzzdf23%28v%3dvs.120%29">_crtDbgFlag</a>标志的位字段来控制**_CrtCheckMemory** 的行为。 打开&nbsp;<span style="font-weight:bolder;">_CRTDBG_CHECK_ALWAYS_DF</span>&nbsp;位字段导致每次请求内存分配操作就调用&nbsp;<span style="font-weight:bolder;">_CrtCheckMemory</span>&nbsp;。 虽然此方法会减慢执行，但是有利于快速查看错误。 关闭&nbsp;<span style="font-weight:bolder;">_CRTDBG_ALLOC_MEM_DF</span>&nbsp;位字段导致&nbsp;<span style="font-weight:bolder;">_CrtCheckMemory</span>&nbsp;不能核实堆并且立即返回&nbsp;<span style="font-weight:bolder;">TRUE</span>。
+</p>
+<p style="color:#171717;font-family:&quot;font-size:16px;background-color:#FFFFFF;">
+	因为函数返回&nbsp;<span style="font-weight:bolder;">TRUE</span>&nbsp;或&nbsp;<span style="font-weight:bolder;">FALSE</span>， 所以能传递一个<a href="https://docs.microsoft.com/zh-cn/previous-versions/ezb1wyez%28v%3dvs.120%29">_ASSERT</a>&nbsp;宏命令来创建一个简单的调试错误处理机制。 如果在堆检测到损坏，下面的示例会造成断言失败：
+</p>
+<div class="codeHeader" id="code-try-1" style="color:#171717;font-size:0.8rem;font-family:&quot;">
+	<span class="language"></span><span class="docon docon-edit-copy" style="font-family:docons;font-size:inherit;line-height:16px;"></span><span>复制</span>
+</div>
+<pre class="has-inner-focus">_ASSERTE( _CrtCheckMemory( ) );</pre>
+<p style="color:#171717;font-family:&quot;font-size:16px;background-color:#FFFFFF;">
+	有关**_CrtCheckMemory** 可用在其它调试函数中的详细信息, 请参阅<a href="https://docs.microsoft.com/zh-cn/previous-versions/974tc9t1%28v%3dvs.120%29">堆状态报告函数</a>. 对于内存管理和调试堆的概述，请参阅&nbsp;<a href="https://docs.microsoft.com/zh-cn/previous-versions/974tc9t1%28v%3dvs.120%29">CRT 调试堆详细信息</a>.
+</p>
+<h2 id="要求" style="font-size:1.75rem;color:#171717;font-family:&quot;background-color:#FFFFFF;">
+	要求<a class="docon docon-link heading-anchor" href="https://docs.microsoft.com/zh-cn/previous-versions/e73x0s4b(v=vs.120)?redirectedfrom=MSDN#%E8%A6%81%E6%B1%82"></a>
+</h2>
+<div class="table-scroll-wrapper" style="color:#171717;font-family:&quot;font-size:16px;background-color:#FFFFFF;">
+	<table style="width:940px;font-size:0.875rem;">
+		<tbody>
+			<tr class="header">
+				<th style="text-align:left;vertical-align:bottom;font-size:0.875rem;">
+					<p>
+						例程
+					</p>
+				</th>
+				<th style="text-align:left;vertical-align:bottom;font-size:0.875rem;">
+					<p>
+						必需的标头
+					</p>
+				</th>
+			</tr>
+		</tbody>
+		<tbody>
+			<tr class="odd">
+				<td style="vertical-align:top;">
+					<p>
+						<span style="font-weight:bolder;">_CrtCheckMemory</span>
+					</p>
+				</td>
+				<td style="vertical-align:top;">
+					<p>
+						&lt;crtdbg.h&gt;
+					</p>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<p style="color:#171717;font-family:&quot;font-size:16px;background-color:#FFFFFF;">
+	有关更多兼容性信息，请参见“简介”中的<a href="https://docs.microsoft.com/zh-cn/previous-versions/sk54f3f5%28v%3dvs.120%29">兼容性</a>。
+</p>
+<h3 id="库" style="font-size:1.1875rem;color:#171717;font-family:&quot;background-color:#FFFFFF;">
+	库<a class="docon docon-link heading-anchor" href="https://docs.microsoft.com/zh-cn/previous-versions/e73x0s4b(v=vs.120)?redirectedfrom=MSDN#%E5%BA%93"></a>
+</h3>
+<p style="color:#171717;font-family:&quot;font-size:16px;background-color:#FFFFFF;">
+	仅限&nbsp;<a href="https://docs.microsoft.com/zh-cn/previous-versions/abx4dbyh%28v%3dvs.120%29">C 运行时库</a>的调试版本。
+</p>
+<h2 id="示例" style="font-size:1.75rem;color:#171717;font-family:&quot;background-color:#FFFFFF;">
+	示例<a class="docon docon-link heading-anchor" href="https://docs.microsoft.com/zh-cn/previous-versions/e73x0s4b(v=vs.120)?redirectedfrom=MSDN#%E7%A4%BA%E4%BE%8B"></a>
+</h2>
+<p style="color:#171717;font-family:&quot;font-size:16px;background-color:#FFFFFF;">
+	对于如何使用&nbsp;<span style="font-weight:bolder;">_CrtCheckMemory</span>&nbsp;的例子，请参阅&nbsp;<a href="https://msdn.microsoft.com/zh-cn/library/fxszt639(v=vs.120)">crt_dbg1</a>。
+</p>
+<p style="color:#171717;font-family:&quot;font-size:16px;background-color:#FFFFFF;">
+	<br />
+</p>
+<p style="color:#171717;font-family:&quot;font-size:16px;background-color:#FFFFFF;">
+	C/C++内存泄漏及检测：<a href="https://www.cnblogs.com/skynet/archive/2011/02/20/1959162.html" target="_blank">https://www.cnblogs.com/skynet/archive/2011/02/20/1959162.html</a>
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1525.html">C++字节对齐可能导致的堆栈内存异常的错误CRT detected that the application wrote to memory after end of heap buffer</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1527.html">c++中string相关操作</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://docs.microsoft.com/zh-cn/previous-versions/e73x0s4b(v=vs.120)" target="_blank">https://docs.microsoft.com/zh-cn/previous-versions/e73x0s4b(v=vs.120)</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

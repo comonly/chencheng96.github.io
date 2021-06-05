@@ -1,0 +1,294 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>ssh三层_comonly.cn</title>
+<meta name="keywords" content="ssh三层" />
+<meta name="description" content="Struts 、 spring 、 Hibernate 在各层的作用
+1 ） struts 负责 web 层 .
+ActionFormBean 接收网页中表单提交的数据，然后通过 Action 进行处理，再 Forward 到对应的网页。
+在 struts-config.xml 中定义, ActionServlet 会加载。
+
+
+2 ） spring 负责业务层管理，即 Service （或 Manager).
+1 ． service 为 action 提供统计的调用接口，封装持久层的 DA" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">ssh三层</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-09-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	java框架-spring等
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>Struts 、 spring 、 Hibernate 在各层的作用
+1 ） struts 负责 web 层 .
+ActionFormBean 接收网页中表单提交的数据，然后通过 Action 进行处理，再 Forward 到对应的网页。
+在 struts-config.xml 中定义, ActionServlet 会加载。
+
+
+2 ） spring 负责业务层管理，即 Service （或 Manager).
+1 ． service 为 action 提供统计的调用接口，封装持久层的 DA</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> Struts 、 spring 、 Hibernate 在各层的作用<br />
+1 ） struts 负责 web 层 .<br />
+ActionFormBean 接收网页中表单提交的数据，然后通过 Action 进行处理，再 Forward 到对应的网页。<br />
+在 struts-config.xml 中定义, ActionServlet 会加载。<br />
+<br />
+<br />
+2 ） spring 负责业务层管理，即 Service （或 Manager).<br />
+1 ． service 为 action 提供统计的调用接口，封装持久层的 DAO.<br />
+2 ．可以写一些自己的业务方法。<br />
+3 ．统一的 javabean 管理方法<br />
+4 ．声明式事务管理<br />
+5. 集成 Hiberante<br />
+<br />
+3 ） Hiberante ，负责持久化层，完成数据库的 crud 操作<br />
+hibernate 为持久层，提供 OR/Mapping 。<br />
+它有一组 .hbm.xml 文件和 POJO, 是跟数据库中的表相对应的。然后定义 DAO ，这些是跟数据库打交道的类，它们会使用 PO 。<br />
+<br />
+<br />
+在 struts+spring+hibernate 的系统中，<br />
+对象的调用流程是： jsp-&gt; Action － &gt; Service -&gt;DAO -&gt;Hibernate 。<br />
+数据的流向是 ActionFormBean 接受用户的数据， Action 将数据从 ActionFromBean 中取出，封装成 VO 或 PO，再调用业务层的 Bean 类，完成各种业务处理后再 forward 。而业务层 Bean 收到这个 PO 对象之后，会调用 DAO 接口方法，进行持久化操作。<br />
+<br />
+SSH框架都是取其优点的：<br />
+Hibernian 的最大好处就是根据数据库的表反向生成实体类，并且还有关系在里面，还有就是它的对数据的操作也很方便。<br />
+Spring 我理解的就是创建对象工厂，省去了在类里面new 对象的过程，把这个调用与被调用的关系直接展示到了配置文件里，做任何操作都变简单了。<br />
+<br />
+项目实现举例<br />
+<br />
+程序框架搭好，各种jar包导好后，开工了<br />
+就拿注册功能来说 页面只有两个文本框 一个用户名（uname） 一个密码(pwd)<br />
+<br />
+<br />
+首先是action层： 它是负责在页面和程序之间传输数据的，还有作用是做页面跳转。页面由用户填写表单数据，点击提交按钮，页面的表单数据由Hibernian自动封装到该页面表单所对应的ActionFrom（ActionFrom跟实体类不是一个东西，ActionFrom是页面有什么值，我类里就写什么属性，是封装表单数据用的。而实体类是完全按照数据库的字段生成的，实体类可以当做ActionFrom用，但ActionFrom绝对不可以当做实体类用），这样表单数据就以ActionFrom对象的形式在Action的点击提交按钮执行的那个方法里存在了，这个时候你需要的就是把表单数据存入数据库中，但如果数据库里并非只有页面上的uname和pwd两个字段，还有其他字段比如用户状态，那你就需要另行在程序里给该属性赋值了，否则会报非空错误，这里的例子，页面只有两个文本框，数据库也只有这两个字段，就不必考虑那么多了，到这一步，action的功能告一段落了，接着是把数据传入services层。<br />
+<br />
+<br />
+Biz层（业务逻辑层）/service层：<br />
+它负责的是对数据的处理，比如网站功能是点卡销售，你就需要在这个层里对点卡的打折啊其他的数学问题做操作了，在这个例子里，此层只做单纯的数据传递作用，而后又到了DAO层。<br />
+<br />
+<br />
+Dao层（数据库操作层）：它负责对数据向数据库增删改查的操作。<br />
+<br />
+以上例子，不使用spring的话，每个层之间的数据传递你都需要new一个调用该层数据的类的实例，而使用了spring的话，你需要做的就是把Dao 层和services层的每个类都写一个接口类，接口类里写实现类的方法，在调用的时候不new 对象，直接用对象点(.)方法就可以，别忘了对每个对象加set/get方法。<br />
+<br />
+业务逻辑层）/service层例子：<br />
+private saveMyScheduleDaoImpl smsDI; //类里定义写接口(saveMyScheduleDaoImpl )，不要写实现类，并且不new<br />
+set/get方法略·········<br />
+public List saveMySchedule(Schedule s)<br />
+{<br />
+return smsDI.saveMySchedule(s); //因为是接口的实例，所以要求该接口里必须写上实现类的所有方法，这样才能点（.）<br />
+}<br />
+这里只简单写了一个services层的。<br />
+以上流程只是从页面获取值存入数据库，是单向的Action层-&gt;services层-&gt;Dao层的数据传递，Dao层-&gt;services层-&gt;Action层的数据传递和我刚刚将的一样，就是反过来了。<br />
+<br />
+<br />
+到这一步的总结：<br />
+Dao层写接口并且接口里写实现类的所有方法。<br />
+Services层写接口并且接口里写实现类的所有方法。调用Dao层方法只定义Dao层需要调用方法所属的类的接口，而后添加get/set方法，再用该接口的没有new的实例点（.）方法。<br />
+Action层同Biz层。<br />
+<br />
+下面就是强大的spring的工作了-------依赖注入<br />
+所有改写的死东西都写完了，我们就差在配置文件里依赖注入了<br />
+<br />
+找到spring的配置文件，先注Dao层，这个时候一定要注意一点，就是依赖注入的时候注的必须是实体类！！ 而不是接口！！ 这是一种良好的变成习惯。<br />
+Dao层的依赖注入里绑定的是你在往工程加Spring的时候让你填写SessionFactory的那个值，配置文件上面应该会有这个bean的。<br />
+然后是Services层的依赖注入，同样也是注实体类，根据我这个例子里面会有smsDI需要绑定，这个时候填写你注的Dao层的相对应的类的名字就行。<br />
+然后是Action层的依赖注入，大体同Services层一样。<br />
+<br />
+依赖注入完毕后，你就可以配置了。<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/980.html">spring源码，包结构</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/982.html">单场景对抗学习，学得异常行为特征</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,215 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>kubernetes(K8s)，体系架构，集群解决方案_comonly.cn</title>
+<meta name="keywords" content="kubernetes(K8s)，体系架构，集群解决方案" />
+<meta name="description" content="kubernetes(K8s)，体系架构，集群解决方案" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">kubernetes(K8s)，体系架构，集群解决方案</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">mnsj1188</li>
+          <li class="lmname"><a href="https://blog.51cto.com/14485508/2430868" target="_blank">https://blog.51cto.com/14485508/2430868</a></li>
+          <li class="timer">2019-08-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>kubernetes(K8s)，体系架构，集群解决方案</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <div class="con editor-preview-side" id="result"><p>由于篇幅关系，第一部分Kubernetes相关概念略过不提，本文将结合分享内容，对《Kubernetes有状态服务部署与管理》之K8S存储系统做重点阐述。</p><p>&nbsp;</p><p><img width="494" height="374" class="alignnone size-full wp-image-990" alt="20161208172104" src="https://www.kubernetes.org.cn/img/2016/12/20161208172104.jpg" style="cursor: pointer;"></p><p>&nbsp;</p><p>在K8S运行的服务，从简单到复杂可以分成三类：无状态服务、普通有状态服务和有状态集群服务。下面分别来看K8S是如何运行这三类服务的。</p><ul class="list-paddingleft-2"><li><p>无状态服务，K8S使用RC（或更新的Replica Set）来保证一个服务的实例数量，如果说某个Pod实例由于某种原因Crash了，RC会立刻用这个Pod的模版新启一个Pod来替代它，由于是无状态的服务，新启的Pod与原来健康状态下的Pod一模一样。在Pod被重建后它的IP地址可能发生变化，为了对外提供一个稳定的访问接口，K8S引入了Service的概念。一个Service后面可以挂多个Pod，实现服务的高可用。</p></li><li><p>普通有状态服务，和无状态服务相比，它多了状态保存的需求。Kubernetes提供了以Volume和Persistent Volume为基础的存储系统，可以实现服务的状态保存。</p></li><li><p>有状态集群服务，与普通有状态服务相比，它多了集群管理的需求。K8S为此开发了一套以Pet Set为核心的全新特性，方便了有状态集群服务在K8S上的部署和管理。具体来说是通过Init Container来做集群的初始化工作，用 Headless Service 来维持集群成员的稳定关系，用动态存储供给来方便集群扩容，最后用Pet Set来综合管理整个集群。</p></li></ul><p>要运行有状态集群服务要解决的问题有两个,一个是状态保存，另一个是集群管理。 我们先来看如何解决第一个问题：状态保存。Kubernetes 有一套以Volume插件为基础的存储系统，通过这套存储系统可以实现应用和服务的状态保存。</p><p>K8S的存储系统从基础到高级又大致分为三个层次：普通Volume，Persistent Volume 和动态存储供应。</p><p><strong>1.普通Volume</strong></p><p>最简单的普通Volume是单节点Volume。它和Docker的存储卷类似，使用的是Pod所在K8S节点的本地目录。</p><p>第二种类型是跨节点存储卷，这种存储卷不和某个具体的K8S节点绑定，而是独立于K8S节点存在的，整个存储集群和K8S集群是两个集群，相互独立。</p><p>跨节点的存储卷在Kubernetes上用的比较多，如果已有的存储不能满足要求，还可以开发自己的Volume插件，只需要实现Volume.go 里定义的接口。如果你是一个存储厂商，想要自己的存储支持Kubernetes 上运行的容器，就可以去开发一个自己的Volume插件。</p><p><strong>2.persistent volume</strong></p><p>它和普通Volume的区别是什么呢？</p><p>普通Volume和使用它的Pod之间是一种静态绑定关系，在定义Pod的文件里，同时定义了它使用的Volume。Volume 是Pod的附属品，我们无法单独创建一个Volume，因为它不是一个独立的K8S资源对象。</p><p>而Persistent Volume 简称PV是一个K8S资源对象，所以我们可以单独创建一个PV。它不和Pod直接发生关系，而是通过Persistent Volume Claim，简称PVC来实现动态绑定。Pod定义里指定的是PVC，然后PVC会根据Pod的要求去自动绑定合适的PV给Pod使用。</p><p>PV的访问模式有三种：</p><p>第一种，ReadWriteOnce：是最基本的方式，可读可写，但只支持被单个Pod挂载。</p><p>第二种，ReadOnlyMany：可以以只读的方式被多个Pod挂载。</p><p>第三种，ReadWriteMany：这种存储可以以读写的方式被多个Pod共享。不是每一种存储都支持这三种方式，像共享方式，目前支持的还比较少，比较常用的是NFS。在PVC绑定PV时通常根据两个条件来绑定，一个是存储的大小，另一个就是访问模式。</p><p>刚才提到说PV与普通Volume的区别是动态绑定，我们来看一下这个过程是怎样的。</p><p>&nbsp;</p><p><img width="490" height="373" class="alignnone size-full wp-image-986" alt="20161208172113" src="https://www.kubernetes.org.cn/img/2016/12/20161208172113.jpg" style="cursor: pointer;"></p><p>&nbsp;</p><p>这是PV的生命周期，首先是Provision，即创建PV，这里创建PV有两种方式，静态和动态。所谓静态，是管理员手动创建一堆PV，组成一个PV池，供PVC来绑定。动态方式是通过一个叫 Storage Class的对象由存储系统根据PVC的要求自动创建。</p><p>一个PV创建完后状态会变成Available，等待被PVC绑定。</p><p>一旦被PVC邦定，PV的状态会变成Bound，就可以被定义了相应PVC的Pod使用。</p><p>Pod使用完后会释放PV，PV的状态变成Released。</p><p>变成Released的PV会根据定义的回收策略做相应的回收工作。有三种回收策略，Retain、Delete 和 Recycle。Retain就是保留现场，K8S什么也不做，等待用户手动去处理PV里的数据，处理完后，再手动删除PV。Delete 策略，K8S会自动删除该PV及里面的数据。Recycle方式，K8S会将PV里的数据删除，然后把PV的状态变成Available，又可以被新的PVC绑定使用。</p><p>在实际使用场景里，PV的创建和使用通常不是同一个人。这里有一个典型的应用场景：管理员创建一个PV池，开发人员创建Pod和PVC，PVC里定义了Pod所需存储的大小和访问模式，然后PVC会到PV池里自动匹配最合适的PV给Pod使用。</p><p>前面在介绍PV的生命周期时，提到PV的供给有两种方式，静态和动态。其中动态方式是通过StorageClass来完成的，这是一种新的存储供应方式。</p><p>使用StorageClass有什么好处呢？除了由存储系统动态创建，节省了管理员的时间，还有一个好处是可以封装不同类型的存储供PVC选用。在StorageClass出现以前，PVC绑定一个PV只能根据两个条件，一个是存储的大小，另一个是访问模式。在StorageClass出现后，等于增加了一个绑定维度。</p><p>比如这里就有两个StorageClass，它们都是用谷歌的存储系统，但是一个使用的是普通磁盘，我们把这个StorageClass命名为slow。另一个使用的是SSD，我们把它命名为fast。</p><p>在PVC里除了常规的大小、访问模式的要求外，还通过annotation指定了Storage Class的名字为fast，这样这个PVC就会绑定一个SSD，而不会绑定一个普通的磁盘。</p><p>到这里Kubernetes的整个存储系统就都介绍完了。总结一下，两种存储卷：普通Volume 和Persistent Volume。普通Volume在定义Pod的时候直接定义，Persistent Volume通过Persistent Volume Claim来动态绑定。PV可以手动创建,也可以通过StorageClass来动态创建。</p><p>下面重介绍Kubernetes与有状态集群服务相关的两个新特性：<strong>Init Container&nbsp;和&nbsp;Pet Set &nbsp;。</strong></p><h2 id='b;什么是IitCotier？'>&nbsp;什么是Init Container？</h2><p>从名字来看就是做初始化工作的容器。可以有一个或多个，如果有多个，这些 Init Container 按照定义的顺序依次执行，只有所有的Init Container 执行完后，主容器才启动。由于一个Pod里的存储卷是共享的，所以 Init Container 里产生的数据可以被主容器使用到。</p><p>Init Container可以在多种 K8S 资源里被使用到如 Deployment、Daemon Set, Pet Set, Job等，但归根结底都是在Pod启动时，在主容器启动前执行，做初始化工作。</p><h3><strong>我们在什么地方会用到 Init Container呢？</strong></h3><p><strong>第一种场景是等待其它模块Ready</strong>，比如我们有一个应用里面有两个容器化的服务，一个是Web Server，另一个是数据库。其中Web Server需要访问数据库。但是当我们启动这个应用的时候，并不能保证数据库服务先启动起来，所以可能出现在一段时间内Web Server有数据库连接错误。为了解决这个问题，我们可以在运行Web Server服务的Pod里使用一个Init Container，去检查数据库是否准备好，直到数据库可以连接，Init Container才结束退出，然后Web Server容器被启动，发起正式的数据库连接请求。</p><p><strong>第二种场景是做初始化配置</strong>，比如集群里检测所有已经存在的成员节点，为主容器准备好集群的配置信息，这样主容器起来后就能用这个配置信息加入集群。</p><p>还有其它使用场景，如将pod注册到一个中央数据库、下载应用依赖等。</p><p>这些东西能够放到主容器里吗？从技术上来说能，但从设计上来说，可能不是一个好的设计。首先不符合单一职责原则，其次这些操作是只执行一次的，如果放到主容器里，还需要特殊的检查来避免被执行多次。</p><p>&nbsp;</p><p><img width="494" height="376" class="wp-image-987 size-full" alt="这是Init Container的一个使用样例" src="https://www.kubernetes.org.cn/img/2016/12/20161208172145.jpg" style="cursor: pointer;"></p><p class="wp-caption-text">这是Init Container的一个使用样例</p><p>&nbsp;</p><p>这个例子创建一个Pod，这个Pod里跑的是一个nginx容器，Pod里有一个叫workdir的存储卷，访问nginx容器服务的时候，就会显示这个存储卷里的index.html 文件。</p><p>而这个index.html 文件是如何获得的呢？是由一个Init Container从网络上下载的。这个Init Container 使用一个busybox镜像，起来后，执行一条wget命令，获取index.html文件，然后结束退出。</p><p>由于Init Container和nginx容器共享一个存储卷（这里这个存储卷的名字叫workdir），所以在Init container里下载的index.html文件可以在nginx容器里被访问到。</p><p>可以看到 Init Container 是在 annotation里定义的。Annotation 是K8S新特性的实验场，通常一个新的Feature出来一般会先在Annotation 里指定，等成熟稳定了，再给它一个正式的属性名或资源对象名。</p><p>介绍完Init Container，千呼万唤始出来，主角Pet Set该出场了。</p><h2 id='么是PetSet？'>什么是Pet Set？</h2><p>在数据结构里Set是集合的意思，所以顾名思义Pet Set就是Pet的集合，那什么是Pet呢？我们提到过Cattle和Pet的概念，Cattle代表无状态服务，而Pet代表有状态服务。具体在K8S资源对象里，Pet是一种需要特殊照顾的Pod。它有状态、有身份、当然也比普通的Pod要复杂一些。</p><p>&nbsp;</p><p><img width="493" height="359" class="alignnone size-full wp-image-988" alt="20161208172151" src="https://www.kubernetes.org.cn/img/2016/12/20161208172151.jpg" style="cursor: pointer;"></p><p>&nbsp;</p><p><strong>具体来说，一个Pet有三个特征。</strong></p><p>一是有稳定的存储，这是通过我们前面介绍的PV/PVC 来实现的。</p><p>二是稳定的网络身份，这是通过一种叫 Headless Service 的特殊Service来实现的。要理解Headless Service是如何工作的，需要先了解Service是如何工作。我们提到过Service可以为多个Pod实例提供一个稳定的对外访问接口。这个稳定的接口是如何实现的的呢，是通过Cluster IP来实现的，Cluster IP是一个虚拟IP，不是真正的IP，所以稳定。K8S会在每个节点上创建一系列的IPTables规则，实现从Cluster IP到实际Pod IP的转发。同时还会监控这些Pod的IP地址变化，如果变了，会更新IP Tables规则，使转发路径保持正确。所以即使Pod IP有变化，外部照样能通过Service的ClusterIP访问到后面的Pod。</p><p>普通Service的Cluster IP 是对外的，用于外部访问多个Pod实例。而Headless Service的作用是对内的，用于为一个集群内部的每个成员提供一个唯一的DNS名字，这样集群成员之间就能相互通信了。所以Headless Service没有Cluster IP，这是它和普通Service的区别。</p><p>Headless Service为每个集群成员创建的DNS名字是什么样的呢？右下角是一个例子，第一个部分是每个Pet自己的名字，后面foo是Headless Service的名字，default是PetSet所在命名空间的名字，cluser.local是K8S集群的域名。对于同一个Pet Set里的每个Pet，除了Pet自己的名字，后面几部分都是一样的。所以要有一个稳定且唯一的DNS名字，就要求每个Pet的名字是稳定且唯一的。</p><p>三是序号命名规则。Pet是一种特殊的Pod，那么Pet能不能用Pod的命名规则呢？答案是不能，因为Pod的名字是不稳定的。Pod的命名规则是，如果一个Pod是由一个RC创建的，那么Pod的名字是RC的名字加上一个随机字符串。为什么要加一个随机字符串，是因为RC里指定的是Pod的模版，为了实现高可用，通常会从这个模版里创建多个一模一样的Pod实例，如果没有这个随机字符串，同一个RC创建的Pod之间就会由名字冲突。</p><p>如果说某个Pod由于某种原因死掉了，RC会新建一个来代替它，但是这个新建里的Pod名字里的随机字符串与原来死掉的Pod是不一样的。所以Pod的名字跟它的IP一样是不稳定的。</p><p>为了解决名字不稳定的问题，K8S对Pet的名字不再使用随机字符串，而是为每个Pet分配一个唯一不变的序号，比如 Pet Set 的名字叫 mysql，那么第一个启起来的Pet就叫 mysql-0，第二个叫 mysql-1，如此下去。</p><p>当一个Pet down 掉后，新创建的Pet 会被赋予跟原来Pet一样的名字。由于Pet名字不变所以DNS名字也跟以前一样，同时通过名字还能匹配到原来Pet用到的存储，实现状态保存。</p><p>&nbsp;</p><p><img width="496" height="371" class="alignnone size-full wp-image-989" alt="20161208172158" src="https://www.kubernetes.org.cn/img/2016/12/20161208172158.jpg" style="cursor: pointer;"></p><p>&nbsp;</p><p>这些是Pet Set 相关的一些操作：</p><ul class="list-paddingleft-2"><li><p>Peer discovery，这和我们上面的Headless Service有密切关系。通过Pet Set的 Headless Service，可以查到该Service下所有的Pet 的 DNS 名字。这样就能发现一个Pet Set 里所有的Pet。当一个新的Pet起来后，就可以通过Peer Discovery来找到集群里已经存在的所有节点的DNS名字，然后用它们来加入集群。</p></li><li><p>更新Replicas的数目、实现扩容和缩容。</p></li><li><p>更新Pet Set里Pet的镜像版本，实现升级。</p></li><li><p>删除 Pet Set。删除一个Pet Set 会先把这个Pet Set的Replicas数目缩减为0，等到所有的Pet都被删除了，再删除 Pet Set本身。注意Pet用到的存储不会被自动删除。这样用户可以把数据拷贝走了，再手动删除。</p></li></ul><p>以上，与有状态服集群服务相关的K8S特性就介绍完了。</p><p><br></p></div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1984.html">大数据日志传输之Kafka，Kafka架构详解kafka的核心</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1986.html">Docker最佳实战，容器级虚拟化</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.51cto.com/14485508/2430868" target="_blank">https://blog.51cto.com/14485508/2430868</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#b;什么是IitCotier？">b;什么是IitCotier？</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#么是PetSet？">么是PetSet？</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

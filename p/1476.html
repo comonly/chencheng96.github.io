@@ -1,0 +1,358 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>c/c++获取系统时间函数及对时间的处理_comonly.cn</title>
+<meta name="keywords" content="c/c++获取系统时间函数及对时间的处理" />
+<meta name="description" content="在C程序中按照你想要的格式输出时间：strftime()
+
+
+	
+
+
+	函数原型
+#include &lt;time.h&gt;
+size_t strftime(char *s, size_t max, const char *format, const struct tm *tm);
+调用例子
+#define CFG_BUFF_LEN&nbsp; &nbsp; (128)
+
+time_t timeCurr = time(NULL);
+char timeStr[CFG_BUFF_" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">c/c++获取系统时间函数及对时间的处理</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-09-18</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>在C程序中按照你想要的格式输出时间：strftime()
+
+
+	
+
+
+	函数原型
+#include &lt;time.h&gt;
+size_t strftime(char *s, size_t max, const char *format, const struct tm *tm);
+调用例子
+#define CFG_BUFF_LEN&nbsp; &nbsp; (128)
+
+time_t timeCurr = time(NULL);
+char timeStr[CFG_BUFF_</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	在C程序中按照你想要的格式输出时间：strftime()
+</p>
+<p>
+	<br />
+</p>
+<p>
+	函数原型<br />
+#include &lt;time.h&gt;<br />
+size_t strftime(char *s, size_t max, const char *format, const struct tm *tm);<br />
+调用例子<br />
+#define CFG_BUFF_LEN&nbsp; &nbsp; (128)<br />
+<br />
+time_t timeCurr = time(NULL);<br />
+char timeStr[CFG_BUFF_LEN];<br />
+<br />
+strftime(timeStr, sizeof(timeStr), "%Y%m%d-%H:%M:%S", localtime(&amp;timrCurr));<br />
+</p>
+<p>
+</p>
+<p>
+	<a href="http://comonly.cn/l/p/1609.html" target="_blank">http://comonly.cn/l/p/1609.html</a>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	c++通过时间戳获得自定格式时间:<a href="https://blog.csdn.net/sinat_41922982/article/details/84191092" target="_blank">https://blog.csdn.net/sinat_41922982/article/details/84191092</a>使用strftime函数。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	sscanf的用法<a href="https://blog.csdn.net/yanyanwenmeng/article/details/82753014" target="_blank">https://blog.csdn.net/yanyanwenmeng/article/details/82753014</a>格式化时间
+</p>
+<p>
+	<br />
+</p>
+<p>
+	可以使用gmtime函数或localtime函数将time_t类型的时间日期转换为struct tm类型（年、月、日、时、分、秒）。
+</p>
+<p>
+	<a href="https://zhidao.baidu.com/question/1606377765686018707.html" target="_blank">https://zhidao.baidu.com/question/1606377765686018707.html</a>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	double difftime ( time_t time2, time_t time1 );<br />
+<br />
+Return difference between two times. Calculates the difference in seconds between time1 and time2.<br />
+<br />
+Parameters<br />
+time2<br />
+time_t object representing the latter of the two times.<br />
+time1<br />
+time_t object representing the earlier of the two times.<br />
+Return Value<br />
+The difference in seconds (time2-time1) as a floating point double.
+</p>
+<p>
+	<br />
+</p>
+<p>
+	获取时间：time_t timenow = time(0);
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<a href="https://www.cnblogs.com/zhengfa-af/p/8312915.html" target="_blank">https://www.cnblogs.com/zhengfa-af/p/8312915.html</a> 
+</p>
+<p>
+	<br />
+</p>
+<p>
+	既然time_t实际上是长整型，到未来的某一天，从一个时间点（一般是1970年1月1日0时0分0秒）到那时的秒数（即日历时间）超出了长整形所能表示的数的范围怎么办？对time_t数据类型的值来说，它所表示的时间不能晚于<span style="color:#E53333;">2038年1月18日19时14分07秒</span>。 为了能够表示更久远的时间，一些编译器厂商引入了64位甚至更长的整形数来保存日历时间。比如微软在Visual C++中采用了__time64_t数据类型来保存日历时间，并通过_time64()函数来获得日历时间（而不是通过使用32位字的time()函数），这样就可以通过该数据类型保存3001年1月1日0时0分0秒（不包括该时间点）之前的时间。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	GetLocalTime、GetSystemTime：Windows API 函数<br />
+GetLocalTime，获取当地的当前系统日期和时间 （精确到毫秒）<br />
+GetSystemTime，则获取的是标准的时间。<br />
+<br />
+两个函数会把获取的系统时间信息存储到SYSTEMTIME结构体里边
+</p>
+<p>
+	typedef struct _SYSTEMTIME <br />
+{ <br />
+WORD wYear;//年 <br />
+WORD wMonth;//月 <br />
+WORD wDayOfWeek;//星期：0为星期日，1为星期一，2为星期二…… <br />
+WORD wDay;//日 <br />
+WORD wHour;//时 <br />
+WORD wMinute;//分 <br />
+WORD wSecond;//秒 <br />
+WORD wMilliseconds;//毫秒 <br />
+}SYSTEMTIME,*PSYSTEMTIME;
+</p>
+<p>
+	SYSTEMTIME st; <br />
+GetLocalTime(&amp;st);
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1475.html">Nginx实现WEB故障转移以及重定向Nginx</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1477.html">网络icmp协议</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

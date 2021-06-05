@@ -1,0 +1,329 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>关于C++ pair 和make_pair的用法_comonly.cn</title>
+<meta name="keywords" content="关于C++ pair 和make_pair的用法" />
+<meta name="description" content="pair 的用法
+
+
+	std::pair主要的作用是将两个数据组合成一个数据，两个数据可以是同一类型或者不同类型。&nbsp;
+C++标准程序库中凡是“必须返回两个值”的函数， 也都会利用pair对象。&nbsp;
+class pair可以将两个值视为一个单元。容器类别map和multimap就是使用pairs来管理其健值/实值(key/value)的成对元素。&nbsp;
+pair被定义为struct,因此可直接存取pair中的个别值.。&nbsp;
+两个pairs互相比较时， 第一个元" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">关于C++ pair 和make_pair的用法</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">张卫建</li>
+          <li class="lmname"><a href="https://blog.csdn.net/weixin_42825576/article/details/81571419" target="_blank">https://blog.csdn.net/weixin_42825576/article/details/81571419</a></li>
+          <li class="timer">2019-09-06</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>pair 的用法
+
+
+	std::pair主要的作用是将两个数据组合成一个数据，两个数据可以是同一类型或者不同类型。&nbsp;
+C++标准程序库中凡是“必须返回两个值”的函数， 也都会利用pair对象。&nbsp;
+class pair可以将两个值视为一个单元。容器类别map和multimap就是使用pairs来管理其健值/实值(key/value)的成对元素。&nbsp;
+pair被定义为struct,因此可直接存取pair中的个别值.。&nbsp;
+两个pairs互相比较时， 第一个元</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id="pair-的用法" style="font-size:24px;font-family:&quot;color:#4F4F4F;background-color:#FFFFFF;">
+	pair 的用法
+</h2>
+<p style="font-family:&quot;font-size:16px;color:#4D4D4D;background-color:#FFFFFF;">
+	std::pair主要的作用是将两个数据组合成一个数据，两个数据可以是同一类型或者不同类型。&nbsp;<br />
+C++标准程序库中凡是“必须返回两个值”的函数， 也都会利用pair对象。&nbsp;<br />
+class pair可以将两个值视为一个单元。容器类别map和multimap就是使用pairs来管理其健值/实值(key/value)的成对元素。&nbsp;<br />
+pair被定义为struct,因此可直接存取pair中的个别值.。&nbsp;<br />
+两个pairs互相比较时， 第一个元素正具有较高的优先级.。
+</p>
+<h2 id="makepair的用法" style="font-size:24px;font-family:&quot;color:#4F4F4F;background-color:#FFFFFF;">
+	make_pair的用法
+</h2>
+<p style="font-family:&quot;font-size:16px;color:#4D4D4D;background-color:#FFFFFF;">
+	无需写出型别， 就可以生成一个pair对象&nbsp;<br />
+例：&nbsp;<br />
+std::make_pair(42, '@');&nbsp;<br />
+而不必费力写成：&nbsp;<br />
+std::pair&lt;int, char&gt;(42, '@')
+</p>
+<p style="font-family:&quot;font-size:16px;color:#4D4D4D;background-color:#FFFFFF;">
+	当有必要对一个接受pair参数的函数传递两个值时， make_pair()尤其显得方便，&nbsp;<br />
+void f(std::pair&lt;int, const char*&gt;);
+</p>
+<p style="font-family:&quot;font-size:16px;color:#4D4D4D;background-color:#FFFFFF;">
+	void foo{&nbsp;<br />
+f(std::make_pair(42, '@')); //pass two values as pair&nbsp;<br />
+}
+</p>
+<h2 id="pair的应用" style="font-size:24px;font-family:&quot;color:#4F4F4F;background-color:#FFFFFF;">
+	pair的应用
+</h2>
+<p style="font-family:&quot;font-size:16px;color:#4D4D4D;background-color:#FFFFFF;">
+	pair是将2个数据组合成一个数据，当需要这样的需求时就可以使用pair，如stl中的map就是将key和value放在一起来保存。另一个应用是，当一个函数需要返回2个数据的时候，可以选择pair。 pair的实现是一个结构体，主要的两个成员变量是first second 因为是使用struct不是class，所以可以直接使用pair的成员变量。
+</p>
+<h2 id="makepair函数" style="font-size:24px;font-family:&quot;color:#4F4F4F;background-color:#FFFFFF;">
+	make_pair函数
+</h2>
+<p style="font-family:&quot;font-size:16px;color:#4D4D4D;background-color:#FFFFFF;">
+	template pair make_pair(T1 a, T2 b) { return pair(a, b); }
+</p>
+<p style="font-family:&quot;font-size:16px;color:#4D4D4D;background-color:#FFFFFF;">
+	很明显，我们可以使用pair的构造函数也可以使用make_pair来生成我们需要的pair。 一般make_pair都使用在需要pair做参数的位置，可以直接调用make_pair生成pair对象很方便，代码也很清晰。 另一个使用的方面就是pair可以接受隐式的类型转换，这样可以获得更高的灵活度。灵活度也带来了一些问题如：
+</p>
+<p style="font-family:&quot;font-size:16px;color:#4D4D4D;background-color:#FFFFFF;">
+	std::pair&lt;int, float&gt;(1, 1.1);
+</p>
+<p style="font-family:&quot;font-size:16px;color:#4D4D4D;background-color:#FFFFFF;">
+	std::make_pair(1, 1.1);
+</p>
+<p style="font-family:&quot;font-size:16px;color:#4D4D4D;background-color:#FFFFFF;">
+	是不同的，第一个就是float，而第2个会自己匹配成double。&nbsp;<br />
+make_pair (STL Samples)
+</p>
+<p style="font-family:&quot;font-size:16px;color:#4D4D4D;background-color:#FFFFFF;">
+	Illustrates how to use the make_pair Standard Template Library (STL) function in Visual C++.&nbsp;<br />
+template&lt;class first, class second&gt; inline&nbsp;<br />
+pair&lt;first,&nbsp;<br />
+second&gt; make_pair(&nbsp;<br />
+const first&amp; _X,&nbsp;<br />
+const second&amp; _Y&nbsp;<br />
+)
+</p>
+<hr />
+<p style="font-family:&quot;font-size:16px;color:#4D4D4D;background-color:#FFFFFF;">
+	// mkpair.cpp&nbsp;<br />
+// compile with: /EHsc&nbsp;<br />
+// Illustrates how to use the make_pair function.&nbsp;<br />
+//&nbsp;<br />
+// Functions: make_pair - creates an object pair containing two data&nbsp;<br />
+// elements of any type.
+</p>
+<p style="font-family:&quot;font-size:16px;color:#4D4D4D;background-color:#FFFFFF;">
+	#include &lt;utility&gt;&nbsp;<br />
+#include &lt;iostream&gt;
+</p>
+<p style="font-family:&quot;font-size:16px;color:#4D4D4D;background-color:#FFFFFF;">
+	using namespace std;&nbsp;<br />
+/* STL pair data type containing int and float&nbsp;<br />
+*/
+</p>
+<p style="font-family:&quot;font-size:16px;color:#4D4D4D;background-color:#FFFFFF;">
+	typedef struct pair&lt;int,float&gt; PAIR_IF;
+</p>
+<p style="font-family:&quot;font-size:16px;color:#4D4D4D;background-color:#FFFFFF;">
+	int main(void)&nbsp;<br />
+{&nbsp;<br />
+PAIR_IF pair1=make_pair(18,3.14f);&nbsp;<br />
+cout &lt;&lt; pair1.first &lt;&lt; " " &lt;&lt; pair1.second &lt;&lt; endl;&nbsp;<br />
+pair1.first=10;&nbsp;<br />
+pair1.second=1.0f;&nbsp;<br />
+cout &lt;&lt; pair1.first &lt;&lt; " " &lt;&lt; pair1.second &lt;&lt; endl;&nbsp;<br />
+}
+</p>
+<h1 id="output" style="font-size:28px;font-family:&quot;color:#4F4F4F;background-color:#FFFFFF;">
+	Output
+</h1>
+<p style="font-family:&quot;font-size:16px;color:#4D4D4D;background-color:#FFFFFF;">
+	18 3.14&nbsp;<br />
+10 1
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1402.html">应用程序配置文件读取 根据电脑变化 使用宏</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1404.html">无法保存对“文件共享见证”的属性更改 系统找不到指定的文件</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/weixin_42825576/article/details/81571419" target="_blank">https://blog.csdn.net/weixin_42825576/article/details/81571419</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

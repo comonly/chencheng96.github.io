@@ -1,0 +1,612 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Access和sql server的语法区别 db2 oracle_comonly.cn</title>
+<meta name="keywords" content="Access和sql server的语法区别 db2 oracle" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Access和sql server的语法区别 db2 oracle</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-07-13</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	数据库
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	一、有区别的函数及解决方案&nbsp;<br />
+以下所示的解决方案中的函数定义在untDataBase单元中TAdoConn类的方法中。
+</p>
+<table border="1">
+	<tbody>
+		<tr>
+			<td>
+				序号
+			</td>
+			<td>
+				简述
+			</td>
+			<td>
+				Access语法
+			</td>
+			<td>
+				SqlServer语法
+			</td>
+			<td>
+				Oracle语法
+			</td>
+			<td>
+				DB2语法
+			</td>
+			<td>
+				解决方案
+			</td>
+		</tr>
+		<tr>
+			<td>
+				01
+			</td>
+			<td>
+				系统时间
+			</td>
+			<td>
+				Date()
+			</td>
+			<td>
+				GETDATE()
+			</td>
+			<td>
+				SYSDATE
+			</td>
+			<td>
+				&nbsp;
+			</td>
+			<td>
+				GetSysTimeStr
+			</td>
+		</tr>
+		<tr>
+			<td>
+				02
+			</td>
+			<td>
+				连接字符串
+			</td>
+			<td>
+				&amp;
+			</td>
+			<td>
+				+
+			</td>
+			<td>
+				||
+			</td>
+			<td>
+				+
+			</td>
+			<td>
+				GetConcatStr
+			</td>
+		</tr>
+		<tr>
+			<td>
+				03
+			</td>
+			<td>
+				截取字符串
+			</td>
+			<td>
+				SubString&nbsp;<br />
+			</td>
+			<td>
+				SubStr&nbsp;<br />
+			</td>
+			<td>
+				SubString
+			</td>
+			<td>
+				SubString
+			</td>
+			<td>
+				GetSubStr
+			</td>
+		</tr>
+		<tr>
+			<td>
+				04
+			</td>
+			<td>
+				小写字符串
+			</td>
+			<td>
+				LCase
+			</td>
+			<td>
+				Lower
+			</td>
+			<td>
+				Lower
+			</td>
+			<td>
+				Lower
+			</td>
+			<td>
+				GetLowerStr
+			</td>
+		</tr>
+		<tr>
+			<td>
+				05
+			</td>
+			<td>
+				大写字符串
+			</td>
+			<td>
+				UCase
+			</td>
+			<td>
+				Upper&nbsp;<br />
+			</td>
+			<td>
+				Upper&nbsp;<br />
+			</td>
+			<td>
+				Upper&nbsp;<br />
+			</td>
+			<td>
+				GetUpperStr
+			</td>
+		</tr>
+		<tr>
+			<td>
+				06
+			</td>
+			<td>
+				查找字符串
+			</td>
+			<td>
+				InStr&nbsp;<br />
+			</td>
+			<td>
+				InStr&nbsp;<br />
+			</td>
+			<td>
+				CharIndex&nbsp;<br />
+			</td>
+			<td>
+				InStr&nbsp;<br />
+			</td>
+			<td>
+				GetFindStr
+			</td>
+		</tr>
+		<tr>
+			<td>
+				07
+			</td>
+			<td>
+				替换空值
+			</td>
+			<td>
+				IIF+IsNull
+			</td>
+			<td>
+				Coalesce&nbsp;<br />
+			</td>
+			<td>
+				Nvl
+			</td>
+			<td>
+				Coalesce
+			</td>
+			<td>
+				GetNullStr
+			</td>
+		</tr>
+		<tr>
+			<td>
+				08
+			</td>
+			<td>
+				条件取值
+			</td>
+			<td>
+				IIF
+			</td>
+			<td>
+				Case+When+Else
+			</td>
+			<td>
+				DeCode或Case&nbsp;<br />
+			</td>
+			<td>
+				IIF<br />
+			</td>
+			<td>
+				GetCaseStr
+			</td>
+		</tr>
+		<tr>
+			<td>
+				09
+			</td>
+			<td>
+				字段类型转换
+			</td>
+			<td>
+				Str、var、….
+			</td>
+			<td>
+				Convert或cast&nbsp;<br />
+			</td>
+			<td>
+				To_Char,To_Number.
+			</td>
+			<td>
+				GetConvertStr&nbsp;<br />
+			</td>
+			<td>
+				GetConvertStr
+			</td>
+		</tr>
+		<tr>
+			<td>
+				10
+			</td>
+			<td>
+				日期字符串<br />
+			</td>
+			<td>
+				‘2004-10-9’&nbsp;<br />
+			</td>
+			<td>
+				#2004-10-19#&nbsp;<br />
+			</td>
+			<td>
+				‘2004-10-9’
+			</td>
+			<td>
+				&nbsp;
+			</td>
+			<td>
+				GetDateStr
+			</td>
+		</tr>
+		<tr>
+			<td>
+				11
+			</td>
+			<td>
+				最大值加1&nbsp;<br />
+			</td>
+			<td>
+				&nbsp;
+			</td>
+			<td>
+				&nbsp;
+			</td>
+			<td>
+				&nbsp;
+			</td>
+			<td>
+				&nbsp;
+			</td>
+			<td>
+				GetNextNumStr
+			</td>
+		</tr>
+		<tr>
+			<td>
+				12
+			</td>
+			<td>
+				Like语句函数
+			</td>
+			<td>
+				Like ‘101*
+			</td>
+			<td>
+				Like ‘101%’&nbsp;<br />
+			</td>
+			<td>
+				Like ‘101%’&nbsp;<br />
+			</td>
+			<td>
+				&nbsp;
+			</td>
+			<td>
+				GetLikeStr
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	二、Access与SQLSERVER部分相同数据库函数及关键字列表
+</p>
+<p>
+	1、 函数
+</p>
+<table border="1">
+	<tbody>
+		<tr>
+			<td>
+				序号&nbsp;<br />
+			</td>
+			<td>
+				简述
+			</td>
+			<td>
+				&nbsp;
+			</td>
+		</tr>
+		<tr>
+			<td>
+				01
+			</td>
+			<td>
+				记数函数&nbsp;<br />
+			</td>
+			<td>
+				Count
+			</td>
+		</tr>
+		<tr>
+			<td>
+				02
+			</td>
+			<td>
+				最大值
+			</td>
+			<td>
+				Max
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	<br />
+2、 关键字
+</p>
+<table border="1">
+	<tbody>
+		<tr>
+			<td>
+				序号&nbsp;<br />
+			</td>
+			<td>
+				简述
+			</td>
+			<td>
+				&nbsp;
+			</td>
+		</tr>
+		<tr>
+			<td>
+				01
+			</td>
+			<td>
+				<br />
+			</td>
+			<td>
+				Like
+			</td>
+		</tr>
+		<tr>
+			<td>
+				02
+			</td>
+			<td>
+				连接
+			</td>
+			<td>
+				Join
+			</td>
+		</tr>
+		<tr>
+			<td>
+				03
+			</td>
+			<td>
+				判断空
+			</td>
+			<td>
+				Is Null
+			</td>
+		</tr>
+	</tbody>
+</table></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/780.html">perl的LWP模块简单介绍</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/782.html">在access中求时间差——DateDiff 函数</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

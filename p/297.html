@@ -1,0 +1,269 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>在 HTML 页面中添加 VBScript 代码_comonly.cn</title>
+<meta name="keywords" content="在 HTML 页面中添加 VBScript 代码" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">在 HTML 页面中添加 VBScript 代码</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">http://www.onejava.com/article/vbscript/9.htm</li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2016-04-11</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">网页技术</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h5 style="font-family:宋体;background-color:#FFFFFF;">
+	<span style="font-family:宋体;font-size:small;line-height:normal;background-color:#FFFFFF;">SCRIPT 元素用于将 VBScript 代码添加到 HTML 页面中。</span><br />
+</h5>
+<h5 style="font-family:宋体;background-color:#FFFFFF;">
+	&lt;SCRIPT&gt; 标记
+</h5>
+<blockquote style="font-family:宋体;font-size:small;background-color:#FFFFFF;">
+	VBScript 代码写在成对的 &lt;SCRIPT&gt; 标记之间。例如，以下代码为一个测试传递日期的过程：
+	<blockquote>
+<pre><span> &lt;SCRIPT LANGUAGE="VBScript"&gt; 
+&lt;!--
+   Function CanDeliver(Dt)
+      CanDeliver = (CDate(Dt) - Now()) &gt; 2
+   End Function
+--&gt;
+&lt;/SCRIPT&gt; </span></pre>
+	</blockquote>
+代码的开始和结束部分都有 &lt;SCRIPT&gt; 标记。LANGUAGE 属性用于指定所使用的 Script 语言。由于浏览器能够使用多种 Script 语言，所以必须在此指定所使用的 Script 语言。注意 CanDeliver 函数被嵌入在注释标记（&lt;!-- 和 --&gt;）中。这样能够避免不能识别 &lt;SCRIPT&gt; 标记的浏览器将代码显示在页面中。
+	<p>
+		因为以上示例是一个通用函数（不依赖于任何窗体控件），所以可以将其包含在页面的 HEAD 部分：
+	</p>
+	<blockquote>
+<pre><span> &lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;订购&lt;/TITLE&gt;
+&lt;SCRIPT LANGUAGE="VBScript"&gt;
+&lt;!--
+   Function CanDeliver(Dt)
+      CanDeliver = (CDate(Dt) - Now()) &gt; 2
+   End Function
+--&gt;
+&lt;/SCRIPT&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+... </span></pre>
+	</blockquote>
+SCRIPT 块可以出现在 HTML 页面的任何地方（BODY 或 HEAD 部分之中）。然而最好将所有的一般目标 Script 代码放在 HEAD 部分中，以使所有 Script 代码集中放置。这样可以确保在 BODY 部分调用代码之前所有 Script 代码都被读取并解码。
+	<p>
+		上述规则的一个值得注意的例外情况是，在窗体中提供内部代码以响应窗体中对象的事件。例如，以下示例在窗体中嵌入 Script 代码以响应窗体中按钮的单击事件：
+	</p>
+	<blockquote>
+<pre><span> &lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;测试按钮事件&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+&lt;FORM NAME="Form1"&gt;
+   &lt;INPUT TYPE="Button" NAME="Button1" VALUE="单击"&gt;
+   &lt;SCRIPT FOR="Button1" EVENT="onClick" LANGUAGE="VBScript"&gt;
+      MsgBox "按钮被单击！"
+   &lt;/SCRIPT&gt;
+&lt;/FORM&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt; </span></pre>
+	</blockquote>
+大多数 Script 代码在&nbsp;<b>Sub</b>&nbsp;或&nbsp;<b>Function</b>&nbsp;过程中，仅在其他代码要调用它时执行。然而，也可以将 VBScript 代码放在过程之外、SCRIPT 块之中。这类代码仅在 HTML 页面加载时执行一次。这样就可以在加载 Web 页面时初始化数据或动态地改变页面的外观。
+</blockquote></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/295.html">使用dreamweaver8设计网页的时候非常卡解决方法</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/304.html">linux</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

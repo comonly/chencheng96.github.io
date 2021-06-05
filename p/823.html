@@ -1,0 +1,340 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>python如何判断一段字符串中是否包含指定的字符串_comonly.cn</title>
+<meta name="keywords" content="python如何判断一段字符串中是否包含指定的字符串" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">python如何判断一段字符串中是否包含指定的字符串</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-01-15</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	python  perl
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h3>
+	python如何判断一段字符串中是否包含指定的字符串
+</h3>
+<div>
+	使用find函数实现
+</div>
+<div>
+	s = "This be a string"
+</div>
+<div>
+	if s.find("is") == -1:
+</div>
+<div>
+	&nbsp; &nbsp; print ("No 'is' here!")
+</div>
+<div>
+	else:
+</div>
+<p>
+	&nbsp; &nbsp; print ("Found 'is' in the string.")
+</p>
+<p>
+	<br />
+</p>
+<h3>
+	python对字符串进行编码时count.encode("gb2312")报错'gb2312' co
+</h3>
+<p>
+	报错：UnicodeEncodeError: 'gb2312' codec can't encode character '\u2014' in position 620: illegal multibyte sequence
+</p>
+<p>
+	gb2312对一些很生僻的中文字并不支持，比如 “囧” “苶”<br />
+将gb2312替换为GBK或者GB18030就好了
+</p>
+<p>
+	<br />
+</p>
+<h3>
+	python post提交表单显示乱码
+</h3>
+<p>
+	查看浏览器传入的类似“%25E8%25B4%25A2%25E5%258A%25A1”编码的数据和python发送的数据不一样
+</p>
+<p>
+	在中文字串前面加u，如 urllib.urlencode({"a":u"财务部".encode("gbk")})<br />
+源文件和urlencode编码后的出来的字节数没有关系。需要你给的字符串是指定编码的（utf8，gbk,gb2312）的
+</p>
+<p>
+	<br />
+</p>
+<h3>
+	python里如何在主程序前声明函数
+</h3>
+<p>
+	函数能写在“主程序”后面吗
+</p>
+<p>
+	分到其他文件去。用的时候import进来。<br />
+不然只能定义在后面，因为python不支持函数声明
+</p>
+<h3>
+	python字典键值能是变量吗
+</h3>
+<p>
+	可以的，变量不加引号就行了。
+</p>
+<h3>
+	python3.x执行post请求时报错“POST data should be bytes or
+</h3>
+<p>
+	TypeError: POST data should be bytes, an iterable of bytes, or a file object. It cannot be of type str.
+</p>
+<div>
+	需要在在urlencode语句后加encode(encoding='UTF8')
+</div>
+<div>
+	eg:data = urllib.parse.urlencode(values).encode(encoding='gb2312')
+</div>
+<h3>
+	python f = open(r'c:\test.txt')中的r代表什么？
+</h3>
+<p>
+	表示不用再加转义字符了，直接转义了,写的是什么就是什么
+</p>
+<p>
+	r是raw string的意思，即原始字符串，不进行任何转移，多用于正则。<br />
+stringprefix ::= "r" | "u" | "ur" | "R" | "U" | "UR" | "Ur" | "uR" | "b" | "B" | "br" | "Br" | "bR" | "BR"<br />
+u U是unicode，b B是byte。
+</p>
+<h3>
+	python 3.3.2报错：No module named 'urllib2'
+</h3>
+<div>
+	报错Traceback (most recent call last):<br />
+File "<pyshell#0>", line 1, in&nbsp;<br />
+import urllib2<br />
+ImportError: No module named 'urllib2'&nbsp;<br />
+</pyshell#0>
+</div>
+<div>
+	答案
+	<div>
+		thefirst在python3.3里面，用urllib.request代替urllib2，另外python3之后，不能再用
+	</div>
+</div>
+Python中syntaxerror：multiple statements found
+<p>
+	<br />
+</p>
+<h3>
+	Python中提示错误syntaxerror：multiple statements foundwhile compiling a single statement
+</h3>
+<p>
+	你这代码是不是复制粘贴到IDE的？一行一行的敲上去试试
+</p>
+<p>
+	把这代码 新建一个.py的文件，放到里面去执行看看
+</p>
+<h3>
+	有没有什么办法加速国内下载 Python 源码？
+</h3>
+<p>
+	通过官网下载速度好慢！
+</p>
+<p>
+	听说用迅雷会快一点，你可以试一下。不过我通过官网下载速度20k左右，360一直下不了，之后换成谷歌就下下来了。
+</p>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/822.html">spring mvc相关问题汇总</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/824.html">怎样才能做到像QQ那样的聊天实时性</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

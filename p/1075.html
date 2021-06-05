@@ -1,0 +1,280 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>3中注入_comonly.cn</title>
+<meta name="keywords" content="3中注入" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">3中注入</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-02-25</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	java框架-spring等
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	https://blog.csdn.net/qq_35923749/article/details/77159213
+</p>
+<p>
+	<br />
+</p>
+<p>
+	1 、构造函数注入（Contructor Injection）<br />
+MovieLister就只依赖于我们定义的MovieFinder接口，而不依赖于MovieFinder的实现了。<br />
+<br />
+public class MovieLister {<br />
+private MovieFinder finder;<br />
+&nbsp;<br />
+public MovieLister(MovieFinder finder) {<br />
+this.finder = finder;<br />
+}<br />
+...<br />
+}<br />
+&nbsp;<br />
+类似的，我们可以增加一个setter函数来传入创建好的MovieFinder对象，这样同样可以避免在MovieFinder中hard init这个对象。<br />
+2 、setter注入<br />
+public class MovieLister {<br />
+s...<br />
+public void setFinder(MovieFinder finder) {<br />
+this.finder = finder;<br />
+}<br />
+}<br />
+3、 接口注入<br />
+接口注入使用接口来提供setter方法，其实现方式如下。<br />
+首先要创建一个注入使用的接口。<br />
+<br />
+public interface InjectFinder {<br />
+void injectFinder(MovieFinder finder);<br />
+}<br />
+<br />
+之后，我们让MovieLister实现这个接口。<br />
+<br />
+class MovieLister implements InjectFinder {<br />
+...<br />
+public void injectFinder(MovieFinder finder) {<br />
+this.finder = finder;<br />
+}<br />
+...<br />
+}<br />
+<br />
+以上三种注入方式，虽然实现了解耦，但多余了很多代码来实例化MovieFinder，MovieLister和MovieFinder两个类并没有完全解耦，那如果将注入方式交给第三方呢？通过bean的注解，想调用时直接通过注解注入，招之即来挥之即去，这就是IOC的创建的初衷。<br />
+<br />
+&nbsp;<br />
+<br />
+3）、所以通过注解注入bean，就是实例化依赖类的方式，这也是为什么要将@Service和@Repository放到实现类上面而不是接口类上面，接口只是一个规范，需要各种实现类去实现这个接口，我们要用的就是这些实用类的方法。<br />
+<br />
+三、注入的方式有@Recource和@Autowired<br />
+@Resource的作用相当于@Autowired，只不过@Autowired按byType自动注入，而@Resource默认按 byName自动注入罢了。<br />
+<br />
+@Resource有两个属性是比较重要的，分别是name和type，spring将@Resource注解的name属性解析为bean的名字，而type属性则解析为bean的类型。所以如果使用name属性，则使用byName的自动注入策略，而使用type属性时则使用byType自动注入策略。如果既不指定name也不指定type属性，这时将通过反射机制使用byName自动注入策略。@Resource装配顺序<br />
+<br />
+如果同时指定了name和type，则从Spring上下文中找到唯一匹配的bean进行装配，找不到则抛出异常。<br />
+如果指定了name，则从上下文中查找名称（id匹配的bean进行装配，找不到则抛出异常。<br />
+如果指定了type，则从上下文中找到类型匹配的唯一bean进行装配，找不到或者找到多个，都会抛出异常。<br />
+如果既没有指定name，又没有指定type，则自动按照byName方式进行装配，如果没有匹配，则回退为一个原始类型（UserDao）进行匹配，如果匹配则自动装配。<br />
+&nbsp;<br />
+<br />
+当指定了@service的name值时， 在@Resource中要么不指示，如果指示的话，则要与之相对应。<br />
+<br />
+当没有指定@service的name值是，在@Resource中随意。但是前提是，实现该接口的只有这一个类。<br />
+<br />
+所以，建议是最好在@service和@Resoure中同时指定名称，并且做到一一对应。<br />
+<br />
+如果采用@Autowired来注解，则同样无需指定name属性，若是实现该接口有多个类，则需要通过@Qualifier来做区分
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1074.html">android</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1076.html">spring-mvc返回视图jsp页面及重定向</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

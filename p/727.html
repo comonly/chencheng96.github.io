@@ -1,0 +1,1035 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>ASP常用的对象和组件_comonly.cn</title>
+<meta name="keywords" content="ASP常用的对象和组件" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">ASP常用的对象和组件</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">W3School</li>
+          <li class="lmname"><a href="http://www.w3school.com.cn/asp/" target="_blank">http://www.w3school.com.cn/asp/</a></li>
+          <li class="timer">2017-05-20</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	javaweb---jsp asp数据库框架
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	ASP常用的对象和组件&nbsp; 参考资料<a href="http://www.w3school.com.cn/asp/">W3School</a>
+</p>
+<p>
+	Request对象：用来连接客户端的Web页（.html文件）和服务器的Web页（.asp文件），可以获得客户端数据，也可以交换两者之间的数据。
+</p>
+<p>
+	Request对象把客户信息保存在几个集合中，供ASP使用。
+</p>
+<p>
+	通用的访问方法是：Request.Collection("membername")当不指定集合名时，以QueryString,Form,Cookie,ServerVariable的顺序搜索所以集合，当发现第一个匹配的变量时，就认定它是要引用的成员。
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	QueryString集合，当HTML表单使用GET方法向ASP文件传递数据时，数据被保存在集合QueryString中。其成员可以具有与之相关的多个值，也就是说，同一表单中，多个元素可以有相同的名字，下面代码访问这些数据：
+</p>
+<p>
+	&lt;%For each item in Request.QueryString("Name")
+</p>
+<p>
+	Response.write Item&amp;"&lt;br&gt;"
+</p>
+<p>
+	Next%&gt;
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	Form集合，当表单用POST方法时，数被保存在Form集合中
+</p>
+<p>
+	ServerVariable集合，保存了随HTTP请求一起传送HTTP头的信息，可以通过它获取有关浏览器的信息，主要成员有<a href="http://www.w3school.com.cn/asp/coll_servervariables.asp#sv" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 参考实例</a>
+</p>
+<table border="1" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<th>
+				变量
+			</th>
+			<th>
+				描述
+			</th>
+		</tr>
+		<tr>
+			<td>
+				ALL_HTTP
+			</td>
+			<td>
+				Returns all HTTP headers sent by the client. Always prefixed with HTTP_ and capitalized
+			</td>
+		</tr>
+		<tr>
+			<td>
+				ALL_RAW
+			</td>
+			<td>
+				Returns all headers in raw form
+			</td>
+		</tr>
+		<tr>
+			<td>
+				APPL_MD_PATH
+			</td>
+			<td>
+				Returns the meta base path for the application for the ISAPI DLL
+			</td>
+		</tr>
+		<tr>
+			<td>
+				APPL_PHYSICAL_PATH
+			</td>
+			<td>
+				Returns the physical path corresponding to the meta base path
+			</td>
+		</tr>
+		<tr>
+			<td>
+				AUTH_PASSWORD
+			</td>
+			<td>
+				Returns the value entered in the client's authentication dialog
+			</td>
+		</tr>
+		<tr>
+			<td>
+				AUTH_TYPE
+			</td>
+			<td>
+				The authentication method that the server uses to validate users
+			</td>
+		</tr>
+		<tr>
+			<td>
+				AUTH_USER
+			</td>
+			<td>
+				Returns the raw authenticated user name
+			</td>
+		</tr>
+		<tr>
+			<td>
+				CERT_COOKIE
+			</td>
+			<td>
+				Returns the unique ID for client certificate as a string
+			</td>
+		</tr>
+		<tr>
+			<td>
+				CERT_FLAGS
+			</td>
+			<td>
+				bit0 is set to 1 if the client certificate is present and bit1 is set to 1 if the cCertification authority of the client certificate is not valid
+			</td>
+		</tr>
+		<tr>
+			<td>
+				CERT_ISSUER
+			</td>
+			<td>
+				Returns the issuer field of the client certificate
+			</td>
+		</tr>
+		<tr>
+			<td>
+				CERT_KEYSIZE
+			</td>
+			<td>
+				Returns the number of bits in Secure Sockets Layer connection key size
+			</td>
+		</tr>
+		<tr>
+			<td>
+				CERT_SECRETKEYSIZE
+			</td>
+			<td>
+				Returns the number of bits in server certificate private key
+			</td>
+		</tr>
+		<tr>
+			<td>
+				CERT_SERIALNUMBER
+			</td>
+			<td>
+				Returns the serial number field of the client certificate
+			</td>
+		</tr>
+		<tr>
+			<td>
+				CERT_SERVER_ISSUER
+			</td>
+			<td>
+				Returns the issuer field of the server certificate
+			</td>
+		</tr>
+		<tr>
+			<td>
+				CERT_SERVER_SUBJECT
+			</td>
+			<td>
+				Returns the subject field of the server certificate
+			</td>
+		</tr>
+		<tr>
+			<td>
+				CERT_SUBJECT
+			</td>
+			<td>
+				Returns the subject field of the client certificate
+			</td>
+		</tr>
+		<tr>
+			<td>
+				CONTENT_LENGTH
+			</td>
+			<td>
+				Returns the length of the content as sent by the client
+			</td>
+		</tr>
+		<tr>
+			<td>
+				CONTENT_TYPE
+			</td>
+			<td>
+				Returns the data type of the content
+			</td>
+		</tr>
+		<tr>
+			<td>
+				GATEWAY_INTERFACE
+			</td>
+			<td>
+				Returns the revision of the CGI specification used by the server
+			</td>
+		</tr>
+		<tr>
+			<td>
+				HTTP_&lt;<em>HeaderName</em>&gt;
+			</td>
+			<td>
+				Returns the value stored in the header?<em>HeaderName</em>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				HTTP_ACCEPT
+			</td>
+			<td>
+				Returns the value of the Accept header
+			</td>
+		</tr>
+		<tr>
+			<td>
+				HTTP_ACCEPT_LANGUAGE
+			</td>
+			<td>
+				Returns a string describing the language to use for displaying content
+			</td>
+		</tr>
+		<tr>
+			<td>
+				HTTP_COOKIE
+			</td>
+			<td>
+				Returns the cookie string included with the request
+			</td>
+		</tr>
+		<tr>
+			<td>
+				HTTP_REFERER
+			</td>
+			<td>
+				Returns a string containing the URL of the page that referred the request to the current page using an &lt;a&gt; tag. If the page is redirected, HTTP_REFERER is empty
+			</td>
+		</tr>
+		<tr>
+			<td>
+				HTTP_USER_AGENT
+			</td>
+			<td>
+				Returns a string describing the browser that sent the request
+			</td>
+		</tr>
+		<tr>
+			<td>
+				HTTPS
+			</td>
+			<td>
+				Returns ON if the request came in through secure channel or OFF if the request came in through a non-secure channel
+			</td>
+		</tr>
+		<tr>
+			<td>
+				HTTPS_KEYSIZE
+			</td>
+			<td>
+				Returns the number of bits in Secure Sockets Layer connection key size
+			</td>
+		</tr>
+		<tr>
+			<td>
+				HTTPS_SECRETKEYSIZE
+			</td>
+			<td>
+				Returns the number of bits in server certificate private key
+			</td>
+		</tr>
+		<tr>
+			<td>
+				HTTPS_SERVER_ISSUER
+			</td>
+			<td>
+				Returns the issuer field of the server certificate
+			</td>
+		</tr>
+		<tr>
+			<td>
+				HTTPS_SERVER_SUBJECT
+			</td>
+			<td>
+				Returns the subject field of the server certificate
+			</td>
+		</tr>
+		<tr>
+			<td>
+				INSTANCE_ID
+			</td>
+			<td>
+				The ID for the IIS instance in text format
+			</td>
+		</tr>
+		<tr>
+			<td>
+				INSTANCE_META_PATH
+			</td>
+			<td>
+				The meta base path for the instance of IIS that responds to the request
+			</td>
+		</tr>
+		<tr>
+			<td>
+				LOCAL_ADDR
+			</td>
+			<td>
+				Returns the server address on which the request came in
+			</td>
+		</tr>
+		<tr>
+			<td>
+				LOGON_USER
+			</td>
+			<td>
+				Returns the Windows account that the user is logged into
+			</td>
+		</tr>
+		<tr>
+			<td>
+				PATH_INFO
+			</td>
+			<td>
+				Returns extra path information as given by the client
+			</td>
+		</tr>
+		<tr>
+			<td>
+				PATH_TRANSLATED
+			</td>
+			<td>
+				A translated version of PATH_INFO that takes the path and performs any necessary virtual-to-physical mapping
+			</td>
+		</tr>
+		<tr>
+			<td>
+				QUERY_STRING
+			</td>
+			<td>
+				Returns the query information stored in the string following the question mark (?) in the HTTP request
+			</td>
+		</tr>
+		<tr>
+			<td>
+				REMOTE_ADDR
+			</td>
+			<td>
+				Returns the IP address of the remote host making the request
+			</td>
+		</tr>
+		<tr>
+			<td>
+				REMOTE_HOST
+			</td>
+			<td>
+				Returns the name of the host making the request
+			</td>
+		</tr>
+		<tr>
+			<td>
+				REMOTE_USER
+			</td>
+			<td>
+				Returns an unmapped user-name string sent in by the user
+			</td>
+		</tr>
+		<tr>
+			<td>
+				REQUEST_METHOD
+			</td>
+			<td>
+				Returns the method used to make the request
+			</td>
+		</tr>
+		<tr>
+			<td>
+				SCRIPT_NAME
+			</td>
+			<td>
+				Returns a virtual path to the script being executed
+			</td>
+		</tr>
+		<tr>
+			<td>
+				SERVER_NAME
+			</td>
+			<td>
+				Returns the server's host name, DNS alias, or IP address as it would appear in self-referencing URLs
+			</td>
+		</tr>
+		<tr>
+			<td>
+				SERVER_PORT
+			</td>
+			<td>
+				Returns the port number to which the request was sent
+			</td>
+		</tr>
+		<tr>
+			<td>
+				SERVER_PORT_SECURE
+			</td>
+			<td>
+				Returns a string that contains 0 or 1. If the request is being handled on the secure port, it will be 1. Otherwise, it will be 0
+			</td>
+		</tr>
+		<tr>
+			<td>
+				SERVER_PROTOCOL
+			</td>
+			<td>
+				Returns the name and revision of the request information protocol
+			</td>
+		</tr>
+		<tr>
+			<td>
+				SERVER_SOFTWARE
+			</td>
+			<td>
+				Returns the name and version of the server software that answers the request and runs the gateway
+			</td>
+		</tr>
+		<tr>
+			<td>
+				URL
+			</td>
+			<td>
+				Returns the base portion of the URL
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	Response对象
+</p>
+<p>
+	用于将服务端数据发送到客户端，可通过在客户端浏览器显示，用户浏览页面的重定向以及在客户端创建cookies等方式进行。该功能与Request对象的功能恰恰相反。
+</p>
+<p>
+	1，Buffer属性，如果为True,则Response的内容要写入缓冲区，当脚本处理完再发给客户。
+</p>
+<p>
+	2，Status属性，传递HTTP Response报文的状态。服务器返回的状态代码由三位数组成，可以用于测试阶段和转换控制到其他站点（即Forward） 。
+</p>
+<p>
+	3，Write方法，向客户输出HTML，可以是任何合法的HTML脚本。
+</p>
+<p>
+	4，Redirect方法，是浏览器重新定向到另一个URL上。
+</p>
+<p>
+	5，Clear方法，如果设Buffer属性为Ture，则Clear方法清除所有缓冲区内容。
+</p>
+<p>
+	6，Flush方法，将缓冲内容立即发送给客户。
+</p>
+<p>
+	7，End方法，当Active Server遇到该方法时，立即停止处理ASP文件，如果有缓冲，立即发送内容到客户。
+</p>
+<p>
+	8，Binary Write方法，输出二进制数据。
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	Request对象和Response对象的Cookies集合
+</p>
+<p>
+	1，写入Cookies
+</p>
+<p>
+	Response.Cookies("Cookies名称")[("键名称").属性]=值
+</p>
+<p>
+	如果该Cookies已经存在，则值被新值代替，否则，创建改cookie。例如
+</p>
+<p>
+	&lt;%Response.Cookies("NewCookie")="New Cookie Value" %&gt;
+</p>
+<p>
+	2,读取Cookies，例如
+</p>
+<p>
+	&lt;%=Request.Cookies("NewCookie")%&gt;
+</p>
+<p>
+	还有其他属性
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	Server对象，提供对服务器上的方法和属性进行访问。最常用的方法是创建ActiveX组件的实例(Server.CreateObject)。其他方法用于将URL或HTML编码成字符串，将虚拟路径映射到物理路径以及设置脚本的超时期限
+</p>
+<p>
+	1，HTMLEncode方法，对特定的字符串进行HTML编码，如本来要显示
+</p>
+<p>
+	The Underline tag(&lt;u&gt;&lt;/u&gt;)is used to underline the surrounded text.但实际可能显示为The Underline tag()is used to underline the surrounded text.
+</p>
+<p>
+	为了避免这种情况，可以调用Server对象的HTMLEncode方法，如：
+</p>
+<p>
+	&lt;%
+</p>
+<p>
+	Response.Write Server.HTMLEncode("The Underline tag()is used to underline the surrounded text.")
+</p>
+<p>
+	%&gt;
+</p>
+<p>
+	2,URLEncode方法，根据URL规则对字符串进行编码。当字符串数据以URL格式传递到服务器时，串中间不能有空格，不能有特殊字符，这是就必须用URL编码
+</p>
+<p>
+	3，CreateObject方法，用于创建已注册到服务器上的ActiveX组件例程，格式
+</p>
+<p>
+	Server.CreateObject("ComponentName")
+</p>
+<p>
+	作为例程启动的组件可以是ActiveX能够使用的所有内置组件，实际上是存在于服务器上的任何ActiveX组件。比如，要使用金融计算，步骤如下
+</p>
+<p>
+	（1）创建对象
+</p>
+<p>
+	&lt;%
+</p>
+<p>
+	set x=server.createobject("extend.financial");
+</p>
+<p>
+	%&gt;
+</p>
+<p>
+	（2）调用对象的方法
+</p>
+<p>
+	&lt;%
+</p>
+<p>
+	set x=server.createobject("extend.financial");
+</p>
+<p>
+	response.write Format(x,futval(.07/12,200,-500),"###,###,##0.00")
+</p>
+<p>
+	%&gt;
+</p>
+<p>
+	（3）释放例程&lt;
+</p>
+<p>
+	%
+</p>
+<p>
+	set x=Nothing
+</p>
+<p>
+	%&gt;
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	Application对象，应用程序级的对象，用来在所有用户间共享信息，并可以在Web应用程序运行期间持久地保持数据。同时如果不加以限制，所有客户都可以访问这个对象。
+</p>
+<p>
+	Active Server 应用程序是虚拟目录及其子目录下的所有文件，即一个Web。可以使用Application对象在应用软件的所有用户中共享信息，并可以在服务器运行期间持久的保存数据。它有一些控制访问应用层数据的方法和事件。
+</p>
+<p>
+	Application本身没有内置属性，可以有用户定义：Application("属性名") =值
+</p>
+<p>
+	保存在Application对象中的数据可以被Application的所有用户读取。例如，用来做访问计数：Application("aVisits")=Application("aVisits")+1
+</p>
+<p>
+	方法有两个：
+</p>
+<p>
+	Lock：当用户调用Lock时，只有当前用户能够编辑或增加Application对象的属性。
+</p>
+<p>
+	Unlock：调用了Lock，完成时一定要调用Unlock。
+</p>
+<p>
+	事件也有两个：
+</p>
+<p>
+	Application_OnStart事件：应用程序启动时调用。
+</p>
+<p>
+	Application_OnStop事件：应用程序终止时调用。
+</p>
+<p>
+	这两个事件再加上Session的两个事件的处理程序都放在文件Global.asp中，一个Web应用只有一个Global.asa文件，且放在改应用的根目录下。一个Global.asp文件的例子如下
+</p>
+<p>
+	&lt;Script Language="VBScript"Runat="Server"&gt;
+</p>
+<p>
+	Sub Application_OnStart
+</p>
+<p>
+	Dim laChats(15)
+</p>
+<p>
+	Application("gaChats")=maChats
+</p>
+<p>
+	Application("giCounter")=0
+</p>
+<p>
+	End Sub
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	Session对象，为每个访问者提供一个标识；Session可以用来存储访问者的一些喜欢，可以跟踪访问者的习惯。在购物网站中。Session常用来创建购物车。
+</p>
+<p>
+	Active Server使用会话设置为使用应用程序的单个用户持久保存数据。当用户请求ActiveServer应用程序中的ASP文件的URL时，要启动Session。在默认情况下，如果没有用户请求，则服务器只保留Session20分钟。用户也可以通过设置Session的属性TimeOut来改变。或显示地调用Session.Abandon方法来释放Session对象。
+</p>
+<p>
+	SessionID属性：唯一标识一个会话的标识符。
+</p>
+<p>
+	TimeOut属性：定义Session保留的时限，单位为分钟，如"Session.TimeOut=10".
+</p>
+<p>
+	像Application一样，Session也可以由用户定义属性。
+</p>
+<p>
+	Session的唯一方法是Abandon,用来取消用户的Session对象，并释放其占用的服务器资源。如：
+</p>
+<p>
+	&lt;%Session.Abandon%&gt;
+</p>
+<p>
+	事件有Session_OnStart和Session_OnEnd，其处理程序应放在文件Glabal.asa中。
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	FileSystem和TextStream对象
+</p>
+<p>
+	FileSystem和TextStream对象可用于建立对文件系统的访问，并提供顺序访问文件的机制。
+</p>
+<p>
+	FileSystem没有属性，只有两个方法，第一个方法是CreateTextFile方法，可以在宿主机上创建新的文本文件，并返回TextStream对象以提供对新创建文件的访问机制。第二个是PpenTextFile方法，用于打开文本文件供顺序访问并返回一个TextStream对象。如：
+</p>
+<p>
+	&lt;%
+</p>
+<p>
+	set fsFilesys=CreateObject("Scripting.FileSystemObject")
+</p>
+<p>
+	set fsCoffee=fsFilesys.CreateTextFile("c:\coffe.txt",True)
+</p>
+<p>
+	tsCoffee.WriteLine("Man,I Could use some coffee.")
+</p>
+<p>
+	tsCoffee.Close
+</p>
+<p>
+	%&gt;
+</p>
+<table border="1">
+	<tbody>
+		<tr>
+			<td colspan="2" bgcolor="#FF0000">
+				TextStream对象的属性有：
+			</td>
+		</tr>
+		<tr>
+			<td>
+				AtEndOfLine
+			</td>
+			<td>
+				如果文件当前字符处在行的末尾则返回true
+			</td>
+		</tr>
+		<tr>
+			<td>
+				AtEndOfScreen
+			</td>
+			<td>
+				如果当前字符在文件的末尾则返回true
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Column
+			</td>
+			<td>
+				返回当前字符的列号
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Line
+			</td>
+			<td>
+				返回当前字符的行号
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" bgcolor="#FF0000">
+				TextStream对象的方法为：
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Close()
+			</td>
+			<td>
+				关闭一个打开的文件并释放TextStream对象
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Read(numchars)
+			</td>
+			<td>
+				从文件中读出<span>?numchars?</span>（给定个数）个字符到一个变量中
+			</td>
+		</tr>
+		<tr>
+			<td>
+				ReadAll()
+			</td>
+			<td>
+				作为单个字符串读出整个文件到一个变量中
+			</td>
+		</tr>
+		<tr>
+			<td>
+				ReadLine()
+			</td>
+			<td>
+				作为一个字符串从文件中读出一行（直到回车符和换行）
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Skip(numchars)
+			</td>
+			<td>
+				当从文件读出时忽略<span>?numchars?</span>个字符
+			</td>
+		</tr>
+		<tr>
+			<td>
+				SkipLine()
+			</td>
+			<td>
+				当从文件读出时忽略下一行
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Write(string)
+			</td>
+			<td>
+				向文件写入字符串<span>?string</span>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				WriteLine(string)
+			</td>
+			<td>
+				向文件写入字符串<span>?string</span>（可选）和换行符，写入以换行结束的字符串
+			</td>
+		</tr>
+		<tr>
+			<td>
+				WriteBlankLines(n)
+			</td>
+			<td>
+				向文件写入<span>?n?</span>个换行符，写入给定数量的空格
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	&nbsp;
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/725.html">图层和行为</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/728.html">ODBC接口技术/ADO接口技术  用ADO实现访问数据库</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="http://www.w3school.com.cn/asp/" target="_blank">http://www.w3school.com.cn/asp/</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

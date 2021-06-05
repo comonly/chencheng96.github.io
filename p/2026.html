@@ -1,0 +1,280 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>C++项目在不同版本vs下同时开发关于静态库等兼容性问题_comonly.cn</title>
+<meta name="keywords" content="C++项目在不同版本vs下同时开发关于静态库等兼容性问题" />
+<meta name="description" content="由于不同vs版本使用的平台工具集版本号不同，通过在属性页 - 配置属性 - 常规 - 平台工具集 填上$(DefaultPlatformToolset) ，大概意思就是使用默认工具集版本号，而这个版本号等于当前IDE的版本号，比如2012就是v110。可以避免在切换vs开发环境时手动选择平台工具集。关于自适应平台工具集：https://zhuanlan.zhihu.com/p/61518123
+
+
+	
+
+
+	静态库的问题。虽然VS2015~2019 ABI兼容。但是由于VS默认开启全程序优化(" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">C++项目在不同版本vs下同时开发关于静态库等兼容性问题</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-08-21</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">静态库,动态库,兼容</a></div>
+      
+      
+        <div class="news_about"><strong>简介</strong>由于不同vs版本使用的平台工具集版本号不同，通过在属性页 - 配置属性 - 常规 - 平台工具集 填上$(DefaultPlatformToolset) ，大概意思就是使用默认工具集版本号，而这个版本号等于当前IDE的版本号，比如2012就是v110。可以避免在切换vs开发环境时手动选择平台工具集。关于自适应平台工具集：https://zhuanlan.zhihu.com/p/61518123
+
+
+	
+
+
+	静态库的问题。虽然VS2015~2019 ABI兼容。但是由于VS默认开启全程序优化(</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	由于不同vs版本使用的平台工具集版本号不同，通过在属性页 - 配置属性 - 常规 - 平台工具集 填上$(DefaultPlatformToolset) ，大概意思就是使用默认工具集版本号，而这个版本号等于当前IDE的版本号，比如2012就是v110。可以避免在切换vs开发环境时手动选择平台工具集。关于自适应平台工具集：<a href="https://zhuanlan.zhihu.com/p/61518123">https://zhuanlan.zhihu.com/p/61518123</a>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	静态库的问题。虽然VS2015~2019 ABI兼容。但是由于VS默认开启全程序优化(/GL)， 如果你没关闭，这将导致编译出来的静态库（obj组成的那种），兼容性大大降低。为了保证lib文件的通用性，建议所有静态库工程都关闭全程序优化(/GL)。在属性页 - 配置属性 - C/C++ - 优化 - 全程序优化 调整为 否。
+</p>
+<p>
+	<ol>
+		<li>
+			使用静态库的一个原则“向下兼容”，显然的，不可能用一个vs2019编译出来的静态库拿到vs2012中使用（虽然有些时候这样用没什么问题）。只能由高版本的开发环境去兼容低版本的静态库。
+		</li>
+		<li>
+			关于符号集的问题（通过导入legacy_stdio_definitions.lib以及增加自定义的转换函数来解决）。
+		</li>
+		<li>
+			在程序中可以判断是当前开发平台的_MSC_VER来决定是否来做向下兼容。关于<span>_MSC_VER可以查看<a href="https://baike.baidu.com/item/_MSC_VER/9468279" target="_blank">百度百科的介绍</a>。</span>
+		</li>
+	</ol>
+</p>
+<p>
+<pre class="prettyprint lang-cpp">#pragma once
+
+#if _MSC_VER&gt;=1900
+	#pragma comment(lib, "legacy_stdio_definitions.lib")
+	#include "stdio.h" 
+	_ACRTIMP_ALT FILE * __cdecl __acrt_iob_func(unsigned);
+	#ifdef __cplusplus 
+	extern "C"
+	#endif 
+	FILE* __cdecl __iob_func(unsigned i) {
+		return __acrt_iob_func(i);
+	}
+#endif /* _MSC_VER&gt;=1900 */
+
+#if _MSC_VER&gt;=1900
+	#ifdef _DEBUG
+		#pragma comment(lib, "log4cplusSUD_10.lib")
+	#else
+		#pragma comment(lib, "log4cplusSU_10.lib")
+	#endif
+#else
+	#ifdef _DEBUG
+		#pragma comment(lib, "log4cplusSUD_7.lib")
+	#else
+		#pragma comment(lib, "log4cplusSU_7.lib")
+	#endif
+#endif /* _MSC_VER&gt;=1900 */</pre>
+</p>
+<p>
+	当然，多个vs版本编译出的不同版本的静态库也可以用该方法分别引入，这样就不用处理符号集的问题了。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/2021.html">C++创建文件夹 输出当前程序运行路径</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/2027.html">solr服务开机自启动设置（windows）</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

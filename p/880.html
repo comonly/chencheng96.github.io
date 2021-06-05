@@ -1,0 +1,438 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>JavaWeb汇总_comonly.cn</title>
+<meta name="keywords" content="JavaWeb汇总" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">JavaWeb汇总</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-03-14</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	javaweb---jsp asp数据库框架
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	基于servlet的JavaWeb，创建一个servlet可以直接通过在myeclipse中右键包创建一个servlet，这样会自动在web.xml中生成相关的servlet配置。
+</p>
+<h4>
+	servlet里的代码怎么才会运行（servlet详细说明会另做说明）
+</h4>
+<p>
+	继承自extends HttpServlet。一般需要重新doGet和doPost方法，这两个方法分别会在get和post方法请求页面时进行调用。
+</p>
+<pre class="prettyprint lang-java">public void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+    //......get方式请求servlet时的处理
+}
+public void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+   //若post请求和get请求同样的操作，一般这样调用一下
+    doGet(request,response);
+}</pre>
+<h2 id='ervlet传递数据给j页面'>
+	servlet传递数据给jsp页面
+</h2>
+<p>
+	将服务器Servlet数据传到另外一jsp页面中，（jsp要从el表达式拿数据都是从四大域Pagecontext、httprequest、httpsession、ServletContext中获取，在存储数据时，尽量在范围小的域中）
+</p>
+<h4>
+	1、利用ServletContext这个web全局上下文来共享数据
+</h4>
+servlet中getServletContext()可以获得一个ServletContext对象，利用这个对象的getAttribute()/setAttribute()方法可以在整个WEB应该里共享数据，可以实现servlet和jsp之间的数据互传<br />
+比如：<br />
+在servlet中<br />
+getServletContext.setAttribute("title", "hello world");<br />
+在servlet上下文中以“hello”为键，保存了“hello world”这一个字符串，如果要在jsp中调用，则用如下jsp脚本<br />
+&lt;%=application.getAttribute("hello")%&gt;<br />
+<h4>
+	2、利用session在同一个会话共享数据
+</h4>
+利用HttpSession共享同一个会话的数据。这也要用到session的getAttribute()/setAttribute()方法，和ServletContext()的使用差不多的。<br />
+<h4>
+	3、利用request共享一次请求的数据
+</h4>
+一次请求当中，可以利用request的getAttribute()/setAttribute()方法在servlet和jsp页面间共享数据。要将存储服务器的数据响应到另外一个页面中，可以使用重定向或者请求转发&nbsp;<br />
+<ul>
+	<li>
+		如果使用重定向跳转页面，我们就需要将数据存储到session或者application中。原因：重定向是请求两次，如果用重定向转向另一个页面，request域将不是同一个域对象，封装在request中的对象也将不存在。&nbsp;
+	</li>
+	<li>
+		如果使用转发跳转页面，我们只需将数据存储到request域中，（遵循范围小的原则）
+	</li>
+</ul>
+<pre class="prettyprint lang-java">//在servlet中创建session，然后在jsp页面引用session
+HttpSession session = request.getSession();
+session.setAttribute("name", request.getParameter("name"));
+jsp页面：
+EL表达式${name}
+&lt;%=(String) session.getAttribute("name") %&gt;
+&lt;%=request.getSession().getAttribute("name")%&gt;
+
+//通过request向jsp传递数据
+request.setAttribute( "name",request.getParameter("name")); 
+RequestDispatcher   d   =   request.getRequestDispatcher( "/graduationProject/member/index.jsp"); 
+d.forward(request,response); 
+jsp页面：
+&lt;%=(String)request.getAttribute("name")%&gt;</pre>
+<h2 id='JSP传值给Servlet'>
+	JSP传值给Servlet
+</h2>
+JSP传值给Servlet有几种形式：Form表单传值，url传值，其他方式传值<br />
+<h4>
+	a、form表单传值：
+</h4>
+<span> </span>String userName = request.getParameter("name");<br />
+<span> </span>out.println("userName："+userName);<br />
+<h4>
+	b、url传值
+</h4>
+比如这里的 &lt;a&gt;标签的 href属性与 &lt;form&gt;标签的 action属性的值 "JspServlet?action=toServlet"，在 servlet同样用 request.getParameter("action")获取；<br />
+<h4>
+	c、java代码传值
+</h4>
+java片段代码，servlet只能接到 session.setAttribute("testSession","Hello session")的内容，而接不到 request的内容。在 servlet里用 request.getSession().getAttribute("testSession")获取 session内容。
+<h2 id='jvBe的使用'>
+	javaBean的使用
+</h2>
+<p>
+	一组数据，创建javabean类型的数据通过上述方法进行传递数据，javabean直接传递数据，可以用static修饰需要传递的静态数据。javaBean也可以用作数据库记录集的封装，将每条记录放在一个bean对象中，再把每个bean放在List中。
+</p>
+<h2 id='对于数据库的数据传递'>
+	对于数据库的数据传递
+</h2>
+<p>
+	servlet中连接数据库获得结果集然后遍历结果集每次遍历的结果封装到实体类user（或者直接封装到Map中）中最后把每次得到的user中放入List&lt;User&gt;中，然后用request.setAttribute方法进行传递,用forword方法转发。在jsp页面中用request.getAttribute方法获取。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/879.html">关于cmd中执行命令路径包含空格的解决办法</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/881.html">Java基础 数据运算、流程控制和数组</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="Java连接Access数据库的两种方法">
+							<h2 style="display:inline;color:#5BC648;">Java连接Access数据库的两种方法</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-03-25&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><h4>
+	Java连接Access数据库的两种方法
+</h4>
+<pre class="prettyprint lang-java">import java.sql.*;
+public class ConnectAccess {
+	/**
+	 * 初学者请注意：
+	 * 1:先建立一个access文件a1.mdb,并放在D:/下;
+	 * 2:在数据库文件a1.mdb中建立一个表Table1；
+	 * 3：为Table1添加一列，并插入至少一条记录；
+	 * 4：本文是一个完整的类，直接拿去运行就可以。
+	 */
+	public static void main(String args[]) throws Exception {
+		ConnectAccess ca=new ConnectAccess();
+		ca.ConnectAccessFile();
+		ca.ConnectAccessDataSource();
+	}
+	public void ConnectAccessFile() throws Exception 
+	{
+		Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
+		/**
+		 * 直接连接access文件。
+		 */
+		String dbur1 = "jdbc:odbc:driver={Microsoft Access Driver (*.mdb)};DBQ=d://a1.mdb";
+		Connection conn = DriverManager.getConnection(dbur1, "username", "password");
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery("select * from Table1");
+		while (rs.next()) {
+			System.out.println(rs.getString(1));
+		}
+		rs.close();
+		stmt.close();
+		conn.close();
+	}
+	public void ConnectAccessDataSource()throws Exception {
+		Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
+		/**
+		 * 采用ODBC连接方式 如何建立ODBC连接？
+		 * 答：在windows下，【开始】-&gt;【控制面板】-&gt;【性能和维护】-&gt;【管理工具】-&gt;【数据源】，
+                 *在数据源这里添加一个指向a1.mdb文件的数据源。
+		 * 比如创建名字为dataS1
+		 */
+		String dbur1 = "jdbc:odbc:dataS1";// 此为ODBC连接方式
+		Connection conn = DriverManager.getConnection(dbur1, "username", "password");
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery("select * from Table1");
+		while (rs.next()) {
+			System.out.println(rs.getString(1));
+		}
+		rs.close();
+		stmt.close();
+		conn.close();
+	}
+}</pre>
+<h4>
+	通过请求来获取数据库的绝对路径方式连接&nbsp;
+</h4>
+<p>
+	使用ODBC数据源的方式或者是使用绝对路径的方式连接access数据库，项目做好后，放到他人的服务器上是无法运行的，因为数据库的信息不存在了，而我现在的想法是无论项目放那一台支持jdbc-odbc机器的服务器上都可以连接数据库，并运行项目，所以要完成这样的操作，只有在让access数据库的mdb文件随着项目的移动而移动，因此，在Java Web项目，将mdb文件放入到WebRoot下或者其子目录下。但是在DAO中如何得到该mdb的真实路径呢?将该数据库文件放在了Web应用的根路径下。那么动态的获取连接的代码如下所示：
+</p>
+<pre class="prettyprint lang-java">//创建一个static的String类型来获取和使用绝对地址
+package vip.chencheng.connectorDatabase;
+public class dataBasePath {
+	private static String dataBasePath;
+	public void setDataBasePath(String path){
+		dataBasePath=path;
+	}
+	public String getDataBasePath(){
+		return dataBasePath;  }
+}</pre>
+<pre class="prettyprint lang-java">//在某次请求中对网站的绝对地址获取
+dataBasePath path=new dataBasePath();
+path.setDataBasePath(request.getSession().getServletContext().getRealPath(request.getRequestURI()) ) ;
+//得到D:\apache-tomcat\webapps\WebRoot\WebRoot\indexServlet</pre>
+<pre class="prettyprint lang-java">//连接数据库的java中获取地址并进行处理
+dataBasePath databasepath=new dataBasePath();
+String path = databasepath.getDataBasePath(); //("/index.jsp"); 
+path = path.substring(0,path.indexOf("WebRoot"))+"\\"; 
+//获取绝对地址,从WebRoot后的内容截掉
+path=path+"WebRoot\\graduationProject\\database\\movie.mdb";</pre>
+<pre class="prettyprint lang-java">//下面是进行数据库的连接，
+Class.forName("sun.jdbc.odbc.JdbcOdbcDriver"); 
+String dburl = "jdbc:odbc:driver={Microsoft Access Driver (*.mdb)};DBQ="+path; 
+//通过properties可以对连接数据库设置编码
+Properties prop= new Properties ();
+prop.put( "charSet", "gbk" );
+prop.put( "user", "用户名" );
+prop.put( "password", "密码" );
+
+Connection conn = DriverManager.getConnection(dburl, prop);  
+Statement stmt = conn.createStatement();  
+ResultSet rs = stmt.executeQuery(sql);  
+......对记录集re进行一系列操作
+rs.close();  //操作完成后对资源关闭
+stmt.close();  
+conn.close();</pre>
+<h4>
+	对记录集进行处理，返回一个List类型的数据给调用者
+</h4>
+<pre class="prettyprint lang-java">List list = new ArrayList();	        
+ResultSetMetaData md = rs.getMetaData();
+int columnCount = md.getColumnCount();     	  
+//***********rs转换为list.其中map可以用bean
+while (rs.next()&amp;&amp;count&gt;=0) {
+    count--;  //count为需要获取记录的数量
+    Map rowData = new HashMap();
+    for (int i = 1; i &lt;= columnCount; i++) {
+        rowData.put(md.getColumnName(i), rs.getObject(i));
+    }
+     list.add(rowData);
+} //最后可以直接将list返回</pre>
+<h4>
+	对List类型数据（vi）处理
+</h4>
+<pre class="prettyprint lang-java">//下面介绍对list的数据项迭代输出，以及获取map的键值
+Iterator it=vi.iterator();
+//hasNext是取值取的是当前值.他的运算过程是判断下个是否有值如果有继续.
+while(it.hasNext()){
+	out.println("&lt;/br&gt;"+it.next());
+}
+//获得List的第i项，下标从0开始
+((Map) vi.get(2)).get("mname")//获得第3向，键位mname的值</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#ervlet传递数据给j页面">ervlet传递数据给j页面</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#JSP传值给Servlet">JSP传值给Servlet</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#jvBe的使用">jvBe的使用</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#对于数据库的数据传递">对于数据库的数据传递</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Java连接Access数据库的两种方法">Java连接Access数据库的两种方法</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

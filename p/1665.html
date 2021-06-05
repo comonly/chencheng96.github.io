@@ -1,0 +1,410 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>nginx日志级别_comonly.cn</title>
+<meta name="keywords" content="nginx日志级别" />
+<meta name="description" content="第二：合理设置配置文件：
+error_log&nbsp; logs/error.log debug;
+debug级别会记录所有信息，这点在源文件
+ngx_log.c
+内的函数
+ngx_set_error_log_levels()
+的最后几行代码：
+} else if (log-&gt;log_level == NGX_LOG_DEBUG) {
+log-&gt;log_level = NGX_LOG_DEBUG_ALL;
+}
+可以看到，如果设置为debug级别，则程序自动扩为NGX_LO" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">nginx日志级别</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2020-02-28</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>第二：合理设置配置文件：
+error_log&nbsp; logs/error.log debug;
+debug级别会记录所有信息，这点在源文件
+ngx_log.c
+内的函数
+ngx_set_error_log_levels()
+的最后几行代码：
+} else if (log-&gt;log_level == NGX_LOG_DEBUG) {
+log-&gt;log_level = NGX_LOG_DEBUG_ALL;
+}
+可以看到，如果设置为debug级别，则程序自动扩为NGX_LO</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 第二：合理设置配置文件：<br />
+error_log&nbsp; logs/error.log debug;<br />
+debug级别会记录所有信息，这点在源文件<br />
+ngx_log.c<br />
+内的函数<br />
+ngx_set_error_log_levels()<br />
+的最后几行代码：<br />
+} else if (log-&gt;log_level == NGX_LOG_DEBUG) {<br />
+log-&gt;log_level = NGX_LOG_DEBUG_ALL;<br />
+}<br />
+可以看到，如果设置为debug级别，则程序自动扩为NGX_LOG_DEBUG_ALL，<br />
+以记录所有的打印信息。<br />
+第三：如果觉得debug把所有的信息都记录下来，不便于定位信息，则可以再加一条配置信息，以缩减记录信息的数目：<br />
+error_log&nbsp; logs/error.log notice;<br />
+error_log&nbsp; logs/error.log debug_http;<br />
+这样，就仅仅记录与http相关的调试信息。<br />
+第四：总得来说，nginx记录日志信息分两个级别，第一个级别的取值为如下之一：<br />
+“stderr”, “emerg”, “alert”, “crit”, “error”,”warn”, “notice”, “info”, “debug”<br />
+这些值是互斥的，也就是说只能取其中之一，如果在配置文件里加了像如下这种两条配置项：<br />
+error_log&nbsp; logs/error.log&nbsp; notice;<br />
+error_log&nbsp; logs/error.log&nbsp; info;<br />
+那么启动nginx将报错如下：<br />
+lenky@lenky-desktop:/usr/local/nginx/sbin$ sudo ./nginx<br />
+src/core/ngx_conf_file.c 1163 : 1000000<br />
+2009/11/18 21:44:46 [emerg] 7027#0: duplicate log level “info” in /usr/local/nginx/conf/nginx.conf:14<br />
+即：日志级别配置重复。<br />
+如果我们指定第一个级别为”debug”，那么nginx还允许我们指定第二级别：<br />
+“debug_core”, “debug_alloc”, “debug_mutex”, “debug_event”,<br />
+“debug_http”, “debug_mail”, “debug_mysql”<br />
+第二级别的指定是多选的，因此可以有多条关于第二级别的配置项目：<br />
+error_log&nbsp; logs/error.log debug_http;<br />
+error_log&nbsp; logs/error.log debug_core;<br />
+注意：在且仅在第一个级别为”debug”时才可以有第二级别的配置，其它第一级别情况下指定第二级别将无法启动nginx，比如在这种：<br />
+error_log&nbsp; logs/error.log notice;<br />
+error_log&nbsp; logs/error.log debug_http;<br />
+配置下，启动nginx将获得如下错误信息：<br />
+lenky@lenky-desktop:/usr/local/nginx/sbin$ sudo ./nginx<br />
+src/core/ngx_conf_file.c 1163 : 1000000<br />
+2009/11/18 21:50:33 [emerg] 7145#0: invalid log level “debug_http” in /usr/local/nginx/conf/nginx.conf:10<br />
+lenky@lenky-desktop:/usr/local/nginx/sbin$<br />
+stderr无法配置，<br />
+ngx_set_error_log_levels的第一个for循环是从1开始的，bug？在后面的nginx版本不知道更新没有。<br />
+<p>
+	<br />
+</p>
+<p>
+	nginx日志级别：<a href="https://blog.csdn.net/fangletian1981/article/details/17247383" target="_blank">https://blog.csdn.net/fangletian1981/article/details/17247383</a>
+</p>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1664.html">C语言 整数字符串转换成int整数 判断能否转</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1666.html">ubuntu重启导致mysql服务打不开了</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="Nginx access.log文件太大，自动释放清理">
+							<h2 style="display:inline;color:#5BC648;">Nginx access.log文件太大，自动释放清理</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-02-28&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span>nginx的error日志这样的：<br />
+<br />
+2014/03/10 14:58:06 [alert] 28465#0: *5107657 write() to &amp;quot;/testhome/nginx/logs/access.log&amp;quot; failed (27: File too large) while logging request<br />
+<br />
+<p>
+	发现/nginx/logs/access.log 这个文件的大小是4194336KB，也就是达到4G了，果断rm掉放个空文件测试，测试结果显示清空access.log的内容后，access.log日志可以正常写入了。 nginx不像log4j可以按照一定的日期格式来记录日志，所以需要我们手动做日志定期分割了，简单的mv就能搞定，这里就不详述了。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	Nginx在涉及大流量时，会发生非常庞大的日志文件，包含access.log和error.log，日志会随着连接不断增加，到无限大。如果日志文件太大，会导致Nginx运行缓慢，卡顿，也是存储资源的浪费。<br />
+<br />
+比如体验盒子服务器的Nginx日志文件<br />
+<br />
+Nginx access.log文件太大，自动释放清理<br />
+手动释放清理Nginx日志文件access.log
+</p>
+<p>
+	查看并查找相关信息及路径<br />
+<br />
+# 查看空间占用<br />
+$ df -h<br />
+<br />
+# 定位Nginx<br />
+$ which nginx<br />
+/usr/local/nginx/logs<br />
+<br />
+# 列出日志文件<br />
+$ cd /usr/local/nginx/logs<br />
+ls<br />
+<br />
+# 查看日志文件大小<br />
+$ du -sh ./*<br />
+<br />
+# 暂停Nginx并删除日志文件<br />
+# nginx -s stop<br />
+rm -rf *.log<br />
+1<br />
+2<br />
+<br />
+# 查看空间占用<br />
+$ df -h<br />
+&nbsp;<br />
+# 定位Nginx<br />
+$ which nginx<br />
+/usr/local/nginx/logs<br />
+&nbsp;<br />
+# 列出日志文件<br />
+$ cd /usr/local/nginx/logs<br />
+ls<br />
+&nbsp;<br />
+# 查看日志文件大小<br />
+$ du -sh ./*<br />
+&nbsp;<br />
+# 暂停Nginx并删除日志文件<br />
+# nginx -s stop<br />
+rm -rf *.log
+</p>
+<p>
+	这里需要注意的是，看到网上有人说重启Nginx可以清除日志文件，这是错误的。重启并不会清空日志文件，你需要手动清理。<br />
+<br />
+另外，你也可以使用覆盖日志的方法清理Nginx日志文件<br />
+<br />
+echo "" &gt; /usr/local/nginx/access.log<br />
+1<br />
+echo "" &gt; /usr/local/nginx/access.log<br />
+如果不需要日志文件就直接关闭（不建议），nginx.conf<br />
+<br />
+access_log off;&nbsp;<br />
+1<br />
+access_log off;&nbsp;<br />
+对Nginx access.log进行分割<br />
+通过shell脚本+linux的定时任务进行的一个平滑切分。不需要重启nginx进程。代码cut_logs.sh<br />
+<br />
+#!/bin/bash<br />
+log_path=/usr/local/nginx/logs/access.log<br />
+save_path=/usr/local/nginx/logs/bak/access_$(date +%Y%m%d -d 'yesterday').log<br />
+cp $log_path $save_path &amp;&amp; echo &gt; $log_path<br />
+1<br />
+2<br />
+3<br />
+4<br />
+#!/bin/bash<br />
+log_path=/usr/local/nginx/logs/access.log<br />
+save_path=/usr/local/nginx/logs/bak/access_$(date +%Y%m%d -d 'yesterday').log<br />
+cp $log_path $save_path &amp;&amp; echo &gt; $log_path<br />
+设置定时任务<br />
+<br />
+$ crontab -e<br />
+#输入<br />
+0 0&nbsp; * * * /usr/bin/sh cut_logs.sh #每天的00:00执行日志切分<br />
+<br />
+$ crontab -l #查看定时任务是否添加成功<br />
+1<br />
+2<br />
+3<br />
+4<br />
+5<br />
+$ crontab -e<br />
+#输入<br />
+0 0&nbsp; * * * /usr/bin/sh cut_logs.sh #每天的00:00执行日志切分<br />
+&nbsp;<br />
+$ crontab -l #查看定时任务是否添加成功
+</p>
+<p>
+	<br />
+</p>
+<p>
+	体验盒子：<a href="https://www.uedbox.com/post/59024/" target="_blank">https://www.uedbox.com/post/59024/</a>
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Nginx access.log文件太大，自动释放清理">Nginx access.log文件太大，自动释放清理</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

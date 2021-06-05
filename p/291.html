@@ -1,0 +1,307 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>ASP 语法_comonly.cn</title>
+<meta name="keywords" content="ASP 语法" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">ASP 语法</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">W3School </li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2016-04-11</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	javaweb---jsp asp数据库框架
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">网页技术</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <div id="intro" style="margin:0px 0px 0px 15px;padding:20px 0px;font-family:Verdana, Arial, 宋体;background-color:#F9F9F9;">
+	<p>
+		<span style="font-family:微软雅黑;font-size:14px;font-weight:800;">在浏览器中通过查看源代码的方式是无法看到 ASP 源代码的，你只能看到由 ASP 文件输出的结果，而那些只是纯粹的 HTML 而已。这是因为，在结果被送回浏览器前，脚本已经在服务器上执行了。</span>
+	</p>
+	<p>
+		<span style="font-family:微软雅黑;font-size:14px;font-weight:800;">在我们的 ASP 教程中，每个例子都提供隐藏的 ASP 代码。这样会使您更容易理解它们的工作原理。</span>
+	</p>
+</div>
+<div class="example" style="margin:0px 0px 0px 15px;padding:20px 0px;font-family:Verdana, Arial, 宋体;background-color:#F9F9F9;">
+	<h2 style="font-family:微软雅黑;font-size:14px;">
+		实例
+	</h2>
+<a target="_blank" href="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_text">用 ASP 写文本</a>如果使用 ASP 生成文本。<a target="_blank" href="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_formatting">向文本添加 HTML</a>如果同时生成 HTML 标签和纯文本。
+</div>
+<div style="margin:0px 0px 0px 15px;padding:20px 0px;font-family:Verdana, Arial, 宋体;background-color:#F9F9F9;">
+	<h2 style="font-family:微软雅黑;font-size:14px;">
+		基本的 ASP 语法规则
+	</h2>
+	<p>
+		通常情况下，ASP 文件包含 HTML 标签，类似 HTML 文件。不过，ASP 文件也能够包含<span style="font-weight:bold;">服务器端脚本</span>，这些脚本被分隔符&nbsp;<span style="font-weight:bold;">&lt;%</span>&nbsp;和<span style="font-weight:bold;">%&gt;</span>&nbsp;包围起来。
+	</p>
+	<p>
+		服务器脚本<span style="font-weight:bold;">在服务器上执行</span>，可包含合法的表达式、语句、或者运算符。
+	</p>
+</div>
+<div style="margin:0px 0px 0px 15px;padding:20px 0px;font-family:Verdana, Arial, 宋体;background-color:#F9F9F9;">
+	<h2 style="font-family:微软雅黑;font-size:14px;">
+		向浏览器写输出
+	</h2>
+	<p>
+		response.write 命令用来向浏览器写输出。下面的例子向浏览器传送了一段文本："Hello World"。
+	</p>
+<pre>&lt;html&gt;
+&lt;body&gt;&lt;%
+response.write("Hello World!")
+%&gt;&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+	<p>
+		还有一种 response.write 命令的简写方法。下面的例子和上面的例子是等效的：
+	</p>
+<pre>&lt;html&gt;
+&lt;body&gt;&lt;%="Hello World!"%&gt;&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</div>
+<div style="margin:0px 0px 0px 15px;padding:20px 0px;font-family:Verdana, Arial, 宋体;background-color:#F9F9F9;">
+	<h2 style="font-family:微软雅黑;font-size:14px;">
+		在 ASP 中使用 VBScript
+	</h2>
+	<p>
+		你可以在 ASP 中使用若干种脚本语言。不过，默认的脚本语言是 VBScript：
+	</p>
+<pre>&lt;html&gt;
+&lt;body&gt;&lt;%
+response.write("Hello World!")
+%&gt;&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+	<p>
+		上面的例子向文档的 body 部分写入了文本 "Hello World!"。
+	</p>
+	<p class="tip">
+		<span style="font-weight:bold;color:#FF9955;">提示：</span>如果您需要了解更多有关 VBScript 的知识，请学习我们的&nbsp;<a href="http://www.w3school.com.cn/vbscript/index.asp">VBScript 教程</a>。
+	</p>
+</div>
+<div style="margin:0px 0px 0px 15px;padding:20px 0px;font-family:Verdana, Arial, 宋体;background-color:#F9F9F9;">
+	<h2 style="font-family:微软雅黑;font-size:14px;">
+		在 ASP 中使用 JavaScript
+	</h2>
+	<p>
+		如果需要使用 JavaScript 作为某个特定页面的默认脚本语言，就必须在页面的顶端插入一行语言设定：
+	</p>
+<pre>&lt;%@ language="javascript"%&gt;
+&lt;html&gt;
+&lt;body&gt;&lt;%
+Response.Write("Hello World!")
+%&gt;&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+	<p class="important">
+		<span style="font-weight:bold;color:#DD0000;">注意：</span>与 VBScript 不同 - JavaScript 对大小写敏感。所以你需要根据 JavaScript 的需要使用不同的大小写字母编写 ASP 代码。
+	</p>
+	<p class="tip">
+		<span style="font-weight:bold;color:#FF9955;">提示：</span>如果您需要了解更多有关 JavaScript 的知识，请学习我们的&nbsp;<a href="http://www.w3school.com.cn/js/index.asp">JavaScript 教程</a>。
+	</p>
+</div>
+<p>
+	<h2 style="font-family:微软雅黑;font-size:14px;">
+		<br />
+	</h2>
+	<p>
+		http://www.w3school.com.cn/asp/index.asp
+	</p>
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/290.html">Dreamweaver限制访问的BUG</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/292.html">如何在Dreamweaver 制作弹出菜单？</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

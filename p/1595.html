@@ -1,0 +1,2299 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>VC++常用数据类型_comonly.cn</title>
+<meta name="keywords" content="VC++常用数据类型" />
+<meta name="description" content="一．&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VC常用数据类型列表
+				
+				
+					二．&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 常用数据类型转化
+				
+				
+					2.1数学类型变量与字符串相互转换
+				
+				
+					2" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">VC++常用数据类型</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">Yincheng</li>
+          <li class="lmname"><a href="https://www.cnblogs.com/yincheng01/archive/2008/12/31/2213386.html" target="_blank">https://www.cnblogs.com/yincheng01/archive/2008/12/31/2213386.html</a></li>
+          <li class="timer">2019-12-10</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>一．&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VC常用数据类型列表
+				
+				
+					二．&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 常用数据类型转化
+				
+				
+					2.1数学类型变量与字符串相互转换
+				
+				
+					2</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <table border="0" class="ke-zeroborder">
+	<tbody>
+		<tr>
+			<td>
+				<p>
+					一．&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VC常用数据类型列表
+				</p>
+				<p>
+					二．&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 常用数据类型转化
+				</p>
+				<p>
+					2.1数学类型变量与字符串相互转换
+				</p>
+				<p>
+					2.2 CString及string,char *与其他数据类型的转换和操作
+				</p>
+				<p>
+					●CString,string,char*的综合比较
+				</p>
+				<p>
+					●数学类型与CString相互转化
+				</p>
+				<p>
+					●CString与char*相互转换举例
+				</p>
+				<p>
+					●CString 与 BSTR 型转换
+				</p>
+				<p>
+					●VARIANT 型转化成 CString 型
+				</p>
+				<p>
+					2.3 BSTR、_bstr_t与CComBSTR
+				</p>
+				<p>
+					2.4 VARIANT 、_variant_t 与 COleVariant
+				</p>
+				<p>
+					附录CString及字符串转及操作详解
+				</p>
+				<p>
+					&nbsp;
+				</p>
+				<p>
+					参考书籍:CSDN,&lt;&lt;MFC深入浅出(Second Edit)&gt;&gt;
+				</p>
+				<p>
+					&nbsp;
+				</p>
+				<p>
+					&nbsp;
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一．VC常用数据类型列表
+				</p>
+				<p>
+					&nbsp;
+				</p>
+				<table border="1">
+					<tbody>
+						<tr>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+							<td>
+								<p>
+									Type
+								</p>
+							</td>
+							<td>
+								<p>
+									Default Size
+								</p>
+							</td>
+							<td>
+								<p>
+									Description
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td rowspan="15">
+								<p>
+									&nbsp;
+								</p>
+								<p>
+									&nbsp;
+								</p>
+								<p>
+									&nbsp;
+								</p>
+								<p>
+									&nbsp;
+								</p>
+								<p>
+									基
+								</p>
+								<p>
+									础
+								</p>
+								<p>
+									类
+								</p>
+								<p>
+									型
+								</p>
+								<p>
+									&nbsp;
+								</p>
+								<p>
+									全
+								</p>
+								<p>
+									是
+								</p>
+								<p>
+									小
+								</p>
+								<p>
+									写
+								</p>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+							<td colspan="3">
+								<p>
+									说明:这些基础数据类型对于MFC还是API都是被支持的
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									boolean
+								</p>
+							</td>
+							<td>
+								<p>
+									unsigned 8 bit ,
+								</p>
+							</td>
+							<td>
+								<p>
+									取值TRUE/FALSE
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									byte
+								</p>
+							</td>
+							<td>
+								<p>
+									unsigned 8 bit,
+								</p>
+							</td>
+							<td>
+								<p>
+									整数,输出按字符输出
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									char
+								</p>
+							</td>
+							<td>
+								<p>
+									unsigned 8 bit,
+								</p>
+							</td>
+							<td>
+								<p>
+									字符
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									double
+								</p>
+							</td>
+							<td>
+								<p>
+									signed 64 bit
+								</p>
+							</td>
+							<td>
+								<p>
+									浮点型
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									float
+								</p>
+							</td>
+							<td>
+								<p>
+									signed32 bit
+								</p>
+							</td>
+							<td>
+								<p>
+									浮点型
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									handle_t
+								</p>
+							</td>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+							<td>
+								<p>
+									Primitive handle type
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									hyper
+								</p>
+							</td>
+							<td>
+								<p>
+									signed 64 bit
+								</p>
+							</td>
+							<td>
+								<p>
+									整型
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									int
+								</p>
+							</td>
+							<td>
+								<p>
+									signed 32 bit
+								</p>
+							</td>
+							<td>
+								<p>
+									整型
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									long
+								</p>
+							</td>
+							<td>
+								<p>
+									signed 32 bit
+								</p>
+							</td>
+							<td>
+								<p>
+									整型
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									short
+								</p>
+							</td>
+							<td>
+								<p>
+									signed 16 bit
+								</p>
+							</td>
+							<td>
+								<p>
+									整型
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									small
+								</p>
+							</td>
+							<td>
+								<p>
+									signed 8 bit
+								</p>
+							</td>
+							<td>
+								<p>
+									整型
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									void *
+								</p>
+							</td>
+							<td>
+								<p>
+									32-bit
+								</p>
+							</td>
+							<td>
+								<p>
+									指向未知类型的指针
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									wchar_t
+								</p>
+							</td>
+							<td>
+								<p>
+									unsigned 16 bit
+								</p>
+							</td>
+							<td>
+								<p>
+									16位字符,比char可容纳更多的字符
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td rowspan="43">
+								<p>
+									Win32
+								</p>
+								<p>
+									API
+								</p>
+								<p>
+									常
+								</p>
+								<p>
+									用
+								</p>
+								<p>
+									数
+								</p>
+								<p>
+									据
+								</p>
+								<p>
+									类
+								</p>
+								<p>
+									型
+								</p>
+								<p>
+									&nbsp;
+								</p>
+								<p>
+									全
+								</p>
+								<p>
+									大
+								</p>
+								<p>
+									写
+								</p>
+							</td>
+							<td colspan="3">
+								<p>
+									说明: 这些Win32API支持的简单数据类型主要是用来定义函数返回值，消息参数，结构成员。这类数据类型大致可以分为五大类：字符型、布尔型、整型、指针型和句柄型（?）. 总共大概有100多种不同的类型，
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									BOOL/BOOLEAN
+								</p>
+							</td>
+							<td>
+								<p>
+									8bit,TRUE/FALSE
+								</p>
+							</td>
+							<td>
+								<p>
+									布尔型
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									BYTE
+								</p>
+							</td>
+							<td>
+								<p>
+									unsigned 8 bit
+								</p>
+							</td>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									BSTR
+								</p>
+								<p>
+									CComBSTR
+								</p>
+								<p>
+									_bstr_t
+								</p>
+							</td>
+							<td>
+								<p>
+									32 bit
+								</p>
+							</td>
+							<td>
+								<p>
+									BSTR是指向字符串的32位指针
+								</p>
+								<p>
+									是对BSTR的封装
+								</p>
+								<p>
+									是对BSTR的封装
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									CHAR
+								</p>
+							</td>
+							<td>
+								<p>
+									8 bit
+								</p>
+							</td>
+							<td>
+								<p>
+									(ANSI）字符类型
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									COLORREF
+								</p>
+							</td>
+							<td>
+								<p>
+									32 bit
+								</p>
+							</td>
+							<td>
+								<p>
+									RGB颜色值 整型
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									DWORD
+								</p>
+							</td>
+							<td>
+								<p>
+									unsigned 32 bit
+								</p>
+							</td>
+							<td>
+								<p>
+									整型
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									FLOAT
+								</p>
+							</td>
+							<td>
+								<p>
+									float型
+								</p>
+							</td>
+							<td>
+								<p>
+									float型
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									HANDLE
+								</p>
+							</td>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+							<td>
+								<p>
+									Object句柄
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									HBITMAP
+								</p>
+							</td>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+							<td>
+								<p>
+									bitmap句柄
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									HBRUSH
+								</p>
+							</td>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+							<td>
+								<p>
+									brush句柄
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									HCURSOR
+								</p>
+							</td>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+							<td>
+								<p>
+									cursor句柄
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									HDC
+								</p>
+							</td>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+							<td>
+								<p>
+									设备上下文句柄
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									HFILE
+								</p>
+							</td>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+							<td>
+								<p>
+									OpenFile打开的File句柄
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									HFONT
+								</p>
+							</td>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+							<td>
+								<p>
+									font句柄
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									HHOOK
+								</p>
+							</td>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+							<td>
+								<p>
+									hook句柄
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									HKEY
+								</p>
+							</td>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+							<td>
+								<p>
+									注册表键句柄
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									HPEN
+								</p>
+							</td>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+							<td>
+								<p>
+									pen句柄
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									HWND
+								</p>
+							</td>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+							<td>
+								<p>
+									window句柄
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									INT
+								</p>
+							</td>
+							<td>
+								<p>
+									--------
+								</p>
+							</td>
+							<td>
+								<p>
+									--------
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									LONG
+								</p>
+							</td>
+							<td>
+								<p>
+									--------
+								</p>
+							</td>
+							<td>
+								<p>
+									---------
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									LONGLONG
+								</p>
+							</td>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+							<td>
+								<p>
+									64位带符号整型
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									LPARAM
+								</p>
+							</td>
+							<td>
+								<p>
+									32 bit
+								</p>
+							</td>
+							<td>
+								<p>
+									消息参数
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									LPBOOL
+								</p>
+							</td>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+							<td>
+								<p>
+									BOOL型指针
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									LPBYTE
+								</p>
+							</td>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+							<td>
+								<p>
+									BYTE型指针
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									LPCOLOREF
+								</p>
+							</td>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+							<td>
+								<p>
+									COLORREF型指针
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									LPCSTR/LPSTR/PCSTR
+								</p>
+							</td>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+							<td>
+								<p>
+									指向8位（ANSI）字符串类型指针
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									LPCWSTR/LPWSTR/PCWSTR
+								</p>
+							</td>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+							<td>
+								<p>
+									指向16位Unicode字符串类型
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									LPCTSTR/LPTSTR/PCTSTR
+								</p>
+							</td>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+							<td>
+								<p>
+									指向一8位或16位字符串类型指针
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									<a></a>LPVOID
+								</p>
+							</td>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+							<td>
+								<p>
+									指向一个未指定类型的32位指针
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									LPDWORD
+								</p>
+							</td>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+							<td>
+								<p>
+									指向一个DWORD型指针
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3">
+								<p>
+									其他相似类型: LPHANDLE、LPINT、LPLONG、LPWORD、LPRESULT
+								</p>
+								<p>
+									PBOOL、PBOOLEAN、PBYTE、PCHAR、PDWORD、PFLOAT、PHANDLE、PINT、PLONG、PSHORT……
+								</p>
+								<p>
+									说明:(1)在16位系统中 LP为16bit,P为8bit,在32位系统中都是32bit(此时等价)
+								</p>
+								<p>
+									(2)LPCSTR等 中的C指Const,T表示TCHAR模式即可以工作在ANSI下也可UNICODE
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									SHORT
+								</p>
+							</td>
+							<td>
+								<p>
+									usigned
+								</p>
+							</td>
+							<td>
+								<p>
+									整型
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3">
+								<p>
+									其他UCHAR、UINT、ULONG、ULONGLONG、USHORT为无符号相应类型
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									TBYTE
+								</p>
+							</td>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+							<td>
+								<p>
+									WCHAR型或者CHAR型
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									TCHAR
+								</p>
+							</td>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+							<td>
+								<p>
+									ANSI与unicode均可
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									VARIANT
+								</p>
+								<p>
+									_variant_t
+								</p>
+								<p>
+									COleVariant
+								</p>
+							</td>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+							<td>
+								<p>
+									一个结构体参考OAIDL.H
+								</p>
+								<p>
+									_variant_t是VARIANT的封装类
+								</p>
+								<p>
+									COleVariant也是VARIANT的封装类
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									WNDPROC
+								</p>
+							</td>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+							<td>
+								<p>
+									指向一个窗口过程的32位指针
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									WCHAR
+								</p>
+							</td>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+							<td>
+								<p>
+									16位Unicode字符型
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									WORD
+								</p>
+							</td>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+							<td>
+								<p>
+									16位无符号整型
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									WPARAM
+								</p>
+							</td>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+							<td>
+								<p>
+									消息参数
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td rowspan="4">
+								<p>
+									MFC
+								</p>
+								<p>
+									独有
+								</p>
+								<p>
+									数据
+								</p>
+								<p>
+									类型
+								</p>
+							</td>
+							<td colspan="3">
+								<p>
+									下面两个数据类型是微软基础类库中独有的数据类型
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									POSITION
+								</p>
+							</td>
+							<td colspan="2">
+								<p>
+									标记集合中一个元素的位置的值,被MFC中的集合类所使用
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									LPCRECT
+								</p>
+							</td>
+							<td colspan="2">
+								<p>
+									指向一个RECT结构体常量（不能修改）的32位指针
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									CString
+								</p>
+							</td>
+							<td colspan="2">
+								<p>
+									其实是MFC中的一个类
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+							<td>
+								<p>
+									&nbsp;
+								</p>
+							</td>
+							<td colspan="2">
+								<p>
+									&nbsp;
+								</p>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<p>
+					说明:
+				</p>
+				<p>
+					(1)-------表示省略
+				</p>
+				<p>
+					(2)1Byte=8Bit,
+				</p>
+				<p>
+					字与机器有关,在8位系统中:字=1字节,16位系统中,1字=2字节，32位中:1字=4字节,
+				</p>
+				<p>
+					64位中1字=8字节.不要搞混这些概念.
+				</p>
+				<p>
+					&nbsp;
+				</p>
+				<p>
+					&nbsp;
+				</p>
+				<p>
+					二．常用数据类型转化及操作
+				</p>
+				<p>
+					2．1 数学类型变量与字符串相互转换(这些函数都在STDLIB.H里)
+				</p>
+				<p>
+					（1）将数学类型转换为字符串可以用以下一些函数:
+				</p>
+				<p>
+					举例: _CRTIMP char * __cdecl _itoa(int, char *, int);//这是一个将数字转换为一个字符串类型的函数,最后一个int表示转换的进制
+				</p>
+				<p>
+					如以下程序:
+				</p>
+				<p>
+					int iTyep=3;
+				</p>
+				<p>
+					char *szChar;
+				</p>
+				<p>
+					itoa(iType,szChar,2);
+				</p>
+				<p>
+					cout&lt;&lt;szChar;//输出为1010
+				</p>
+				<p>
+					类似函数列表:
+				</p>
+				<p>
+					_CRTIMP char * __cdecl _itoa(int, char *, int);//为了完整性,也列在其中
+				</p>
+				<p>
+					_CRTIMP char * __cdecl _ultoa(unsigned long, char *, int);
+				</p>
+				<p>
+					_CRTIMP char * __cdecl _ltoa(long, char *, int);
+				</p>
+				<p>
+					_CRTIMP char * __cdecl _i64toa(__int64, char *, int);
+				</p>
+				<p>
+					_CRTIMP char * __cdecl _ui64toa(unsigned __int64, char *, int);
+				</p>
+				<p>
+					_CRTIMP wchar_t * __cdecl _i64tow(__int64, wchar_t *, int);
+				</p>
+				<p>
+					_CRTIMP wchar_t * __cdecl _ui64tow(unsigned __int64, wchar_t *, int);
+				</p>
+				<p>
+					_CRTIMP wchar_t * __cdecl _itow (int, wchar_t *, int);//转换为长字符串类型
+				</p>
+				<p>
+					_CRTIMP wchar_t * __cdecl _ltow (long, wchar_t *, int);
+				</p>
+				<p>
+					_CRTIMP wchar_t * __cdecl _ultow (unsigned long, wchar_t *, int);
+				</p>
+				<p>
+					还有很多,请自行研究
+				</p>
+				<p>
+					（2）将字符串类型转换为数学类型变量可以用以下一些函数:
+				</p>
+				<p>
+					举例: _CRTIMP int&nbsp; __cdecl atoi(const char *);//参数一看就很明了
+				</p>
+				<p>
+					char *szChar=”88”;
+				</p>
+				<p>
+					int temp(0);
+				</p>
+				<p>
+					temp=atoi(szChar);
+				</p>
+				<p>
+					cout&lt;&lt;temp;
+				</p>
+				<p>
+					类似的函数列表:
+				</p>
+				<p>
+					_CRTIMP int&nbsp;&nbsp;&nbsp; __cdecl atoi(const char *);
+				</p>
+				<p>
+					_CRTIMP double __cdecl atof(const char *);
+				</p>
+				<p>
+					_CRTIMP long&nbsp;&nbsp; __cdecl atol(const char *);
+				</p>
+				<p>
+					_CRTIMP long double __cdecl _atold(const char *);
+				</p>
+				<p>
+					_CRTIMP __int64 __cdecl _atoi64(const char *);
+				</p>
+				<p>
+					_CRTIMP double __cdecl strtod(const char *, char **);//
+				</p>
+				<p>
+					_CRTIMP long&nbsp;&nbsp; __cdecl strtol(const char *, char **, int);//
+				</p>
+				<p>
+					_CRTIMP long double __cdecl _strtold(const char *, char **);
+				</p>
+				<p>
+					_CRTIMP unsigned long __cdecl strtoul(const char *, char **, int);
+				</p>
+				<p>
+					_CRTIMP double __cdecl wcstod(const wchar_t *, wchar_t **);//长字符串类型转换为数学类型
+				</p>
+				<p>
+					_CRTIMP long&nbsp;&nbsp; __cdecl wcstol(const wchar_t *, wchar_t **, int);
+				</p>
+				<p>
+					_CRTIMP unsigned long __cdecl wcstoul(const wchar_t *, wchar_t **, int);
+				</p>
+				<p>
+					_CRTIMP int __cdecl _wtoi(const wchar_t *);
+				</p>
+				<p>
+					_CRTIMP long __cdecl _wtol(const wchar_t *);
+				</p>
+				<p>
+					_CRTIMP __int64&nbsp;&nbsp; __cdecl _wtoi64(const wchar_t *);
+				</p>
+				<p>
+					还有很多,请自行研究
+				</p>
+				<p>
+					2．2．CString及string,char *与其他数据类型的转换和操作
+				</p>
+				<p>
+					（1）CString,string,char*的综合比较（这部分CSDN上的作者<a href="http://blog.csdn.net/user/joise">joise</a>的文章
+				</p>
+				<p>
+					&lt;&lt; CString,string,char*的综合比较&gt;&gt;写的很详细,请大家在仔细阅读他的文章.
+				</p>
+				<p>
+					地址:&nbsp;<a href="http://blog.csdn.net/joise/" target="_blank">http://blog.csdn.net/joise/</a> 
+				</p>
+				<p>
+					或参考附录:
+				</p>
+				<p>
+					(2)转换:
+				</p>
+				<p>
+					●数学类型与CString相互转化
+				</p>
+				<p>
+					&nbsp;数学类型转化为CString
+				</p>
+				<p>
+					可用Format函数,举例:
+				</p>
+				<p>
+					CString s;
+				</p>
+				<p>
+					int i = 64;
+				</p>
+				<p>
+					s.Format("%d", i)
+				</p>
+				<p>
+					CString转换为数学类型:举例CString strValue("1.234");
+				</p>
+				<p>
+					double dblValue;
+				</p>
+				<p>
+					dblValue = atof((LPCTSTR)strValue);
+				</p>
+				<p>
+					●CString与char*相互转换举例
+				</p>
+				<p>
+					CString strValue(“Hello”);
+				</p>
+				<p>
+					char *szValue;
+				</p>
+				<p>
+					szValue=strValue.GetBuffer(szValue);
+				</p>
+				<p>
+					也可用(LPSTR)(LPCTSTR)对CString//&nbsp;&nbsp;进行强制转换.&nbsp;&nbsp;
+				</p>
+				<p>
+					szValue=(LPSTR)(LPCTSTR)strValue;
+				</p>
+				<p>
+					反过来可直接赋值:
+				</p>
+				<p>
+					char *szChar=NULL;
+				</p>
+				<p>
+					CString strValue;
+				</p>
+				<p>
+					szChar=new char[10];
+				</p>
+				<p>
+					memset(szChar,0,10);
+				</p>
+				<p>
+					strcpy(szChar,”Hello”);
+				</p>
+				<p>
+					strValue=szChar;
+				</p>
+				<p>
+					●CString 与 BSTR 型转换
+				</p>
+				<p>
+					CString 型转化成 BSTR 型
+				</p>
+				<p>
+					当我们使用 ActiveX 控件编程时，经常需要用到将某个值表示成 BSTR 类型.BSTR 是一种记数字符串，Intel平台上的宽字符串（Unicode），并且可以包含嵌入的 NULL 字符。
+				</p>
+				<p>
+					可以调用 CString 对象的 AllocSysString 方法将 CString 转化成 BSTR：
+				</p>
+				<p>
+					CString str;
+				</p>
+				<p>
+					str = .....; // whatever
+				</p>
+				<p>
+					BSTR bStr = str.AllocSysString();
+				</p>
+				<p>
+					&nbsp;
+				</p>
+				<p>
+					BSTR型<a></a>转换为CString
+				</p>
+				<p>
+					如果你在 UNICODE 模式下编译代码，你可以简单地写成：
+				</p>
+				<p>
+					CString convert(BSTR bStr)
+				</p>
+				<p>
+					{
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp; if(bStr == NULL)
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return CString(_T(""));
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp; CString s(bStr); // in UNICODE mode
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp; return s;
+				</p>
+				<p>
+					}
+				</p>
+				<p>
+					如果是 ANSI 模式
+				</p>
+				<p>
+					CString convert(BSTR b)
+				</p>
+				<p>
+					{
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp; CString s;
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp; if(b == NULL)
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return s; // empty for NULL BSTR
+				</p>
+				<p>
+					#ifdef UNICODE
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp; s = b;
+				</p>
+				<p>
+					#else
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp; LPSTR p = s.GetBuffer(SysStringLen(b) + 1);
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp; ::WideCharToMultiByte(CP_ACP,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // ANSI Code Page
+				</p>
+				<p>
+					&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // no flags
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; b,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // source widechar string
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -1,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // assume NUL-terminated
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // target buffer
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SysStringLen(b)+1, // target buffer length
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NULL,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // use system default char
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NULL);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // don''t care if default used
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp; s.ReleaseBuffer();
+				</p>
+				<p>
+					#endif
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp; return s;
+				</p>
+				<p>
+					}
+				</p>
+				<p>
+					&nbsp;
+				</p>
+				<p>
+					●VARIANT 型转化成 CString 型
+				</p>
+				<p>
+					VARIANT 类型经常用来给 COM 对象传递参数，或者接收从 COM 对象返回的值。你也能自己编写返回 VARIANT 类型的方法，函数返回什么类型 依赖可能（并且常常）方法的输入参数（比如，在自动化操作中，依赖与你调用哪个方法。IDispatch::Invoke 可能返回（通过其一个参数）一个 包含有BYTE、WORD、float、double、date、BSTR 等等 VARIANT 类型的结果，（详见 MSDN 上的 VARIANT 结构的定义）。在下面的例子中，假设 类型是一个BSTR的变体，也就是说在串中的值是通过 bsrtVal 来引用，其优点是在 ANSI 应用中，有一个构造函数会把 LPCWCHAR 引用的值转换为一个 CString（见 BSTR-to-CString 部分）。在 Unicode 模式中，将成为标准的 CString 构造函数，参见对缺省::WideCharToMultiByte 转换的告诫，以及你觉得是否可以接受（大多数情况下，你会满意的）。VARIANT vaData;
+				</p>
+				<p>
+					vaData = m_com.YourMethodHere();
+				</p>
+				<p>
+					ASSERT(vaData.vt == VT_BSTR);
+				</p>
+				<p>
+					CString strData(vaData.bstrVal);
+				</p>
+				<p>
+					你还可以根据 vt 域的不同来建立更通用的转换例程。为此你可能会考虑：
+				</p>
+				<p>
+					CString VariantToString(VARIANT * va)
+				</p>
+				<p>
+					{
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp; CString s;
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp; switch(va-&gt;vt)
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { /* vt */
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; case VT_BSTR:
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return CString(vaData-&gt;bstrVal);
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; case VT_BSTR | VT_BYREF:
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return CString(*vaData-&gt;pbstrVal);
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; case VT_I4:
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; s.Format(_T("%d"), va-&gt;lVal);
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return s;
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; case VT_I4 | VT_BYREF:
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; s.Format(_T("%d"), *va-&gt;plVal);
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; case VT_R8:
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; s.Format(_T("%f"), va-&gt;dblVal);
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return s;
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ... 剩下的类型转换由读者自己完成
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; default:
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ASSERT(FALSE); // unknown VARIANT type (this ASSERT is optional)
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return CString("");
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } /* vt */
+				</p>
+				<p>
+					}
+				</p>
+				<p>
+					&nbsp;
+				</p>
+				<p>
+					2．3 BSTR、_bstr_t与CComBSTR
+				</p>
+				<p>
+					CComBSTR、_bstr_t是对BSTR的封装,BSTR是指向字符串的32位指针。
+				</p>
+				<p>
+					char *转换到BSTR可以这样:
+				</p>
+				<p>
+					BSTR b=_com_util::ConvertStringToBSTR("数据");///使用前需要加上头文件comutil.h
+				</p>
+				<p>
+					反之可以使用char *p=_com_util::ConvertBSTRToString(b);
+				</p>
+				<p>
+					2．4(引)VARIANT 、_variant_t 与 COleVariant
+				</p>
+				<p>
+					VARIANT的结构可以参考头文件VC98/Include/OAIDL.H中关于结构体tagVARIANT的定义。
+				</p>
+				<p>
+					对于VARIANT变量的赋值：首先给vt成员赋值，指明数据类型，再对联合结构中相同数据类型的变量赋值，举个例子：
+				</p>
+				<p>
+					VARIANT va;
+				</p>
+				<p>
+					int a=2001;
+				</p>
+				<p>
+					va.vt=VT_I4;///指明整型数据
+				</p>
+				<p>
+					va.lVal=a; ///赋值
+				</p>
+				<p>
+					对于不马上赋值的VARIANT，最好先用Void VariantInit(VARIANTARG FAR* pvarg);进行初始化,其本质是将vt设置为VT_EMPTY,下表我们列举vt与常用数据的对应关系:
+				</p>
+				<p>
+					unsigned char bVal; VT_UI1
+				</p>
+				<p>
+					short iVal; VT_I2
+				</p>
+				<p>
+					long lVal; VT_I4
+				</p>
+				<p>
+					float fltVal; VT_R4
+				</p>
+				<p>
+					double dblVal; VT_R8
+				</p>
+				<p>
+					VARIANT_BOOL boolVal; VT_BOOL
+				</p>
+				<p>
+					SCODE scode; VT_ERROR
+				</p>
+				<p>
+					CY cyVal; VT_CY
+				</p>
+				<p>
+					DATE date; VT_DATE
+				</p>
+				<p>
+					BSTR bstrVal; VT_BSTR
+				</p>
+				<p>
+					IUnknown FAR* punkVal; VT_UNKNOWN
+				</p>
+				<p>
+					IDispatch FAR* pdispVal; VT_DISPATCH
+				</p>
+				<p>
+					SAFEARRAY FAR* parray; VT_ARRAY|*
+				</p>
+				<p>
+					unsigned char FAR* pbVal; VT_BYREF|VT_UI1
+				</p>
+				<p>
+					short FAR* piVal; VT_BYREF|VT_I2
+				</p>
+				<p>
+					long FAR* plVal; VT_BYREF|VT_I4
+				</p>
+				<p>
+					float FAR* pfltVal; VT_BYREF|VT_R4
+				</p>
+				<p>
+					double FAR* pdblVal; VT_BYREF|VT_R8
+				</p>
+				<p>
+					VARIANT_BOOL FAR* pboolVal; VT_BYREF|VT_BOOL
+				</p>
+				<p>
+					SCODE FAR* pscode; VT_BYREF|VT_ERROR
+				</p>
+				<p>
+					CY FAR* pcyVal; VT_BYREF|VT_CY
+				</p>
+				<p>
+					DATE FAR* pdate; VT_BYREF|VT_DATE
+				</p>
+				<p>
+					BSTR FAR* pbstrVal; VT_BYREF|VT_BSTR
+				</p>
+				<p>
+					IUnknown FAR* FAR* ppunkVal; VT_BYREF|VT_UNKNOWN
+				</p>
+				<p>
+					IDispatch FAR* FAR* ppdispVal; VT_BYREF|VT_DISPATCH
+				</p>
+				<p>
+					SAFEARRAY FAR* FAR* pparray; VT_ARRAY|*
+				</p>
+				<p>
+					VARIANT FAR* pvarVal; VT_BYREF|VT_VARIANT
+				</p>
+				<p>
+					void FAR* byref; VT_BYREF
+				</p>
+				<p>
+					_variant_t是VARIANT的封装类，其赋值可以使用强制类型转换，其构造函数会自动处理这些数据类型。
+				</p>
+				<p>
+					例如：
+				</p>
+				<p>
+					long l=222;
+				</p>
+				<p>
+					ing i=100;
+				</p>
+				<p>
+					_variant_t lVal(l);
+				</p>
+				<p>
+					lVal = (long)i;
+				</p>
+				<p>
+					COleVariant的使用与_variant_t的方法基本一样，请参考如下例子：
+				</p>
+				<p>
+					COleVariant v3 = "字符串", v4 = (long)1999;
+				</p>
+				<p>
+					CString str =(BSTR)v3.pbstrVal;
+				</p>
+				<p>
+					long i = v4.lVal;
+				</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+一、BSTR、LPSTR和LPWSTR<br />
+<br />
+在Visual C++.NET的所有编程方式中，我们常常要用到这样的一些基本字符串类型，如BSTR、LPSTR和LPWSTR等。之所以出现类似上述的这些数据类型，是因为不同编程语言之间的数据交换以及对ANSI、Unicode和多字节字符集(MBCS)的支持。<br />
+<br />
+那么什么是BSTR、LPSTR以及LPWSTR呢？<br />
+<br />
+BSTR(Basic STRing，Basic字符串)是一个OLECHAR*类型的Unicode字符串。它被描述成一个与自动化相兼容的类型。由于操作系统提供相应的 API函数(如SysAllocString)来管理它以及一些默认的调度代码，因此BSTR实际上就是一个COM字符串，但它却在自动化技术以外的多种场合下得到广泛使用。图1描述了BSTR的结构，其中DWORD值是字符串中实际所占用的字节数，且它的值是字符串中Unicode字符的两倍。<br />
+<br />
+LPSTR和LPWSTR是Win32和VC++所使用的一种字符串数据类型。LPSTR被定义成是一个指向以NULL(‘/0’)结尾的8位ANSI 字符数组指针，而LPWSTR是一个指向以NULL结尾的16位双字节字符数组指针。在VC++中，还有类似的字符串类型，如LPTSTR、 LPCTSTR等，它们的含义如图2所示。<br />
+<br />
+例如，LPCTSTR是指“long pointer to a constant generic string”，表示“一个指向一般字符串常量的长指针类型”，与C/C++的const char*相映射，而LPTSTR映射为 char*。<br />
+<br />
+一般地，还有下列类型定义：<br />
+<br />
+#ifdef UNICODE<br />
+typedef LPWSTR LPTSTR;<br />
+typedef LPCWSTR LPCTSTR;<br />
+#else<br />
+typedef LPSTR LPTSTR;<br />
+typedef LPCSTR LPCTSTR;<br />
+#endif<br />
+<br />
+二、CString、CStringA 和 CStringW<br />
+<br />
+Visual C++.NET中将CStringT作为ATL和MFC的共享的“一般”字符串类，它有CString、CStringA和CStringW三种形式，分别操作不同字符类型的字符串。这些字符类型是TCHAR、char和wchar_t。TCHAR在Unicode平台中等同于WCHAR(16位 Unicode字符)，在ANSI中等价于char。wchar_t通常定义为unsigned short。由于CString在MFC应用程序中经常用到，这里不再重复。<br />
+<br />
+三、VARIANT、COleVariant 和_variant_t<br />
+<br />
+在OLE、ActiveX和COM中，VARIANT数据类型提供了一种非常有效的机制，由于它既包含了数据本身，也包含了数据的类型，因而它可以实现各种不同的自动化数据的传输。下面让我们来看看OAIDL.H文件中VARIANT定义的一个简化版：<br />
+<br />
+struct tagVARIANT {<br />
+VARTYPE vt;<br />
+union {<br />
+short iVal; // VT_I2.<br />
+long lVal; // VT_I4.<br />
+float fltVal; // VT_R4.<br />
+double dblVal; // VT_R8.<br />
+DATE date; // VT_DATE.<br />
+BSTR bstrVal; // VT_BSTR.<br />
+…<br />
+short * piVal; // VT_BYREF|VT_I2.<br />
+long * plVal; // VT_BYREF|VT_I4.<br />
+float * pfltVal; // VT_BYREF|VT_R4.<br />
+double * pdblVal; // VT_BYREF|VT_R8.<br />
+DATE * pdate; // VT_BYREF|VT_DATE.<br />
+BSTR * pbstrVal; // VT_BYREF|VT_BSTR.<br />
+};<br />
+};<br />
+<br />
+显然，VARIANT类型是一个C结构，它包含了一个类型成员vt、一些保留字节以及一个大的union类型。例如，如果vt为VT_I2，那么我们可以从iVal中读出VARIANT的值。同样，当给一个VARIANT变量赋值时，也要先指明其类型。例如：<br />
+<br />
+VARIANT va;<br />
+:: VariantInit(&amp;va); // 初始化<br />
+int a = 2002;<br />
+va.vt = VT_I4; // 指明long数据类型<br />
+va.lVal = a; // 赋值<br />
+<br />
+为了方便处理VARIANT类型的变量，Windows还提供了这样一些非常有用的函数：<br />
+<br />
+VariantInit —— 将变量初始化为VT_EMPTY；<br />
+<br />
+VariantClear —— 消除并初始化VARIANT；<br />
+<br />
+VariantChangeType —— 改变VARIANT的类型；<br />
+<br />
+VariantCopy —— 释放与目标VARIANT相连的内存并复制源VARIANT。<br />
+<br />
+COleVariant类是对VARIANT结构的封装。它的构造函数具有极为强大大的功能，当对象构造时首先调用VariantInit进行初始化，然后根据参数中的标准类型调用相应的构造函数，并使用VariantCopy进行转换赋值操作，当VARIANT对象不在有效范围时，它的析构函数就会被自动调用，由于析构函数调用了VariantClear，因而相应的内存就会被自动清除。除此之外，COleVariant的赋值操作符在与VARIANT类型转换中为我们提供极大的方便。例如下面的代码：<br />
+<br />
+COleVariant v1("This is a test"); // 直接构造<br />
+COleVariant v2 = "This is a test";<br />
+// 结果是VT_BSTR类型，值为"This is a test"<br />
+COleVariant v3((long)2002);<br />
+COleVariant v4 = (long)2002;<br />
+// 结果是VT_I4类型，值为2002<br />
+<br />
+_variant_t是一个用于COM的VARIANT类，它的功能与COleVariant相似。不过在Visual C++.NET的MFC应用程序中使用时需要在代码文件前面添加下列两句：<br />
+<br />
+#include "comutil.h"<br />
+<br />
+#pragma comment( lib, "comsupp.lib" )<br />
+四、CComBSTR和_bstr_t<br />
+<br />
+CComBSTR是对BSTR数据类型封装的一个ATL类，它的操作比较方便。例如：<br />
+<br />
+CComBSTR bstr1;<br />
+bstr1 = "Bye"; // 直接赋值<br />
+OLECHAR* str = OLESTR("ta ta"); // 长度为5的宽字符<br />
+CComBSTR bstr2(wcslen(str)); // 定义长度为5<br />
+wcscpy(bstr2.m_str, str); // 将宽字符串复制到BSTR中<br />
+CComBSTR bstr3(5, OLESTR("Hello World"));<br />
+CComBSTR bstr4(5, "Hello World");<br />
+CComBSTR bstr5(OLESTR("Hey there"));<br />
+CComBSTR bstr6("Hey there");<br />
+CComBSTR bstr7(bstr6);<br />
+// 构造时复制，内容为"Hey there"<br />
+<br />
+_bstr_t是是C++对BSTR的封装，它的构造和析构函数分别调用SysAllocString和SysFreeString函数，其他操作是借用BSTR API函数。与_variant_t相似，使用时也要添加comutil.h和comsupp.lib。<br />
+<br />
+五、BSTR、char*和CString转换<br />
+<br />
+(1) char*转换成CString<br />
+<br />
+若将char*转换成CString，除了直接赋值外，还可使用CString::Format进行。例如：<br />
+<br />
+char chArray[] = "This is a test";<br />
+char * p = "This is a test";<br />
+<br />
+或<br />
+<br />
+LPSTR p = "This is a test";<br />
+<br />
+或在已定义Unicode应的用程序中<br />
+<br />
+TCHAR * p = _T("This is a test");<br />
+<br />
+或<br />
+<br />
+LPTSTR p = _T("This is a test");<br />
+CString theString = chArray;<br />
+theString.Format(_T("%s"), chArray);<br />
+theString = p;<br />
+<br />
+(2) CString转换成char*<br />
+<br />
+若将CString类转换成char*(LPSTR)类型，常常使用下列三种方法：<br />
+<br />
+方法一，使用强制转换。例如：<br />
+<br />
+CString theString( "This is a test" );<br />
+LPTSTR lpsz =(LPTSTR)(LPCTSTR)theString;<br />
+<br />
+方法二，使用strcpy。例如：<br />
+<br />
+CString theString( "This is a test" );<br />
+LPTSTR lpsz = new TCHAR[theString.GetLength()+1];<br />
+_tcscpy(lpsz, theString);<br />
+<br />
+需要说明的是，strcpy(或可移值Unicode/MBCS的_tcscpy)的第二个参数是 const wchar_t* (Unicode)或const char* (ANSI)，系统编译器将会自动对其进行转换。<br />
+<br />
+方法三，使用CString::GetBuffer。例如：<br />
+<br />
+CString s(_T("This is a test "));<br />
+LPTSTR p = s.GetBuffer();<br />
+// 在这里添加使用p的代码<br />
+if(p != NULL) *p = _T('/0');<br />
+s.ReleaseBuffer();<br />
+// 使用完后及时释放，以便能使用其它的CString成员函数<br />
+<br />
+(3) BSTR转换成char*<br />
+<br />
+方法一，使用ConvertBSTRToString。例如：<br />
+<br />
+#include<br />
+#pragma comment(lib, "comsupp.lib")<br />
+int _tmain(int argc, _TCHAR* argv[]){<br />
+BSTR bstrText = ::SysAllocString(L"Test");<br />
+char* lpszText2 = _com_util::ConvertBSTRToString(bstrText);<br />
+SysFreeString(bstrText); // 用完释放<br />
+delete[] lpszText2;<br />
+return 0;<br />
+}<br />
+<br />
+方法二，使用_bstr_t的赋值运算符重载。例如：<br />
+<br />
+_bstr_t b = bstrText;<br />
+char* lpszText2 = b;<br />
+<br />
+(4) char*转换成BSTR<br />
+<br />
+方法一，使用SysAllocString等API函数。例如：<br />
+<br />
+BSTR bstrText = ::SysAllocString(L"Test");<br />
+BSTR bstrText = ::SysAllocStringLen(L"Test",4);<br />
+BSTR bstrText = ::SysAllocStringByteLen("Test",4);<br />
+<br />
+方法二，使用COleVariant或_variant_t。例如：<br />
+<br />
+//COleVariant strVar("This is a test");<br />
+_variant_t strVar("This is a test");<br />
+BSTR bstrText = strVar.bstrVal;<br />
+<br />
+方法三，使用_bstr_t，这是一种最简单的方法。例如：<br />
+<br />
+BSTR bstrText = _bstr_t("This is a test");<br />
+<br />
+方法四，使用CComBSTR。例如：<br />
+<br />
+BSTR bstrText = CComBSTR("This is a test");<br />
+<br />
+或<br />
+<br />
+CComBSTR bstr("This is a test");<br />
+BSTR bstrText = bstr.m_str;<br />
+<br />
+方法五，使用ConvertStringToBSTR。例如：<br />
+<br />
+char* lpszText = "Test";<br />
+BSTR bstrText = _com_util::ConvertStringToBSTR(lpszText);<br />
+<br />
+(5) CString转换成BSTR<br />
+<br />
+通常是通过使用CStringT::AllocSysString来实现。例如：<br />
+<br />
+CString str("This is a test");<br />
+BSTR bstrText = str.AllocSysString();<br />
+…<br />
+SysFreeString(bstrText); // 用完释放<br />
+<br />
+(6) BSTR转换成CString<br />
+<br />
+一般可按下列方法进行：<br />
+<br />
+BSTR bstrText = ::SysAllocString(L"Test");<br />
+CStringA str;<br />
+str.Empty();<br />
+str = bstrText;<br />
+<br />
+或<br />
+<br />
+CStringA str(bstrText);<br />
+<br />
+(7) ANSI、Unicode和宽字符之间的转换<br />
+<br />
+方法一，使用MultiByteToWideChar将ANSI字符转换成Unicode字符，使用WideCharToMultiByte将Unicode字符转换成ANSI字符。<br />
+<br />
+方法二，使用“_T”将ANSI转换成“一般”类型字符串，使用“L”将ANSI转换成Unicode，而在托管C++环境中还可使用S将ANSI字符串转换成String*对象。例如：<br />
+<br />
+TCHAR tstr[] = _T("this is a test");<br />
+wchar_t wszStr[] = L"This is a test";<br />
+String* str = S”This is a test”;<br />
+<br />
+方法三，使用ATL 7.0的转换宏和类。ATL7.0在原有3.0基础上完善和增加了许多字符串转换宏以及提供相应的类，它具有如图3所示的统一形式：<br />
+<br />
+其中，第一个C表示“类”，以便于ATL 3.0宏相区别，第二个C表示常量，2表示“to”，EX表示要开辟一定大小的缓冲。SourceType和DestinationType可以是A、 T、W和OLE，其含义分别是ANSI、Unicode、“一般”类型和OLE字符串。例如，CA2CT就是将ANSI转换成一般类型的字符串常量。下面是一些示例代码：<br />
+<br />
+LPTSTR tstr= CA2TEX&lt;16&gt;("this is a test");<br />
+LPCTSTR tcstr= CA2CT("this is a test");<br />
+wchar_t wszStr[] = L"This is a test";<br />
+char* chstr = CW2A(wszStr);<br />
+<br />
+六、结语<br />
+<br />
+几乎所有的程序都要用到字符串，而Visual C++.NET由于功能强大、应用广泛，因而字符串之间的转换更为频繁。本文几乎涉及到目前的所有转换方法。当然对于.NET框架来说，还可使用Convert和Text类进行不同数据类型以及字符编码之间的相互转换。</div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1594.html">LPCTSTR LPTSTR DWORD LPDWORD 这些类型怎么定义，初始化 LPCTSTR是字符串指针</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1596.html">c++中类的继承与纯虚函数</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.cnblogs.com/yincheng01/archive/2008/12/31/2213386.html" target="_blank">https://www.cnblogs.com/yincheng01/archive/2008/12/31/2213386.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

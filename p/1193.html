@@ -1,0 +1,292 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>3D卷积神经网络_comonly.cn</title>
+<meta name="keywords" content="3D卷积神经网络" />
+<meta name="description" content="卷积神经网络中二维卷积核与三维卷积核有什么区别？ https://www.zhihu.com/question/266352189
+
+
+	
+		基于3D卷积神经网络的人体行为理解（论文笔记） https://blog.csdn.net/zouxy09/article/details/9002508
+	
+	
+		论文笔记：基于3D卷积神经网络的人体行为识别(3D CNN)&nbsp; https://zhuanlan.zhihu.com/p/47490523
+	
+	
+		
+	
+	
+" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">3D卷积神经网络</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2020-11-21</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	机器学习算法分析
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>卷积神经网络中二维卷积核与三维卷积核有什么区别？ https://www.zhihu.com/question/266352189
+
+
+	
+		基于3D卷积神经网络的人体行为理解（论文笔记） https://blog.csdn.net/zouxy09/article/details/9002508
+	
+	
+		论文笔记：基于3D卷积神经网络的人体行为识别(3D CNN)&nbsp; https://zhuanlan.zhihu.com/p/47490523
+	
+	
+		
+	
+	
+</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	卷积神经网络中二维卷积核与三维卷积核有什么区别？ <a href="https://www.zhihu.com/question/266352189" target="_blank">https://www.zhihu.com/question/266352189</a>
+</p>
+<p>
+	<p>
+		基于3D卷积神经网络的人体行为理解（论文笔记） <a href="https://blog.csdn.net/zouxy09/article/details/9002508" target="_blank">https://blog.csdn.net/zouxy09/article/details/9002508</a>
+	</p>
+	<p>
+		论文笔记：基于3D卷积神经网络的人体行为识别(3D CNN)&nbsp; <a href="https://zhuanlan.zhihu.com/p/47490523" target="_blank">https://zhuanlan.zhihu.com/p/47490523</a>
+	</p>
+	<p>
+		<br />
+	</p>
+	<p>
+		因此我们可以采用多种卷积核来提取多种特征。<br />
+对于CNNs，有一个通用的设计规则就是：在后面的层（离输出层近的）特征map的个数应该增加，这样就可以从低级的feature map组合产生更多类型的特征。<br />
+	</p>
+	<p>
+		<br />
+	</p>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	3D CNN模型的主要特性有：
+</p>
+<p>
+	1）通过3D卷积操作核去提取数据的时间和空间特征，在CNN的卷积层使用3D卷积。
+</p>
+<p>
+	2）3D CNN模型可以同时处理多幅图片，达到附加信息的提取。
+</p>
+<p>
+	3）融合时空域的预测。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	三维卷积需要向三个方向滑动，分别是width、height、depth(注意这个深度不是RGB)
+</p>
+<p>
+	<br />
+</p>
+<p>
+	3D卷积操作核去提取视频数据的时间和空间特征。这些3D特征提取器在空间和时间维度上操作，因此可以捕捉视频流的运动信息。
+</p>
+<p>
+	可以从连续视频帧中产生多通道的信息，然后在每一个通道都分离地进行卷积和下采样操作。最后将所有通道的信息组合起来得到最终的特征描述。
+</p>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1192.html">混合高斯背景建模 -- 运动目标检测背景提取</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1194.html">Socket过程详细解释（包括三次握手建立连接，四次握手断开连接）</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

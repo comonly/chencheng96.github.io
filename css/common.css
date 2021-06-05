@@ -1,0 +1,17 @@
+@CHARSET "UTF-8";
+
+body {
+	position: relative;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	border: none;
+	font-family: Geneva, Arial;
+}
+
+a {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: none;
+}

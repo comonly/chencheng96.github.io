@@ -1,0 +1,251 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>IIS中URL重写工具的匹配URL-规则模式(rule patterns)_comonly.cn</title>
+<meta name="keywords" content="IIS中URL重写工具的匹配URL-规则模式(rule patterns)" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">IIS中URL重写工具的匹配URL-规则模式(rule patterns)</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">十有三</li>
+          <li class="lmname"><a href="http://shiyousan.com/post/635659901987610088" target="_blank">http://shiyousan.com/post/635659901987610088</a></li>
+          <li class="timer">2017-03-30</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	服务器apache等
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">IIS,规则模式</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	rule patterns规则模式在IIS的URL重写模块中，是较为关键的设置。只有规则模式的URL匹配成功时，其他的规则才能起到作用。规则模式的匹配URL设置主要是匹配URL中的路径部分，一般使用正则表达式和通配符对URL路径进行匹配，下面会仔细的说明。
+</p>
+<p>
+	首先要了解规则模式是匹配URL中的哪一部分，假设当前有网站的URL地址为http://shiyousan.com/Home/Index?page=1，那么规则模式匹配的部分就是Home/Index，域名的主机部分和参数部分如果要匹配，则需要在规则条件(Rule conditions)那设置，并且要使用到服务器变量，具体可以查看这篇文章：<a href="http://www.iyaka.cn/blog/14_657.html" target="_blank">详解IIS中URL重写工具的规则条件(Rule conditions)</a> 
+</p>
+<p>
+	官方相关文档：<a href="http://www.iis.net/learn/extensions/url-rewrite-module/url-rewrite-module-configuration-reference#Rule_Pattern" target="_blank">Rule Pattern</a> 
+</p>
+<p>
+	PS:这里非常重要，一定要注意匹配URL的只是路径部分，是不包含主机域名部分！
+</p>
+<hr />
+<p>
+	下面说明如何设置匹配URL规则的各个属性：
+</p>
+<p>
+	<img alt="设置匹配URL规则" src="http://shiyousan.com/UserFiles/images/2015/04/635659901987610088/01_635659901987610088.jpg" style="height:244px;width:661px;" /> 
+</p>
+<p>
+	如上图所示，匹配方式我们可以选择与模式匹配，与模式不匹配这两种。从字面上很容易理解这两个选项的意思，主要还是根据下面的匹配语法和模式相关联。
+</p>
+<p>
+	接下来选择要使用的匹配语法，一共有三种：正则表达式，通配符，完全匹配，这里我们选择的是使用正则表达式。
+</p>
+<p>
+	最后设置匹配规则模式的语法，这里我设置的正则表达式是&nbsp;^(.*?)/Home/(Index)$&nbsp;。点击右边的测试模式，我们可以测试正则匹配的是否正确，输入URL:http://shiyousan.com/Home/Index，最终正确的显示匹配，如下图所示：
+</p>
+<p>
+	<img alt="测试模式界面" src="http://shiyousan.com/UserFiles/images/2015/04/635659901987610088/02_635659901987610088.jpg" style="height:487px;width:440px;" /> 
+</p>
+<p>
+	我们使用正则一共可以捕获到3组反向引用的内容，具体关于{R:0}/{R:1}/{R:2}和向后引用/反向引用，可以看这篇文章：<a href="http://www.iyaka.cn/blog/14_658.html" target="_blank">详解IIS中的重写工具下关于操作重定向URL中的{R:N}与{C:N}</a>。
+</p>
+<p>
+	到这里就对rule patterns进行了全部的说明，以后在IIS上使用URL重写工具就会容易的多。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/658.html">IIS中的重写工具下关于操作重定向URL中的{R:N}与{C:N}</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/660.html">利用URL重写实现参数目录化—实例</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="http://shiyousan.com/post/635659901987610088" target="_blank">http://shiyousan.com/post/635659901987610088</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

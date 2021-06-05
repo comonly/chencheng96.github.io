@@ -1,0 +1,291 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>c++ 11多线程创建 标准线程库_comonly.cn</title>
+<meta name="keywords" content="c++ 11多线程创建 标准线程库" />
+<meta name="description" content="thread mytobj(ctc);&nbsp; &nbsp;//一个新的线程
+
+	mytobj.joinable()&nbsp; &nbsp;//判断能否加入线程
+
+
+	mytobj.join();&nbsp; &nbsp; //阻塞当前线程
+
+
+	mytobj.detach();&nbsp; &nbsp; //非阻塞当前线程" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">c++ 11多线程创建 标准线程库</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2020-09-23</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>thread mytobj(ctc);&nbsp; &nbsp;//一个新的线程
+
+	mytobj.joinable()&nbsp; &nbsp;//判断能否加入线程
+
+
+	mytobj.join();&nbsp; &nbsp; //阻塞当前线程
+
+
+	mytobj.detach();&nbsp; &nbsp; //非阻塞当前线程</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> thread mytobj(ctc);&nbsp; &nbsp;//一个新的线程<br />
+<p>
+	mytobj.joinable()&nbsp; &nbsp;//判断能否加入线程
+</p>
+<p>
+	<span>mytobj</span>.join();&nbsp; &nbsp; //阻塞当前线程
+</p>
+<p>
+	mytobj.detach();&nbsp; &nbsp; //非阻塞当前线程
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1742.html">多线程中join和detach方法的理解</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1744.html">MySQL优化  explain 关键字使用 查看语句的执行计划</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="c++11多线程创建">
+							<h2 style="display:inline;color:#5BC648;">c++11多线程创建</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-09-23&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><pre class="prettyprint lang-cpp">#include &lt;iostream&gt;
+
+#include &lt;thread&gt;
+
+std::thread::id main_thread_id = std::this_thread::get_id();
+
+void hello()  
+{
+    std::cout &lt;&lt; "Hello Concurrent World\n";
+    if (main_thread_id == std::this_thread::get_id())
+        std::cout &lt;&lt; "This is the main thread.\n";
+    else
+        std::cout &lt;&lt; "This is not the main thread.\n";
+}
+
+void pause_thread(int n) {
+    std::this_thread::sleep_for(std::chrono::seconds(n));
+    std::cout &lt;&lt; "pause of " &lt;&lt; n &lt;&lt; " seconds ended\n";
+}
+
+int main() {
+    std::thread t(hello);
+    std::cout &lt;&lt; t.hardware_concurrency() &lt;&lt; std::endl;//可以并发执行多少个(不准确)
+    std::cout &lt;&lt; "native_handle " &lt;&lt; t.native_handle() &lt;&lt; std::endl;//可以并发执行多少个(不准确)
+    t.join();
+    std::thread a(hello);
+    a.detach();
+    std::thread threads[5];                         // 默认构造线程
+
+    std::cout &lt;&lt; "Spawning 5 threads...\n";
+    for (int i = 0; i &lt; 5; ++i)
+        threads[i] = std::thread(pause_thread, i + 1);   // move-assign threads
+    std::cout &lt;&lt; "Done spawning threads. Now waiting for them to join:\n";
+    for (auto &amp;thread : threads)
+        thread.join();
+    std::cout &lt;&lt; "All threads joined!\n";
+}</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#c++11多线程创建">c++11多线程创建</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

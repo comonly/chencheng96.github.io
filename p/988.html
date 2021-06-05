@@ -1,0 +1,322 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>序列化和反序列化——ObjectOutputStream和ObjectInputStream的使用【转】_comonly.cn</title>
+<meta name="keywords" content="序列化和反序列化——ObjectOutputStream和ObjectInputStream的使用【转】" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">序列化和反序列化——ObjectOutputStream和ObjectInputStream的使用【转】</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">Java中ObjectOutputStream和ObjectInputStream的基本</li>
+          <li class="lmname"><a href="https://blog.csdn.net/lyb1832567496/article/details/52738136" target="_blank">https://blog.csdn.net/lyb1832567496/article/details/52738136</a></li>
+          <li class="timer">2018-09-28</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	android
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 在我们讲解对象输出流和对象输入流之前，我们首先要明确两个概念：&nbsp;<br />
+<ul>
+	<li>
+		序列化和反序列化：&nbsp;将一个特定的数据结构转换为一组字节的过程称之为序列化； 将一组字节转换为特定的数据结构的过程称之为反序列化&nbsp;
+	</li>
+	<li>
+		持久化：&nbsp;将数据写入硬盘长久保存的过程称之为持久化
+	</li>
+</ul>
+<h2 id='ObjectOututStrem的使用'>
+	ObjectOutputStream的使用
+</h2>
+<p>
+	ObjectOutputStream是一个高级流， 将 Java 对象的基本数据类型和图形写入 OutputStream。可以使用 ObjectInputStream 读取（重构）对象。通过在流中使用文件可以实现对象的持久存储。如果流是网络套接字流，则可以在另一台主机上或另一个进程中重构对象。
+</p>
+<p>
+	构造函数
+</p>
+<ul>
+	<li>
+		protected ObjectOutputStream();//为完全重新实现 ObjectOutputStream 的子类提供一种方法，让它不必分配仅由 ObjectOutputStream 的实现使用的私有数据。
+	</li>
+	<li>
+		public ObjectOutputStream(OutputStream out);//创建写入指定 OutputStream 的 ObjectOutputStream。此构造方法将序列化流部分写入底层流；调用者可以通过立即刷新流，确保在读取头部时，用于接收 ObjectInputStreams 构造方法不会阻塞。
+	</li>
+</ul>
+<p>
+	<span style="color:#E53333;">注意：只能将支持 java.io.Serializable 接口的对象写入流中 import java.io.Serializable。</span>每个 serializable 对象的类都被编码，编码内容包括类名和类签名、对象的字段值和数组值，以及从初始对象中引用的其他所有对象的闭包。
+</p>
+<p>
+	public final void writeObject(Object obj);&nbsp; &nbsp; //将指定的对象写入 ObjectOutputStream。对象的类、类的签名，以及类及其所有超类型的非瞬态和非静态字段的值都将被写入。
+</p>
+<h2 id='ObjectIutStrem的使用'>
+	ObjectInputStream的使用
+</h2>
+<p>
+	ObjectInputStream也是一个高级流，对以前使用 ObjectOutputStream 写入的基本数据和对象进行反序列化。
+</p>
+构造函数<br />
+<ul>
+	<li>
+		protected ObjectInputStream();//为完全重新实现 ObjectInputStream 的子类提供一种方式，让它不必分配仅由 ObjectInputStream 的实现使用的私有数据。
+	</li>
+	<li>
+		public ObjectInputStream(InputStream in);//创建从指定 InputStream 读取的 ObjectInputStream。从流读取序列化头部并予以验证。在对应的 ObjectOutputStream 写入并刷新头部之前，此构造方法将阻塞。
+	</li>
+</ul>
+<p>
+	public final Object readObject();&nbsp; &nbsp;//从 ObjectInputStream 读取对象。对象的类、类的签名和类及所有其超类型的非瞬态和非静态字段的值都将被读取。该方法返回的是一个Object，所以我们在反序列化的过程中需要强制转换为我们所需要的类型。
+</p>
+小结：ObjectOutputStream 和 ObjectInputStream 分别与 FileOutputStream 和 FileInputStream 一起使用时，可以为应用程序提供对对象图形的持久存储。ObjectOutputStream用于序列化对象，ObjectInputStream 用于恢复那些以前序列化的对象(反序列化)。其他用途包括使用套接字流在主机之间传递对象，或者用于编组和解组远程通信系统中的实参和形参。</div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/987.html">Skipped 103 frames! The application may be doing too much work on its main thread.</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/989.html">Android中关于EditText的点击事件及响应</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/lyb1832567496/article/details/52738136" target="_blank">https://blog.csdn.net/lyb1832567496/article/details/52738136</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="将对象写入文件中及反序列">
+							<h2 style="display:inline;color:#5BC648;">将对象写入文件中及反序列</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-09-29&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><h4>
+	Person对象
+</h4>
+<pre class="prettyprint lang-java">public class Person implements Serializable{
+    /**
+     * 序列化的ID,只要加了该版本号，在反序列化的时候不论你的类的属性是否改变，只要是版本号不变那么尽经可能的兼容新版本。
+     * 如果版本号改变了，那么反序列化的过程中就会抛出异常。
+     */
+    private static final long serialVersionUID = 6871740251451383067L;
+    private String name;
+    private int age;
+    private char sex;
+    private ArrayList&lt;String&gt; other;
+    ......</pre>
+<h4>
+	将Person对象写入到文件中
+</h4>
+其中Person对象implements java.io.Serializable 接口
+<pre class="prettyprint lang-java">ArrayList&lt;String&gt; other=new ArrayList&lt;String&gt;();
+other.add("清华大学");
+other.add("软件学院");
+other.add("软件工程");
+Person person=new Person("小明", 22, '男', other);
+FileOutputStream fos=new FileOutputStream("OOS.txt");
+ObjectOutputStream oos=new ObjectOutputStream(fos);
+//将一个对象经行序列化时需要实现Serializable接口
+oos.writeObject(person);
+oos.flush();
+oos.close();</pre>
+<h4>
+	将已经序列化的对象反序列化
+</h4>
+<pre class="prettyprint lang-java">FileInputStream fis=new FileInputStream("OOS.txt");
+ObjectInputStream ois=new ObjectInputStream(fis);
+Person person=(Person)ois.readObject();
+System.out.println(person.getName());
+System.out.println(person.getAge());
+System.out.println(person.getSex());
+ArrayList&lt;String&gt; other=person.getOther();
+for (String string : other) {
+    System.out.println(string);
+}
+ois.close();</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#ObjectOututStrem的使用">ObjectOututStrem的使用</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#ObjectIutStrem的使用">ObjectIutStrem的使用</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#将对象写入文件中及反序列">将对象写入文件中及反序列</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

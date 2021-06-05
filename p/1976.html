@@ -1,0 +1,364 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>一文了解OOM及解决方案_comonly.cn</title>
+<meta name="keywords" content="一文了解OOM及解决方案" />
+<meta name="description" content="1.Java堆空间发生频率：5颗星造成原因无法在Java堆中分配对象吞吐量增加应用程序无意中保存了对象引用，对象无法被GC回收应用程序过度使用finalizer。finalizer对象不能被GC立刻回收。finalizer由结束队列服务的守护线程调用，有时finalizer线程的处理能力无法跟上结束队列的增长解决方案单位对应：GB->G,g；MB->M,m；KB->K,k使用-X" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">一文了解OOM及解决方案</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">Java_老男孩</li>
+          <li class="lmname"><a href="https://blog.51cto.com/14230003/2430776" target="_blank">https://blog.51cto.com/14230003/2430776</a></li>
+          <li class="timer">2019-08-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>1.Java堆空间发生频率：5颗星造成原因无法在Java堆中分配对象吞吐量增加应用程序无意中保存了对象引用，对象无法被GC回收应用程序过度使用finalizer。finalizer对象不能被GC立刻回收。finalizer由结束队列服务的守护线程调用，有时finalizer线程的处理能力无法跟上结束队列的增长解决方案单位对应：GB->G,g；MB->M,m；KB->K,k使用-X</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <div class="con artical-content editor-preview-side"><h3><strong>1. Java 堆空间</strong></h3>
+<h4><strong>发生频率：</strong>5颗星</h4>
+<h4><strong>造成原因</strong></h4>
+<ol>
+<li>
+<p>无法在 Java 堆中分配对象</p>
+</li>
+<li>
+<p>吞吐量增加</p>
+</li>
+<li>
+<p>应用程序无意中保存了对象引用，对象无法被 GC 回收</p>
+</li>
+<li>应用程序过度使用 finalizer。finalizer 对象不能被 GC 立刻回收。finalizer 由结束队列服务的守护线程调用，有时 finalizer 线程的处理能力无法跟上结束队列的增长</li>
+</ol>
+<h4><strong>解决方案</strong></h4>
+<blockquote>
+<p>单位对应：GB -&gt; G, g；MB -&gt; M, m；KB -&gt; K, k</p>
+</blockquote>
+<ol>
+<li>
+<p>使用&nbsp;-Xmx&nbsp;增加堆大小</p>
+</li>
+<li>修复应用程序中的内存泄漏</li>
+</ol>
+<h3><strong>2. GC 开销超过限制</strong></h3>
+<h4><strong>发生频率：</strong>5颗星</h4>
+<h4><strong>造成原因</strong></h4>
+<ol>
+<li>Java 进程98%的时间在进行垃圾回收，恢复了不到2%的堆空间，最后连续5个（编译时常量）垃圾回收一直如此。</li>
+</ol>
+<h4><strong>解决方案</strong></h4>
+<ol>
+<li>
+<p>使用&nbsp;-Xmx&nbsp;增加堆大小</p>
+</li>
+<li>
+<p>使用&nbsp;-XX:-UseGCOverheadLimit&nbsp;取消 GC 开销限制</p>
+</li>
+<li>修复应用程序中的内存泄漏</li>
+</ol>
+<h3><strong>3. 请求的数组大小超过虚拟机限制</strong></h3>
+<h3><strong>发生频率：</strong>2颗星</h3>
+<h4><strong>造成原因</strong></h4>
+<ol>
+<li>应用程序试图分配一个超过堆大小的数组</li>
+</ol>
+<h4><strong>解决方案</strong></h4>
+<ol>
+<li>
+<p>使用&nbsp;-Xmx&nbsp;增加堆大小</p>
+</li>
+<li>修复应用程序中分配巨大数组的 bug</li>
+</ol>
+<h3><strong>4. Perm gen 空间</strong></h3>
+<h4><strong>发生频率：</strong>3颗星</h4>
+<h4><strong>造成原因</strong></h4>
+<p>Perm gen 空间包含：</p>
+<ul>
+<li>
+<p>类的名字、字段、方法</p>
+</li>
+<li>
+<p>与类相关的对象数组和类型数组</p>
+</li>
+<li>JIT 编译器优化</li>
+</ul>
+<p>当 Perm gen 空间用尽时，将抛出异常。</p>
+<h4><strong>解决方案</strong></h4>
+<ol>
+<li>
+<p>使用&nbsp;-XX: MaxPermSize&nbsp;增加 Permgen 大小</p>
+</li>
+<li>不重启应用部署应用程序可能会导致此问题。重启 JVM 解决</li>
+</ol>
+<h3><strong>5. Metaspace</strong></h3>
+<h4><strong>发生频率：</strong>3颗星</h4>
+<h4><strong>造成原因</strong></h4>
+<ol>
+<li>从 Java 8 开始 Perm gen 改成了 Metaspace，在本机内存中分配 class 元数据（称为 metaspace）。如果 metaspace 耗尽，则抛出异常</li>
+</ol>
+<h4><strong>解决方案</strong></h4>
+<ol>
+<li>
+<p>通过命令行设置&nbsp;-XX: MaxMetaSpaceSize&nbsp;增加 metaspace 大小</p>
+</li>
+<li>
+<p>取消&nbsp;-XX: maxmetsspacedize</p>
+</li>
+<li>
+<p>减小 Java 堆大小,为 MetaSpace 提供更多的可用空间</p>
+</li>
+<li>
+<p>为服务器分配更多的内存</p>
+</li>
+<li>可能是应用程序 bug，修复 bug</li>
+</ol>
+<h3><strong>6. 无法新建本机线程</strong></h3>
+<h4><strong>发生频率：</strong>5颗星</h4>
+<h4><strong>造成原因</strong></h4>
+<ol>
+<li>内存不足，无法创建新线程。由于线程在本机内存中创建，报告这个错误表明本机内存空间不足</li>
+</ol>
+<h4><strong>解决方案</strong></h4>
+<ol>
+<li>
+<p>为机器分配更多的内存</p>
+</li>
+<li>
+<p>减少 Java 堆空间</p>
+</li>
+<li>
+<p>修复应用程序中的线程泄漏。</p>
+</li>
+<li>增加操作系统级别的限制</li>
+</ol>
+<ul>
+<li>
+<p>ulimit -a</p>
+</li>
+<li>用户进程数增大&nbsp;(-u) 1800</li>
+</ul>
+<ol start="6">
+<li>使用&nbsp;-Xss&nbsp;减小线程堆栈大小</li>
+</ol>
+<h3><strong>7. 杀死进程或子进程</strong></h3>
+<h4><strong>发生频率：</strong>1颗星</h4>
+<h4><strong>造成原因</strong></h4>
+<ol>
+<li>内核任务：内存不足结束器，在可用内存极低的情况下会杀死进程</li>
+</ol>
+<h4><strong>解决方案</strong></h4>
+<ol>
+<li>
+<p>将进程迁移到不同的机器上</p>
+</li>
+<li>给机器增加更多内存</li>
+</ol>
+<p>与其他 OOM 错误不同，这是由操作系统而非 JVM 触发的。</p>
+<h3><strong>8. 发生 stack_trace_with_native_method</strong></h3>
+<h4><strong>发生频率：</strong>1颗星</h4>
+<h4><strong>造成原因</strong></h4>
+<ol>
+<li>
+<p>本机方法（native method）分配失败</p>
+</li>
+<li>打印的堆栈跟踪信息，最顶层的帧是本机方法</li>
+</ol>
+<h4><strong>解决方案</strong></h4>
+<p>使用操作系统本地工具进行诊断</p></div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1975.html">部署Exchange管理端</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1977.html">3个Spring Boot核心注解，你知道几个？</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.51cto.com/14230003/2430776" target="_blank">https://blog.51cto.com/14230003/2430776</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

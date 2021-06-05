@@ -1,0 +1,344 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>C++虚函数和虚函数表概念及实现原理_comonly.cn</title>
+<meta name="keywords" content="C++虚函数和虚函数表概念及实现原理" />
+<meta name="description" content="1. 概述
+
+
+	
+每一个含有虚函数（无论是其本身的，还是继承而来的）的类都至少有一个与之对应的虚函数表，其中存放着该类所有的虚函数对应的函数指针。例：
+其中：
+
+
+	
+		B的虚函数表中存放着B::foo和B::bar两个函数指针。
+	
+	
+		D的虚函数表中存放的既有继承自B的虚函数B::foo，又有重写（override）了基类虚函数B::bar的D::bar，还有新增的虚函数D::quz。
+	
+
+
+	2. 虚函数表构造过程
+
+
+	从编译器的角度来说，B的虚函数" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">C++虚函数和虚函数表概念及实现原理</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">Kuany_</li>
+          <li class="lmname"><a href="https://blog.csdn.net/weixin_44718794/article/details/107088956" target="_blank">https://blog.csdn.net/weixin_44718794/article/details/107088956</a></li>
+          <li class="timer">2020-10-03</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>1. 概述
+
+
+	
+每一个含有虚函数（无论是其本身的，还是继承而来的）的类都至少有一个与之对应的虚函数表，其中存放着该类所有的虚函数对应的函数指针。例：
+其中：
+
+
+	
+		B的虚函数表中存放着B::foo和B::bar两个函数指针。
+	
+	
+		D的虚函数表中存放的既有继承自B的虚函数B::foo，又有重写（override）了基类虚函数B::bar的D::bar，还有新增的虚函数D::quz。
+	
+
+
+	2. 虚函数表构造过程
+
+
+	从编译器的角度来说，B的虚函数</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h1>
+	1. 概述
+</h1>
+<p>
+	<img src="https://img-blog.csdnimg.cn/20200702171623639.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDcxODc5NA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /><br />
+每一个含有虚函数（无论是其本身的，还是继承而来的）的类都至少有一个与之对应的虚函数表，其中存放着该类所有的虚函数对应的函数指针。例：<br />
+<img src="https://img-blog.csdnimg.cn/20200702171658952.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDcxODc5NA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" />其中：
+</p>
+<ul>
+	<li>
+		B的虚函数表中存放着B::foo和B::bar两个函数指针。
+	</li>
+	<li>
+		D的虚函数表中存放的既有继承自B的虚函数B::foo，又有重写（override）了基类虚函数B::bar的D::bar，还有新增的虚函数D::quz。
+	</li>
+</ul>
+<h1>
+	<a></a><a></a><a></a>2. 虚函数表构造过程
+</h1>
+<p>
+	从编译器的角度来说，B的虚函数表很好构造，D的虚函数表构造过程相对复杂。下面给出了构造D的虚函数表的一种方式（仅供参考）：<br />
+<img src="https://img-blog.csdnimg.cn/20200702171810744.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDcxODc5NA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" />提示：该过程是由编译器完成的，因此也可以说：虚函数替换过程发生在编译时。
+</p>
+<h1>
+	<a></a><a></a><a></a>3. 虚函数调用过程
+</h1>
+<p>
+	以下面的程序为例：<br />
+<img src="https://img-blog.csdnimg.cn/20200702171845643.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDcxODc5NA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" />编译器只知道pb是B*类型的指针，并不知道它指向的具体对象类型 ：pb可能指向的是B的对象，也可能指向的是D的对象。
+</p>
+<p>
+	但对于“pb-&gt;bar()”，编译时能够确定的是：此处operator-&gt;的另一个参数是B::bar（因为pb是B*类型的，编译器认为bar是B::bar），而B::bar和D::bar在各自虚函数表中的偏移位置是相等的。
+</p>
+<p>
+	无论pb指向哪种类型的对象，只要能够确定被调函数在虚函数中的偏移值，待运行时，能够确定具体类型，并能找到相应vptr了，就能找出真正应该调用的函数。<br />
+B::bar是一个虚函数指针， 它的ptr部分内容为9，它在B的虚函数表中的偏移值为8（8+1=9）。
+</p>
+<p>
+	当程序执行到“pb-&gt;bar()”时，已经能够判断pb指向的具体类型了：
+</p>
+<ul>
+	<li>
+		如果pb指向B的对象，可以获取到B对象的vptr，加上偏移值8（(char*)vptr + 8），可以找到B::bar。
+	</li>
+	<li>
+		如果pb指向D的对象，可以获取到D对象的vptr，加上偏移值8（(char*)vptr + 8） ，可以找到D::bar。
+	</li>
+	<li>
+		如果pb指向其它类型对象…同理…
+	</li>
+</ul>
+<h1>
+	<a></a><a></a><a></a>4. 多重继承
+</h1>
+<p>
+	当一个类继承多个类，且多个基类都有虚函数时，子类对象中将包含多个虚函数表的指针（即多个vptr），例：<br />
+<img src="https://img-blog.csdnimg.cn/20200702171931727.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDcxODc5NA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /><br />
+其中：D自身的虚函数与B基类共用了同一个虚函数表，因此也称B为D的主基类（primary base class）。
+</p>
+<p>
+	虚函数替换过程与前面描述类似，只是多了一个虚函数表，多了一次拷贝和替换的过程。
+</p>
+<p>
+	虚函数的调用过程，与前面描述基本类似，区别在于基类指针指向的位置可能不是派生类对象的起始位置，以如下面的程序为例：<br />
+<img src="https://img-blog.csdnimg.cn/2020070217194823.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDcxODc5NA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /> 
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1789.html">C++ STL容器底层实现原理</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1791.html">c++ 关于菱形继承&虚继承的问题</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/weixin_44718794/article/details/107088956" target="_blank">https://blog.csdn.net/weixin_44718794/article/details/107088956</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="虚函数表存放在哪里">
+							<h2 style="display:inline;color:#5BC648;">虚函数表存放在哪里</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2021-03-31&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	转自：<a href="https://www.cnblogs.com/chenhuan001/p/6485233.html" target="_blank">https://www.cnblogs.com/chenhuan001/p/6485233.html</a> 
+</p>
+<p>
+	1.虚函数表是全局共享的元素,即全局仅有一个.<br />
+2.虚函数表类似一个数组,类对象中存储vptr指针,指向虚函数表.即虚函数表不是函数,不是程序代码,不肯能存储在代码段.<br />
+3.虚函数表存储虚函数的地址,即虚函数表的元素是指向类成员函数的指针,而类中虚函数的个数在编译时期可以确定,即虚函数表的大小可以确定,即大小是在编译时期确定的,不必动态分配内存空间存储虚函数表,所以不再堆中.<br />
+根据以上特征,虚函数表类似于类中静态成员变量.静态成员变量也是全局共享,大小确定.<br />
+所以我<span style="color:#E53333;">推测</span>虚函数表和静态成员变量一样,存放在全局数据区.
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#虚函数表存放在哪里">虚函数表存放在哪里</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

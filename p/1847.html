@@ -1,0 +1,551 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>SMS短信PDU编码_comonly.cn</title>
+<meta name="keywords" content="SMS短信PDU编码" />
+<meta name="description" content="目前，发送短消息常用Text和PDU(Protocol Data Unit，协议数据单元)模式。使用Text模式收发短信代码简单，实现起来十分容易，但最大的缺点是不能收发中文短信；而PDU模式不仅支持中文短信，也能发送英文短信。PDU模式收发短信可以使用3种编码：7-bit、8-bit和UCS2编码。7-bit编码用于发送普通的ASCII字符，8-bit编码通常用于发送数据消息，UCS2编码用于发送Unicode字符。一般的PDU编码由A B C D E F G H I J K L M十三项组成。
+
+" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">SMS短信PDU编码</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">九命黑猫</li>
+          <li class="lmname"><a href="https://www.cnblogs.com/youse/p/5828005.html" target="_blank">https://www.cnblogs.com/youse/p/5828005.html</a></li>
+          <li class="timer">2020-10-06</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>目前，发送短消息常用Text和PDU(Protocol Data Unit，协议数据单元)模式。使用Text模式收发短信代码简单，实现起来十分容易，但最大的缺点是不能收发中文短信；而PDU模式不仅支持中文短信，也能发送英文短信。PDU模式收发短信可以使用3种编码：7-bit、8-bit和UCS2编码。7-bit编码用于发送普通的ASCII字符，8-bit编码通常用于发送数据消息，UCS2编码用于发送Unicode字符。一般的PDU编码由A B C D E F G H I J K L M十三项组成。
+
+</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	目前，发送短消息常用Text和PDU(Protocol Data Unit，协议数据单元)模式。使用Text模式收发短信代码简单，实现起来十分容易，但最大的缺点是不能收发中文短信；而PDU模式不仅支持中文短信，也能发送英文短信。PDU模式收发短信可以使用3种编码：7-bit、8-bit和UCS2编码。7-bit编码用于发送普通的ASCII字符，8-bit编码通常用于发送数据消息，UCS2编码用于发送Unicode字符。一般的PDU编码由A B C D E F G H I J K L M十三项组成。
+</p>
+<p>
+	A：短信息中心地址长度，2位十六进制数(1字节)。<br />
+B：短信息中心号码类型，2位十六进制数。<br />
+C：短信息中心号码，B+C的长度将由A中的数据决定。<br />
+D：文件头字节，2位十六进制数。<br />
+E：信息类型，2位十六进制数。<br />
+F：被叫号码长度，2位十六进制数。<br />
+G：被叫号码类型，2位十六进制数，取值同B。<br />
+H：被叫号码，长度由F中的数据决定。<br />
+I：协议标识，2位十六进制数。<br />
+J：数据编码方案，2位十六进制数。<br />
+K：有效期，2位十六进制数。<br />
+L：用户数据长度，2位十六进制数。<br />
+M：用户数据，其长度由L中的数据决定。J中设定采用UCS2编码，这里是中英文的Unicode字符。
+</p>
+<p>
+	PDU编码协议简单说明
+</p>
+<p>
+	例1 发送：SMSC号码是+8613800250500，对方号码是13693092030，消息内容是“Hello!”。从手机发出的PDU串可以是<br />
+08 91 68 31 08 20 05 05 F0 11 00 0D 91 68 31 96 03 29 30 F0 00 00 00 06 C8 32 9B FD 0E 01<br />
+对照规范，具体分析：<br />
+分段 含义 说明<br />
+08 SMSC地址信息的长度 共8个八位字节(包括91)<br />
+91 SMSC地址格式(TON/NPI) 用国际格式号码(在前面加‘+’)<br />
+68 31 08 20 05 05 F0 SMSC地址 8613800250500，补‘F’凑成偶数个<br />
+11 基本参数(TP-MTI/VFP) 发送，TP-VP用相对格式<br />
+00 消息基准值(TP-MR) 0<br />
+0D 目标地址数字个数 共13个十进制数(不包括91和‘F’)<br />
+91 目标地址格式(TON/NPI) 用国际格式号码(在前面加‘+’)<br />
+68 31 96 03 29 30 F0 目标地址(TP-DA) 8613693092030，补‘F’凑成偶数个<br />
+00 协议标识(TP-PID) 是普通GSM类型，点到点方式<br />
+00 用户信息编码方式(TP-DCS) 7-bit编码<br />
+00 有效期(TP-VP) 5分钟<br />
+06 用户信息长度(TP-UDL) 实际长度6个字节<br />
+C8 32 9B FD 0E 01 用户信息(TP-UD) “Hello!”
+</p>
+<p>
+	例2 接收：SMSC号码是+8613800250500，对方号码是13693092030，消息内容是“你好!”。手机接收到的PDU串可以是<br />
+08 91 68 31 08 20 05 05 F0 84 0D 91 68 31 96 03 29 30 F0 00 08 30 30 21 80 63 54 80 06 4F 60 59 7D 00 21<br />
+对照规范，具体分析：<br />
+分段 含义 说明<br />
+08 地址信息的长度 个八位字节(包括91)<br />
+91 SMSC地址格式(TON/NPI) 用国际格式号码(在前面加‘+’)<br />
+68 31 08 20 05 05 F0 SMSC地址 8613800250500，补‘F’凑成偶数个<br />
+84 基本参数(TP-MTI/MMS/RP) 接收，无更多消息，有回复地址<br />
+0D 回复地址数字个数 共13个十进制数(不包括91和‘F’)<br />
+91 回复地址格式(TON/NPI) 用国际格式号码(在前面加‘+’)<br />
+68 31 96 03 29 30 F0 回复地址(TP-RA) 8613693092030，补‘F’凑成偶数个<br />
+00 协议标识(TP-PID) 是普通GSM类型，点到点方式<br />
+08 用户信息编码方式(TP-DCS) UCS2编码<br />
+30 30 21 80 63 54 80 时间戳(TP-SCTS) 2003-3-12 08:36:45 +8时区<br />
+06 用户信息长度(TP-UDL) 实际长度6个字节<br />
+4F 60 59 7D 00 21 用户信息(TP-UD) “你好!”
+</p>
+<p>
+	<br />
+若基本参数的最高位(TP-RP)为0，则没有回复地址的三个段。从Internet上发出的短消息常常是这种情形。<br />
+注意号码和时间的表示方法，不是按正常顺序顺着来的，而且要以‘F’将奇数补成偶数。
+</p>
+<p>
+	<br />
+在PDU Mode中，可以采用三种编码方式来对发送的内容进行编码，它们是7-bit、8-bit和UCS2编码。7-bit编码用于发送普通的ASCII字符，它将一串7-bit的字符(最高位为0)编码成8-bit的数据，每8个字符可“压缩”成7个；8-bit编码通常用于发送数据消息，比如图片和铃声等；而UCS2编码用于发送Unicode字符。PDU串的用户信息(TP-UD)段最大容量是140字节，所以在这三种编码方式下，可以发送的短消息的最大字符数分别是160、140和70。这里，将一个英文字母、一个汉字和一个数据字节都视为一个字符。
+</p>
+<p>
+	<br />
+需要注意的是，PDU串的用户信息长度(TP-UDL)，在各种编码方式下意义有所不同。7-bit编码时，指原始短消息的字符个数，而不是编码后的字节数。8-bit编码时，就是字节数。UCS2编码时，也是字节数，等于原始短消息的字符数的两倍。如果用户信息(TP-UD)中存在一个头(基本参数的TP-UDHI为1)，在所有编码方式下，用户信息长度(TP-UDL)都等于头长度与编码后字节数之和。如果采用GSM 03.42所建议的压缩算法(TP-DCS的高3位为001)，则该长度也是压缩编码后字节数或头长度与压缩编码后字节数之和。
+</p>
+<p>
+	2 参见详细英文说明:http://www.dreamfabric.com/sms/
+</p>
+<p>
+	将源串每8个字符分为一组(这个例子中不满8个)进行编码，在组内字符间压缩，但每组之间是没有什么联系的。
+</p>
+<p>
+	用C实现7-bit编码和解码的算法如下：
+</p>
+<p>
+	// 7-bit编码<br />
+// pSrc: 源字符串指针<br />
+// pDst: 目标编码串指针<br />
+// nSrcLength: 源字符串长度<br />
+// 返回: 目标编码串长度<br />
+int gsmEncode7bit(const char* pSrc, unsigned char* pDst, int nSrcLength)<br />
+{<br />
+int nSrc; // 源字符串的计数值<br />
+int nDst; // 目标编码串的计数值<br />
+int nChar; // 当前正在处理的组内字符字节的序号，范围是0-7<br />
+unsigned char nLeft; // 上一字节残余的数据<br />
+<br />
+// 计数值初始化<br />
+nSrc = 0;<br />
+nDst = 0;<br />
+<br />
+// 将源串每8个字节分为一组，压缩成7个字节<br />
+// 循环该处理过程，直至源串被处理完<br />
+// 如果分组不到8字节，也能正确处理<br />
+while(nSrc&lt;nSrcLength)<br />
+{<br />
+// 取源字符串的计数值的最低3位<br />
+nChar = nSrc &amp; 7;<br />
+<br />
+// 处理源串的每个字节<br />
+if(nChar == 0)<br />
+{<br />
+// 组内第一个字节，只是保存起来，待处理下一个字节时使用<br />
+nLeft = *pSrc;<br />
+}<br />
+else<br />
+{<br />
+// 组内其它字节，将其右边部分与残余数据相加，得到一个目标编码字节<br />
+*pDst = (*pSrc &lt;&lt; (8-nChar)) | nLeft;<br />
+<br />
+// 将该字节剩下的左边部分，作为残余数据保存起来<br />
+nLeft = *pSrc &gt;&gt; nChar;<br />
+// 修改目标串的指针和计数值 pDst++;<br />
+nDst++;<br />
+}<br />
+<br />
+// 修改源串的指针和计数值<br />
+pSrc++; nSrc++;<br />
+}<br />
+<br />
+// 返回目标串长度<br />
+return nDst;<br />
+}<br />
+<br />
+// 7-bit解码<br />
+// pSrc: 源编码串指针<br />
+// pDst: 目标字符串指针<br />
+// nSrcLength: 源编码串长度<br />
+// 返回: 目标字符串长度<br />
+int gsmDecode7bit(const unsigned char* pSrc, char* pDst, int nSrcLength)<br />
+{<br />
+int nSrc; // 源字符串的计数值<br />
+int nDst; // 目标解码串的计数值<br />
+int nByte; // 当前正在处理的组内字节的序号，范围是0-6<br />
+unsigned char nLeft; // 上一字节残余的数据<br />
+<br />
+// 计数值初始化<br />
+nSrc = 0;<br />
+nDst = 0;<br />
+<br />
+// 组内字节序号和残余数据初始化<br />
+nByte = 0;<br />
+nLeft = 0;<br />
+<br />
+// 将源数据每7个字节分为一组，解压缩成8个字节<br />
+// 循环该处理过程，直至源数据被处理完<br />
+// 如果分组不到7字节，也能正确处理<br />
+while(nSrc&lt;nSrcLength)<br />
+{<br />
+// 将源字节右边部分与残余数据相加，去掉最高位，得到一个目标解码字节<br />
+*pDst = ((*pSrc &lt;&lt; nByte) | nLeft) &amp; 0x7f;<br />
+// 将该字节剩下的左边部分，作为残余数据保存起来<br />
+nLeft = *pSrc &gt;&gt; (7-nByte);<br />
+<br />
+// 修改目标串的指针和计数值<br />
+pDst++;<br />
+nDst++;<br />
+<br />
+// 修改字节计数值<br />
+nByte++;<br />
+<br />
+// 到了一组的最后一个字节<br />
+if(nByte == 7)<br />
+{<br />
+// 额外得到一个目标解码字节<br />
+*pDst = nLeft;<br />
+<br />
+// 修改目标串的指针和计数值<br />
+pDst++;<br />
+nDst++;<br />
+<br />
+// 组内字节序号和残余数据初始化<br />
+nByte = 0;<br />
+nLeft = 0;<br />
+}<br />
+<br />
+// 修改源串的指针和计数值<br />
+pSrc++;<br />
+nSrc++;<br />
+}<br />
+<br />
+*pDst = 0;<br />
+<br />
+// 返回目标串长度<br />
+return nDst;<br />
+}
+</p>
+<p>
+	需要指出的是，7-bit的字符集与ANSI标准字符集不完全一致，在0x20以下也排布了一些可打印字符，但英文字母、阿拉伯数字和常用符号的位置两者是一样的。用上面介绍的算法收发纯英文短消息，一般情况应该是够用了。如果是法语、德语、西班牙语等，含有 “?”、 “é”这一类字符，则要按上面编码的输出去查表，请参阅GSM 03.38的规定。
+</p>
+<p>
+	8-bit编码其实没有规定什么具体的算法，不需要介绍。
+</p>
+<p>
+	UCS2编码是将每个字符(1-2个字节)按照ISO/IEC106的规定，转变为16位的Unicode宽字符。在Windows系统中，特别是在2000/XP中，可以简单地调用API 函数实现编码和解码。如果没有系统的支持，比如用单片机控制手机模块收发短消息，只好用查表法解决了。
+</p>
+<p>
+	Windows环境下，用C实现UCS2编码和解码的算法如下：
+</p>
+<p>
+	// UCS2编码<br />
+// pSrc: 源字符串指针<br />
+// pDst: 目标编码串指针<br />
+// nSrcLength: 源字符串长度<br />
+// 返回: 目标编码串长度<br />
+int gsmEncodeUcs2(const char* pSrc, unsigned char* pDst, int nSrcLength)<br />
+{<br />
+int nDstLength; // UNICODE宽字符数目<br />
+WCHAR wchar[128]; // UNICODE串缓冲区<br />
+<br />
+// 字符串--&gt;UNICODE串<br />
+nDstLength = ::MultiByteToWideChar(CP_ACP, 0, pSrc, nSrcLength, wchar, 128);<br />
+<br />
+// 高低字节对调，输出<br />
+for(int i=0; i&lt;nDstLength; i++)<br />
+{<br />
+// 先输出高位字节<br />
+*pDst++ = wchar[i] &gt;&gt; 8;<br />
+// 后输出低位字节<br />
+*pDst++ = wchar[i] &amp; 0xff;<br />
+}<br />
+<br />
+// 返回目标编码串长度<br />
+return nDstLength * 2;<br />
+}<br />
+<br />
+// UCS2解码<br />
+// pSrc: 源编码串指针<br />
+// pDst: 目标字符串指针<br />
+// nSrcLength: 源编码串长度<br />
+// 返回: 目标字符串长度<br />
+int gsmDecodeUcs2(const unsigned char* pSrc, char* pDst, int nSrcLength)<br />
+{<br />
+int nDstLength; // UNICODE宽字符数目<br />
+WCHAR wchar[128]; // UNICODE串缓冲区<br />
+<br />
+// 高低字节对调，拼成UNICODE<br />
+for(int i=0; i&lt;nSrcLength/2; i++)<br />
+{<br />
+// 先高位字节<br />
+wchar[i] = *pSrc++ &lt;&lt; 8;<br />
+<br />
+// 后低位字节<br />
+wchar[i] |= *pSrc++;<br />
+}<br />
+<br />
+// UNICODE串--&gt;字符串<br />
+nDstLength = ::WideCharToMultiByte(CP_ACP, 0, wchar, nSrcLength/2, pDst, 160, NULL, NULL);<br />
+<br />
+// 输出字符串加个结束符<br />
+pDst[nDstLength] = '\0';<br />
+<br />
+// 返回目标字符串长度<br />
+return nDstLength;<br />
+}
+</p>
+<p>
+	用以上编码和解码模块，还不能将短消息字符串编码为PDU串需要的格式，也不能直接将PDU串中的用户信息解码为短消息字符串，因为还差一个在可打印字符串和字节数据之间相互转换的环节。可以循环调用sscanf和sprintf函数实现这种变换。下面提供不用这些函数的算法，它们也适用于单片机、DSP编程环境。
+</p>
+<p>
+	// 可打印字符串转换为字节数据<br />
+// 如："C8329BFD0E01" --&gt; {0xC8, 0x32, 0x9B, 0xFD, 0x0E, 0x01}<br />
+// pSrc: 源字符串指针<br />
+// pDst: 目标数据指针<br />
+// nSrcLength: 源字符串长度<br />
+// 返回: 目标数据长度<br />
+int gsmString2Bytes(const char* pSrc, unsigned char* pDst, int nSrcLength)<br />
+{<br />
+for(int i=0; i&lt;nSrcLength; i+=2)<br />
+{<br />
+// 输出高4位<br />
+if(*pSrc&gt;='0' &amp;&amp; *pSrc&lt;='9')<br />
+{<br />
+*pDst = (*pSrc - '0') &lt;&lt; 4;<br />
+}<br />
+else<br />
+{<br />
+*pDst = (*pSrc - 'A' + 10) &lt;&lt; 4;<br />
+}<br />
+<br />
+pSrc++;<br />
+<br />
+// 输出低4位<br />
+if(*pSrc&gt;='0' &amp;&amp; *pSrc&lt;='9')<br />
+{<br />
+*pDst |= *pSrc - '0';<br />
+}<br />
+else<br />
+{<br />
+*pDst |= *pSrc - 'A' + 10;<br />
+}<br />
+pSrc++;<br />
+pDst++;<br />
+}<br />
+<br />
+// 返回目标数据长度<br />
+returnnSrcLength / 2;<br />
+}<br />
+<br />
+// 字节数据转换为可打印字符串<br />
+// 如：{0xC8, 0x32, 0x9B, 0xFD, 0x0E, 0x01} --&gt; "C8329BFD0E01"<br />
+// pSrc: 源数据指针<br />
+// pDst: 目标字符串指针<br />
+// nSrcLength: 源数据长度<br />
+// 返回: 目标字符串长度<br />
+int gsmBytes2String(const unsigned char* pSrc, char* pDst, int nSrcLength)<br />
+{<br />
+const char tab[]="0123456789ABCDEF"; // 0x0-0xf的字符查找表<br />
+<br />
+for(int i=0; i&lt;nSrcLength; i++)<br />
+{<br />
+// 输出低4位<br />
+*pDst++ = tab[*pSrc &gt;&gt; 4];<br />
+<br />
+// 输出高4位<br />
+*pDst++ = tab[*pSrc &amp; 0x0f];<br />
+<br />
+pSrc++;<br />
+}<br />
+<br />
+// 输出字符串加个结束符<br />
+*pDst = '\0';<br />
+<br />
+// 返回目标字符串长度<br />
+return nSrcLength * 2;<br />
+}
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1846.html">在线运行工具（网站）导航</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1848.html">'merge' is not callable 使用keras模块中的merge方法，报错model object is not callable</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.cnblogs.com/youse/p/5828005.html" target="_blank">https://www.cnblogs.com/youse/p/5828005.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

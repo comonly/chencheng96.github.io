@@ -1,0 +1,284 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>c、c++ char* 和wchar* 互相转换 wchar_t_comonly.cn</title>
+<meta name="keywords" content="c、c++ char* 和wchar* 互相转换 wchar_t" />
+<meta name="description" content="2.1 wchar* 转到 char*
+方法一，使用_bstr_t转换。
+
+
+#include &lt;comdef.h&gt; // you will need this
+const WCHAR* wc = L"Hello World" ;
+_bstr_t b(wc);
+const char* c = b;
+printf("Output: %s\n", c);
+
+方法二，使用conversion macros。
+包含在头文件#include &lt;atlconv.h&gt;中，使" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">c、c++ char* 和wchar* 互相转换 wchar_t</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-10-15</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>2.1 wchar* 转到 char*
+方法一，使用_bstr_t转换。
+
+
+#include &lt;comdef.h&gt; // you will need this
+const WCHAR* wc = L"Hello World" ;
+_bstr_t b(wc);
+const char* c = b;
+printf("Output: %s\n", c);
+
+方法二，使用conversion macros。
+包含在头文件#include &lt;atlconv.h&gt;中，使</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 2.1 wchar* 转到 char*<br />
+方法一，使用_bstr_t转换。<br />
+<br />
+<br />
+#include &lt;comdef.h&gt; // you will need this<br />
+const WCHAR* wc = L"Hello World" ;<br />
+_bstr_t b(wc);<br />
+const char* c = b;<br />
+printf("Output: %s\n", c);<br />
+<br />
+方法二，使用conversion macros。<br />
+包含在头文件#include &lt;atlconv.h&gt;中，使用需谨慎！因为转换字符串分配的空间在栈上，直到函数返回才释放。如归使用很多次，例如在递归函数里使用，容易造成内存溢出。<br />
+<br />
+USES_CONVERSION;<br />
+WCHAR* wc = L"Hello World" ;<br />
+char* c = W2A(wc);<br />
+<br />
+方法三，使用sprintf，比较简洁。<br />
+<br />
+<br />
+char output[256];<br />
+WCHAR* wc = L"Hellow World" ;<br />
+sprintf(output, "%ws", wc );<br />
+<br />
+2.2 char*转 wchar*<br />
+方法一：使用mbstowcs函数。<br />
+<br />
+<br />
+const wchar_t *GetWC(const char *c)<br />
+{<br />
+const size_t cSize = strlen(c)+1;<br />
+wchar_t* wc = new wchar_t[cSize];<br />
+mbstowcs (wc, c, cSize);<br />
+<br />
+return wc;<br />
+}<br />
+<br />
+方法二：使用USES_CONVERSION。<br />
+用法及注意事项同上。<br />
+<br />
+<br />
+USES_CONVERSION;<br />
+char* c = L"Hello World" ;<br />
+Wchar* wc = A2W(c);<br />
+<br />
+方法三：使用swprintf函数，推荐使用。<br />
+<br />
+<br />
+wchar_t ws[100];<br />
+swprintf(ws, 100, L"%hs", "ansi string");<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1501.html">版本修改计划</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1503.html">tcp 和 udp问题描述 问题介绍</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

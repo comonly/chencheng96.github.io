@@ -1,0 +1,686 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>统计无符号整数二进制中1的个数（Hamming weight）_comonly.cn</title>
+<meta name="keywords" content="统计无符号整数二进制中1的个数（Hamming weight）" />
+<meta name="description" content="1.问题来源
+
+
+	之所以来记录这个问题的解法，是因为在在线编程中经常遇到，比如编程之美和京东的校招笔试以及很多其他公司都累此不疲的出这个考题。看似简单的问题，背后却隐藏着很多精妙的解法。查找网上资料，才知道这个问题的正式的名字叫Hamming weight（汉明重量）。
+	
+	
+		2.问题描述
+	
+
+	对于一个无符号整型数，求其二进制表示中1的个数。比如12的以32位无符号整型来表示，其二进制为：00000000 00000000 00000000 00001100，那么12的二进制" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">统计无符号整数二进制中1的个数（Hamming weight）</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">猪猪侠01</li>
+          <li class="lmname"><a href="https://www.bbsmax.com/A/D8540lnw5E/" target="_blank">https://www.bbsmax.com/A/D8540lnw5E/</a></li>
+          <li class="timer">2020-10-05</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>1.问题来源
+
+
+	之所以来记录这个问题的解法，是因为在在线编程中经常遇到，比如编程之美和京东的校招笔试以及很多其他公司都累此不疲的出这个考题。看似简单的问题，背后却隐藏着很多精妙的解法。查找网上资料，才知道这个问题的正式的名字叫Hamming weight（汉明重量）。
+	
+	
+		2.问题描述
+	
+
+	对于一个无符号整型数，求其二进制表示中1的个数。比如12的以32位无符号整型来表示，其二进制为：00000000 00000000 00000000 00001100，那么12的二进制</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h3>
+	1.问题来源
+</h3>
+<p style="" background-color:#ffffff;"="">
+	之所以来记录这个问题的解法，是因为在在线编程中经常遇到，比如编程之美和京东的校招笔试以及很多其他公司都累此不疲的出这个考题。看似简单的问题，背后却隐藏着很多精妙的解法。查找网上资料，才知道这个问题的正式的名字叫Hamming weight（汉明重量）。
+	</p>
+	<h3>
+		2.问题描述
+	</h3>
+<p style="" background-color:#ffffff;"="">
+	对于一个无符号整型数，求其二进制表示中1的个数。比如12的以32位无符号整型来表示，其二进制为：00000000 00000000 00000000 00001100，那么12的二进制中1的个数是两个。
+</p>
+<h3>
+	3.具体解法
+</h3>
+<p style="" background-color:#ffffff;"="">方法一： 移位法
+	</p>
+<p style="" background-color:#ffffff;"="">
+	网上的对这种方法的称谓五花八门，个人权且称之为移位法，因为比较形象贴切地描述了这个方法具体实现。
+</p>
+<ol>
+	<li>
+		#include<stdint.h></stdint.h>
+	</li>
+	<li>
+	</li>
+	<li>
+		intcount1(uint32_tx){
+	</li>
+	<li>
+		intcount=0;
+	</li>
+	<li>
+		while(x){
+	</li>
+	<li>
+		if(x&amp;0x1)
+	</li>
+	<li>
+		++count;
+	</li>
+	<li>
+		x=(x&gt;&gt;1);
+	</li>
+	<li>
+		}
+	</li>
+	<li>
+		returncount;
+	</li>
+	<li>
+		}
+	</li>
+</ol>
+<p style="" background-color:#ffffff;"="">方法二：去1法<br />
+<br />
+因为网上没有对之权威的称谓，个人还是权且称之为”去1法”，因为这种方法中，x&amp;(x-1)将会减少x二进制中最右边的1，直至x变为0。
+	</p>
+	<ol>
+		<li>
+			intcount1(uint32_tx){
+		</li>
+		<li>
+			intcount=0;
+		</li>
+		<li>
+			while(x){
+		</li>
+		<li>
+			x=x&amp;(x-1);
+		</li>
+		<li>
+			count++;
+		</li>
+		<li>
+			}
+		</li>
+		<li>
+			returncount;
+		</li>
+		<li>
+			}
+		</li>
+	</ol>
+<p style="" background-color:#ffffff;"="">
+	与之相似的变形是可以先统计出二进制数中0的个数，统计方法是x=x|(x+1)的作用是每次循环把x的二进制中从右往左数的第一个0变成1，直道变成全1的时候x+1就溢出为全0，循环结束。
+</p>
+<ol>
+	<li>
+		intcount1(intx){
+	</li>
+	<li>
+		intn=0;
+	</li>
+	<li>
+		while((x+1)){
+	</li>
+	<li>
+		n++;
+	</li>
+	<li>
+		x|=(x+1);
+	</li>
+	<li>
+		}
+	</li>
+	<li>
+		return32-n;
+	</li>
+	<li>
+		}
+	</li>
+</ol>
+<p style="" background-color:#ffffff;"="">方法三：分治法<br />
+<br />
+这个方法是Hamming weight Wikipedia上面提出来的，很高效，比上面的两种方法都要高效。采用了分治法的思想，具体实现如下：
+	</p>
+	<ol>
+		<li>
+			intHamming_weight(uint32_tn){
+		</li>
+		<li>
+			n=(n&amp;0x55555555)+((n&gt;&gt;1)&amp;0x55555555);
+		</li>
+		<li>
+			n=(n&amp;0x33333333)+((n&gt;&gt;2)&amp;0x33333333);
+		</li>
+		<li>
+			n=(n&amp;0x0f0f0f0f)+((n&gt;&gt;4)&amp;0x0f0f0f0f);
+		</li>
+		<li>
+			n=(n&amp;0x00ff00ff)+((n&gt;&gt;8)&amp;0x00ff00ff);
+		</li>
+		<li>
+			n=(n&amp;0x0000ffff)+((n&gt;&gt;16)&amp;0x0000ffff);
+		</li>
+		<li>
+			returnn;
+		</li>
+		<li>
+			}
+		</li>
+	</ol>
+<p style="" background-color:#ffffff;"="">
+	代码解析： 乍一看，立马懵逼，很难看懂为何那么写。先将代码中用到的几个常数对比一下其特点，再联想到分治的思想，你可能就懂了。
+</p>
+<ol>
+	<li>
+		0x5555……这个换成二进制之后就是0101010101010101……
+	</li>
+	<li>
+		0x3333……这个换成二进制之后就是0011001100110011……
+	</li>
+	<li>
+		0x0f0f………这个换成二进制之后就是0000111100001111……
+	</li>
+</ol>
+<p style="" background-color:#ffffff;"="">
+	看出来点什么了吗？ 如果把这些二进制序列看作一个循环的周期序列的话，那么第一个序列的周期是2，每个周期是01，第二个序列的周期是4，每个周期是0011，第三个的周期是8，每个是00001111，第四个和第五个以此类推。看出了这些数的特点，再回头看代码你会轻松的发现代码的意义。算法的实现原理是将32位无符号整数分成32个段，每个段即1bit，段的取值可表示当前段中1的个数，所以将32个段的数值累加在一起就是二进制中1的个数，如何累加呢？这就是代码做的事情。&nbsp;(n&amp;0x55555555)+((n&gt;&gt;1)&amp;0x55555555)&nbsp;将32位数中的32个段从左往右把相邻的两个段的值相加后放在2bits中，就变成了16个段，每段2位。同理(n&amp;0x33333333)+((n&gt;&gt;2)&amp;0x33333333)将16个段中相邻的两个段两两相加，存放在4bits中，就变成了8个段，每段4位。以此类推，最终求得数中1的个数就存放在一个段中，这个段32bits，就是最后的n。
+	</p>
+<p style="" background-color:#ffffff;"="">
+	看懂了上面几行的代码，你会情不自禁的想说：妙，太妙了！算法的世界总是那么奇妙。你也许可能会问，有没有更优的方法了，还真有，Hamming weight Wikipedia还有对该方法的优化，有心者继续探究吧，我就此打住，不和大家一同前行啦。
+</p>
+<p style="" background-color:#ffffff;"="">方法四：位标记法<br />
+<br />
+巧妙的使用位域结构体来标记32位无符号整数每个位，最后将32个位相加得到1的个数。可见这里的累加方法明显与上面不同，代码也是略显膨胀。
+	</p>
+	<ol>
+		<li>
+			structBitStruct{
+		</li>
+		<li>
+			uint8_ta:1;uint8_tb:1;uint8_tc:1;uint8_td:1;uint8_te:1;uint8_tf:1;uint8_tg:1;uint8_th:1;
+		</li>
+		<li>
+			uint8_ta1:1;uint8_tb1:1;uint8_tc1:1;uint8_td1:1;uint8_te1:1;uint8_tf1:1;uint8_tg1:1;uint8_th1:1;
+		</li>
+		<li>
+			uint8_ta2:1;uint8_tb2:1;uint8_tc2:1;uint8_td2:1;uint8_te2:1;uint8_tf2:1;uint8_tg2:1;uint8_th2:1;
+		</li>
+		<li>
+			uint8_ta3:1;uint8_tb3:1;uint8_tc3:1;uint8_td3:1;uint8_te3:1;uint8_tf3:1;uint8_tg3:1;uint8_th3:1;
+		</li>
+		<li>
+			};
+		</li>
+		<li>
+		</li>
+		<li>
+			//get number of 1
+		</li>
+		<li>
+			intcount1(uint32_tx){
+		</li>
+		<li>
+			BitStruct*stBit=(BitStruct*)&amp;x;
+		</li>
+		<li>
+			return(stBit-&gt;a+stBit-&gt;b+stBit-&gt;c+stBit-&gt;d+stBit-&gt;e+stBit-&gt;f+stBit-&gt;g+stBit-&gt;h+
+		</li>
+		<li>
+			stBit-&gt;a1+stBit-&gt;b1+stBit-&gt;c1+stBit-&gt;d1+stBit-&gt;e1+stBit-&gt;f1+stBit-&gt;g1+stBit-&gt;h1+
+		</li>
+		<li>
+			stBit-&gt;a2+stBit-&gt;b2+stBit-&gt;c2+stBit-&gt;d2+stBit-&gt;e2+stBit-&gt;f2+stBit-&gt;g2+stBit-&gt;h2+
+		</li>
+		<li>
+			stBit-&gt;a3+stBit-&gt;b3+stBit-&gt;c3+stBit-&gt;d3+stBit-&gt;e3+stBit-&gt;f3+stBit-&gt;g3+stBit-&gt;h3);
+		</li>
+		<li>
+			}
+		</li>
+	</ol>
+<p style="" background-color:#ffffff;"="">方法五：指令法 popcnt assembly<br />
+<br />
+超简洁，感谢网友Milo Yip提供。使用微软提供的指令，首先要确保你的CPU支持SSE4指令，用Everest和CPU-Z可以查看是否支持。
+</p>
+<ol>
+	<li>
+		cout&lt;&lt;_mm_popcnt_u32(0xffffffff)&lt;&lt;endl;
+	</li>
+</ol>
+<p style="" background-color:#ffffff;"="">方法六：MIT HAKMEM 169算法<br />
+<br />
+MIT HAKMEM是1972由MIT AI Lab（Massachusetts Institute of Technology Artificial Intelligence Laboratory，麻省理工学院人工智能实验室）发表的一篇技术报告，里面描述了一些技巧性很强，很有用的算法，用来更快更有效地进行数学运算。其中第169个算法，就跟popcount有关，用来统计整数二进制中1的个数。HAKMEM是“hacks memo”的简写，意为技巧备忘录。
+	</p>
+<p style="" background-color:#ffffff;"="">
+	原始的代码是用汇编写的，翻译成C代码如下：
+</p>
+<ol>
+	<li>
+		intHAKMEM(uint32_tn){
+	</li>
+	<li>
+		uint32_ttmp;
+	</li>
+	<li>
+		tmp=n-((n&gt;&gt;1)&amp;033333333333)-((n&gt;&gt;2)&amp;011111111111);
+	</li>
+	<li>
+		tmp=(tmp+(tmp&gt;&gt;3))&amp;030707070707;
+	</li>
+	<li>
+		returntmp%63;
+	</li>
+	<li>
+		}
+	</li>
+</ol>
+<p style="" background-color:#ffffff;"="">
+	乍一看，绝对懵逼，上面的代码究竟是什么意思，下面给大家作简要的分析。
+	</p>
+<p style="" background-color:#ffffff;"="">
+	总共需要3次shift，3次and，2次sub，1次add, 1次mod共10次算数运算。这是32位整数的版本，改成适用于64位整数的版本也很简单。主要思想也是分治以及并行加法，其中文字常量如033333333333都是8进制的数。
+</p>
+<p style="" background-color:#ffffff;"="">
+	第一步：<br />
+<br />
+n-((n&gt;&gt;1)&amp;033333333333)-((n&gt;&gt;2)&amp;011111111111);表示的意思是将n中的二进制1的个数分段存储在从右至左的每一个3个bits的段中。比如一个3位二进制数是4a+2b+c，我们要求的是a+b+c，n&gt;&gt;1的结果是2a+b，n&gt;&gt;2的结果是a，所以： (4a+2b+c) - (2a+b) - (a) = a + b + c。
+	</p>
+<div class="google-auto-placed ap_container" style="" font-size:16px;background-color:#ffffff;text-align:center;"=""> <br />
+		</div>
+<p style="" background-color:#ffffff;"="">
+	第二步：<br />
+<br />
+(tmp+(tmp&gt;&gt;3))&amp;030707070707;将各个3bits段中表示的1的个数累加起来放在一个6bits的段中，之所以使用0001112与每一个6bits的段相与，是因为使用3bits就可以表示6bits段中二进制1的个数而不会产生溢出，因为3bits最大可以表示7，6bits段中二进制1的个数最多是6。
+			</p>
+<p style="" background-color:#ffffff;"="">
+	第三步：<br />
+<br />
+第二步做完之后，对于变量tmp，除了最左边是2bits为单独的一段，其它的从右至左每6位组成一段。以上面无符号32bits整数为例，x=a*64^5+b*64^4+c*64^3+d*64^2+e*64+f，因为a，b，c，d，e，f中保留着各个6bits段中的二进制1的个数，所以我们要求的是a+b+c+d+e+f，很明显, （a+b+c+d+e+f）=（a+b+c+d+e+f）mod 63=x mod 63。也就是说x与a+b+c+d+e+f关于模63同余。证明如下：
+		</p>
+		<ol>
+			<li>
+				(x mod63)=(a*64^5)%63+(b*64^4)%63+(c*64^3)%63+(d*64^2)%63+(e*64)%63+f%63
+			</li>
+			<li>
+				因为64的n次幂(n&gt;=0)取模63的余数始终等于1，所以
+			</li>
+			<li>
+				(x mod63)=a%63+b%63+c%63+d%63+e%63+f%63
+			</li>
+			<li>
+				因为(a+b+c+d+e+f)&lt;=32,所以
+			</li>
+			<li>
+				(x mod63)=(a+b+c+d+e+f)%63=a+b+c+d+e+f
+			</li>
+		</ol>
+<p style="" background-color:#ffffff;"="">
+	同理，对于64位整数我们也可以这么处理。
+			</p>
+<p style="" background-color:#ffffff;"="">
+	上面解释了每一步的意义作用，但是该算法是如何一步一步优化推理而来的，这里不做赘述，具体可参考：<a href="http://blog.csdn.net/msquare/article/details/4536388">MIT HAKMEM算法分析</a>。
+		</p>
+<p style="" background-color:#ffffff;"="">方法七：查表法<br />
+<br />
+（1）静态表-8bit<br />
+<br />
+首先构造一个包含256个元素的表table，table[i]即i中1的个数，这里的i是[0-255]之间任意一个值。然后对于任意一个32bit无符号整数n，我们将其拆分成四个8bit，然后分别求出每个8bit中1的个数，再累加求和即可，这里用移位的方法，每次右移8位，并与0xff相与，取得最低位的8bit，累加后继续移位，如此往复，直到n为0。所以对于任意一个32位整数，需要查表4次。以十进制数2882400018为例，其对应的二进制数为10101011110011011110111100010010，对应的四次查表过程如下：红色表示当前8bit，绿色表示右移后高位补零。
+			</p>
+<p style="" background-color:#ffffff;"="">
+	第一次（n &amp; 0xff） 10101011110011011110111100010010
+		</p>
+<p style="" background-color:#ffffff;"="">
+	第二次（(n &gt;&gt; 8) &amp; 0xff） 00000000101010111100110111101111
+			</p>
+<p style="" background-color:#ffffff;"="">
+	第三次（(n &gt;&gt; 16) &amp; 0xff）00000000000000001010101111001101
+		</p>
+<p style="" background-color:#ffffff;"="">
+	第四次（(n &gt;&gt; 24) &amp; 0xff）00000000000000000000000010101011
+			</p>
+<p style="" background-color:#ffffff;"="">
+	具体实现如下：
+		</p>
+		<ol>
+			<li>
+				intbitCountSearchTable(unsignedintn){
+			</li>
+			<li>
+				unsignedinttable[256]=
+			</li>
+			<li>
+				{
+			</li>
+			<li>
+				0,1,1,2,1,2,2,3,1,2,2,3,2,3,3,4,
+			</li>
+			<li>
+				1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,
+			</li>
+			<li>
+				1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,
+			</li>
+			<li>
+				2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,
+			</li>
+			<li>
+				1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,
+			</li>
+			<li>
+				2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,
+			</li>
+			<li>
+				2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,
+			</li>
+			<li>
+				3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,
+			</li>
+			<li>
+				1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,
+			</li>
+			<li>
+				2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,
+			</li>
+			<li>
+				2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,
+			</li>
+			<li>
+				3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,
+			</li>
+			<li>
+				2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,
+			</li>
+			<li>
+				3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,
+			</li>
+			<li>
+				3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,
+			</li>
+			<li>
+				4,5,5,6,5,6,6,7,5,6,6,7,6,7,7,8,
+			</li>
+			<li>
+				};
+			</li>
+			<li>
+			</li>
+			<li>
+				returntable[n&amp;0xff]+table[(n&gt;&gt;8)&amp;0xff]=+table[(n&gt;&gt;16)&amp;0xff]+table[(n&gt;&gt;24)&amp;0xff];
+			</li>
+			<li>
+				}
+			</li>
+		</ol>
+<p style="" background-color:#ffffff;"="">
+	（2）静态表-4bit<br />
+<br />
+原理和8-bit表相同，详见8-bit表的解释
+			</p>
+			<ol>
+				<li>
+					intBitCount4(unsignedintn){
+				</li>
+				<li>
+					unsignedinttable[16]={
+				</li>
+				<li>
+					0,1,1,2,
+				</li>
+				<li>
+					1,2,2,3,
+				</li>
+				<li>
+					1,2,2,3,
+				</li>
+				<li>
+					2,3,3,4
+				</li>
+				<li>
+					};
+				</li>
+				<li>
+				</li>
+				<li>
+					unsignedintcount=0;
+				</li>
+				<li>
+					while(n){
+				</li>
+				<li>
+					count+=table[n&amp;0xf];
+				</li>
+				<li>
+					n&gt;&gt;=4;
+				</li>
+				<li>
+					}
+				</li>
+				<li>
+					returncount;
+				</li>
+				<li>
+					}
+				</li>
+			</ol>
+			<h3>
+				4.小结
+			</h3>
+<p style="" background-color:#ffffff;"="">
+	网上应该还有很多不同的而又令人叹为观止的实现方法，这里我就不探究了，有兴趣的读者可继续挖掘。
+		</p>
+		<hr />
+		<h1 style="" font-weight:400;color:#273746;background-color:#ffffff;"="">
+	参考文献
+			</h1>
+<p style="" background-color:#ffffff;"="">
+	[1]<a href="http://www.cnblogs.com/graphics/archive/2010/06/21/1752421.html">求二进制数中1的个数</a><br />
+[2]<a href="http://blog.csdn.net/kai8wei/article/details/44340361">计算一个无符号整数的二进制中0和1的个数</a><br />
+[3]<a href="http://blog.csdn.net/hitwhylz/article/details/10122617">c语言:统计整数二进制表示中1的个数(汉明重量)</a><br />
+[4]<a href="https://en.wikipedia.org/wiki/HAKMEM">HAKMEM.维基百科</a><br />
+[5]<a href="http://blog.chinaunix.net/uid-20729605-id-1884368.html">求二进制数中1的个数 (下)</a> 
+				</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1839.html">C/C++框架和库</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1841.html">Golang 之协程详解（应用查看原文）</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.bbsmax.com/A/D8540lnw5E/" target="_blank">https://www.bbsmax.com/A/D8540lnw5E/</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

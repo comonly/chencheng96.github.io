@@ -1,0 +1,336 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>表单—HTML基础知识_comonly.cn</title>
+<meta name="keywords" content="表单—HTML基础知识" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">表单—HTML基础知识</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-03-04</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">网页,语法,html,表单</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>用户在表单中输入数据，将表单提交后。通过服务器端的应用程序或者脚本文件，信息就会存储到数据库中，实现与客户的交互。</p>
+<p><b>表单标签form</b></p>
+<p></p>
+<ul>
+<li>&lt;form id="form1" name="form1" method="post" action=""&gt;&lt;/form&gt;<br>
+</li></ul>
+<p></p>
+<p>表单中的两个重要的属性</p>
+<p></p>
+<ul>
+<li>action 表示表单提交后发生的URL地址，如action="1.jsp",当提交表单时，就会把用户输入的所有数据提交给1.jsp网页来处理表单信息。<br>
+</li>
+<li>method get和post<br>
+</li></ul>
+<p></p>
+<p></p>
+<ol>
+<li>get的方式将表单控件的name/value信息经编码后，通过URL发送（可以在地址栏看到）</li>
+<li>post将表单内容通过http发送，用户在地址栏看不到表单信息。</li></ol>
+<p></p>
+<p>表单的属性及说明</p>
+<p></p>
+<table width="70%" align="center" border="1" cellspace="0" cellpadding="3" style="border-collapse: collapse;"><tbody>
+<tr><td valign="top">属性</td><td valign="top">描述</td></tr>
+<tr><td valign="top">id</td><td valign="top">表单的名称</td></tr>
+<tr><td valign="top">name</td><td valign="top">表单的名称</td></tr>
+<tr><td valign="top">method</td><td valign="top">定义表单结果从浏览器传送到服务器的方法：get和post</td></tr>
+<tr><td valign="top">action</td><td valign="top">定义表单处理程序（asp，jsp,php等程序）</td></tr>
+<tr><td>enctype</td><td>在发送到服务器之前应该如何对表单数据进行编码。默认编码为"application/x-www-form-urlencoded"&nbsp;</td></tr>
+<tr><td>target</td><td>设置表单显示目标（和超链接的target属性相同）较少使用。&nbsp;</td></tr></tbody></table>
+<p><br>
+</p>
+<p></p>
+<p><b>文本域和密码域</b></p>
+<p></p>
+<table width="96%" align="center" border="1" cellspace="0" cellpadding="3" style="border-collapse: collapse;"><tbody>
+<tr><td valign="top"><i>单行文本域</i><br>
+&lt;input type="text" name="12" size="20" maxlength="120" value="100"&gt;&lt;/input&gt;</td><td valign="top">一行输入文本的输入框<br>
+type后面选择text表示是文本域<br>
+size文本框的宽度20个字符（10个汉字）<br>
+maxlength表示最多能输入的字符数<br>
+value规定了文本框的初始值为100</td><td valign="top"><input type="text" name="12" size="20" maxlength="120" value="100"></td></tr>
+<tr><td valign="top"><i>密码文本域</i><br>
+&lt;input type="password" name="pw"&gt;&lt;/input&gt;</td><td valign="top">在密码文本域输入密码，都用*进行显示</td><td valign="top"><input type="password" name="pw"></td></tr>
+<tr><td valign="top"><i>多行文本域</i><br>
+&lt;textarea name="ly" cols="20" rows="3"&gt;&lt;/textarea&gt;</td><td valign="top">clos设置宽度为20个字符<br>
+rows设置文本区域为3行，超过后出现滚动条</td><td valign="top"><textarea name="ly" cols="20" rows="3" style="margin: 0px; width: 157px; height: 45px;"></textarea></td></tr></tbody></table>
+<p><br>
+<b>单选按钮，复选框，下拉列表以及按钮</b></p>
+<p></p>
+<p></p>
+<table width="96%" align="center" border="1" cellspace="0" cellpadding="3" style="border-collapse: collapse;"><tbody>
+<tr><td valign="top" class=""><i>单选按钮</i><br>
+&lt;input type="radio" name="text" value="1" checked="checked"/&gt;<br>
+&lt;input type="radio" name="text" value="2"/&gt;<br>
+</td><td valign="top" class="">后面不用&lt;/input&gt;结束符<br>
+checked属性表示该按钮在开始的时候处于选中状态<br>
+同组按钮的name要相同，value值不同，value指插入数据库的值</td><td class=""><input type="radio" name="text" value="1" checked="checked"><br>
+<input type="radio" name="text" value="2"></td></tr>
+<tr><td valign="top" class=""><i>复选框</i><br>
+&lt;input type="checkbox" name="21" value="1"/&gt;</td><td valign="top" class="">name值相同，value值不同，若复选框被选中，在提交给服务器时，这些值会包含在表单参数列表中。</td><td class=""><input type="checkbox" name="21" value="1"></td></tr>
+<tr><td valign="top" class=""><i>下拉列表</i><br>
+&lt;select name="12" size="2" multiple="multiple"&gt;<br>
+<blockquote style="margin: 0px 0px 0px 40px; border: none; padding: 0px;">&lt;option value="1" selected&gt;选项一&lt;/option&gt;<br>
+&lt;option value="2" selected&gt;选项二&lt;/option&gt;<br>
+&lt;option value="3" selected&gt;选项三&lt;/option&gt;</blockquote>&lt;/select&gt;</td><td valign="top" class="">下拉列表的常用属性<br>
+<table width="96%" align="center" border="1" cellspace="0" cellpadding="3" style="border-collapse: collapse;"><tbody>
+<tr><td valign="top">属性</td><td valign="top">描述</td></tr>
+<tr><td valign="top">size</td><td valign="top">定义下拉选择框的行数，决定用户一次可以看到多少个选项，默认为1</td></tr>
+<tr><td valign="top">name</td><td valign="top">定义下拉选择框的名称</td></tr>
+<tr><td valign="top">multiple</td><td valign="top">默认一次只能选择一个选项，如果允许一次选择多个选项的话，加上multiple</td></tr>
+<tr><td valign="top">option</td><td valign="top">定义下拉列表中的选项，在下拉列表中显示标签所包含的内容</td></tr>
+<tr><td>value</td><td>定义选项的值&nbsp;</td></tr>
+<tr><td>selected</td><td>表示默认已经选择本选项&nbsp;</td></tr></tbody></table>
+<br>
+</td><td class=""><select name="12" size="2" multiple="multiple">
+<option value="1" selected="">选项一</option>
+<option value="2" selected="">选项二</option>
+<option value="3" selected="">选项三</option></select></td></tr>
+<tr><td valign="top" class=""><i>按钮</i><br>
+&lt;input type="submit" name="" value="提交"/&gt;<br>
+&lt;input type="reset" value="重置"/&gt;</td><td valign="top" class="">submit 提交按钮<br>
+reset 重置按钮<br>
+value的值在点击按钮时会一起传送到服务器，以区分同一页面的不同表单</td><td class=""><input type="submit" name="" value="提交"><br>
+<input type="reset" value="重置"></td></tr>
+<tr><td class=""><i>一般按钮</i><br>
+&lt;input type="button" name="点击我" value="点击我" onClick="javascript:alert('你好')"/&gt;</td><td class="">value属性来设置按钮上的标记，若指定name，则会把提供的值传递给表单处理程序<br>
+必须加上指定动作并用相应的事件来触发，才会在事件发生时激发动作。否则按下普通按钮什么都不会发生。</td><td class="">&nbsp;<input type="button" name="点击我" value="点击我" onclick="javascript:alert('你好')"></td></tr></tbody></table>
+<p><br>
+</p>
+<p></p>
+<p><b>图像域，隐藏域和文件域</b></p>
+<p></p>
+<table width="96%" align="center" border="1" cellspace="0" cellpadding="3" style="border-collapse: collapse;"><tbody>
+<tr><td valign="top">图像域<br>
+&lt;input type="image" src="1.gif" name="1111"/&gt;</td><td>src表示图片的地址<br>
+可以用来插入个性化按钮</td><td valign="top"><input type="image" src="1.gif" name="1111">
+</td></tr>
+<tr><td valign="top">隐藏域<br>
+&lt;input type="hidden" name="" value=""/&gt;</td><td>不在用户提交页面显示，但在提交表单时会一起发送到数据库</td><td valign="top"><br>
+</td></tr>
+<tr><td valign="top">文件域<br>
+&lt;input type="file" name="upfile" size="20" maxlength="200"/&gt;</td><td>把客户端的文件上传，访问者可以通过输入需上传文件路径或点击“浏览”选择要上传的文件<br>
+使用文件域之前，要确定服务器是否允许匿名上传文件。表单标签中必须设置enctype="multipart/form-data"来确保文件被正常编码。传送方式必须设置成POST</td><td valign="top"><input type="file" name="upfile" size="20" maxlength="200">
+</td></tr></tbody></table>
+<p><br>
+</p>
+<p></p>
+<p>input标签常用属性</p>
+<p></p>
+<table width="80%" align="center" border="1" cellspace="0" cellpadding="3" style="border-collapse: collapse;"><tbody>
+<tr><td valign="top">属性名</td><td valign="top">意义</td></tr>
+<tr><td valign="top">type</td><td valign="top">表单标签类型，值为text，password，checkbox，radio，submit，reset，button，file，hidden，image共10类</td></tr>
+<tr><td valign="top">name</td><td valign="top">标签的变量名</td></tr>
+<tr><td valign="top">value</td><td valign="top">标签的变量值</td></tr>
+<tr><td valign="top">disabled</td><td valign="top">禁止使用，其值为true或false</td></tr>
+<tr><td>readonly</td><td>只读，值为true或false</td></tr>
+<tr><td>accesskey&nbsp;</td><td>快捷键</td></tr>
+<tr><td>tabindex</td><td>使用tab键的顺序</td></tr>
+<tr><td>checked</td><td>用于单选按钮和复选框，表示选项是否被选择了，值为true或false</td></tr>
+<tr><td>size</td><td>用于单行文本输入框，表示单行文本输入框的长度，单位为字符</td></tr>
+<tr><td>maxlength</td><td>用于单行文本输入框，表示最大输入长度，单位为字符</td></tr></tbody></table>
+<p></p>
+<p></p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/571.html">表格—HTML基础知识</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/573.html">框架—HTML基础知识</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,534 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>flex连接数据库_comonly.cn</title>
+<meta name="keywords" content="flex连接数据库" />
+<meta name="description" content="Flex是不能直接连接数据库的，它只能间接地连接数据库，所以你需要使用某种类型的服务来支持对数据的使用。Flex别指望能连Oracle，只有AIR能连sqllite，flex只是客户端，没权限去操作数据库的，只有借助JAVA等后台语言去连，而且只是间接连DB 。其实 一个项目可以抽象的分为两个部分，数据存储+数据表现 。flex只是客户端的一种数据表现形式（动画形式）与JavaScript和html在某种意义是一致的，没法直接连数据库。
+
+
+	Flex中提供了三种方式：HttpService（fle" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">flex连接数据库</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">雪山飞鹄—较详细的一个教程</li>
+          <li class="lmname"><a href="http://www.blogjava.net/sxyx2008/archive/2010/08/31/326360.html" target="_blank">http://www.blogjava.net/sxyx2008/archive/2010/08/31/326360.html</a></li>
+          <li class="timer">2018-09-11</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	outdated
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>Flex是不能直接连接数据库的，它只能间接地连接数据库，所以你需要使用某种类型的服务来支持对数据的使用。Flex别指望能连Oracle，只有AIR能连sqllite，flex只是客户端，没权限去操作数据库的，只有借助JAVA等后台语言去连，而且只是间接连DB 。其实 一个项目可以抽象的分为两个部分，数据存储+数据表现 。flex只是客户端的一种数据表现形式（动画形式）与JavaScript和html在某种意义是一致的，没法直接连数据库。
+
+
+	Flex中提供了三种方式：HttpService（fle</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	Flex是不能直接连接数据库的，它只能间接地连接数据库，所以你需要使用某种类型的服务来支持对数据的使用。Flex别指望能连Oracle，只有AIR能连sqllite，flex只是客户端，没权限去操作数据库的，只有借助JAVA等后台语言去连，而且只是间接连DB 。其实 一个项目可以抽象的分为两个部分，数据存储+数据表现 。flex只是客户端的一种数据表现形式（动画形式）与JavaScript和html在某种意义是一致的，没法直接连数据库。
+</p>
+<p>
+	Flex中提供了三种方式：HttpService（flex 与服务器交互），WebService（flex与webservice交互） 和RemoteObject（flex 与普通java类通信）。其中HttpService可以直接获取XML中的数据，还可以通过JSP,ASP以及PHP读取数据库中的数据。WebService我不懂，请自己查资料。JAVA对象连接数据库挺方便，而且J2EE的技术已经很成熟。Remote，就是所谓的遥控器（Remote） ，客户端直接遥控执行服务器端的方法。把get和post传值封装进去了，传值和调用一个方法用起来无分别，和ajax一样异步通讯 但却超越ajax。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/970.html">JAVA POJO类</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/972.html">PLSQL连接远程oracle数据库</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="http://www.blogjava.net/sxyx2008/archive/2010/08/31/326360.html" target="_blank">http://www.blogjava.net/sxyx2008/archive/2010/08/31/326360.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="一个有问题的实例">
+							<h2 style="display:inline;color:#5BC648;">一个有问题的实例</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-09-11&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span>虽然有一些问题，但是对于客户端，服务器，数据库之间的联系与套路都展示出来了（有需要再进行处理）：http://www.iteye.com/problems/38422</span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="remoteObject方式">
+							<h2 style="display:inline;color:#5BC648;">remoteObject方式</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-09-11&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	数据库查询相关操作（实体类，查询后返回<span>ArrayList noticeList = new ArrayList();类型数据</span>）
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+创建好这个之后我们要创建一个数据查询类：DataServiceImpl.java来查询数据库，并将查询结果传给将要创建的Flex程序。由于我们不清楚有多少条记录，所以就借助一下JAVA中的ArrayList这个类，它位于java.util 包中。先创建一个ArrayList：<br />
+ArrayList noticeList = new ArrayList();<br />
+查询数据库之后，每读取一条记录就添加到 noticeList。<br />
+while(rs.next()){<br />
+&nbsp; &nbsp; &nbsp;NoticeInfo temp = new NoticeInfo();<br />
+&nbsp; &nbsp; &nbsp;temp.setAuthor(rs.getString("author"));<br />
+&nbsp; &nbsp; &nbsp;temp.setContent(rs.getString("content"));<br />
+&nbsp; &nbsp; &nbsp;temp.setDates(rs.getDate("date"));<br />
+&nbsp; &nbsp; &nbsp;temp.setTitle(rs.getString("title"));<br />
+&nbsp; &nbsp; &nbsp;noticeList.add(temp);<br />
+}<br />
+查询完毕之后你就可以把这个noticeList传回去，你也可以传回去一个 NoticeInfo 数组：<br />
+NoticeInfo[] notices = new NoticeInfo[noticeList.size()];<br />
+for(int i=0;i&lt;noticeList.size();i++){<br />
+&nbsp; &nbsp; &nbsp;notices = (NoticeInfo)noticeList.get(i);<br />
+}<br />
+return notices;
+</p>
+<p>
+	<br />
+我这里用的是后一种方法。如果你直接把noticeList传回去的话，记住一点，<span style="color:#E53333;">JAVA的ArrayList类型的对象到了Flex中会变成ArrayCollection类型的</span>。
+</p>
+这里查询数据可以用框架，或者直接直接写，总之返回指定的数据即可。
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	普通Java类:&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<br />
+package com.flex.demo;<br />
+/**<br />
+&nbsp;* 功能描述:该类用来实现flex与普通java类中的方法通信<br />
+&nbsp;* @author Administrator<br />
+&nbsp;*/<br />
+public class SimpleService {<br />
+&nbsp; &nbsp; public String sayHello(String name){<br />
+&nbsp; &nbsp; &nbsp; &nbsp; return "Hello, "+name;<br />
+&nbsp; &nbsp; }<br />
+}<br />
+<br />
+配置说明:配置remoting-config.xml<br />
+&lt;destination id="myservice"&gt;<br />
+&nbsp; &nbsp; &lt;properties&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;source&gt;com.flex.demo.SimpleService&lt;/source&gt;<br />
+&nbsp; &nbsp; &lt;/properties&gt;<br />
+&lt;/destination&gt;<br />
+<br />
+调用<br />
+&lt;!--flex 与普通java类通信--&gt;<br />
+&lt;s:RemoteObject id="serv" destination="myservice" fault="serv_faultHandler(event)" result="serv_resultHandler(event)"&gt;<br />
+&lt;/s:RemoteObject&gt;
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="HTTPService方式">
+							<h2 style="display:inline;color:#5BC648;">HTTPService方式</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-09-11&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span>servlet代码&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<br />
+package com.flex.demo;<br />
+<br />
+import java.io.IOException;<br />
+import javax.servlet.ServletException;<br />
+import javax.servlet.http.HttpServlet;<br />
+import javax.servlet.http.HttpServletRequest;<br />
+import javax.servlet.http.HttpServletResponse;<br />
+<br />
+/**<br />
+&nbsp;* 功能描述:该servlet用来与flex进行交互<br />
+&nbsp;* @author Administrator<br />
+&nbsp;*<br />
+&nbsp;*/<br />
+@SuppressWarnings("serial")<br />
+public class SimpleServiceServlet extends HttpServlet {<br />
+&nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; @Override<br />
+&nbsp; &nbsp; protected void service(HttpServletRequest request, HttpServletResponse response)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; throws ServletException, IOException {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; request.setCharacterEncoding("utf-8");<br />
+&nbsp; &nbsp; &nbsp; &nbsp; response.setCharacterEncoding("utf-8");<br />
+&nbsp; &nbsp; &nbsp; &nbsp; response.getWriter().write("我是服务器");<br />
+&nbsp; &nbsp; }<br />
+}<br />
+<br />
+调用<br />
+&lt;!-- flex 与服务器交互--&gt;<br />
+&lt;s:HTTPService id="service" fault="service_faultHandler(event)" result="service_resultHandler(event)" url="http://localhost:8080/flexdemo/simpleServiceServlet"&gt;<br />
+&nbsp; &nbsp;&nbsp;<br />
+&lt;/s:HTTPService&gt;<br /></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="WebService方式">
+							<h2 style="display:inline;color:#5BC648;">WebService方式</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-09-11&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span>&lt;!--flex与webservice交互这里调用一个天气预报的webservice--&gt;<br />
+&lt;s:WebService id="ws"&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; wsdl="http://www.webxml.com.cn/WebServices/WeatherWebService.asmx?wsdl"&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; fault="ws_faultHandler(event)"&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; result="ws_resultHandler(event)"&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; showBusyCursor="true"&gt;<br />
+&nbsp; &nbsp; &lt;!-- 第二种调用webservice的方法&lt;s:operation&gt;--&gt;<br />
+&nbsp; &nbsp; &lt;!-- &lt;s:operation name="getWeatherbyCityName"&gt; webservice中的方法名--&gt;<br />
+&nbsp; &nbsp; &lt;s:operation name="getWeatherbyCityName"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;!--传递的参数--&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;s:request&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;!--参数名称必须与webservice中定义的参数名一致否则调用不成功报错--&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;theCityName&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {city.text}<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/theCityName&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;/s:request&gt;<br />
+&nbsp; &nbsp; &lt;/s:operation&gt;<br />
+&nbsp; &nbsp;&nbsp;<br />
+&lt;/s:WebService&gt;<br /></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id=" 三种方式完整的配置例子——实现了两种">
+							<h2 style="display:inline;color:#5BC648;"> 三种方式完整的配置例子——实现了两种</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-09-11&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	//代码来自参考文章http://www.blogjava.net/sxyx2008/archive/2010/08/31/326360.html
+</p>
+<p>
+	一种在加载页面时调用，一种点击事件发生时调用
+</p>
+<p>
+	&lt;?xml version="1.0" encoding="utf-8"?&gt;<br />
+&lt;s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009"&nbsp;<br />
+<span> </span>&nbsp; &nbsp;xmlns:s="library://ns.adobe.com/flex/spark"&nbsp;<br />
+<span> </span>&nbsp; &nbsp;xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600"<br />
+<span> </span>&nbsp; &nbsp;creationComplete="service.send()"<br />
+<span> </span>&nbsp; &nbsp;&gt;<br />
+<span> </span>&lt;fx:Script&gt;<br />
+<span> </span>&lt;![CDATA[<br />
+<span> </span>import mx.controls.Alert;<br />
+<span> </span>import mx.rpc.events.FaultEvent;<br />
+<span> </span>import mx.rpc.events.ResultEvent;<br />
+<span> </span><br />
+<span> </span>//错误处理函数<br />
+<span> </span>protected function serv_faultHandler(event:FaultEvent):void<br />
+<span> </span>{<br />
+<span> </span>Alert.show("调用失败了:"+event.fault.message as String,"提示1");<br />
+<span> </span>}<br />
+<span> </span><br />
+<span> </span>//成功调用函数<br />
+<span> </span>protected function serv_resultHandler(event:ResultEvent):void<br />
+<span> </span>{<br />
+<span> </span>Alert.show("调用成功了:"+event.result as String,"提示2");<br />
+<span> </span>}<br />
+<span> </span><br />
+<span> </span><br />
+<span> </span>protected function service_faultHandler(event:FaultEvent):void<br />
+<span> </span>{<br />
+<span> </span>Alert.show("调用失败了:"+event.fault.message as String,"提示3");<br />
+<span> </span>}<br />
+<span> </span><br />
+<span> </span><br />
+<span> </span>protected function service_resultHandler(event:ResultEvent):void<br />
+<span> </span>{<br />
+<span> </span>Alert.show("调用成功了:"+event.result as String,"提示4");<br />
+<span> </span>}<br />
+<span> </span><br />
+<span> </span><br />
+<span> </span>protected function ws_faultHandler(event:FaultEvent):void<br />
+<span> </span>{<br />
+<span> </span>Alert.show("调用失败了:"+event.fault.message as String,"提示5");<br />
+<span> </span>}<br />
+<span> </span><br />
+<span> </span>//调用成功了<br />
+<span> </span>protected function ws_resultHandler(event:ResultEvent):void<br />
+<span> </span>{<br />
+<span> </span>trace(event.result);<br />
+<span> </span>lbl.text=(String)(event.result);<br />
+<span> </span>}<br />
+<span> </span><br />
+<span> </span>//第一种调用webservice的方法<br />
+<span> </span>//此方法调用webservice<br />
+<span> </span>protected function btn_clickHandler(event:MouseEvent):void<br />
+<span> </span>{<br />
+<span> </span>//ws.getWeatherbyCityName(city.text);<br />
+<span> </span>//第二中调用webservice的方法<br />
+<span> </span>ws.getWeatherbyCityName.send();<br />
+<span> </span>}<br />
+<span> </span><br />
+<span> </span><br />
+<span> </span><br />
+<span> </span>]]&gt;<br />
+<span> </span>&lt;/fx:Script&gt;<br />
+<span> </span>&lt;fx:Declarations&gt;<br />
+<span> </span>&lt;!-- 将非可视元素（例如服务、值对象）放在此处 --&gt;<br />
+<span> </span><br />
+<span> </span>&lt;!--flex 与普通java类通信--&gt;<br />
+<span> </span>&lt;s:RemoteObject id="serv" destination="myservice" fault="serv_faultHandler(event)" result="serv_resultHandler(event)"&gt;<br />
+<span> </span><br />
+<span> </span>&lt;/s:RemoteObject&gt;<br />
+<span> </span><br />
+<span> </span>&lt;!-- flex 与服务器交互--&gt;<br />
+<span> </span>&lt;s:HTTPService id="service" fault="service_faultHandler(event)" result="service_resultHandler(event)" url="http://localhost:8080/"&gt;<br />
+<span> </span><br />
+<span> </span>&lt;/s:HTTPService&gt;<br />
+<span> </span><br />
+<span> </span>&lt;!--flex与webservice交互这里调用一个天气预报的webservice--&gt;<br />
+<span> </span>&lt;s:WebService id="ws"&nbsp;<br />
+<span> </span>&nbsp; wsdl="http://www.webxml.com.cn/WebServices/WeatherWebService.asmx?wsdl"&nbsp;<br />
+<span> </span>&nbsp; fault="ws_faultHandler(event)"&nbsp;<br />
+<span> </span>&nbsp; result="ws_resultHandler(event)"&nbsp;<br />
+<span> </span>&nbsp; showBusyCursor="true"&gt;<br />
+<span> </span>&lt;!-- 第二种调用webservice的方法&lt;s:operation&gt;--&gt;<br />
+<span> </span>&lt;!-- &lt;s:operation name="getWeatherbyCityName"&gt; webservice中的方法名--&gt;<br />
+<span> </span>&lt;s:operation name="getWeatherbyCityName"&gt;<br />
+<span> </span>&lt;!--传递的参数--&gt;<br />
+<span> </span>&lt;s:request&gt;<br />
+<span> </span>&lt;!--参数名称必须与webservice中定义的参数名一致否则调用不成功报错--&gt;<br />
+<span> </span>&lt;theCityName&gt;<br />
+<span> </span>{city.text}<br />
+<span> </span>&lt;/theCityName&gt;<br />
+<span> </span>&lt;/s:request&gt;<br />
+<span> </span>&lt;/s:operation&gt;<br />
+<span> </span><br />
+<span> </span>&lt;/s:WebService&gt;<br />
+<span> </span><br />
+<span> </span><br />
+<span> </span>&lt;/fx:Declarations&gt;<br />
+<span> </span>&lt;s:TextInput x="488" y="72" id="city"/&gt;<br />
+<span> </span>&lt;s:Button x="633" y="72" label="查看" id="btn" click="btn_clickHandler(event)"/&gt;<br />
+<span> </span>&lt;s:Label x="224" y="128" id="lbl" width="820" height="376"/&gt;<br />
+&lt;/s:WindowedApplication&gt;<br />
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#一个有问题的实例">一个有问题的实例</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#remoteObject方式">remoteObject方式</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#HTTPService方式">HTTPService方式</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#WebService方式">WebService方式</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="# 三种方式完整的配置例子——实现了两种"> 三种方式完整的配置例子——实现了两种</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

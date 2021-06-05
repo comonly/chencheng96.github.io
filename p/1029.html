@@ -1,0 +1,507 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>将electron打包成exe文件并生成安装版本exe_comonly.cn</title>
+<meta name="keywords" content="将electron打包成exe文件并生成安装版本exe" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">将electron打包成exe文件并生成安装版本exe</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-10-11</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	本教程中除了特别指明的安装包外，均是<span>安装在本地目录，即命令行所在目录下的node_modules.</span>
+</p>
+<h2 id='使用Electro-ckge打包exe'>
+	使用Electron-package打包exe
+</h2>
+<p>
+	转：//https://blog.csdn.net/xiaozhu2hao/article/details/77557548
+</p>
+<p>
+	cd到你的项目根目录下，安装electron-package
+</p>
+<pre class="prettyprint lang-bsh">npm install electron-packager</pre>
+修改package.json,在该文件中加入（这是我根据自己的实际项目写的）
+<pre class="prettyprint">"scripts" : {
+	"packager": "electron-packager ./ exe_name --platform=win32  --arch=x64 --electron-version=1.7.5 --out=../exe版 --overwrite  --ignore=node_modules"
+ }</pre>
+其中：<br />
+<ul>
+	<li>
+		./表示当前路径
+	</li>
+	<li>
+		exe_name 这是我的exe应用的名称&nbsp;
+	</li>
+	<li>
+		platform:&nbsp; &nbsp;打包平台 darwin, linux, mas, win32或者选择all&nbsp;
+	</li>
+	<li>
+		arch:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;可选 ia32, x64, armv7l, arm64或者选择all&nbsp;
+	</li>
+	<li>
+		electron-version： electron的版本，看好多博客这都写的-version但是应该写electron-version，不然会报错&nbsp;
+	</li>
+	<li>
+		out：生成的exe保存目录，这里的../表示父目录。在保存目录中会自动生成一个目录 应用名+平台+位数（管理系统客户端-win32-x64），该目录里才是生成的实际内容。
+	</li>
+	<li>
+		overwrite:使用了这个参数，每次打包就不用把原来exe删除，可直接覆盖了。
+	</li>
+	<li>
+		--ignore=node_modules&nbsp; &nbsp;可选，如果加该参数的话 node_modules不会被打包进去，如果有依赖，记得进入resources/app目录输入npm install安装一下依赖
+	</li>
+</ul>
+package.json完成后保存， 此时运行，即可生成exe。exe是可以直接双击运行的，resources里是源文件。<br />
+<pre class="prettyprint lang-bsh">npm run-script packager</pre>
+<h2 id='打包成安装包'>
+	打包成安装包
+</h2>
+<p>
+	转：//https://www.jianshu.com/p/d4363efb2e75
+</p>
+<p>
+	Electron官方推荐使用grunt-electron-installer模块自动生成 Windows 安装向导。注意，以下操作都在“管理系统客户端-win32-x64”的父级目录中
+</p>
+<h4>
+	安装包
+</h4>
+<p>
+	转：//https://blog.csdn.net/u014592293/article/details/50275163（必须这步，否则后面无法使用grunt命令）
+</p>
+<p>
+	在安装grunt前，必须使用：
+</p>
+<pre class="prettyprint lang-bsh">npm install -g grunt-cli</pre>
+-g代表全局。注意，安装grunt-cli并不等于安装了 Grunt。Grunt CLI的任务很简单：调用与Gruntfile在同一目录中 Grunt。
+<p>
+	新建package.json文件，package.json的内容可以简单写下（更多配置内容及含义参考其他）:
+</p>
+<pre class="prettyprint">{
+  "name": "app",
+  "version": "1.0.0"  
+}</pre>
+打开命令行，安装需要的包。<br />
+<pre class="prettyprint lang-js">npm install grunt-electron-installer --save-dev
+#安装grunt-electron-installer模块
+npm install grunt --save-dev
+#安装grunt(--save-dev含义参考其他)</pre>
+<h4>
+	配置Gruntfile.js
+</h4>
+因为要用到grunt执行打包任务，所以，新建一个Gruntfile.js文件，并配置gurnt.config（更多配置内容参考其他）：<br />
+<pre class="prettyprint lang-js">var grunt = require("grunt");
+grunt.config.init({
+    pkg: grunt.file.readJSON('package.json'),
+    'create-windows-installer': {
+        x64: {
+            appDirectory: './管理系统客户端-win32-x64',
+            authors: 'myname.',
+            exe: '管理系统.exe',
+            description:"一个管理系统客户端",
+        }       
+    }
+}) grunt.loadNpmTasks('grunt-electron-installer');
+grunt.registerTask('default', ['create-windows-installer']);</pre>
+<p>
+	配置说明：
+</p>
+<table border="1" cellpadding="0" cellspacing="0" bordercolor="#000000">
+	<tbody>
+		<tr>
+			<th>
+				Config Name
+			</th>
+			<th>
+				Required
+			</th>
+			<th>
+				Description
+			</th>
+		</tr>
+	</tbody>
+	<tbody>
+		<tr>
+			<td>
+				appDirectory
+			</td>
+			<td>
+				Yes
+			</td>
+			<td>
+				Electron App 的目录
+			</td>
+		</tr>
+		<tr>
+			<td>
+				outputDirectory
+			</td>
+			<td>
+				No
+			</td>
+			<td>
+				输出exe的目录. 默认生成在installer目录.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				loadingGif
+			</td>
+			<td>
+				No
+			</td>
+			<td>
+				安装过程中的加载动画图片.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				authors
+			</td>
+			<td>
+				Yes
+			</td>
+			<td>
+				作者,若未指明，则从应用的package.json文件中读取
+			</td>
+		</tr>
+		<tr>
+			<td>
+				owners
+			</td>
+			<td>
+				No
+			</td>
+			<td>
+				应用拥有者，若未定义则与作者相同.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				exe
+			</td>
+			<td>
+				No
+			</td>
+			<td>
+				应用的入口exe名称.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				description
+			</td>
+			<td>
+				No
+			</td>
+			<td>
+				应用描述
+			</td>
+		</tr>
+		<tr>
+			<td>
+				version
+			</td>
+			<td>
+				No
+			</td>
+			<td>
+				应用版本号.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				title
+			</td>
+			<td>
+				No
+			</td>
+			<td>
+				应用的标题.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				certificateFile
+			</td>
+			<td>
+				No
+			</td>
+			<td>
+				证书文件
+			</td>
+		</tr>
+		<tr>
+			<td>
+				certificatePassword
+			</td>
+			<td>
+				No
+			</td>
+			<td>
+				加密密钥
+			</td>
+		</tr>
+		<tr>
+			<td>
+				signWithParams
+			</td>
+			<td>
+				No
+			</td>
+			<td>
+				传递给signtool签名工具的参数，如果软件不签名，可以忽略这个
+			</td>
+		</tr>
+		<tr>
+			<td>
+				iconUrl
+			</td>
+			<td>
+				No
+			</td>
+			<td>
+				应用图标链接，默认是Atom的图标.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				setupIcon
+			</td>
+			<td>
+				No
+			</td>
+			<td>
+				Setup.exe 的icon
+			</td>
+		</tr>
+		<tr>
+			<td>
+				noMsi
+			</td>
+			<td>
+				No
+			</td>
+			<td>
+				是否创建.msi安装文件?
+			</td>
+		</tr>
+		<tr>
+			<td>
+				remoteReleases
+			</td>
+			<td>
+				No
+			</td>
+			<td>
+				更新链接，如果填写，当链接中有新版本，会自动下载安装。
+			</td>
+		</tr>
+	</tbody>
+</table>
+<h4>
+	grunt打包
+</h4>
+<p>
+	在命令行输入grunt,就会执行自动构建安装程序。在构建完之后的installer目录(或者你配置的输出目录)中会有一个生成的安装文件Setup.exe. 运行setup.exe就开始自动安装了。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1028.html">npm 配置及操作相关命令 </a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1030.html">利用vue-cli来搭建vue项目——通过npm创建一个vue项目</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#使用Electro-ckge打包exe">使用Electro-ckge打包exe</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#打包成安装包">打包成安装包</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

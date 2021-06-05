@@ -1,0 +1,242 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>dreamweaver连接数据库典型问题解决方法_comonly.cn</title>
+<meta name="keywords" content="dreamweaver连接数据库典型问题解决方法" />
+<meta name="description" content="先看第一个问题，错误如下“http错误404 无法找到文件。
+1）在该服务器机器上没有测试服务器运行。?
+2）为该站点指定的测试服务器没有映射到http://localhost/_mmserverscripts/MMHTTPDB.aspURL.请确认url前缀映射到了您站点的根上.”但是此 时IIS服务器是运行正常。出现此问题的原因是站点的测试根目录使用了localhost，只要改为其他任何地 方都行。但是要注意在Dreamweaver和IIS中使用相同的设置（此处假设为chinese），则Dream" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">dreamweaver连接数据库典型问题解决方法</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2016-05-01</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	ide -- myeclipse相关
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">网页技术</a></div>
+      
+      
+        <div class="news_about"><strong>简介</strong>先看第一个问题，错误如下“http错误404 无法找到文件。
+1）在该服务器机器上没有测试服务器运行。?
+2）为该站点指定的测试服务器没有映射到http://localhost/_mmserverscripts/MMHTTPDB.aspURL.请确认url前缀映射到了您站点的根上.”但是此 时IIS服务器是运行正常。出现此问题的原因是站点的测试根目录使用了localhost，只要改为其他任何地 方都行。但是要注意在Dreamweaver和IIS中使用相同的设置（此处假设为chinese），则Dream</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	先看第一个问题，错误如下“http错误404 无法找到文件。<br />
+1）在该服务器机器上没有测试服务器运行。?<br />
+2）为该站点指定的测试服务器没有映射到http://localhost/_mmserverscripts/MMHTTPDB.aspURL.请确认url前缀映射到了您站点的根上.”但是此 时IIS服务器是运行正常。出现此问题的原因是站点的测试根目录使用了localhost，只要改为其他任何地 方都行。但是要注意在Dreamweaver和IIS中使用相同的设置（此处假设为chinese），则Dreamweaver测试 服务器URL前缀使用http://localhost/chinese/。IIS设置的时候使用别名用刚才的chinese，其他均按照 平常的设置。此时，你会发现在Dreamweaver中可以使用F12预览网页。再使用自定义连接字符串就成功了 。<br />
+再看第二个问题，“使用测试服务器上的驱动”测试时能够“成功创建连接脚本”，但是在绑定的时候， 却找不到数据库中的表。提示“无法从该连接检索表格...”?
+</p>
+<p>
+	在“使用本地服务器上的驱动”测试的时候，提示“指定初始化字符串不符合OLE DB规定”使用DSN的时 候没问题.
+</p>
+<p>
+	这个问题比较好解决，是因为使用XP-SP2后的兼容问题。1.下载插件 download.macromedia.com/pub/dreamweaver/extensions/SP2DBFix1.0.2.mxp并安装启动插件。?<br />
+2.在Dreamweaver中打开之前连接时候的那个文件，「站点」→「高级」→「移除连接脚本」.?<br />
+3.删除之前连接产生的文件夹Connections和_mmServerScripts.
+</p>
+<p>
+	重新连接就可以了
+</p>
+<p>
+	不过这里有个很奇怪的问题，我在另外一台机器上安装插件并启动后仍然无法正常，提示“HTTP错误405 不允许使用该方法”和“发生一个错误，无法上传MMHTTPDB.asp.另一个程序正在使用此文件，进程无法访问”，反而是关闭后才成功的。不知道是不是插件的BUG。
+</p>
+<br />
+在你就可以在Dreamweaver操作你的数据库了。<br />
+<br />
+第一个问题在PHP和ASP.NET中同样有产生,但是本人对于 它们没有研究，不知道是不是同样的原因。</div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/371.html">MySQL安装包下载</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/375.html">studying12 如何在自己的网站上实现QQ授权登录？</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

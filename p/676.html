@@ -1,0 +1,258 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>XML是什么，它可以做什么？_comonly.cn</title>
+<meta name="keywords" content="XML是什么，它可以做什么？" />
+<meta name="description" content="XML即可扩展标记语言（eXtensible Markup Language）。标记是指计算机所能理解的信息符号，通过此种标记，计算机之间可以处理包含各种信息的文章等。如何定义这些标记，既可以选择国际通用的标记语言，比如HTML，也可以使用象XML这样由相关人士自由决定的标记语言，这就是语言的可扩展性。XML是从SGML中简化修改出来的。它主要用到的有XML、XSL和XPath等。
+
+
+	上面这段是对XML的一个基本定义，一个被广泛接受的说明。简单说，XML就是一种数据的描述语言，虽然它是语言，但是" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">XML是什么，它可以做什么？</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">Sank Orange</li>
+          <li class="lmname"><a href="http://blog.csdn.net/cds27/article/details/743409" target="_blank">http://blog.csdn.net/cds27/article/details/743409</a></li>
+          <li class="timer">2017-04-14</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	其他
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">XML,含义</a></div>
+      
+      
+        <div class="news_about"><strong>简介</strong>XML即可扩展标记语言（eXtensible Markup Language）。标记是指计算机所能理解的信息符号，通过此种标记，计算机之间可以处理包含各种信息的文章等。如何定义这些标记，既可以选择国际通用的标记语言，比如HTML，也可以使用象XML这样由相关人士自由决定的标记语言，这就是语言的可扩展性。XML是从SGML中简化修改出来的。它主要用到的有XML、XSL和XPath等。
+
+
+	上面这段是对XML的一个基本定义，一个被广泛接受的说明。简单说，XML就是一种数据的描述语言，虽然它是语言，但是</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	XML即可扩展标记语言（eXtensible Markup Language）。标记是指计算机所能理解的信息符号，通过此种标记，计算机之间可以处理包含各种信息的文章等。如何定义这些标记，既可以选择国际通用的标记语言，比如HTML，也可以使用象XML这样由相关人士自由决定的标记语言，这就是语言的可扩展性。XML是从SGML中简化修改出来的。它主要用到的有XML、XSL和XPath等。
+</p>
+<p>
+	上面这段是对XML的一个基本定义，一个被广泛接受的说明。简单说，XML就是一种数据的描述语言，虽然它是语言，但是通常情况下，它并不具备常见语言的基本功能——被计算机识别并运行。只有依靠另一种语言，来解释它，使它达到你想要的效果或被计算机所接受。
+</p>
+<p>
+	假如你是刚接触XML的新手，那么可能并无法从定义上是了解XML是什么。也许，你可以换个角度来认识XML是什么；从应用面来认识XML，从XML可以做些什么来认识它，这应该能比那更空洞的定义对你更有帮助。
+</p>
+<p>
+	XML应用面主要分为两种类型，文档型和数据型。下面介绍一下几种常见的XML应用：
+</p>
+<p>
+	1、自定义XML+XSLT=&gt;HTML，最常见的文档型应用之一。XML存放整个文档的XML数据，然后XSLT将XML转换、解析，结合XSLT中的HTML标签，最终成为HTML，显示在浏览器上。典型的例子就是CSDN上的帖子。
+</p>
+<p>
+	2、XML作为微型数据库，这是最常见的数据型应用之一。我们利用相关的XML API（MSXML DOM、Java&nbsp;DOM等）对XML进行存取和查询。留言板的实现中，就经常可以看到用XML作为数据库。同时，这里要告诉一些新人，数据库和数据库系统，这两个概念是不同的。这里顺便提一下XML对数据库系统的影响。在新版本的传统数据库系统中，XML成为了一种数据类型。和“传统”相对的就是一种新形态的数据库，完全以XML相关技术为基础的数据库系统。目前比较知名的eXist。
+</p>
+<p>
+	3、作为信息传递的载体。为什么说是载体呢？因为这些应用虽然还是以XML为基本形态，但是都已经发展出具有特定意义的格式形态。最典型的就是WEB SERVICE，将数据包装成XML来传递，但是这里的XML已经有了特定的规格，即SOAP。不过这里还不得不说AJAX，AJAX的应用中，相信也有一部分的应用是以自定义XML为数据，不过没有成为工业标准，这里不做详述。
+</p>
+<p>
+	4、应用程序的配置信息数据。最典型的就是J2EE配置WEB服务器时用的web.XML。这个应用估计是很容易理解的了。我们只要将需要的数据存入XML，然后在我们的应用程序运行载入，根据不同的数据，做相应的操作。这里其实和应用2，有点类似，所不同的在于，数据库中的数据变化是个常态，而配置信息往往是较为静态，缺少变化的。
+</p>
+<p>
+	5、其他一些文档的XML格式。如WORD、EXCEL等。
+</p>
+<p>
+	6、保存数据间的映射关系。如hibernate。
+</p>
+<p>
+	这几种常见应用中，我们还可以根据其应用广泛程度，分为：自定义XML和特定意义XML。在1和2就是属于自定义XML的范畴；3至6则属于特定意义XML，或者说是XML的延伸。
+</p>
+<p>
+	这里介绍的6种应用，基本涵盖了XML的主要用途。总之，XML是一种抽象的语言，它不如传统的程序语言那么具体。要深入的认识它，应该先从它的应用入手，选择一种你需要的用途，然后再学习如何使用。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/675.html">怎么让一个div水平居中</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/677.html">数据库的命脉——记录集</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="http://blog.csdn.net/cds27/article/details/743409" target="_blank">http://blog.csdn.net/cds27/article/details/743409</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,303 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>DFS分布式文件系统及网络负载平衡(NLB)群集配置过程遇到的问题及解决_comonly.cn</title>
+<meta name="keywords" content="DFS分布式文件系统及网络负载平衡(NLB)群集配置过程遇到的问题及解决" />
+<meta name="description" content="window server2012服务器环境下：
+
+
+	DFS分布式文件系统
+
+
+	DFS复制组中的成员需要在同一个域中。
+
+
+	使用复制组，发现文件在复制组的设备上没有正常同步。
+
+
+	解决方法：
+
+
+	在服务器管理器中选择文件和存储服务，然后在事件中查看是否有错误发生，或者直接在事件查看器中，查看应用程序和服务日志目录下DFS Replication&nbsp;中德事件信息。
+
+DFS 复制服务已停止卷 D: 上的复制。 如果 DFSR JET 数据库没有完全关闭， " />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">DFS分布式文件系统及网络负载平衡(NLB)群集配置过程遇到的问题及解决</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-08-30</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>window server2012服务器环境下：
+
+
+	DFS分布式文件系统
+
+
+	DFS复制组中的成员需要在同一个域中。
+
+
+	使用复制组，发现文件在复制组的设备上没有正常同步。
+
+
+	解决方法：
+
+
+	在服务器管理器中选择文件和存储服务，然后在事件中查看是否有错误发生，或者直接在事件查看器中，查看应用程序和服务日志目录下DFS Replication&nbsp;中德事件信息。
+
+DFS 复制服务已停止卷 D: 上的复制。 如果 DFSR JET 数据库没有完全关闭， </div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	window server2012服务器环境下：
+</p>
+<h3>
+	DFS分布式文件系统
+</h3>
+<p>
+	DFS复制组中的成员需要在同一个域中。
+</p>
+<p>
+	<span style="color:#009900;">使用复制组，发现文件在复制组的设备上没有正常同步。</span>
+</p>
+<p>
+	解决方法：
+</p>
+<p>
+	在服务器管理器中选择文件和存储服务，然后在事件中查看是否有错误发生，或者直接在事件查看器中，查看应用程序和服务日志目录下DFS Replication&nbsp;中德事件信息。
+</p>
+<pre class="prettyprint">DFS 复制服务已停止卷 D: 上的复制。 如果 DFSR JET 数据库没有完全关闭， 并禁用了自动恢复，则会发生此情况。要解决此问题，请备份 受影响的已复制文件夹中的文件，然后使用 ResumeReplication WMI 方法恢复复制。 
+ 
+其他信息: 
+卷: D: 
+GUID: 961BADD2-86D4-11E9-93E8-001E67F51B8D 
+ 
+恢复步骤 
+1. 备份卷上所有已复制文件夹中的文件。 如果未成功执行此操作，则在恢复已复制文件夹期间 可能会因异常冲突解析而导致数据丢失。 
+2. 要恢复此卷的复制，请使用 DfsrVolumeConfig 类的 WMI 方法 ResumeReplication。 例如，在提升的命令行提示符下，输入以下命令: 
+wmic /namespace:\\root\microsoftdfs path dfsrVolumeConfig where volumeGuid="961BADD2-86D4-11E9-93E8-001E67F51B8D" call ResumeReplication</pre>
+按照提示，在命令行提示符下，输入以下命令即可:
+<pre class="prettyprint lang-bsh">wmic /namespace:\\root\microsoftdfs path dfsrVolumeConfig where volumeGuid="961BADD2-86D4-11E9-93E8-001E67F51B8D" call ResumeReplication</pre>
+<p>
+	执行结束后会提示执行成功。如果有其他问题按提示解决即可。
+</p>
+<p>
+	<span style="color:#E53333;">在同一个复制组中的成员，每个主机在DFS管理中都有一份相同的完整的复制组信息。</span>
+</p>
+<h3>
+	网络负载平衡(NLB)群集
+</h3>
+<p>
+	群集的各个主机没有在同一个域的强制要求。
+</p>
+<p>
+	<span style="color:#009900;">群集多播模式下无法通过群集ip访问群集的问题：</span>
+</p>
+<p>
+	在多播模式下，NLB不会修改NLB节点启用NLB的网络适配器的MAC地址，而是为它再分配一个二层多播MAC地址专用于NLB的通讯（此MAC地址称为群集MAC地址），这样NLB节点之间可以通过自己原有的专用IP地址进行通讯。但是在多播模式中，NLB节点发送的针对群集IP地址MAC地址ARP请求的ARP回复会将群集IP地址映射到多播MAC地址，而许多路由器或者交换机（包括CISCO的产品）会拒绝这一行为。当出现这种情况时，你必须在路由器和交换机上手动添加静态映射，将群集IP地址映射到群集的多播MAC地址。MAC地址在添加群集时，设置群集参数会自动生成一个默认的。添加完集群后在集群属性/集群参数中可以看到网络地址。
+</p>
+<p>
+	<span style="color:#009900;">群集添加主机时提示主机不可访问的问题。</span>
+</p>
+<p>
+	将提示中对应的主机名及对应的ip追加到windows系统hosts文件（一般在C:/Windows/System32/Drivers/etc目录下）中。
+</p>
+<p>
+	<span style="color:#E53333;">将多个主机添加到群集中，会将群集的信息在每个主机上有一个备份</span>。在所有加入群集的主机上都能在网络负载平衡管理器上看到完整的群集信息(包括群集包含主机的列表)。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1365.html">域安全策略 解决 密码必须符合复杂性要求</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1367.html">网络负载平衡(NLB)群集中单播、多播区别</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

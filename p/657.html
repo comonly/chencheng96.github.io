@@ -1,0 +1,306 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>IIS中URL重写工具的规则条件(Rule conditions)_comonly.cn</title>
+<meta name="keywords" content="IIS中URL重写工具的规则条件(Rule conditions)" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">IIS中URL重写工具的规则条件(Rule conditions)</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">十有三</li>
+          <li class="lmname"><a href="http://shiyousan.com/post/635654920639643421" target="_blank">http://shiyousan.com/post/635654920639643421</a></li>
+          <li class="timer">2017-03-30</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	服务器apache等
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">IIS,重写规则</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h1>
+	<span style="font-size:12px;font-weight:normal;line-height:1.5;">本文结合官方文档和相关示例，详细记录了在IIS中URL重写工具下的规则条件(Rule conditions)的相关说明。规则条件允许我们通过额外的逻辑规则来过滤和匹配规则模式( rule pattern )，所以只有当规则模式的URL匹配成功时，Rule conditions才会起作用。</span>
+</h1>
+<p>
+	先附上官方文档地址：<a href="http://www.iis.net/learn/extensions/url-rewrite-module/url-rewrite-module-configuration-reference#Rule_conditions" target="_blank">Rule conditions</a>。下面会详细说明规则中的各种属性和设置。
+</p>
+<h2 id='逻辑分组'>
+	逻辑分组
+</h2>
+<p>
+	逻辑分组只有两个选项，任意匹配和全部匹配。规则条件是由多个条件组成的一个条件集合，所以最终判断需要根据逻辑分组来的设置来选择计算方法。
+</p>
+<p>
+	就如同字面上的意思，如果选择任意匹配，只要在条件集合中有一个条件规则符合匹配，那么整体的规则条件就是有效的，相当于编程中的或运算。而如果选择全部匹配，只有当条件集合中的所有规则全部匹配成功，规则条件才算是有效的规则，相当于编程中的与运算。
+</p>
+<h2 id='匹配类型'>
+	匹配类型
+</h2>
+<p>
+	按照文档所说，定义一个规则条件主要通过设置两个属性，即输入字符串(Input string)和匹配类型(Match type)，匹配类型在添加条件的对话框中是通过检查输字符串是否选项来设置的，总共有3种匹配类型，细分的话则是6种匹配类型：
+</p>
+<p>
+	<img alt="匹配类型选择项" src="http://shiyousan.com/UserFiles/images/2015/04/635654920639643421/01_635654920639643421.jpg" style="height:283px;width:289px;" /> 
+</p>
+<p>
+	1、是否是文件，分为是文件和不是文件这两个选项，可以用来判断所请求的URL是否为系统文件的物理路径，默认的条件输入字符串的值（服务器变量）是{REQUEST_FILENAME}
+</p>
+<p>
+	2、是否是目录，分为是目录和不是目录这两个选项，可以用来判断所请求的URL是否为文件目录的物理路径，默认服务器变量为{REQUEST_FILENAME}
+</p>
+<p>
+	3、是否与模式匹配，分为与模式匹配和与模式不匹配两个选项，一旦选择了这种匹配模式，那么就需要搭配正则表达式或者通配符进行匹配。在添加条件的对话框中，通过设置模式输入框来设置相应的正则表达式或通配符以完成模式匹配。
+</p>
+<p>
+	<img alt="规则添加的模式属性" src="http://shiyousan.com/UserFiles/images/2015/04/635654920639643421/02_635654920639643421.jpg" style="height:125px;width:317px;" /> 
+</p>
+<h2 id='条件输入字符串与服务器变量'>
+	条件输入字符串与服务器变量
+</h2>
+<p>
+	条件输入字符串中的值就是服务器变量，而具体使用哪些服务器变量则与匹配类型有关，关于服务器变量可以查阅这篇资料：<a href="https://msdn.microsoft.com/zh-CN/Library/ms524602.aspx" target="_blank">IIS Server Variables</a> 
+</p>
+<p>
+	这里我们挑选最常使用的匹配类型：与模式匹配。这种模式最常使用的服务器变量类型如下：QUERY_STRING、HTTP_HOST、SERVER_PORT、SERVER_PORT_SECURE、REQUEST_URI。
+</p>
+<p>
+	<img alt="条件输入字符串的值为服务器变量" src="http://shiyousan.com/UserFiles/images/2015/04/635654920639643421/03_635654920639643421.JPG" style="height:179px;width:399px;" /> 
+</p>
+<p>
+	假设向下面的URL地址发送一个请求：http://shiyousan.com/Home/Index?page=1&amp;tid=11，那么这些变量的含义如下：
+</p>
+<ul>
+	<li>
+		QUERY_STRING 服务器变量所包含的是 page=1&amp;tid=11这部分，表示URL的参数字符串
+	</li>
+	<li>
+		HTTP_HOST 服务器变量所包含的部分是shiyousan.com，表示所请求的主机域名
+	</li>
+	<li>
+		SERVER_PORT 服务器变量所包含的部分是 80，表示服务器的端口
+	</li>
+	<li>
+		SERVER_PORT_SECURE 服务器变量所包含的部分是0，HTTPS请求为OFF，表示接受请求的服务器端口是否为安全端口时，是为1，否则为0，一般来说如果是HTTPS请求则为安全端口，即为1，HTTPS为ON。
+	</li>
+	<li>
+		REQUEST_URI 服务器变量所包含的部分是/Home/Index?page=1&amp;tid=11，就是除了主机域名外剩下的URL地址字符串和参数字符串。
+	</li>
+</ul>
+<h2 id='范例'>
+	范例
+</h2>
+<p>
+	根据上面条件输入的服务器变量类型描述，就能大概知道这些服务器变量如何和我们的匹配模式相结合使用，这里我们以正则搭配HTTP_HOST来做一个范例。
+</p>
+<p>
+	假设当前网站绑定了多个域名，比如shiyousan.com，www.shiyousan.com,daodaodao.shiyousan.com,ywftest.com（意思就是访问这些域名都是打开同一个网站）。我们要做一个301重定向，将shiyousan.com这个顶级域名下的所有子域名都重定向到顶级域名中（这里只是举例，一般很少这样做），其他顶级域名保持不变。
+</p>
+<p>
+	如下图所示，我们添加了一个条件模式，条件输入的服务器变量为{HTTP_HOST},匹配模式的正则为^(.+)\.shiyousan\.com$。
+</p>
+<p>
+	<img alt="如何添加规则条件" src="http://shiyousan.com/UserFiles/images/2015/04/635654920639643421/04_635654920639643421.JPG" style="height:276px;width:334px;" /> 
+</p>
+<p>
+	只要在网站中输入www.shiyousan.com这样主机为shiyousan且带有多级域名前缀，都会被强制跳转到顶级域名中。
+</p>
+<p>
+	相反的由于在条件模式中没有限制ywftest.com这个域名，所以使用这个域名访问网站就会发现URL地址仍然没有变化。因为ywftest.com的主机无法和我们设置的条件正则匹配，所以就不会触发对应的入站规则。如果想将ywftest.com这个域名也实现上述的重定向功能，我们也只要在添加一条规则添加即可，并设置逻辑分组为任意匹配。
+</p>
+<p>
+	其他的服务器变量也是这样的道理，比如添加一个QUERY_STRING的条件模式，那么只有请求的URL地址和所设置的URL参数正则匹配，才能触发重写工具所定义的规则。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/656.html">安装和使用URL重写工具-URL Rewrite</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/658.html">IIS中的重写工具下关于操作重定向URL中的{R:N}与{C:N}</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="http://shiyousan.com/post/635654920639643421" target="_blank">http://shiyousan.com/post/635654920639643421</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#逻辑分组">逻辑分组</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#匹配类型">匹配类型</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#条件输入字符串与服务器变量">条件输入字符串与服务器变量</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#范例">范例</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

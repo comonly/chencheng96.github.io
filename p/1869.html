@@ -1,0 +1,283 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Ubuntu系统下查看显卡相关信息（未安装驱动、已安装驱动）_comonly.cn</title>
+<meta name="keywords" content="Ubuntu系统下查看显卡相关信息（未安装驱动、已安装驱动）" />
+<meta name="description" content="Linux(Ubuntu)系统查看显卡型号&nbsp;https://blog.csdn.net/maizousidemao/article/details/88821949
+
+
+	Ubuntu系统下查看显卡相关信息 https://www.cnblogs.com/ranxf/p/9412242.html
+
+
+	
+
+
+	lspci | grep -i vga，返回的是一个十六进制数字代码
+
+
+	lspci |grep -i vga
+01:00.0 VGA compatible c" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Ubuntu系统下查看显卡相关信息（未安装驱动、已安装驱动）</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2020-10-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>Linux(Ubuntu)系统查看显卡型号&nbsp;https://blog.csdn.net/maizousidemao/article/details/88821949
+
+
+	Ubuntu系统下查看显卡相关信息 https://www.cnblogs.com/ranxf/p/9412242.html
+
+
+	
+
+
+	lspci | grep -i vga，返回的是一个十六进制数字代码
+
+
+	lspci |grep -i vga
+01:00.0 VGA compatible c</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	Linux(Ubuntu)系统查看显卡型号&nbsp;<a href="https://blog.csdn.net/maizousidemao/article/details/88821949">https://blog.csdn.net/maizousidemao/article/details/88821949</a>
+</p>
+<p>
+	Ubuntu系统下查看显卡相关信息 <a href="https://www.cnblogs.com/ranxf/p/9412242.html">https://www.cnblogs.com/ranxf/p/9412242.html</a>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	lspci | grep -i vga，返回的是一个十六进制数字代码
+</p>
+<p>
+	lspci |grep -i vga<br />
+01:00.0 VGA compatible controller: NVIDIA Corporation Device 1e04 (rev a1)<br />
+02:00.0 VGA compatible controller: NVIDIA Corporation Device 1e04 (rev a1)
+</p>
+<p>
+	The PCI ID Repository（<a href="http://pci-ids.ucw.cz/mods/PC/10de?action=help?help=pci" target="_blank">http://pci-ids.ucw.cz/mods/PC/10de?action=help?help=pci</a>）<br />
+可以按照十六进制数字代码找到相应的显卡型号。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	安装驱动后通过 nvidia 管理工具查看 gpu 相关信息：
+</p>
+<p>
+	nvidia-smi（显示一次当前GPU占用情况）<br />
+nvidia-smi -l（每秒刷新一次并显示）<br />
+watch -n 5 nvidia-smi （其中，5表示每隔6秒刷新一次终端的显示结果）<br />
+我这儿没有启动任何利用显存资源的进程，所以没有占用任何资源。<br />
+<br />
+第一栏的Fan：N/A是风扇转速，从0到100%之间变动，这个速度是计算机期望的风扇转速，实际情况下如果风扇堵转，可能打不到显示的转速。有的设备不会返回转速，因为它不依赖风扇冷却而是通过其他外设保持低温（比如我们实验室的服务器是常年放在空调房间里的）。&nbsp;<br />
+第二栏的Temp：是温度，单位摄氏度。&nbsp;<br />
+第三栏的Perf：是性能状态，从P0到P12，P0表示最大性能，P12表示状态最小性能。&nbsp;<br />
+第四栏下方的Pwr：是能耗，上方的Persistence-M：是持续模式的状态，持续模式虽然耗能大，但是在新的GPU应用启动时，花费的时间更少，这里显示的是off的状态。&nbsp;<br />
+第五栏的Bus-Id是涉及GPU总线的东西<br />
+第六栏的Disp.A是Display Active，表示GPU的显示是否初始化。&nbsp;<br />
+第五第六栏下方的Memory Usage是显存使用率。&nbsp;<br />
+第七栏是浮动的GPU利用率。&nbsp;<br />
+第八栏上方是关于ECC的东西。&nbsp;<br />
+第八栏下方Compute M是计算模式。&nbsp;<br />
+显存占用和GPU占用是两个不一样的东西，显卡是由GPU和显存等组成的，显存和GPU的关系有点类似于内存和CPU的关系。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1868.html">ubuntu 安装NVIDIA驱动 + CUDA  + cuDNN</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1870.html">服务器普通用户无法使用conda，“conda: command not found”</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

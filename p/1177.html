@@ -1,0 +1,261 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>pix2pix 生成对抗网络_comonly.cn</title>
+<meta name="keywords" content="pix2pix 生成对抗网络" />
+<meta name="description" content="pix2pix算法笔记&nbsp;https://blog.csdn.net/u014380165/article/details/98453672
+	
+		生成对抗网络系列(4)——pix2pix&nbsp;https://zhuanlan.zhihu.com/p/38411618
+	
+
+
+	
+
+
+	论文：Image-to-Image Translation with Conditional Adversarial Networks
+
+论文链接：https://arxiv.org/" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">pix2pix 生成对抗网络</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2020-11-14</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	机器学习算法分析
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>pix2pix算法笔记&nbsp;https://blog.csdn.net/u014380165/article/details/98453672
+	
+		生成对抗网络系列(4)——pix2pix&nbsp;https://zhuanlan.zhihu.com/p/38411618
+	
+
+
+	
+
+
+	论文：Image-to-Image Translation with Conditional Adversarial Networks
+
+论文链接：https://arxiv.org/</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	pix2pix算法笔记&nbsp;<a href="https://blog.csdn.net/u014380165/article/details/98453672" target="_blank">https://blog.csdn.net/u014380165/article/details/98453672</a><br />
+	<div>
+		生成对抗网络系列(4)——pix2pix&nbsp;<a href="https://zhuanlan.zhihu.com/p/38411618" target="_blank">https://zhuanlan.zhihu.com/p/38411618</a>
+	</div>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	论文：Image-to-Image Translation with Conditional Adversarial Networks
+</p>
+论文链接：https://arxiv.org/abs/1611.07004<br />
+代码链接：https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix<br />
+<br />
+<p>
+	这篇论文发表在CVPR2017，简称pix2pix，是将GAN应用于有监督的图像到图像翻译的经典论文，有监督表示训练数据是成对的。图像到图像翻译（image-to-image translation）是GAN很重要的一个应用方向，什么叫图像到图像翻译呢？其实就是基于一张输入图像得到想要的输出图像的过程，可以看做是图像和图像之间的一种映射（mapping），我们常见的图像修复、超分辨率其实都是图像到图像翻译的例子。这篇论文列举了一些图像到图像翻译的例子如图Figure1所示，包括从标签到图像的生成、图像边缘到图像的生成等过程。
+</p>
+<p>
+	pix2pix基于GAN实现图像翻译，更准确地讲是基于cGAN（conditional GAN，也叫条件GAN），因为cGAN可以通过添加条件信息来指导图像生成，因此在图像翻译中就可以将输入图像作为条件，学习从输入图像到输出图像之间的映射，从而得到指定的输出图像。而其他基于GAN来做图像翻译的，因为GAN算法的生成器是基于一个随机噪声生成图像，难以控制输出，因此基本上都是通过其他约束条件来指导图像生成，而不是利用cGAN，这是pix2pix和其他基于GAN做图像翻译的差异。<br />
+<br />
+鉴别器为什么选择PatchGAN?<br />
+之前在介绍AE和VAE的时候有说，用L1和L2 loss重建的图像很模糊，也就是说L1和L2并不能很好的恢复图像的高频部分(图像中的边缘等)，但能较好地恢复图像的低频部分(图像中的色块)。为了能更好得对图像的局部做判断，作者提出patchGAN的结构，也就是说把图像等分成patch，分别判断每个Patch的真假，最后再取平均！作者最后说，文章提出的这个PatchGAN可以看成所以另一种形式的纹理损失或样式损失。在具体实验时，不同尺寸的patch，最后发现70x70的尺寸比较合适。<br />
+</p>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1176.html">FlowNet 提取光流特征</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1178.html">稀疏特征(Sparse Features) 稀疏表示(Sparse Representations)</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

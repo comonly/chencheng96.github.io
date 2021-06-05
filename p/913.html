@@ -1,0 +1,510 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>后端相关汇总_plan_comonly.cn</title>
+<meta name="keywords" content="后端相关汇总_plan" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">后端相关汇总_plan</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-04-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	本科毕业设计  考研 研究生
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 1. 解决JDBC作业问题<br />
+<br />
+&nbsp; &nbsp; Statement 语句对象<br />
+&nbsp; &nbsp; &nbsp; &nbsp;|<br />
+&nbsp; &nbsp; &nbsp; &nbsp;|-Preparedstatament 预编译语句对象<br />
+&nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;优点: 1) 对sql语句预编译处理,多次执行同样的sql语句时,效率高;<br />
+<p>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2) 使用PreparedStatement对象,可以支持sql语句动态传参,更灵活,不易出错.
+</p>
+<p>
+	<br />
+</p>
+<p>
+	计划:<br />
+<br />
+1. 使用表格与表单和Javascript完成练习<br />
+&nbsp;&nbsp;<br />
+<br />
+<br />
+2. JSP页面<br />
+<br />
+&nbsp; &nbsp; 1)JSP页面的组成元素<br />
+&nbsp; &nbsp; 2)JSP页面中的脚本元素 [服务器端脚本]<br />
+&nbsp; &nbsp; &nbsp; &lt;%&nbsp; Java代码 %&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;%=%&gt; 表达式输出<br />
+&nbsp; &nbsp; &nbsp; &lt;%!%&gt; 脚本声明<br />
+&nbsp; &nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; 3)JSP页面中的指令元素<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;%@ page %&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;%@ include %&gt; 包含指令<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;%@ taglib %&gt; 标签库指令<br />
+&nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; 脚本元素相关练习<br />
+&nbsp; &nbsp;<br />
+--------------------------------------------------<br />
+3. Servlet的使用<br />
+&nbsp; &nbsp;<br />
+&nbsp; &nbsp;<br />
+&nbsp; &nbsp;servlet练习<br />
+&nbsp;&lt;servlet&gt;<br />
+&nbsp; <span> </span> &lt;servlet-name&gt;HelloServlet&lt;/servlet-name&gt;<br />
+&nbsp; <span> </span> &lt;servlet-class&gt;com.wust.servlet.HelloServlet&lt;/servlet-class&gt;<br />
+&nbsp; &lt;/servlet&gt;<span> </span><br />
+&nbsp;&nbsp;<br />
+&nbsp; &lt;servlet-mapping&gt;<br />
+&nbsp; <span> </span>&lt;!-- mapping 映射&nbsp; 一一对象&nbsp; &nbsp;--&gt;<br />
+&nbsp; <span> </span>&lt;servlet-name&gt;HelloServlet&lt;/servlet-name&gt;<br />
+&nbsp; <span> </span>&lt;url-pattern&gt;/hello.c&lt;/url-pattern&gt;<br />
+&nbsp; &lt;/servlet-mapping&gt;<br />
+<span> </span><br />
+<br />
+&nbsp; &nbsp;<br />
+&nbsp; &nbsp;乱码解决:<br />
+&nbsp; &nbsp; 默认情况下都是使用iso-8859-1&nbsp; Latin1拉丁英文<br />
+&nbsp; &nbsp;<br />
+&nbsp; &nbsp; &nbsp;服务端 --&gt;客户端&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; response.setContentType("text/html;charset=UTF-8");<br />
+&nbsp; &nbsp; &nbsp;<br />
+&nbsp; &nbsp; &nbsp;客户端 --&gt; 服务端<br />
+&nbsp; &nbsp; &nbsp;<br />
+&nbsp; &nbsp; &nbsp; get:<br />
+&nbsp; &nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; post:&nbsp;<br />
+<span> </span>//设置请求的字符集编码<br />
+<span> </span>request.setCharacterEncoding("UTF-8");
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	jsp页面的组成元素:<br />
+<br />
+&nbsp; 1) 指令 &lt;%@ %&gt;&nbsp;<br />
+&nbsp; 2) 小脚本&nbsp; &lt;% %&gt;<br />
+&nbsp; 3) 表达式输出 &lt;%= %&gt;<br />
+&nbsp; 4) 脚本声明 &lt;%! %&gt;<br />
+&nbsp; 5) HTML静态文本 &lt;html&gt; ...&lt;/html&gt;<br />
+&nbsp; 6) JSP标准动作 &lt;jsp:动作名 属性="" /&gt;<br />
+&nbsp; 7) 注释&nbsp; &lt;!-- 客户端注释--&gt;&nbsp; &lt;%-- 服务端注释--%&gt;<br />
+&nbsp;&nbsp;<br />
+<br />
+Servlet 简介<br />
+<br />
+&nbsp; &nbsp;服务器端的小应用程序,本质是一个Java类<br />
+&nbsp; &nbsp;<br />
+&nbsp; &nbsp;javax.servlet.http.HttpServlet类 (抽象类)<br />
+&nbsp; &nbsp; &nbsp; |<br />
+&nbsp; &nbsp;自定义Servlet类 [重写override 父类方法]<br />
+&nbsp; &nbsp; |-doGet(HttpServletRequest request,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; HttpServletResponse response){<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; this.doPost(request,response);<br />
+&nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; 404--请求的资源不存在[地址,部署]<br />
+&nbsp; &nbsp; 405错误 [Servlet找不到对应的处理方法]<br />
+&nbsp; &nbsp; 500 错误 [服务端错误]&nbsp;&nbsp;<br />
+&nbsp; &nbsp; |-doPost(HttpServletRequest request,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; HttpServletResponse response){<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //.....<br />
+&nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; 添加web.xml配置 [servlet的映射 mapping]&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; 执行Servlet程序<br />
+&nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; 乱码解决 --&gt;&nbsp; &nbsp;客户端 -- 服务端<br />
+------------------------------------------------------<br />
+plan:<br />
+<br />
+1. servlet作业讲解<br />
+<br />
+<br />
+2. get与post两种请求方式比较 [理解]<br />
+&nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; get: /calc?num1=3&amp;num2=5<br />
+&nbsp; &nbsp; post: /calc<br />
+<br />
+3. 页面的跳转 (重点)<br />
+<br />
+<br />
+4. 请求作用域&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp;|-request Scope 作用域<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;在服务器中分配一块内存空间,用于保存客户端在一次请求过程中的数据.<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;注意: 该数据仅在一次请求过程中有效.<br />
+&nbsp; &nbsp; &nbsp; &nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp;操纵作用域的方法:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;setAttribute("name",Object); --存包<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Object getAttribute("name");<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;removeAttribute("name");<br />
+-------------------------------------------------<br />
+5. 会话作用域<br />
+&nbsp; &nbsp; &nbsp;|-一次用户的连接过程[多次请求与响应] 中有效.<br />
+&nbsp; &nbsp; &nbsp;<br />
+&nbsp; &nbsp; 用于登录成功后,用户在当前web应用中多次的请求页面时,仍能访问到的信息.比如,当前登录的用户信息.<br />
+&nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp;&nbsp;<br />
+-------------------------------------------------<br />
+租房网项目<br />
+1. 搭建项目结构<br />
+<br />
+2. 导入静态页面<br />
+<br />
+3. 登录和注册<br />
+&nbsp; &nbsp;|-实际开发中,不会针对每个请求都去创建一个Servlet类.<br />
+&nbsp; &nbsp; &nbsp;<br />
+&nbsp; &nbsp; &nbsp;一个模块多个请求交给一个Servlet处理.<br />
+&nbsp; &nbsp; &nbsp;<br />
+&nbsp; 登录&nbsp; - LoginServlet<br />
+&nbsp; 注册&nbsp; - RegisterServlet<br />
+&nbsp; 注销&nbsp; --LogoutServlet<br />
+&nbsp; 修改密码 --UpdatePwdServlet<br />
+&nbsp; 找回密码 ---...<br />
+&nbsp; ...<br />
+&nbsp;&nbsp;<br />
+-------------------------------------------------------------------------------------------------<br />
+<br />
+</p>
+<p>
+	2.租房网系统实现 --&gt; 记住当前登录的用户<br />
+&nbsp;&nbsp;<br />
+&nbsp; 用户的注销<br />
+&nbsp;&nbsp;<br />
+&nbsp; 会话技术<br />
+&nbsp;------------------------------------------------&nbsp;<br />
+&nbsp; Servlet类中作用域有三种:<br />
+&nbsp; &nbsp; &nbsp;1) 请求作用域 --HttpServletRequest request<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |-仅在一次请求过程中有效<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp;2) 会话作用域 -- HttpSession&nbsp; session<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |-在客户端的一次连接(多次的请求与响应)过程中有效<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp;3) 全局作用域 -- ServletContext application<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |-多个客户端(会话)可以共享的数据<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;在一次web服务器启动过程中有效.<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; setAttribute("name",Object);<br />
+&nbsp; &nbsp; &nbsp; Object getAttribute("name");<br />
+&nbsp; &nbsp; &nbsp; void removeAttribue("name");<br />
+&nbsp; &nbsp; &nbsp;&nbsp;<br />
+&nbsp;会话失效 --&gt;意味着会话作用域中的属性数据全部丢失.<br />
+&nbsp;<br />
+&nbsp;session的关闭<br />
+&nbsp; 1)调用session. invalidate()方法,使session对象失效<br />
+&nbsp; 2)访问时间间隔大于非活动时间间隔， session对象失效<br />
+&nbsp; &nbsp; &nbsp; &nbsp; |- 非活动时间间隔 30分钟<br />
+&nbsp; 3)关闭浏览器时，session对象失效<br />
+<br />
+<br />
+<br />
+&nbsp; 作业: 实现房屋列表功能<br />
+&nbsp;&nbsp;
+</p>
+<p>
+	plan:<br />
+--------------------------------------------------<br />
+1. 复习巩固 EL+JSTL<br />
+&nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; EL -- 简化变量或对象访问输出<br />
+&nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; &lt;%=request.getAttribute("error")%&gt;<br />
+&nbsp; &nbsp; ${ error } --&gt; pageContext --&gt;request--&gt;session--&gt;application<br />
+&nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; ${ requestScope.error }<br />
+&nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; ${ requestScope.student.name }<br />
+&nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; JSTL --标准标签库<br />
+&nbsp; &nbsp; &nbsp; |- jar包 [jstl.jar standard.jar]<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;核心标签core<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;%@ taglib uri="" prefix="c" %&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;通用:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;c:set /&gt;&nbsp; &lt;c:out /&gt; &lt;c:catch /&gt;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;c:remove /&gt; 移作用域中的属性<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;条件:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;c:if test="" /&gt;&nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;c:choose&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;c:when test=""&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/c:when&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;c:when test=""&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/c:when&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;c:when test=""&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/c:when&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ...<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;c:otherwise&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/c:oterwise&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;/c:choose&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;迭代:<br />
+&nbsp; &nbsp; &nbsp; &lt;c:forEach var="单个对象"&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;items="${作用域中的集合或数组}<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;begin="" end="" step="" varStatus=""&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |-index,count,first,last<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &lt;/c:forEach&gt;<br />
+------------------------------------------------------------&nbsp;<br />
+2.解决重复提交问题<br />
+<br />
+<span> </span>使用令牌标记 Token&nbsp; &nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; //获取当前请求相关联的会话对象<br />
+<span> </span>HttpSession session = request.getSession();<br />
+<span> </span>//获取会话作用域中的token<br />
+<span> </span>String token = (String)session.getAttribute("token");<br />
+<span> </span>if(token==null){<br />
+<span> </span>//说明并没有通过add.jsp发送addHouse的请求<br />
+<span> </span>//进入房屋列表管理页面<br />
+<span> </span>gotoManage(request, response);<br />
+<span> </span>return;<br />
+<span> </span>}else{<br />
+<span> </span>//移除会话作用域中的token<br />
+<span> </span>session.removeAttribute("token");<br />
+<span> </span>}<br />
+------------------------------------------------------<br />
+3. 过滤器<br />
+<br />
+&nbsp; &nbsp;简介<br />
+&nbsp; &nbsp;入门使用<br />
+&nbsp; &nbsp; &nbsp;|- &lt;url-pattern&gt;&lt;/url-pattern&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /*&nbsp; --&gt;所有的请求执行过滤器<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;*.jsp&nbsp; --&gt;对所有jsp页面的请求执行过滤器<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/page/*&nbsp; &nbsp;则表示对于 /page路径下的所有请求执行过滤器<br />
+&nbsp; &nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/test&nbsp; --&gt;只针对test的请求路径执行过滤器<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />
+&nbsp; &nbsp;过滤器应用: --租房网举例<br />
+&nbsp; &nbsp; &nbsp; 1) 解决字符集编码设置<br />
+&nbsp; &nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; 2) 权限控制<br />
+<br />
+-------------------------------------------------------------<br />
+4. 验证码<br />
+<br />
+<br />
+-------------------------------------------------------------<br />
+<br />
+5. 分页 + 文件上传&nbsp; [扩展功能]
+</p>
+<div>
+	<br />
+</div>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/912.html">WEB前端——拖拉页面元素改变页面布局 管理后台（实例）</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/914.html">EL & JSTL</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

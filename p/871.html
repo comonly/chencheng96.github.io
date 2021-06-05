@@ -1,0 +1,300 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>C 一些问题_comonly.cn</title>
+<meta name="keywords" content="C 一些问题" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">C 一些问题</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-03-09</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	c c++
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h3>
+	二维数组做参数
+</h3>
+<p>
+	不能写成 q[][]的形式，如果你是要传这个数组的首地址，可以写成
+</p>
+int que(int i,int j,int q[100][100],int n[100][100]);<br />
+或者<br />
+int que(int i,int j,int q[][100],int n[][100]);<br />
+<p>
+	因为从实参传递来的是数组的起始地址，在内存中按数组排列规则存放(按行存放)，而并不区分行和列，如果在形参中不说明列数，则系统无法决定应为多少行多少列，不能只指定一维而不指定第二维。
+</p>
+<h3>
+	将char 单字符型转成int型
+</h3>
+我这里说的不是字符串型.单字符atoi()的话不能用<br />
+比如 char key='1' 转成int 的 1;直接使用ASCII码对应的十进制。比如'5'-'0'返回数字5。
+<h3>
+	字符串转int型
+</h3>
+<p>
+	需导入#include &lt;stdlib.h&gt;
+</p>
+<p>
+	atof(将字符串转换成浮点型数)<br />
+atoi(将字符串转换成整型数)<br />
+atol(将字符串转换成长整型数)<br />
+strtod(将字符串转换成浮点数)<br />
+strtol(将字符串转换成长整型数)<br />
+strtoul(将字符串转换成无符号长整型数)<br />
+toascii(将整型数转换成合法的ASCII 码字符)<br />
+toupper(将小写字母转换成大写字母)<br />
+tolower(将大写字母转换成小写字母)
+</p>
+<h3>
+	分解字符串
+</h3>
+<p>
+	strtok函数：原型：char *strtok(char s[], const char *delim)；功能：将一个字符串分解为一组字符串，s为要分解的字符串，delim为分隔符字符串；说明：当strtok函数在参数s的字符串中发现参数delim中包含的分割字符时,则会将该字符改为\0 字符。在第一次调用时，strtok()必需给予参数s字符串，往后的调用则将参数s设置成NULL。每次调用成功则返回指向被分割出片段的指针；头文件：string.h；返回值：从字符串s开头开始的一个个被分割的字符串。分割结束时，返回NULL。所有delim中包含的字符都会被滤掉，并将被滤掉的地方设为一处分割的节点。
+</p>
+<pre class="prettyprint lang-cpp">#include&lt;stdio.h&gt;
+#include&lt;string.h&gt; int main(){
+    char input[16]="abc,d,ef,g";//待分解字符串
+    char* delim=",";//分隔符字符串
+    char* p=strtok(input,delim);//第一次调用strtok
+    while(p!=NULL){//当返回值不为NULL时，继续循环
+        printf("%s\n",p);//输出分解的字符串
+        p=strtok(NULL,delim);//继续调用strtok，分解剩下的字符串
+    }
+    return 0;
+}</pre></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/870.html">复试大纲及线</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/872.html">MyEclipse</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="">
+							<h2 style="display:inline;color:#5BC648;"></h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-03-19&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><h4>
+	C生成随机数
+</h4>
+<p>
+	欲生成随机数，主要用到两个函数srand，rand。头文件为：#include &lt;stdlib.h&gt;
+</p>
+<p>
+	1.srand函数：void srand ( unsigned int seed );<br />
+用法：它需要提供一个种子，这个种子会对应一个随机数，如果使用相同的种子后面的 rand() 函数会出现一样的随机数。为了防止随机数每次重复常常使用系统时间来初始化，即使用 time函数来获得系统时间，它的返回值为从 00:00:00 GMT, January 1, 1970 到现在所持续的秒数，然后将 time_t型数据转化为(unsigned)型再传给 srand 函数，即：srand((unsigned) time(&amp;t)) &nbsp;还有一个经常用法，即： srand((unsigned) time(NULL)); 直接传入一个空指针，因为你的程序中往往并不需要经过参数获得的 t 数据。srand((int)getpid()); 使用程序的ID (getpid()) 来作为初始化种子，在同一个程序中这个种子是固定的。
+</p>
+<p>
+	<br />
+2.rand函数：int rand ( void );<br />
+产生一个伪随机数（根据 srand 初始的随机数种子），范围为 0 - RAND_MAX。可通过取模来产生不同范围的随机数，如：int value = rand() % (MAX + 1 - MIN) + MIN; &nbsp; &nbsp;比如rand() % (11 + 1 - 8) + 8产生8到11的随机数。
+</p>
+<pre class="prettyprint lang-cpp">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;time.h&gt;
+void main()
+{
+	srand(time(NULL));
+	printf("%d\n",rand() % (1111 + 1 - 8) + 8);
+}</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

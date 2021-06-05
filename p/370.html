@@ -1,0 +1,416 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>studying9 网站实现QQ登录功能_comonly.cn</title>
+<meta name="keywords" content="studying9 网站实现QQ登录功能" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">studying9 网站实现QQ登录功能</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">c博客 乡下程序员http://blog.csdn.net/wowkk/article</li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2016-05-01</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	第三方api
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">网页技术</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	<span style="line-height:1.5;">一般网站要先做个用户注册的功能页面，但我的网站名气不大，不需要要求用户注册，所以直接使用腾讯QQ登录的API接口。</span>
+</p>
+<p>
+	如何使用JS_SDK让网站拥有QQ登录的功能，官网的这篇文章写得还算完整：<a target="_blank" href="http://connect.qq.com/intro/login/jssdk-demo">http://connect.qq.com/intro/login/jssdk-demo</a> 但是，里面有些地方并没有填写“实例”，只是说那个地方需要填写什么东西，但有时这样说是不够的，我就是试了挺多遍才知道填写的格式。
+</p>
+<p>
+	所以我重新整理下过程。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	一：准备工作
+</p>
+<p>
+	域名注册，空间购买，网站接入申请这些我就不说了。使用API要求有个“回调地址”，所以本地调试就别想了。
+</p>
+<p>
+	我所用的域名是：<a href="http://www.zhuanba8.cn/" target="_blank">http://www.zhuanba8.cn/</a> 填写网站基本信息就是这样的：
+</p>
+<p>
+	网站地址：<span style="font-family:Arial;font-size:14px;line-height:21px;">http://www.zhuanba8.cn/</span> 
+</p>
+<p>
+	<span style="font-family:Arial;font-size:14px;line-height:21px;">回调地址：zhuanba8.cn</span> 
+</p>
+<p>
+	<br />
+</p>
+<p>
+	二：制作一个回调网页
+</p>
+<p>
+	当访客点击“QQ登录”时，网页就跳转到“QQ某数据中心登录页面”，正确登录之后，就会返回到“我们制作的回调网页”，然后再跳到“访客刚刚点击登录的地方”。
+</p>
+<p>
+	&lt;html&gt;<br />
+&lt;head&gt;<br />
+&nbsp; &nbsp; &lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;<br />
+&nbsp; &nbsp; &lt;title&gt;梦想起航 &lt;/title&gt;<br />
+&lt;/head&gt;<br />
+&lt;body&gt;<br />
+&nbsp; &nbsp; &lt;h3&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; 数据传输中，请稍后...&lt;/h3&gt;<br />
+&lt;/body&gt;<br />
+&lt;/html&gt;<br />
+&lt;script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js"<br />
+&nbsp; &nbsp; charset="utf-8" data-callback="true"&gt;&lt;/script&gt;
+</p>
+<div>
+	<br />
+</div>
+<p>
+	<br />
+</p>
+<p>
+	命名为：qc_back.htm&nbsp; 保存在根目录下。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	三：首页进行QQ登录
+</p>
+<p>
+	1：默认形式
+</p>
+<p>
+	&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;<br />
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;<br />
+&lt;head&gt;<br />
+&nbsp; &nbsp; &lt;title&gt;梦想起航_综合信息发布平台&lt;/title&gt;<br />
+&nbsp; &nbsp; &lt;script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; data-appid="100575629" data-redirecturi="http://bbs.yirenge.net/qc_back.htm"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; charset="utf-8"&gt;&lt;/script&gt;<br />
+&lt;/head&gt;<br />
+&lt;body&gt;<br />
+&nbsp; &nbsp; &lt;span id="qq_login_btn" data-role="none"&gt;&lt;/span&gt;<br />
+&nbsp; &nbsp; &lt;script type="text/javascript"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; QC.Login({//按默认样式插入QQ登录按钮<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; btnId: "qq_login_btn"	//插入按钮的节点id<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; &lt;/script&gt;<br />
+&lt;/body&gt;<br />
+&lt;/html&gt;
+</p>
+<div>
+	<br />
+</div>
+<p>
+	<br />
+</p>
+<p>
+	2：自定义效果
+</p>
+<p>
+	&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;<br />
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;<br />
+&lt;head&gt;<br />
+&nbsp; &nbsp; &lt;title&gt;<span>梦想起航_综合信息发布平台</span>&lt;/title&gt;<br />
+&nbsp; &nbsp; &lt;script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; data-appid="100575629" data-redirecturi="http://bbs.yirenge.net/qc_back.htm"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; charset="utf-8"&gt;&lt;/script&gt;<br />
+&lt;/head&gt;<br />
+&lt;body&gt;<br />
+&nbsp; &nbsp; &lt;span id="qqLoginBtn"&gt;&lt;/span&gt;<br />
+&nbsp; &nbsp; &lt;script type="text/javascript"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; //调用QC.Login方法，指定btnId参数将按钮绑定在容器节点中<br />
+&nbsp; &nbsp; &nbsp; &nbsp; QC.Login({<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //btnId：插入按钮的节点id，必选<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; btnId: "qqLoginBtn",<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //用户需要确认的scope授权项，可选，默认all<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; scope: "all",<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //按钮尺寸，可用值[A_XL| A_L| A_M| A_S| &nbsp;B_M| B_S| C_S]，可选，默认B_S<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; size: "A_XL"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }, function (reqData, opts) {//登录成功<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //根据返回数据，更换按钮显示状态方法<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var dom = document.getElementById(opts['btnId']),<br />
+&nbsp; &nbsp; &nbsp; &nbsp;_logoutTemplate = [<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //头像<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; '&lt;span&gt;&lt;img src="{figureurl}" class="{size_key}"/&gt;&lt;/span&gt;',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //昵称<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; '&lt;span&gt;{nickname}&lt;/span&gt;',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //退出<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; '&lt;span&gt;&lt;a href="javascript:QC.Login.signOut();"&gt;退出&lt;/a&gt;&lt;/span&gt;'<br />
+&nbsp; &nbsp; &nbsp; &nbsp;].join("");<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; dom &amp;&amp; (dom.innerHTML = QC.String.format(_logoutTemplate, {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; nickname: QC.String.escHTML(reqData.nickname), //做xss过滤<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; figureurl: reqData.figureurl<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }));<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }, function (opts) {//注销成功<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; alert('QQ登录 注销成功');<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+);<br />
+&nbsp; &nbsp; &lt;/script&gt;<br />
+&lt;/body&gt;<br />
+&lt;/html&gt;
+</p>
+<div>
+	<br />
+</div>
+<p>
+	<br />
+</p>
+<p>
+	获取用户信息的文档：<a target="_blank" href="http://wiki.connect.qq.com/get_user_info">http://wiki.connect.qq.com/get_user_info</a> 修改一些参数可以改变登陆后显示的头像大小等信息。
+</p>
+<p>
+	PS：
+</p>
+<p>
+	每次做了修改的话，需要清理浏览器缓存。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	四：判断是否登录
+</p>
+<p>
+	我新建一个目录Mine，里面放一个Index.htm页面，代码如下：
+</p>
+<p>
+	&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;<br />
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;<br />
+&lt;head&gt;<br />
+&nbsp; &nbsp; &lt;title&gt;<span>梦想起航_个人中心</span>&lt;/title&gt;<br />
+&nbsp; &nbsp; &lt;script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; data-appid="100575629" data-redirecturi="http://bbs.yirenge.net/qc_back.htm"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; charset="utf-8"&gt;&lt;/script&gt;<br />
+&nbsp; &nbsp; &lt;script src="../Resource/JQueryMobile/jquery.js" type="text/javascript"&gt;&lt;/script&gt;<br />
+&nbsp; &nbsp; &lt;script type="text/javascript"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; if (QC.Login.check()) {//如果已登录<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //向“后台”请求数据<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; alert("欢迎登录");<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; QC.Login.getMe(function (openId, accessToken) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp;//向“后台”请求当前“用户openId”的数据<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $("#message").html("当前登录用户的openId为：" + openId + "\n accessToken为：" + accessToken);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&lt;/script&gt;<br />
+&lt;/head&gt;<br />
+&lt;body&gt;<br />
+&lt;div id="message"&gt;&lt;/div&gt;<br />
+&lt;/body&gt;<br />
+&lt;/html&gt;
+</p>
+<p>
+	<br />
+</p>
+<div class="dp-highlighter bg_plain" style="font-family:Consolas, 'Courier New', Courier, mono, serif;font-size:12px;margin:18px 0px !important;background-color:#E7E5DC;">
+	<ol>
+		<li class="alt">
+			•openId是用户身份的唯一标识，可以保存在本地，以便用户下次登录时可对应到其之前的身份信息，不需要重新授权。
+		</li>
+		<li class="">
+			•accessToken是表示当前用户在此网站/应用的登录状态与授权信息，也可以保存在本地。
+		</li>
+	</ol>
+</div>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/368.html">dreamweaver制作asp动态网页之向数据库增加记录</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/371.html">MySQL安装包下载</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

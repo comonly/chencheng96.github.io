@@ -1,0 +1,465 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>【转】Tomcat建立多个应用(Web Server),多个主机,多个站点的方法【待测试】_comonly.cn</title>
+<meta name="keywords" content="【转】Tomcat建立多个应用(Web Server),多个主机,多个站点的方法【待测试】" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">【转】Tomcat建立多个应用(Web Server),多个主机,多个站点的方法【待测试】</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-07-16</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	服务器apache等
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">tomcat,多站点</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <div id="blog_content" class="blog_content">
+	<p style="font-family:'Lucida Grande',Verdana,Arial,sans-serif;font-size:13px;text-align:left;">
+		<br />
+	</p>
+	<p style="font-family:'Lucida Grande',Verdana,Arial,sans-serif;font-size:13px;text-align:left;">
+		当你使用Tomcat作为Web Server的时候，是不是会想过这样的一个问题：如何利用Tomcat建立多个Web应用 呢？<br />
+要实现这一点是很简单的,也有多种方法.(以下说明使用%tomcat_home%代表Tomcat安装目录).
+	</p>
+	<p style="font-family:'Lucida Grande',Verdana,Arial,sans-serif;font-size:13px;text-align:left;">
+		<span style="color:red;"><strong>一.首先介绍一下Tomcat及server.xml</strong></span>
+	</p>
+	<p style="font-family:'Lucida Grande',Verdana,Arial,sans-serif;font-size:13px;text-align:left;">
+		Tomcat服务器是由一系列的可配置的组件构成,tomcat的组件可以在%tomcat_home%/conf/server.xml文件中进行配置,每个Tomcat组件和server.xml文件的一种配置元素对应.<br />
+<span style="color:blue;"><strong>主要分为4类:</strong></span><br />
+<strong>1.顶层类元素:</strong>包括和,他们位于整个配置文件的顶层.<br />
+元素代表整个Catalina Servlet 容器,由org.apache.catalin.Server接口定义.包含一个或多个元素.<br />
+元素由org.apache.catalin.Service 接口定义.包含一个元素,及一个或多个元素.多个元素共享一个元素.<br />
+<strong>2.连接器类元素</strong><br />
+连接器类代表了介于客户与服务之间的通信接口,负责将客户的请求发送给服务器,并将服务器的响应结果传递给客户.<br />
+元素由org.apache.catalin.Connector 接口定义.代表了与客户程序实际交互的组件,它负责接收客户请求,以及向客户返回响应结果.<br />
+<strong>3.容器类元素</strong><br />
+容器类元素代表处理客户请求并生成响应的组件.包括和.<br />
+元素由org.apache.catalin.Engine 接口定义.每个只能包含一个元素,元素处理在同一个中的所有元素收到的客户请求.<br />
+元素由org.apache.catalin.Host 接口定义.一个元素中可以包含多个元素.每个元素定义了一个虚拟主机,她可以包含一个或多个Web 应用.<br />
+元素由org.apache.catalin.Context 接口定义.代表了运行在虚拟主机上的一个Web 应用.一个元素可以包含多个元素<br />
+<strong>4.嵌套类元素</strong><br />
+嵌套类元素代表了可以加到容器中的组件,如和.
+	</p>
+	<p style="font-family:'Lucida Grande',Verdana,Arial,sans-serif;font-size:13px;text-align:left;">
+		关于server.xml的更多信息,可以参考Tomcat的文档:/webapps/tomcat-docs/config/index.html
+	</p>
+	<p style="font-family:'Lucida Grande',Verdana,Arial,sans-serif;font-size:13px;text-align:left;">
+		样例:
+	</p>
+	<div class="hl-surround" style="background-color:#F9FBFC;margin-left:0px;text-align:left;font-family:'Lucida Grande',Verdana,Arial,sans-serif;font-size:13px;">
+		<ol class="hl-main ln-show" style="margin-left:0px;background-color:transparent;">
+			<li class="hl-firstline" style="font-size:12px!important;">
+				<span style="color:olive;">&lt;</span><span style="color:green;">Server</span><span style="color:olive;">&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:gray;"></span><span style="color:olive;">&lt;</span><span style="color:green;">Service</span><span style="color:gray;"></span><span style="color:#00008B;">name</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">Catalina</span><span style="color:#8B0000;">"</span><span style="color:olive;">&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:gray;"></span><span style="color:olive;">&lt;</span><span style="color:green;">Connector</span><span style="color:gray;"></span><span style="color:#00008B;">acceptCount</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">100</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">connectionTimeout</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">20000</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">disableUploadTimeout</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">true</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">port</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">8080</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">redirectPort</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">8443</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">maxSpareThreads</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">75</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">maxThreads</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">150</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">minSpareThreads</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">25</span><span style="color:#8B0000;">"</span><span style="color:olive;">/&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:gray;"></span><span style="color:olive;">&lt;</span><span style="color:green;">Connector</span><span style="color:gray;"></span><span style="color:#00008B;">port</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">8009</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">protocol</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">AJP/1.3</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">protocolHandlerClassName</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">org.apache.jk.server.JkCoyoteHandler</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">redirectPort</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">8443</span><span style="color:#8B0000;">"</span><span style="color:olive;">/&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:gray;"></span><span style="color:olive;">&lt;</span><span style="color:green;">Engine</span><span style="color:gray;"></span><span style="color:#00008B;">defaultHost</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">localhost</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">name</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">Catalina</span><span style="color:#8B0000;">"</span><span style="color:olive;">&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:gray;"></span><span style="color:olive;">&lt;</span><span style="color:green;">Host</span><span style="color:gray;"></span><span style="color:#00008B;">appBase</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">webapps</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">name</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">localhost</span><span style="color:#8B0000;">"</span><span style="color:olive;">&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:gray;"> </span><span style="color:olive;">&lt;</span><span style="color:green;">Logger</span><span style="color:gray;"></span><span style="color:#00008B;">className</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">org.apache.catalina.logger.FileLogger</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">prefix</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">localhost_log.</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">suffix</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">.txt</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">timestamp</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">true</span><span style="color:#8B0000;">"</span><span style="color:olive;">/&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:gray;"></span><span style="color:olive;">&lt;/</span><span style="color:green;">Host</span><span style="color:olive;">&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:gray;"></span><span style="color:olive;">&lt;</span><span style="color:green;">Logger</span><span style="color:gray;"></span><span style="color:#00008B;">className</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">org.apache.catalina.logger.FileLogger</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">prefix</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">catalina_log.</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">suffix</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">.txt</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">timestamp</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">true</span><span style="color:#8B0000;">"</span><span style="color:olive;">/&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:gray;"></span><span style="color:olive;">&lt;</span><span style="color:green;">Realm</span><span style="color:gray;"></span><span style="color:#00008B;">className</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">org.apache.catalina.realm.UserDatabaseRealm</span><span style="color:#8B0000;">"</span><span style="color:olive;">/&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:gray;"></span><span style="color:olive;">&lt;/</span><span style="color:green;">Engine</span><span style="color:olive;">&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:gray;"></span><span style="color:olive;">&lt;/</span><span style="color:green;">Service</span><span style="color:olive;">&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:olive;">&lt;/</span><span style="color:green;">Server</span><span style="color:olive;">&gt;</span> 
+			</li>
+		</ol>
+	</div>
+	<p style="font-family:'Lucida Grande',Verdana,Arial,sans-serif;font-size:13px;text-align:left;">
+		<span style="color:red;"><strong>二.建立多个Web应用方法:</strong></span>
+	</p>
+	<p style="font-family:'Lucida Grande',Verdana,Arial,sans-serif;font-size:13px;text-align:left;">
+		在这之前,我已经将默认8080更改为80了.
+	</p>
+	<p style="font-family:'Lucida Grande',Verdana,Arial,sans-serif;font-size:13px;text-align:left;">
+		<span style="color:blue;"><strong>1.通过配置多个元素(这是最为普遍的方法)</strong></span><br />
+在下配置多个元素
+	</p>
+	<div class="hl-surround" style="background-color:#F9FBFC;margin-left:0px;text-align:left;font-family:'Lucida Grande',Verdana,Arial,sans-serif;font-size:13px;">
+		<ol class="hl-main ln-show" style="margin-left:0px;background-color:transparent;">
+			<li class="hl-firstline" style="font-size:12px!important;">
+				<span style="color:olive;">&lt;</span><span style="color:green;">Context</span><span style="color:gray;"></span><span style="color:#00008B;">path</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">webapps</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">docBase</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">C:\Program
+ Files\Apache Software Foundation\Tomcat 5.5\webapps\ROOT</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">debug</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">0</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">reloadable</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">true</span><span style="color:#8B0000;">"</span><span style="color:olive;">&gt;&lt;/</span><span style="color:green;">Context</span><span style="color:olive;">&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:gray;"> </span><span style="color:olive;">&lt;</span><span style="color:green;">Context</span><span style="color:gray;"></span><span style="color:#00008B;">path</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">webapps2</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">docBase</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">C:\Program
+ Files\Apache Software Foundation\Tomcat 5.5\webapps2\ROOT</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">debug</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">0</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">reloadable</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">true</span><span style="color:#8B0000;">"</span><span style="color:olive;">&gt;&lt;/</span><span style="color:green;">Context</span><span style="color:olive;">&gt;</span> 
+			</li>
+		</ol>
+	</div>
+	<p style="font-family:'Lucida Grande',Verdana,Arial,sans-serif;font-size:13px;text-align:left;">
+		然后通过 主机名:端口/应用名 访问,如: http://localhost/app1 或 http://localhost/app2
+	</p>
+	<p style="font-family:'Lucida Grande',Verdana,Arial,sans-serif;font-size:13px;text-align:left;">
+		<span style="color:blue;"><strong>2.通过配置多个元素</strong></span><br />
+在下配置多个元素
+	</p>
+	<div class="hl-surround" style="background-color:#F9FBFC;margin-left:0px;text-align:left;font-family:'Lucida Grande',Verdana,Arial,sans-serif;font-size:13px;">
+		<ol class="hl-main ln-show" style="margin-left:0px;background-color:transparent;">
+			<li class="hl-firstline" style="font-size:12px!important;">
+				<span style="color:olive;">&lt;</span><span style="color:green;">Host</span><span style="color:gray;"></span><span style="color:#00008B;">appBase</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">webapps</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">name</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">xok.la</span><span style="color:#8B0000;">"</span><span style="color:olive;">&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:gray;"></span><span style="color:olive;">&lt;</span><span style="color:green;">Alias</span><span style="color:olive;">&gt;</span><span style="color:gray;">www.xok.la</span><span style="color:olive;">&lt;/</span><span style="color:green;">Alias</span><span style="color:olive;">&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:gray;"></span><span style="color:olive;">&lt;</span><span style="color:green;">Context</span><span style="color:gray;"></span><span style="color:#00008B;">path</span><span style="color:gray;">=</span><span style="color:#8B0000;">""</span><span style="color:gray;"></span><span style="color:#00008B;">docBase</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">C:\Program
+ Files\Apache Software Foundation\Tomcat 5.5\webapps\ROOT</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">debug</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">0</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">reloadable</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">true</span><span style="color:#8B0000;">"</span><span style="color:olive;">&gt;&lt;/</span><span style="color:green;">Context</span><span style="color:olive;">&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:gray;"></span><span style="color:olive;">&lt;/</span><span style="color:green;">Host</span><span style="color:olive;">&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:gray;"></span><span style="color:olive;">&lt;</span><span style="color:green;">Host</span><span style="color:gray;"></span><span style="color:#00008B;">appBase</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">webapps2</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">name</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">xok.cc</span><span style="color:#8B0000;">"</span><span style="color:olive;">&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:gray;"></span><span style="color:olive;">&lt;</span><span style="color:green;">Alias</span><span style="color:olive;">&gt;</span><span style="color:gray;">www.xok.cc</span><span style="color:olive;">&lt;/</span><span style="color:green;">Alias</span><span style="color:olive;">&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:gray;"></span><span style="color:olive;">&lt;</span><span style="color:green;">Context</span><span style="color:gray;"></span><span style="color:#00008B;">path</span><span style="color:gray;">=</span><span style="color:#8B0000;">""</span><span style="color:gray;"></span><span style="color:#00008B;">docBase</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">C:\Program
+ Files\Apache Software Foundation\Tomcat 5.5\webapps2\ROOT</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">debug</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">0</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">reloadable</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">true</span><span style="color:#8B0000;">"</span><span style="color:olive;">&gt;&lt;/</span><span style="color:green;">Context</span><span style="color:olive;">&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:gray;"></span><span style="color:olive;">&lt;/</span><span style="color:green;">Host</span><span style="color:olive;">&gt;</span> 
+			</li>
+		</ol>
+	</div>
+	<p style="font-family:'Lucida Grande',Verdana,Arial,sans-serif;font-size:13px;text-align:left;">
+		然后通过 主机名:端口 访问,如: http://xok.la 或 http://xok.cc<br />
+需要注意的是这样需要机器连接到局域网上.
+	</p>
+	<p style="font-family:'Lucida Grande',Verdana,Arial,sans-serif;font-size:13px;text-align:left;">
+		<span style="color:blue;"><strong>3.通过配置多个元素(多端口 多应用)</strong></span><br />
+在下配置多个元素
+	</p>
+	<div class="hl-surround" style="background-color:#F9FBFC;margin-left:0px;text-align:left;font-family:'Lucida Grande',Verdana,Arial,sans-serif;font-size:13px;">
+		<ol class="hl-main ln-show" style="margin-left:0px;background-color:transparent;">
+			<li class="hl-firstline" style="font-size:12px!important;">
+				<span style="color:olive;">&lt;</span><span style="color:green;">Service</span><span style="color:gray;"></span><span style="color:#00008B;">name</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">Catalina</span><span style="color:#8B0000;">"</span><span style="color:olive;">&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:gray;"></span><span style="color:olive;">&lt;</span><span style="color:green;">Connector</span><span style="color:gray;"></span><span style="color:#00008B;">acceptCount</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">100</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">connectionTimeout</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">20000</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">disableUploadTimeout</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">true</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">port</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">80</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">redirectPort</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">8453</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">maxSpareThreads</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">75</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">maxThreads</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">150</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">minSpareThreads</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">25</span><span style="color:#8B0000;">"</span><span style="color:olive;">/&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:gray;"></span><span style="color:olive;">&lt;</span><span style="color:green;">Connector</span><span style="color:gray;"></span><span style="color:#00008B;">port</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">8019</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">protocol</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">AJP/1.3</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">protocolHandlerClassName</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">org.apache.jk.server.JkCoyoteHandler</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">redirectPort</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">8453</span><span style="color:#8B0000;">"</span><span style="color:olive;">/&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:gray;"></span><span style="color:olive;">&lt;</span><span style="color:green;">Engine</span><span style="color:gray;"></span><span style="color:#00008B;">defaultHost</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">localhost</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">name</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">Catalina</span><span style="color:#8B0000;">"</span><span style="color:olive;">&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:gray;"></span><span style="color:olive;">&lt;</span><span style="color:green;">Host</span><span style="color:gray;"></span><span style="color:#00008B;">appBase</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">webapps</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">name</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">localhost</span><span style="color:#8B0000;">"</span><span style="color:olive;">&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:gray;"> </span><span style="color:olive;">&lt;</span><span style="color:green;">Context</span><span style="color:gray;"></span><span style="color:#00008B;">path</span><span style="color:gray;">=</span><span style="color:#8B0000;">""</span><span style="color:gray;"></span><span style="color:#00008B;">docBase</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">C:\Program
+ Files\Apache Software Foundation\Tomcat 5.5\webapps\ROOT</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">debug</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">0</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">reloadable</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">true</span><span style="color:#8B0000;">"</span><span style="color:olive;">&gt;&lt;/</span><span style="color:green;">Context</span><span style="color:olive;">&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:gray;"></span><span style="color:olive;">&lt;/</span><span style="color:green;">Host</span><span style="color:olive;">&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:gray;"></span><span style="color:olive;">&lt;</span><span style="color:green;">Realm</span><span style="color:gray;"></span><span style="color:#00008B;">className</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">org.apache.catalina.realm.UserDatabaseRealm</span><span style="color:#8B0000;">"</span><span style="color:olive;">/&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:gray;"></span><span style="color:olive;">&lt;/</span><span style="color:green;">Engine</span><span style="color:olive;">&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:gray;"></span><span style="color:olive;">&lt;/</span><span style="color:green;">Service</span><span style="color:olive;">&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:olive;">&lt;</span><span style="color:green;">Service</span><span style="color:gray;"></span><span style="color:#00008B;">name</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">Catalina2</span><span style="color:#8B0000;">"</span><span style="color:olive;">&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:gray;"></span><span style="color:olive;">&lt;</span><span style="color:green;">Connector</span><span style="color:gray;"></span><span style="color:#00008B;">acceptCount</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">100</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">connectionTimeout</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">20000</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">disableUploadTimeout</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">true</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">port</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">90</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">redirectPort</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">9443</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">maxSpareThreads</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">75</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">maxThreads</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">150</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">minSpareThreads</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">25</span><span style="color:#8B0000;">"</span><span style="color:olive;">/&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:gray;"></span><span style="color:olive;">&lt;</span><span style="color:green;">Connector</span><span style="color:gray;"></span><span style="color:#00008B;">port</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">9009</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">protocol</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">AJP/1.3</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">protocolHandlerClassName</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">org.apache.jk.server.JkCoyoteHandler</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">redirectPort</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">9443</span><span style="color:#8B0000;">"</span><span style="color:olive;">/&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:gray;"></span><span style="color:olive;">&lt;</span><span style="color:green;">Engine</span><span style="color:gray;"></span><span style="color:#00008B;">defaultHost</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">localhost</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">name</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">Catalina</span><span style="color:#8B0000;">"</span><span style="color:olive;">&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:gray;"></span><span style="color:olive;">&lt;</span><span style="color:green;">Host</span><span style="color:gray;"></span><span style="color:#00008B;">appBase</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">webapps</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">name</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">localhost</span><span style="color:#8B0000;">"</span><span style="color:olive;">&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:gray;"> </span><span style="color:olive;">&lt;</span><span style="color:green;">Context</span><span style="color:gray;"></span><span style="color:#00008B;">path</span><span style="color:gray;">=</span><span style="color:#8B0000;">""</span><span style="color:gray;"></span><span style="color:#00008B;">docBase</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">C:\Program
+ Files\Apache Software Foundation\Tomcat 5.5\webapps2\ROOT</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">debug</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">0</span><span style="color:#8B0000;">"</span><span style="color:gray;"></span><span style="color:#00008B;">reloadable</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">true</span><span style="color:#8B0000;">"</span><span style="color:olive;">&gt;&lt;/</span><span style="color:green;">Context</span><span style="color:olive;">&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:gray;"></span><span style="color:olive;">&lt;/</span><span style="color:green;">Host</span><span style="color:olive;">&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:gray;"></span><span style="color:olive;">&lt;</span><span style="color:green;">Realm</span><span style="color:gray;"></span><span style="color:#00008B;">className</span><span style="color:gray;">=</span><span style="color:#8B0000;">"</span><span style="color:red;">org.apache.catalina.realm.UserDatabaseRealm</span><span style="color:#8B0000;">"</span><span style="color:olive;">/&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:gray;"></span><span style="color:olive;">&lt;/</span><span style="color:green;">Engine</span><span style="color:olive;">&gt;</span> 
+			</li>
+			<li style="font-size:12px!important;">
+				<span style="color:gray;"></span><span style="color:olive;">&lt;/</span><span style="color:green;">Service</span><span style="color:olive;">&gt;</span> 
+			</li>
+		</ol>
+	</div>
+	<p style="font-family:'Lucida Grande',Verdana,Arial,sans-serif;font-size:13px;text-align:left;">
+		第2个应用只是在默认端口第1位数字上加1<br />
+定义了两个Service分别是Catalina和Catalina2,侦听的端口分别是80和90<br />
+然后通过 主机名:端口 访问,如: http://localhost:80 或 http://localhost:90
+	</p>
+	<p style="font-family:'Lucida Grande',Verdana,Arial,sans-serif;font-size:13px;text-align:left;">
+		第2,3种都经过本人测试.
+	</p>
+</div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/789.html">python中的urlencode</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/792.html">Spring官网下载dist.zip的几种方法</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="一台电脑上启动两个tomcat方法">
+							<h2 style="display:inline;color:#5BC648;">一台电脑上启动两个tomcat方法</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-03-20&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span>由于两个工程分别部署在不同的服务器下，一个用来开发，一个用来测试，需要同时启动两个tomcat，如图apache-tomcat-6.0.35是开发服务器，apache-tomcat6test用来测试：<br />
+<br />
+以下是方法：<br />
+1.特别要注意：<span style="color:#E53333;">不要设置CATALINA_HOME</span><br />
+<br />
+2.分别修改安装目录下的conf子目录中的server.xml文件：<br />
+a.修改http访问端口（默认为8080端口，apache-tomcat-6.0.35改成8091， apache-tomcat6test改成8095），将8080修改为tomcat不在使用的端口号。此处所设的端口号即是以后访问web时所用的端口号。<br />
+b.修改apache-tomcat-6.0.35的Shutdown端口（在server.xml中，默认为8005端口），将8005修改为没有在使用的端口号，例如8055。 &nbsp;apache-tomcat6test的Shutdown端口（在server.xml中，默认为8005端口），将8005修改为没有在使用的端口号，例如8099。<br />
+c.修改 apache-tomcat6test的8009端口（AJP），将8009修改为没有在使用的端口号，（也在server.xml中修改）例如8010； apache-tomcat-6.0.35的8009端口不改。<br />
+（注意：只要是这两个文件中的这三处端口不一样就行，不一定都要进行修改；可以保持一个tomcat的server.xml文件不变，另一个tomcat的server.xml文件与对应的server.xml的端口不一样即可。）<br />
+<br />
+3.依次启动两个tomcat。<br />
+<p>
+	可以都在eclipse中启动，也可以通过对应的startup.bat启动，还可以一个用elipse启动，另一个通过startup.bat启动。
+</p>
+<p>
+	参考：http://zhangzhaoaaa.iteye.com/blog/1826924
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#一台电脑上启动两个tomcat方法">一台电脑上启动两个tomcat方法</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

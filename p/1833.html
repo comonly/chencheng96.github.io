@@ -1,0 +1,354 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>SOA （面向服务的架构）_comonly.cn</title>
+<meta name="keywords" content="SOA （面向服务的架构）" />
+<meta name="description" content="面向服务的体系结构，是一个组件模型，它将应用程序的不同功能单元（称为服务）通过这些服务之间定义良好的接口和契约联系起来。接口是采用中立的方式进行定义的，它应该独立于实现服务的硬件平台、操作系统和编程语言。这使得构建在各种这样的系统中的服务可以以一种统一和通用的方式进行交互。
+
+
+	特征
+
+
+	SOA的服务级别抽象图，如下图1所示：
+
+
+	
+		&nbsp;SOA的服务级别抽象图
+	
+
+
+	图1SOA的服务级别抽象图
+
+
+	基于以上图示．SOA具有以下五个特征：
+
+
+" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">SOA （面向服务的架构）</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">bolang100</li>
+          <li class="lmname"><a href="https://www.cnblogs.com/bolang100/p/6603361.html" target="_blank">https://www.cnblogs.com/bolang100/p/6603361.html</a></li>
+          <li class="timer">2020-10-05</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>面向服务的体系结构，是一个组件模型，它将应用程序的不同功能单元（称为服务）通过这些服务之间定义良好的接口和契约联系起来。接口是采用中立的方式进行定义的，它应该独立于实现服务的硬件平台、操作系统和编程语言。这使得构建在各种这样的系统中的服务可以以一种统一和通用的方式进行交互。
+
+
+	特征
+
+
+	SOA的服务级别抽象图，如下图1所示：
+
+
+	
+		&nbsp;SOA的服务级别抽象图
+	
+
+
+	图1SOA的服务级别抽象图
+
+
+	基于以上图示．SOA具有以下五个特征：
+
+
+</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	面向服务的体系结构，是一个组件模型，它将应用程序的不同功能单元（称为服务）通过这些服务之间定义良好的接口和契约联系起来。接口是采用中立的方式进行定义的，它应该独立于实现服务的硬件平台、操作系统和编程语言。这使得构建在各种这样的系统中的服务可以以一种统一和通用的方式进行交互。
+</p>
+<h2 id='特征'>
+	特征
+</h2>
+<div>
+	SOA的服务级别抽象图，如下图1所示：
+</div>
+<div>
+	<div>
+		<a href="http://baike.baidu.com/pic/%E9%9D%A2%E5%90%91%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/8258990/0/a28d62d9b4122db239012ffa?fr=lemma&amp;ct=single" target="_blank"><img src="http://b.hiphotos.baidu.com/baike/s%3D220/sign=60ec113655fbb2fb302b5f107f4a2043/5243fbf2b2119313897ce6db65380cd791238d99.jpg" alt="SOA的服务级别抽象图" style="height:175px;width:220px;" />&nbsp;</a>SOA的服务级别抽象图
+	</div>
+</div>
+<div>
+	图1SOA的服务级别抽象图
+</div>
+<div>
+	基于以上图示．SOA具有以下五个特征：
+</div>
+<div>
+	1、可重用
+</div>
+<div>
+	一个服务创建后能用于多个应用和业务流程。
+</div>
+<div>
+	2、松耦合
+</div>
+<div>
+	服务请求者到服务提供者的绑定与服务之间应该是松耦合的。因此，服务请求者不需要知道服务提供者实现的技术细节，例如程序语言、底层平台等等。
+</div>
+<div>
+	3、明确定义的接口
+</div>
+<div>
+	服务交互必须是明确定义的。Web服务描述语言（Web Services Description Language，WSDL）是用于描述服务请求者所要求的绑定到服务提供者的细节。WSDL不包括服务实现的任何技术细节。服务请求者不知道也不关心服务究竟是由哪种程序设计语言编写的。
+</div>
+<div>
+	4、无状态的服务设计
+</div>
+<div>
+	服务应该是独立的、自包含的请求，在实现时它不需要获取从一个请求到另一个请求的信息或状态。服务不应该依赖于其他服务的上下文和状态。当产生依赖时，它们可以定义成通用业务流程、函数和 数据模型。
+</div>
+<div>
+	5、基于开放标准
+</div>
+<div>
+	当前SOA的实现形式是Web服务，基于的是公开的W3C及其他公认标准．采用第一代Web服务定义的SOAP、WSDL和UDDI以及第二代Web服务定义的WS-*来实现SOA。
+</div>
+<div>
+	<h2 id='基本特点'>
+		基本特点
+	</h2>
+</div>
+<div>
+	SOA的目标在于让IT系统变得更有弹性，以便更灵活、更快地响应不断改变的企业业务需求，解决软件领域一直以来存在的“如何重用软件功能”问题。采用SOA来构建信息平台，无疑是未来的发展方向。
+</div>
+<div>
+	SOA的5大基本特征为软件功能重用提供了解决的办法。
+</div>
+<div>
+	①服务之间通过简单、精确定义的接口进行通信，不涉及底层编程接口和通信模型。
+</div>
+<div>
+	②粗粒度性：粗粒度服务提供一项特定的业务功能，采用粗粒度服务接口的优点在于使用者和服务层之间不必再进行多次的往复，一次往复就足够了。
+</div>
+<div>
+	③松耦合性：松耦合性要求SOA架构中的不同服务之间应该保持一种松耦合 的关系，也就是应该保持一种相对独立无依赖的关系。这样的好处有两点，首先是具有灵活性，其次当组成整个应用程序的服务内部结构和实现逐步地发生变化时， 系统可以继续地独立存在。而紧耦合意味着应用程序的不同组件之间的接口与其功能和结构是紧密相连的，因而当需要对部分或整个应用程序进行某种形式的更改时 这种结构就显得非常脆弱。
+</div>
+<div>
+	④位置透明性：位置透明性要求SOA系统中的所有服务对于其调用者来说都是位置透明的，也就是说，每个服务的调用者只需要知道想要调用的是哪一个服务，但并不需要知道所调用服务的物理位置在哪。
+</div>
+<div>
+	⑤协议无关性：协议无关性要求每一个服务都可以通过不同的协议来调用。
+</div>
+<div>
+	另外，在许多传统的IT系统的内在部分采用的是硬连接，这种结构很难让企 业快速响应市场的变化，而SOA能够重复利用企业现有的资源，可以减轻企业运营成本，提升资源的使用效率，并且减轻企业维护人员的工作量，减少潜在的风险 以及管理费用。在业务方面和IT方面带来许多优势：
+</div>
+<div>
+	①服务给精确的业务流程带来灵活性；
+</div>
+<div>
+	②使用服务来改善客户服务，而不必担心底层复杂的IT基础架构；
+</div>
+<div>
+	③可以迅速创建新的业务流程和复杂的应用程序，以适应市场变化；
+</div>
+<div>
+	④借助安全、易管理的集成环境，成为响应能力更强的IT组织；
+</div>
+<div>
+	⑤通过使用预装的、可重复使用的服务构建模块，缩短开发和部署周期；
+</div>
+<div>
+	⑥通过使用服务来降低复杂性和维护成本；
+</div>
+<div>
+	⑦是增强而不是替换现有的IT系统。
+</div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1832.html">项目如何进行压力测试？</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1834.html">什么是微服务架构？伴随业务发展微服务架构的改进</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.cnblogs.com/bolang100/p/6603361.html" target="_blank">https://www.cnblogs.com/bolang100/p/6603361.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#特征">特征</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#基本特点">基本特点</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

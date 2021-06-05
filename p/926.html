@@ -1,0 +1,389 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Java Web会话机制——Cookie和Session_comonly.cn</title>
+<meta name="keywords" content="Java Web会话机制——Cookie和Session" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Java Web会话机制——Cookie和Session</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-04-26</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	javaweb---jsp asp数据库框架
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 style="font-family:&quot;">
+	会话机制
+</h2>
+<span style="font-family:&quot;font-size:medium;">会话是Web程序中常用的技术，用来跟踪用户的整个会话。常用的会话跟踪技术是Cookie与Session。Cookie通过在客户端记录信息确定用户身份，Session通过在服务器端记录信息确定用户身份。由于HTTP协议是无状态的，而出于种种考虑也不希望使之成为有状态的。具体来说cookie机制采用的是在客户端保持状态的方案，而session机制采用的是在服务器端保持状态的方案。同时我们也看到，由于采用服务器端保持状态的方案在客户端也需要保存一个标识，所以session机制需要借助于cookie机制来达到保存标识的目的。</span> 
+<p style="font-family:&quot;font-size:medium;">
+	cookie是由服务器端创建发送回浏览器端的，并且每次请求服务器都会将cookie带过去，以便服务器知道该用户是哪一个。其cookie中是使用键值对来存储信息的，并且一个cookie只能存储一个键值对。所以在获取cookie时，是会获取到所有的cookie，然后从其中遍历。Cookie是客户端技术，程序把每个用户的数据以cookie的形式写给用户各自的浏览器。当用户使用浏览器再去访问服务器中的web资源时，就会带着各自的数据去。这样，web资源处理的就是用户各自的数据了。
+</p>
+<p style="font-family:&quot;font-size:medium;">
+	session机制是一种服务器端的机制，服务器使用一种类似于散列表的结构(也可能就是使用散列表)来保存信息。服务器在运行时可以为每个用户的浏览器创建一个其独享的session对象，由于session对象为用户浏览器独享，所以用户在访问web资源时，可以把各自的数据放到各自的session中，当用户再去访问服务器中的其他的web资源时，其他web资源再从用户各自的session中取出数据为用户服务。
+</p>
+<h2 style="font-family:&quot;">
+	Cookie
+</h2>
+<h3 style="font-family:&quot;">
+	服务器创建cookie，并进行属性设置
+</h3>
+<p style="font-family:&quot;font-size:medium;">
+	Cookie cookie = new Cookie("cookiename","cookievalue");&nbsp; &nbsp; //创建一个cookie
+</p>
+<p style="font-family:&quot;font-size:medium;">
+	cookie.setMaxAge(expiry);&nbsp; &nbsp; //设置cookie被浏览器保存的时间，单位为秒。
+</p>
+<ul>
+	<li>
+		expiry：单位秒，默认为-1，expiry=-1：代表浏览器关闭后，也就是会话结束后，cookie就失效了，也就没有了。
+	</li>
+	<li>
+		expiry&gt;0：代表浏览器关闭后，cookie不会失效，仍然存在。并且会将cookie保存到硬盘中，直到设置时间过期才会被浏览器自动删除，
+	</li>
+	<li>
+		expiry=0：删除cookie。不管是之前的expiry=-1还是expiry&gt;0，当设置expiry=0时，cookie都会被浏览器给删除。
+	</li>
+</ul>
+<p style="font-family:&quot;font-size:medium;">
+	cookie.setValue();　　//对名为cookie的Cookie对应的value值修改
+</p>
+<p style="font-family:&quot;font-size:medium;">
+	cookie.setPath("/");&nbsp; &nbsp; //设置cookie的有效范围，可以设置服务器端获取cookie的访问路径，而并非在服务器端的web项目中所有的servlet都能访问该cookie。cookie默认路径：当前访问的servlet父路径。
+</p>
+<ul>
+	<li>
+		例如：http://localhost:8080/test01/a/b/c/SendCookieServlet默认路径：/test01/a/b/c　　也就是说，在该默认路径下的所有Servlet都能够获取到cookie，/test01/a/b/c/MyServlet　这个MyServlet就能获取到cookie。
+	</li>
+</ul>
+<p style="font-family:&quot;font-size:medium;">
+	isHttpOnly()&nbsp; 是否只是http协议使用。只能servlet的通过getCookies()获得，javascript不能获得。<br />
+setComment(java.lang.String purpose) (了解)　　//对该cookie进行描述的信息(说明作用)，浏览器显示cookie信息时能看到<br />
+setSecure(boolean flag) (了解)　　是否使用安全传输协议。为true时，只有当是https请求连接时cookie才会发送给服务器端，而http时不会，但是服务端还是可以发送给浏览端的。<br />
+setVersion(int v) (了解)　　参数为0（传统Netscape cookie规范编译）或1（RFC 2109规范编译）。
+</p>
+<p style="font-family:&quot;font-size:medium;">
+	response.addCookie(cookie);&nbsp; &nbsp; //将cookie添加到HttpServletResponse类型的response中发生到客户端进行保存。发送cookie需要使用HttpServletResponse的addCookie方法，将cookie插入到一个Set-Cookie　HTTP请求报头中。由于这个方法并不修改任何之前指定的Set-Cookie报头，而是创建新的报头，因此我们将这个方法称为是addCookie，而非setCookie。同样要记住响应报头必须在任何文档内容发送到客户端之前设置。
+</p>
+<ol>
+	<li>
+		servlet创建cookie，保存少量数据，发送浏览器。
+	</li>
+	<li>
+		浏览器获得服务器发送的cookie数据，将自动的保存到浏览器端。
+	</li>
+	<li>
+		下次访问时，浏览器将自动携带cookie数据发送给服务器。
+	</li>
+</ol>
+<h3 style="font-family:&quot;">
+	获取cookie的相关信息（键、值等）
+</h3>
+<p style="font-family:&quot;font-size:medium;">
+	1.调用request.getCookie<br />
+要获取浏览器发送来的cookie，需要调用HttpServletRequest的getCookies方法，这个调用返回Cookie对象的数组，对应由HTTP请求中Cookie报头输入的值。<br />
+2.对数组进行循环，调用每个cookie的getName方法，直到找到感兴趣的cookie为止<br />
+cookie与你的主机(域)相关，而非你的servlet或JSP页面。因而，尽管你的servlet可能只发送了单个cookie，你也可能会得到许多不相关的cookie。<br />
+例如：
+</p>
+<pre class="prettyprint lang-java">String cookieName = “userID”;
+Cookie cookies[] = request.getCookies();
+if (cookies!=null){
+    for(int i=0;i&lt;cookies.length;i++){
+        Cookie cookie = cookies[i];
+        if (cookieName.equals(cookie.getName())){
+            doSomethingWith(cookie.getValue());
+        }
+    }
+}</pre>
+<span style="font-family:&quot;font-size:medium;">getName() 获得名称，cookie中的key</span><br />
+<span style="font-family:&quot;font-size:medium;">getValue() 获得值，cookie中的value</span> 
+<h3 style="font-family:&quot;">
+	cookie中中文的处理
+</h3>
+<p style="font-family:&quot;font-size:medium;">
+	注意：cookie不能发送中文，如果要发送中文，就需要进行特别处理。要想在cookie中存储中文，那么必须使用URLEncoder类里面的encode(String s, String enc)方法进行中文转码。在获取cookie中的中文数据时，再使用URLDecoder类里面的decode(String s, String enc)进行解码
+</p>
+<h4 style="font-family:&quot;font-size:medium;">
+	解码URLDecoder.decode
+</h4>
+<p style="font-family:&quot;font-size:medium;">
+	URLDecoder.decode("获取的编码数据");
+</p>
+<h4 style="font-family:&quot;font-size:medium;">
+	编码URLEncoder.encode
+</h4>
+<span style="font-family:&quot;font-size:medium;">URLEncoder.encode("中文cookie");</span> 
+<h2 style="font-family:&quot;">
+	Session
+</h2>
+<span style="font-family:&quot;font-size:medium;">浏览器请求服务器访问web站点时，程序需要为客户端的请求创建一个session的时候，服务器首先会检查这个客户端请求是否已经包含了一个session标识、称为SESSIONID，如果已经包含了一个sessionid则说明以前已经为此客户端创建过session，服务器就按照sessionid把这个session检索出来使用，如果客户端请求不包含session id，则服务器为此客户端创建一个session并且生成一个与此session相关联的session id，sessionid 的值应该是一个既不会重复，又不容易被找到规律以仿造的字符串，这个sessionid将在本次响应中返回到客户端保存，保存这个sessionid的方式就可以是cookie，这样在交互的过程中，浏览器可以自动的按照规则把这个标识发回给服务器，服务器根据这个sessionid就可以找得到对应的session，又回到了这段文字的开始。</span> 
+<h3 style="font-family:&quot;">
+	创建、设置和操作session
+</h3>
+<p style="font-family:&quot;font-size:medium;">
+	session并不是在有客户端访问时就被创建，事实是直到某server端程序(如Servlet)调用HttpServletRequest.getSession(true)这样的语句时才会被创建。
+</p>
+<span style="font-family:&quot;font-size:medium;">getSession()/getSession(true)：当session存在时返回该session，否则新建一个session并返回该对象</span><br />
+<span style="font-family:&quot;font-size:medium;">getSession(false)：当session存在时返回该session，否则不会新建session，返回null</span><br />
+<span style="font-family:&quot;font-size:medium;">setAttrubute(key,value);&nbsp; &nbsp; //设置session</span><br />
+<span style="font-family:&quot;font-size:medium;">session.invalidate();&nbsp; &nbsp; //将session对象销毁</span><br />
+<span style="font-family:&quot;font-size:medium;">setMaxInactiveInterval(int interval);&nbsp; &nbsp; // 设置有效时间，单位秒。</span><span style="font-family:&quot;font-size:medium;">关闭浏览器不会导致session被删除，所以服务器为seesion设置了一个失效时间，一般是30分钟</span><br />
+<span style="font-family:&quot;font-size:medium;">session对象默认30分钟没有使用，则服务器会自动销毁session，在web.xml文件中可以手工配置session的失效时间</span><br />
+<pre class="prettyprint lang-xml">&lt;session-config&gt;
+    &lt;session-timeout&gt;30&lt;/session-timeout&gt;   单位：分钟
+&lt;session-config&gt;</pre>
+<h3 style="font-family:&quot;">
+	获取session
+</h3>
+<p style="font-family:&quot;font-size:medium;">
+	在获取session时，需要检测请求中是否有session标识，所以需要用request来获取
+</p>
+<span style="font-family:&quot;font-size:medium;">HttpSession session=request.getSession();　　//如果没有将创建一个新的，等效getSession(true);</span><br />
+<span style="font-family:&quot;font-size:medium;">request.getSession(boolean);　　//true：没有将创建，false：没有将返回null</span><br />
+<p style="font-family:&quot;font-size:medium;">
+	session.getAttribute(key);&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; //获取键为key的session变量的值
+</p>
+<p style="font-family:&quot;font-size:medium;">
+	public boolean isNew();&nbsp; &nbsp; //如果会话尚未和客户程序(浏览器)发生任何联系，则这个方法返回true，这一般是因为会话是新建的，不是由输入的客户请求所引起的。如果isNew返回false，只不过是说明他之前曾经访问该Web应用，并不代表他们曾访问过我们的servlet或JSP页面。
+</p>
+<h3 style="font-family:&quot;">
+	session的销毁
+</h3>
+<span style="font-family:&quot;font-size:medium;">1、超时，默认30分钟</span><br />
+<span style="font-family:&quot;font-size:medium;">2、执行api：session.invalidate()将session对象销毁、setMaxInactiveInterval(int interval) 设置有效时间，单位秒</span><br />
+<span style="font-family:&quot;font-size:medium;">3、服务器非正常关闭<br />
+</span><span style="font-family:&quot;font-size:medium;">removeAttribute(“key”);&nbsp; &nbsp; //可以将指定键关联的值删除（用户自定义的session变量）</span><br />
+<span style="font-family:&quot;font-size:medium;">invalidate();&nbsp; &nbsp; //将整个会话废弃掉。这样做会丢失该用户的所有会话数据，而非仅仅由我们自定义的session变量。</span> 
+<h3 style="font-family:&quot;">
+	解决客户端禁用cookie时使用session的方法
+</h3>
+<span style="font-family:&quot;font-size:medium;">A．保存session id的方式可以采用cookie，这样在交互过程中浏览器可以自动的按照规则把这个标识发送给服务器。</span><br />
+<span style="font-family:&quot;font-size:medium;">B．由于cookie可以被人为的禁止，必须有其它的机制以便在cookie被禁止时仍然能够把session id传递回服务器，经常采用的一种技术叫做URL重写，就是把session id附加在URL路径的后面，附加的方式也有两种，一种是作为URL路径的附加信息，另一种是作为查询字符串附加在URL后面。网络在整个交互过程中始终保持状态，就必须在每个客户端可能请求的路径后面都包含这个session id。</span><br />
+<span style="font-family:&quot;font-size:medium;">C．另一种技术叫做表单隐藏字段。就是服务器会自动修改表单，添加一个隐藏字段，以便在表单提交时能够把session id传递回服务器。</span> 
+<h2 style="font-family:&quot;">
+	Cookie机制和Session机制的区别
+</h2>
+<h3>
+	1、从存取方式上比较
+</h3>
+Cookie中只能保存ASCII字符串，如果需要存取Unicode字符或者二进制数据，需要进行UTF-8，GBK或者BASE64等方式的编码。Cookie中也不能直接存取Java对象。若要存储稍微复杂的信息，使用Cookie是比较困难的。而Session中可以存取任何类型的数据，包括而不限于String、Integer、List、Map等。Session中也可以直接保存Java Bean乃至任何Java类，对象等，使用起来非常方便。可以把Session看做是一个Java容器类。<br />
+<h3>
+	2、从隐私安全上比较
+</h3>
+Cookie存储在客户端浏览器中，对客户端是可见的，客户端的一些程序可能会窥探、复制甚至修改Cookie中的内容。而Session存储在服务器上，对客户端是透明的，不存在敏感信息泄露的危险。如果选用Cookie，比较好的办法是，敏感的信息如账号密码等尽量不要写到Cookie中。或者是像Google、Baidu那样将Cookie信息加密，提交到服务器后再进行解密，保证Cookie中的信息只有自己能读得懂。而如果选择Session就省事多了，反正是放在服务器上，Session里任何隐私都可以。<br />
+<h3>
+	3、从有效期上比较
+</h3>
+Cookie能实现信息永久的保存，只需要设置Cookie的maxAge属性为一个很大很大的数字或者Integer.MAX_VALUE就可以了。如果不设置过期时间，则表示这个cookie生命周期为浏览器会话期间，只要关闭浏览器窗口，cookie就消失了。这种生命期为浏览会话期的cookie被称为会话cookie。会话cookie一般不保存在硬盘上而是保存在内存里。如果设置了过期时间，浏览器就会把cookie保存到硬盘上，关闭后再次打开浏览器，这些cookie依然有效直到超过设定的过期时间。
+<p style="font-family:&quot;font-size:medium;">
+	使用Session理论上也能实现这种效果。只要调用方法setMaxInactiveInterval(Integer. MAX_VALUE)不就可以了么。但是由于Session依赖于名为JSESSIONID的Cookie，而Cookie JSESSIONID的maxAge默认为-1，只要关闭了浏览器该Session就会失效，因此Session不能实现信息永久有效的效果。使用URL地址重写也不能实现。而且如果设置Session的超时时间过长，服务器累计的Session就会越多，越容易导致内存溢出。
+</p>
+<h3>
+	4、从对服务器的负担上比较
+</h3>
+Session是保存在服务器端的，每个用户都会产生一个Session。如果并发访问的用户非常多，会产生非常多的Session，消耗大量的内存。因此像Google、Baidu、Sina这样并发访问量极高的网站，是不太可能使用Session来追踪客户会话的。他们一般都用加密的cookie来存储用户会话信息。<br />
+<h3>
+	5、从浏览器支持上比较
+</h3>
+Cookie是需要客户端浏览器支持的。如果客户端禁用了Cookie，或者不支持Cookie，则会话跟踪会失效。对于WAP上的应用，常规的Cookie就派不上用场了。如果客户端浏览器不支持Cookie，需要使用Session以及URL地址重写。需要注意的是所有的用到Session程序的URL都要使用response.encodeURL(String URL)或者response.encodeRedirectURL(String URL)进行URL地址重写，否则导致Session会话跟踪失败。对于WAP应用来说，Session+URL地址重写也许是它唯一的选择。<br />
+<h3>
+	6、从跨域名上比较
+</h3>
+Cookie支持跨域名访问，例如将domain属性设置为".hello.com"，则以".hello.com"为后缀的所有域名均可以访问该Cookie。跨域名Cookie现在被广泛用在网络中，例如Google、Baidu、Sina等。而Session则不会支持跨域名访问。Session仅在他所在的域名内有效。</div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/925.html">java servlet, jsp, js几种页面跳转的方法及传值</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/927.html">Cookie和Session的使用——登录、自动登录、注销登录（实例）</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

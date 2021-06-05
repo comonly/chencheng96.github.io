@@ -1,0 +1,470 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>CreateProcess执行cmd指令程序 TerminateProcess终止进程_comonly.cn</title>
+<meta name="keywords" content="CreateProcess执行cmd指令程序 TerminateProcess终止进程" />
+<meta name="description" content="WinAPI执行外部程序和创建新进程：CreateProcess(NULL,cmdOp,NULL,NULL,FALSE,CREATE_NEW_CONSOLE,NULL,NULL,&amp;si,&amp;pi)。执行一个外部程序实质上可以认为就是创建一个进程，windows系统下创建一个进程意味着：
+1、创建一个内核对象：内核对象是windows系统用于管理进程的一个工具，可以认为是一个数据结构。 
+2、创建一个地址空间：用于存放可执行文件的代码和数据
+
+
+	TerminateProcess(t" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">CreateProcess执行cmd指令程序 TerminateProcess终止进程</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2020-01-14</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	c c++
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>WinAPI执行外部程序和创建新进程：CreateProcess(NULL,cmdOp,NULL,NULL,FALSE,CREATE_NEW_CONSOLE,NULL,NULL,&amp;si,&amp;pi)。执行一个外部程序实质上可以认为就是创建一个进程，windows系统下创建一个进程意味着：
+1、创建一个内核对象：内核对象是windows系统用于管理进程的一个工具，可以认为是一个数据结构。 
+2、创建一个地址空间：用于存放可执行文件的代码和数据
+
+
+	TerminateProcess(t</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	WinAPI执行外部程序和创建新进程：CreateProcess(NULL,cmdOp,NULL,NULL,FALSE,CREATE_NEW_CONSOLE,NULL,NULL,&amp;si,&amp;pi)。执行一个外部程序实质上可以认为就是创建一个进程，windows系统下创建一个进程意味着：<br />
+1、创建一个内核对象：内核对象是windows系统用于管理进程的一个工具，可以认为是一个数据结构。 <br />
+2、创建一个地址空间：用于存放可执行文件的代码和数据
+</p>
+<p>
+	TerminateProcess(temp_playing_list_ffmpeg_node-&gt;win_process_information.hProcess, 1);
+</p>
+<p>
+	这个函数可以用来终止或者说杀死一个进程，它不会留给进程及其所有线程清理的时间，系统会马上终止(杀死)这个进程的所有线程，致使进程终止。在使用此函数前我们必须要调用OpenProcess函数来获得我们要终止(杀死)进程的句柄，并且要获得进程的PROCESS_TERMINATE权限。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	BOOL bRet = ::CreateProcess (NULL,cmdline,NULL,NULL,FALSE,CREATE_NEW_CONSOLE,NULL,NULL,&amp;si,&amp;pi); <br />
+下面的代码会等待指令完成之后再进行之下代码<br />
+WaitForSingleObject(pi.hProcess, INFINITE);
+</p>
+<p>
+	//关闭进程
+</p>
+<p>
+	<span> </span>TerminateProcess(<span>pi</span>.hProcess, 1);<br />
+<span> </span>CloseHandle(<span>pi</span>.hProcess);<br />
+<span> </span>CloseHandle(<span>pi</span>.hThread);
+</p>
+<p>
+	<br />
+</p>
+<p>
+	//关闭指定名称的进程
+</p>
+<p>
+	首先打开cmd.exe，输入tasklist,如下图，找出你需要结束的进程名字<br />
+然后输入taskkill /f /t /im exe名字<br />
+string exe = "taskkill /f /t /im ffmpeg.exe";<br />
+WinExec(exe.c_str(), SW_HIDE);
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1130.html">电脑配置设置相关 工具 插件 软件使用</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1132.html">JS获取子节点、父节点和兄弟节点的方法实例总结</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="PROCESS_INFORMATION结构体管理进程信息">
+							<h2 style="display:inline;color:#5BC648;">PROCESS_INFORMATION结构体管理进程信息</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-01-14&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span>typedef struct _PROCESS_INFORMATION {&nbsp;<br />
+&nbsp; &nbsp; HANDLE hProcess; //存放每个对象的与进程相关的句柄&nbsp;<br />
+&nbsp; &nbsp; HANDLE hThread;&nbsp; &nbsp; &nbsp; &nbsp; //返回的线程句柄。&nbsp;<br />
+&nbsp; &nbsp; DWORD dwProcessId;&nbsp; &nbsp; //用来存放进程ID号&nbsp;<br />
+&nbsp; &nbsp; DWORD dwThreadId;&nbsp; &nbsp; &nbsp; //用来存放线程ID号&nbsp;<br />
+} PROCESS_INFORMATION, *PPROCESS_INFORMATION, *LPPROCESS_INFORMATION;<br />
+调用Createprocess ()函数后,会自动地对该结构进行填充.<br />
+<br />
+如前所述，创建新进程可使系统建立一个进程内核对象和一个线程内核对象。在创建进程的时候，系统为每个对象赋予一个初始使用计数值1 。然后，在createProcess返回之前，该函数打开进程对象和线程对象，并将每个对象的与进程相关的句柄放入 PROCESS_INFORMATION结构的hProcess 和hThread 成员中。当CreateProcess 在内部打开这些对象时，每个对象的使用计数就变为2 。<br />
+这意味着在系统能够释放进程对象前，该进程必须终止运行（将使用计数递减为1），并且父进程必须调用CloseHandle （再将使用计数递减1，使之变为0）。同样，若要释放线程对象，该线程必须终止运行，父进程必须关闭线程对象的句柄。<br />
+<br />
+注意必须关闭子进程和它的主线程的句柄，以避免在应用程序运行时泄漏资源。当然，当进程终止运行时，系统会自动消除这些泄漏现象，但是，当进程不再需要访问子进程和它的线程时，编写得较好的软件能够显式关闭这些句柄（通过调用CloseHandle 函数来关闭）。不能关闭这些句柄是开发人员最常犯的错误之一。<br />
+<br />
+由于某些原因，许多开发人员认为，关闭进程或线程的句柄，会促使系统撤消该进程或线程。实际情况并非如此。关闭句柄只是告诉系统，你对进程或线程的统计数据不感兴趣。进程或线程将继续运行，直到它自己终止运行。<br />
+<br />
+当进程内核对象创建后，系统赋予该对象一个独一无二的标识号，系统中的其他任何进程内核对象都不能使用这个相同的ID号。线程内核对象的情况也一样。当一个线程内核对象创建时，该对象被赋予一个独一无二的、系统范围的I D号。进程I D和线程I D共享相同的号码池。这意味着进程和线程不可能拥有相同的I D 。另外，对象决不会被赋予0 作为其I D。在CreateProcess 返回之前，它要用这些I D填入PROCESS_INFORMATION 结构的dwProcessId 和dwThreadId 成员中。I D使你能够非常容易地识别系统中的进程和线程。一些实用工具（如Task Manager）对I D使用得最多，而高效率的应用程序则使用得很少。由于这个原因，大多数应用程序完全忽略ID。<br />
+<br />
+如果应用程序使用I D来跟踪进程和线程，必须懂得系统会立即复用进程I D和线程ID。例如，当一个进程被创建时，系统为它指定一个进程对象，并为它赋予ID值1 2 2。如果创建了一个新进程对象，系统不会将相同的I D赋予给它。但是，如果第一个进程对象被释放，系统就可以将1 2 2赋予创建的下一个进程对象。记住这一点后，就能避免编写引用不正确的进程对象或线程对象的代码。获取进程I D是很容易的，保存该I D也不难，但是，接下来你应该知道，该I D标识的进程已被释放，新进程被创建并被赋予相同的I D。当使用已经保存的进程I D时，最终操作的是新进程，而不是原先获得I D的进程。<br />
+<br />
+有时，运行的应用程序想要确定它的父进程。首先应该知道只有在生成子进程时，才存在进程之间的父子关系。在子进程开始执行代码前， Windows不再考虑存在什么父子关系。较早的Windows 版本没有提供让进程查询其父进程的函数。现在， ToolHelp 函数通过PROCESSENTRY32 结构使得这种查询成为可能。在这个结构中有一个th32ParentProcess I D成员，根据文档的说明，它能返回进程的父进程的I D。<br />
+<br />
+系统无法记住每个进程的父进程的I D，但是，由于I D是被立即重复使用的，因此，等到获得父进程的I D时，该I D可能标识了系统中一个完全不同的进程。父进程可能已经终止运行。如果应用程序想要与它的“创建者”进行通信，最好不要使用I D。应该定义一个持久性更好的机制，比如内核对象和窗口句柄等。<br />
+<br />
+若要确保进程I D或线程I D不被重复使用，唯一的方法是保证进程或线程的内核对象不会被撤消。如果刚刚创建了一个新进程或线程，只要不关闭这些对象的句柄，就能够保证进程对象不被撤消。一旦应用程序结束使用该I D，那么调用CloseHandle 就可以释放内核对象，要记住，这时使用或依赖进程I D，将不再安全。如果使用的是子进程，将无法保证父进程或父线程的有效性，除非父进程复制了它自己的进程对象或线程对象的句柄，并让子进程继承这些句柄。<br />
+<p>
+	<br />
+</p>
+<p>
+	转自：<a href="https://blog.csdn.net/akof1314/article/details/5471768" target="_blank">https://blog.csdn.net/akof1314/article/details/5471768</a>
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="WindowsAPI详解——CreateProcess执行外部程序和创建新进程">
+							<h2 style="display:inline;color:#5BC648;">WindowsAPI详解——CreateProcess执行外部程序和创建新进程</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-01-14&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span>WinAPI执行外部程序和创建新进程：CreateProcess（）的使用<br />
+一、基本原理和流程<br />
+执行一个外部程序实质上可以认为就是创建一个进程，windows系统下创建一个进程意味着：<br />
+1、创建一个内核对象：内核对象是windows系统用于管理进程的一个工具，可以认为是一个数据结构。&nbsp;&nbsp;<br />
+2、创建一个地址空间：用于存放可执行文件的代码和数据&nbsp;&nbsp;<br />
+当调用CreateProcess()时，windows会自动创建一个进程内核对象，将进程内核对象引用计数设置为1，并将可执行文件的代码和数据加载到地址空间，然后再创建相应的主线程的内核对象，最终执行入口函数。<br />
+<br />
+二、CreateProcess的定义<br />
+BOOL CreateProcess&nbsp;<br />
+(&nbsp;<br />
+LPCTSTR lpApplicationName,&nbsp;<br />
+LPTSTR lpCommandLine,&nbsp;<br />
+LPSECURITY_ATTRIBUTES lpProcessAttributes，<br />
+LPSECURITY_ATTRIBUTES lpThreadAttributes,&nbsp;<br />
+BOOL bInheritHandles,&nbsp;<br />
+DWORD dwCreationFlags,&nbsp;<br />
+LPVOID lpEnvironment,&nbsp;<br />
+LPCTSTR lpCurrentDirectory,&nbsp;<br />
+LPSTARTUPINFO lpStartupInfo,&nbsp;<br />
+LPPROCESS_INFORMATION lpProcessInformation&nbsp;<br />
+);&nbsp;
+<p>
+	详情参考：<a href="https://blog.csdn.net/baidu_29198395/article/details/82926348" target="_blank">https://blog.csdn.net/baidu_29198395/article/details/82926348</a>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	第6个参数 dwCreationFlags ，这是个DWORD的标识，用于设置新进程创建的方式，各个标识符以宏的形式定义，可以用位或组合使用，同时指定多个标识符（部分取值）:<br />
+CREATE_NEW_CONSOLE //要求系统为新进程创建一个新的控制台窗口（否则会和原进程共用一个控制台窗口）<br />
+CREATE_NO_WINDOW //不为新进程创建窗口，可以用这个来创建一个没有窗口的应用程序<br />
+DEBUG_PROCESS //将新进程作为被调试程序而原进程被当做调试器，新进程和其创建的其他进程中发生的特定事件都会被通知原进程<br />
+CREATE_UNICODE_ENVIRONMENT //告诉系统新进程的环境块包含Unicode字符（默认为ANSI）
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="WindowsAPI详解——TerminateProcess 终止|杀死其它进程">
+							<h2 style="display:inline;color:#5BC648;">WindowsAPI详解——TerminateProcess 终止|杀死其它进程</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-01-14&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span>这个函数可以用来终止或者说杀死一个进程，它不会留给进程及其所有线程清理的时间，系统会马上终止(杀死)这个进程的所有线程，致使进程终止。在使用此函数前我们必须要调用OpenProcess函数来获得我们要终止(杀死)进程的句柄，并且要获得进程的PROCESS_TERMINATE权限。<br />
+<br />
+函数原型：<br />
+BOOL TerminateProcess(HANDLE hProcess,UINT uExitCode)<br />
+<br />
+参数说明：<br />
+1、hProcess：要终止(杀死)进程的句柄，需要有PROCESS_TERMINATE权限。<br />
+2、uExitCode：设置进程的退出值。可通过GetExitCodeProcess函数得到一个进程的退出值。<br />
+<br />
+返回值：<br />
+如果失败将返回FALSE(0)，而成功将返回一个非零值。<br />
+注：不要用if(ret==TRUE)去检测函数是否调用成功，因为函数调用成功会返回一个非零值，但不一定是TRUE(1)<br />
+<p>
+	<br />
+</p>
+<p>
+	转自：<a href="https://blog.csdn.net/jfkidear/article/details/27057861" target="_blank">https://blog.csdn.net/jfkidear/article/details/27057861</a>
+</p>
+<p>
+	<br />
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="STARTUPINFO结构体">
+							<h2 style="display:inline;color:#5BC648;">STARTUPINFO结构体</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-01-14&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span>typedef struct _STARTUPINFO&nbsp;<br />
+{&nbsp;<br />
+<span></span>&nbsp; &nbsp; DWORD cb;<span> </span> <span> </span> //包含STARTUPINFO结构中的字节数.如果Microsoft将来扩展该结构,它可用作版本控制手段.应用程序必须将cb初始化为sizeof(STARTUPINFO)&nbsp;<br />
+&nbsp; &nbsp; PSTR lpReserved;<span> </span> //保留。必须初始化为NULL<br />
+&nbsp; &nbsp; PSTR lpDesktop;<span> </span> //用于标识启动应用程序所在的桌面的名字。如果该桌面存在，新进程便与指定的桌面相关联。如果桌面不存在，便创建一个带有默认属性的桌面，并使用为新进程指定的名字。如果lpDesktop是NULL（这是最常见的情况 ),那么该进程将与当前桌面相关联&nbsp;<br />
+&nbsp; &nbsp; PSTR lpTitle;<span> </span> //用于设定控制台窗口的名称。如果lpTitle是NULL，则可执行文件的名字将用作窗口名.This parameter must be NULL for GUI or console processes that do not create a new console window.<br />
+&nbsp; &nbsp; DWORD dwX;<span> </span> //用于设定应用程序窗口相对屏幕左上角位置的x 坐标（以像素为单位）。&nbsp;<br />
+&nbsp; &nbsp; DWORD dwY;<span> </span> //对于GUI processes用CW_USEDEFAULT作为CreateWindow的x、y参数，创建它的第一个重叠窗口。若是创建控制台窗口的应用程序，这些成员用于指明相对控制台窗口的左上角的位置<br />
+&nbsp; &nbsp; DWORD dwXSize;<span> </span> //用于设定应用程序窗口的宽度（以像素为单位）<br />
+&nbsp; &nbsp; DWORD dwYSize;<span> </span> //子进程将CW_USEDEFAULT 用作CreateWindow 的nWidth、nHeight参数来创建它的第一个重叠窗口。若是创建控制台窗口的应用程序，这些成员将用于指明控制台窗口的宽度&nbsp;<br />
+&nbsp; &nbsp; DWORD dwXCountChars;<span> </span> //用于设定子应用程序的控制台窗口的宽度（屏幕显示的字节列）和高度（字节行）（以字符为单位）&nbsp;<br />
+&nbsp; &nbsp; DWORD dwYCountChars;&nbsp;<br />
+&nbsp; &nbsp; DWORD dwFillAttribute;&nbsp; &nbsp;//用于设定子应用程序的控制台窗口使用的文本和背景颜色&nbsp;<br />
+&nbsp; &nbsp; DWORD dwFlags;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//请参见下一段和表4-7 的说明&nbsp;<br />
+&nbsp; &nbsp; WORD wShowWindow;&nbsp; &nbsp; &nbsp; &nbsp; //用于设定如果子应用程序初次调用的ShowWindow 将SW_*作为nCmdShow 参数传递时，该应用程序的第一个重叠窗口应该如何出现。本成员可以是通常用于ShowWindow 函数的任何一个SW_*标识符，除了SW_SHOWDEFAULT.&nbsp;<br />
+&nbsp; &nbsp; WORD cbReserved2;&nbsp; &nbsp; &nbsp; &nbsp; //保留。必须被初始化为0&nbsp;<br />
+&nbsp; &nbsp; PBYTE lpReserved2;&nbsp; &nbsp; &nbsp; &nbsp;//保留。必须被初始化为NULL<br />
+&nbsp; &nbsp; HANDLE hStdInput;&nbsp; &nbsp; &nbsp; &nbsp; //用于设定供控制台输入和输出用的缓存的句柄。按照默认设置，hStdInput 用于标识键盘缓存，hStdOutput 和hStdError用于标识控制台窗口的缓存&nbsp;<br />
+&nbsp; &nbsp; HANDLE hStdOutput;&nbsp;<br />
+&nbsp; &nbsp; HANDLE hStdError;&nbsp;<br />
+} STARTUPINFO, *LPSTARTUPINFO;<br />
+<br />
+当Windows 创建新进程时，它将使用该结构的有关成员。大多数应用程序将要求生成的应用程序仅仅使用默认值。至少应将该结构中的所有成员初始化为零，然后将cb成员设置为该结构的大小：<br />
+<br />
+STARTUPINFO StartupInfo;<br />
+<span> </span>char szCMDPath[255];<br />
+&nbsp;<br />
+<span> </span>//配置隐藏窗口结构体<br />
+<span> </span>StartupInfo.cb=sizeof(STARTUPINFO);<br />
+<span> </span>StartupInfo.wShowWindow=SW_HIDE;<br />
+<span> </span>StartupInfo.dwFlags=STARTF_USESTDHANDLES|STARTF_USESHOWWINDOW;<br />
+<span> </span>StartupInfo.hStdInput=(HANDLE)listenFd;<br />
+<span> </span>StartupInfo.hStdOutput=(HANDLE)listenFd;<br />
+<span> </span>StartupInfo.hStdError=(HANDLE)listenFd;<br />
+&nbsp;<br />
+<span> </span>//创建匿名管道<br />
+<span> </span>PROCESS_INFORMATION ProcessInfo;<br />
+<span> </span>//other operation<br />
+<span> </span>CreateProcess(NULL,szCMDPath,NULL,NULL,TRUE,0,NULL,NULL,&amp;StartupInfo,&amp;ProcessInfo);<br />
+<br />
+dwFlags 使用标志及含义<br />
+STARTF_USESIZE<span> </span>//使用dwXSize 和dwYSize 成员&nbsp;<br />
+STARTF_USESHOWWINDOW<span> </span>//使用wShowWindow 成员&nbsp;<br />
+STARTF_USEPOSITION<span> </span>//使用dwX 和dwY 成员&nbsp;<br />
+STARTF_USECOUNTCHARS&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //使用dwXCountChars 和dwYCount Chars 成员&nbsp;<br />
+STARTF_USEFILLATTRIBUTE<span> </span>//使用dwFillAttribute 成员&nbsp;<br />
+STARTF_USESTDHANDLES<span> </span>//使用hStdInput 、hStdOutput 和hStdError 成员&nbsp;<br />
+STARTF_RUN_FULLSCREEN<span> </span>//强制在x86 计算机上运行的控制台应用程序以全屏幕方式启动运行<br />
+<p>
+	<br />
+</p>
+<p>
+	转自：<a href="https://blog.csdn.net/whynottrythis/article/details/39828395" target="_blank">https://blog.csdn.net/whynottrythis/article/details/39828395</a>
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#PROCESS_INFORMATION结构体管理进程信息">PROCESS_INFORMATION结构体管理进程信息</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#WindowsAPI详解——CreateProcess执行外部程序和创建新进程">WindowsAPI详解——CreateProcess执行外部程序和创建新进程</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#WindowsAPI详解——TerminateProcess 终止|杀死其它进程">WindowsAPI详解——TerminateProcess 终止|杀死其它进程</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#STARTUPINFO结构体">STARTUPINFO结构体</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,398 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Request对象—ASP_comonly.cn</title>
+<meta name="keywords" content="Request对象—ASP" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Request对象—ASP</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-03-22</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	javaweb---jsp asp数据库框架
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">Request,ASP</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h1>
+	Request对象
+</h1>
+<h2 id='Requet对象的集合'>
+	Request对象的集合
+</h2>
+<h4>
+	QueryString集合
+</h4>
+<p>
+	可以存储URL中的查询串信息，可以包含用户名，电子邮件地址及其他信息。生成查询串的三种方式：
+</p>
+<p>
+	以？附加到URL地址中
+</p>
+<p>
+	查询串附加在锚标记1<a>生成的超级链接上</a> 
+</p>
+<p>
+	<a>利用Get方法发送表单到服务器</a> 
+</p>
+<p>
+	<a>根据变量名显示查询串的值：<span style="line-height:1.5;">&lt;%=Request.QueryString("username</span><span style="line-height:1.5;">")%&gt;，显示URL中username对应的值1，并输出到浏览器。</span> </a> 
+</p>
+<p>
+	<a>检索多个“名/值”对的内容：</a> 
+</p>
+<p>
+	<a>Request.QueryString.count &nbsp; &nbsp; //可以获取查询串的长度，可用于循环遍历</a> 
+</p>
+<p>
+	<a>&lt;%=Request.QueryString("username")(0)%&gt; &nbsp; &nbsp; //可以用来查询test.aso?username=test&amp;username=qw的第一个值</a>
+</p>
+<h4>
+	<a>Form集合</a> 
+</h4>
+<p>
+	<a>From（表单）中可以发送文本框，列表框，复选框，单选框等：Request.Form("elementname")[(index)|.count]。提交表单的方式如果是post，则</a> 
+</p>
+<p>
+	<a>可以通过&lt;%=Response.write Request.form("username")%&gt;获取表单的值。</a> 
+</p>
+<p>
+	<a><span>Request.Form.count &nbsp; &nbsp; //可以获取Form集合的长度，可用于循环遍历</span>。</a> 
+</p>
+<p>
+	<a><span>&lt;%=Response.write Request.form(i</span><span>)%&gt;获取表单某一项的值。</span></a>
+</p>
+<h4>
+	<a>ServerVariables集合</a> 
+</h4>
+<p>
+	<a>存放着所有http标题变量和web服务器的几个环境变量。需要将表单的method属性设置为get，才能得到该集合的变量。</a> 
+</p>
+<p>
+	<a href="http://www.iyaka.cn/blog/14_642.html">HTTP变量参考另一篇文章：http://www.iyaka.cn/blog/14_642.html</a> 
+</p>
+<p>
+	<a>HTTP标题：</a> 
+</p>
+<p>
+	<a> 
+	<table style="width:350px;" class="ke-zeroborder">
+		<tbody>
+			<tr>
+				<td>
+					变量<br />
+				</td>
+				<td>
+					含有
+				</td>
+			</tr>
+			<tr>
+				<td>
+					HTTP_ACCEPT
+				</td>
+				<td>
+					客户机可接受的MIME数据类型列表
+				</td>
+			</tr>
+			<tr>
+				<td>
+					HTTP_ACCEPT_ENCODING
+				</td>
+				<td>
+					客户机可接受的编码类型列表
+				</td>
+			</tr>
+			<tr>
+				<td>
+					ACCEPT_LANGUAGE
+				</td>
+				<td>
+					客户机可使用的语言列表
+				</td>
+			</tr>
+			<tr>
+				<td>
+					HTTP_CONNECTION
+				</td>
+				<td>
+					连接类型
+				</td>
+			</tr>
+			<tr>
+				<td>
+					HTTP_USER_AGENT
+				</td>
+				<td>
+					客户机软件
+				</td>
+			</tr>
+			<tr>
+				<td>
+					HTTP_REFERER
+				</td>
+				<td>
+					链接到此页面的URL
+				</td>
+			</tr>
+			<tr>
+				<td>
+					HTTP_COOKIE
+				</td>
+				<td>
+					客户机浏览器发送的cookie
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</a> 
+</p>
+<p>
+	<a>这些变量都是由浏览器随网页一起发送的，每次执行一个网页，web服务器都要伴随该页面建立一组服务器变量。这些变量可以通过Request的ServerVariables来访问。比如通过&lt;%=request.ServerVariables("HTTP_REFERER")%&gt;获取链接到该页的URL。</a> 
+</p>
+<p>
+	<a>可以通过Request.ServerVariables.count来变量所有web服务器变量的值。</a> 
+</p>
+<p>
+	<a>在VB中可以使用for Each key in Request.ServerVariables来变量所有变量。</a> 
+</p>
+<p>
+	<a></a><a>ServerVariables集合中的变量是只读的，资料性的。</a>
+</p>
+<h4>
+	<a>Cookies集合</a> 
+</h4>
+<p>
+	<a>使用Request对象的cookies集合可以检索在HTTP请求中发送的cookie值。</a> 
+</p>
+<p>
+	<a>&lt;%Request.Cookies("user")("name")%&gt;</a> 
+</p>
+<p>
+	<a>cookie可以用来保存客户端的某些信息，如网站的访问记录，用户的登录次数等记录。</a>
+</p>
+<h4>
+	<a>ClientCertificate集合</a> 
+</h4>
+<p>
+	<a>已经获得证书授权（Certificate&nbsp;Authority，CA）的客户机能够与web服务器进行安全信息传递的加密数码。</a>
+</p>
+<h2 id='Requet对象的属性'>
+	<a>Request对象的属性</a> 
+</h2>
+<p>
+	<a>只有一个TotalBytes，是一个只读属性，给出在发送正文中发送的字节总数。</a> 
+</p>
+<h2 id='Requet对象的方法'>
+	<a>Request对象的方法</a> 
+</h2>
+<p>
+	<a>只有一个方法BinaryRead。当form的method方法值为post时，该方法可以取得从客户端传送到服务器的数据，并存储在Safe Array数组中。 </a> 
+</p>
+<p>
+	<a>&lt;%byt=Request.TotalBytes &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //获取传递的字符数</a> 
+</p>
+<p>
+	<a>data=Request.BinaryRead(byt)%&gt; &nbsp; &nbsp; //将指定字节数的数据读取到字符串变量data中，该方法获得表单的纯文本信息。</a> 
+</p>
+<p>
+	<a>可以用midB函数对数据进行处理显示。</a> 
+</p>
+<p>
+	<a>BinaryRead和QueryString，以及Form集合不能同时使用，否则会出现数据无法读取的错误。</a> 
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/640.html">地址对象—JavaScript</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/642.html">ServerVariables—ASP</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Requet对象的集合">Requet对象的集合</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Requet对象的属性">Requet对象的属性</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Requet对象的方法">Requet对象的方法</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,264 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>指向指针的引用  指针的引用（指针） _comonly.cn</title>
+<meta name="keywords" content="指向指针的引用  指针的引用（指针） " />
+<meta name="description" content="引用本身不是对象，因此不能定义指向引用的指针。但指针是对象，所以存在指针的引用。
+
+int i = 42;
+int *p;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // p是一个 int 型指针
+int *&amp;r = p;&nbsp; &nbsp; &nbsp;// r是一个对指针p的引用
+
+r = &amp;i;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // 相当于 p = &amp;i;
+*r = 0;&nbsp" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">指向指针的引用  指针的引用（指针） </h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-12-03</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>引用本身不是对象，因此不能定义指向引用的指针。但指针是对象，所以存在指针的引用。
+
+int i = 42;
+int *p;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // p是一个 int 型指针
+int *&amp;r = p;&nbsp; &nbsp; &nbsp;// r是一个对指针p的引用
+
+r = &amp;i;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // 相当于 p = &amp;i;
+*r = 0;&nbsp</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 引用本身不是对象，因此不能定义指向引用的指针。但指针是对象，所以存在指针的引用。<br />
+<br />
+int i = 42;<br />
+int *p;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // p是一个 int 型指针<br />
+int *&amp;r = p;&nbsp; &nbsp; &nbsp;// r是一个对指针p的引用<br />
+<br />
+r = &amp;i;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // 相当于 p = &amp;i;<br />
+*r = 0;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // 相当与 *p = 0;<br />
+要理解r的类型到底是什么，就简单的方法是从右向左阅读r的定义，离变量名最近的符号（此题中是&amp;r的符号是&amp;）对变量的类型有最直接的影响，因此r是一个引用。声明符的其余部分以确定r引用的类型是什么，此题中的符号*说明r引用的是一个指针。最后，声明的基本数据类型部分指出r引用的是一个int指针。<br />
+<br />
+面对一条比较复杂的指针或引用的声明语句时，从右向左阅读有助于弄清楚它的真实含义<br />
+<br />
+<p>
+	<br />
+</p>
+<p>
+	<s>用指针的引用总是没有问题的。因为传递变量的地址比传递变量本身总是改的快。</s><br />
+	<div>
+		<br />
+	</div>
+没有指向引用的指针!因为引用不是对象，没有地址。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	引用本身不是一个对象，因此不能定义指向引用的指针。但指针是对象，所以存在对指针的引用：<br />
+<br />
+int i = 42;<br />
+int *p;<br />
+int *&amp;r = p;<br />
+要理解r的类型到底是什么，最简单的办法是从右向左阅读r的定义。离变量最近的符号（&amp;）对变量的类型有最直接的影响，因此r是一个引用。声明符其余部分确定r引用的类型是什么，*说明引用的是一个指针。最后，声明的基本数据类型部分指出r引用的是一个int指针。<br />
+int &amp;*r;<br />
+如果这些写就会提示：pointer to reference is not allowed.<br />
+</p>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1583.html">对线程CloseHandle，会对WaitForSingleObject产生什么作用？</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1585.html">ResetEvent、CreateEvent、SetEvent  event</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

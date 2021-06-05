@@ -1,0 +1,406 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>android相关内容汇总_comonly.cn</title>
+<meta name="keywords" content="android相关内容汇总" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">android相关内容汇总</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-01-15</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	android
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h3>
+	Eclipse如何导出安卓apk文件
+</h3>
+<p>
+	thefirst在Eclipse中选一个Android工程，然后鼠标右键选 Export<br />
+选择 Android -&gt;Export Android Application&nbsp;<br />
+之前已经选择了工程，点击 Next&nbsp;<br />
+若没keystore，选择 Create new keystore ，然后指定路径和密码&nbsp;<br />
+输入 Alias 名称和密码，指定其有效期。界面下面至少输一个<br />
+输入要导出 apk 的名称，点Finish 。这样就得到了一个已经签名的apk。
+</p>
+<h3>
+	Android问：Dx unsupported class file version 52.0
+</h3>
+<p>
+	Dx unsupported class file version 52.0<br />
+...while parsing com/nn/windows/WMain.class<br />
+上述报错后跟着报错：Conversion to Dalvik format failed with error 1
+</p>
+<p>
+	<br />
+</p>
+<p>
+	Conversion to Dalvik format failed with error 1是Dx unsupported class file version 52.0的错误引起的。是由于Java编译器版本和Android&nbsp;sdk版本不匹配。
+</p>
+<p>
+	解决方法：把java的编译器改为1.6版本的（Android&nbsp;sdk版本也是1.6的话）。右键项目-&gt;properties-&gt;Java&nbsp;compiler
+</p>
+怎么解决新建项目的报错No resource found that matches the give
+<p>
+	<br />
+</p>
+<p>
+	AndroidManifest.xml:11: error: Error: No resource found that matches the given name (at 'icon' with value '@drawable/ic_launcher') 错误发生在AndroidManifest.xml中的android:icon="@drawable/ic_launcher"
+</p>
+<p>
+	<br />
+</p>
+<p>
+	Eclipse Neon版本新建的android项目使用的图标都是使用mipmap文件夹里面的，就是那个ic_launcher系统默认机器人在这个文件夹里面，app内置图片都放在drawable中，所以可以直接修改图片来源是mipmap 而不是drawable。
+</p>
+<p>
+	直接把drawable改成mipmap就行，你的@的文件不在drawable就在mipmap里
+</p>
+<p>
+	<br />
+</p>
+<h3>
+	Android SDk Manager里面到底哪些东西是必须下载的？
+</h3>
+<p>
+	<br />
+</p>
+<p>
+	sdk+版本号，主要是提供你开发时候要使用的那个版本api。比如你开发中如果用到了5.0的api，那么你就要安装5.0的sdk
+</p>
+<p>
+	根据官方文档的描述<br />
+SDK Tools 必须<br />
+SDK Platform-tools 必须<br />
+SDK Platform必须至少安装一个版本<br />
+System Image建议安装<br />
+Android Support建议安装<br />
+SDK Samples建议安装
+</p>
+<p>
+	<br />
+</p>
+<p>
+	初学安卓开发应该用Eclipse还是Android studio？
+</p>
+<p>
+	使用Android Studio可以先用着最基本的功能，然后慢慢熟悉它的更多功能。但是使用Eclipse的话，在解决依赖之类的问题时花费的时间就多太多了。还可以考虑 Intellij idea
+</p>
+<h3>
+	android http://dl-ssl.google.com/android/eclipse/访
+</h3>
+<p>
+	eclipse中安装adt插件：这个dl-ssl.google.com域名经常会访问不了
+</p>
+<p>
+	有很多地方说的方法是操作C:\Windows\System32\drivers\etc\hosts文件来进行访问，其实可以通过可以访问的镜像进行访问。可以通过Android SDK 在线更新镜像服务器资源<a href="http://tools.android-studio.org/index.php/proxy" target="_blank">http://tools.android-studio.org/index.php/proxy</a>
+</p>
+<h3>
+	Eclipse中ADT，sdk，dk，各是干什么的
+</h3>
+<p>
+	<br />
+</p>
+<p>
+	1、JDK(Java Development Kit)是 Java 语言的软件开发工具包(SDK)。开发Java的工具包。
+</p>
+<p>
+	2、软件开发工具包（外语首字母缩写：SDK、外语全称：Software Development Kit）是为特定软件包、软件框架、硬件平台、操作系统等建立应用软件时开发工具的集合。
+</p>
+<p>
+	3、安卓开发工具---Android Develop Tool。ADT是Android开发的eclipse插件，用于打包和封装Android应用
+</p>
+<p>
+	<br />
+</p>
+<h3>
+	Android Studio怎么删除项目
+</h3>
+<p>
+	<br />
+</p>
+<p>
+	点击File——Project Structure
+</p>
+<p>
+	在Project Structure页面，选中要删除的项目，点击上面的减号图标。
+</p>
+<p>
+	弹出“Remove Module”的弹框，点击Yes，然后ok
+</p>
+<p>
+	在项目上点击右键，delete就可以把module删除掉了
+</p>
+<h3>
+	error when loading the sdk 发现了元素 d:skin 开头无效内容
+</h3>
+<p>
+	把错误位置的devices.xml这个文件删除，再把sdk里面tools\lib下的这个文件拷贝到你删除的那个文件夹里，重启eclipse
+</p>
+<h3>
+	在eclipse中添加android ADT
+</h3>
+<p>
+	https://dl-ssl.google.com/android/eclipse/无法正常访问
+</p>
+可以在Eclipse中离线安装ADT，下载好ADT包后再进行导入
+<h3>
+	Your CPU does not support required features (VT-x
+</h3>
+<p>
+	android studio 运行虚拟机的时候出现
+</p>
+<p>
+	你的电脑的处理器是AMD的吗？如果是AMD的就悲催了，基本上不能用模拟器调试程序了，只能用手机调试了
+</p>
+<h3>
+	android studio怎么切换工程
+</h3>
+<p>
+	<br />
+</p>
+<p>
+	1.点击File——Project Structure
+</p>
+<p>
+	2.在Project Structure页面，选中要删除的项目，点击上面的减号图标。
+</p>
+<p>
+	3.弹出“Remove Module”的弹框，点击Yes，然后ok
+</p>
+<p>
+	4.在项目上点击右键，delete就可以把module删除掉了
+</p>
+<h3>
+	怎么将网页嵌入到android应用中
+</h3>
+<p>
+	可以使用webview加载或者textview等，都支持html的显示不过只能处理部分HTML标签
+</p>
+<p>
+	直接调用系统浏览器<br />
+Intent intent = new Intent();<br />
+Uri content_url = Uri.parse("http://www.iyaka.cn");<br />
+intent<br />
+.setAction("android.intent.action.VIEW")<br />
+.setData(content_url);<br />
+startActivity(intent);
+</p>
+<h3>
+	Hardcoded string 汉字, should use @string resource警告
+</h3>
+在一个RelativeLayout布局中加入一个Button按钮，在android:text="确定"处总出现一个提示“Hardcoded string "确定", should use @string resource”
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	应该在res/values/strings.xml中设置：
+</p>
+<p>
+	&lt;!--?xml version="1.0" encoding="utf-8"?--&gt;
+</p>
+<p>
+	&lt;resources&gt;&lt;string name="message"&gt;下一步&lt;/string&gt;&lt;/resources&gt;
+</p>
+<p>
+	引用的时候使用 android:text="@string/message"就行了。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/827.html">iMacros相关问题汇总</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/829.html">轻松汇编在WIN7 64位的问题   目标文件不存在?</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

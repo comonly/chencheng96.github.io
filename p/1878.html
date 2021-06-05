@@ -1,0 +1,399 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>keras框架等使用中问题【汇总】_comonly.cn</title>
+<meta name="keywords" content="keras框架等使用中问题【汇总】" />
+<meta name="description" content="operands could not be broadcast together with shapes
+
+
+	使用ufunc函数对两个数组进行计算时，ufunc函数会对这两个数组的对应元素进行计算，因此它要求这两个数组有相同的大小(shape相同)
+
+
+	https://blog.csdn.net/qq_18433441/article/details/56834207 
+
+
+	
+
+
+	numpy的squeeze函数
+
+
+	squeeze 函数：从数组的形状中删除单维度条目" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">keras框架等使用中问题【汇总】</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2020-10-23</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	机器学习算法分析
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>operands could not be broadcast together with shapes
+
+
+	使用ufunc函数对两个数组进行计算时，ufunc函数会对这两个数组的对应元素进行计算，因此它要求这两个数组有相同的大小(shape相同)
+
+
+	https://blog.csdn.net/qq_18433441/article/details/56834207 
+
+
+	
+
+
+	numpy的squeeze函数
+
+
+	squeeze 函数：从数组的形状中删除单维度条目</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	operands could not be broadcast together with shapes
+</p>
+<p>
+	使用ufunc函数对两个数组进行计算时，ufunc函数会对这两个数组的对应元素进行计算，因此它要求这两个数组有相同的大小(shape相同)
+</p>
+<p>
+	<a href="https://blog.csdn.net/qq_18433441/article/details/56834207">https://blog.csdn.net/qq_18433441/article/details/56834207</a> 
+</p>
+<p>
+	<br />
+</p>
+<p>
+	numpy的squeeze函数
+</p>
+<p>
+	squeeze 函数：从数组的形状中删除单维度条目，即把shape中为1的维度去掉
+</p>
+<p>
+	<a href="https://blog.csdn.net/tracy_leaf/article/details/79297121">https://blog.csdn.net/tracy_leaf/article/details/79297121</a> 
+</p>
+<p>
+	<br />
+</p>
+<p>
+	reshape()函数
+</p>
+<p>
+	可以改变数组的形状，并且原始数据不发生变化。但是，reshape()函数中的参数需要满足乘积等于数组中数据总数。<br />
+reshape(1,-1)转化成1行：&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-1表示自动计算<br />
+reshape(2,-1)转换成两行：<br />
+reshape(-1,1)转换成1列：<br />
+reshape(-1,2)转化成两列
+</p>
+<p>
+	<br />
+</p>
+<p>
+	cannot reshape array of size 115200 into shape (1,160,240,1)
+</p>
+<p>
+	<span>115200</span>不等于四个数相乘的倍数（包括1倍）
+</p>
+<p>
+	<a href="https://blog.csdn.net/Netceor/article/details/107330685">https://blog.csdn.net/Netceor/article/details/107330685</a> 
+</p>
+<p>
+	<br />
+</p>
+<p>
+	python区别之[:j]和[:,j]或者[:i]与[:,i]，python冒号在数组和矩阵使用
+</p>
+<p>
+	<a href="https://blog.csdn.net/weixin_38632246/article/details/87197226">https://blog.csdn.net/weixin_38632246/article/details/87197226</a> 
+</p>
+<p>
+	<br />
+</p>
+<p>
+	model.compile() 在配置训练方法时，告知训练时用的优化器、损失函数和准确率评测标准。<a href="https://blog.csdn.net/yunfeather/article/details/106461754">https://blog.csdn.net/yunfeather/article/details/106461754</a>
+</p>
+<p>
+	model.predict 方法
+</p>
+<p>
+	model.fit() 方法 训练模型
+</p>
+<p>
+	返回&nbsp;hist.history是一个字典，里面的键值有loss，acc，val_loss，val_acc或者自定义内容，每个健对应一个列表，索引是epoch或者batch_step
+</p>
+<p>
+	Early Stopping
+</p>
+<p>
+	每个epoch开始和结束的时候进行哪种特定操作。Callbacks中有一些设置好的接口，可以直接使用，如’acc’, 'val_acc’, ’loss’ 和 ’val_loss’等等
+</p>
+<p>
+	<a href="https://blog.csdn.net/zwqjoy/article/details/86677030">https://blog.csdn.net/zwqjoy/article/details/86677030</a> 
+</p>
+<p>
+	ModelCheckpoint
+</p>
+<p>
+	该回调函数将在每个epoch后保存模型到filepath
+</p>
+<p>
+	<a href="https://blog.csdn.net/zengNLP/article/details/94589469">https://blog.csdn.net/zengNLP/article/details/94589469</a> 
+</p>
+<p>
+	predict_on_batch
+</p>
+<p>
+	为您提供的一组预测作为参数提供给您.如果您训练网络识别猫和狗 – 一旦您将图像提供给predict_on_batch方法 – 如果给定图像中有猫或狗,您将获得概率.您还可以使用这些概率来评估模型.
+</p>
+<p>
+	<a href="https://www.icode9.com/content-1-418128.html">https://www.icode9.com/content-1-418128.html</a> 
+</p>
+<p>
+	<br />
+</p>
+<p>
+	Python enumerate() 函数
+</p>
+<p>
+	将一个可遍历的数据对象(如列表、元组或字符串)组合为一个索引序列，同时列出数据和数据下标，一般用在 for 循环当中。
+</p>
+<p>
+	<a href="https://www.runoob.com/python/python-func-enumerate.html">https://www.runoob.com/python/python-func-enumerate.html</a> 
+</p>
+<p>
+	<br />
+</p>
+<p>
+	np.save和np.load
+</p>
+<p>
+	Numpy数组的保存与读取，数组以二进制格式保存 .npy文件
+</p>
+<p>
+	<a href="https://blog.csdn.net/u010089444/article/details/52738479">https://blog.csdn.net/u010089444/article/details/52738479</a> 
+</p>
+<p>
+	<br />
+</p>
+<p>
+	Error when checking input: expected input_1 to have 5 dimensions, but got ararray with shape (1, 160, 240, 1)
+</p>
+<p>
+	模型希望输入一个2维的tensor进来，结果输入进来了（60000,28,28）这个三维变量。
+</p>
+<p>
+	<a href="https://blog.csdn.net/u012193416/article/details/79399679">https://blog.csdn.net/u012193416/article/details/79399679</a>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	Keras&nbsp;模型主要包括model和weight两个部分。 进行保存。
+</p>
+<p>
+	model.to_yaml()  # save as YAML
+</p>
+<p>
+	保存model文件和载入model文件。model.save('model_weight.h5')&nbsp; # creates a HDF5 file 'my_model.h5'
+</p>
+<p>
+	<a href="https://blog.csdn.net/u011692048/article/details/77686208">https://blog.csdn.net/u011692048/article/details/77686208</a>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	sys.excepthook&nbsp; 全局异常钩子 <a href="http://www.zhangdongshengtech.com/article-detials/282">http://www.zhangdongshengtech.com/article-detials/282</a>
+</p>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1877.html">ubuntu下pycharm快捷方式创建</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1879.html">可以使用Python读取java写入redis 的object数据，并解析吗？</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

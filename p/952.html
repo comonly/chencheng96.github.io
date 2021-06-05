@@ -1,0 +1,462 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>MongoDB结构及命令行操作_comonly.cn</title>
+<meta name="keywords" content="MongoDB结构及命令行操作" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">MongoDB结构及命令行操作</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-08-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	数据库
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='创建数据库'>
+	创建数据库
+</h2>
+<p>
+	use DATABASE_NAME
+</p>
+<p>
+	MongoDB 中默认的数据库为 test，如果你没有创建新的数据库，集合将存放在 test 数据库中。如果你想查看所有数据库，可以使用 show dbs 命令。
+</p>
+<h2 id='删除数据库'>
+	删除数据库
+</h2>
+<p>
+	db.dropDatabase()
+</p>
+删除当前数据库，默认为 test，你可以使用 db 命令查看当前数据库名。
+<h2 id='创建集合'>
+	创建集合
+</h2>
+db.createCollection(name, options)<br />
+<p>
+	参数说明：
+</p>
+<ul>
+	<li>
+		name: 要创建的集合名称
+	</li>
+	<li>
+		options: 可选参数, 指定有关内存大小及索引的选项
+	</li>
+</ul>
+<p>
+	options 可以是如下参数：
+</p>
+<table cellpadding="0" border="1" bordercolor="#000000" cellspacing="0">
+	<tbody>
+		<tr>
+			<th>
+				字段
+			</th>
+			<th>
+				类型
+			</th>
+			<th>
+				描述
+			</th>
+		</tr>
+	</tbody>
+	<tbody>
+		<tr>
+			<td>
+				capped
+			</td>
+			<td>
+				布尔
+			</td>
+			<td>
+				（可选）如果为 true，则创建固定集合。固定集合是指有着固定大小的集合，当达到最大值时，它会自动覆盖最早的文档。<br />
+当该值为 true 时，必须指定 size 参数。
+			</td>
+		</tr>
+		<tr>
+			<td>
+				autoIndexId
+			</td>
+			<td>
+				布尔
+			</td>
+			<td>
+				（可选）如为 true，自动在 _id 字段创建索引。默认为 false。
+			</td>
+		</tr>
+		<tr>
+			<td>
+				size
+			</td>
+			<td>
+				数值
+			</td>
+			<td>
+				（可选）为固定集合指定一个最大值（以字节计）。<br />
+如果 capped 为 true，也需要指定该字段。
+			</td>
+		</tr>
+		<tr>
+			<td>
+				max
+			</td>
+			<td>
+				数值
+			</td>
+			<td>
+				（可选）指定固定集合中包含文档的最大数量。
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	在插入文档时，MongoDB 首先检查固定集合的 size 字段，然后检查 max 字段。
+</p>
+<p>
+	&gt; db.createCollection("mycol", { capped : true, autoIndexId : true, size :&nbsp;&nbsp;6142800, max : 10000 } )
+</p>
+<h2 id='删除集合'>
+	删除集合
+</h2>
+db.collection.drop()<br />
+如果成功删除选定集合，则 drop() 方法返回 true，否则返回 false
+<h2 id='插入文档'>
+	插入文档
+</h2>
+文档的数据结构和JSON基本一样。所有存储在集合中的数据都是BSON格式。BSON是一种类json的一种二进制形式的存储格式,简称Binary JSON。<br />
+MongoDB 使用 insert() 或 save() 方法向集合中插入文档，语法如下：<br />
+db.COLLECTION_NAME.insert(document)
+<p>
+	插入文档你也可以使用 db.col.save(document) 命令。如果不指定 _id 字段 save() 方法类似于 insert() 方法。如果指定 _id 字段，则会更新该 _id 的数据。
+</p>
+<h2 id='更新文档'>
+	更新文档
+</h2>
+MongoDB 使用 update() 和 save() 方法来更新集合中的文档。接下来让我们详细来看下两个函数的应用及其区别。<br />
+update() 方法用于更新已存在的文档。语法格式如下：<br />
+db.collection.update(<br />
+&nbsp; &nbsp;&lt;query&gt;,<br />
+&nbsp; &nbsp;&lt;update&gt;,<br />
+&nbsp; &nbsp;{<br />
+&nbsp; &nbsp; &nbsp;upsert: &lt;boolean&gt;,<br />
+&nbsp; &nbsp; &nbsp;multi: &lt;boolean&gt;,<br />
+&nbsp; &nbsp; &nbsp;writeConcern: &lt;document&gt;<br />
+&nbsp; &nbsp;}<br />
+)<br />
+参数说明：<br />
+<ul>
+	<li>
+		query : update的查询条件，类似sql update查询内where后面的。
+	</li>
+	<li>
+		update : update的对象和一些更新的操作符（如$,$inc...）等，也可以理解为sql update查询内set后面的
+	</li>
+	<li>
+		upsert : 可选，这个参数的意思是，如果不存在update的记录，是否插入objNew,true为插入，默认是false，不插入。
+	</li>
+	<li>
+		multi : 可选，mongodb 默认是false,只更新找到的第一条记录，如果这个参数为true,就把按条件查出来多条记录全部更新。
+	</li>
+	<li>
+		writeConcern :可选，抛出异常的级别。
+	</li>
+</ul>
+<h2 id='删除文档'>
+	删除文档
+</h2>
+<p>
+	在执行remove()函数前先执行find()命令来判断执行的条件是否正确，这是一个比较好的习惯。
+</p>
+db.collection.remove(<br />
+&nbsp; &nbsp;&lt;query&gt;,<br />
+&nbsp; &nbsp;&lt;justOne&gt;<br />
+)<br />
+如果你的 MongoDB 是 2.6 版本以后的，语法格式如下：<br />
+db.collection.remove(<br />
+&nbsp; &nbsp;&lt;query&gt;,<br />
+&nbsp; &nbsp;{<br />
+&nbsp; &nbsp; &nbsp;justOne: &lt;boolean&gt;,<br />
+&nbsp; &nbsp; &nbsp;writeConcern: &lt;document&gt;<br />
+&nbsp; &nbsp;}<br />
+)<br />
+参数说明：<br />
+<ul>
+	<li>
+		query :（可选）删除的文档的条件。
+	</li>
+	<li>
+		justOne : （可选）如果设为 true 或 1，则只删除一个文档。
+	</li>
+	<li>
+		writeConcern :（可选）抛出异常的级别。
+	</li>
+</ul>
+<h2 id='查询文档'>
+	查询文档
+</h2>
+find() 方法以非结构化的方式来显示所有文档。<br />
+db.collection.find(query, projection)<br />
+<ul>
+	<li>
+		query ：可选，使用查询操作符指定查询条件
+	</li>
+	<li>
+		projection ：可选，使用投影操作符指定返回的键。查询时返回文档中所有键值， 只需省略该参数即可（默认省略）。
+	</li>
+</ul>
+如果你需要以易读的方式来读取数据，可以使用 pretty() 方法，语法格式如下：<br />
+&gt;db.col.find().pretty()<br />
+<ul>
+	<li>
+		pretty() 方法以格式化的方式来显示所有文档。
+	</li>
+</ul></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/951.html">mongo客户端mongo VUE</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/953.html">MongoDB查询有关操作</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="数据库增删改操作">
+							<h2 style="display:inline;color:#5BC648;">数据库增删改操作</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-08-19&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><pre class="prettyprint lang-bsh">&gt; use mytest  #创建数据库
+switched to db mytest
+&gt; db.createCollection("name")  #创建集合
+{ "ok" : 1 }
+&gt; db.name.insert({title:'第一行',description:'集合中的第一个文档'}) #插入文档
+WriteResult({ "nInserted" : 1 })
+&gt; db.first.update({titel:'第一行'},{$set:{description:'相当于表中的第一行'}}) #更新文档
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+&gt; db.name.find() #查找文档
+{ "_id" : ObjectId("5b78f931f63db1992134083c"), "title" : "第一行", "description" : "相当于表中的第一行" }
+&gt; db.name.find().pretty() #格式输出
+{
+        "_id" : ObjectId("5b78f931f63db1992134083c"),
+        "title" : "第一行",
+        "description" : "集合中的第一个文档，相当于表中的第一行"
+}
+
+&gt; show dbs #查看所有的数据库
+local   0.000GB
+mytest  0.000GB
+test    0.000GB
+&gt; db #查看当前数据库
+mytest
+&gt; show tables #查看当前数据库所有集合
+name
+
+&gt; db.name.remove({'title':'第一行'}) #删除指定文档
+WriteResult({ "nRemoved" : 1 })
+&gt; db.name.find()
+&gt; db.name.drop() #删除某集合
+true
+&gt; show tables
+&gt; db.dropDatabase() #删除当前数据库
+{ "dropped" : "mytest", "ok" : 1 }
+&gt; show dbs
+local  0.000GB
+test   0.000GB</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#创建数据库">创建数据库</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#删除数据库">删除数据库</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#创建集合">创建集合</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#删除集合">删除集合</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#插入文档">插入文档</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#更新文档">更新文档</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#删除文档">删除文档</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#查询文档">查询文档</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#数据库增删改操作">数据库增删改操作</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

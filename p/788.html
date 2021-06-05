@@ -1,0 +1,319 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Python 字典(Dictionary)及其操作_comonly.cn</title>
+<meta name="keywords" content="Python 字典(Dictionary)及其操作" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Python 字典(Dictionary)及其操作</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-07-16</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	python  perl
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">Python,字典,Dictionary</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 字典是一种可变容器模型，且可存储任意类型对象。<br />
+字典的每个键值(key=&gt;value)对用冒号(:)分割，每个对之间用逗号(,)分割，整个字典包括在花括号({})中 ,格式如下所示：<br />
+d = {key1 : value1, key2 : value2 }<br />
+<p>
+	键必须是唯一的，但值则不必。值可以取任何数据类型，但键必须是不可变的，如字符串，数字或元组。
+</p>
+<h2 id='创建字典'>
+	创建字典
+</h2>
+一个简单的字典实例：<br />
+dict = {'Alice': '2341', 'Beth': '9102', 'Cecil': '3258'}<br />
+也可如此创建字典：<br />
+dict1 = { 'abc': 456 };<br />
+dict2 = { 'abc': 123, 98.6: 37 };<br />
+<h2 id='访问字典里的值'>
+	访问字典里的值
+</h2>
+把相应的键放入熟悉的方括弧，如下实例:<br />
+实例<br />
+#!/usr/bin/python<br />
+dict = {'Name': 'Zara', 'Age': 7, 'Class': 'First'};<br />
+print "dict['Name']: ", dict['Name'];<br />
+print "dict['Age']: ", dict['Age'];<br />
+以上实例输出结果：<br />
+dict['Name']: &nbsp;Zara<br />
+dict['Age']: &nbsp;7<br />
+如果用字典里没有的键访问数据，会输出错误KeyError<br />
+<h2 id='修改字典和添加值'>
+	修改字典和添加值
+</h2>
+向字典添加新内容的方法是增加新的键/值对，修改或删除已有键/值对如下实例:<br />
+实例<br />
+#!/usr/bin/python<br />
+dict = {'Name': 'Zara', 'Age': 7, 'Class': 'First'};<br />
+dict['Age'] = 8; # update existing entry<br />
+dict['School'] = "DPS School"; # Add new entry
+<p>
+	或者用update更新字典里的值
+</p>
+<p>
+	&gt;&gt;&gt; dict.update({'<span>Age</span>':8})
+</p>
+<h2 id='删除字典元素'>
+	删除字典元素
+</h2>
+能删单一的元素也能清空字典，清空只需一项操作。<br />
+显示删除一个字典用del命令，如下实例：<br />
+实例<br />
+#!/usr/bin/python<br />
+# -*- coding: UTF-8 -*-<br />
+dict = {'Name': 'Zara', 'Age': 7, 'Class': 'First'};<br />
+del dict['Name']; # 删除键是'Name'的条目<br />
+dict.clear(); &nbsp; &nbsp; # 清空词典所有条目<br />
+del dict ; &nbsp; &nbsp; &nbsp; &nbsp;# 删除词典<br />
+<h2 id='字典键的特性'>
+	字典键的特性
+</h2>
+字典值可以没有限制地取任何python对象，既可以是标准的对象，也可以是用户定义的，但键不行。<br />
+两个重要的点需要记住：<br />
+1）不允许同一个键出现两次。创建时如果同一个键被赋值两次，后一个值会被记住<br />
+2）键必须不可变，所以可以用数字，字符串或元组充当，所以用列表就不行，如下实例：<br />
+实例<br />
+#!/usr/bin/python<br />
+dict = {['Name']: 'Zara', 'Age': 7};<br />
+print "dict['Name']: ", dict['Name'];<br />
+以上实例输出结果：<br />
+Traceback (most recent call last):<br />
+&nbsp; File "test.py", line 3, in &lt;module&gt;<br />
+&nbsp; &nbsp; dict = {['Name']: 'Zara', 'Age': 7};<br />
+TypeError: list objects are unhashable<br />
+<h2 id='字典内置函数&m;方法'>
+	字典内置函数&amp;方法
+</h2>
+Python字典包含了以下内置函数：<br />
+<br />
+1 .cmp(dict1, dict2) &nbsp; 比较两个字典元素。<br />
+2. len(dict) &nbsp; 计算字典元素个数，即键的总数。<br />
+3. str(dict) &nbsp; 输出字典可打印的字符串表示。<br />
+4 .type(variable) &nbsp; 返回输入的变量类型，如果变量是字典就返回字典类型。<br />
+<p>
+	<br />
+</p>
+<p>
+	Python字典包含了以下内置方法：
+</p>
+1. dict.clear() &nbsp; 删除字典内所有元素<br />
+2 .dict.copy() &nbsp; 返回一个字典的浅复制<br />
+3. dict.fromkeys(seq[, val])) &nbsp; 创建一个新字典，以序列 seq 中元素做字典的键，val 为字典所有键对应的初始值<br />
+4. dict.get(key, default=None) &nbsp; 返回指定键的值，如果值不在字典中返回default值
+<p>
+	if key in dics: &nbsp; &nbsp;&nbsp;
+</p>
+&nbsp; &nbsp; print dics[key]&nbsp;<br />
+else: &nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; print 'not found!!'&nbsp;<br />
+<br />
+5. dict.has_key(key) &nbsp; 如果键在字典dict里返回true，否则返回false<br />
+6. dict.items() &nbsp; 以列表返回可遍历的(键, 值) 元组数组<br />
+7 .dict.keys() &nbsp; 以列表返回一个字典所有的键<br />
+8 .dict.setdefault(key, default=None) &nbsp; 和get()类似, 但如果键不存在于字典中，将会添加键并将值设为default<br />
+9 .dict.update(dict2) &nbsp; 把字典dict2的键/值对更新到dict里<br />
+10 .dict.values() &nbsp; 以列表返回字典中的所有值<br />
+11. pop(key[,default]) &nbsp; 删除字典给定键 key 所对应的值，返回值为被删除的值。key值必须给出。 否则，返回default值。<br />
+12 .popitem() &nbsp; 随机返回并删除字典中的一对键和值。
+<p>
+	13<span>&nbsp;.dics.pop('key', 'not found') &nbsp;&nbsp;</span>从字典中取值，若找到则删除；当键不存在时不想处理异常.当键'key'不存在是，打印'not found'(即想要处理的信息)，当存在是输出键值,并且去除该健。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/787.html">用perl发送http请求【转】【待处理】</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/789.html">python中的urlencode</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#创建字典">创建字典</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#访问字典里的值">访问字典里的值</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#修改字典和添加值">修改字典和添加值</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#删除字典元素">删除字典元素</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#字典键的特性">字典键的特性</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#字典内置函数&m;方法">字典内置函数&m;方法</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

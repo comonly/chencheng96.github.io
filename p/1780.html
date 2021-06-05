@@ -1,0 +1,314 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>HTTPS接口加密和身份认证_comonly.cn</title>
+<meta name="keywords" content="HTTPS接口加密和身份认证" />
+<meta name="description" content="1.为什么要用HTTPS代替HTTP
+
+
+	HTTPS和HTTP的区别
+1）https协议需要到CA申请证书，一般免费证书很少，需要交费
+2）http是超文本传输协议，信息是明文传输，https则是具有安全性的SSL加密传输协议
+3）http使用80号端口，https使用443端口
+4）http是一种无状态连接；HTTPS则是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，比http协议安全
+
+
+	http为什么不安全
+http协议没有任何的加密以及身份验证的机制，非" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">HTTPS接口加密和身份认证</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">ForeverDirect</li>
+          <li class="lmname"><a href="https://blog.csdn.net/gaoyz1/article/details/77511380" target="_blank">https://blog.csdn.net/gaoyz1/article/details/77511380</a></li>
+          <li class="timer">2020-10-03</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>1.为什么要用HTTPS代替HTTP
+
+
+	HTTPS和HTTP的区别
+1）https协议需要到CA申请证书，一般免费证书很少，需要交费
+2）http是超文本传输协议，信息是明文传输，https则是具有安全性的SSL加密传输协议
+3）http使用80号端口，https使用443端口
+4）http是一种无状态连接；HTTPS则是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，比http协议安全
+
+
+	http为什么不安全
+http协议没有任何的加密以及身份验证的机制，非</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h3>
+	1.为什么要用HTTPS代替HTTP
+</h3>
+<p>
+	HTTPS和HTTP的区别<br />
+1）https协议需要到CA申请证书，一般免费证书很少，需要交费<br />
+2）http是超文本传输协议，信息是明文传输，https则是具有安全性的SSL加密传输协议<br />
+3）http使用80号端口，https使用443端口<br />
+4）http是一种无状态连接；HTTPS则是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，比http协议安全
+</p>
+<p>
+	http为什么不安全<br />
+http协议没有任何的加密以及身份验证的机制，非常容易遭遇窃听、劫持、篡改，因此会造成个人隐私泄露，恶意的流量劫持等严重的安全问题
+</p>
+<p>
+	https如何保证安全<br />
+HTTPS是以安全为目标的HTTP通道，是HTTP的安全版。即HTTP下加入SSL层（传输层和应用层之间），用于安全的HTTP数据传输。
+</p>
+<p>
+	HTTPS存在不同于HTTP的默认端口及一个加密/身份验证层（HTTP和TCP之间）。这个系统最初研发由网景公司进行，提供了身份验证与加密通讯方法，现在它被广泛用于万维网上安全敏感的通讯，例如交易支付方面
+</p>
+<h3>
+	<a></a><a></a>2.HTTPS的加密原理
+</h3>
+<p>
+	了解加密
+</p>
+<p>
+	对称加密<br />
+对称加密指加密和解密使用相同秘钥的加密算法。要求发送发和接收方在安全通信之前，商定一个秘钥。对称算法的安全性依赖于秘钥，泄漏秘钥意味着任何人都可以解密传输的消息。<br />
+优点：算法公开 计算量小 加密速度快 加密效率高<br />
+缺点：交易双方都使用同样秘钥，安全性得不到保证；每对用户每次使用对称加密算法时，都需要使用其他人不知道的惟一钥匙，这会使得发收信双方所拥有的钥匙数量呈几何级数增长，密钥管理成为用户的负担；虽能提供加密传输，但不能验证双方身份
+</p>
+<p>
+	非对称加密<br />
+这种加密生成公钥和私钥。公钥加密的数据要用私钥解密，私钥加密的数据要用公钥解密。这种算法很多，常用的是RSA<br />
+优点：相比于对称加密更加安全<br />
+缺点：CPU计算资源消耗非常大，一次完全TLS握手，秘钥交换使得非对称解密计算量占整个握手过程的90%以上。而对称加密的计算量只是非对称加密的0.1%，如果应用层数据也使用非对称解密，性能开销太大；对加密内容的长度有限制，不能超过公钥长度。比如现在常用的公钥长度是2048位，意味着待加密内容不能超过256个字节
+</p>
+<p>
+	身份认证（CA数字证书）<br />
+https协议中身份认证的部分是由数字证书来完成的，证书由公钥、证书主题、数字签名等内容组成，在客户端发起SSL请求后，服务端会将数字证书发给客户端，客户端对证书进行验证，并获取用于秘钥交换的非对称秘钥
+</p>
+<p>
+	数字证书作用：
+</p>
+<ul>
+	<li>
+		身份授权 确保浏览器访问的网站是经过CA验证的可信任网站
+	</li>
+	<li>
+		分发公钥 每个数字证书都包含了注册者生成的公钥。在SSL握手时通过certificate消息传输给客户端
+	</li>
+</ul>
+<p>
+	数字证书验证：<br />
+申请者拿到CA的证书并部署在网站服务器端，浏览器发起握手接收到证书后，如何确认这个证书就是CA签发的呢？怎样避免第三方伪造这个证书？答案就是数字签名（digital signature）。数字签名是证书的防伪标签，目前使用最广泛的是SHA-RSA（SHA用于哈希算法，RSA用于非对称加密算法）数字签名
+</p>
+<p>
+	加密的详细过程
+</p>
+<p>
+	首先服务器端用非对称加密（RSA）产生公钥和私钥。然后把公钥交给数字证书，并进行包装发给客户端，当公钥到达客户端之后，客户端的TLS首先验证公钥是否有效（颁发机构，公钥有效期，CA数字签名），若存在问题则弹出警告框，提示证书存在问题。若证书没有问题，则客户端会用对称加密产生一个秘钥并用公钥加密后发送给服务器，这个秘钥就是以后用来通信的秘钥。这样服务器端收到公钥加密的秘钥就用自己的私钥解开公钥从而获得秘钥。这样客户端和服务器都获得了秘钥，信息交流相对是安全的
+</p>
+<blockquote>
+	<p>
+		可将公钥私钥理解为锁、钥匙，只有服务器有这把锁的钥匙；将锁发送给客户端，客户端收到后生成秘钥，用锁锁住，再发送给服务器，服务器用钥匙打开锁获得秘钥。从而双方可以进行安全的通信
+	</p>
+</blockquote>
+<p>
+	<img src="https://img-blog.csdn.net/20170823201524145?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZ2FveXox/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" title="" /> 
+</p>
+<p>
+	使用非对称加密仅仅获得一个用对称加密生成的秘钥？
+</p>
+<p>
+	这是因为非对称加密的密码对（公钥私钥）生成和加密的消耗时间比较长，为了节省双方的计算时间，通常只用它来交换密钥，而非直接用来传输数据（具体可看上文非对称加密的缺点）
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1779.html">TCP通信粘包问题分析和解决</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1781.html">http请求有8种，为什么我们现在常用的就只有get post了呢</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/gaoyz1/article/details/77511380" target="_blank">https://blog.csdn.net/gaoyz1/article/details/77511380</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

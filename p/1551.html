@@ -1,0 +1,289 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>git merge后 丢失文件 以及 代码 分支回退后出现的问题 Git 合并时 --no-ff 的作用_comonly.cn</title>
+<meta name="keywords" content="git merge后 丢失文件 以及 代码 分支回退后出现的问题 Git 合并时 --no-ff 的作用" />
+<meta name="description" content="为什么会丢失文件？https://blog.csdn.net/uniquewonderq/article/details/95309135
+git merge 快速合并时会以某个文件新的操作为准，如果master将一个dev合并进来，而dev分支中对某个文件进行过删除操作，那么merge之后master就会将那个文件删除。
+
+举个例子：
+
+master 分支创建文件 1.txt 并 commit -&gt; 创建分支 dev -&gt; dev 删除1.txt 并 commit
+
+此时如果在" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">git merge后 丢失文件 以及 代码 分支回退后出现的问题 Git 合并时 --no-ff 的作用</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-11-21</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>为什么会丢失文件？https://blog.csdn.net/uniquewonderq/article/details/95309135
+git merge 快速合并时会以某个文件新的操作为准，如果master将一个dev合并进来，而dev分支中对某个文件进行过删除操作，那么merge之后master就会将那个文件删除。
+
+举个例子：
+
+master 分支创建文件 1.txt 并 commit -&gt; 创建分支 dev -&gt; dev 删除1.txt 并 commit
+
+此时如果在</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 为什么会丢失文件？<a href="https://blog.csdn.net/uniquewonderq/article/details/95309135" target="_blank"><span>https://blog.csdn.net/uniquewonderq/article/details/95309135</span></a><br />
+git merge 快速合并时会以某个文件新的操作为准，如果master将一个dev合并进来，而dev分支中对某个文件进行过删除操作，那么merge之后master就会将那个文件删除。<br />
+<br />
+举个例子：<br />
+<br />
+master 分支创建文件 1.txt 并 commit -&gt; 创建分支 dev -&gt; dev 删除1.txt 并 commit<br />
+<br />
+此时如果在master分支git merge dev ， master分支的1.txt 被删除，成功快速合并；而如果是在dev分支 git merge master， 会显示already up-to-date， 因为1.txt在dev分支已经被删除了，不必更新。<br />
+<br />
+为什么会丢失代码？<br />
+假定有两个分支A,B<br />
+如果之前 有过一个merge（无论是在A上mergeB，还是B上mergeA），然后各自经历一些commit后，再次逆向合并，且合并的时候使用的是默认的快速合并，那么简单来说将会以 远方合并的分支为主，如，在A上mergeB，那么会以B为主。可参考如下文章：<br />
+https://www.jianshu.com/p/603186352605<br />
+https://www.zhihu.com/question/36509119<br />
+https://git-scm.com/book/zh/v2/Git-分支-分支的新建与合并<br />
+<br />
+解决思路<br />
+如果要合并远程的分支到本地，需要先 git fetch ，默认拉取本地分支关联的远程分支代码。<br />
+git fetch origin master(或者其他分支）<br />
+三方合并需要：<br />
+<br />
+需要 git merge xxx --no-ff 让其生成一个 merge commit， 记录此次并入过程!!!<br />
+需要 git merge xxx --no-ff 让其生成一个 merge commit， 记录此次并入过程!!!<br />
+需要 git merge xxx --no-ff 让其生成一个 merge commit， 记录此次并入过程!!!<br />
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<h2 id='Git合并时--o-ff的作用'>
+	Git 合并时 --no-ff 的作用
+</h2>
+<p>
+	在许多介绍 Git 工作流的文章里，都会推荐在合并分支时，加上 --no-ff 参数：<br />
+<br />
+$ git checkout develop<br />
+$ git merge --no-ff feature<br />
+--no-ff 在这的作用是禁止快进式合并。<br />
+<br />
+Git 合并两个分支时，如果顺着一个分支走下去可以到达另一个分支的话，那么 Git 在合并两者时，只会简单地把指针右移，叫做“快进”（fast-forward），比如下图：<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; A---B---C feature<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/<br />
+D---E---F master<br />
+要把 feature 合并到 master 中，执行以下命令<br />
+<br />
+$ git checkout master<br />
+$ git merge feature<br />
+结果就会变成<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; A---B---C feature<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;master<br />
+D---E---F&nbsp;<br />
+因为 feature 就在 master 的下游，所以直接移动了 master 的指针，master 和 feature 都指向了 C。而如果执行了 git merge --no-ff feature 的话，是下面的结果：<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; A---B---C feature<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;\<br />
+D---E---F-----------G master<br />
+由于 --no-ff 禁止了快进，所以会生成一个新的提交，master 指向 G。<br />
+<br />
+从合并后的代码来看，结果其实是一样的，区别就在于 --no-ff 会让 Git 生成一个新的提交对象。为什么要这样？通常我们把 master 作为主分支，上面存放的都是比较稳定的代码，提交频率也很低，而 feature 是用来开发特性的，上面会存在许多零碎的提交，快进式合并会把 feature 的提交历史混入到 master 中，搅乱 master 的提交历史。所以如果你根本不在意提交历史，也不爱管 master 干不干净，那么 --no-ff 其实没什么用。不过，如果某一次 master 出现了问题，你需要回退到上个版本的时候，比如上例，你就会发现退一个版本到了 B，而不是想要的 F，因为 feature 的历史合并进了 master 里。<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1550.html">linux学习路线</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1552.html">C++ socket编程 绑定端口 接收处理数据</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Git合并时--o-ff的作用">Git合并时--o-ff的作用</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

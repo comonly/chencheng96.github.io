@@ -1,0 +1,567 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Redis客户端——jedis和redis-py_comonly.cn</title>
+<meta name="keywords" content="Redis客户端——jedis和redis-py" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Redis客户端——jedis和redis-py</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-02-23</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	数据库
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	客户端通信协议RESP(REdis Serialization Protocal, redis序列化协议)。
+</p>
+<p>
+	请求数据格式：
+</p>
+<pre class="prettyprint">*{参数数量}CRLF(\r\n)
+${参数1的字节数量}CRLF
+{参数1}CRLF
+${参数2的字节数量}CRLF
+{参数2}CRLF
+... set hello word ==&gt;
+*3\r\n$3\r\nset\r\n$5\r\nhello\r\n$4\r\nword\r\n</pre>
+<p>
+	返回数据格式（回复后是每种类型返回的第一个字节）：
+</p>
+<pre class="prettyprint">状态回复+
+错误回复-
+整数回复:
+字符串回复$
+多条字符串回复*</pre>
+<p>
+	通过nc、telnet及socket程序可以看到Redis返回的真正结果。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1059.html">Redis的阻塞</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1061.html">Redis持久化</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="Java客户端Jedis">
+							<h2 style="display:inline;color:#5BC648;">Java客户端Jedis</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-06-01&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><h3 style="font-family:;">
+	建立连接及关闭连接
+</h3>
+<pre class="prettyprint lang-java">Jedis jedis = new Jedis("127.0.0.1", 6379);
+//jedis相关操作
+jedis.close();</pre>
+<p style="font-family:" font-size:medium;"="">Jedis提供的字节数组参数，可以将Java对象序列化为二进制，通过get(final byte[] key)获取字节数组后，反序列化为Java对象。redis和jedis本身不提供对象序列化，不要手动操作。
+	</p>
+	<h3 style="font-family:;">
+		jedis中使用pipeline
+	</h3>
+<p style="font-family:" font-size:medium;"="">模拟批量删除
+</p>
+<pre class="prettyprint lang-js">Pipeline pipeline = jedis.pipelined();//生成管道
+for(String key : keys){
+    pipeline.del(key);
+}
+pipeline.sync();//真正的执行命令</pre>
+<h3 style="font-family:;">
+	jedis的Lua脚本
+</h3>
+<pre class="prettyprint lang-java">//参数举例
+script = "return redis.call('get',KEYS[1])";
+params = "hello";
+keyCount = 1;
+
+//使用方法一
+Object eval(String script, int keyCount, String params);
+
+//使用方法二，两个函数需结合使用
+String ScriptLoad(String script);
+Object evalsha(String shal, int keyCount, String params);</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="Redis在Java中的使用——参数配置连接池的获取及资源的返回">
+							<h2 style="display:inline;color:#5BC648;">Redis在Java中的使用——参数配置连接池的获取及资源的返回</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-06-01&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p style="font-family:" font-size:medium;"="">
+	</p>
+<p style="font-family:" font-size:medium;"=""><br />
+https://www.cnblogs.com/benwu/articles/8616141.html<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+//创建连接池配置对象：<br />
+<br />
+JedisPoolConfig jpc = new JedisPoolConfig();<br />
+//设置最大闲置个数<br />
+jpc.setMaxIdle(30);<br />
+//设置最小闲置个数：<br />
+jpc.setMinIdle(10);<br />
+//设置最大的连接数<br />
+jpc.setMaxTotal(50);<br />
+//创建连接池对象&nbsp; host:连接redis主机IP ；port:redis的默认端口<br />
+JedisPool jedisPool = new JedisPool(jpc, "127.0.0.1", 6379);<br />
+//获取连接资源<br />
+Jedis resource = jedisPool.getResource();<br />
+<br />
+<br />
+</p>
+<p style="font-family:" font-size:medium;"=""><br />
+	</p>
+<p style="font-family:" font-size:medium;"=""><br />
+</p>
+<p style="font-family:" font-size:medium;"="">
+	通过static块初始化连接池确保每次请求都是同一个连接池，不然每次请求都要新生成一个了
+	</p>
+<p style="font-family:" font-size:medium;"=""><br />
+</p>
+<p style="font-family:" font-size:medium;"=""><br />
+	</p>
+<p style="font-family:" font-size:medium;"="">
+	/**
+</p>
+<span style="font-family:" font-size:medium;"="">&nbsp;* </span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp;*/</span><br />
+<span style="font-family:" font-size:medium;"="">/**</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp;* @author chen cheng</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp;*</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp;*/</span><br />
+<span style="font-family:" font-size:medium;"="">package vip.chencheng.utils.redis;</span><br />
+<br />
+<span style="font-family:" font-size:medium;"="">import java.io.InputStream;</span><br />
+<span style="font-family:" font-size:medium;"="">import java.util.ArrayList;</span><br />
+<span style="font-family:" font-size:medium;"="">import java.util.List;</span><br />
+<span style="font-family:" font-size:medium;"="">import java.util.Properties;</span><br />
+<br />
+<span style="font-family:" font-size:medium;"="">import org.springframework.stereotype.Component;</span><br />
+<br />
+<span style="font-family:" font-size:medium;"="">import redis.clients.jedis.Jedis;</span><br />
+<span style="font-family:" font-size:medium;"="">import redis.clients.jedis.JedisPool;</span><br />
+<span style="font-family:" font-size:medium;"="">import redis.clients.jedis.JedisPoolConfig;</span><br />
+<span style="font-family:" font-size:medium;"="">import redis.clients.jedis.JedisShardInfo;</span><br />
+<span style="font-family:" font-size:medium;"="">import redis.clients.jedis.ShardedJedis;</span><br />
+<span style="font-family:" font-size:medium;"="">import redis.clients.jedis.ShardedJedisPool;</span><br />
+<span style="font-family:" font-size:medium;"="">@Component</span><br />
+<span style="font-family:" font-size:medium;"="">public class RedisUtilImpl implements RedisUtil{</span><br />
+<span style="font-family:" font-size:medium;"="">//public class RedisUtilImpl { </span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; //private static final long serialVersionUID = -1149678082569464779L;</span><br />
+<br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; //Redis服务器IP</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; private static String addr;</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; //Redis的端口号</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; private static int port;</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; //访问密码</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; private static String auth;</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; //可用连接实例的最大数目，默认值为8；</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; //如果赋值为-1，则表示不限制；如果pool已经分配了maxActive个jedis实例，则此时pool的状态为exhausted(耗尽)。</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; private static int maxActive;</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; //控制一个pool最多有多少个状态为idle(空闲的)的jedis实例，默认值也是8。</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; private static int maxIdle;</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; //等待可用连接的最大时间，单位毫秒，默认值为-1，表示永不超时。如果超过等待时间，则直接抛出JedisConnectionException；</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; private static int maxWait;</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; private static int timeOut;</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; //在borrow一个jedis实例时，是否提前进行validate操作；如果为true，则得到的jedis实例均是可用的；</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; private static boolean testOnBorrow;</span><br />
+<span style="font-family:" font-size:medium;"=""> </span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; public static Jedis jedis;//非切片额客户端连接</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; public static JedisPool jedisPool;//非切片连接池</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; public static ShardedJedis shardedJedis;//切片额客户端连接</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; public static ShardedJedisPool shardedJedisPool;//切片连接池</span><br />
+<span style="font-family:" font-size:medium;"=""> </span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; /*</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp;* 初始化列表</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp;* 静态代码初始化池配置</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp;*/</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; //private static void initData() {</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; static {</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; try{</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Properties props = new Properties();</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; InputStream in = RedisUtilImpl.class.getResourceAsStream("/redis.properties");</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; props.load(in);</span><br />
+<span style="font-family:" font-size:medium;"=""> </span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; addr = String.valueOf(props.getProperty("redis.addr"));</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; port = Integer.valueOf(props.getProperty("redis.port"));</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; auth = String.valueOf(props.getProperty("redis.auth"));;</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; maxActive = Integer.valueOf(props.getProperty("redis.maxActive"));</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; maxIdle = Integer.valueOf(props.getProperty("redis.maxIdle"));</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; maxWait = Integer.valueOf(props.getProperty("redis.maxWait"));</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; timeOut = Integer.valueOf(props.getProperty("redis.timeOut"));</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; testOnBorrow = Boolean.valueOf(props.getProperty("redis.testOnBorrow"));</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; System.out.println("怎么实现只调用一次");</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; initialPool(); </span><br />
+<br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; }catch (Exception e) {</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //logger.info("redis连接池异常",e);</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; }</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; }</span><br />
+<span style="font-family:" font-size:medium;"=""> </span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; /**</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp;* 初始化非切片池</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp;*/</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; private static void initialPool() </span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; { </span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; // 池基本配置 </span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; JedisPoolConfig config = new JedisPoolConfig();</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; config.setMaxTotal(maxActive); </span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; config.setMaxIdle(maxIdle); </span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; config.setMaxWaitMillis(maxWait); </span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; config.setTestOnBorrow(testOnBorrow);</span><br />
+<span style="font-family:" font-size:medium;"=""> </span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; if(jedisPool == null) {</span><br />
+<span style="font-family:" font-size:medium;"=""> </span><span style="font-family:" font-size:medium;"=""></span><br />
+<span style="font-family:" font-size:medium;"=""> </span><span style="font-family:" font-size:medium;"=""></span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; jedisPool = new JedisPool(config, addr, port);</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; }</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; }</span><br />
+<span style="font-family:" font-size:medium;"=""> </span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; /** </span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp;* 初始化切片池 </span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp;*/ </span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; @SuppressWarnings("unused")</span><br />
+<span style="font-family:" font-size:medium;"=""></span><span style="font-family:" font-size:medium;"="">private static&nbsp; void initialShardedPool() </span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; { </span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; // 池基本配置 </span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; JedisPoolConfig config = new JedisPoolConfig();</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; config.setMaxTotal(maxActive); </span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; config.setMaxIdle(maxIdle); </span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; config.setMaxWaitMillis(maxWait); </span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; config.setTestOnBorrow(testOnBorrow);</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; // slave链接 </span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; Listshards = new ArrayList(); </span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; shards.add(new JedisShardInfo(addr, port, auth)); </span><br />
+<br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; // 构造池 </span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; shardedJedisPool = new ShardedJedisPool(config, shards); </span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; }</span><br />
+<br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; //public&nbsp; static void afterPropertiesSet() throws Exception {</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; public Jedis getJedis() {</span><br />
+<span style="font-family:" font-size:medium;"=""> </span><span style="font-family:" font-size:medium;"=""></span><span style="font-family:" font-size:medium;"="">//initData();</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; //initialPool(); </span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; /*</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; initialShardedPool();</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; try {</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; shardedJedis = shardedJedisPool.getResource(); </span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; System.out.println("连接shardedJedisPool成功!");</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; } catch (Exception e) {</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; System.out.println("连接shardedJedisPool失败!");</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; }</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; */</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; try {</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;System.out.println(jedisPool);</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;System.out.println(jedisPool.getNumActive());</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;System.out.println(jedisPool.getMaxBorrowWaitTimeMillis());</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;jedis = jedisPool.getResource();</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;System.out.println(jedis);</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;System.out.println("连接jedisPool成功!");</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; } catch (Exception e) {</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; System.out.println("连接jedisPool失败!"+e);</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; }</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; &nbsp; &nbsp; return jedis;</span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; }</span><br />
+<br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; public void closeJedis(Jedis jedis) {</span><br />
+<span style="font-family:" font-size:medium;"=""> </span><span style="font-family:" font-size:medium;"=""></span><span style="font-family:" font-size:medium;"="">if(jedis!=null) {</span><br />
+<span style="font-family:" font-size:medium;"=""> </span><span style="font-family:" font-size:medium;"=""></span><span style="font-family:" font-size:medium;"="">jedis.close();</span><br />
+<span style="font-family:" font-size:medium;"=""> </span><span style="font-family:" font-size:medium;"=""></span><span style="font-family:" font-size:medium;"="">}</span><br />
+<span style="font-family:" font-size:medium;"=""> </span><span style="font-family:" font-size:medium;"=""></span><br />
+<span style="font-family:" font-size:medium;"="">&nbsp; &nbsp; }</span><br />
+<br />
+<span style="font-family:" font-size:medium;"="">}</span></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="jedis中的调用方法">
+							<h2 style="display:inline;color:#5BC648;">jedis中的调用方法</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-06-01&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><br />
+https://blog.csdn.net/zhangguanghui002/article/details/78770071<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+使用redis存储数据的时候，有时候为了查看的方便，通常会有层级或者说是目录，这时候我们在set的时候，需要将key值使用“:”的符号来区分层级关系，比如：set(“a:b”, “123”)，那么在redis中就是a目录下的key值为b的value为123。<br />
+<br /></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="python客户端redis-py">
+							<h2 style="display:inline;color:#5BC648;">python客户端redis-py</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-06-01&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="客户端管理">
+							<h2 style="display:inline;color:#5BC648;">客户端管理</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-06-01&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	通过相关API对状态监控和管理。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	client list
+</p>
+<p>
+	<br />
+</p>
+<p>
+	info memory
+</p>
+<p>
+	info clients
+</p>
+<p>
+	<br />
+</p>
+<p>
+	进行相关配置
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Java客户端Jedis">Java客户端Jedis</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Redis在Java中的使用——参数配置连接池的获取及资源的返回">Redis在Java中的使用——参数配置连接池的获取及资源的返回</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#jedis中的调用方法">jedis中的调用方法</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#python客户端redis-py">python客户端redis-py</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#客户端管理">客户端管理</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

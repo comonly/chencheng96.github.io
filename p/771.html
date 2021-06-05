@@ -1,0 +1,283 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>a bytes-like object is required ,not 'str'?报错_comonly.cn</title>
+<meta name="keywords" content="a bytes-like object is required ,not 'str'?报错" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">a bytes-like object is required ,not 'str'?报错</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-07-06</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	python  perl
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">python,socket连接,编码</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 该问题主要是由于当前操作的字符串是bytes类型的字符串对象，并对该bytes类型的字符串对象进行按照str类型的操作。<br />
+当对s进行按照str类型的操作（split）时，会弹出一下错误提示。因为split函数传入的参数是str类型的字符串，而实际的s为bytes编码类型的字符串对象<br />
+<br />
+此时的解决办法是，<br />
+方法1：bytes--&gt;str 将s转码成为str类型的或者是将对s进行str类型操作转化为对bytes类型的操作。<br />
+<p>
+	str和bytes类型之间的常用转码方式：
+</p>
+<p>
+	<hr />
+</p>
+1、str to bytes:&nbsp;&nbsp;#字符串a转换成字节b<br />
+b = bytes(a,encoding='utf-8')<br />
+<p>
+	b1 = bytes(a,encoding='gbk') <br />
+或<br />
+b = a.encode(encoding='utf-8')
+</p>
+<p>
+	b= a.encode(encoding='gbk')
+</p>
+2、bytes to str&nbsp;&nbsp; &nbsp;#将字节b转换成字符c
+<p>
+	c=str(b,encoding='utf-8')<br />
+c1=str(b1,encoding='gbk') <br />
+或<br />
+c = b.decode(encoding='utf-8')<br />
+c = b.decode() &nbsp; &nbsp; &nbsp;#按gbk的方式编码
+</p>
+<p>
+	<hr />
+</p>
+<p>
+	<span>方法2：对s进行str类型操作转化为对bytes类型的操作</span><br />
+<span>由于split里面用到分解字符串中的是空格‘ &nbsp;’，但是该‘ ’是按照str编码的，需要转化成为bytes类型的，然后再直接对s进行对bytes类型的操作。</span> 
+</p>
+<p>
+	<br />
+</p>
+<h2 id='出现该错误的常见场景'>
+	出现该错误的常见场景
+</h2>
+<p>
+	1：查找文件时：<br />
+with open(fname, 'rb') as f:<br />
+if b'some-pattern' in tmp: continue<br />
+出现该错误往往是通过open()函数打开文本文件时，使用了‘rb’属性，如：fileHandle=open(filename,'rb'),则此时是通过二进制方式打开文件的，所以在后面处理时如果使用了str()函数，就会出现该错误，该错误不会再python2中出现。
+</p>
+<p>
+	具体解决方法有以下两种：<br />
+第一种，在open()函数中使用‘r’属性，即文本方式读取，而不是‘rb’,以二进制文件方式读取，可以直接解决问题。<br />
+第二种,在open()函数中使用‘rb’,可以在使用之前进行转换。<br />
+2：使用socket连接时：<br />
+import socket &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # 导入 socket 模块<br />
+s = socket.socket() &nbsp; &nbsp; &nbsp; &nbsp; # 创建 socket 对象<br />
+host = socket.gethostname() # 获取本地主机名<br />
+port = 12345 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# 设置端口<br />
+s.bind((host, port)) &nbsp; &nbsp; &nbsp; &nbsp;# 绑定端口<br />
+s.listen(5) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # 等待客户端连接<br />
+while True:<br />
+c, addr = s.accept() &nbsp; &nbsp; # 建立客户端连接。<br />
+print ('连接地址：', addr)<br />
+stri='欢迎访问菜鸟教程！' &nbsp; #需要转码否则会报错<br />
+b1=str.encode(stri)<br />
+c.send(b1)<br />
+c.close() &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# 关闭连接<br />
+该场景一般将字节类型数据转换为字符串类型<br />
+3：提前进行编码：<br />
+with open(fname, 'rb') as f:<br />
+lines = [x.decode('utf8').strip() for x in f.readlines()]
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/770.html">Python的下载安装，py文件的运行</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/772.html">一个超级傻的错误--import urllib.request 报错</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#出现该错误的常见场景">出现该错误的常见场景</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,264 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>交换机路由器单播多播网络配置相关_comonly.cn</title>
+<meta name="keywords" content="交换机路由器单播多播网络配置相关" />
+<meta name="description" content="组播IP地址 
+
+
+	根据IANA（Internet Assigned Numbers Authority，因特网编号授权委员会）规定，组播报文的IP地址使用D类IP地址，组播IP地址范围是224.0.0.0～239.255.255.255。
+
+
+	组播MAC地址
+以太网传输单播IP报文的时候，目的MAC地址使用的是接收者的MAC地址。但是在传输组播报文时，传输目标不再是一个具体的接收者，而是一个成员不确定的组，所以需要使用组播MAC地址作为目的地址，组播MAC地址是一个逻辑的MAC地址。
+" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">交换机路由器单播多播网络配置相关</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-09-02</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>组播IP地址 
+
+
+	根据IANA（Internet Assigned Numbers Authority，因特网编号授权委员会）规定，组播报文的IP地址使用D类IP地址，组播IP地址范围是224.0.0.0～239.255.255.255。
+
+
+	组播MAC地址
+以太网传输单播IP报文的时候，目的MAC地址使用的是接收者的MAC地址。但是在传输组播报文时，传输目标不再是一个具体的接收者，而是一个成员不确定的组，所以需要使用组播MAC地址作为目的地址，组播MAC地址是一个逻辑的MAC地址。
+</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h3>
+	<strong>组播IP地址</strong> 
+</h3>
+<p>
+	根据IANA（Internet Assigned Numbers Authority，因特网编号授权委员会）规定，组播报文的IP地址使用D类IP地址，组播IP地址范围是224.0.0.0～239.255.255.255。
+</p>
+<p>
+	<strong>组播MAC地址</strong><strong></strong><br />
+以太网传输单播IP报文的时候，目的MAC地址使用的是接收者的MAC地址。但是在传输组播报文时，传输目标不再是一个具体的接收者，而是一个成员不确定的组，所以需要使用组播MAC地址作为目的地址，组播MAC地址是一个逻辑的MAC地址。<br />
+IANA规定，组播MAC地址的高24bit位是以01-00-5E开头，低23bit为组播IP地址的低23bit。<br />
+由于IP组播地址的高4bit是1110，标识了组播组，而低28bit中只有23bit被映射到组播MAC地址上，这样IP组播地址中就会有5bit没有使用，从而出现了32个IP组播地址映射到同一MAC地址上的结果。
+</p>
+<p>
+	<strong>组播地址表</strong><br />
+交换机在转发组播数据时是根据组播地址表来进行的。由于组播数据不能跨越VLAN传输，因此组播地址表的第一部分是VLAN ID，当交换机收到组播数据包时，数据包只能在接收端口所在的VLAN内转发。组播地址表对应的出口端口不是一个，而是一组端口列表。转发数据时，交换机根据组播数据的目的组播地址查找组播地址表，如果在组播地址表中查不到相应的条目，则把该组播数据广播，即向接收端口所在VLAN内的所有端口上转发；如果能查找到对应的条目，则目的地址应该是一组端口列表，于是交换机把这个组播数据复制成多份，每份转发到一个端口，从而完成组播数据的交换。
+</p>
+<p>
+	<strong>IGMP侦听</strong><br />
+网络中的主机通过发送IGMP（Internet Group Management Protocol，互联网组管理协议）报文向临近的路由器申请加入（或离开）组播组，当上层路由设备将组播数据转发下来后，交换机负责将组播数据转发给主机。IGMP侦听（IGMP Snooping）是组播约束机制，交换机用他来完成组播组的动态注册，运行IGMP侦听的交换机通过侦听和分析主机与组播路由器之间交互的IGMP报文来管理和控制组播组，从而可以有效抑制组播数据在网络中扩散。
+</p>
+<p>
+	<strong>IGMP侦听的工作过程</strong><br />
+交换机侦听用户主机与路由器之间的交互IGMP报文，跟踪组播信息及其申请的端口。当交换机侦听到主机向路由器发出报告报文（IGMP Report）时，交换机便把该端口加入组播地址表中；当交换机侦听到主机发送的离开报文（IGMP Leave）时，路由器会发送该端口的特定组查询报文（Group-Specific Query），若还有其它主机需要该组播，则将回应报告报文，若路由器收不到任何主机的回应，交换机便把该端口从组播地址表中删除。路由器会定时发查询报文（IGMP Query），交换机收到查询报文后，如果在一定的时间段内没有收到主机的报告报文，便把该端口从组播表中删除。<br />
+<strong>处理组播过程</strong><br />
+许多以太网交换机处理组播 流量，就像播放 流量一样。当组播数据包到达这样一个桥接器/交换机时，它将数据包转发到所有活动接口，从而有效地充斥着网络。这确保所有客户端接收组播数据，但是具有每个LAN段承载所有组播流量的缺点，即使直接连接的客户端不需要数据。当考虑组播流量时，这减轻了切换的大部分优点。<br />
+网桥/交换机可以被设计为通过在设备的输出端口处实现过滤器来提供组播支持，该过滤器去除了连接到端口的客户端没有注册兴趣的分组。此操作类似于虚拟LAN（VLAN）的处理，可以使用相同/类似的处理引擎执行。配置此类操作时，可以使用三种方法：<br />
+<br />
+1. 手动表配置网络管理器确定哪些客户端应该接收哪些组播数据包，与配置VLAN成员资格的方式相同。然而，许多组播应用程序随着应用程序执行而动态地选择其组播组<br />
+2.“侦听”客户端发送的组播“加入”和“离开”消息。客户端使用称为互联网组管理协议（IGMP）的协议来注册与本地组播路由器有兴趣的地址组。某些交换机（如FORE，3COM）能够监视/仿真这些数据包，并使用该信息动态配置交换机过滤器<br />
+3. 从本地组播路由器下载交换机过滤表。每个IP组播网络必须至少有一个组播。路由器必须跟踪每个客户端的组播成员资格，并且可以利用该信息通知交换机哪些客户端需要哪些数据包。实际上，这可能与将多播地址过滤表下载到所有连接的交换机一样简单。大多数CISCO设备支持CISCO集团管理协议（CGMP）提供此功能。<br />
+<br />
+在处理多播流量的网桥/交换机中，一定程度的组播过滤是非常需要的。这些过程允许设备选择性地将组播数据包转发给注册对应组播组地址的兴趣的主机。没有添加这样的过程，二级网桥/交换机被强制向所有连接的局域网广播组播数据包。虽然手动配置可能足够应用程序，如组播文件传输或组播分发给网络新闻/ Web缓存客户端。对于大多数组播应用，推荐使用两种动态方案之一。
+</p>
+<p>
+	交换机如何处理组播：<a href="https://jingyan.baidu.com/article/af9f5a2d6ae36943150a4549.html">https://jingyan.baidu.com/article/af9f5a2d6ae36943150a4549.html</a> 
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1400.html">solr在java中使用的基本代码</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1402.html">应用程序配置文件读取 根据电脑变化 使用宏</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

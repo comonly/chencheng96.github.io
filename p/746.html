@@ -1,0 +1,311 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>imacros常用命令-js调用函数-内置变量_comonly.cn</title>
+<meta name="keywords" content="imacros常用命令-js调用函数-内置变量" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">imacros常用命令-js调用函数-内置变量</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-06-02</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	电脑配置设置  软件使用 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">imacros,js,变量,模式</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='imcro最常用的命令：'>
+	imacros最常用的命令：
+</h2>
+<p>
+	REFRESH &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;用来刷新页面<br />
+WAIT SECONDES=3 &nbsp; 等候 3 秒<br />
+ONDIALOG POS=1 BUTTON=CANCEL CONTENT= &nbsp;看到弹出窗口后点 Cancel<br />
+URL GOTO=http://www.g.cn &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;转到网址 www.g.cn<br />
+TAB T=1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;转到第一个标签页<br />
+VERSION BUILD=6700624 RECORDER=FX &nbsp; &nbsp;&nbsp;版本号<br />
+TAB OPEN NEW &nbsp; &nbsp;打开新的标签<br />
+TAB CLOSE &nbsp; &nbsp;关闭当前标签<br />
+iimDisplay(msg) ：以独立对话框形式显示一个消息<br />
+string=iimGetLastExtract([n]) ： 返回第n此从页面里通过Extract得到的数据<br />
+iimGetLastError() &nbsp; &nbsp;返回最近差错对应的差错信息（字符串）<br />
+Tag &nbsp; &nbsp; 网页中某tag未找到时会默认会等候 !TIMEOUT 60，默认值就是 6 秒
+</p>
+<p>
+	<br />
+TAG POS=1 TYPE=td &nbsp;ATTR=align:center EXTRACT=TXT<br />
+POS=地位 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 页面提取内容<br />
+TYPE=标签<br />
+ATTR=标签对用的属性:值<br />
+EXTRACRT=TXT &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;提取文字
+</p>
+<p>
+	SET !VAR {{!EXTRACT}} &nbsp; &nbsp;提取内容在EXTRACT里,复制到var<br />
+SET !TIMEOUT 25 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 超时时间设置，设定页面超时时间为25，我在火狐中使用是2.5s<br />
+SET !REPLAYSPEED FAST &nbsp; 用来设定回放速度为最快，即履行语句中间不等候<br />
+SET !ERRORIGNORE YES &nbsp; &nbsp; 用来漠视差错，错误的内容继续运行
+</p>
+<h2 id='内置变量'>
+	内置变量
+</h2>
+<p>
+	{{!CLIPBOARD} 获取当前电脑剪切板的内容。
+</p>
+<p>
+	!VAR1 ， !VAR2和!VAR3。这些变量可以设置为任何你自定义的值。通过<span>{{<span>!VAR3</span>}}进行引用</span><br />
+例如：<br />
+SET !VAR1 helloworld &nbsp; &nbsp; &nbsp; &nbsp;设定!VAR1为 helloworld （ps: &lt;sp&gt;代表空格&lt;br&gt;代表回车）<br />
+PROMPT Pleaseentertext !VAR1 &nbsp; &nbsp; &nbsp; &nbsp;弹出一个输入框，你在输入框中输入的内容将传到!VAR1中。<br />
+<span style="color:#E53333;">我在火狐中使用时，可以使用的变量为!VAR1~9</span>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	imacros能记录你在网页中的动作，然后模拟你的动作自动重复执行。<br />
+1.用JS动态调用，重复执行之，调用方法参考：<a href="http://www.iyaka.cn/blog/22_747.html" target="_blank">http://www.iyaka.cn/blog/22_747.html</a><br />
+2.调用CSV文件，可以调用数据库。方法参考：<a href="http://www.iyaka.cn/blog/22_752.html" target="_blank">http://www.iyaka.cn/blog/22_752.html</a>
+</p>
+<h2 id='JS调用imcro所用到的函数'>
+	JS调用imacros所用到的函数
+</h2>
+一、iimPlay() : 调用一个iim脚本。<br />
+<p>
+	完整调用方法为 : int ret_code = iimPlay ( String macro [, int timeout] ) ,返回值ret_code为1时说明iim被正确调用。小于0则说明执行脚本时出现了错误（在履行 iMacros 的脚本语句，语句可以是一段，必须以 CODE: 起头，行间要用 “\n” 分隔，返回值为负数代表履行有错）
+</p>
+<p>
+	<br />
+</p>
+<p>
+	二、iimSet() ：设置自定义变量<br />
+语法为：int ret_code = iimSet ( String -var_VARNAME, String VARVALUE )
+</p>
+<p>
+	imacros能记录你在网页中的动作，然后模拟你的动作自动重复执行。
+</p>
+<p>
+	<br />
+</p>
+浏览器左边出现它的工作界面，就三部分：<br />
+1.运行：（可以运行所存在的宏，不解释，别害怕很好用的） &nbsp; &nbsp; &nbsp;&nbsp;<br />
+2.记录：（点记录即可记录你在网页中的动作，按停止即可自动保存为当前宏） &nbsp; &nbsp; &nbsp;&nbsp;<br />
+3.编辑：（可以对存储的宏进一步编辑，更适合你的用途）&nbsp;
+<h2 id='imcro的一些注意事项——录制模式'>
+	imacros的一些注意事项——录制模式
+</h2>
+在录制不要施用您的浏览器返回或者转到按钮或者更改地址栏。&nbsp;<br />
+如果在录制过程中出现错误，可以通过改变模式的方式尝试录制<br />
+各种差别的模式： &nbsp; &nbsp;<br />
+自己主动模式： iMacros试图选择最佳录制选项（建议在大多数情况下的记录上的HTML的网站）。<br />
+HTML 模式： iMacros施用纯粹的HTML TAG举行录制。 &nbsp; &nbsp;<br />
+X / Y模式：施用该录制模式将模拟点击网页相片比本人好看对位置。 &nbsp;<br />
+DirectScreen模式 ：如果其它方法都失败这是最终的处理完成办法。它模仿标准鼠标点击浏览器窗口内。<span style="color:#E53333;">这种模式不支持谷歌或火狐浏览器的插件，要在专业版中才能使用。</span>
+<h2 id='安全'>
+	安全
+</h2>
+iMacros密码安全选项<br />
+许多网站要求你输入一个用户名和密码才能进入该网站。在iMacros密码管理可帮助您存储您的用户名和密码的宏，并输入他们会自动为您当您访问这些网站。<br />
+有三种方式来存储你的密码。<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;没有加密：密码是以明码形式存放在宏的纯文本文件中。这种方法非常方便，但请记住，每个打开了宏的人都可以读取密码。<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;加密网站的密码：密码加密使用强大的256位加密基于行业标准的AES算法。这种加密需要一个主密码，这是储存在您的电脑在iMacros配置文件。.默认主密码是“ iOpus2004 ” 。 这个主密码可以在安全选项卡上的选项对话框中改变。破解iMacros的配置文件是非常困难的，但不是不可能。<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;加密网站的密码，并要求主密码：密码是加密的使用相同的强大的256位加密基于行业标准的AES算法，但主密码未保存。<br />
+它仅仅保存在您运行宏时的内存中。当您每次启动iMacros和使用网站的密码是您需要重新输入一次密码。这种方法比其他两种选择更安全，但不方便。
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/745.html">接码平台</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/747.html">在浏览器中调用js</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#imcro最常用的命令：">imcro最常用的命令：</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#内置变量">内置变量</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#JS调用imcro所用到的函数">JS调用imcro所用到的函数</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#imcro的一些注意事项——录制模式">imcro的一些注意事项——录制模式</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#安全">安全</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

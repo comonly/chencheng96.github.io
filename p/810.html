@@ -1,0 +1,406 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>jdk、tomcat6.0.20 安装环境变量配置_comonly.cn</title>
+<meta name="keywords" content="jdk、tomcat6.0.20 安装环境变量配置" />
+<meta name="description" content="jdk1.6.0_10 
+
+
+	MyEclipse 8.5
+
+apache-tomcat-6.0.20
+
+	
+
+
+	可以从Sun的Java网站（http://www.oracle.com/technetwork/java/index.html）下载J2SE（Java开发包），然后安装，假设安装路径为D:\retainProfessional。然后在系统环境变量PATH最前面添加Java路径D:\retainProfessional\Jave\jdk1.6.0_10\bin。然后增加一个" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">jdk、tomcat6.0.20 安装环境变量配置</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">flexyou</li>
+          <li class="lmname"><a href="http://blog.sina.com.cn/s/blog_4caa51170102uy8y.html" target="_blank">http://blog.sina.com.cn/s/blog_4caa51170102uy8y.html</a></li>
+          <li class="timer">2018-01-08</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	服务器apache等
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">jdk,tomcat</a></div>
+      
+      
+        <div class="news_about"><strong>简介</strong>jdk1.6.0_10 
+
+
+	MyEclipse 8.5
+
+apache-tomcat-6.0.20
+
+	
+
+
+	可以从Sun的Java网站（http://www.oracle.com/technetwork/java/index.html）下载J2SE（Java开发包），然后安装，假设安装路径为D:\retainProfessional。然后在系统环境变量PATH最前面添加Java路径D:\retainProfessional\Jave\jdk1.6.0_10\bin。然后增加一个</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	<span>jdk1.6.0_10</span> 
+</p>
+<p>
+	MyEclipse 8.5
+</p>
+apache-tomcat-6.0.20<br />
+<p>
+	<br />
+</p>
+<p>
+	可以从Sun的Java网站（http://www.oracle.com/technetwork/java/index.html）下载J2SE（Java开发包），然后安装，假设安装路径为D:\retainProfessional。然后在系统环境变量PATH最前面添加Java路径D:\retainProfessional\Jave\jdk1.6.0_10\bin。然后增加一个环境变量“JAVA_HOME”指向Java安装路径D:\retainProfessional\Jave\jdk1.6.0_10\。
+</p>
+<h4>
+	1、首先安装JDK，然后配置java环境变量
+</h4>
+<p>
+	（1）、变量名JAVA_HOME&nbsp;&nbsp;&nbsp;变量值为&nbsp;&nbsp;D:\Program Files (x86)\Java\jdk1.6.0_10
+</p>
+<p>
+	<img src="/File/ForKindEditor/image/20180105224924_682.jpg" alt="jdk、tomcat6.0.20 <wbr>环境变量配置" title="jdk、tomcat6.0.20&nbsp;<wbr>环境变量配置" width="553" height="151" /> 
+</p>
+<p>
+	（2）、&nbsp;变量名PATH 变量值为D:\Program Files (x86)\Java\jdk1.6.0_10\bin 或者 %JAVA_HOME%\bin
+</p>
+<p>
+	<img src="/File/ForKindEditor/image/20180105225033_919.jpg" width="417" height="405" alt="jdk、tomcat6.0.20 <wbr>环境变量配置" title="jdk、tomcat6.0.20&nbsp;<wbr>环境变量配置" /> 
+</p>
+<p>
+	（3）、&nbsp;&nbsp;变量名CLASSPATH&nbsp;&nbsp;&nbsp;变量值为&nbsp;&nbsp;&nbsp;.;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar
+</p>
+<p>
+	<img src="/File/ForKindEditor/image/20180105225158_83.jpg" width="547" height="149" alt="jdk、tomcat6.0.20 <wbr>环境变量配置" title="jdk、tomcat6.0.20&nbsp;<wbr>环境变量配置" /><br />
+运行java和javac命令，出现以下提示说明jdk安装完成。
+</p>
+<p>
+	<img src="/File/ForKindEditor/image/20180105225338_267.jpg" alt="" width="426" height="549" title="" /> 
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<img src="/File/ForKindEditor/image/20180105225411_988.jpg" alt="" width="568" height="375" title="" /> 
+</p>
+<h4>
+	2、下载tomcat6 免安装版本，这里下载apache-tomcat-6.0.20
+</h4>
+<p>
+	然后配置tomcat6环境变量：
+</p>
+<p>
+	（1）、&nbsp;变量名CATALINA_HOME&nbsp;&nbsp;&nbsp;变量值为&nbsp;&nbsp;D:\apache-tomcat-6.0.20
+</p>
+<p>
+	（2）、&nbsp;变量名TOMCAT_HOME&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;变量值为&nbsp;&nbsp;D:\apache-tomcat-6.0.20
+</p>
+<p>
+	<img src="/File/ForKindEditor/image/20180105225516_630.jpg" alt="" width="549" height="151" title="" /> 
+</p>
+<h4>
+	3、注册服务
+</h4>
+<p>
+	解压版的&nbsp;&nbsp;没有在Windows里 注册服务&nbsp;&nbsp;&nbsp;必须要手动注册服务&nbsp;&nbsp;&nbsp;不然无法运行tomcat6.exe
+</p>
+<p>
+	只能通过 startup.bat 启动Tomcat&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;修改文件D:\apache-tomcat-6.0.20\bin\service.bat
+</p>
+<p>
+	在rem Set default Service name（在此下添加下面一行）<br />
+set CATALINA_HOME=Tomcat安装目录或 % CD %
+</p>
+<p>
+	<br />
+set SERVICE_NAME=Tomca6<br />
+set PR_DISPLAYNAME=Apache Tomcat 6
+</p>
+<h4>
+	4、安装服务
+</h4>
+运行cmd打开控制台，进入Tomat目录/bin文件夹，输入如下命令运行。<br />
+service.bat install<br />
+程序提示：The service 'Tomcat6（或者你修改一后的SERVICE_NAME）' has been installed<br />
+说明服务Tomcat已经被安装成功。下面是安装失败的提示
+<p>
+	<span style="color:#E53333;">注意用管理员的身份运行cmd，否则会出现：Failed installing tomcat6 service</span><span style="color:#E53333;"></span> 
+</p>
+<p>
+	<img src="/File/ForKindEditor/image/20180105230810_716.jpg" alt="" width="622" height="115" title="" /> 
+</p>
+<h4>
+	5、运行bin下的startup.bat启动服务
+</h4>
+<p>
+	<img src="/File/ForKindEditor/image/20180105231416_607.jpg" alt="" width="759" height="368" title="" /> 
+</p>
+<h4>
+	Tomcat6.0的目录结构
+</h4>
+<ul>
+	<li>
+		/bin：存放windows或Linux平台上启动和关闭Tomcat的脚本文件
+	</li>
+	<li>
+		/conf：存放Tomcat服务器的各种全局配置文件，其中包括server.xml（Tomcat的主要配置文件）、tomcat-users.xml和web.xml等配置文件
+	</li>
+	<li>
+		/lib：存放所需的所有jar文件（整合了原来tomcat5.5中的common/share/server三个目录下的所有jar）
+	</li>
+	<li>
+		/logs：存放Tomcat执行时的日志文件
+	</li>
+	<li>
+		/temp：存放Tomcat运行时所产生的临时文件
+	</li>
+	<li>
+		/webapps：Tomcat的主要Web发布目录，默认情况下把Web应用文件放于此目录（原/server/webapps下的manager等应用也已转移至此）
+	</li>
+	<li>
+		/work：Tomcat将JSP生成的Servlet源文件和字节码文件放到这个目录下
+	</li>
+</ul>
+<h3>
+	<span>在MyEclipse</span>使用<span>Tomcat服务器及创建web项目</span> 
+</h3>
+<p>
+	Window--Preference打开“使用偏好”窗口，然后选择MyEclipse——&gt;Servers——&gt;Tomcat，然后选择tomcat6.0，设置tomcat的安装路径完成myeclipse与tomcat的绑定。
+</p>
+<p>
+	<img src="/File/ForKindEditor/image/20180429203631_292.jpg" alt="" width="800" height="432" title="" align="" /> 
+</p>
+<p>
+	在myeclipse中新建一个web项目，进行相关的编写。
+</p>
+<p>
+	<img src="/File/ForKindEditor/image/20180429203651_443.jpg" alt="" width="800" height="437" title="" align="" /> 
+</p>
+<p>
+	<br />
+</p>
+<p>
+	项目完成后可以部署项目到tomcat服务器。
+</p>
+<p>
+	<img src="/File/ForKindEditor/image/20180429203848_845.jpg" alt="" width="800" height="430" title="" align="" /> 
+</p>
+<p>
+	最后通过runas可以启动服务器
+</p>
+<p>
+	<img src="/File/ForKindEditor/image/20180429204156_166.jpg" alt="" width="800" height="431" title="" align="" /> 
+</p>
+<p>
+	启动服务器，运行项目
+</p>
+<p>
+	<img src="/File/ForKindEditor/image/20180429204215_328.jpg" alt="" /> 
+</p>
+<p>
+	下面是一个简单的项目结构
+</p>
+<p>
+	<img src="/File/ForKindEditor/image/20180429204313_493.jpg" alt="" /> 
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/809.html">android页面跳转,button事件初始化及点击事件的响应</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/811.html">JSP页面中使用中文名图片</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="http://blog.sina.com.cn/s/blog_4caa51170102uy8y.html" target="_blank">http://blog.sina.com.cn/s/blog_4caa51170102uy8y.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,381 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>复试大纲及线_comonly.cn</title>
+<meta name="keywords" content="复试大纲及线" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">复试大纲及线</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-03-07</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	本科毕业设计  考研 研究生
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	第一部分 &nbsp;考试说明
+</p>
+<p>
+	(一)	答卷方式：闭卷、笔试、机试<br />
+(二)	答题时间：笔试120分钟，上机120分钟<br />
+(三)	考试题型及比例（满分100分）：<br />
+(四)	程序设计 （程序设计，算法设计与分析）		70%<br />
+(五)	离散结构（计算与证明题）						30%
+</p>
+<p>
+	<br />
+第二部分 &nbsp;考查主要知识点<br />
+(一)	程序设计语言<br />
+C/C++或者Java<br />
+(二)	结构体类型<br />
+结构体数组、链表定义及初始化、结构体和函数调用、结构体动态开辟和释放、结构体链表的建立、输出、删除、插入、修改等操作。<br />
+(三)	文件<br />
+文件打开与关闭、读取文件指定内容、修改文件指定内容、删除文件指定内容、文件更名与删除、文本文件与二进制文件、流式文件读写、内存映射文件。<br />
+(四)	同步与互斥<br />
+信号量、互斥量、临界区、进程同步、线程同步、多线程读写共享内存。<br />
+(五)	经典算法<br />
+递归算法、迭代算法、搜索算法、排序算法、学科核心课程的重要算法等。 <br />
+(六)	集合与关系<br />
+集合与关系、关系的性质、等价关系、偏序关系、集合的计数。<br />
+(七)	数理逻辑<br />
+逻辑与证明、命题演算的推理理论、谓词演算的推理理论。<br />
+(八)	代数结构<br />
+代数运算及其性质、同态和同构、半群、独异点和群、格及其性质。<br />
+(九)	图论<br />
+图的基本概念及基本定理、图的连通性、特殊图、图及树的应用。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/869.html">计算机考研题目</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/871.html">C 一些问题</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="结构体类型与文件">
+							<h2 style="display:inline;color:#5BC648;">结构体类型与文件</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-03-24&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><h4>
+	结构体类型与文件
+</h4>
+<pre class="prettyprint lang-cpp">#include &lt;stdio.h&gt;
+#include &lt;io.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;direct.h&gt;
+//#include&lt;malloc.h&gt;
+typedef struct List
+{
+	int count;
+	struct List * next;
+}List;
+
+void initList(List *L);  //初始化链表
+void viewList(List L);  //输出链表值
+void delect(int count,List *L);  //删除链表某元素
+void saveList(List L);  //以二进制形式保存读取文件fread,fwrite函数
+void main()
+{
+	List *p;
+	List grade;
+	grade.count=0;grade.next=NULL;
+	p=&amp;grade;
+
+	initList(&amp;grade);
+	printf("初始化时grade指向的链表的值：");
+	viewList(grade);
+
+	printf("删除grade中 30 后的链表的值：");
+	delect(30,p);
+	viewList(grade);
+
+	saveList(grade);
+
+}
+
+void saveList(List L)
+{
+	FILE *fp;
+	int i=0;
+	List *p=&amp;L;
+	List *read=(List *)malloc(sizeof(List));
+
+	if(access("20180324",0))mkdir("20180324");
+	if((fp=fopen("20180324/my.dat","w+"))==NULL)exit(0);
+
+	while(p!=NULL)	//二进制形式存储文件
+	{
+		fwrite(p,sizeof(List),1,fp);
+		p=p-&gt;next;
+		i++;
+	}
+	
+	rewind(fp);  //移动文件游标到文件起始位置
+
+	printf("流式文件读取：");
+	for(;i&gt;0;i--)	//二进制形式读取文件
+	{
+		fread(read,sizeof(List),1,fp);
+		printf("%d ",read-&gt;count);
+	}
+	putchar('\n');
+	
+	fclose(fp);
+
+	printf("修改名字状态%d\n",rename("20180324/my.dat","20180324/my.txt"));
+	//rename(old,new).修改文件名字，需要在文件关闭状态。
+	printf("删除文件状态%d\n",remove("20180324/my.txt"));//remove(name)删除文件
+	
+	//文件内容的删除与修改的一个策略，从源文件中读取内容。
+	//判断后写入一个新文件，最后再对新文件重命名
+
+}
+
+void initList(List *L)
+{
+	int i;
+	List *p=L;
+	for(i=1;i&lt;=10;i++)
+	{
+		L-&gt;count++;//带头结点，记录链表长度
+		p=(List *)malloc(sizeof(List));
+		p-&gt;count=i*3;
+
+		p-&gt;next=L-&gt;next;
+		L-&gt;next=p;
+	}
+}
+
+void viewList(List L)
+{
+	List *p=&amp;L;
+	while(p != NULL)
+	{
+		printf("%d ",p-&gt;count);
+		p=p-&gt;next;
+	}
+	putchar('\n');
+}
+
+void delect(int count,List *L)
+{//从链表删除值为count的结点，参数应为指针
+	List *q;
+	List *p=L;
+	//while(p-&gt;count==count){L=*L.next;free(p);p=&amp;L;}
+	q=p-&gt;next;		
+	while(q != NULL)
+	{
+		if(q-&gt;count==count)
+		{
+			p-&gt;next=q-&gt;next;
+			free(q);
+			q=p-&gt;next;
+			L-&gt;count--;
+		}
+		else 
+		{
+			q=q-&gt;next;
+			p=p-&gt;next;
+		}
+	}
+}</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#结构体类型与文件">结构体类型与文件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

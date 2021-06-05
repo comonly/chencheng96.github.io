@@ -1,0 +1,489 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>域控制器发生异常关于备份域控器的切换等_comonly.cn</title>
+<meta name="keywords" content="域控制器发生异常关于备份域控器的切换等" />
+<meta name="description" content="在额外域控制器上通过Transfer命令切换FSMO 5钟角色之后，将原主域控制器关机，发现新主域控制器（原额外域控制器）无法打开Active Directory站点和服务、Active Directory用户和计算机等，提示域不存在，成员服务器也无法登入。
+
+
+	
+
+
+	
+
+
+	
+
+
+	备份域控在主域无法工作时自动切换？不能
+
+
+	
+
+
+	window server2012环境下在命令提示符下输入netdom query fsmo查看一下当前的五个前色的owner是谁" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">域控制器发生异常关于备份域控器的切换等</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-09-12</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>在额外域控制器上通过Transfer命令切换FSMO 5钟角色之后，将原主域控制器关机，发现新主域控制器（原额外域控制器）无法打开Active Directory站点和服务、Active Directory用户和计算机等，提示域不存在，成员服务器也无法登入。
+
+
+	
+
+
+	
+
+
+	
+
+
+	备份域控在主域无法工作时自动切换？不能
+
+
+	
+
+
+	window server2012环境下在命令提示符下输入netdom query fsmo查看一下当前的五个前色的owner是谁</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	在额外域控制器上通过Transfer命令切换FSMO 5钟角色之后，将原主域控制器关机，发现新主域控制器（原额外域控制器）无法打开Active Directory站点和服务、Active Directory用户和计算机等，提示域不存在，成员服务器也无法登入。
+</p>
+<div>
+	<br />
+</div>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	备份域控在主域无法工作时自动切换？不能
+</p>
+<p>
+	<br />
+</p>
+<p>
+	window server2012环境下在命令提示符下输入netdom query fsmo查看一下当前的五个前色的owner是谁或者通过ad用户和计算机右键操作主机进行查看。我们看到当前五个角色的owner还是PDC。下面我们就开始强制夺取吧。<br />
+<br />
+在命令提示符下<br />
+输入ntdsutil 回车，<br />
+再输入:roles 回车，<br />
+再输入connections回车，
+</p>
+<p>
+	再输入connect toserver bdc.test.com，提示绑定成功后，<br />
+输入q退出，<br />
+&nbsp;<br />
+四、输入问号可以看到一些帮助信息，如果主域控没有坏掉的话，我们可以用transfer进行5大角色的转移,而现在主域控已经坏掉了，我们要用seize来进行强制夺取了，分别输入：<br />
+Seize naming master<br />
+Seize infrastructure master<br />
+Seize PDC<br />
+Seize RID master<br />
+Seize schema master<br />
+以上的命令在输入完成一条后都会确认要占用角色，选择是，然后接着一条一条完成既可，<br />
+完成以上按Q退出界面.<br />
+选择是以后。看到报错了，因为主域PDC不在线，所以在夺取时会有这个出错信息。，所以结构角色会夺取到BDC上，接下来的各个角色的夺取也会有这出错信息。<br />
+<br />
+以上命令全部完成以后，我们按Q退出，此时我们再查看一下五个角色的owner已经是我们的BDC了<br />
+<br />
+清理死亡dc的残留信息（元数据）：<br />
+运行--cmd---ntdsutil&nbsp;<br />
+ntdsutil: metadata cleanup&nbsp; &nbsp;//进入服务器对象清理模式<br />
+metadata cleanup: select operation target//进入操作对象选择模式<br />
+select operation target: connections&nbsp; //进入连接模式<br />
+server connections: connect to domain test.com&nbsp; //连接到域<br />
+server connections:quit<br />
+select operation target: list sites&nbsp; //列出当前连接的域中的站点<br />
+select operation target: select site 0&nbsp; //选择站点0<br />
+select operation target: List domains insite&nbsp; /列出站点中的域<br />
+select operation target: select domain 0&nbsp; &nbsp;//选择域0<br />
+select operation target: List servers for domain in site //列出所有服务器<br />
+select operation target: select server ０&nbsp; //选择域中的将要删掉服务器(域控)<br />
+select operation target: quit&nbsp;<br />
+metadata cleanup:Remove selected server&nbsp; &nbsp;<br />
+出现对话框，按“确定“删除DC-01主控服务器。<br />
+metadata cleanup:quit<br />
+ntdsutil: quit<br />
+<br />
+八、以上全部完成以后还要把全局编录转移到BDC上，具体步骤为打开ad站点和服务，然后找到好的那台辅助域控的NTDS settings右键把全局编录勾上，把坏的那台主域控的NTDS settings右键把全局编录的勾去掉。<br />
+所有做完后，把辅助域控的ip地址改为原主域控的ip地址即可。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	主机权限抢夺
+</p>
+<p>
+	从Windows Server 2000 开始，域控就没有主域控制器、备域控制器之分了，取而代之的就是主域控制器和额外域控制器，两的区别就是5种操作主机角色，也称FSMO角色.<br />
+FSMO的英文全称为Flexible Single Master Operations.<br />
+这些角色包括:<br />
+★架构主机 (Schema master) － 架构主机角色是林范围的角色。<br />
+★域命名主机 (Domain naming master) － 域命名主机角色是林范围的角色，每个林一个。<br />
+★RID 主机 (RID master) － RID 主机角色是域范围的角色，每个域一个。此角色用于分配 RID 池，以便新的或现有的域控制器能够创建用户帐户、计算机帐户或安全组。<br />
+★PDC 模拟器 (PDC emulator) － PDC 模拟器角色是域范围的角色，每个域一个。将数据库更新发送到 Windows NT 备份域控制器的域控制器需要具备这个角色。此外，拥有此角色的域控制器也是某些管理工具的目标，它还可以更新用户帐户密码和计算机帐户密码。<br />
+★结构主机 (Infrastructure master) － 结构主机角色是域范围的角色，每个域一个。此角色供域控制器使用，用于成功运行 adprep /forestprep 命令，以及更新跨域引用的对象的 SID 属性和可分辨名称属性。<br />
+Active Directory 安装向导 (Dcpromo.exe) 将这五种 FSMO 角色全部分配给林根域中的第一台域控<br />
+<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	全局编录服务器GC的主要作用有：1、存储森林对象的信息副本。2、存储能用组成员身份信息。3、提高用户主体（UPN）名称身份验证信息。4、验证林内的对象参考。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	AD辅域控制器升级为主域控制器（图形界面操作）：<a href="https://blog.csdn.net/tladagio/article/details/79618338">https://blog.csdn.net/tladagio/article/details/79618338</a> 
+</p>
+<p>
+	AD域服务器|两台DC无法进行复制同步：<a href="http://www.360doc.com/content/16/0201/11/8046410_532055241.shtml">http://www.360doc.com/content/16/0201/11/8046410_532055241.shtml</a> 
+</p>
+<p>
+	Server 2012 R2 部署域控、额外域控及FSMO角色转移和夺取：<a href="https://wenku.baidu.com/view/7a9224f9a300a6c30d229fda.html">https://wenku.baidu.com/view/7a9224f9a300a6c30d229fda.html</a> 
+</p>
+<p>
+	How to view and transfer FSMO roles in Windows Server 2003：<a href="https://support.microsoft.com/en-us/help/324801/how-to-view-and-transfer-fsmo-roles-in-windows-server-2003">https://support.microsoft.com/en-us/help/324801/how-to-view-and-transfer-fsmo-roles-in-windows-server-2003</a> 
+</p>
+<p>
+	主域控制器损坏后，备份域控制器抢夺五种角色：<a href="https://blog.51cto.com/snbolinux/1051872">https://blog.51cto.com/snbolinux/1051872</a> 
+</p>
+<p>
+	Windows server 2012 利用ntdsutil工具实现AD角色转移及删除域控方法：<a href="https://blog.51cto.com/itwish/2087493">https://blog.51cto.com/itwish/2087493</a> 
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	为什么结构主机和全局编录服务器不能放在同一个域控制器上？
+</p>
+<p>
+	”注意：结构主机 (IM) 角色应由非全局编录 (GC) 服务器的域控制器担任。如果结构主机在全局编录服务器上运行，它将会停止更新对象信息，原因是它只包含对它所拥有的对象的引用。“<br />
+我有个疑问：在装域控制的时候，第一个装好的域控制器就是所谓的全局编录、结构主机、域命名主机、RID主机！<br />
+我看了一下网域中的域控制器，结构主机和全局编录就是在同一台上！不过还好没有出现什么问题！<br />
+答：基础结构主控更新的引用信息是来自其它域的信息，即非本域信息。在以下两个情况下，基础结构主控主机其实不用工作：<br />
+<br />
+1. 只有一个域，这时你无论把基础结构主控放在哪都无所谓。因为没有其它域的信息需要引用。<br />
+<br />
+2. 多域环境，但所有DC都是GC。这时基础结构主控也无需工作，因为所有的DC都是GC，GC拥有其它域的只读信息。<br />
+问：请问单域中 有两DC 把额外DC也设置成GC，这样做好还是不好？？<br />
+已经说过了，GC是储存其它域的信息的，如果你的AD森林中只有一个单域，额外DC是不是GC不重要。<br />
+<br />
+也没什么好或不好的说法，只是从容错的角度上说，都设置成GC会稍好一点。<br />
+Active Directory 定义了五种操作主机角色（又称ＦＳＭＯ）：&nbsp;<br />
+1.架构主机 schema master&nbsp;<br />
+2..域命名主机 domain naming master&nbsp;<br />
+3.相对标识号 (RID) 主机 RID master&nbsp;<br />
+4.主域控制器模拟器 (PDCE)&nbsp;<br />
+5.基础结构主机 infrastructure master&nbsp;<br />
+森林级别&nbsp;<br />
+１、架构主机（Schema Master）&nbsp;<br />
+功能：控制活动目录内所有对象/属性的定义&nbsp;<br />
+提示：Regsvr32 schmmgmt.dll&nbsp;<br />
+&nbsp; &nbsp; &nbsp; Schema Admins组&nbsp;<br />
+故障影响：更新Schema受影响&nbsp;<br />
+短期内一般看不到影响&nbsp;<br />
+&nbsp; &nbsp; &nbsp; 典型问题如：无法安装Exchange&nbsp;<br />
+故障处理：需确定原OM为永久性脱机才可抓取&nbsp;<br />
+&nbsp; &nbsp; &nbsp; 确保目标DC为具有最新更新的DC<br />
+<br />
+２、域命名主机（Domain Naming Master）&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;功能：控制森林内域的添加和删除&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;添加和删除对外部目录的交叉引用对象&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;提示：建议与GC配置在一起&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Enterprise Admins组&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;故障影响：更改域结构受影响&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;短期内一般看不到影响&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;典型问题如：添加/删除域&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;故障处理：需确定原OM为永久性脱机才可抓取&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;确保目标DC为具有最新更新的DC&nbsp;<br />
+域级别&nbsp;<br />
+１、RID主机（RID Master）&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;功能：管理域中对象相对标识符（RID）池&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;提示：对象安全标识符（SID）= 域安全标识符 + 相对标识符（RID）&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;* 形如：S-1-5-21-1343024091-879983540-3…&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;故障影响：无法获得新的RID池分配&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;典型问题如：无法新建（大量）用户帐号&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;故障处理：需确定原OM为永久性脱机才可抓取&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;确保目标DC为具有最新更新的DC&nbsp;<br />
+２、PDC模拟主机（PDC Emulator）&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;功能：模拟Windows NT PDC&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;默认的域主浏览器&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;默认的域内权威的时间服务源&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;统一管理域帐号密码更新、验证及锁定&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;提示：PDC模拟主机不仅仅是模拟NT PDC&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;一般负荷较大&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;故障影响：底端客户不能访问AD&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;不能更改域帐号密码&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;浏览服务问题&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;时间同步问题&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;故障处理：需要比较及时地恢复&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;可以临时抓取到其他DC&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;在原OM恢复后可以抓取回去&nbsp;<br />
+３、基础结构主机（Infrastructure Master）&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;功能：负责对跨域对象引用进行更新&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;提示：单域情况下基础结构主机不需要工作&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;不能同时和GC配置在一起（单域控除外）&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;故障影响：外域帐号不能识别，标记为SID&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;故障处理：需要比较及时地恢复&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;可以临时抓取到其他DC&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;在原OM恢复后可以抓取回去&nbsp;<br />
+查看操作主机角色&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;命令行工具：Ntdsutil Netdom Dcdiag&nbsp;<br />
+操作主机的放置&nbsp;<br />
+默认情况：架构主机在根域的第一台DC上&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;域命名主机在根域的第一台DC上&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;其他三个主机角色在各自域的第一台DC上&nbsp;<br />
+考虑问题：和GC的冲突&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;性能考虑&nbsp;<br />
+手工优化：基础结构主机与GC不放在一起&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;域命名主机与GC放在一起&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;架构主机与域命名主机可放在一起&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;PDC模拟主机建议单独放置&nbsp;<br />
+操作主机的转移&nbsp;<br />
+１、转移（Transfer）&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;把OM角色平滑地传递给另一台DC&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;操作可逆&nbsp;<br />
+２、抓取（Seize）&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;把OM角色强制地赋予另一台DC&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;操作不可逆&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;抓取命令会自动先尝试转移<br />
+查看操作主机角色的方法：netdom query fsmo<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<span>nslookup用于查询DNS的记录，查询域名解析是否正常，在网络故障时用来诊断网络问题</span> 
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	查看同步异常信息等：
+</p>
+<p>
+	repadmin /syncall /force
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1441.html">谈谈Memcached与Redis</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1443.html">域控制器不用节点，在正常使用节点上删除</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

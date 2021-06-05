@@ -1,0 +1,313 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>mysql索引数据结构_comonly.cn</title>
+<meta name="keywords" content="mysql索引数据结构" />
+<meta name="description" content="主键索引三问
+
+为什么非主键索引结构叶子节点存储的是主键值？
+一是保证一致性，更新数据的时候只需要更新主键索引树，二是节省存储空间。
+
+为什么推荐InnoDB表必须有主键？
+保证会有主键索引树的存在（因为数据存放在主键索引树上面），如果没有mysql会自己生成一个rowid作为自增的主键主键索引
+
+为什么推荐使用整型的自增主键？
+一是方便查找比较，而是新增数据的时候只需要在最后加入，不会大规模调整树结构，如果是UUID的话，大小不好比较，新增的时候也极有可能在中间插入数据，会导致树结构大" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">mysql索引数据结构</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2020-09-20</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>主键索引三问
+
+为什么非主键索引结构叶子节点存储的是主键值？
+一是保证一致性，更新数据的时候只需要更新主键索引树，二是节省存储空间。
+
+为什么推荐InnoDB表必须有主键？
+保证会有主键索引树的存在（因为数据存放在主键索引树上面），如果没有mysql会自己生成一个rowid作为自增的主键主键索引
+
+为什么推荐使用整型的自增主键？
+一是方便查找比较，而是新增数据的时候只需要在最后加入，不会大规模调整树结构，如果是UUID的话，大小不好比较，新增的时候也极有可能在中间插入数据，会导致树结构大</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 主键索引三问<br />
+<br />
+为什么非主键索引结构叶子节点存储的是主键值？<br />
+一是保证一致性，更新数据的时候只需要更新主键索引树，二是节省存储空间。<br />
+<br />
+为什么推荐InnoDB表必须有主键？<br />
+保证会有主键索引树的存在（因为数据存放在主键索引树上面），如果没有mysql会自己生成一个rowid作为自增的主键主键索引<br />
+<br />
+为什么推荐使用整型的自增主键？<br />
+一是方便查找比较，而是新增数据的时候只需要在最后加入，不会大规模调整树结构，如果是UUID的话，大小不好比较，新增的时候也极有可能在中间插入数据，会导致树结构大规调整，造成插入数据变慢。<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1722.html">mysql锁机制</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1724.html">mysql各种文件以及作用</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="mysql覆盖索引与回表">
+							<h2 style="display:inline;color:#5BC648;">mysql覆盖索引与回表</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-09-20&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	<a href="https://www.jianshu.com/p/8991cbca3854">https://www.jianshu.com/p/8991cbca3854</a>
+</p>
+<p>
+	将被查询的字段，建立到联合索引里去
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="数据库索引B+树">
+							<h2 style="display:inline;color:#5BC648;">数据库索引B+树</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-09-20&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	<a href="https://www.cnblogs.com/lixiaolun/p/5058304.html">https://www.cnblogs.com/lixiaolun/p/5058304.html</a>
+</p>
+<p>
+	1. 数据库文件是放在硬盘上，每次读取数据库都需要在磁盘上搜索，因此需要考虑磁盘寻道时间，我们都知道磁盘寻道开销是非常大的。同时，索引一般也是非常大的，内存不能放下，因此也会放在磁盘上。（另外，还与局部性原理与磁盘预读有关系）。<br />
+<br />
+2. B+树所有的关键字都出现在叶子节点的链表（稠密索引）中，且链表中的关键字是有序的。非叶子节点只起索引作用（稀疏索引）。<br />
+叶子节点相当于存储了关键字的数据层。<br />
+因此，我们得出结论，由于数据存数在磁盘上，因此应该尽量减少磁盘I/O次数。恰好，B+树的叶子节点存储了关键字的数据层（我们可以称为主键），因此我们可以直接通过主键来查询数据。若是使用二叉树，二叉树索引的只是主键的位置，我还需要根据二叉树索引主键的位置，进行一次I/O操作来获取主键。<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	----------------------------------叶子节点对应的范围查找。
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="数据库索引 IO 的次数">
+							<h2 style="display:inline;color:#5BC648;">数据库索引 IO 的次数</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-09-24&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span>数据库索引是存储在磁盘上的，在数据量大的时候，就不可以将整个索引全部加载到内存，只可以说一项一项的加载每一个磁盘页(对应索引树的节点)。<br />
+<br />
+所以的话，要减少IO次数，对于树来讲的话，IO次数就是树的高度，而“矮胖”就是b树的特征之一，m的大小取决于磁盘页的大小。<br /></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#mysql覆盖索引与回表">mysql覆盖索引与回表</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#数据库索引B+树">数据库索引B+树</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#数据库索引 IO 的次数">数据库索引 IO 的次数</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

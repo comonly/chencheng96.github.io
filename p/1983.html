@@ -1,0 +1,264 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>大数据实时计算系统实践_comonly.cn</title>
+<meta name="keywords" content="大数据实时计算系统实践" />
+<meta name="description" content="大数据实时计算系统实践" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">大数据实时计算系统实践</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">mnsj1188</li>
+          <li class="lmname"><a href="https://blog.51cto.com/14485508/2430870" target="_blank">https://blog.51cto.com/14485508/2430870</a></li>
+          <li class="timer">2019-08-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>大数据实时计算系统实践</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <div class="con editor-preview-side" id="result"><h2 style="padding:0px;margin:8px 0px 16px;font-size:24px;font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(79,79,79);line-height:32px;white-space:normal;background-color:rgb(255,255,255);">实时计算</h2><h4 style="padding:0px;margin:8px 0px 16px;font-size:20px;font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(79,79,79);line-height:28px;white-space:normal;background-color:rgb(255,255,255);">简介</h4><p style="padding:0px;margin-top:0px;margin-bottom:16px;font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(77,77,77);line-height:26px;white-space:normal;background-color:rgb(255,255,255);">随着大数据的快速发展，业务场景越来越复杂，离线式的批处理框架 MapReduce 已经不能满足业务，大量的场景需要实时的数据处理结果来进行分析，决策。例如实时的用户推荐，在 618 这样的刺激环境下普通历史数据的推荐已经不能满足场景，就需要采集前分钟，甚至式前几秒的数据进行分析。实时计算适用于这种对历史数据依赖不强，短时间内变化较大的数据。用户行为分析，舆情分析，等等不断随环境和时间实时变化的数据都可能用到实时计算。</p><h4 style="padding:0px;margin:8px 0px 16px;font-size:20px;font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(79,79,79);line-height:28px;white-space:normal;background-color:rgb(255,255,255);">流程</h4><blockquote style="padding:16px 16px 0px;margin:0px 0px 24px;border-left:8px solid rgb(221,223,228);background:rgb(238,240,244);color:rgb(51,51,51);font-family:'-apple-system', 'SF UI Text', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif, SimHei, SimSun;font-size:14px;white-space:normal;"><p style="padding:0px;margin-top:0px;margin-bottom:16px;font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;font-size:16px;color:rgb(79,79,79);line-height:26px;">实时的数据源：微博，微信，股票交易，银行流水，商城交易, 日志等数据。</p><blockquote style="padding:16px 16px 0px;margin:0px 0px 24px;border-left:8px solid rgb(221,223,228);"><p style="padding:0px;margin-top:0px;margin-bottom:16px;font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;font-size:16px;color:rgb(79,79,79);line-height:26px;">消息中间件：Kafka，作为消息队列，提供数据的缓冲功能，同时也提供容错机制。</p><blockquote style="padding:16px 16px 0px;margin:0px 0px 24px;border-left:8px solid rgb(221,223,228);"><p style="padding:0px;margin-top:0px;margin-bottom:16px;font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;font-size:16px;color:rgb(79,79,79);line-height:26px;">实时处理框架 (SparkStreaming)：通过编写的 app 应用来拉取消息中间件的数据进行分布式的并行计算，处理和输出。</p></blockquote></blockquote></blockquote><p style="padding:0px;margin-top:0px;margin-bottom:16px;font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(77,77,77);line-height:26px;white-space:normal;background-color:rgb(255,255,255);">实时计算一定是基于分布式的并行计算框架的，单机对于短时间的高数据量远远达不到实时处理。</p><h2 style="padding:0px;margin:8px 0px 16px;font-size:24px;font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(79,79,79);line-height:32px;white-space:normal;background-color:rgb(255,255,255);"><a style="color: rgb(66, 133, 244);"></a>SparkStreaming</h2><h4 style="padding:0px;margin:8px 0px 16px;font-size:20px;font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(79,79,79);line-height:28px;white-space:normal;background-color:rgb(255,255,255);">简介</h4><p style="padding:0px;margin-top:0px;margin-bottom:16px;font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(77,77,77);line-height:26px;white-space:normal;background-color:rgb(255,255,255);">SparkStreaming 是 Spark 提供的分布式的大数据实时计算框架，是基于 SparkCore(Spark 核心 API) 的扩展，他提供了动态的，高吞吐量的，可容错的流式数据处理。他可以从多个数据 Kafka,Flume,Kinesis,Twitter,Tcp scokets 中获取数据，然后使用复杂的算法和高级的函数算子如：map,reduce,join,window... 进行数据处理加工。最后可以将处理后的数据输出到文件系统，数据库，和可视化界面，同样也可以在数据流上使用机器学习和图形计算算法。<br>SparkStreaming 同 sparksql 一样在核心 RDD 上封装一种数据集<code style="font-family:'Source Code Pro', 'DejaVu Sans Mono', 'Ubuntu Mono', 'Anonymous Pro', 'Droid Sans Mono';">DStream</code>, 用于适应实时计算的特点, 类似于 sparksql 的 Dataset 和 DataFrame 用于方便交互式查询操作。<br><img alt="9add1de69872485caa9a92d17ddc8741-image.png" src="https://hacpai.com/porter?src=http://os36ky6gs.bkt.clouddn.com/file/2017/7/9add1de69872485caa9a92d17ddc8741-image.png" style="cursor: pointer;"></p><h4 style="padding:0px;margin:8px 0px 16px;font-size:20px;font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(79,79,79);line-height:28px;white-space:normal;background-color:rgb(255,255,255);">原理</h4><p style="padding:0px;margin-top:0px;margin-bottom:16px;font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(77,77,77);line-height:26px;white-space:normal;background-color:rgb(255,255,255);">接收实时的输入数据流，将数据拆分成多个 batch, 如每一秒的数据封装成一个 batch, 将每个 batch 交给 Spark 进行处理。最后将结果输出，同样的输出也是按 batch 来进行划分。<br><img alt="345810b0db7e4406be1727635e17174b-image.png" src="https://hacpai.com/porter?src=http://os36ky6gs.bkt.clouddn.com/file/2017/7/345810b0db7e4406be1727635e17174b-image.png" style="cursor: pointer;"></p><h4 style="padding:0px;margin:8px 0px 16px;font-size:20px;font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(79,79,79);line-height:28px;white-space:normal;background-color:rgb(255,255,255);">示例 SparkStreaming 的工作</h4><h4 style="padding:0px;margin:8px 0px 16px;font-size:20px;font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(79,79,79);line-height:28px;white-space:normal;background-color:rgb(255,255,255);">StreamingContext</h4><p style="padding:0px;margin-top:0px;margin-bottom:16px;font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(77,77,77);line-height:26px;white-space:normal;background-color:rgb(255,255,255);">1. 用 conf 对象初始化 Streaming;</p><pre style="padding:8px;margin-top:0px;margin-bottom:24px;font-family:Consolas, Inconsolata, Courier, monospace;white-space:pre-wrap;font-size:14px;line-height:22px;background-color:rgb(255,255,255);">//scala
+import&nbsp;org.apache.spark._
+import&nbsp;org.apache.spark.streaming._
+
+val&nbsp;conf&nbsp;=&nbsp;new&nbsp;SparkConf().setAppName(appName).setMaster(master)
+val&nbsp;sc&nbsp;&nbsp;&nbsp;=&nbsp;new&nbsp;StreamingContext(conf,Seconds(1))</pre><p><code class="hljs javascript" style="font-family:'Source Code Pro', 'DejaVu Sans Mono', 'Ubuntu Mono', 'Anonymous Pro', 'Droid Sans Mono';padding:.5em;background:rgb(40,42,54);color:rgb(248,248,242);font-size:14px;white-space:normal;"><span class="hljs-comment" style="font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(98,114,164);">//scala</span><span class="hljs-keyword" style="font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(139,233,253);font-weight:bold;">import</span>&nbsp;org.apache.spark._<span class="hljs-keyword" style="font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(139,233,253);font-weight:bold;">import</span>&nbsp;org.apache.spark.streaming._val conf =&nbsp;<span class="hljs-keyword" style="font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(139,233,253);font-weight:bold;">new</span>SparkConf().setAppName(appName).setMaster(master)val sc =&nbsp;<span class="hljs-keyword" style="font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(139,233,253);font-weight:bold;">new</span>&nbsp;StreamingContext(conf,Seconds(<span class="hljs-number" style="font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;">1</span>))</code></p><pre style="padding:8px;margin-top:0px;margin-bottom:24px;font-family:Consolas, Inconsolata, Courier, monospace;white-space:pre-wrap;font-size:14px;line-height:22px;background-color:rgb(255,255,255);">//java
+import&nbsp;org.apache.spark.*;
+import&nbsp;org.apache.spark.streaming.api.java.*;
+
+SparkConf&nbsp;conf&nbsp;=&nbsp;new&nbsp;SparkConf().setAppName(appName).setMaster(master);
+JavaStreamingContext&nbsp;ssc&nbsp;=&nbsp;new&nbsp;JavaStreamingContext(conf,&nbsp;new&nbsp;Duration(1000));</pre><p><code class=" hljs  language-java" style="font-family:'Source Code Pro', 'DejaVu Sans Mono', 'Ubuntu Mono', 'Anonymous Pro', 'Droid Sans Mono';padding:.5em;background:rgb(40,42,54);color:rgb(248,248,242);font-size:14px;white-space:normal;"><span class="token comment">//javaimport org.apache.spark.*;import org.apache.spark.streaming.api.java.*;SparkConf conf = newSparkConf().setAppName(appName).setMaster(master);JavaStreamingContext ssc = new JavaStreamingContext(conf, newDuration(1000));</span></code></p><p style="padding:0px;margin-top:0px;margin-bottom:16px;font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(77,77,77);line-height:26px;white-space:normal;background-color:rgb(255,255,255);">2. 用 context 对象初始化</p><pre style="padding:8px;margin-top:0px;margin-bottom:24px;font-family:Consolas, Inconsolata, Courier, monospace;white-space:pre-wrap;font-size:14px;line-height:22px;background-color:rgb(255,255,255);">//scala
+import&nbsp;org.apache.spark.streaming._
+
+val&nbsp;sc&nbsp;=&nbsp;...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;existing&nbsp;SparkContext
+val&nbsp;ssc&nbsp;=&nbsp;new&nbsp;StreamingContext(sc,&nbsp;Seconds(1))</pre><p><code class="hljs javascript" style="font-family:'Source Code Pro', 'DejaVu Sans Mono', 'Ubuntu Mono', 'Anonymous Pro', 'Droid Sans Mono';padding:.5em;background:rgb(40,42,54);color:rgb(248,248,242);font-size:14px;white-space:normal;"><span class="hljs-comment" style="font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(98,114,164);">//scala</span><span class="hljs-keyword" style="font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(139,233,253);font-weight:bold;">import</span>&nbsp;org.apache.spark.streaming._val sc = ...&nbsp;<span class="hljs-comment" style="font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(98,114,164);">// existing SparkContext</span>val ssc =&nbsp;<span class="hljs-keyword" style="font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(139,233,253);font-weight:bold;">new</span>&nbsp;StreamingContext(sc, Seconds(<span class="hljs-number" style="font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;">1</span>))</code></p><pre style="padding:8px;margin-top:0px;margin-bottom:24px;font-family:Consolas, Inconsolata, Courier, monospace;white-space:pre-wrap;font-size:14px;line-height:22px;background-color:rgb(255,255,255);">//java
+import&nbsp;org.apache.spark.streaming.api.java.*;
+
+JavaSparkContext&nbsp;sc&nbsp;=&nbsp;...&nbsp;&nbsp;&nbsp;//existing&nbsp;JavaSparkContext
+JavaStreamingContext&nbsp;ssc&nbsp;=&nbsp;new&nbsp;JavaStreamingContext(sc,&nbsp;Durations.seconds(1));</pre><p><code class=" hljs  language-java" style="font-family:'Source Code Pro', 'DejaVu Sans Mono', 'Ubuntu Mono', 'Anonymous Pro', 'Droid Sans Mono';padding:.5em;background:rgb(40,42,54);color:rgb(248,248,242);font-size:14px;white-space:normal;"><span class="token comment">//javaimport org.apache.spark.streaming.api.java.*;JavaSparkContext sc = ... //existing JavaSparkContextJavaStreamingContext ssc = new JavaStreamingContext(sc, Durations.seconds(1));</span></code></p><p style="padding:0px;margin-top:0px;margin-bottom:16px;font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(77,77,77);line-height:26px;white-space:normal;background-color:rgb(255,255,255);">appName，是用来在 Spark UI 上显示的应用名称。master，是一个 Spark、Mesos 或者 Yarn 集群的 URL，或者是 local[*] 运行在本地模式 (用于本地测试和单元测试)。<br>必须根据应用程序的延迟需求和可用的集群资源来设置<code style="font-family:'Source Code Pro', 'DejaVu Sans Mono', 'Ubuntu Mono', 'Anonymous Pro', 'Droid Sans Mono';">批处理间隔batch interval</code></p><h4 style="padding:0px;margin:8px 0px 16px;font-size:20px;font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(79,79,79);line-height:28px;white-space:normal;background-color:rgb(255,255,255);">Discretized Streams(DStream)</h4><p style="padding:0px;margin-top:0px;margin-bottom:16px;font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(77,77,77);line-height:26px;white-space:normal;background-color:rgb(255,255,255);">Spark Streaming 提供了一种高级的抽象，叫做 DStream，英文全称为 Discretized Stream，中文翻译为“离散流”，它代表了一个持续不断的数据流。DStream 可以通过输入数据源来创建，比如 Kafka、Flume 和 Kinesis, 也可以通过对其他 DStream 应用高阶函数来创建，比如 map、reduce、join、window。!<br>DStream 的内部，其实一系列持续不断产生的 RDD。RDD 是 Spark Core 的核心抽象，即不可变的，分布式的弹性性数据集。DStream 中的每个 RDD 都包含了一个时间段内的数据。<br><img alt="ea19380297544753860c68e24c49939b-image.png" src="https://hacpai.com/porter?src=http://os36ky6gs.bkt.clouddn.com/file/2017/7/ea19380297544753860c68e24c49939b-image.png" style="cursor: pointer;"><br>对 DStream 应用的算子，比如 flatmap，其实在底层会被翻译为对 DStream 中每个 RDD 的操作。比如对一个 DStream 执行一个 flatmap 操作，会产生一个新的 DStream。但是，在底层其原理为，对输入 DStream 中每个时间段的 RDD，都应用一遍 flatmap 操作，然后生成的新的 RDD，即作为新的 DStream 中的那个时间段的一个 RDD。底层的 RDD 的 transformation 操作，其实，还是由 Spark Core 的计算引擎来实现的。Spark Streaming 对 Spark Core 进行了一层封装，隐藏了细节，然后对开发人员提供了方便易用的高层次的 API。<br><img alt="b781236cf5264cc5a6ded56b512d5476-image.png" src="https://hacpai.com/porter?src=http://os36ky6gs.bkt.clouddn.com/file/2017/7/b781236cf5264cc5a6ded56b512d5476-image.png" style="cursor: pointer;"></p><h2 style="padding:0px;margin:8px 0px 16px;font-size:24px;font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(79,79,79);line-height:32px;white-space:normal;background-color:rgb(255,255,255);"><a style="color: rgb(66, 133, 244);"></a>实时的 WordCount 应用</h2><p style="padding:0px;margin-top:0px;margin-bottom:16px;font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(77,77,77);line-height:26px;white-space:normal;background-color:rgb(255,255,255);">我们通过经典的 wordcount 来初步的了解 SparkStreaming 是如何进行实时的流处理的。</p><pre style="padding:8px;margin-top:0px;margin-bottom:24px;font-family:Consolas, Inconsolata, Courier, monospace;white-space:pre-wrap;font-size:14px;line-height:22px;background-color:rgb(255,255,255);">//基本数据源：
+//Tcp&nbsp;Socket:&nbsp;`socketTextStream`
+//file,Hdfs:&nbsp;`textFileStream("hdfs://...")`
+private&nbsp;static&nbsp;&nbsp;void&nbsp;ssBSDataSource()&nbsp;throws&nbsp;InterruptedException{
+&nbsp;&nbsp;SparkConf&nbsp;conf&nbsp;=&nbsp;new&nbsp;SparkConf().setAppName("ssBSDataSource").setMaster("local[2]");
+&nbsp;&nbsp;//创建JavaStreamingContext，设置时间延迟为1秒(每次收集前一秒的数据)
+&nbsp;&nbsp;JavaStreamingContext&nbsp;jsc&nbsp;=&nbsp;new&nbsp;JavaStreamingContext(conf,&nbsp;Durations.seconds(1));
+
+&nbsp;&nbsp;/*jsc.textFileStream("input/streaming");//file
+&nbsp;&nbsp;&nbsp;&nbsp;jsc.textFileStream("hdfs://...");&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//hdfs&nbsp;
+&nbsp;&nbsp;*/&nbsp;&nbsp;
+&nbsp;&nbsp;//从Socket中获取数据，监听端口9999，的得到的是ReceiverInputDStream
+&nbsp;&nbsp;JavaReceiverInputDStream&nbsp;lines&nbsp;=&nbsp;&nbsp;&nbsp;jsc.socketTextStream("localhost",9999);
+&nbsp;&nbsp;&nbsp;&nbsp;//接下来就是wordcount的操作了。
+&nbsp;&nbsp;JavaDStream&nbsp;listDstream&nbsp;=&nbsp;&nbsp;lines.flatMap(line-&gt;&nbsp;Arrays.asList(line.split("&nbsp;")).iterator());
+&nbsp;&nbsp;JavaPairDStream&nbsp;pairDStream&nbsp;=&nbsp;&nbsp;listDstream.mapToPair(x-&gt;new&nbsp;Tuple2&lt;&gt;(x,1));
+&nbsp;&nbsp;JavaPairDStream&nbsp;wordCount&nbsp;=&nbsp;&nbsp;pairDStream.reduceByKey((x1,x2)-&gt;(x1+x2));
+
+&nbsp;&nbsp;wordCount.print();//默认输出前10条数据
+&nbsp;&nbsp;jsc.start();
+&nbsp;&nbsp;jsc.awaitTermination();//不断的不等待一段时间间隔进行一次执行。
+
+&nbsp;&nbsp;//直到我们使用jsc.close();
+}</pre><p><code class=" hljs  language-java" style="font-family:'Source Code Pro', 'DejaVu Sans Mono', 'Ubuntu Mono', 'Anonymous Pro', 'Droid Sans Mono';padding:.5em;background:rgb(40,42,54);color:rgb(248,248,242);font-size:14px;white-space:normal;"><span class="token comment">//基本数据源：//Tcp Socket: `socketTextStream`//file,Hdfs: `textFileStream("hdfs://...")`private static void ssBSDataSource() throwsInterruptedException{ SparkConf conf = new SparkConf().setAppName("ssBSDataSource").setMaster("local[2]"); //创建JavaStreamingContext，设置时间延迟为1秒(每次收集前一秒的数据) JavaStreamingContext jsc = new JavaStreamingContext(conf, Durations.seconds(1)); /*jsc.textFileStream("input/streaming");//file jsc.textFileStream("hdfs://..."); //hdfs */ //从Socket中获取数据，监听端口9999，的得到的是ReceiverInputDStream JavaReceiverInputDStream lines = jsc.socketTextStream("localhost",9999); //接下来就是wordcount的操作了。 JavaDStream listDstream = lines.flatMap(line-&gt; Arrays.asList(line.split(" ")).iterator()); JavaPairDStream pairDStream = listDstream.mapToPair(x-&gt;new Tuple2&lt;&gt;(x,1)); JavaPairDStream wordCount = pairDStream.reduceByKey((x1,x2)-&gt;(x1+x2)); wordCount.print();//默认输出前10条数据 jsc.start(); jsc.awaitTermination();//不断的不等待一段时间间隔进行一次执行。 //直到我们使用jsc.close();}</span></code></p><p style="padding:0px;margin-top:0px;margin-bottom:16px;font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(77,77,77);line-height:26px;white-space:normal;background-color:rgb(255,255,255);"><code style="font-family:'Source Code Pro', 'DejaVu Sans Mono', 'Ubuntu Mono', 'Anonymous Pro', 'Droid Sans Mono';">创建StreamingContext-&gt;获取InputDStream-&gt;业务操作-&gt;输出-&gt;循环获取数据并操作</code>，可见实时流处理相比普通的 RDD 操作并没有太多的不同之处，这里的 StreamingContext 相当于 SparkContext，SparkSession，DStream 相当与 RDD 和 Dataset, 是操作对象。一个不同是<code style="font-family:'Source Code Pro', 'DejaVu Sans Mono', 'Ubuntu Mono', 'Anonymous Pro', 'Droid Sans Mono';">StreamingContext需要start()启动才能执行</code>，另一个不同点在于 SparkStreaming 会不断的从端口获取实时数据，然后执行相同的操作。</p><h2 style="padding:0px;margin:8px 0px 16px;font-size:24px;font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(79,79,79);line-height:32px;white-space:normal;background-color:rgb(255,255,255);"><a style="color: rgb(66, 133, 244);"></a>SparkStreaming 的数据源</h2><h4 style="padding:0px;margin:8px 0px 16px;font-size:20px;font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(79,79,79);line-height:28px;white-space:normal;background-color:rgb(255,255,255);">基础数据源: 文件 (file,HDFS)，Socket,Akka Ator, 是内置支持的数据源。</h4><p style="padding:0px;margin-top:0px;margin-bottom:16px;font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(77,77,77);line-height:26px;white-space:normal;background-color:rgb(255,255,255);">Hdfs:<code style="font-family:'Source Code Pro', 'DejaVu Sans Mono', 'Ubuntu Mono', 'Anonymous Pro', 'Droid Sans Mono';">JavaReceiverInputDStream lines=textFileStream("hdfs://spark1:9000/fileDir")</code><br>对于文件数据源的实时处理，会不断的去检查目录，一旦有<code style="font-family:'Source Code Pro', 'DejaVu Sans Mono', 'Ubuntu Mono', 'Anonymous Pro', 'Droid Sans Mono';">移入或者重命名</code>(只处理新加入目录和名称不同的新文件) 的文件就会进行数据的获取和处理，处理之后即使内容修改也不会再处理。需要强调的是数据格式必须一致。</p><h4 style="padding:0px;margin:8px 0px 16px;font-size:20px;font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(79,79,79);line-height:28px;white-space:normal;background-color:rgb(255,255,255);">高级数据源:Kafka,Flume,Kinesis,Twitter, 可以引用第三方依赖调用。</h4><p style="padding:0px;margin-top:0px;margin-bottom:16px;font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(77,77,77);line-height:26px;white-space:normal;background-color:rgb(255,255,255);">Kafka: 需要配置依赖, 或者直接在 jar 放到 Spark 的 jars 中一同加入 Library.Version=SparkVersion</p><pre style="padding:8px;margin-top:0px;margin-bottom:24px;font-family:Consolas, Inconsolata, Courier, monospace;white-space:pre-wrap;font-size:14px;line-height:22px;background-color:rgb(255,255,255);">&lt;dependency&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.apache.spark&lt;/groupId&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;spark-streaming-kafka-0-8_2.11&lt;/artifactId&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;2.1.1&lt;/version&gt;
+&lt;/dependency&gt;</pre><p><code class="hljs xml" style="font-family:'Source Code Pro', 'DejaVu Sans Mono', 'Ubuntu Mono', 'Anonymous Pro', 'Droid Sans Mono';padding:.5em;background:rgb(40,42,54);color:rgb(248,248,242);font-size:14px;white-space:normal;"><span class="hljs-tag" style="font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;">&lt;<span class="hljs-name" style="color:rgb(241,250,140);font-weight:bold;">dependency</span>&gt;</span>&nbsp;<span class="hljs-tag" style="font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;">&lt;<span class="hljs-name" style="color:rgb(241,250,140);font-weight:bold;">groupId</span>&gt;</span>org.apache.spark<span class="hljs-tag" style="font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;">&lt;/<span class="hljs-name" style="color:rgb(241,250,140);font-weight:bold;">groupId</span>&gt;</span>&nbsp;<span class="hljs-tag" style="font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;">&lt;<span class="hljs-name" style="color:rgb(241,250,140);font-weight:bold;">artifactId</span>&gt;</span>spark-streaming-kafka-0-8_2.11<span class="hljs-tag" style="font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;">&lt;/<span class="hljs-name" style="color:rgb(241,250,140);font-weight:bold;">artifactId</span>&gt;</span><span class="hljs-tag" style="font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;">&lt;<span class="hljs-name" style="color:rgb(241,250,140);font-weight:bold;">version</span>&gt;</span>2.1.1<span class="hljs-tag" style="font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;">&lt;/<span class="hljs-name" style="color:rgb(241,250,140);font-weight:bold;">version</span>&gt;</span><span class="hljs-tag" style="font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;">&lt;/<span class="hljs-name" style="color:rgb(241,250,140);font-weight:bold;">dependency</span>&gt;</span></code></p><p style="padding:0px;margin-top:0px;margin-bottom:16px;font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(77,77,77);line-height:26px;white-space:normal;background-color:rgb(255,255,255);">Flume 同 Kafka 配置：</p><pre style="padding:8px;margin-top:0px;margin-bottom:24px;font-family:Consolas, Inconsolata, Courier, monospace;white-space:pre-wrap;font-size:14px;line-height:22px;background-color:rgb(255,255,255);">&lt;dependency&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.apache.spark&lt;/groupId&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;spark-streaming-flume_2.10&lt;/artifactId&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;2.1.1&lt;/version&gt;
+&lt;/dependency&gt;</pre><p><code class="hljs xml" style="font-family:'Source Code Pro', 'DejaVu Sans Mono', 'Ubuntu Mono', 'Anonymous Pro', 'Droid Sans Mono';padding:.5em;background:rgb(40,42,54);color:rgb(248,248,242);font-size:14px;white-space:normal;"><span class="hljs-tag" style="font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;">&lt;<span class="hljs-name" style="color:rgb(241,250,140);font-weight:bold;">dependency</span>&gt;</span>&nbsp;<span class="hljs-tag" style="font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;">&lt;<span class="hljs-name" style="color:rgb(241,250,140);font-weight:bold;">groupId</span>&gt;</span>org.apache.spark<span class="hljs-tag" style="font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;">&lt;/<span class="hljs-name" style="color:rgb(241,250,140);font-weight:bold;">groupId</span>&gt;</span>&nbsp;<span class="hljs-tag" style="font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;">&lt;<span class="hljs-name" style="color:rgb(241,250,140);font-weight:bold;">artifactId</span>&gt;</span>spark-streaming-flume_2.10<span class="hljs-tag" style="font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;">&lt;/<span class="hljs-name" style="color:rgb(241,250,140);font-weight:bold;">artifactId</span>&gt;</span><span class="hljs-tag" style="font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;">&lt;<span class="hljs-name" style="color:rgb(241,250,140);font-weight:bold;">version</span>&gt;</span>2.1.1<span class="hljs-tag" style="font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;">&lt;/<span class="hljs-name" style="color:rgb(241,250,140);font-weight:bold;">version</span>&gt;</span><span class="hljs-tag" style="font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;">&lt;/<span class="hljs-name" style="color:rgb(241,250,140);font-weight:bold;">dependency</span>&gt;</span></code></p><p style="padding:0px;margin-top:0px;margin-bottom:16px;font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(77,77,77);line-height:26px;white-space:normal;background-color:rgb(255,255,255);">依赖可以去<a href="https://hacpai.com/forward?goto=http%3A%2F%2Fsearch.maven.org%2F%23search%257Cga%257C1%257Cg%253A%2522org.apache.spark%2522%2520AND%2520v%253A%25222.2.0%2522" style="color: rgb(66, 133, 244);">Maven repository</a>查询。具体应用后面再讲。</p><h4 style="padding:0px;margin:8px 0px 16px;font-size:20px;font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(79,79,79);line-height:28px;white-space:normal;background-color:rgb(255,255,255);">自定义数据源：以自定义数据源，来决定如何接受和存储。</h4><h2 style="padding:0px;margin:8px 0px 16px;font-size:24px;font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(79,79,79);line-height:32px;white-space:normal;background-color:rgb(255,255,255);"><a style="color: rgb(66, 133, 244);"></a>DStream 和 Receiver</h2><ul style="list-style-type:none;" class="list-paddingleft-2"><li><p>InputDStream 代表从数据源接收到的输入 DStream，在上面的实例中 lines 代表从 socket 中接收到的数据流的输入 DStream,<code style="font-family:'Source Code Pro', 'DejaVu Sans Mono', 'Ubuntu Mono', 'Anonymous Pro', 'Droid Sans Mono';">除了文件数据流之外每个InputDstream都会绑定一个Receiver对象</code>，<code style="font-family:'Source Code Pro', 'DejaVu Sans Mono', 'Ubuntu Mono', 'Anonymous Pro', 'Droid Sans Mono';">这个对象[Receiver]用于获取/接收数据并将其存储到Spark的内存中</code>，以备后续使用。</p></li><li><p>如果想要<code style="font-family:'Source Code Pro', 'DejaVu Sans Mono', 'Ubuntu Mono', 'Anonymous Pro', 'Droid Sans Mono';">并行的接受多个数据流</code>，我们可以创建多个 JavaReceierInputDStream, 这样每个 InputDStream 都会创建一个 Receiver，从而并行的接收多个数据流。但是 SparkStreamingAPP 在执行的时候是个持续工作的过程，Spark 的 Work/Executor 会独占一个 CPU Core, 所以说一旦 APP 运行，那么这个 CPU Core 就没法给其他 APP 使用。</p><blockquote style="padding:16px 16px 0px;margin:0px 0px 24px;border-left:8px solid rgb(221,223,228);background:rgb(238,240,244);"><p style="padding:0px;margin-top:0px;margin-bottom:16px;color:rgb(79,79,79);line-height:26px;">所以说我们要保证一个 APP 运行，在<code style="font-family:'Source Code Pro', 'DejaVu Sans Mono', 'Ubuntu Mono', 'Anonymous Pro', 'Droid Sans Mono';">本地Local在起码保证要有大于2个线程</code>【一个用于给处理 InputDStream 的 Executor 分配一个线程，一个用于 Receiver 接收数据。<code style="font-family:'Source Code Pro', 'DejaVu Sans Mono', 'Ubuntu Mono', 'Anonymous Pro', 'Droid Sans Mono';">即一条接收数据,一条处理数据</code>。】所以 setMaster("local[n]"),n 不能设置为 1，也不能直接 local，必须是要为 local[n] n&gt;=2.<br>在集群中 (不设置 Master) 必须要保证单个节点 Cpu Core&gt;1，然后给每个 Executor 分配的 CPU Core 必须&gt;1。这样才能保证才能保证 Executor 既可以执行 Receiver 数据的接收，又可以进行数据的处理。</p></blockquote></li></ul><hr><p style="padding:0px;margin-top:0px;margin-bottom:16px;font-family:'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial, 'PingFang SC', sans-serif;color:rgb(77,77,77);line-height:26px;white-space:normal;background-color:rgb(255,255,255);">因此，在我们配置 Spark 的时候必须给 Executor 配置 &gt;1 的 CPU Core. 才能满足 SparkStreaming 的单任务执行。<br><code style="font-family:'Source Code Pro', 'DejaVu Sans Mono', 'Ubuntu Mono', 'Anonymous Pro', 'Droid Sans Mono';">特例</code>：基于 Hdfs 文件的数据源是没有绑定 Receiver 的。因此不会占用一个 CPU Core.</p><p><br></p></div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1982.html">说MGR - MGR重点参数说明</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1984.html">大数据日志传输之Kafka，Kafka架构详解kafka的核心</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.51cto.com/14485508/2430870" target="_blank">https://blog.51cto.com/14485508/2430870</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

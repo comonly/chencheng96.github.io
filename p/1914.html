@@ -1,0 +1,287 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>使用Keras进行视频预测（时间序列）(Using Keras for video prediction (time series))_comonly.cn</title>
+<meta name="keywords" content="使用Keras进行视频预测（时间序列）(Using Keras for video prediction (time series))" />
+<meta name="description" content="I want to predict the next frame of a (greyscale) video given N previous frames - using CNNs or RNNs in Keras. Most tutorials and other information regarding time series prediction and Keras use a 1-dimensional input in their network but mine would be 3D " />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">使用Keras进行视频预测（时间序列）(Using Keras for video prediction (time series))</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">IT屋</li>
+          <li class="lmname"><a href="https://www.it1352.com/1524949.html" target="_blank">https://www.it1352.com/1524949.html</a></li>
+          <li class="timer">2020-11-29</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	机器学习算法分析
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>I want to predict the next frame of a (greyscale) video given N previous frames - using CNNs or RNNs in Keras. Most tutorials and other information regarding time series prediction and Keras use a 1-dimensional input in their network but mine would be 3D </div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> I want to predict the next frame of a (greyscale) video given N previous frames - using CNNs or RNNs in Keras. Most tutorials and other information regarding time series prediction and Keras use a 1-dimensional input in their network but mine would be 3D (N frames x rows x cols)<br />
+I'm currently really unsure what a good approach for this problem would be. My ideas include:<br />
+Using one or more LSTM layers. The problem here is that I'm not sure whether they're suited to take a series of images instead a series of scalars as input. Wouldn't the memory consumption explode? If it is okay to use them: How can I use them in Keras for higher dimensions?<br />
+Using 3D convolution on the input (the stack of previous video frames). This raises other questions: Why would this help when I'm not doing a classification but a prediction? How can I stack the layers in such a way that the input of the network has dimensions (N x cols x rows) and the output (1 x cols x rows)?<br />
+I'm pretty new to CNNs/RNNs and Keras and would appreciate any hint into the right direction.<br />
+<br />
+解决方案<br />
+So basically every approach has its advantages and disadvantages. Let's go throught the ones you provided and then other to find the best approach:<br />
+<br />
+LSTM: Among their biggest advantages is an ability to learn a long-term dependiencies patterns in your data. They were designed in order to be able to analyse long sequences like e.g. speech or text. This is also might cause problems because of number parameters which could be really high. Other typical recurrent network architectures like GRU might overcome this issues. The main disadvantage is that in their standard (sequential implementation) it's infeasible to fit it on a video data for the same reason why dense layers are bad for an imagery data - loads of time and spatial invariances must be learnt by a topology which is completely not suited for catching them in an efficient manner. Shifting a video by a pixel to the right might completely change the output of your network.<br />
+<br />
+Other thing which is worth to mention is that training LSTM is belived to be similiar to finding equilibrium between two rivalry processes - finding good weights for a dense-like output computations and finding a good inner-memory dynamic in processing sequences. Finding this equilibrium might last for a really long time but once its finded - it's usually quite stable and produces a really good results.<br />
+<br />
+Conv3D: Among their biggest advantages one may easily find an ability to catch spatial and temporal invariances in the same manner as Conv2D in an imagery case. This make the curse of dimensionality much less harmful. On the other hand - in the same way as Conv1D might not produce good results with a longer sequences - in the same way - a lack of any memory might make learning a long sequence harder.<br />
+<br />
+Of course one may use different approaches like:<br />
+TimeDistributed + Conv2D: using a TimeDistributed wrapper - one may use some pretrained convnet like e.g. Inception framewise and then analyse the feature maps sequentially. A really huge advantage of this approach is a possibility of a transfer learning. As a disadvantage - one may think about it as a Conv2.5D - it lacks temporal analysis of your data.<br />
+<br />
+ConvLSTM: this architecture is not yet supported by the newest version of Keras (on March 6th 2017) but as one may see here it should be provided in the future. This is a mixture of LSTM and Conv2D and it's belived to be better then stacking Conv2D and LSTM.<br />
+Of course these are not the only way to solve this problem, I'll mention one more which might be usefull:<br />
+<br />
+Stacking: one may easily stack the upper methods in order to build their final solution. E.g. one may build a network where at the beginning video is transformed using a TimeDistributed(ResNet) then output is feed to Conv3D with multiple and agressive spatial pooling and finally transformed by an GRU/LSTM layer.<br />
+PS:<br />
+One more thing that is also worth to mention is that shape of video data is actually 4D with (frames, width, height, channels).<br />
+PS2:<br />
+In case when your data is actually 3D with (frames, width, hieght) you actually could use a classic Conv2D (by changing channels to frames) to analyse this data (which actually might more computationally effective). In case of a transfer learning you should add additional dimension because most of CNN models were trained on data with shape (width, height, 3). One may notice that your data doesn't have 3 channels. In this case a technique which is usually used is repeating spatial matrix three times.<br />
+PS3:<br />
+An example of this 2.5D approach is:<br />
+<br />
+input = Input(shape=input_shape)<br />
+base_cnn_model = InceptionV3(include_top=False, ..)<br />
+temporal_analysis = TimeDistributed(base_cnn_model)(input)<br />
+conv3d_analysis = Conv3D(nb_of_filters, 3, 3, 3)(temporal_analysis)<br />
+conv3d_analysis = Conv3D(nb_of_filters, 3, 3, 3)(conv3d_analysis)<br />
+output = Flatten()(conv3d_analysis)<br />
+output = Dense(nb_of_classes, activation="softmax")(output)<br />
+译文<br />
+在给定 N 前一帧的情况下，我想使用Keras中的CNN或RNN预测（灰度）视频的下一帧。关于时间序列预测和Keras的大多数教程和其他信息在其网络中使用一维输入，但我的将是3D （N帧x行x cols）<br />
+<br />
+我目前真的不确定解决这个问题的好方法。我的想法包括：<br />
+使用一个或多个LSTM层。这里的问题是，我不确定它们是否适合拍摄一系列图像，而不是一系列标量作为输入。内存消耗不会爆炸吗？如果可以使用它们：我如何在Keras中使用它们以获得更大的尺寸？<br />
+在输入上使用3D卷积（先前视频帧的堆栈） ）。这就提出了其他问题：当我不进行分类而是进行预测时，为什么会有帮助？如何以网络输入尺寸为（N x cols x行）和输出（1 x cols x行）？<br />
+我对CNN / RNN和Keras还是很陌生<br />
+<br />
+解决方案<br />
+Ad by Valueimpression<br />
+因此，基本上每种方法都有其优点和缺点。让我们先介绍一下您提供的方法，然后再通过其他方法找到最佳方法：<br />
+<br />
+LSTM ：最大的优点之一就是能够学习数据中的长期依赖关系模式。设计它们是为了能够分析长序列，例如语音或文字。由于数量参数可能真的很高，这也可能导致问题。其他典型的递归网络体系结构，例如 GRU 可能会克服此问题。主要缺点是，在其标准（顺序实现）中，由于稠密层不利于图像数据的原因，将其安装在视频数据上是不可行的-必须完全通过拓扑学习时间和空间不变性的负载不适合以有效的方式捕获它们。将视频向右移动一个像素可能会完全改变网络的输出。<br />
+<br />
+其他值得一提的是培训 LSTM 非常类似于在两个竞争过程之间寻找平衡-为密集型输出计算找到合适的权重，并在处理序列中找到良好的内存动态。找到这种平衡可能会持续很长时间，但是一旦找到平衡，通常就会非常稳定，并且会产生非常好的结果。<br />
+Conv3D ：在它们的最大优点中，很容易找到一种以与 Conv2D 相同的方式捕获空间和时间不变性的能力。这使得维数的诅咒的危害性大大降低。另一方面-与 Conv1D 相同，对于较长的序列可能不会产生良好的结果-同样，缺少内存可能会使学习较长的序列<br />
+<br />
+当然，可以使用其他方法，例如：<br />
+TimeDistributed + Conv2D ：使用 TimeDistributed 包装器-可以使用一些经过预训练的卷积网络，例如<br />
+ConvLSTM ：最新版本的 Keras 尚不支持此体系结构（2017年3月6日）但是可能会在此处中提供未来。这是 LSTM 和 Conv2D 的混合，人们相信它会更好，然后堆叠 Conv2D &lt; / code&gt;和 LSTM 。<br />
+<br />
+当然，这些并不是解决此问题的唯一方法，我会再提一个可能有用的方法：<br />
+堆叠：人们可以轻松地堆叠上部方法以构建最终解决方案。例如。可以建立一个网络，在开始时使用 TimeDistributed（ResNet）转换视频，然后将输出馈送到 Conv3D 进行了多次侵略性空间合并，最后通过 GRU / LSTM 层进行了转换。<br />
+<br />
+PS：<br />
+还有一件事还值得一提的是，视频数据的形状实际上是 4D ，而（帧，宽度，高度，通道 ）。<br />
+PS2：<br />
+如果您的数据实际上是 3D 和（帧，宽度，高度），实际上您可以使用经典的 Conv2D （通过将个通道更改为个帧）来分析此数据（实际上可能更有效地计算）。如果是转移学习，则应添加额外的维度，因为大多数 CNN 模型都是针对形状为（宽度，高度3）。可能会注意到您的数据没有3个渠道。在这种情况下，通常使用的技术是将空间矩阵重复三次。<br />
+PS3：<br />
+这种 2.5D 方法的示例是：<br />
+&nbsp;输入=输入（形状=输入形状）<br />
+&nbsp;base_cnn_model = InceptionV3（include_top = False，..）<br />
+temporal_analysis = TimeDistributed（base_cnn_model）（输入）<br />
+&nbsp;conv3d_analysis = Conv3D（nb_of_filters，3，3 ，3）（temporal_analysis）<br />
+&nbsp;conv3d_analysis = Conv3D（nb_of_filters，3，3，3）（conv3d_analysis）<br />
+输出= Flatten（）（conv3d_analysis）<br />
+输出= Dense（nb_of_classes，Activation =" softmax"）（输出）<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1913.html">tensorflow 中 conv3d</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1915.html">GAN中的判别器如何“判别”</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.it1352.com/1524949.html" target="_blank">https://www.it1352.com/1524949.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

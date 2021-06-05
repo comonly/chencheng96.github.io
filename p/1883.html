@@ -1,0 +1,382 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>为什么要重载new?_comonly.cn</title>
+<meta name="keywords" content="为什么要重载new?" />
+<meta name="description" content="为什么要重载new? 作者 ariesram 电子邮件地址 ariesram@linuxaid.com.cn, 或 ariesram@may10.ca 本文及本人所有文章均收集在bambi.may10.ca/~ariesram/articles/中。 本文授权给www.linuxaid.com.cn。
+
+
+正文： 我曾经参与过一个比较大的项目，在这个项目里面，我们没有一个完全确定的设计文档，所以程序的实现常常变动。虽然我们有一个比较灵活的框架，但是从程序的角度来讲，它使我们的程序非常的混乱。直到发布" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">为什么要重载new?</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">Eric Xiang</li>
+          <li class="lmname"><a href="https://www.cnblogs.com/juncheng/archive/2009/11/12/1602165.html" target="_blank">https://www.cnblogs.com/juncheng/archive/2009/11/12/1602165.html</a></li>
+          <li class="timer">2020-10-23</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>为什么要重载new? 作者 ariesram 电子邮件地址 ariesram@linuxaid.com.cn, 或 ariesram@may10.ca 本文及本人所有文章均收集在bambi.may10.ca/~ariesram/articles/中。 本文授权给www.linuxaid.com.cn。
+
+
+正文： 我曾经参与过一个比较大的项目，在这个项目里面，我们没有一个完全确定的设计文档，所以程序的实现常常变动。虽然我们有一个比较灵活的框架，但是从程序的角度来讲，它使我们的程序非常的混乱。直到发布</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 为什么要重载new? 作者 ariesram 电子邮件地址 ariesram@linuxaid.com.cn, 或 ariesram@may10.ca 本文及本人所有文章均收集在bambi.may10.ca/~ariesram/articles/中。 本文授权给www.linuxaid.com.cn。<br />
+<br />
+<br />
+正文： 我曾经参与过一个比较大的项目，在这个项目里面，我们没有一个完全确定的设计文档，所以程序的实现常常变动。虽然我们有一个比较灵活的框架，但是从程序的角度来讲，它使我们的程序非常的混乱。直到发布的日期临近，我们还没有一个稳定的可以用来做alpha测试的版本。所以我们必须尽快的删除掉无用的代码，让这个版本足够的稳定。但是，在这个没有足够规范的软件公司，我们没有时间也没有足够的精力来做边界测试之类的工作。所以我们只能采用变通的办法。在软件中最大的问题就是内存泄漏。因为往往出现这样的情况，我们在一段代码中分配了内存，但是却没有释放它。这造成了很大的问题。我们需要一个简单的解决方案，能够简单的编译进这个项目，在运行的时候，它能够产生一个没有被释放的内存的列表，用这个列表，我们能够改正程序的错误。这就是我们称之为内存跟踪的方法。首先，我们需要一种代码，能够被加入到源代码中去，而且这种代码能够被重用。代码重用是一种很重要的特性，能够节省大量的时间和金钱以及程序员的劳动。另外，我们的这种代码必须简单，因为我们当时已经没有那么多的时间和精力去完全重看一遍所有的代码来重新编写以及改正错误从而使内存跟踪能够起作用。 好在，我们总能够找到解决的办法。首先，我们检查了代码，发现所有的代码都是用new来分配内存，用delete来释放内存。那么，我们能够用一个全程替换，来替换掉所有的new和delete操作符吗？不能。因为代码的规模太大了，那样做除了浪费时间没有别的任何好处。好在我们的源代码是用C++ 来写成的，所以，这意味着没有必要替换掉所有的new和delete,而只用重载这两个操作符。对了，值用重载这两个操作符，我们就能在分配和释放内存之前做点什么。这是一个绝对的好消息。我们也知道该如何去做。因为，MFC也是这么做的。我们需要做的是：跟踪所有的内存分配和交互引用以及内存释放。我们的源代码使用Visual C++写成，当然这种解决方法也可以很轻松的使用在别的C++代码里面。要做的第一件事情是重载new和delete操作符，它们将会在所有的代码中被使用到。我们在stdafx.h中，加入：<br />
+<br />
+#ifdef _DEBUG<br />
+<br />
+inline void * __cdecl operator new(unsigned int size, const char *file, int line) { };<br />
+<br />
+inline void __cdecl operator delete(void *p) { };<br />
+<br />
+#endif<br />
+<br />
+这样，我们就重载了new和delete操作符。我们用$ifdef和#endif来包住这两个重载操作符，这样，这两个操作符就不会在发布版本中出现。看一看这段代码，会发现，new操作符有三个参数，它们是，分配的内存大小，出现的文件名，和行号。这对于寻找内存泄漏是必需的和重要的。否则，就会需要很多时间去寻找它们出现的确切地方。加入了这段代码，我们的调用new()的代码仍然是指向只接受一个参数的new操作符，而不是这个接受三个参数的操作符。另外，我们也不想记录所有的new操作符的语句去包含__FILE__和__LINE__参数。我们需要做的是自动的让所有的接受一个参数的new操作符调用接受三个参数的new操作符。这一点可以用一点点小的技巧去做，例如下面的这一段宏定义，<br />
+<br />
+#ifdef _DEBUG<br />
+<br />
+#define DEBUG_NEW new(__FILE__, __LINE__)<br />
+<br />
+#else<br />
+<br />
+#define DEBUG_NEW new<br />
+<br />
+#endif<br />
+<br />
+#define new DEBUG_NEW 现在我们所有的接受一个参数的new操作符都成为了接受三个参数的new操作符号，__FILE__和__LINE__被预编译器自动的插入到其中了。然后，就是作实际的跟踪了。我们需要加入一些例程到我们的重载的函数中去，让它们能够完成分配内存和释放内存的工作。这样来做，<br />
+<br />
+#ifdef _DEBUG<br />
+<br />
+inline void * __cdecl operator new(unsigned int size, const char *file, int line)<br />
+<br />
+{<br />
+<br />
+void *ptr = (void *)malloc(size);<br />
+<br />
+AddTrack((DWORD)ptr, size, file, line);<br />
+<br />
+return(ptr);<br />
+<br />
+};<br />
+<br />
+inline void __cdecl operator delete(void *p)<br />
+<br />
+{<br />
+<br />
+RemoveTrack((DWORD)p);<br />
+<br />
+free(p);<br />
+<br />
+};<br />
+<br />
+#endif<br />
+<br />
+另外，还需要用相同的方法来重载new[]和delete[]操作符。这里就省略掉它们了。 最后，我们需要提供一套函数AddTrack()和RemoveTrack()。我用STL来维护存储内存分配记录的连接表。 这两个函数如下：<br />
+<br />
+typedef struct<br />
+<br />
+{<br />
+<br />
+DWORD address;<br />
+<br />
+DWORD size;<br />
+<br />
+char file[64];<br />
+<br />
+DWORD line;<br />
+<br />
+}ALLOC_INFO;<br />
+<br />
+&nbsp;<br />
+<br />
+typedef list AllocList *allocList;<br />
+<br />
+&nbsp;void AddTrack(DWORD addr, DWORD asize, const char *fname, DWORD lnum)<br />
+<br />
+{<br />
+<br />
+ALLOC_INFO *info;<br />
+<br />
+if(!allocList)<br />
+<br />
+{<br />
+<br />
+allocList = new(AllocList);<br />
+<br />
+}<br />
+<br />
+info = new(ALLOC_INFO);<br />
+<br />
+info-&gt;address = addr;<br />
+<br />
+strncpy(info-&gt;file, fname, 63);<br />
+<br />
+info-&gt;line = lnum;<br />
+<br />
+info-&gt;size = asize;<br />
+<br />
+allocList-&gt;insert(allocList-&gt;begin(), info);<br />
+<br />
+};<br />
+<br />
+&nbsp;<br />
+<br />
+void RemoveTrack(DWORD addr)<br />
+<br />
+{<br />
+<br />
+AllocList::iterator i;<br />
+<br />
+if(!allocList) return;<br />
+<br />
+for(i = allocList-&gt;begin(); i != allocList-&gt;end(); i++)<br />
+<br />
+{<br />
+<br />
+if((*i)-&gt;address == addr)<br />
+<br />
+{<br />
+<br />
+allocList-&gt;remove((*i));<br />
+<br />
+break;<br />
+<br />
+}<br />
+<br />
+}<br />
+<br />
+};<br />
+<br />
+现在，在我们的程序退出之前，allocList存储了没有被释放的内存分配。为了看到它们是什么和在哪里被分配的，我们需要打印出allocList中的数据。我使用了Visual C++中的Output窗口来做这件事情。<br />
+<br />
+void DumpUnfreed()<br />
+<br />
+{<br />
+<br />
+AllocList::iterator i;<br />
+<br />
+DWORD totalSize = 0;<br />
+<br />
+char buf[1024];<br />
+<br />
+if(!allocList) return;<br />
+<br />
+for(i = allocList-&gt;begin(); i != allocList-&gt;end(); i++)<br />
+<br />
+{<br />
+<br />
+sprintf(buf, \"%-50s: LINE %d, ADDRESS %d %d unfreed \", (*i)-&gt;file, (*i)-&gt;line, (*i)-&gt;address, (*i)-&gt;size); OutputDebugString(buf);<br />
+<br />
+totalSize += (*i)-&gt;size; } sprintf(buf, \"----------------------------------------------------------- \");<br />
+<br />
+OutputDebugString(buf);<br />
+<br />
+sprintf(buf, \"Total Unfreed: %d bytes \", totalSize);<br />
+<br />
+OutputDebugString(buf);<br />
+<br />
+}<br />
+<br />
+}<br />
+<br />
+现在我们就有了一个可以重用的代码，用来监测跟踪所有的内存泄漏了。这段代码可以用来加入到所有的项目中去。虽然它不会让你的程序看起来更好，但是起码它能够帮助你检查错误，让程序更加的稳定。 ========================================================================== GPG里面有个很perfect的分配监控器，我之前的时候用的就是它。 ========================================================================== 在某些console平台下，不要指望系统会帮你做内存管理，重载new和delete可以有效率的来进行基本的内存管理，比如对于分配size比较小的内存，都分配到一个独立的heap里面，这样可以尽量的避免内存碎片又不需要复杂的内存管理代码。<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1882.html">Mysql:为什么用limit时，offset很大会影响性能</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1884.html">rand函数只能均匀的生成指定范围的随机数怎么均匀生成其它范围的</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.cnblogs.com/juncheng/archive/2009/11/12/1602165.html" target="_blank">https://www.cnblogs.com/juncheng/archive/2009/11/12/1602165.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

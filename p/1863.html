@@ -1,0 +1,247 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>static_cast与dynamic_cast静态类型转换与运行期类型转换_comonly.cn</title>
+<meta name="keywords" content="static_cast与dynamic_cast静态类型转换与运行期类型转换" />
+<meta name="description" content="类型转换是C/C++中重要的一种转换，对于内置类型的转换，其往往伴随着精度丢失或者转换失败。
+
+而对于继承体系中的类类型转换，可分为两大类别：
+
+向上转换：将派生类的指针引用转换为基类的指针或引用，根据里式替换规则，这类转换是安全的。
+向下转换：将基类的指针引用转换为派生类的指针或引用，由于不确定基类指针实际指向，所以这类转换是不安全的。
+&nbsp;
+C++实现多态的核心是虚函数，其一种通俗的描述是：通过基类指针引用指向不同的子类，而采取统一地调用方法，虚函数机制能够确保根据实际的指向对象" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">static_cast与dynamic_cast静态类型转换与运行期类型转换</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">一只老风铃</li>
+          <li class="lmname"><a href="https://blog.csdn.net/qq_33369979/article/details/108715516" target="_blank">https://blog.csdn.net/qq_33369979/article/details/108715516</a></li>
+          <li class="timer">2020-10-16</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>类型转换是C/C++中重要的一种转换，对于内置类型的转换，其往往伴随着精度丢失或者转换失败。
+
+而对于继承体系中的类类型转换，可分为两大类别：
+
+向上转换：将派生类的指针引用转换为基类的指针或引用，根据里式替换规则，这类转换是安全的。
+向下转换：将基类的指针引用转换为派生类的指针或引用，由于不确定基类指针实际指向，所以这类转换是不安全的。
+&nbsp;
+C++实现多态的核心是虚函数，其一种通俗的描述是：通过基类指针引用指向不同的子类，而采取统一地调用方法，虚函数机制能够确保根据实际的指向对象</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 类型转换是C/C++中重要的一种转换，对于内置类型的转换，其往往伴随着精度丢失或者转换失败。<br />
+<br />
+而对于继承体系中的类类型转换，可分为两大类别：<br />
+<br />
+向上转换：将派生类的指针引用转换为基类的指针或引用，根据里式替换规则，这类转换是安全的。<br />
+向下转换：将基类的指针引用转换为派生类的指针或引用，由于不确定基类指针实际指向，所以这类转换是不安全的。<br />
+&nbsp;<br />
+C++实现多态的核心是虚函数，其一种通俗的描述是：通过基类指针引用指向不同的子类，而采取统一地调用方法，虚函数机制能够确保根据实际的指向对象不同调用相应的函数。<br />
+<br />
+关于类型转换，C++中提供两种转换实现：<br />
+static_cast:静态类型转换，在编译器完成类型转换的语法检查，针对向上转换，其是安全的，但对于向下转换，其无法确保安全性<br />
+dynamic_cast:运行期类型转换，其会在运行期检查基类指针和引用是否实际指向相应的待转换类型。即检查向下转换的安全性。<br />
+<br />
+具体dynamic_cast如何在运行期检查实际的指向类型？<br />
+其通过运行期类型检查的功能，也就是RTTI 其只能用在含有虚函数的机制体系中<br />
+具体做法是通过Vptr访问到虚函数表，而虚函数表中头部存放着指向类型信息结构体的指针<br />
+通过该指针访问到类型信息结构体，由此确定实际类型。<br />
+因此，支持RTTI以及虚函数，就需要额外的空间和时间开销。<br />
+大量使用dynamic_cast造成性能下降，在确定实际类型时使用static_cast将更加高效。<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1862.html">虚函数表是在编译的时候还是运行的时候产生的</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1864.html">apt-get update及更换源</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/qq_33369979/article/details/108715516" target="_blank">https://blog.csdn.net/qq_33369979/article/details/108715516</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,322 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>html头部代码【转载】_comonly.cn</title>
+<meta name="keywords" content="html头部代码【转载】" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">html头部代码【转载】</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">来源：再见理想</li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2016-04-18</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">网页技术</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13.3333px;background-color:#FFFFFF;">
+	学习html是件比较容易的事情，但单单学html语言肯定是不够用的，所以大多数人并没有拿html作为学习核心，而是将html作为javascript、动态语言或者css学习的必经之路。于是很多人并不关注一些其他的html标签。主流书籍大多对此也是一掠而过，我倒更认为，是书本的作者本身对此一知半解，受惑于此，最近幸运看到关于这部分古老标签的介绍，想在这里写一下。所谓知其然当知其所以然，html已经有十几年历史了，现行html语法中很多是以前的老知识，于是一些以前对html有研究的觉得这不必说，重点是这些标签可移植性好，所以一些典型代码被作为副本广为传抄，以至于能做网站的人不必去了解这些。本文列举这些只为深究，如上所述，实际用到这里谈到的知识的不多，但是如果你真的不幸被这些因素绊倒，很难知道html到底出现了什么问题。可以去问问从事3年以内网络的人员，也许他们那会儿学html的时候，前辈们也不讲这些。
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13.3333px;background-color:#FFFFFF;">
+	<strong>1、http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</strong><br />
+这是一个典型被广泛传抄而不被理解的代码，因为Dreamwear设计html时会自动帮你设计好这些代码，所以确实不需要去理解，正常情况它不会困扰到你。
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13.3333px;background-color:#FFFFFF;">
+	这代码由来是DTD标准，DTD标准可以理解成一种语法，这种语法规定了标签嵌套的规则，不同的DTD文件说明不同的标准DTD。比如有的DTD可以承认百度这种标签，但html专用的DTD文件（如：<a href="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd</a>）写的标准不能识别这种标签，xml文件和html文件一样由DTD文件指定规则。xml是一种只负责信息内容的文件，DTD负责信息的结构，xml可以用指定的DTD文件校正，保证xml不会乱来，这和html文件linkcss有点相似。xml和css结合可以呈现网页，css单纯通过xml个性标签来识别，xml标签<a>对应css中A:{} 。而html一般能特别指定样式，标签style、class、ID属性等，但css中的p：{}这种通用标签属性写法也是从xmll+css标准传承下来的。因为html由W3C指定的有限的几个DTD文件限定，所以成为html，但xml可以由任何自写的DTD文件限定信息结构，所以可以简单认为html是xml的特例，但目前html已经不仅仅是xml延续这么简单了，增加了很多东西，但是html中看到了xml的影子，因为XML更贴近DTD。</a> 
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13.3333px;background-color:#FFFFFF;">
+	<a>理解这一点，以下是这段代码意思：</a> 
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13.3333px;background-color:#FFFFFF;">
+	<br />
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13.3333px;background-color:#FFFFFF;">
+	<a>的内置规则（类似C语言编译器内置C语言语法），而<link 是用dtd文件指定的规则，这个两个还是不一样的<="" p=""></a> 
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13.3333px;background-color:#FFFFFF;">
+	<a>html&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 这个是指定当前文件最外层标签，xml里面叫root（根）标签，如果是xml中用</a> 
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13.3333px;background-color:#FFFFFF;">
+	<a>任何字符串，只要对应当前xml文件的root标签，否则就是不合法的xml文件，就像不合法的C程序一样，解释器也会报错。</a> 
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13.3333px;background-color:#FFFFFF;">
+	<a>PUBLIC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; 说明指定的DTD文件是公共文件，相对私有文件来说的，也就是后面的url是任何人都可以访问的，比如可以是SYSTEM。</a> 
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13.3333px;background-color:#FFFFFF;">
+	<a>"-//W3C//DTD XHTML 1.0 Transitional//EN"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 指定本html文件使用的DTD的版本号，这个部分只是针对html才有的。</a> 
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13.3333px;background-color:#FFFFFF;">
+	<a>W3C指的是出品的单位</a> 
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13.3333px;background-color:#FFFFFF;">
+	<a>DTD XHTML 1.0 是指定版本号，其他还有html 4.01等</a> 
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13.3333px;background-color:#FFFFFF;">
+	<a>Transitional这里是过渡型版本，一般分Strict(严格)、Transitional、Frameset(框架)</a> 
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13.3333px;background-color:#FFFFFF;">
+	<a>EN&nbsp; 应该是English的缩写，没有具体查实</a> 
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13.3333px;background-color:#FFFFFF;">
+	<a>"</a><a href="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd</a>"&gt;&nbsp;&nbsp; 指定DTD文件位置，在xml中还可以是相对路径、绝对路径
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13.3333px;background-color:#FFFFFF;">
+	<strong>2、</strong> 
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13.3333px;background-color:#FFFFFF;">
+	相信了解SEO（Search Engine Optimization搜索引擎优化）的人对此并不陌生，这行代码主要是为google、百度这类搜索引擎写的，keywords是关键字，如果用户使用搜索引擎搜索你在这里列举的关键字（如奥运），搜索引擎就会将你的网页和没有奥运关键字的网页区别开，你的网页会优先显示，也就是排名较高。keywords使用，或|分隔开。同时description是指网页描述，出现在搜索引擎结果的小字部分（大字部分是你的title标签内的文字）。cms系统、博客管理等系统中提供的“关键字”编辑以及“描述”编辑（cms中多见）就是这个道理，这部分文件分别通过php类动态语言输出到对应文章页面的这行代码中。
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13.3333px;background-color:#FFFFFF;">
+	友情提示：由于keyword被大量SEO初学者滥用（因为keywords没有长度和个数限制），所以优秀的搜索引擎必须足够聪明（比如google），有时候会忽视keywords的这行代码，而直接通过html内容检索来分析你的关键词，比如加粗变色字体等，加上各个因素（包括title、keywords、description）综合分析出最重要几个真实关键词，而不是任由你在keywords里面说多少就是多少个。所以现在这部分对SEO意义也不是很大，但专业的SEO肯定是需要注意这一点的。
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13.3333px;background-color:#FFFFFF;">
+	<strong>3、</strong> 
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13.3333px;background-color:#FFFFFF;">
+	指定字符集，这不用说，吃过亏的网络工作者必定深有体会，一个网站一开始的字符集就必须确定，否则到后面会非常麻烦，gb2312针对中国用户，如果你的网站未来肯定不会指望给国外用户访问，选择gb2312有轻量的优点。但推荐UTF-8，因为数据库一般都建议utf-8，所以网页最好也统一用Utf-8，UTF-8是国际可以通用的字符集，未来如果用外部工具处理网站数据会遇到更少麻烦。text/html是MEMI类型，告诉浏览器解析成文本类的html类型，如果是图片或者zip，这个MEMI类型会修改。典型应用是在php的GD库处理图像时，输入之前必须指定这是个图像，否则就会按默认text/html类型变成乱码显示出来。php处理文件的下载会用到，发送一个Content-Type值告诉浏览器这是一个下载文件，浏览器就会弹框。比如提供一个未打包php文件给用户下载，正常情况，点击php文件就会在服务器上执行php，只用通过先发送下载文件的MEMI类型给浏览器才能正常下载。
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13.3333px;background-color:#FFFFFF;">
+	<strong>4、</strong> 
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13.3333px;background-color:#FFFFFF;">
+	先放个位置，对这个我个人也不是很了解，多数网站会添加这个，先挖个坑吧，以后明白了再补
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13.3333px;background-color:#FFFFFF;">
+	<strong>5、</strong> 
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13.3333px;background-color:#FFFFFF;">
+	以上设置能让html页面自动每3秒刷新一次，可以修改3为其他秒数，这个功能并不常见，没有什么应用价值，有的浏览器会默认禁用该功能，使代码失效。一个扩展的写法是，表示在本页面停留3秒后转到百度网址，由于这些功能可能被SEO用来做“黑帽子”，该功能受部分浏览器和搜索引擎抵制。
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13.3333px;background-color:#FFFFFF;">
+	<strong>6、</strong> 
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13.3333px;background-color:#FFFFFF;">
+	禁止浏览器缓存本页面，浏览器默认是会缓存html文件的，如果修改0为其他正数X，表示缓存过X秒后失效，在X秒内是缓存，过X秒之后就必须像服务器重现请求网页。
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13.3333px;background-color:#FFFFFF;">
+	<strong>7、</strong> 
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13.3333px;background-color:#FFFFFF;">
+	(禁用被引用)一些其他网站可能使用动态语言或者框架将本页面置入自己的页面，可以利用本页面为自己页面增加访问量，本页面不允许被这么做，浏览器如果看到这行代码，就会把本页面升为最顶层，占满整个浏览器，而不是沦为别人页面的一部分。
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13.3333px;background-color:#FFFFFF;">
+	<strong>8、<br />
+</strong> 
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13.3333px;background-color:#FFFFFF;">
+	这个功能很少为人所知，该功能能够实现类似ppt中页面过渡效果，Page-Enter是指进入本页面时的动态效果，Page-Exit反之。代号选择特效，进出特效共23种。但页面有flash会破坏效果，而且效果美观并不突出，目前并不是主流，用得比较少，正式网站基本不会见到，但不也排除现在网页设计者浮躁并不了解这个功能。
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13.3333px;background-color:#FFFFFF;">
+	<strong>9、<base href="http://www.baidu.com/" http:="" www.baidu.com="" "="">http://www.baidu.com" /&gt;</strong> 
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13.3333px;background-color:#FFFFFF;">
+	这个用于规定页面中所有相对链接的基准 URL。如果有一行代码链接到图片./abc/aa.jpg，那么点击就会访问到<a href="http://www.baidu.com/abc/aa.jpg">http://www.baidu.com/abc/aa.jpg</a> ,如果是写成<base href="http://www.google.cn.hk/" http:="" www.google.cn.hk="" "="">http://<a href="http://www.google.com.hk/">www.google.com.hk</a>" /&gt;，那就会访问到<a href="http://www.google.com.hk/abc/aa.jpg">www.google.com.hk/abc/aa.jpg</a>这个图片。
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13.3333px;background-color:#FFFFFF;">
+	用于指定本页面中打开页面的默认形式，这里修改成新的窗口打开，浏览器默认是直接打开，除非在链接上指定_blank或者浏览器使用者对浏览器有特别设置。
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13.3333px;background-color:#FFFFFF;">
+	最后就不多说了,而标记能链接javascript、css等这些常用功能也不再赘述了。
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13.3333px;background-color:#FFFFFF;">
+	<br />
+</p>
+<p style="color:#333333;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:13.3333px;background-color:#FFFFFF;">
+	以上这些就是html文件头部常见或者能见到的一些代码，帮助读者了解一些知识死角，成为优秀的程序开发员，而不是没了DW就什么都不会的网页施工者。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/309.html">从数据库中取出第一个数据与最后一个数据</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/328.html">用AspJpeg组件，按宽高比例，真正生成缩略图(待完善)</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,247 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Generate mapfile 解决 APPCRASH 问题_comonly.cn</title>
+<meta name="keywords" content="Generate mapfile 解决 APPCRASH 问题" />
+<meta name="description" content="该方法只能定位显性泄漏，定位 到的Ｃ语句一定产生泄漏了，但可能这个位置是＂理论上＂不会出问题的代码．那么这是由于同进程内其他代码泄漏而影响了进程的堆区或栈区（隐性泄漏，这个地 方不会产生data abort exception），然后被定位出来的代码才被动地显性泄露．产生data abort. 在篇末我给出代码实例来说明这种情况。
+
+
+	
+
+
+	PlatformBuilder或VS2005、EVC这类IDE工具会在DEBUG模式下自动停在出错的那句，情况就很显然了。RELEASE版本下的泄漏就" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Generate mapfile 解决 APPCRASH 问题</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2020-01-18</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>该方法只能定位显性泄漏，定位 到的Ｃ语句一定产生泄漏了，但可能这个位置是＂理论上＂不会出问题的代码．那么这是由于同进程内其他代码泄漏而影响了进程的堆区或栈区（隐性泄漏，这个地 方不会产生data abort exception），然后被定位出来的代码才被动地显性泄露．产生data abort. 在篇末我给出代码实例来说明这种情况。
+
+
+	
+
+
+	PlatformBuilder或VS2005、EVC这类IDE工具会在DEBUG模式下自动停在出错的那句，情况就很显然了。RELEASE版本下的泄漏就</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	该方法只能定位显性泄漏，定位 到的Ｃ语句一定产生泄漏了，但可能这个位置是＂理论上＂不会出问题的代码．那么这是由于同进程内其他代码泄漏而影响了进程的堆区或栈区（隐性泄漏，这个地 方不会产生data abort exception），然后被定位出来的代码才被动地显性泄露．产生data abort. 在篇末我给出代码实例来说明这种情况。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	PlatformBuilder或VS2005、EVC这类IDE工具会在DEBUG模式下自动停在出错的那句，情况就很显然了。RELEASE版本下的泄漏就要稍微麻烦一点，如何快速定位呢？<br />
+</p>
+<p>
+	你可以通过map文件来大概定位，能确定到某一个函数当中去。MAP 文件是最基本/常用的方法，但前提是编译时必须生成 MAP 文件，否则无从查起。
+</p>
+<p>
+</p>
+<p>
+	这种方法类似在&nbsp;<span>DEBUG 模式下自动停在出错的那句的情况，对于内存泄漏可能出现的隐形错误无法准确定位。<span style="color:#E53333;">程序中途的内存泄漏可能在程序之后对内存的操作中才暴露出来。</span></span>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	vs生成的map文件详解：<a href="https://blog.csdn.net/u012138730/article/details/90611728" target="_blank">https://blog.csdn.net/u012138730/article/details/90611728</a>
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1653.html">strncasecmp未定义 使用 _strnicmp MS</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1655.html">windows下通过msys编译nginx</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

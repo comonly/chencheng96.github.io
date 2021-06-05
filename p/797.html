@@ -1,0 +1,269 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>站点配置文件web.xml_comonly.cn</title>
+<meta name="keywords" content="站点配置文件web.xml" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">站点配置文件web.xml</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-07-20</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	java框架-spring等
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">web,spring</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <span>在/WebContent/WEB-INF/下新建web.xml文件，具体内容如下,里面有一些最基本的配置，里面的配置都有注释：</span><br />
+<span>&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br />
+<span>&lt;web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"</span><br />
+<span>&nbsp; &nbsp; xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"</span><br />
+<span>&nbsp; &nbsp; xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"&gt;</span><br />
+<span>&nbsp; &nbsp; &lt;description&gt;</span><br />
+<span>&nbsp; &nbsp; &nbsp; Spring MVC DEOM</span><br />
+<span>&nbsp; &nbsp; &lt;/description&gt;</span><br />
+<span>&nbsp; &nbsp; &lt;display-name&gt;springMVC&lt;/display-name&gt;</span><br />
+<span>&nbsp; &nbsp;&nbsp;</span><br />
+<span>&nbsp; &nbsp; &lt;!--&nbsp;</span><br />
+<span>&nbsp; &nbsp; &nbsp; &nbsp; CharacterEncodingFilter类具有encoding和forceEncoding两个属性，其中encoding是表示设置request的编码，forceEncoding表示是否同时设置response的编码。&nbsp;</span><br />
+<span>&nbsp; &nbsp; &nbsp; &nbsp; &lt;filter&gt;下的&lt;filter-name&gt;内的值和&lt;filter-mapping&gt;下的&lt;filter-name&gt;内的值要完全一致</span><br />
+<span>&nbsp; &nbsp; --&gt;</span><br />
+<span>&nbsp; &nbsp; &lt;filter&gt;</span><br />
+<span>&nbsp; &nbsp; &nbsp; &nbsp; &lt;filter-name&gt;characterEncodingFilter&lt;/filter-name&gt;</span><br />
+<span>&nbsp; &nbsp; &nbsp; &nbsp; &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;/filter-class&gt;</span><br />
+<span>&nbsp; &nbsp; &nbsp; &nbsp; &lt;init-param&gt;</span><br />
+<span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;param-name&gt;encoding&lt;/param-name&gt;</span><br />
+<span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;param-value&gt;UTF-8&lt;/param-value&gt;</span><br />
+<span>&nbsp; &nbsp; &nbsp; &nbsp; &lt;/init-param&gt;</span><br />
+<span>&nbsp; &nbsp; &nbsp; &nbsp; &lt;init-param&gt;</span><br />
+<span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;param-name&gt;forceEncoding&lt;/param-name&gt;</span><br />
+<span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;param-value&gt;true&lt;/param-value&gt;</span><br />
+<span>&nbsp; &nbsp; &nbsp; &nbsp; &lt;/init-param&gt;</span><br />
+<span>&nbsp; &nbsp; &lt;/filter&gt;</span><br />
+<span>&nbsp; &nbsp;&nbsp;</span><br />
+<span>&nbsp; &nbsp; &lt;filter-mapping&gt;</span><br />
+<span>&nbsp; &nbsp; &nbsp; &nbsp; &lt;filter-name&gt;characterEncodingFilter&lt;/filter-name&gt;</span><br />
+<span>&nbsp; &nbsp; &nbsp; &nbsp; &lt;!-- /下的所有请求都为UTF-8编码 --&gt;</span><br />
+<span>&nbsp; &nbsp; &nbsp; &nbsp; &lt;url-pattern&gt;/*&lt;/url-pattern&gt;</span><br />
+<span>&nbsp; &nbsp; &lt;/filter-mapping&gt;</span><br />
+<span>&nbsp; &nbsp;&nbsp;</span><br />
+<span>&nbsp; &nbsp; &lt;!--&nbsp;</span><br />
+<span>&nbsp; &nbsp; &nbsp; &nbsp; Spring MVC相关设置</span><br />
+<span>&nbsp; &nbsp; &nbsp; &nbsp; &lt;servlet&gt;下的&lt;servlet-name&gt;内的值和&lt;servlet-mapping&gt;下的&lt;servlet-name&gt;内的值要完全一致</span><br />
+<span>&nbsp; &nbsp; --&gt;</span><br />
+<span>&nbsp; &nbsp; &lt;servlet&gt;</span><br />
+<span>&nbsp; &nbsp; &nbsp; &nbsp; &lt;servlet-name&gt;SpringMVC-DEOM&lt;/servlet-name&gt;</span><br />
+<span>&nbsp; &nbsp; &nbsp; &nbsp; &lt;!-- DispatcherServlet主要负责流程的控制 --&gt;</span><br />
+<span>&nbsp; &nbsp; &nbsp; &nbsp; &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;</span><br />
+<span>&nbsp; &nbsp; &nbsp; &nbsp; &lt;!-- Spring MVC配置文件路径 --&gt;</span><br />
+<span>&nbsp; &nbsp; &nbsp; &nbsp; &lt;init-param&gt;</span><br />
+<span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;</span><br />
+<span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;param-value&gt;/WEB-INF/springMVC-servlet.xml&lt;/param-value&gt;</span><br />
+<span>&nbsp; &nbsp; &nbsp; &nbsp; &lt;/init-param&gt;</span><br />
+<span>&nbsp; &nbsp; &nbsp; &nbsp; &lt;!-- 表示启动容器时初始化该Servlet --&gt;</span><br />
+<span>&nbsp; &nbsp; &nbsp; &nbsp; &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;</span><br />
+<span>&nbsp; &nbsp; &lt;/servlet&gt;</span><br />
+<span>&nbsp; &nbsp;&nbsp;</span><br />
+<span>&nbsp; &nbsp; &lt;servlet-mapping&gt;</span><br />
+<span>&nbsp; &nbsp; &nbsp; &nbsp; &lt;servlet-name&gt;SpringMVC-DEOM&lt;/servlet-name&gt;</span><br />
+<span>&nbsp; &nbsp; &nbsp; &nbsp; &lt;!-- 表示哪些请求交给Spring Web MVC处理， “/” 是用来定义默认servlet映射的。也可以如“*.html”表示拦截所有以html为扩展名的请求。 --&gt;</span><br />
+<span>&nbsp; &nbsp; &nbsp; &nbsp; &lt;url-pattern&gt;/&lt;/url-pattern&gt;</span><br />
+<span>&nbsp; &nbsp; &lt;/servlet-mapping&gt;</span><br />
+<span>&nbsp; &nbsp;&nbsp;</span><br />
+<span>&lt;/web-app&gt;</span></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/796.html">Spring MVC配置文件springMVC-servlet.xml</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/798.html">Java Spring MVC入门</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

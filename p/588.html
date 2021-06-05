@@ -1,0 +1,473 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>定位 层—CSS_comonly.cn</title>
+<meta name="keywords" content="定位 层—CSS" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">定位 层—CSS</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-03-05</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">html,层,定位</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h1>
+	定位方式
+</h1>
+<blockquote>
+	<p>
+		position定位面板就是把对象放在一个层里来定位，相当于HTML的DIV标签。
+	</p>
+	<p>
+		position属性取值
+	</p>
+	<p>
+		absolute：绝对定位，位置不会随网页大小而改变
+	</p>
+	<p>
+		fixed：特殊的absolute，即fixed总是以body为定位对象的，按照浏览器的窗口进行定位
+	</p>
+	<p>
+		relative：相对定位，位置会随网页大小改变而改变
+	</p>
+	<p>
+		static：无定位，默认设置
+	</p>
+</blockquote>
+<p>
+	<br />
+</p>
+<h1>
+	定位位置
+</h1>
+<p>
+	absolute和relative要与top，bottom,right,left结合使用。
+</p>
+<p>
+	这几个属性取值方式有三种：auto（自动，这是默认的），长度值（px）和百分比。
+</p>
+<p>
+	&lt;style type="text/css"&gt;<br />
+#one{<br />
+position: absolute; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/*绝对定位*/<br />
+top: 50px; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/*距网页顶部50像素*/<br />
+left: 50px; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/*距网页左边50px*/<br />
+border: 2px #666 solid; &nbsp; &nbsp; &nbsp; /*边框粗细2像素，实线*/<br />
+width: 200px; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/*宽度*/<br />
+height: 100px; &nbsp; &nbsp; &nbsp; &nbsp;/*高度*/<br />
+}<br />
+&lt;/style&gt;<br />
+&lt;/head&gt;<br />
+&lt;body&gt;<br />
+&lt;div id="one"&gt;元素在网页中的位置由定位方式和定位位置的共同作用。&lt;/div&gt;
+</p>
+<p>
+	<a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank"><span style="background-color:#FFE500;">点击查看运行效果</span><span style="background-color:#FFE500;"></span></a>
+</p>
+<p>
+	<br />
+</p>
+<h1>
+	层
+</h1>
+<p>
+	层就是一个容器，用&lt;div&gt;标签来描述。可以使用层的属性来设置层的样式，层的先后顺序由z-index属性确定。
+</p>
+<p>
+	层空间
+</p>
+<p>
+	层空间属性（z-index）就是描述z轴的，属性值越大，层就越位于上面。
+</p>
+<p>
+	&lt;style type="text/css"&gt;<br />
+#one{<br />
+position: absolute; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/*绝对定位*/<br />
+top: 30px; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/*距网页顶部50像素*/<br />
+left: 50px; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/*距网页左边50px*/<br />
+width: 200px; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/*宽度*/<br />
+height: 100px; &nbsp; &nbsp; &nbsp; &nbsp;/*高度*/<br />
+background: #000;<br />
+z-index: 1;<br />
+color: #fff;<br />
+}<br />
+#two{<br />
+position: absolute; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/*绝对定位*/<br />
+top: 70px; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/*距网页顶部50像素*/<br />
+left: 70px; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/*距网页左边50px*/<br />
+width: 200px; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/*宽度*/<br />
+height: 100px; &nbsp; &nbsp; &nbsp; &nbsp;/*高度*/<br />
+background: #ccc;<br />
+z-index: 2;<br />
+}<br />
+&lt;/style&gt;<br />
+&lt;/head&gt;<br />
+&lt;body&gt;<br />
+&lt;div id="one"&gt;第一层,z-index属性值为1&lt;/div&gt;<br />
+&lt;div id="two"&gt;第二层,z-index属性值为2&lt;/div&gt;
+</p>
+<p>
+	<a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank"><span style="background-color:#FFE500;">点击查看运行效果</span><span style="background-color:#FFE500;"></span></a>
+</p>
+<p>
+	<br />
+</p>
+<h1>
+	层的可见性
+</h1>
+<p>
+	层的初始显示状态：Inherit继承父层的显示属性,Visible表示该层是可视的,Hidden表示该层被隐藏，不可见。
+</p>
+<p>
+	visibility: hidden;
+</p>
+<p>
+	在上述代码中加上隐藏属性，观察显示效果
+</p>
+<p>
+	&lt;style type="text/css"&gt;<br />
+#one{<br />
+position: absolute; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/*绝对定位*/<br />
+top: 30px; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/*距网页顶部50像素*/<br />
+left: 50px; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/*距网页左边50px*/<br />
+width: 200px; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/*宽度*/<br />
+height: 100px; &nbsp; &nbsp; &nbsp; &nbsp;/*高度*/<br />
+background: #000;<br />
+z-index: 1;<br />
+color: #fff;<br />
+visibility: hidden;<br />
+}<br />
+#two{<br />
+position: absolute; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/*绝对定位*/<br />
+top: 70px; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/*距网页顶部50像素*/<br />
+left: 70px; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/*距网页左边50px*/<br />
+width: 200px; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/*宽度*/<br />
+height: 100px; &nbsp; &nbsp; &nbsp; &nbsp;/*高度*/<br />
+background: #ccc;<br />
+z-index: 2;<br />
+}<br />
+&lt;/style&gt;<br />
+&lt;/head&gt;<br />
+&lt;body&gt;<br />
+&lt;div id="one"&gt;第一层,z-index属性值为1&lt;/div&gt;<br />
+&lt;div id="two"&gt;第二层,z-index属性值为2&lt;/div&gt;
+</p>
+<p>
+	<span style="background-color:#FFE500;"><a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank">点击查看运行效果</a></span>
+</p>
+<p>
+	<a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank"><span style="background-color:#FFE500;"></span></a>
+</p>
+<p>
+	层的宽度和高度
+</p>
+<p>
+	决定层的大小，一般只要设置宽度或高度中一个值，另一个值会主动获取。
+</p>
+<p>
+	<br />
+</p>
+<h1>
+	层的溢出
+</h1>
+<p>
+	overflow溢出属性，当内容超出层的大小，发生溢出时，有四种处理方法：
+</p>
+<ul>
+	<li>
+		visible：增加层的大小，从而将层的所有内容显示出来
+	</li>
+	<li>
+		hidden：保持层的大小不变，将超出层的内容剪裁掉
+	</li>
+	<li>
+		scroll：总是显示滚动条
+	</li>
+	<li>
+		auto：只有在内容超出层的边界时才显示滚动条
+	</li>
+</ul>
+<p>
+	&lt;style type="text/css"&gt;<br />
+#one{<br />
+position: absolute; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/*绝对定位*/<br />
+top: 30px; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/*距网页顶部30像素*/<br />
+left: 50px; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/*距网页左边50px*/<br />
+width: 100px; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/*宽度*/<br />
+height: 20px; &nbsp; &nbsp; &nbsp; &nbsp;/*高度*/<br />
+background: #000;<br />
+z-index: 1;<br />
+color: #fff;<br />
+overflow: hidden; &nbsp; &nbsp; &nbsp; /*溢出内容隐藏*/<br />
+}<br />
+#two{<br />
+position: absolute; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/*绝对定位*/<br />
+top: 30px; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/*距网页顶部30像素*/<br />
+left: 170px; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/*距网页左边170px*/<br />
+width: 100px; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/*宽度*/<br />
+height: 20px; &nbsp; &nbsp; &nbsp; &nbsp;/*高度*/<br />
+background: #ccc;<br />
+z-index: 2;<br />
+overflow: visible; &nbsp; &nbsp;/*溢出内容可见*/<br />
+}<br />
+&lt;/style&gt;<br />
+&lt;/head&gt;<br />
+&lt;body&gt;<br />
+&lt;div id="one"&gt;第一层,z-index属性值为1,溢出为隐藏&lt;/div&gt;<br />
+&lt;div id="two"&gt;第二层,z-index属性值为2,溢出为可见&lt;/div&gt;
+</p>
+<p>
+	<span style="background-color:#FFE500;"><a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank">点击查看运行效果</a></span>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<h1>
+	层的剪辑
+</h1>
+<p>
+	clip剪辑属性设置层的可视区域，将需要的部分留下，不需要的部分裁掉。
+</p>
+<p>
+	必须将position属性的值设为absolute，此属性方可使用。另外clip裁切的计算坐标都是从左上角（0,0）点开始计算。
+</p>
+<p>
+	clip属性取值方式有两种
+</p>
+<ul>
+	<li>
+		auto，默认值，没有剪辑
+	</li>
+	<li>
+		依据上，右，下，左的顺序提供自左上角为（0,0）坐标计算的4个偏移数值，其中任一数值都可用auto替换，即此边不剪辑。
+	</li>
+</ul>
+<p>
+	&lt;style type="text/css"&gt;<br />
+#one{<br />
+position: absolute; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/*绝对定位*/<br />
+top: 30px; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/*距网页顶部30像素*/<br />
+left: 50px; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/*距网页左边50px*/<br />
+background: #000;<br />
+clip: rect(auto,auto,auto,auto); &nbsp; &nbsp; &nbsp; /*自动*/<br />
+color: #fff;<br />
+}<br />
+#two{<br />
+position: absolute; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/*绝对定位*/<br />
+top: 200px; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/*距网页顶部200像素*/<br />
+left: 50px; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/*距网页左边50px*/<br />
+background: #000;<br />
+clip: rect(40px,100px,100px,50px); &nbsp; &nbsp; &nbsp; /*设置具体的坐标位置*/<br />
+color: #fff;<br />
+}<br />
+&lt;/style&gt;<br />
+&lt;/head&gt;<br />
+&lt;body&gt;<br />
+&lt;div id="one"&gt;!!!!!!!!!!!!!!!!!&lt;/br&gt;!!!!!!!!!!!!!!!!!&lt;/br&gt;!!!!!!!!!!!!!!!!!&lt;/br&gt;!!!!!!!!!!!!!!!!!&lt;/br&gt;!!!!!!!!!!!!!!!!!&lt;/br&gt;!!!!!!!!!!!!!!!!!&lt;/div&gt;<br />
+&lt;div id="two"&gt;!!!!!!!!!!!!!!!!!&lt;/br&gt;!!!!!!!!!!!!!!!!!&lt;/br&gt;!!!!!!!!!!!!!!!!!&lt;/br&gt;!!!!!!!!!!!!!!!!!&lt;/br&gt;!!!!!!!!!!!!!!!!!&lt;/br&gt;!!!!!!!!!!!!!!!!!&lt;/div&gt;
+</p>
+<p>
+	<a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank"><span style="background-color:#FFE500;">点击查看运行效果</span></a>
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/587.html">列表和导航菜单—CSS</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/589.html">鼠标指针</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

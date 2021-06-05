@@ -1,0 +1,270 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>如何只用2GB内存从20亿，40亿，80亿个整数中找到出现次数最多的数？_comonly.cn</title>
+<meta name="keywords" content="如何只用2GB内存从20亿，40亿，80亿个整数中找到出现次数最多的数？" />
+<meta name="description" content="这几天小秋去面试了，不过最近小秋学习了不少和位算法相关文章，例如
+
+【面试现场】如何判断一个数是否在40亿个整数中？ &lt;https://mp.weixin.qq.com/s/r2WtHW7UcinIjelILSnWwg&gt;
+【算法技巧】位运算装逼指南 &lt;https://mp.weixin.qq.com/s/C6o6T9ju34vAxNBg5zobWw&gt;
+
+对于算法题还是有点信心的，，，，于是，发现了如下对话。
+
+20亿级别
+
+面试官：如果我给你 2GB 的内存，并且" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">如何只用2GB内存从20亿，40亿，80亿个整数中找到出现次数最多的数？</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">MaTools</li>
+          <li class="lmname"><a href="https://www.matools.com/blog/190664142" target="_blank">https://www.matools.com/blog/190664142</a></li>
+          <li class="timer">2020-10-04</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>这几天小秋去面试了，不过最近小秋学习了不少和位算法相关文章，例如
+
+【面试现场】如何判断一个数是否在40亿个整数中？ &lt;https://mp.weixin.qq.com/s/r2WtHW7UcinIjelILSnWwg&gt;
+【算法技巧】位运算装逼指南 &lt;https://mp.weixin.qq.com/s/C6o6T9ju34vAxNBg5zobWw&gt;
+
+对于算法题还是有点信心的，，，，于是，发现了如下对话。
+
+20亿级别
+
+面试官：如果我给你 2GB 的内存，并且</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 这几天小秋去面试了，不过最近小秋学习了不少和位算法相关文章，例如<br />
+<br />
+【面试现场】如何判断一个数是否在40亿个整数中？ &lt;https://mp.weixin.qq.com/s/r2WtHW7UcinIjelILSnWwg&gt;<br />
+【算法技巧】位运算装逼指南 &lt;https://mp.weixin.qq.com/s/C6o6T9ju34vAxNBg5zobWw&gt;<br />
+<br />
+对于算法题还是有点信心的，，，，于是，发现了如下对话。<br />
+<br />
+20亿级别<br />
+<br />
+面试官：如果我给你 2GB 的内存，并且给你 20 亿个 int 型整数，让你来找出次数出现最多的数，你会怎么做？<br />
+小秋：（嗯？怎么感觉和之前的那道判断一个数是否出现在这 40 亿个整数中有点一样？可是，如果还是采用 bitmap算法的话，好像无法统计一个数出现的次数，只能判断一个数是否存在），我可以采用哈希表来统计，把这个数作为 key，把这个数出现的次数作为value，之后我再遍历哈希表哪个数出现最多的次数最多就可以了。<br />
+面试官：你可以算下你这个方法需要花费多少内存吗？<br />
+小秋：key 和 value 都是 int 型整数，一个 int 型占用 4B 的内存，所以哈希表的一条记录需要占用 8B，最坏的情况下，这 20亿个数都是不同的数，大概会占用 16GB 的内存。<br />
+面试官:你的分析是对的，然而我给你的只有 2GB 内存。<br />
+小秋：（感觉这道题有点相似，不过不知为啥，没啥思路，这下凉凉），目前没有更好的方法。<br />
+面试官：按照你那个方法的话，最多只能记录大概 2 亿多条不同的记录，2 亿多条不同的记录，大概是 1.6GB 的内存。<br />
+小秋：（嗯？面试官说这话是在提示我？）我有点思路了，我可以把这 20 亿个数存放在不同的文件，然后再来筛选。<br />
+面试题：可以具体说说吗？<br />
+小秋：刚才你说，我的那个方法，最多只能记录大概 2 亿多条的不同记录，那么我可以把这 20 亿个数映射到不同的文件中去，例如，数值在 0 至<br />
+2亿之间的存放在文件1中，数值在2亿至4亿之间的存放在文件2中....，由于 int 型整数大概有 42 亿个不同的数，所以我可以把他们映射到 21<br />
+个文件中去。<br />
+显然，相同的数一定会在同一个文件中，我们这个时候就可以用我的那个方法，统计每个文件中出现次数最多的数，然后再从这些数中再次选出最多的数，就可以了。<br />
+面试官：嗯，这个方法确实不错，不过，如果我给的这 20 亿个数数值比较集中的话，例如都处于 1~20000000之间，那么你都会把他们全部映射到同一个文件中，你有优化思路吗？<br />
+小秋：那我可以先把每个数先做哈希函数映射，根据哈希函数得到的哈希值，再把他们存放到对应的文件中，如果哈希函数设计到好的话，那么这些数就会分布的比较平均。（关于哈希函数的设计，我就不说了，我这只是提供一种思路）<br />
+<br />
+40亿级别<br />
+<br />
+面试官：那如果我把 20 亿个数加到 40 亿个数呢？<br />
+小秋：（这还不简单，映射到42个文件呗）那我可以加大文件的数量啊。<br />
+面试官：那如果我给的这 40 亿个数中数值都是一样的，那么你的哈希表中，某个 key 的 value 存放的数值就会是 40 亿，然而 int 的最大数值是21 亿左右，那么就会出现溢出，你该怎么办？<br />
+小秋：（那我把 int 改为 long 不就得了，虽然会占用更多的内存，那我可以把文件分多几份呗，不过，这应该不是面试官想要的答案），我可以把 value初始值赋值为负21亿，这样，如果 value 的数值是 21 亿的话，就代表某个 key 出现了 42 亿次了。<br />
+这里说明下，文件还是 21 个就够了，因为 21 个文件就可以把每个文件的数值种类控制在 2亿种了，也就是说，哈希表存放的记录还是不会超过 2 亿中。<br />
+<br />
+80亿级别<br />
+<br />
+面试官：反应挺快哈，那我如果把 40 亿增加到 80 亿呢？<br />
+小秋：（我靠，这变本加厉啊）.........我知道了，我可以一边遍历一遍判断啊，如果我在统计的过程中，发现某个 key 出现的次数超过了 40亿次，那么，就不可能再有另外一个 key 出现的次数比它多了，那我直接把这个 key 返回就搞定了。<br />
+面试官：行，此次面试到此结束，回去等通知吧。<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1823.html">海量数据中找出出现次数最多的前10个URL（如何找出访问最多的IP，如何从大量数据中找出高频词）</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1825.html">面向对象设计的六大原则</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.matools.com/blog/190664142" target="_blank">https://www.matools.com/blog/190664142</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

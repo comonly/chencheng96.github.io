@@ -1,0 +1,428 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>RegExp对象—JavaScript_comonly.cn</title>
+<meta name="keywords" content="RegExp对象—JavaScript" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">RegExp对象—JavaScript</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-03-11</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">JavaScript,RegExp对象,正则表达式</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	正则表达式用来表示指定字符串在另一个字符串出现的情况。JavaScript对正则表达式的支持是通过RegExp对象来实现的。
+</p>
+<p>
+	RegExp的对象的构造函数可以带一个或两个参数，第一个参数是描述需要进行匹配的字符串，第二个参数指定了处理命令。
+</p>
+<h2 id='创建RegEx对象'>
+	创建RegExp对象
+</h2>
+<p>
+	使用new操作符创建RegExp对象
+</p>
+<p>
+	var r=new RegExp();&nbsp; //创建一个RegExp对象
+</p>
+<p>
+	普通的字符串是最基本的正则表达式，比如匹配“tom”，可以定义正则表达式：
+</p>
+<blockquote>
+	<p>
+		var r=new RegExp("tom"); //只匹配第一个"tom",且区分大小写
+	</p>
+	<p>
+		var r=new RegExp("tom","g");//“g”是global的缩写，表示要查找字符串中出现的全部“tom”。
+	</p>
+	<p>
+		var r=new RegExp("tom","ig");//查找字符串中出现的全部“tom”,且不区分大小写
+	</p>
+</blockquote>
+<h2 id='RegEx对象的方法'>
+	RegExp对象的方法
+</h2>
+<ul>
+	<li>
+		test()方法：用于查找字符串中的指定值，如果找到返回true，否则返回false。
+	</li>
+	<li>
+		exec()方法：用于查找字符串中的指定值，如果找到返回被找到的字符串，否则返回null。
+	</li>
+	<li>
+		compile()方法：可以改变查找模式，也可以添加或删除第二个参数。
+	</li>
+</ul>
+<p>
+	&lt;script type="text/javascript"&gt;<br />
+var r=new RegExp("tom");<br />
+document.write(r.test("tomabc")+"&lt;/br&gt;");//返回true<br />
+document.write(r.exec("tomabc")+"&lt;/br&gt;");//返回tom<br />
+document.write(r.compile("h")+"&lt;/br&gt;");//修改被查找的字符串为“h”<br />
+document.write(r+"&lt;/br&gt;");&nbsp; //返回null<br />
+document.write(r.exec("tomabc")+"&lt;/br&gt;");&nbsp; //返回null<br />
+&lt;/script&gt;
+</p>
+<p>
+	复制代码<a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank"><span style="background-color:#FFE500;">在线测试效果</span></a>
+</p>
+<h2 id='正则表达式的元字符'>
+	正则表达式的元字符
+</h2>
+<p>
+	正则表达式的一般形式：
+</p>
+<p>
+	<em>/</em><em>字符串/</em>
+</p>
+<p>
+	位于/之间的部分就是要匹配的字符串。
+</p>
+<p>
+	元字符指在正则表达式中具有特殊意义的专用字符，可以用来规定前导字符（位于元字符前面的字符）在目标字符串中的出现模式。常见的有+，*，？
+</p>
+<ul>
+	<li>
+		+：规定前导字符必须在目标字符串连续出现一次或多次
+	</li>
+	<li>
+		*：规定前导字符必须在目标字符串中出现零次或多次（任意次）
+	</li>
+	<li>
+		?：规定前导字符必须在目标字符串中连续出现零次或一次
+	</li>
+</ul>
+<p>
+	<em>/fo+/：表示可以匹配在字母f后面连续出现一个或多个字母o的字符串</em>
+</p>
+<p>
+	<em>/fo*/：表示可以匹配在字母f后面连续出现零个或多个字母o的字符串</em>
+</p>
+<p>
+	<em>/fi?/：表示可以匹配字母f后面出现0次或一次字母i</em>
+</p>
+<p>
+	如果要使用元字符本身，可以使用转义字符\，如\*得到*。
+</p>
+<p>
+	有时候知道要匹配多少个字符，可以在正则表达式中指定字符出现的次数。
+</p>
+<ul>
+	<li>
+		{n}：n是一个正整数，匹配确定n次&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; a{2}表示要出现两个字母a。
+	</li>
+	<li>
+		{n,}：n是一个正整数，白色至少匹配n次&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; a{2,}表示a至少要出现2次。
+	</li>
+	<li>
+		{n,m}：m,n为正整数，n&lt;=m，求至少匹配n次，最多匹配m次。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; a{1,3}表示a可以出现1~3次。
+	</li>
+</ul>
+<p>
+	几个其他的重要元字符的使用方法
+</p>
+<blockquote>
+	<p>
+		.：用于匹配除换行符以外的所有字符
+	</p>
+	<p>
+		\s：匹配单个空格符，包括Tab键和换行符。
+	</p>
+	<p>
+		\S：匹配除单个空格符之外的所有字符。
+	</p>
+	<p>
+		\d：匹配0~9的数字
+	</p>
+	<p>
+		\w：匹配字母，数字或下划线
+	</p>
+	<p>
+		\W：匹配所有与\w不匹配的字符
+	</p>
+</blockquote>
+<p>
+	可以把\s和\S已经\w和\W看做互为逆运算。
+</p>
+<h2 id='正则表达式的定位符'>
+	正则表达式的定位符
+</h2>
+<p>
+	定位符用于规定匹配字符串在目标字符串中的出现位置，较为常见的有：^,$,\b,\B。
+</p>
+<ul>
+	<li>
+		^：规定匹配字符串必须出现在目标字符串的开头；
+	</li>
+	<li>
+		$：规定匹配字符串必须出现在目标字符串的结尾；
+	</li>
+	<li>
+		\b：规定匹配字符串必须出现在目标字符串的开头或结尾的两个边界之一；
+	</li>
+	<li>
+		\B：规定匹配字符串必须出现在目标字符串的开头或结尾的两个边界之内。
+	</li>
+</ul>
+<p>
+	可以把^和$以及\b和\B看做互为逆运算。
+</p>
+<p>
+	/^hell/：匹配以hell开头的所有字符串
+</p>
+<p>
+	/ar$/：匹配以ar结尾的字符串
+</p>
+<p>
+	/\bfat/：匹配以fat开头或结尾的字符串
+</p>
+<p>
+	/man\B/：匹配中间含有man的字符串，但是开头和结尾不能是man
+</p>
+<h2 id='正则表达式的范围'>
+	正则表达式的范围
+</h2>
+<p>
+	正则表达式允许匹配字符串指定一个范围而不只局限于具体的某个字符。
+</p>
+<ul>
+	<li>
+		/[a-z]/：表示a~z范围内的任何一个小写字母
+	</li>
+	<li>
+		/[A-Z]/：表示A~Z范围内的任何一个大写字母
+	</li>
+	<li>
+		/[0-9]/：表示0~9范围内的任何一个数字
+	</li>
+	<li>
+		/([a-z][A-Z][1-9])/：表示任何由字母和数字组成的字符串
+	</li>
+</ul>
+<p>
+	()把三个字符串条件组合在一起，()符号包含的内容必须同时出现在目标字符串中，“aAa”不符号条件，因为最后一个符号不是数字。
+</p>
+<ul>
+	<li>
+		|：在正则表达式中实现“或”运算的效果，使用|管道符&nbsp;&nbsp; /a|b|c/表示匹配字母a或b或c
+	</li>
+	<li>
+		[^]：规定目标字符串中不能存在某个字符，可以使用否定符[^]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /[^a-c]/表示目标字符串中可以与除a,b,c之外的任何字符想匹配。
+	</li>
+</ul>
+<p>
+	匹配日期的一个实例
+</p>
+<p>
+	&lt;script type="text/javascript"&gt;<br />
+function isvalid(s){<br />
+var d=/(?:0[1-9]|[12][0-9]|3[01])\/(?:0[1-9]|1[0-2])\/(?:19|20\d{2})/;<br />
+return d.test(s);<br />
+}<br />
+window.alert(isvalid("05/05/2010"));//true<br />
+window.alert(isvalid("5/5/2010"));//false<br />
+&lt;/script&gt;
+</p>
+<p>
+	复制代码<a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank"><span style="background-color:#FFE500;">在线测试效果</span></a>
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/613.html">字符串对象—JavaScript</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/615.html">对象层次—JavaScript</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#创建RegEx对象">创建RegEx对象</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#RegEx对象的方法">RegEx对象的方法</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#正则表达式的元字符">正则表达式的元字符</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#正则表达式的定位符">正则表达式的定位符</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#正则表达式的范围">正则表达式的范围</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,665 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>数据类型转换—JavaScript_comonly.cn</title>
+<meta name="keywords" content="数据类型转换—JavaScript" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">数据类型转换—JavaScript</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-03-07</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">JavaScript,date</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	JavaScript中的字符串类型，数字类型和布尔类型的数据类型，如果要进行运算时，必须将不同的数据类型转换成相同的数据类型。
+</p>
+<h1>
+	自动转换
+</h1>
+<p>
+	以下列出JavaScript一种特定类型用于一种特定环境下时所执行的转换。
+</p>
+<p>
+	<br />
+</p>
+<table cellpadding="2" cellspacing="0" border="1" bordercolor="#999999" style="width:600px;">
+	<tbody>
+		<tr>
+			<td>
+				值
+			</td>
+			<td>
+				字符串
+			</td>
+			<td>
+				数字
+			</td>
+			<td>
+				布尔值
+			</td>
+			<td>
+				对象
+			</td>
+		</tr>
+		<tr>
+			<td>
+				未定义的值
+			</td>
+			<td>
+				"undefined"
+			</td>
+			<td>
+				NaN
+			</td>
+			<td>
+				false
+			</td>
+			<td>
+				Error
+			</td>
+		</tr>
+		<tr>
+			<td>
+				null
+			</td>
+			<td>
+				null
+			</td>
+			<td>
+				0
+			</td>
+			<td>
+				false
+			</td>
+			<td>
+				Error
+			</td>
+		</tr>
+		<tr>
+			<td>
+				非空字符串
+			</td>
+			<td>
+				As is
+			</td>
+			<td>
+				字符串的数字值或NaN
+			</td>
+			<td>
+				true
+			</td>
+			<td>
+				String对象
+			</td>
+		</tr>
+		<tr>
+			<td>
+				字符串
+			</td>
+			<td>
+				As is
+			</td>
+			<td>
+				0
+			</td>
+			<td>
+				false
+			</td>
+			<td>
+				String对象
+			</td>
+		</tr>
+		<tr>
+			<td>
+				0
+			</td>
+			<td>
+				"0"
+			</td>
+			<td>
+				As is
+			</td>
+			<td>
+				false
+			</td>
+			<td>
+				Number对象
+			</td>
+		</tr>
+		<tr>
+			<td>
+				NaN
+			</td>
+			<td>
+				"NaN"
+			</td>
+			<td>
+				As is
+			</td>
+			<td>
+				false
+			</td>
+			<td>
+				Number对象
+			</td>
+		</tr>
+		<tr>
+			<td>
+				无穷大
+			</td>
+			<td>
+				"Infinity"
+			</td>
+			<td>
+				As is
+			</td>
+			<td>
+				true
+			</td>
+			<td>
+				Number对象
+			</td>
+		</tr>
+		<tr>
+			<td>
+				负无穷大
+			</td>
+			<td>
+				"-Infinity"
+			</td>
+			<td>
+				As is
+			</td>
+			<td>
+				true
+			</td>
+			<td>
+				Number对象
+			</td>
+		</tr>
+		<tr>
+			<td>
+				其他所有数字
+			</td>
+			<td>
+				数字的字符串值
+			</td>
+			<td>
+				As is
+			</td>
+			<td>
+				true
+			</td>
+			<td>
+				Number对象
+			</td>
+		</tr>
+		<tr>
+			<td>
+				true
+			</td>
+			<td>
+				"true"
+			</td>
+			<td>
+				1
+			</td>
+			<td>
+				As is
+			</td>
+			<td>
+				Boolean对象
+			</td>
+		</tr>
+		<tr>
+			<td>
+				false
+			</td>
+			<td>
+				"false"
+			</td>
+			<td>
+				0
+			</td>
+			<td>
+				As is
+			</td>
+			<td>
+				Boolean对象
+			</td>
+		</tr>
+		<tr>
+			<td>
+				对象
+			</td>
+			<td>
+				toString()
+			</td>
+			<td>
+				valueOf()或toString()或NaN
+			</td>
+			<td>
+				true
+			</td>
+			<td>
+				As is
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	如document.write(true);会制动转换为字符串"true"输出
+</p>
+<h1>
+	转换成字符串
+</h1>
+<h3>
+	利用每个值都有的toString()方法
+</h3>
+<p>
+	null和underfined类型没有toString();
+</p>
+<p>
+	var number=20; &nbsp; //数字类型
+</p>
+<p>
+	var str=number.toString(); &nbsp; &nbsp; &nbsp;//把数字类型转换成字符串类型
+</p>
+<p>
+	var b=true; &nbsp; //布尔类型
+</p>
+<p>
+	var arr=["javascript","html","css"]; &nbsp; &nbsp; &nbsp; &nbsp; //数组类型
+</p>
+<p>
+	document.write(str); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//输出字符串20
+</p>
+<p>
+	document.write(arr.toString()); &nbsp; &nbsp; &nbsp; //输出字符串javascript,html,css
+</p>
+<p>
+	document.write(b.toString)); &nbsp; &nbsp; &nbsp; &nbsp; //输出字符串true
+</p>
+<h3>
+	使用String()函数
+</h3>
+<p>
+	能将任何类型的值转换成字符串。
+</p>
+<p>
+	如果有toString()方法，则调用该方法并返回相应结果；
+</p>
+<p>
+	如果值是underfined，返回"underfined";
+</p>
+<p>
+	如果值是null，返回"null"。
+</p>
+<h1>
+	转换成数字类型
+</h1>
+<p>
+	使用Number()函数可以把任何数据类型转换成数字类型：
+</p>
+<blockquote>
+	<p>
+		<br />
+	</p>
+	<ul>
+		<li>
+			<span style="line-height:1.5;">如果是布尔类型（Boolean</span><span style="line-height:1.5;">），true和false分别变为1和0；</span> 
+		</li>
+		<li>
+			<span style="line-height:1.5;">如果是null类型，返回0；</span> 
+		</li>
+		<li>
+			<span style="line-height:1.5;">如果是undefined，返回NaN；</span> 
+		</li>
+		<li>
+			<span style="line-height:1.5;">如果字符串只包含数字，则将其转换为数字，“021</span><span style="line-height:1.5;">”会变成21；</span> 
+		</li>
+		<li>
+			<span style="line-height:1.5;">如果字符串是空的，则转换成0；</span> 
+		</li>
+		<li>
+			<span style="line-height:1.5;">如果字符串是其他歌手的字符，则转换成NaN</span><span style="line-height:1.5;">。</span> 
+		</li>
+	</ul>
+	<p>
+		<br />
+	</p>
+</blockquote>
+<p>
+	var s1="3.6";
+</p>
+<p>
+	window.alert(Number(s1)); &nbsp;//返回3.6
+</p>
+<p>
+	var s2="025";
+</p>
+<p>
+	window.alert(Number(s2)); &nbsp;//返回25
+</p>
+<p>
+	另外两个专门用于把字符串转换成数字的函数：parseInt()和parseFloat()。
+</p>
+<h4>
+	parseInt()得到整数格式，
+</h4>
+<p>
+	var s1=parseInt("236red"); &nbsp;//得到236，后面的字符串过滤了
+</p>
+<p>
+	var s2=parseInt(""); &nbsp;//空字符串，得到NaN
+</p>
+<p>
+	var s3=parseInt("30.8"); &nbsp; //得到30
+</p>
+<h4>
+	parseFloat()得到浮点数格式，
+</h4>
+<p>
+	var s1=parseInt("236red"); &nbsp; //得到235
+</p>
+<p>
+	var s2=parseInt("30.8"); &nbsp; &nbsp;//得到30.8
+</p>
+<h1>
+	转换成布尔(Boolean)类型
+</h1>
+<p>
+	使用Boolean()函数，对任何数据类型的值的调用，返回一个true或false。
+</p>
+<table cellpadding="2" cellspacing="0" border="1" bordercolor="#999999" style="width:500px;">
+	<tbody>
+		<tr>
+			<td>
+				数据类型
+			</td>
+			<td>
+				转换为true
+			</td>
+			<td>
+				转换为false
+			</td>
+		</tr>
+		<tr>
+			<td>
+				布尔型
+			</td>
+			<td>
+				true
+			</td>
+			<td>
+				false
+			</td>
+		</tr>
+		<tr>
+			<td>
+				字符串型
+			</td>
+			<td>
+				任何非空字符串<br />
+			</td>
+			<td>
+				空字符串
+			</td>
+		</tr>
+		<tr>
+			<td>
+				数字型
+			</td>
+			<td>
+				任何非零数字
+			</td>
+			<td>
+				0和NaN
+			</td>
+		</tr>
+		<tr>
+			<td>
+				对象
+			</td>
+			<td>
+				任何对象
+			</td>
+			<td>
+				NULL
+			</td>
+		</tr>
+	</tbody>
+</table>
+<h1>
+	其他常用方法
+</h1>
+<h4>
+	数字类型转换成字符串类型，可以将其与一个空字符串相连。
+</h4>
+<p>
+	var s=256+""; &nbsp; //将数字类型变成字符串类型
+</p>
+<h4>
+	字符串转换成数字类型，可以将其减零，
+</h4>
+<p>
+	var s="256" &nbsp; &nbsp;//字符串类型
+</p>
+<p>
+	var str=s-0; &nbsp; &nbsp;//转换成数字型
+</p>
+<h4>
+	字符串类型或数字类型转换成布尔类型，可以连续使用两次"!"运算符，如：
+</h4>
+<p>
+	var s="javascript"; &nbsp; //字符串型
+</p>
+<p>
+	var b1=!!s; &nbsp; //转换成布尔型
+</p>
+<p>
+	var n=236; //数字型
+</p>
+<p>
+	var b2=!!n; &nbsp; &nbsp;//转换成布尔型
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/595.html">数据类型—JavaScript</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/597.html">常量和变量—JavaScript</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

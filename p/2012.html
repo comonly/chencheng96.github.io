@@ -1,0 +1,215 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>使用vue实现todoMVC_comonly.cn</title>
+<meta name="keywords" content="使用vue实现todoMVC" />
+<meta name="description" content="在线演示：Demo效果如下：步骤如下：1、搭建项目基本结构2、实现基本数据渲染及关联3、实现增、删、查、改等基本功能4、实现数据本地存储1、搭建项目基本结构1.1 从github上克隆 todomvc 的模板文件github链接： https://github.com/tastejs/todomvc-app-template.git（本贴附件中同样提供下载）1.2 引入 vue.js 文件使用 n" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">使用vue实现todoMVC</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">小黑爱代码</li>
+          <li class="lmname"><a href="https://blog.51cto.com/14360146/2430778" target="_blank">https://blog.51cto.com/14360146/2430778</a></li>
+          <li class="timer">2019-08-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>在线演示：Demo效果如下：步骤如下：1、搭建项目基本结构2、实现基本数据渲染及关联3、实现增、删、查、改等基本功能4、实现数据本地存储1、搭建项目基本结构1.1 从github上克隆 todomvc 的模板文件github链接： https://github.com/tastejs/todomvc-app-template.git（本贴附件中同样提供下载）1.2 引入 vue.js 文件使用 n</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <div class="con editor-preview-side" id="result"><p><span style="color:rgb(54,54,54);font-family:'Microsoft Yahei', Simsun;font-size:14px;background-color:rgb(255,255,255);">在线演示：</span><a href="http://tinymark.github.io/vue_demo/todos/" class="gj_safe_a" style="margin: 0px; padding: 0px; color: rgb(66, 133, 244); font-family: &quot;Microsoft Yahei&quot;, Simsun; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">Demo</a><br><br><span style="color:rgb(54,54,54);font-family:'Microsoft Yahei', Simsun;font-size:14px;background-color:rgb(255,255,255);">效果如下：</span><br><img src="http://bbs.itheima.com/data/attachment/forum/201712/14/145115q0h0ym5x5ztiigi5.gif" class="zoom" width="720" height="497" alt="145115q0h0ym5x5ztiigi5.gif" style="cursor: pointer;"><span style="color:rgb(54,54,54);font-family:'Microsoft Yahei', Simsun;font-size:14px;background-color:rgb(255,255,255);"></span><br><br><span style="color:rgb(54,54,54);font-family:'Microsoft Yahei', Simsun;font-size:14px;background-color:rgb(255,255,255);">步骤如下：</span><br><span style="color:rgb(54,54,54);font-family:'Microsoft Yahei', Simsun;font-size:14px;background-color:rgb(255,255,255);">1、搭建项目基本结构</span><br><span style="color:rgb(54,54,54);font-family:'Microsoft Yahei', Simsun;font-size:14px;background-color:rgb(255,255,255);">2、实现基本数据渲染及关联</span><br><span style="color:rgb(54,54,54);font-family:'Microsoft Yahei', Simsun;font-size:14px;background-color:rgb(255,255,255);">3、实现增、删、查、改等基本功能</span><br><span style="color:rgb(54,54,54);font-family:'Microsoft Yahei', Simsun;font-size:14px;background-color:rgb(255,255,255);">4、实现数据本地存储</span><br><br><br><span style="font-size:16px;"><span style="margin:0px;padding:0px;font-weight:700;">1、搭建项目基本结构</span></span><br><span style="color:rgb(54,54,54);font-family:'Microsoft Yahei', Simsun;font-size:14px;background-color:rgb(255,255,255);">1.1 从github上克隆 todomvc 的模板文件</span><br><br><span style="color:rgb(54,54,54);font-family:'Microsoft Yahei', Simsun;font-size:14px;background-color:rgb(255,255,255);">github链接：&nbsp;</span><a href="https://github.com/tastejs/todomvc-app-template.git" class="gj_safe_a" style="margin: 0px; padding: 0px; color: rgb(66, 133, 244); font-family: &quot;Microsoft Yahei&quot;, Simsun; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">https://github.com/tastejs/todomvc-app-template.git</a><br><br><span style="color:rgb(54,54,54);font-family:'Microsoft Yahei', Simsun;font-size:14px;background-color:rgb(255,255,255);">（本贴附件中同样提供下载）</span><br><br><span style="color:rgb(54,54,54);font-family:'Microsoft Yahei', Simsun;font-size:14px;background-color:rgb(255,255,255);">1.2 引入 vue.js 文件</span><br><br><span style="color:rgb(54,54,54);font-family:'Microsoft Yahei', Simsun;font-size:14px;background-color:rgb(255,255,255);">使用 npm install vue -S 下载 vue</span><br><img src="http://bbs.itheima.com/data/attachment/forum/201712/14/150307plz8mzo88qzf6l62.png.thumb.jpg" alt="150307plz8mzo88qzf6l62.png.thumb.jpg" style="cursor: pointer;"><span style="color:rgb(54,54,54);font-family:'Microsoft Yahei', Simsun;font-size:14px;background-color:rgb(255,255,255);"></span><br><br><span style="color:rgb(54,54,54);font-family:'Microsoft Yahei', Simsun;font-size:14px;background-color:rgb(255,255,255);">1.3 修改 index.html 文件：</span><br><span style="color:rgb(54,54,54);font-family:'Microsoft Yahei', Simsun;font-size:14px;background-color:rgb(255,255,255);">&nbsp; &nbsp;&nbsp; &nbsp;引入vue.js</span><br><img src="http://bbs.itheima.com/data/attachment/forum/201712/14/150213z8yf2j9bz8b2bufn.png.thumb.jpg" alt="150213z8yf2j9bz8b2bufn.png.thumb.jpg" style="cursor: pointer;"><span style="color:rgb(54,54,54);font-family:'Microsoft Yahei', Simsun;font-size:14px;background-color:rgb(255,255,255);"></span><br><br><span style="color:rgb(54,54,54);font-family:'Microsoft Yahei', Simsun;font-size:14px;background-color:rgb(255,255,255);">1.4 给body中的section标签 添加ID</span><br><img src="http://bbs.itheima.com/data/attachment/forum/201712/14/150719ghz9uzuhmun3p9w2.png.thumb.jpg" alt="150719ghz9uzuhmun3p9w2.png.thumb.jpg" style="cursor: pointer;"><span style="color:rgb(54,54,54);font-family:'Microsoft Yahei', Simsun;font-size:14px;background-color:rgb(255,255,255);"></span><br><br><br><span style="font-size:18px;"><span style="margin:0px;padding:0px;font-weight:700;">2、实现基本数据渲染</span></span><br><span style="color:rgb(54,54,54);font-family:'Microsoft Yahei', Simsun;font-size:14px;background-color:rgb(255,255,255);">编写 app.js 文件</span><br><br><span style="color:rgb(54,54,54);font-family:'Microsoft Yahei', Simsun;font-size:14px;background-color:rgb(255,255,255);">2.1 app.js基本结构如下：</span><br><img src="http://bbs.itheima.com/data/attachment/forum/201712/14/151852v5o432ez2odoywbe.png.thumb.jpg" alt="151852v5o432ez2odoywbe.png.thumb.jpg" style="cursor: pointer;"><span style="color:rgb(54,54,54);font-family:'Microsoft Yahei', Simsun;font-size:14px;background-color:rgb(255,255,255);"></span><br><br><span style="color:rgb(54,54,54);font-family:'Microsoft Yahei', Simsun;font-size:14px;background-color:rgb(255,255,255);">2.2 修改 index.html 中 ul 标签，留下一个 li 标签，使用 v-for 渲染 list 数据</span><br><span style="color:rgb(54,54,54);font-family:'Microsoft Yahei', Simsun;font-size:14px;background-color:rgb(255,255,255);">如下图：</span><br><img src="http://bbs.itheima.com/data/attachment/forum/201712/14/151854kquqb1bff2jybob8.png.thumb.jpg" alt="151854kquqb1bff2jybob8.png.thumb.jpg" style="cursor: pointer;"><span style="color:rgb(54,54,54);font-family:'Microsoft Yahei', Simsun;font-size:14px;background-color:rgb(255,255,255);"></span><br><br><span style="color:rgb(54,54,54);font-family:'Microsoft Yahei', Simsun;font-size:14px;background-color:rgb(255,255,255);">2.3 继续修改 li 标签，class 增加三元运算，input 增加 v-model 绑定 status</span><br><span style="color:rgb(54,54,54);font-family:'Microsoft Yahei', Simsun;font-size:14px;background-color:rgb(255,255,255);">如下图：</span><br><img src="http://bbs.itheima.com/data/attachment/forum/201712/28/164944sh30s5kg0z07nkw3.png.thumb.jpg" alt="164944sh30s5kg0z07nkw3.png.thumb.jpg" style="cursor: pointer;"><span style="color:rgb(54,54,54);font-family:'Microsoft Yahei', Simsun;font-size:14px;background-color:rgb(255,255,255);"></span><br><br><span style="color:rgb(54,54,54);font-family:'Microsoft Yahei', Simsun;font-size:14px;background-color:rgb(255,255,255);">此时，页面效果如下</span><br><img src="http://bbs.itheima.com/data/attachment/forum/201712/28/170857vjjcj8j0jyejjctj.gif" class="zoom" width="720" alt="170857vjjcj8j0jyejjctj.gif" style="cursor: pointer;"><span style="color:rgb(54,54,54);font-family:'Microsoft Yahei', Simsun;font-size:14px;background-color:rgb(255,255,255);"></span><br><br><br><span style="color:rgb(54,54,54);font-family:'Microsoft Yahei', Simsun;font-size:14px;background-color:rgb(255,255,255);">2.4 添加 v-cloak 解决刷新闪烁问题</span><br><img src="http://bbs.itheima.com/data/attachment/forum/201712/28/204751nnyzfp6g7gf6bbt6.png.thumb.jpg" alt="204751nnyzfp6g7gf6bbt6.png.thumb.jpg" style="cursor: pointer;"><span style="color:rgb(54,54,54);font-family:'Microsoft Yahei', Simsun;font-size:14px;background-color:rgb(255,255,255);"></span></p></div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/2011.html">ES6中export 和 import</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/2013.html">eclipse的Java项目修改后要不要重启tomcat问题</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.51cto.com/14360146/2430778" target="_blank">https://blog.51cto.com/14360146/2430778</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

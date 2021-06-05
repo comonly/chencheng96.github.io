@@ -1,0 +1,398 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>nodejs 使用socket.io与网页实时数据交互_comonly.cn</title>
+<meta name="keywords" content="nodejs 使用socket.io与网页实时数据交互" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">nodejs 使用socket.io与网页实时数据交互</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">無名 大猫咪与小狮子</li>
+          <li class="lmname"><a href="http://www.cnblogs.com/xiezhengcai/p/3956401.html" target="_blank">http://www.cnblogs.com/xiezhengcai/p/3956401.html</a></li>
+          <li class="timer">2018-08-17</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	nodejs
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 首先我们需要安装socket模块，安装命令: npm install socket.io
+<p>
+	其中服务端使用volatile 意思大概是说，当服务器发送数据时，客户端因为各种原因不能正常接收，比如网络问题、或者正处于长连接的建立连接阶段。此时会让我们的应用变得 suffer，那就需要考虑发送 volatile 数据。
+</p>
+<h2 id='服务端'>
+	服务端
+</h2>
+io.on('connection',function(socket)); 监听客户端连接,回调函数会传递本次连接的socket<br />
+io.sockets.emit('String',data); 给所有客户端广播消息<br />
+io.sockets.socket(socketid).emit('String', data); 给指定的客户端发送消息
+<h2 id='emit和o的用法，实现客户端与服务端的双向数据传递'>
+	emit和on的用法，实现客户端与服务端的双向数据传递
+</h2>
+<p>
+	下面一组方法实现了客户端与服务端的双向数据传递：<br />
+socket.on('String',function(data)); 监听客户端发送的信息<br />
+socket.emit('String', data); 给该socket的客户端发送消息，<span style="color:#E53333;">data可以是json类型数据</span>，即{rp:"fine,thank you",re2:"hell2"}。这样在socket.on中可以直接获得指定数据，data.re2获得hell2。
+</p>
+<h4>
+	1.emit方法可以用多种形式的参数
+</h4>
+<p>
+	socket.emit('action');表示发送了一个action命令，在另一端接收时，可以这么写： socket.on('action',function(){...});不传递参数，直接执行function中的函数。<br />
+socket.emit('action',data);表示发送了一个action命令，还有data数据，在另一端接收时，可以这么写： socket.on('action',function(data){...});通过data传递数据。<br />
+socket.emit(action,arg1,arg2); 表示发送了一个action命令，还有两个数据，在另一端接收时，可以这么写： socket.on('action',function(arg1,arg2){...});
+</p>
+<h4>
+	2.在emit方法中包含回调函数
+</h4>
+socket.emit('action',data, function(arg1,arg2){...} );那么这里面有一个回调函数可以在另一端调用，另一端可以这么写：socket.on('action',function(data,fn){&nbsp; &nbsp;fn('a','b') ;&nbsp; });<br />
+上面的data数据可以有0个或者多个，相应的在另一端改变function中参数的个数即可，function中的参数个数和顺序应该和发送时一致<br />
+上面的fn表示另一个端传递过来的参数，是个函数，写fn('a','b') ;会回调函数执行。一次发送不应该写多个回调，否则只有最后一个起效，回调应作为最后一个参数。
+<h2 id='客户端'>
+	客户端
+</h2>
+<p>
+	建立一个socket连接
+</p>
+<p>
+	var socket = io.connect('http://localhost:3000');或var socket = io("ws://103.31.201.154:5555");
+</p>
+<span style="color:#E53333;">监听服务器消息和向服务器发送消息的方法和服务器端相同，通过emit和on。</span><br />
+<h4>
+	客户端socket.on()监听的事件：
+</h4>
+<p>
+	socket.on('disconnect', function() {&nbsp;console.log('当断开连接时客户端所做的操作，下面事件的使用on方法相同')&nbsp;});
+</p>
+<p>
+	<br />
+</p>
+connect：连接成功<br />
+connecting：正在连接<br />
+disconnect：断开连接<br />
+connect_failed：连接失败<br />
+error：错误发生，并且无法被其他事件类型所处理<br />
+message：同服务器端message事件<br />
+anything：同服务器端anything事件<br />
+reconnect_failed：重连失败<br />
+reconnect：成功重连<br />
+reconnecting：正在重连<br />
+当第一次连接时，事件触发顺序为：connecting-&gt;connect；当失去连接时，事件触发顺序为：disconnect-&gt;reconnecting（可能进行多次）-&gt;connecting-&gt;reconnect-&gt;connect。</div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/946.html">WebSocket实现实时web服务端与客户端通信【待处理】</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/948.html">nodejs--socket.io的广播信息及用户分组</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="http://www.cnblogs.com/xiezhengcai/p/3956401.html" target="_blank">http://www.cnblogs.com/xiezhengcai/p/3956401.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="客户端index.html代码">
+							<h2 style="display:inline;color:#5BC648;">客户端index.html代码</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-08-17&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><pre class="prettyprint lang-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head lang="en"&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;统计在线人数&lt;/title&gt;
+    &lt;script src="http://localhost:3000/socket.io/socket.io.js"&gt;&lt;/script&gt;
+    &lt;script src="http://code.jquery.com/jquery-latest.min.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript"&gt;
+        // 创建websocket连接
+        var socket = io.connect('http://localhost:3000');
+        // 把信息显示到div上
+        socket.on('onlinenums', function (data) {   //接收服务端发送的数据
+                $("#nums").html(data.nums);//更改在线用户数      
+        });
+
+        socket.emit('msg', {rp:"fine,thank you"}); //向服务器发送消息
+
+        //监听socket的相关事件，状态信息见正文
+        socket.on('disconnect', function() {
+            $("#tip").html("与服务其断开");
+        });
+        socket.on('connect', function() {
+            $("#tip").html("与服务连接");
+        });
+        socket.on('connecting', function() {
+            $("#tip").html("正在连接到服务器");
+        });
+        socket.on('reconnect', function() {
+            $("#tip").html("重新连接到服务器");
+        });
+        socket.on('reconnecting', function() {
+            $("#tip").html("正在重新连接到服务器");
+        });
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    当前在线人数:&lt;span style="color: red;" id="nums"&gt;0&lt;/span&gt;&lt;br/&gt;
+    当前状态信息:&lt;span style="color: red;" id="tip"&gt;&lt;/span&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="服务端index.js代码">
+							<h2 style="display:inline;color:#5BC648;">服务端index.js代码</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-08-17&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><pre class="prettyprint lang-js">//统计在线用户数，未区别设备等
+var app = require('http').createServer(handler),
+    io = require('socket.io').listen(app),
+    fs = require('fs');
+//当前在线人数
+var onlineCount = 0;
+
+//响应客户端请求
+function handler (req, res) {
+    fs.readFile(__dirname + '/index.html',
+        function (err, data) {
+            if (err) {
+                res.writeHead(500);
+                return res.end('Error loading index.html');
+            }
+            res.writeHead(200);
+            res.end(data);
+        });
+}
+
+//连接事件
+//io.sockets.on('connection', function (socket) {   //  和下面的关系
+io.on('connection', function (socket) {
+    console.log('有新用户进入...');
+    //叠加当前在线人数
+    onlineCount++;
+    var tweets = setInterval(function () {  //setInterval循环调用函数1000即1s
+            //socket.volatile.emit('onlinenums', {nums : onlineCount}); //和下面的有什么区别？
+            socket.emit('onlinenums', {nums : onlineCount});
+    }, 1000);
+
+    console.log('当前用户数量:'+onlineCount);
+
+    //监听客户端断开连接
+    socket.on('disconnect', function() {
+        if(onlineCount &gt; 0 ){
+            //当前在线用户减一
+            onlineCount--;
+            console.log('当前用户数量:'+onlineCount);
+        }
+    });
+
+    //接收客户端名为msg发送的数据
+    socket.on('msg',function(tip){
+        console.log(tip);
+    });
+});
+ 
+//启动HTTP服务，绑定端口3000
+app.listen(3000, function(){
+    console.log('listening on *:3000');
+});</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#服务端">服务端</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#emit和o的用法，实现客户端与服务端的双向数据传递">emit和o的用法，实现客户端与服务端的双向数据传递</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#客户端">客户端</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#客户端index.html代码">客户端index.html代码</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#服务端index.js代码">服务端index.js代码</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

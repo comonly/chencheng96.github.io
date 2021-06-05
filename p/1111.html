@@ -1,0 +1,319 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>空指针和void *类型指针_comonly.cn</title>
+<meta name="keywords" content="空指针和void *类型指针" />
+<meta name="description" content="今天，有个师弟问我：“师兄，空指针和void *类型指针是怎样的？”
+
+当时，我大概的说法是：
+
+1、空指针是没有指向的指针，将暂时用不到的指针定义成空指针，能防止误用。
+
+2、而void * 类型的指针是有指向的指针，但它的指向的数据的类型暂时不确定，所以先弄成void * 类型，后期一般要强制转换的。
+
+
+
+回来后，发现这种说法虽然勉强能够接受，但依然有不足的地方，现在补充更正一下：
+
+1、空指针实质上是有指向的指针，但它指向的地址是很小的地址，约定俗成为地址0，我来解释一下为" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">空指针和void *类型指针</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">luo_technically</li>
+          <li class="lmname"><a href="https://blog.csdn.net/luo_technically/article/details/52714389" target="_blank">https://blog.csdn.net/luo_technically/article/details/52714389</a></li>
+          <li class="timer">2019-10-10</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	c c++
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>今天，有个师弟问我：“师兄，空指针和void *类型指针是怎样的？”
+
+当时，我大概的说法是：
+
+1、空指针是没有指向的指针，将暂时用不到的指针定义成空指针，能防止误用。
+
+2、而void * 类型的指针是有指向的指针，但它的指向的数据的类型暂时不确定，所以先弄成void * 类型，后期一般要强制转换的。
+
+
+
+回来后，发现这种说法虽然勉强能够接受，但依然有不足的地方，现在补充更正一下：
+
+1、空指针实质上是有指向的指针，但它指向的地址是很小的地址，约定俗成为地址0，我来解释一下为</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 今天，有个师弟问我：“师兄，空指针和void *类型指针是怎样的？”<br />
+<br />
+当时，我大概的说法是：<br />
+<br />
+1、空指针是没有指向的指针，将暂时用不到的指针定义成空指针，能防止误用。<br />
+<br />
+2、而void * 类型的指针是有指向的指针，但它的指向的数据的类型暂时不确定，所以先弄成void * 类型，后期一般要强制转换的。<br />
+<br />
+<br />
+<br />
+回来后，发现这种说法虽然勉强能够接受，但依然有不足的地方，现在补充更正一下：<br />
+<br />
+1、空指针实质上是有指向的指针，但它指向的地址是很小的地址，约定俗成为地址0，我来解释一下为什么。<br />
+<br />
+#include <stdio.h><br />
+void main(){<br />
+int * str = NULL;<br />
+gets(str);<br />
+printf("%s",str);<br />
+}<br />
+这个程序在语法上是没有问题的，但是我们编译、链接都没有报错，但是我们打开的时候却出错了。<br />
+原因是空指针指向的地址是不保存数据，同时不允许程序访问的。<br />
+<br />
+那么，这个NULL到底是什么呢?<br />
+<br />
+我打开了用F12对着NULL 单击打开，看看它到底是什么，结果打开了头文件stdio.h，显示&nbsp; &nbsp;#define NULL&nbsp; &nbsp; ((void *)0) <br />
+<br />
+显然，这是一个宏定义。NULL 实际上是((void*)0) ，容易看出，外层的括号纯粹是为了防止歧义；里层的括号则是强制类型转换，转换成void * 类型，本来void * 类型是用来存放地址的，那么这里的0自然就是地址0了。<br />
+<br />
+在内存分配方面，较小的地址是不用来存放数据的，也不允许程序访问的。所以，指针指向了它，就是这个指针不能操作它指向的这块较小的地址。<br />
+<br />
+哈哈，至此，空指针算是解释通了。<br />
+<br />
+简单来说，空指针有指向，但是它指向的地址是特殊的，该地址不允许存放数据和不允许程序访问，所以空指针不能操作该地址里的东西，我们就理解为“指针指向了空，无法操作了”。<br />
+<br />
+<br />
+<br />
+2、void * 类型指针，这个类型指针指向了实实在在的存放数据的地址，但是该地址存放的数据的数据类型我们暂时不知道。<br />
+<br />
+举个例子，我们的动态内存分配就是这样，一开始只是分配地址，但没有知道这块地址用了存放什么，接着强制类型转换，使得它用来存放我们想要存放的内容。<br />
+<br />
+<br />
+char*str=(char*)malloc(sizeof(char)*13);<br />
+<br />
+上面这条代码，malloc()函数分配的地址一开始是void * 类型的，因为我们用来存放char类型数据，所以强制转换为 char *&nbsp; 。<br />
+</stdio.h></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1110.html">C回调函数的定义 传参 使用 typedef定义回调函数 函数指针的赋值</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1112.html">eclipse直接把项目部署到tomcat根目录</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/luo_technically/article/details/52714389" target="_blank">https://blog.csdn.net/luo_technically/article/details/52714389</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="PVOID和VOID* 无类型指针">
+							<h2 style="display:inline;color:#5BC648;">PVOID和VOID* 无类型指针</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-09-25&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	<a href="https://blog.csdn.net/u012370255/article/details/28257043">https://blog.csdn.net/u012370255/article/details/28257043</a>
+</p>
+<p>
+	P表示指针，那么PVOID表示:void *&nbsp; ---无类型指针<br />
+<br />
+<br />
+所有指针都是一个32位二进制数（32位系统下），这个意义上说所有指针都是一样的，它们的大小一样，用于指向内存中的某处地址，然而指针为什么要有类型之分呢？答案是指针偏移。例如p为一个指针，它指向内存某处地址，那么p+1（或者写p[1]）是什么意思呢？答案是p指向地址的后面那个地址，那么后面多少呢？这就看指针类型了，假如它是字符指针，那么就是后面一个字节，假如它是整型指针，那就是后面第四字节，假如它是一个结构体，那就是后面sizeof(结构体)个字节。可以说，指针有类型之分，完全就是为了计算地址偏移。这一区别到了汇编级就没有分别了，汇编级不存在指针类型，只有指针偏移数。<br />
+<br />
+<br />
+那么void 指针是啥呢？答案是无类型指针。干啥用呢？它只是一个地址指向，从不用计算偏移（void 了也没法确定如何偏移了…），它只能指向一整块内存，只能通过它来访问这块内存，不能用偏移访问（p 1，p[1]等，千万不要用在void指针上）。它的好处是什么呢？答案是不用强制转换，任何类型指针都可直接赋值给一个void 指针，而不用转换。<br />
+例如：void *p :<br />
+char a :<br />
+int b :<br />
+p =&amp;a :可以，不用转换<br />
+p =&amp;b :可以，不用转换<br />
+那么通过p 怎么输出a和b呢？可以，答案是强制转换。*((int *)p ).*((char *)p )得到了对应类型的内容。<br />
+指针，真灵活……<br />
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#PVOID和VOID* 无类型指针">PVOID和VOID* 无类型指针</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

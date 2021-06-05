@@ -1,0 +1,384 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Java中synchronized使用及实现方法_comonly.cn</title>
+<meta name="keywords" content="Java中synchronized使用及实现方法" />
+<meta name="description" content="[java] synchronized关键字用法及实现原理详解https://blog.csdn.net/topdeveloperr/article/details/80485900 
+
+
+	线程安全(中)--彻底搞懂synchronized(从偏向锁到重量级锁)https://www.cnblogs.com/kubidemanong/p/9520071.html 
+
+
+	
+
+
+	synchronized修饰方法
+
+
+	
+
+
+	更加准确的说法应该是修饰实例方法，而不包括静态方" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Java中synchronized使用及实现方法</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2020-07-02</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>[java] synchronized关键字用法及实现原理详解https://blog.csdn.net/topdeveloperr/article/details/80485900 
+
+
+	线程安全(中)--彻底搞懂synchronized(从偏向锁到重量级锁)https://www.cnblogs.com/kubidemanong/p/9520071.html 
+
+
+	
+
+
+	synchronized修饰方法
+
+
+	
+
+
+	更加准确的说法应该是修饰实例方法，而不包括静态方</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <div>
+	[java] synchronized关键字用法及实现原理详解<a href="https://blog.csdn.net/topdeveloperr/article/details/80485900">https://blog.csdn.net/topdeveloperr/article/details/80485900</a> 
+</div>
+<div>
+	线程安全(中)--彻底搞懂synchronized(从偏向锁到重量级锁)<a href="https://www.cnblogs.com/kubidemanong/p/9520071.html">https://www.cnblogs.com/kubidemanong/p/9520071.html</a> 
+</div>
+<div>
+	<br />
+</div>
+<div>
+	synchronized修饰方法
+</div>
+<div>
+	<br />
+</div>
+<div>
+	更加准确的说法应该是修饰实例方法，而不包括静态方法。关键字synchronized取得的锁都是对象锁，而不是把一段代码或方法当作锁。原因在于，要调用一个实例方法必须要new一个对应的实例对象，通过此实例对象才能访问实例方法。要实现同步，那么不同线程的锁必须是访问的同一个对象。这也是从设计角度来讲，为何notify， wait等和锁相关的方法定义在Object这个类中，而非Thread类中的原因之一。
+</div>
+<div>
+<pre class="prettyprint lang-java">public class MyObject {
+    private String name;
+    public void setName(String name){
+        this.name = name;
+    }
+    synchronized public void method() {
+    //如果不加synchronized则两个线程可同时进入methodA方法。
+    //若加入synchronized，则声明的方法一定是排队运行的
+    //public void method() {
+        try {
+            System.out.println(this.getName());
+            Thread.sleep(5000);
+            System.out.println("end");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}</pre>
+</div>
+<div>
+	<br />
+</div>
+<p>
+	<br />
+</p>
+<pre class="prettyprint lang-java">//证明synchronized锁定的是对象
+MyObject object = new MyObject();
+object.setName("A");
+Thread a = new Thread(object);
+object.setName("B");
+Thread b = new Thread(object);
+a.start();
+b.start();</pre>
+<p>
+	<br />
+</p>
+<div>
+	共享资源是MyObject的实例object, 而object中的方法method()是用synchronized修饰的，因此当一个线程执行这个方法时需要先取得对象锁，这里就是要取得object对象。
+</div>
+<div>
+	synchronized代码块
+</div>
+<div>
+<pre class="prettyprint lang-java">synchronized(this){
+}</pre>
+</div>
+<div>
+	当一个线程访问某个对象的一个synchronized同步代码块时，另一个线程仍然可以访问该对象中的非synchronized(this)代码块。一半是异步，一半是同步，不在synchronized块中就是异步执行，在synchronized块中就是同步执行。
+</div>
+<div>
+	<br />
+</div>
+<div>
+	但是，synchronized持有的锁仍然是调用它的对象。
+</div>
+<div>
+	<br />
+</div>
+<div>
+	synchronized(this)代码块锁定的是当前对象。在多个线程持有对象监视器为同一个对象的前提下，同一时间只有一个线程可以执行synchronized(非this对象x)同步代码块中的代码.
+</div>
+<div>
+	<br />
+</div>
+<div>
+	非静态类加锁
+</div>
+<div>
+	synchronized是对类的当前实例进行加锁，防止其他线程同时访问该类的该实例的所有synchronized块，注意这里是“类的当前实例”，类的两个不同实例就没有这种约束了。那么static synchronized恰好就是要控制类的所有实例的访问了，static synchronized是限制线程同时访问jvm中该类的所有实例同时访问对应的代码快。实际上，在类中某方法或某代码块中有 synchronized，那么在生成一个该类实例后，该类也就有一个监视快，放置线程并发访问该实例synchronized保护快，而static synchronized则是所有该类的实例公用一个监视快了，也就是两个的区别了,也就是synchronized相当于this.synchronized，而static synchronized相当于Something.synchronized.
+</div>
+<div>
+<pre class="prettyprint lang-java">pulbic class Something(){
+    public synchronized void isSyncA(){}
+    public synchronized void isSyncB(){}
+    public static synchronizedvoid cSyncA(){}
+    public static synchronizedvoid cSyncB(){}
+}</pre>
+</div>
+<div>
+	&nbsp;那么，假如有Something类的两个实例a与b，那么下列组方法何以被1个以上线程同时访问呢
+</div>
+<div>
+	&nbsp;&nbsp; a.&nbsp;&nbsp; x.isSyncA()与x.isSyncB()&nbsp;
+</div>
+<div>
+	&nbsp;&nbsp; b.&nbsp;&nbsp; x.isSyncA()与y.isSyncA()
+</div>
+<div>
+	&nbsp;&nbsp; c.&nbsp;&nbsp; x.cSyncA()与y.cSyncB()
+</div>
+<div>
+	&nbsp;&nbsp; d.&nbsp;&nbsp; x.isSyncA()与Something.cSyncA()
+</div>
+<div>
+	&nbsp;&nbsp;&nbsp; 这里，很清楚的可以判断：
+</div>
+<div>
+	&nbsp;&nbsp; a，都是对同一个实例的synchronized域访问，因此不能被同时访问
+</div>
+<div>
+	&nbsp;&nbsp; b，是针对不同实例的，因此可以同时被访问
+</div>
+<div>
+	&nbsp;&nbsp; c，因为是static synchronized，所以不同实例之间仍然会被限制,相当于Something.isSyncA()与&nbsp;&nbsp; Something.isSyncB()了，因此不能被同时访问。
+</div>
+<div>
+	<br />
+</div>
+<div>
+	&nbsp;&nbsp; &nbsp;&nbsp;那么，第d呢?，书上的 答案是可以被同时访问的，答案理由是synchronzied的是实例方法与synchronzied的类方法由于锁定（lock）不同的原因。
+</div>
+<div>
+	<br />
+</div>
+<div>
+	结论：
+</div>
+<div>
+	A: synchronized static是某个类的范围，synchronized static cSync{}防止多个线程同时访问这个类中的synchronized static 方法。它可以对类的所有对象实例起作用。
+</div>
+<div>
+	B: synchronized 是某实例的范围，synchronized isSync(){}防止多个线程同时访问这个实例中的synchronized 方法。
+</div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1714.html">【待处理】C++运行时数据的存储 存储堆栈</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1716.html">VMware 虚拟机安装ubuntu系统重启出现黑屏问题汇总</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

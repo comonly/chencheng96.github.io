@@ -1,0 +1,308 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>spring-mvc.xml对bean的初始化已经参数的填充--通过Properties的方法_comonly.cn</title>
+<meta name="keywords" content="spring-mvc.xml对bean的初始化已经参数的填充--通过Properties的方法" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">spring-mvc.xml对bean的初始化已经参数的填充--通过Properties的方法</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-02-22</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	java框架-spring等
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	Spring中property-placeholder的使用与解析：https://www.cnblogs.com/leftthen/p/5615066.html
+</p>
+<p>
+	<br />
+</p>
+<p>
+	在spring-mvc.xml文件中 扫描Java类所在的包（是不是必须？）
+</p>
+<p>
+	<span> </span>&lt; context:component-scan base-package="cn.com.taiji.sample.config.web" /&gt;
+</p>
+<p>
+	<br />
+&nbsp;&lt;context:property-placeholder location="classpath:redis.properties" /&gt;
+</p>
+<p>
+	加载配置文件redis.properties<br />
+&nbsp; &nbsp; &nbsp;&nbsp;
+</p>
+<p>
+	通过property配置Java类的参数<br />
+&nbsp; &nbsp; &lt;bean id="redisUtil" class="vip.chencheng.utils.RedisUtil"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;property name="addr"&gt;&lt;value&gt;${redis.addr}&lt;/value&gt;&lt;/property&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;property name="port"&gt;&lt;value&gt;${redis.port}&lt;/value&gt;&lt;/property&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;property name="auth"&gt;&lt;value&gt;${redis.auth}&lt;/value&gt;&lt;/property&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;property name="maxIdle"&gt;&lt;value&gt;${redis.maxIdle}&lt;/value&gt;&lt;/property&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;property name="maxActive"&gt;&lt;value&gt;${redis.maxActive}&lt;/value&gt;&lt;/property&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;property name="maxWait"&gt;&lt;value&gt;${redis.maxWait}&lt;/value&gt;&lt;/property&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;property name="timeOut"&gt;&lt;value&gt;${redis.timeOut}&lt;/value&gt;&lt;/property&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;property name="testOnBorrow"&gt;&lt;value&gt;${redis.testOnBorrow}&lt;/value&gt;&lt;/property&gt;<br />
+&nbsp; &nbsp; &lt;/bean&gt;<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	properties配置文件内容时是键值：
+</p>
+<p>
+	# Redis Setting<br />
+redis.addr = 127.0.0.1<br />
+redis.port = 6379<br />
+redis.auth = master<br />
+<br />
+redis.maxIdle = 200<br />
+redis.maxActive = 1024<br />
+redis.maxWait = 10000<br />
+redis.timeOut = 10000<br />
+redis.testOnBorrow = true<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	java类中定义数据及方法以适应xml文件初始化的配置
+</p>
+<p>
+	类变量：<br />
+&nbsp; //Redis服务器IP<br />
+&nbsp; &nbsp; private static String addr;<br />
+&nbsp; &nbsp; //Redis的端口号<br />
+&nbsp; &nbsp; private static int port;<br />
+&nbsp; &nbsp; //访问密码<br />
+&nbsp; &nbsp; private static String auth;<br />
+&nbsp; &nbsp;&nbsp;
+</p>
+<p>
+	方法：
+</p>
+<p>
+	<br />
+&nbsp; &nbsp; public String getAddr() {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; return addr;<br />
+&nbsp; &nbsp; }<br />
+<br />
+&nbsp; &nbsp; public void setAddr(String addr) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; this.addr = addr;<br />
+&nbsp; &nbsp; }<br />
+<br />
+&nbsp; &nbsp; public int getPort() {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; return port;<br />
+&nbsp; &nbsp; }<br />
+<br />
+&nbsp; &nbsp; public void setPort(int port) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; this.port = port;<br />
+&nbsp; &nbsp; }<br />
+<br />
+&nbsp; &nbsp; public String getAuth() {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; return auth;<br />
+&nbsp; &nbsp; }<br />
+<br />
+&nbsp; &nbsp; public void setAuth(String auth) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; this.auth = auth;<br />
+&nbsp; &nbsp; }<br />
+</p>
+<p>
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1055.html">Spring中Bean及@Bean的理解   注解的使用</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1057.html">构建spring-mvc项目需要引入包的相关说明</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

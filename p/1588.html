@@ -1,0 +1,330 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>CreateSemaphore  window下线程同步之（Semaphores（信号量）)_comonly.cn</title>
+<meta name="keywords" content="CreateSemaphore  window下线程同步之（Semaphores（信号量）)" />
+<meta name="description" content="HANDLE hsem;
+&nbsp;
+{
+hsem = CreateSemaphore(NULL, Thr_MAX, Thr_MAX, NULL);//psa,当前可用资源,最大可用资源,name
+for(;;){
+wait hsem//等待, 当前资源&gt;0才能调度,同时计数器减1 &lt;- 原子操作方式
+start Y}
+}
+&nbsp;
+Y()
+{
+//...
+ReleaseSemaphore(hsem,1,NULL);//递增当前资源数量
+
+	}
+
+
+	
+" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">CreateSemaphore  window下线程同步之（Semaphores（信号量）)</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">执迷不悟~</li>
+          <li class="lmname"><a href="https://www.cnblogs.com/staring-hxs/p/3665936.html" target="_blank">https://www.cnblogs.com/staring-hxs/p/3665936.html</a></li>
+          <li class="timer">2019-12-03</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>HANDLE hsem;
+&nbsp;
+{
+hsem = CreateSemaphore(NULL, Thr_MAX, Thr_MAX, NULL);//psa,当前可用资源,最大可用资源,name
+for(;;){
+wait hsem//等待, 当前资源&gt;0才能调度,同时计数器减1 &lt;- 原子操作方式
+start Y}
+}
+&nbsp;
+Y()
+{
+//...
+ReleaseSemaphore(hsem,1,NULL);//递增当前资源数量
+
+	}
+
+
+	
+</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> HANDLE hsem;<br />
+&nbsp;<br />
+{<br />
+hsem = CreateSemaphore(NULL, Thr_MAX, Thr_MAX, NULL);//psa,当前可用资源,最大可用资源,name<br />
+for(;;){<br />
+wait hsem//等待, 当前资源&gt;0才能调度,同时计数器减1 &lt;- 原子操作方式<br />
+start Y}<br />
+}<br />
+&nbsp;<br />
+Y()<br />
+{<br />
+//...<br />
+ReleaseSemaphore(hsem,1,NULL);//递增当前资源数量<br />
+<p>
+	}
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	HANDLE WINAPI CreateSemaphore(&nbsp;<br />
+&nbsp; _In_opt_&nbsp; LPSECURITY_ATTRIBUTES lpSemaphoreAttributes&nbsp;<br />
+&nbsp; _In_&nbsp; &nbsp; &nbsp; LONG lInitialCount,&nbsp;<br />
+&nbsp; _In_&nbsp; &nbsp; &nbsp; LONG lMaximumCount,&nbsp;<br />
+&nbsp; _In_opt_&nbsp; LPCTSTR lpName&nbsp;<br />
+);<br />
+第一个参数：安全属性，如果为NULL则是默认安全属性<br />
+第二个参数：信号量的初始值，要&gt;=0且&lt;=第三个参数<br />
+第三个参数：信号量的最大值<br />
+第四个参数：信号量的名称<br />
+返回值：指向信号量的句柄，如果创建的信号量和已有的信号量重名，那么返回已经存在的信号量句柄<br />
+<br />
+使用方法：<br />
+1、创建一个信号量：CreateSemaphore；<br />
+2、打开一个已经存在的信号量：OpenSemaphore；<br />
+3、获得信号量的一个占有权：WaitForSingleObject、WaitForMultipleObjects 等一类等待的函数……（可能造成阻塞）；<br />
+4、释放信号量的占有权：ReleaseSemaphore；<br />
+5、关闭信号量：CloseHandle；<br />
+<br />
+※ 命名标准：Semaphores 可以跨进程使用，所以其名称对整个系统而言是全局的，所以命名不要过于普通，类似：Semaphore、Object 等。<br />
+最好想一些独一无二的名字等！<br />
+<br />
+固有特点(优点+缺点)：<br />
+1、是一个系统核心对象，所以有安全描述指针，用完了要 CloseHandle 关闭句柄，这些是内核对象的共同特征；<br />
+2、因为是核心对象，所以执行速度稍慢（当然只是相比较而言）；<br />
+3、因为是核心对象，而且可以命名，所以可以跨进程使用；<br />
+4、Semaphore 使用正确的情况下不会发生死锁；<br />
+5、在“等待”一个 信号量 的时候，可以指定“结束等待”的时间长度；<br />
+6、非排他性的占有，跟 Critical Sections 和 Mutex 不同，这两种而言是排他性占有，<br />
+即：同一时间内只能有单一线程获得目标并拥有操作的权利，而 Semaphores 则不是这样，<br />
+同一时间内可以有多个线程获得目标并操作！<br />
+<br />
+信号量没有线程所有权属性，即一个线程获得某个信号量后，在他释放该信号量之前，他不能再次进入信号量保护的区域<br />
+<br />
+信号量的使用规则：<br />
+<br />
+1. 如果当前资源计数大于0，那么信号量处于触发状态；<br />
+<br />
+2. 如果当前资源计数等于0，那么信号量处于未触发状态；那么系统会让调用线程进入等待状态。<br />
+<br />
+CreateSemaphore(NULL,0,1,NULL); 当第二个参数为0时，调用线程就会进入等待状态<br />
+3. 系统绝对不会让当前资源计数变为负数；<br />
+<br />
+4. 当前资源计数绝对不会大于最大资源计数。<br />
+</p>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1587.html">EnterCriticalSection 和 LeaveCriticalSection   CRITICAL_SECTION</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1589.html">ffmpeg介绍【--】</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.cnblogs.com/staring-hxs/p/3665936.html" target="_blank">https://www.cnblogs.com/staring-hxs/p/3665936.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

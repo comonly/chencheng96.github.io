@@ -1,0 +1,238 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Linux的账号与与权限管理_comonly.cn</title>
+<meta name="keywords" content="Linux的账号与与权限管理" />
+<meta name="description" content="一、管理用户账号1、用户账号概述与Windows系统相比，Linux系统中的用户账号和组账号的作用在本质上是一样的，同样都是基于用户的身份来控制对资源的访问，只不过在表现形式及个别细节方面存在些许差异。1）、用户账号在Linux系统中，根据系统管理的需求将用户账号分为不同的类型，其拥有的权限、担任的角色也各不相同，主要包括超级用户、普通用户、和程序用户。超级用户：root用户是Linux系统中默认" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Linux的账号与与权限管理</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">wx5d2c2cbaaf223</li>
+          <li class="lmname"><a href="https://blog.51cto.com/14449528/2430862" target="_blank">https://blog.51cto.com/14449528/2430862</a></li>
+          <li class="timer">2019-08-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>一、管理用户账号1、用户账号概述与Windows系统相比，Linux系统中的用户账号和组账号的作用在本质上是一样的，同样都是基于用户的身份来控制对资源的访问，只不过在表现形式及个别细节方面存在些许差异。1）、用户账号在Linux系统中，根据系统管理的需求将用户账号分为不同的类型，其拥有的权限、担任的角色也各不相同，主要包括超级用户、普通用户、和程序用户。超级用户：root用户是Linux系统中默认</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <div class="con artical-content editor-preview-side"><p><strong>一、管理用户账号</strong><br>1、用户账号概述<br>与Windows系统相比，Linux系统中的用户账号和组账号的作用在本质上是一样的，同样都是基于用户的身份来控制对资源的访问，只不过在表现形式及个别细节方面存在些许差异。<br>1）、用户账号<br>在Linux系统中，根据系统管理的需求将用户账号分为不同的类型，其拥有的权限、担任的角色也各不相同，主要包括超级用户、普通用户、和程序用户。<br>超级用户：root用户是Linux系统中默认的超级用户账号，对本机拥有最高的权限，类似于Windows系统中的Administrator用户。只有进行系统管理、维护任务时，才建议使用root用户登录系统，日常事务处理建议只使用普通用户账号。<br>普通用户：普通用户账号需要由root用户或其他管理员创建，拥有的权限受到一定的限制，一般只用在用户自己的宿主目录拥有完整的权限。<br>程序用户：在安装Linux系统及部分应用时，或添加一些特定的低权限用户账号，这些用户一般不允许登陆到系统，而仅用于维持系统或某个程序的正常运行。</p>
+<p>2）、UID号<br>Linux系统中的每一个用户账号都有一个数字形式的身份标记，称为UID，对于核心系统来说，UID作为作为区分用户的基本依据，原则上每个用户的UID号应该是唯一的。root用户账号的UID号为固定值0，而程序用户账号的UID号默认为1~999,1000~60000的UID号是默认分配给普通用户的。</p>
+<p>3）、用户账号文件<br>Linux系统中的用户账号、密码等信息均保存在相应的配置文件中，直接修改这些文件或者使用用户管理命令都可以对用户账号进行管理。与用户相关的配置文件主要有两个，分别是/etc/passwd、/etc/shadow。前者用于保存用户账号、宿主目录、登录SHELL等基本信息，后者用于保存用户的密码、账号有效期等信息。</p>
+<p>passwd文件中的配置行格式</p>
+<p><img src="https://s1.51cto.com/images/blog/201908/19/6296a91a0487d92d561a3e50487f9029.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="Linux的账号与与权限管理" style="cursor: pointer;"><br>passwd文件的每一行内容中，包含了用七个用冒号“：”分隔的配置字段，从左到右各配置字段含义如下所述。<br>第一个字段：用户账号的名称，也是登录系统时使用的识别名称。<br>第二个字段：经加密的用户密码字串，或者密码占位符“x”。<br>第三个字段：用户账号的UID号。<br>第四个字段：所属基本组账号的GID号。<br>第五个字段：用户全名，可填写与用户相关的说明信息。<br>第六个字段：宿主目录，即该用户登陆后所在的默认工作目录。<br>第七个字段：登录shell等信息，用户完成登陆后使用的Shell。</p>
+<p>shadow文件中的配置行格式</p>
+<p><img src="https://s1.51cto.com/images/blog/201908/19/2d06491f6359c857b448c6073c927331.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="Linux的账号与与权限管理" style="cursor: pointer;"><br>shadow文件中的每一行内容中，包含了九个用冒号“：”分隔的配置字段，从左至右各配置字段的含义如下所示。<br>第一个字段：用户账号名称。<br>第二个字段：使用MD5加密的密码字串信息，当为“*”或“！”时表示此用户不能登录到系统，若该字段内容为空，则该用户无需密码即可登录系统。<br>第三个字段：上次修改密码的时间，表示从1970年0101日算起到最近一次修改密码时间隔的天数。<br>第四个字段：密码的最短有效天数。<br>第五个字段：密码的最长有效天数。<br>第六个字段：提前多少天警告用户口令即将过期，默认值为7。<br>第七个字段：在密码过期多少天后多少天内禁用此用户。<br>第八个字段：账号失效期间，此字段指定了用户作废的天数。<br>第九个字段：保留字段，目前没有特定用途。</p>
+<p>2、用户账号管理<br>1）useradd命令<br>useradd命令可以用于添加用户账号，其基本命令格式为：useradd 【选项】 用户名<br>例如创建一个名为lisi的用户<br><img src="https://s1.51cto.com/images/blog/201908/19/2a62a42e0c6c05c64cb87625f725a4ef.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="Linux的账号与与权限管理" style="cursor: pointer;"></p>
+<p>useradd常用的选项<br>-u：指定用户的UID号，前提是该UID号未被使用。<br>-d：指定用户的宿主目录位置。<br>-e：指定用户的账号失效时间。<br>-M：不建立宿主目录。<br>-s：指定用户的登录Shell。</p>
+<p>passwd命令<br>使用passwd命令可以设置或修改密码，root有权管理其他账号的密码。例如这里我们对用户“wangwu”的密码进行设置。<br><img src="https://s1.51cto.com/images/blog/201908/19/9624fd8e493a9f9cbccc7e4aed638f93.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="Linux的账号与与权限管理" style="cursor: pointer;"></p>
+<p>使用passwd命令除了可以修改账号密码外，还能够对用户账号进行锁定、解锁，也可以将用户的密码设置为空。相关几个选项如下。<br>-d：清空指定用户的密码，无需密码即可登录。<br>-l：锁定用户账号。<br>-S：查看用户账号的状态。<br>-u：解锁用户账号。<br>下面我们以用户“lisi”为例进行账号的锁定与解锁。<br><img src="https://s1.51cto.com/images/blog/201908/19/f2fcc1bec5101af9edb5124f74a8c986.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="Linux的账号与与权限管理" style="cursor: pointer;"></p>
+<p>usermod命令<br>对于系统中已经存在的的用户账号，可以使用usermod命令进行重新设置各种属性。usermod命令同样需要指定账号名称作为参数。以下是比较常见的几个选项。<br>-u：修改用户的UID号。<br>-d：修改用户的宿主目录位置。<br>-e：修改用户的账号失效时间。<br>-s：指定用户的登录Shell。<br>-L：锁定用户账号。<br>-l：更改用户账号的登录名称。<br>-U：解锁用户账号。<br>例如我们对用户的登录Shell进行修改。<br><img src="https://s1.51cto.com/images/blog/201908/19/4eba5760debbd79fccef3bf24def4056.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="Linux的账号与与权限管理" style="cursor: pointer;"></p>
+<p>userdel命令<br>当系统中的某个用户账号不再需要使用时，我们就可以使用userdel命令对其进行删除，该命令也需要指定用户名作为参数，结合选项“r”可连同宿主目录一起删除。<br>此时我们以删除用户wangwu为例进行操作。<img src="https://s1.51cto.com/images/blog/201908/19/b9fcc6bb2dedde1369c93d49108f9663.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="Linux的账号与与权限管理" style="cursor: pointer;"></p>
+<p><strong>二、管理组账号</strong><br>对于用户账号来说，对应的组账号可分为基本组和附加组两种类型。每一个用户账号可以是多个组账号的成员，但是其基本组账号只有一个。</p>
+<p>1、组账号文件<br>与组账号相关的配置文件也有两个，分别是、etc/group、etc/gshadow。前者用于保存组账号名称、GID、组成员等基本信息，后者用于保存组账号的加密密码字串等信息。</p>
+<p>2、添加、删除、修改组账号<br>1）、groupadd命令可以添加一个组账号，需要指定GID号时，可以使用“-g”选项。例如我们创建一个名为“yun”的组账号。<br><img src="https://s1.51cto.com/images/blog/201908/19/025a06620830ad2da4b544a9cebb4942.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="Linux的账号与与权限管理" style="cursor: pointer;"></p>
+<p>2）、gpasswd命令本来是用于设置组账号的密码，但该功能极少使用，实际上该命令更多的用来管理组账号的用户成员。需要添加、删除成员用户时，可分别使用“-a”“-d”选项。<br>例如我们向yun组中添加用户成员stu01，删除成员用户stu02。<br><img src="https://s1.51cto.com/images/blog/201908/19/db56871e8b6272810a1494e6fc08f0ec.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="Linux的账号与与权限管理" style="cursor: pointer;"></p>
+<p>3）、当系统中的某个组账号不再使用时，可以使用groupdel命令进行删除。<br>这里我们以删除yun账号组为例进行操作。<br><img src="https://s1.51cto.com/images/blog/201908/19/99e6ce1bbcd027fe1eda90c8c0a0d66f.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="Linux的账号与与权限管理" style="cursor: pointer;"></p>
+<p>3、查询账号信息<br>1）、使用id命令可以快速查看指定用户账号的UID、GID等标识信息。<br><img src="https://s1.51cto.com/images/blog/201908/19/cb1c988d97d83efc40b874b6c85eb659.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="Linux的账号与与权限管理" style="cursor: pointer;"></p>
+<p>2）、使用groups命令可以查看指定的用户账号属于那些组。<br><img src="https://s1.51cto.com/images/blog/201908/19/b0ff5199f86a6357f9afb999a34738ea.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="Linux的账号与与权限管理" style="cursor: pointer;"></p>
+<p>3）、使用finger命令可以查询指定的用户账号的登录属性等详细信息。<br><img src="https://s1.51cto.com/images/blog/201908/19/1e31130c9fa64a6aca802b17e4e33437.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="Linux的账号与与权限管理" style="cursor: pointer;"></p>
+<p>使用w命令可以查询当前主机中的用户登录情况，列出登录账号名称、所在终端、登陆、、登录时间、来源地点等信息。<br><img src="https://s1.51cto.com/images/blog/201908/19/7a4d618ba4e5992f1031ea202f23df6f.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="Linux的账号与与权限管理" style="cursor: pointer;"></p>
+<p>三、文件的权限及归属<br>1）、设置文件权限<br>在设置文件权限时，主要通过chomd命令进行。<br><img src="https://s1.51cto.com/images/blog/201908/19/3640fda3628ca319f1abfa97947030b8.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="Linux的账号与与权限管理" style="cursor: pointer;"></p>
+<p>2）、设置文件的归属<br>需要设置文件的归属时，主要通过chomn命令进行。可以只设置属主或属组，也可以同时设置属主、属组。<br>对/bdqn/kgc.txt的属主、属组同时进行修改。<br><img src="https://s1.51cto.com/images/blog/201908/19/8f7cd29e6f697179d7be6cbc553c94b9.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="Linux的账号与与权限管理" style="cursor: pointer;"></p></div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1988.html">Docker环境下的前后端分离部署与运维</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1990.html">low code - 潮流还是闹剧？</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.51cto.com/14449528/2430862" target="_blank">https://blog.51cto.com/14449528/2430862</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

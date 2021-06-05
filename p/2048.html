@@ -1,0 +1,320 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>运动目标检测_comonly.cn</title>
+<meta name="keywords" content="运动目标检测" />
+<meta name="description" content="基于灰度与关键帧光流检测的视频异常判断https://kns.cnki.net/KCMS/detail/detail.aspx?dbcode=CJFQ&amp;dbname=CJFDLAST2019&amp;filename=DZQJ201903035&amp;v=MDA3MTlKSVRmYVpMRzRIOWpNckk5R1lZUjhlWDFMdXhZUzdEaDFUM3FUcldNMUZyQ1VSN3FmWWVkdUZ5L25Vcjc= 
+
+
+	背景差分结合光流算法
+
+
+	
+
+
+	帧间" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">运动目标检测</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2021-05-21</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	机器学习算法分析
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>基于灰度与关键帧光流检测的视频异常判断https://kns.cnki.net/KCMS/detail/detail.aspx?dbcode=CJFQ&amp;dbname=CJFDLAST2019&amp;filename=DZQJ201903035&amp;v=MDA3MTlKSVRmYVpMRzRIOWpNckk5R1lZUjhlWDFMdXhZUzdEaDFUM3FUcldNMUZyQ1VSN3FmWWVkdUZ5L25Vcjc= 
+
+
+	背景差分结合光流算法
+
+
+	
+
+
+	帧间</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	基于灰度与关键帧光流检测的视频异常判断<a href="https://kns.cnki.net/KCMS/detail/detail.aspx?dbcode=CJFQ&dbname=CJFDLAST2019&filename=DZQJ201903035&v=MDA3MTlKSVRmYVpMRzRIOWpNckk5R1lZUjhlWDFMdXhZUzdEaDFUM3FUcldNMUZyQ1VSN3FmWWVkdUZ5L25Vcjc=">https://kns.cnki.net/KCMS/detail/detail.aspx?dbcode=CJFQ&amp;dbname=CJFDLAST2019&amp;filename=DZQJ201903035&amp;v=MDA3MTlKSVRmYVpMRzRIOWpNckk5R1lZUjhlWDFMdXhZUzdEaDFUM3FUcldNMUZyQ1VSN3FmWWVkdUZ5L25Vcjc=</a> 
+</p>
+<p>
+	背景差分结合光流算法
+</p>
+<p>
+	<br />
+</p>
+<p>
+	帧间差分法、背景减法、光流场法简介 https://blog.csdn.net/zhang1308299607/article/details/80081553
+</p>
+<br />
+<p>
+	运动目标检测--帧间差分法 https://blog.csdn.net/tiemaxiaosu/article/details/51558830
+</p>
+<p>
+	<br />
+</p>
+<p>
+	四帧间差分与光流法结合的目标检测及追踪<a href="http://www.oejournal.org/mv_html/j00001/2018-08/A180727000006_WEB.htm">http://www.oejournal.org/mv_html/j00001/2018-08/A180727000006_WEB.htm</a> 
+</p>
+<p>
+	为了能在复杂环境下快速、准确地对多个目标进行检测及追踪，本文结合四帧间差分算法与光流算法，提出了一种更高效的运动目标检测算法。本算法为了提升光流法的处理速度并降低光照等环境所带来的影响，首先对视频序列进行四帧间差分处理，然后将得到的差分视频序列进行光流处理，以实现对视频中目标的准确检测。最后将该算法与粒子滤波、ViBe等算法进行比较，并在不同场景下对不同运动目标、不同个数目标进行捕获处理，结果表明，本方法不仅具有较好的鲁棒性，而且能够更快速、准确的对目标进行检测与追踪。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	目标检测（Object Detection）和目标跟踪（Object Tracking）的区别 https://zhuanlan.zhihu.com/p/32826719
+</p>
+<br />
+概述<br />
+<br />
+运动目标检测是指当监控场景中有活动目标时，采用图像分割的方法从背景图像中提取出目标的运动区域。运动目标检测技术是智能视频分析的基础，因为目标跟踪、行为理解等视频分析算法都是针对目标区域的像素点进行的，目标检测的结果直接决定着智能视觉监控系统的整体性能。<br />
+<br />
+运动目标检测的方法有很多种。根据背景是否复杂、摄像机是否运动等环境的不同，算法之间也有很大的差别。其中最常用的三类方法是：帧间差分法、背景减法、光流场法。下面对这三类方法进行介绍，通过实验结果，对它们各自的算法性能进行分析，为进一步的目标检测算法研究建立良好的基础。<br />
+<br />
+<br />
+一、帧间差分法原理<br />
+<br />
+摄像机采集的视频序列具有连续性的特点。如果场景内没有运动目标，则连续帧的变化很微弱，如果存在运动目标，则连续的帧和帧之间会有明显地变化。<br />
+<br />
+帧间差分法(Temporal Difference)就是借鉴了上述思想。由于场景中的目标在运动，目标的影像在不同图像帧中的位置不同。该类算法对时间上连续的两帧或三帧图像进行差分运算，不同帧对应的像素点相减，判断灰度差的绝对值，当绝对值超过一定阈值时，即可判断为运动目标，从而实现目标的检测功能。 <br />
+<br />
+二、三帧差分法<br />
+<br />
+两帧差分法适用于目标运动较为缓慢的场景，当运动较快时，由于目标在相邻帧图像上的位置相差较大，两帧图像相减后并不能得到完整的运动目标，因此，人们在两帧差分法的基础上提出了三帧差分法。<br />
+<br />
+三、两帧差分和三帧差分的比较<br />
+<br />
+图 2-5 是采用帧间差分法对自拍序列 lab 序列进行运动目标检测的实验结果，(b)图是采用两帧差分法的检测结果，(c)图是采用三帧差分法的检测结果。lab序列中的目标运动较快，在这种情况下，运动目标在不同图像帧内的位置明显不同，采用两帧差分法检测出的目标会出现“重影”的现象，采用三帧差分法，可以检测出较为完整的运动目标。<br />
+<br />
+<br />
+综上所述，帧间差分法的原理简单，计算量小，能够快速检测出场景中的运动目标。但由实验结果可以看出，帧间差分法检测的目标不完整，内部含有“空洞”，这是因为运动目标在相邻帧之间的位置变化缓慢，目标内部在不同帧图像中相重叠的部分很难检测出来。帧间差分法通常不单独用在目标检测中，往往与其它的检测算法结合使用。<br />
+<br />
+<br />
+二、背景减弱法原理<br />
+<br />
+对于一个稳定的监控场景而言，在没有运动目标，光照没有变化的情况下，视频图像中各个像素点的灰度值是符合随机概率分布的。由于摄像机在采集图像的过程中，会不可避免地引入噪声，这些灰度值以某一个均值为基准线，在附近做一定范围内的随机振荡，这种场景就是所谓的“背景”。<br />
+<br />
+背景减法(Background subtraction)是当前运动目标检测技术中应用较为广泛的一类方法，它的基本思想和帧间差分法相类似，都是利用不同图像的差分运算提取目标区域。不过与帧间差分法不同的是，背景减法不是将当前帧图像与相邻帧图像相减，而是将当前帧图像与一个不断更新的背景模型相减，在差分图像中提取运动目标。<br />
+<br />
+<br />
+<br />
+背景减法的运算过程如图2-6所示。首先利用数学建模的方法建立一幅背景图像帧B，记当前图像帧为fn，背景帧和当前帧对应像素点的灰度值分别记为B(x,y )和fn(x , y ) ，按照式2.17将两帧图像对应像素点的灰度值进行相减，并取其绝对值，得到差分图像D n：<br />
+<br />
+<br />
+<br />
+设定阈值 T ，按照式2.18逐个对像素点进行二值化处理，得到二值化图像 Rn' 。其中，灰度值为255的点即为前景(运动目标)点，灰度值为0的点即为背景点；对图像 Rn'进行连通性分析，最终可得到含有完整运动目标的图像Rn 。<br />
+<br />
+<br />
+<br />
+背景减法计算较为简单，由于背景图像中没有运动目标，当前图像中有运动目标，将两幅图像相减，显然可以提取出完整的运动目标，解决了帧间差分法提取的目标内部含有“空洞”的问题。<br />
+<br />
+利用背景减法实现目标检测主要包括四个环节：背景建模，背景更新，目标检测，后期处理。其中，背景建模和背景更新是背景减法中的核心问题。背景模型建立的好坏直接影响到目标检测的效果。所谓背景建模，就是通过数学方法，构建出一种可以表征“背景”的模型。获取背景的最理想方法是在没有运动目标的情况下获取一帧“纯净”的图像作为背景，但是，在实际情况中，由于光照变化、雨雪天气、目标运动等诸多因素的影响，这种情况是很难实现。<br />
+<br />
+<br />
+<br />
+三、光流场法原理<br />
+<br />
+光流场(Optical Flow)是用来表征图像中像素点的灰度值发生变化趋势的瞬时速度场。在现实世界中，目标的运动通常是通过视频流中各个像素点灰度分布的变化表征的。图2-1表现了昆虫在飞行过程中所处的三维光流场。C图中箭头的长度和指向表征了各点光流的大小和方向。美国学者Horn和Schunck在1981年提出了光流场的计算方法，他们在两帧图像的灰度变化和时间间隔都很小的前提下，推导出了光流的基本约束方程，从而奠定了光流场计算的理论知识。<br />
+<br />
+<br />
+<br />
+实现思想：<br />
+<br />
+利用光流场法实现目标检测的基本思想是：首先计算图像中每一个像素点的运动向量，即建立整幅图像的光流场。如果场景中没有运动目标，则图像中所有像素点的运动向量应该是连续变化的；如果有运动目标，由于目标和背景之间存在相对运动，目标所在位置处的运动向量必然和邻域(背景)的运动向量不同，从而检测出运动目标。<br />
+<br />
+通过计算光流场得到的像素运动向量是由目标和摄像机之间的相对运动产生的。因此该类检测方法可以适用于摄像机静止和运动两种场合。但是光流场的计算过于复杂，而且在实际情况中， 由于光线等因素的影响，目标在运动时，其表面的亮度并不是保持不变的，这就不满足光流基本约束方程的假设前提，导致计算会出现很大的误差。光流场法很少应用于实际的<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/2047.html">指数基金   etf基金 </a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/2049.html">背景提取</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

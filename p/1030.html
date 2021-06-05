@@ -1,0 +1,301 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>利用vue-cli来搭建vue项目——通过npm创建一个vue项目_comonly.cn</title>
+<meta name="keywords" content="利用vue-cli来搭建vue项目——通过npm创建一个vue项目" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">利用vue-cli来搭建vue项目——通过npm创建一个vue项目</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">liaoanran-手把手教你用vue-cli搭建vue项目</li>
+          <li class="lmname"><a href="https://www.cnblogs.com/liaoanran/p/8042893.html" target="_blank">https://www.cnblogs.com/liaoanran/p/8042893.html</a></li>
+          <li class="timer">2018-10-14</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	主要是利用vue-cli来搭建vue项目，其中前提是node和npm已经安装好，<span style="font-family:Verdana, Arial, Helvetica, sans-serif;background-color:#FFFFFF;">使用vue-cli来搭建整个项目，vue-cli就是一个脚手架，步骤很简单，输入几个命令之后就会生成整个项目，里面包括了webpack、ESLint、babel很多配置等等。</span>
+</p>
+<h2 id='安装vue-cli'>
+	安装vue-cli
+</h2>
+<pre class="prettyprint lang-bsh"># 全局安装 vue-cli
+$ cnpm install --global vue-cli</pre>
+<h2 id='创建项目'>
+	创建项目
+</h2>
+<pre class="prettyprint lang-bsh"># 创建一个基于 webpack 模板的新项目
+$ vue init webpack my-project
+# 这里需要进行一些配置，默认回车或者自己输入相关配置</pre>
+<p>
+	这里有几个需要说明一下，没说明的直接回车选择默认就好，对项目没多大影响，很傻瓜式：
+</p>
+<ul>
+	<li>
+		“Project name”：这个是项目名称，默认是输入时的那个名称，想改的话直接输入修改，也可以直接回车
+	</li>
+	<li>
+		“Install vue-router”:是否需要vue-router，这里默认选择使用，这样生成好的项目就会有相关的路由配置文件
+	</li>
+	<li>
+		“Use ESLint to lint your code”:是否使用ESLint，刚才说了我们这个项目需要使用所以也是直接回车，默认使用，这样会生成相关的ESLint配置
+	</li>
+	<li>
+		“Setup unit tests with Karma + Moch?”: 是否安装单元测试。由于我们现在还没有单元测试，所以这里选择的是”N”，而不是直接回车哦
+	</li>
+	<li>
+		“Setup e2e tests with Nightwatch”：是否安装e2e测试，这里我也同样选择的是“N”
+	</li>
+</ul>
+这几个配置选择yes 或者 no 对于我们项目最大的影响就是，如果选择了yes 则生成的项目会自动有相关的配置，有一些loader我们就要配套下载。所以如果我们确定不用的话最好不要yes，要么下一步要下很多没有用的loader。
+<h2 id='目录结构说明'>
+	目录结构说明
+</h2>
+<p>
+	<span>进入项目，安装并运行：</span>
+</p>
+<pre class="prettyprint lang-bsh">$ cd my-project
+$ cnpm install</pre>
+<img src="/File/ForKindEditor/image/20181014214623_612.jpg" alt="" />
+<p>
+	1. build 文件夹：<br />
+如上图，这个文件夹主要是进行webpack的一些配置，就我个人觉得啊~对我们最有用并且可能会使用的就是webpack.base.config.js、webpack.dev.config.js、webpack.prod.config.js三个webpack的配置文件，分别是基本webpack配置、开发环境配置、生产环境配置。实际上这些文件里面的内容，一些简单的配置都已经有了，包括入口文件、插件、loader、热更新等都已经配置好了。我们要做的只是根据自己的项目有什么loader需要增加的，比如生成环境需要加上UglifyJsPlugin插件等可以自行配置，或者一些插件增加或者不需要的删除，其实都是和业务相关了，其他的都可以不需要动。<br />
+2. config 文件夹：<br />
+如上图，这几个配置文件我觉得最主要的就是index.js 这个文件进行配置代理服务器，这个地方和我们息息相关，和后台联调就是在这里设置一个地址就可以了。<br />
+3. src文件夹：<br />
+这个文件夹是整个项目最主要以及使用频率最高的文件夹。
+</p>
+<ul>
+	<li>
+		“assets”: 共用的样式、图片
+	</li>
+	<li>
+		“components”: 业务代码存放的地方，里面分成一个个组件存放，一个页面是一个组件，一个页面里面还会包着很多组件
+	</li>
+	<li>
+		“router”: 设置路由
+	</li>
+	<li>
+		“App.vue”: vue文件入口界面
+	</li>
+	<li>
+		“main.js：对应App.vue 创建vue实例，也是入口文件，对应webpack.base.config.js里的入口配置
+	</li>
+</ul>
+4.static 文件夹：<br />
+存放的文件不会经过webpack处理，可以直接引用，例如swf文件如果要引用可以在webpack配置对swf后缀名的文件处理的loader，也可以直接将swf文件放在这个文件夹引用<br />
+5.package.json:<br />
+这个文件有两部分是有用的：scripts 里面设置命令，例如设置了dev用于调试则我们开发时输入的是<br />
+npm run dev ；例如设置了build 则是输入 npm run build 用于打包;另一部分是这里可以看到我们需要的依赖包,在dependencies和devDependencies中，分别对应全局下载和局部下载的依赖包
+<h2 id='下载依赖包'>
+	下载依赖包
+</h2>
+<p>
+	上一步我们已经生成好项目，现在打开之前说过的package.json 文件，找到devDependencies 和 dependencies ，在这里面可以删掉我们不需要的，其他就则都需要使用 npm install 下载安装，例如vue： npm install vue –save-dev<br />
+这个过程会生成一个node_modules 文件夹，这一个过程可能会有一点耗时间，但是也是傻瓜式，一个个下载，下载好之后输入npm run dev 。如果有哪些缺漏的都会提示再补下载就好了（新版本在创建项目时会提示是否在创建项目后自动安装依赖）。
+</p>
+<h2 id='运行'>
+	运行
+</h2>
+<pre class="prettyprint lang-bsh">$ cnpm run dev
+ DONE  Compiled successfully in 4388ms</pre>
+<p>
+	成功执行以上命令后访问 http://localhost:8080/，若8080端口被占用可以会自动换到其他端口。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1029.html">将electron打包成exe文件并生成安装版本exe</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1031.html">vue的使用小问题汇总</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.cnblogs.com/liaoanran/p/8042893.html" target="_blank">https://www.cnblogs.com/liaoanran/p/8042893.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#安装vue-cli">安装vue-cli</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#创建项目">创建项目</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#目录结构说明">目录结构说明</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#下载依赖包">下载依赖包</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#运行">运行</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

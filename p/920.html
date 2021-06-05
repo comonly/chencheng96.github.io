@@ -1,0 +1,1413 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Jsoup是一款比较好的Java版HTML解析器_comonly.cn</title>
+<meta name="keywords" content="Jsoup是一款比较好的Java版HTML解析器" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Jsoup是一款比较好的Java版HTML解析器</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-04-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	java-含工具类
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	Jsoup是一款比较好的Java版HTML解析器。可直接解析某个URL地址、HTML文本内容。它提供了一套非常省力的API，可通过DOM，CSS以及类似于jQuery的操作方法来取出和操作数据。
+</p>
+<h2 id='jSOUP主要功能'>
+	jSOUP主要功能
+</h2>
+<ol>
+	<li>
+		从一个URL，文件或字符串中解析HTML；
+	</li>
+	<li>
+		使用DOM或CSS选择器来查找、取出数据；
+	</li>
+	<li>
+		可操作HTML元素、属性、文本；
+	</li>
+</ol>
+<h2 id='使用准备'>
+	使用准备
+</h2>
+<p>
+	对于java项目，直接导入相应的jar包即可，注意与jdk版本的兼容问题。
+</p>
+<p>
+	对于老版本的jdk可以通过http://jsoup.org/packages/jsoup-1.8.1.jar下载，不同版本的jdk直接在链接后面更改即可。
+</p>
+<h2 id='1.输入'>
+	1. 输入
+</h2>
+<p>
+	jsoup 可以从包括字符串、URL地址以及本地文件来加载HTML 文档，并生成Document对象实例。
+</p>
+<ul>
+	<li>
+		<p>
+			Document对象（一个文档的对象模型）：文档由多个Elements和TextNodes组成 。Document继承Element继承Node.&nbsp;TextNode继承&nbsp;Node.
+		</p>
+	</li>
+	<li>
+		<p>
+			一个Element包含一个子节点集合，并拥有一个父Element。他们还提供了一个唯一的子元素过滤列表。
+		</p>
+	</li>
+</ul>
+<h3>
+	1.1 从字符串中输入HTML文档
+</h3>
+<h4>
+	1.1.1 解析一个html字符串
+</h4>
+<p>
+	使用静态方法Jsoup.parse(String html)&nbsp;或&nbsp;Jsoup.parse(String html, String baseUri)
+</p>
+<ol>
+	<li>
+		String html = "&lt;html&gt;&lt;head&gt;&lt;title&gt;开源中国社区&lt;/title&gt;&lt;/head&gt;"
+	</li>
+	<li>
+		+"&lt;body&gt;&lt;p&gt;这里是jsoup 项目的相关文章&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;";
+	</li>
+	<li>
+		Document doc = Jsoup.parse(html);
+	</li>
+</ol>
+<p>
+	说明：
+</p>
+<ol>
+	<li>
+		<p>
+			其解析器能够尽最大可能从你提供的HTML文档来创见一个干净的解析结果，无论HTML的格式是否完整。比如它可以处理：
+		</p>
+		<ul>
+			<li>
+				没有关闭的标签 (比如：&nbsp;&lt;p&gt;Lorem &lt;p&gt;Ipsum&nbsp;解析为&nbsp;&lt;p&gt;Lorem&lt;/p&gt; &lt;p&gt;Ipsum&lt;/p&gt;)
+			</li>
+			<li>
+				隐式标签 (比如：它可以自动将&nbsp;&lt;td&gt;Table data&lt;/td&gt;包装成&lt;table&gt;&lt;tr&gt;&lt;td&gt;?)
+			</li>
+			<li>
+				创建可靠的文档结构（html标签包含head 和 body，在head只出现恰当的元素）
+			</li>
+		</ul>
+	</li>
+	<li>
+		<p>
+			parse(String html, String baseUri)&nbsp;这个方法能够将输入的HTML解析为一个新的文档 (Document），参数 baseUri 是用来将相对 URL 转成绝对URL，并指定从哪个网站获取文档。如这个方法不适用，你可以使用&nbsp;parse(String html)&nbsp;方法来解析成HTML字符串如上面的示例。
+		</p>
+	</li>
+	<li>
+		<p>
+			只要解析的不是空字符串，就能返回一个结构合理的文档，其中包含(至少) 一个head和一个body元素。
+		</p>
+	</li>
+	<li>
+		<p>
+			一旦拥有了一个Document，你就可以使用Document中适当的方法或它父类&nbsp;Element&nbsp;和&nbsp;Node&nbsp;中的方法来取得相关数据
+		</p>
+	</li>
+</ol>
+<h4>
+	1.1.2 解析一个body片断
+</h4>
+<p>
+	假如你有一个HTML片断 (比如. 一个 div 包含一对 p 标签; 一个不完整的HTML文档) 想对它进行解析。这个HTML片断可以是用户提交的一条评论或在一个CMS页面中编辑body部分。可以使用Jsoup.parseBodyFragment(String html)&nbsp;方法.
+</p>
+<ol>
+	<li>
+		String html = "&lt;div&gt;&lt;p&gt;Lorem ipsum.&lt;/p&gt;";
+	</li>
+	<li>
+		Document doc = Jsoup.parseBodyFragment(html);
+	</li>
+	<li>
+		Element body = doc.body();
+	</li>
+</ol>
+<p>
+	说明：
+</p>
+<ol>
+	<li>
+		parseBodyFragment 方法创建一个空壳的文档，并插入解析过的HTML到body元素中。假如你使用正常的&nbsp;Jsoup.parse(String html)&nbsp;方法，通常你也可以得到相同的结果，但是明确将用户输入作为 body片段处理，以确保用户所提供的任何糟糕的HTML都将被解析成body元素。
+	</li>
+	<li>
+		Document.body()&nbsp;方法能够取得文档body元素的所有子元素，与 doc.getElementsByTag("body")相同。
+	</li>
+</ol>
+<h3>
+	1.2 从URL直接加载HTML文档
+</h3>
+<p>
+	从一个网站获取和解析一个HTML文档，并查找其中的相关数据，可以使用&nbsp;Jsoup.connect(String url)方法。
+</p>
+<ol>
+	<li>
+		Document doc =Jsoup.connect("网址/").get();
+	</li>
+	<li>
+		String title = doc.title();
+	</li>
+	<li>
+		Document doc =Jsoup.connect("网址/")
+	</li>
+	<li>
+		.data("query", "Java") //请求参数
+	</li>
+	<li>
+		.userAgent("I’mjsoup") //设置User-Agent
+	</li>
+	<li>
+		.cookie("auth", "token") //设置cookie
+	</li>
+	<li>
+		.timeout(3000) //设置连接超时时间
+	</li>
+	<li>
+		.post(); //使用POST方法访问URL
+	</li>
+</ol>
+<p>
+	说明：
+</p>
+<ol>
+	<li>
+		connect(String url)&nbsp;方法创建一个新的&nbsp;Connection&nbsp;和&nbsp;get()&nbsp;取得和解析一个HTML文件。如果从该URL获取HTML时发生错误，便会抛出 IOException，应适当处理。
+	</li>
+	<li>
+		Connection&nbsp;接口还提供一个方法链来解决特殊请求，具体如下：
+	</li>
+</ol>
+<ol>
+	<li>
+		Document doc = Jsoup.connect("http://example.com")
+	</li>
+	<li>
+		.data("query", "Java")
+	</li>
+	<li>
+		.userAgent("Mozilla")
+	</li>
+	<li>
+		.cookie("auth", "token")
+	</li>
+	<li>
+		.timeout(3000)
+	</li>
+	<li>
+		.post();
+	</li>
+</ol>
+<p>
+	这个方法只支持Web URLs (http 和 https 协议); 假如你需要从一个文件加载，可以使用&nbsp;parse(File in, String charsetName)&nbsp;代替。
+</p>
+<h3>
+	1.3 从文件中加载HTML文档
+</h3>
+<p>
+	在本机硬盘上有一个HTML文件，需要对它进行解析从中抽取数据或进行修改。可以使用静态&nbsp;Jsoup.parse(File in, String charsetName, String baseUri)&nbsp;方法。
+</p>
+<ol>
+	<li>
+		File input = new File("/tmp/input.html");
+	</li>
+	<li>
+		Document doc = Jsoup.parse(input, "UTF-8", "http://example.com/");
+	</li>
+</ol>
+<p>
+	说明：
+</p>
+<ol>
+	<li>
+		<p>
+			parse(File in, String charsetName, String baseUri)&nbsp;这个方法用来加载和解析一个HTML文件。如在加载文件的时候发生错误，将抛出IOException，应作适当处理。
+		</p>
+	</li>
+	<li>
+		<p>
+			baseUri参数用于解决文件中URLs是相对路径的问题。如果不需要可以传入一个空的字符串。
+		</p>
+	</li>
+	<li>
+		<p>
+			另外还有一个方法parse(File in, String charsetName)&nbsp;它使用文件的路径做为 baseUri。 这个方法适用于如果被解析文件位于网站的本地文件系统，且相关链接也指向该文件系统。
+		</p>
+	</li>
+</ol>
+<h3>
+	1.4 保证安全Stay safe
+</h3>
+<p>
+	假如你可以让用户输入HTML内容，那么要小心避免跨站脚本攻击。利用基于Whitelist的清除器和clean(String bodyHtml, Whitelist whitelist)&nbsp;方法来清除用户输入的恶意内容。
+</p>
+<h2 id='2.数据抽取'>
+	2. 数据抽取
+</h2>
+<h3>
+	2.1 使用DOM方法来遍历一个文档
+</h3>
+<p>
+	有一个HTML文档要从中提取数据，并了解这个HTML文档的结构。将HTML解析成一个Document之后，就可以使用类似于DOM的方法进行操作。
+</p>
+<ol>
+	<li>
+		File input = new File("/tmp/input.html");
+	</li>
+	<li>
+		Document doc = Jsoup.parse(input, "UTF-8", "http://example.com/");
+	</li>
+	<li>
+	</li>
+	<li>
+		Element content = doc.getElementById("content");
+	</li>
+	<li>
+		Elements links = content.getElementsByTag("a");
+	</li>
+	<li>
+		for (Element link : links) {
+	</li>
+	<li>
+		String linkHref = link.attr("href");
+	</li>
+	<li>
+		String linkText = link.text();
+	</li>
+	<li>
+		}
+	</li>
+</ol>
+<p>
+	说明：Elements这个对象提供了一系列类似于DOM的方法来查找元素，抽取并处理其中的数据。具体如下：
+</p>
+<h4>
+	2.1.1 查找元素
+</h4>
+<table>
+	<tbody>
+		<tr>
+			<th>
+				getElementById(String id)
+			</th>
+			<th>
+				id
+			</th>
+		</tr>
+	</tbody>
+	<tbody>
+		<tr>
+			<td>
+				getElementsByTag(String tag)
+			</td>
+			<td>
+				标签名
+			</td>
+		</tr>
+		<tr>
+			<td>
+				getElementsByClass(String className)
+			</td>
+			<td>
+				class名
+			</td>
+		</tr>
+		<tr>
+			<td>
+				getElementsByAttribute(String key)
+			</td>
+			<td>
+				属性
+			</td>
+		</tr>
+		<tr>
+			<td>
+				siblingElements()
+			</td>
+			<td>
+				所有的兄弟元素
+			</td>
+		</tr>
+		<tr>
+			<td>
+				firstElementSibling()
+			</td>
+			<td>
+				第一个兄弟元素
+			</td>
+		</tr>
+		<tr>
+			<td>
+				lastElementSibling()
+			</td>
+			<td>
+				最后一个兄弟元素
+			</td>
+		</tr>
+		<tr>
+			<td>
+				nextElementSibling()
+			</td>
+			<td>
+				下一个兄弟元素
+			</td>
+		</tr>
+		<tr>
+			<td>
+				previousElementSibling()
+			</td>
+			<td>
+				上一个兄弟元素
+			</td>
+		</tr>
+		<tr>
+			<td>
+				parent()
+			</td>
+			<td>
+				获取该元素父节点
+			</td>
+		</tr>
+		<tr>
+			<td>
+				children()
+			</td>
+			<td>
+				获取该元素的子元素
+			</td>
+		</tr>
+		<tr>
+			<td>
+				child(int index)
+			</td>
+			<td>
+				获取该元素的第几个子元素（下标从0开始）
+			</td>
+		</tr>
+	</tbody>
+</table>
+<h4>
+	2.1.2 元素数据
+</h4>
+<table>
+	<tbody>
+		<tr>
+			<th>
+				attr(String key)
+			</th>
+			<th>
+				获取属性
+			</th>
+		</tr>
+	</tbody>
+	<tbody>
+		<tr>
+			<td>
+				attr(String key, String value)
+			</td>
+			<td>
+				设置属性
+			</td>
+		</tr>
+		<tr>
+			<td>
+				attributes()
+			</td>
+			<td>
+				获取所有属性
+			</td>
+		</tr>
+		<tr>
+			<td>
+				id()
+			</td>
+			<td>
+				获取该元素id
+			</td>
+		</tr>
+		<tr>
+			<td>
+				className()
+			</td>
+			<td>
+				获取该元素class，多个class之间空格隔开
+			</td>
+		</tr>
+		<tr>
+			<td>
+				classNames()
+			</td>
+			<td>
+				获取所有元素的class
+			</td>
+		</tr>
+		<tr>
+			<td>
+				text()
+			</td>
+			<td>
+				获取文本内容
+			</td>
+		</tr>
+		<tr>
+			<td>
+				text(String value)
+			</td>
+			<td>
+				设置文本内容
+			</td>
+		</tr>
+		<tr>
+			<td>
+				html()
+			</td>
+			<td>
+				获取元素内HTML
+			</td>
+		</tr>
+		<tr>
+			<td>
+				html(String value)
+			</td>
+			<td>
+				设置元素内的HTML内容
+			</td>
+		</tr>
+		<tr>
+			<td>
+				outerHtml()
+			</td>
+			<td>
+				获取元素外HTML内容
+			</td>
+		</tr>
+		<tr>
+			<td>
+				data()
+			</td>
+			<td>
+				获取数据内容（例如：script和style标签)
+			</td>
+		</tr>
+		<tr>
+			<td>
+				tag()
+			</td>
+			<td>
+				&nbsp;
+			</td>
+		</tr>
+		<tr>
+			<td>
+				tagName()
+			</td>
+			<td>
+				获取元素标签名
+			</td>
+		</tr>
+	</tbody>
+</table>
+<h4>
+	2.1.3 操作HTML和文本
+</h4>
+<table>
+	<tbody>
+		<tr>
+			<th>
+				append(String html)
+			</th>
+			<th>
+				添加给定的html到元素末尾
+			</th>
+		</tr>
+	</tbody>
+	<tbody>
+		<tr>
+			<td>
+				prepend(String html)
+			</td>
+			<td>
+				添加给定html到元素前面
+			</td>
+		</tr>
+		<tr>
+			<td>
+				appendText(String text)
+			</td>
+			<td>
+				创建并添加文本
+			</td>
+		</tr>
+		<tr>
+			<td>
+				prependText(String text)
+			</td>
+			<td>
+				创建并添加文本
+			</td>
+		</tr>
+		<tr>
+			<td>
+				appendElement(String tagName)
+			</td>
+			<td>
+				添加到元素末尾
+			</td>
+		</tr>
+		<tr>
+			<td>
+				prependElement(String tagName)
+			</td>
+			<td>
+				添加到元素前
+			</td>
+		</tr>
+		<tr>
+			<td>
+				html(String value)
+			</td>
+			<td>
+				设置元素值
+			</td>
+		</tr>
+	</tbody>
+</table>
+<h3>
+	2.2 使用选择器语法来查找元素(select)
+</h3>
+<p>
+	使用&nbsp;Element.select(String selector)&nbsp;和&nbsp;Elements.select(String selector)，使用类似于CSS或jQuery的语法来查找和操作元素。
+</p>
+<ol>
+	<li>
+		File input = new File("/tmp/input.html");
+	</li>
+	<li>
+		Document doc = Jsoup.parse(input, "UTF-8", "http://example.com/");
+	</li>
+	<li>
+		Elements links = doc.select("a[href]"); //带有href属性的a元素
+	</li>
+	<li>
+		Elements pngs = doc.select("img[src$=.png]"); //扩展名为.png的图片
+	</li>
+	<li>
+		Element masthead = doc.select("div.masthead").first();//class等于masthead的div标签
+	</li>
+	<li>
+		Elements resultLinks = doc.select("h3.r &gt; a"); //在h3元素之后的a元素
+	</li>
+</ol>
+<p>
+	说明：&nbsp;<br />
+jsoup elements对象支持类似于CSS&nbsp;(或jquery)的选择器语法，来实现非常强大和灵活的查找功能。
+</p>
+<p>
+	这个select&nbsp;方法在Document,&nbsp;Element,或Elements&nbsp;对象中都可以使用。且是上下文相关的，因此可实现指定元素的过滤，或者链式选择访问。
+</p>
+<p>
+	Select方法将返回一个Elements&nbsp;集合，并提供一组方法来抽取和处理结果。
+</p>
+<h4>
+	2.2.1 Selector选择器 基本用法
+</h4>
+<table>
+	<tbody>
+		<tr>
+			<th>
+				tagname
+			</th>
+			<th>
+				使用标签名来定位，例如 a
+			</th>
+		</tr>
+	</tbody>
+	<tbody>
+		<tr>
+			<td>
+				ns|tag
+			</td>
+			<td>
+				使用命名空间的标签定位，例如 fb:name 来查找&nbsp;&lt;fb:name&gt;&nbsp;元素
+			</td>
+		</tr>
+		<tr>
+			<td>
+				#id
+			</td>
+			<td>
+				使用元素 id 定位，例如 #logo
+			</td>
+		</tr>
+		<tr>
+			<td>
+				.class
+			</td>
+			<td>
+				使用元素的 class 属性定位，例如 .head
+			</td>
+		</tr>
+		<tr>
+			<td>
+				[attribute]
+			</td>
+			<td>
+				使用元素的属性进行定位，例如 [href] 表示检索具有 href 属性的所有元素
+			</td>
+		</tr>
+		<tr>
+			<td>
+				[^attr]
+			</td>
+			<td>
+				使用元素的属性名前缀进行定位，例如 [^data-] 用来查找 HTML5 的 dataset 属性
+			</td>
+		</tr>
+		<tr>
+			<td>
+				[attr=value]
+			</td>
+			<td>
+				使用属性值进行定位，例如 [width=500] 定位所有 width 属性值为 500 的元素
+			</td>
+		</tr>
+		<tr>
+			<td>
+				[attr^=value], [attr$=value], [attr*=value]
+			</td>
+			<td>
+				利用匹配属性值开头、结尾或包含属性值来查找元素，比如：[href*=/path/]
+			</td>
+		</tr>
+		<tr>
+			<td>
+				[attr~=regex]
+			</td>
+			<td>
+				利用属性值匹配正则表达式来查找元素，例如img[src~=(?i).(png|jpe?g)]
+			</td>
+		</tr>
+		<tr>
+			<td>
+				*
+			</td>
+			<td>
+				定位所有元素
+			</td>
+		</tr>
+	</tbody>
+</table>
+<h4>
+	2.2.2 Selector选择器 组合使用
+</h4>
+<table>
+	<tbody>
+		<tr>
+			<th>
+				el#id
+			</th>
+			<th>
+				定位 id 值某个元素，例如 a#logo -&gt;&nbsp;&lt;a id=logo href= … &gt;
+			</th>
+		</tr>
+	</tbody>
+	<tbody>
+		<tr>
+			<td>
+				el.class
+			</td>
+			<td>
+				定位 class 为指定值的元素，例如 div.head -&gt;&nbsp;&lt;div class=head&gt;xxxx&lt;/div&gt;
+			</td>
+		</tr>
+		<tr>
+			<td>
+				el[attr]
+			</td>
+			<td>
+				定位所有定义了某属性的元素，例如 a[href]
+			</td>
+		</tr>
+		<tr>
+			<td>
+				以上三个任意组合
+			</td>
+			<td>
+				例如 a[href]#logo 、a[name].outerlink
+			</td>
+		</tr>
+		<tr>
+			<td>
+				ancestor child
+			</td>
+			<td>
+				查找某个元素下子元素，比如：可以用.body p&nbsp;查找在"body"元素下的所有&nbsp;p元素
+			</td>
+		</tr>
+		<tr>
+			<td>
+				parent &gt; child
+			</td>
+			<td>
+				查找某个父元素下的直接子元素，比如：可以用div.content &gt; p&nbsp;查找&nbsp;p&nbsp;元素，也可以用body &gt; *&nbsp;查找body标签下所有直接子元素
+			</td>
+		</tr>
+		<tr>
+			<td>
+				siblingA + siblingB
+			</td>
+			<td>
+				查找在A元素之前第一个同级元素B，比如：div.head + div
+			</td>
+		</tr>
+		<tr>
+			<td>
+				siblingA ~ siblingX
+			</td>
+			<td>
+				查找A元素之前的同级X元素，比如：h1 ~ p
+			</td>
+		</tr>
+		<tr>
+			<td>
+				el, el, el
+			</td>
+			<td>
+				多个选择器组合，查找匹配任一选择器的唯一元素，例如：div.masthead, div.logo
+			</td>
+		</tr>
+	</tbody>
+</table>
+<h4>
+	2.2.3 伪选择器selectors (表达式)：
+</h4>
+<table>
+	<tbody>
+		<tr>
+			<th>
+				:lt(n)
+			</th>
+			<th>
+				查找哪些元素的同级索引值（它的位置在DOM树中是相对于它的父节点）小于n，比如：td:lt(3)&nbsp;表示小于三列的元素
+			</th>
+		</tr>
+	</tbody>
+	<tbody>
+		<tr>
+			<td>
+				:gt(n)
+			</td>
+			<td>
+				查找哪些元素的同级索引值大于n``，比如：&nbsp;div p:gt(2)表示哪些div中有包含2个以上的p元素
+			</td>
+		</tr>
+		<tr>
+			<td>
+				:eq(n)
+			</td>
+			<td>
+				查找哪些元素的同级索引值与n相等，比如：form input:eq(1)表示包含一个input标签的Form元素
+			</td>
+		</tr>
+		<tr>
+			<td>
+				:has(seletor)
+			</td>
+			<td>
+				查找匹配选择器包含元素的元素，比如：div:has(p)表示哪些div包含了p元素
+			</td>
+		</tr>
+		<tr>
+			<td>
+				:not(selector)
+			</td>
+			<td>
+				查找与选择器不匹配的元素，比如：&nbsp;div:not(.logo)&nbsp;表示不包含 class=logo 元素的所有 div 列表
+			</td>
+		</tr>
+		<tr>
+			<td>
+				:contains(text)
+			</td>
+			<td>
+				查找包含给定文本的元素，不区分大不写，比如：&nbsp;p:contains(jsoup)
+			</td>
+		</tr>
+		<tr>
+			<td>
+				:containsOwn(text)
+			</td>
+			<td>
+				查找文本信息完全等于指定条件的元素
+			</td>
+		</tr>
+		<tr>
+			<td>
+				:matches(regex)
+			</td>
+			<td>
+				使用正则表达式进行文本过滤：div:matches((?i)login)
+			</td>
+		</tr>
+		<tr>
+			<td>
+				:matchesOwn(regex)
+			</td>
+			<td>
+				使用正则表达式找到自身的文本
+			</td>
+		</tr>
+	</tbody>
+</table>
+<ul>
+	<li>
+		注意：上述伪选择器索引是从0开始的，也就是说第一个元素索引值为0，第二个元素index为1等
+	</li>
+	<li>
+		可以查看Selector&nbsp;API参考来了解更详细的内容
+	</li>
+</ul>
+<h3>
+	2.3 从元素抽取属性，文本和HTML
+</h3>
+<ul>
+	<li>
+		Node.attr(String key)&nbsp;获取属性值
+	</li>
+	<li>
+		Element.text()&nbsp;获取元素中的文本值
+	</li>
+	<li>
+		Element.html()&nbsp;获取元素HTML内容
+	</li>
+	<li>
+		Node.outerHtml()&nbsp;获取元素HTML内容
+	</li>
+</ul>
+<ol>
+	<li>
+		String html = "&lt;p&gt;An &lt;a href='http://example.com/'&gt;&lt;b&gt;example&lt;/b&gt;&lt;/a&gt; link.&lt;/p&gt;";
+	</li>
+	<li>
+		Document doc = Jsoup.parse(html);//解析HTML字符串返回一个Document实现
+	</li>
+	<li>
+		Element link = doc.select("a").first();//查找第一个a元素
+	</li>
+	<li>
+	</li>
+	<li>
+		String text = doc.body().text(); // "An example link"//取得字符串中的文本
+	</li>
+	<li>
+		String linkHref = link.attr("href"); // "http://example.com/"//取得链接地址
+	</li>
+	<li>
+		String linkText = link.text(); // "example""//取得链接地址中的文本
+	</li>
+	<li>
+	</li>
+	<li>
+		String linkOuterH = link.outerHtml();
+	</li>
+	<li>
+		// "&lt;a href="http://example.com"&gt;&lt;b&gt;example&lt;/b&gt;&lt;/a&gt;"
+	</li>
+	<li>
+		String linkInnerH = link.html(); // "&lt;b&gt;example&lt;/b&gt;"//取得链接内的html内容
+	</li>
+</ol>
+<p>
+	说明：&nbsp;<br />
+上述方法是元素数据访问的核心办法。此外还其它一些方法可以使用：
+</p>
+<ul>
+	<li>
+		Element.id()
+	</li>
+	<li>
+		Element.tagName()
+	</li>
+	<li>
+		Element.className()
+	</li>
+	<li>
+		Element.hasClass(String className)
+	</li>
+</ul>
+<p>
+	这些访问器方法都有相应的setter方法来更改数据.
+</p>
+<h3>
+	2.4 处理URLs
+</h3>
+<p>
+	有一个包含相对URLs路径的HTML文档，需要将这些相对路径转换成绝对路径的URLs。
+</p>
+<ol>
+	<li>
+		在解析文档时确保有指定baseURI，
+	</li>
+	<li>
+		然后使用&nbsp;abs:&nbsp;属性前缀来取得包含baseURI的绝对路径
+	</li>
+</ol>
+<ol>
+	<li>
+		Document doc = Jsoup.connect("http://www.open-open.com").get();
+	</li>
+	<li>
+		Element link = doc.select("a").first();
+	</li>
+	<li>
+		String relHref = link.attr("href"); // == "/"
+	</li>
+	<li>
+		String absHref = link.attr("abs:href"); // "http://www.open-open.com/"
+	</li>
+</ol>
+<p>
+	说明：&nbsp;<br />
+在HTML元素中，URLs经常写成相对于文档位置的相对路径：&nbsp;&lt;a href="/download"&gt;...&lt;/a&gt;. 当你使用&nbsp;Node.attr(String key)&nbsp;方法来取得a元素的href属性时，它将直接返回在HTML源码中指定的值。
+</p>
+<p>
+	假如你需要取得一个绝对路径，需要在属性名前加&nbsp;abs:&nbsp;前缀。这样就可以返回包含根路径的URL地址attr("abs:href")，因此，在解析HTML文档时，定义baseURI非常重要。
+</p>
+<p>
+	如果你不想使用abs:&nbsp;前缀，还有一个方法能够实现同样的功能&nbsp;Node.absUrl(String key)。
+</p>
+<h2 id='3.数据修改'>
+	3. 数据修改
+</h2>
+<h3>
+	3.1 设置属性的值
+</h3>
+<p>
+	在解析一个Document之后可能想修改其中的某些属性值，然后再保存到磁盘或都输出到前台页面。
+</p>
+<p>
+	可以使用属性设置方法&nbsp;Element.attr(String key, String value), 和&nbsp;Elements.attr(String key, String value).
+</p>
+<p>
+	假如你需要修改一个元素的&nbsp;class&nbsp;属性，可以使用&nbsp;Element.addClass(String className)&nbsp;和Element.removeClass(String className)&nbsp;方法。
+</p>
+<p>
+	Elements&nbsp;提供了批量操作元素属性和class的方法，比如：要为div中的每一个a元素都添加一个rel="nofollow"&nbsp;可以使用如下方法：
+</p>
+<ol>
+	<li>
+		doc.select("div.comments a").attr("rel", "nofollow");
+	</li>
+</ol>
+<p>
+	说明：与Element&nbsp;中的其它方法一样，attr&nbsp;方法也是返回当前&nbsp;Element&nbsp;(或在使用选择器是返回&nbsp;Elements&nbsp;集合)。这样能够很方便使用方法连用的书写方式。比如：
+</p>
+<ol>
+	<li>
+		doc.select("div.masthead").attr("title", "jsoup").addClass("round-box");
+	</li>
+</ol>
+<h3>
+	3.2 设置一个元素的HTML内容
+</h3>
+<ol>
+	<li>
+		Element div = doc.select("div").first(); // &lt;div&gt;&lt;/div&gt;
+	</li>
+	<li>
+		div.html("&lt;p&gt;lorem ipsum&lt;/p&gt;"); // &lt;div&gt;&lt;p&gt;lorem ipsum&lt;/p&gt;&lt;/div&gt;
+	</li>
+	<li>
+		div.prepend("&lt;p&gt;First&lt;/p&gt;");//在div前添加html内容
+	</li>
+	<li>
+		div.append("&lt;p&gt;Last&lt;/p&gt;");//在div之后添加html内容
+	</li>
+	<li>
+		// 添完后的结果: &lt;div&gt;&lt;p&gt;First&lt;/p&gt;&lt;p&gt;lorem ipsum&lt;/p&gt;&lt;p&gt;Last&lt;/p&gt;&lt;/div&gt;
+	</li>
+	<li>
+	</li>
+	<li>
+		Element span = doc.select("span").first(); // &lt;span&gt;One&lt;/span&gt;
+	</li>
+	<li>
+		span.wrap("&lt;li&gt;&lt;a href='http://example.com/'&gt;&lt;/a&gt;&lt;/li&gt;");
+	</li>
+	<li>
+		// 添完后的结果: &lt;li&gt;&lt;a href="http://example.com"&gt;&lt;span&gt;One&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+	</li>
+</ol>
+<p>
+	说明：
+</p>
+<ul>
+	<li>
+		Element.html(String html)&nbsp;这个方法将先清除元素中的HTML内容，然后用传入的HTML代替。
+	</li>
+	<li>
+		Element.prepend(String first)&nbsp;和&nbsp;Element.append(String last)&nbsp;方法用于在分别在元素内部HTML的前面和后面添加HTML内容
+	</li>
+	<li>
+		Element.wrap(String around)&nbsp;对元素包裹一个外部HTML内容。
+	</li>
+</ul>
+<h3>
+	3.3 设置元素的文本内容
+</h3>
+<ol>
+	<li>
+		Element div = doc.select("div").first(); // &lt;div&gt;&lt;/div&gt;
+	</li>
+	<li>
+		div.text("five &gt; four"); // &lt;div&gt;five &amp;gt; four&lt;/div&gt;
+	</li>
+	<li>
+		div.prepend("First ");
+	</li>
+	<li>
+		div.append(" Last");
+	</li>
+	<li>
+		// now: &lt;div&gt;First five &amp;gt; four Last&lt;/div&gt;
+	</li>
+</ol>
+<p>
+	说明：&nbsp;<br />
+文本设置方法与&nbsp;HTML setter&nbsp;方法一样：
+</p>
+<ul>
+	<li>
+		Element.text(String text)&nbsp;将清除一个元素中的内部HTML内容，然后提供的文本进行代替
+	</li>
+	<li>
+		Element.prepend(String first)&nbsp;和&nbsp;Element.append(String last)&nbsp;将分别在元素的内部html前后添加文本节点。
+	</li>
+</ul>
+<p>
+	对于传入的文本如果含有像&nbsp;&lt;,&nbsp;&gt;&nbsp;等这样的字符，将以文本处理，而非HTML。
+</p>
+<h2 id='4.HTML清理'>
+	4.HTML清理
+</h2>
+<h3>
+	4.1 消除不受信任的HTML (防止XSS攻击)
+</h3>
+<p>
+	在做网站的时候，经常会提供用户评论的功能。有些不怀好意的用户，会搞一些脚本到评论内容中，而这些脚本可能会破坏整个页面的行为，更严重的是获取一些机要信息，此时需要清理该HTML，以避免跨站脚本cross-site scripting攻击（XSS）。&nbsp;<br />
+使用jsoup HTML&nbsp;Cleaner&nbsp;方法进行清除，但需要指定一个可配置的&nbsp;Whitelist。
+</p>
+<ol>
+	<li>
+		String unsafe = "&lt;p&gt;&lt;a href='http://example.com/' onclick='stealCookies()'&gt;Link&lt;/a&gt;&lt;/p&gt;";
+	</li>
+	<li>
+		String safe = Jsoup.clean(unsafe, Whitelist.basic());
+	</li>
+	<li>
+		// now: &lt;p&gt;&lt;a href="http://example.com/" rel="nofollow"&gt;Link&lt;/a&gt;&lt;/p&gt;
+	</li>
+</ol>
+<p>
+	说明：&nbsp;<br />
+XSS又叫CSS (Cross Site Script) ，跨站脚本攻击。它指的是恶意攻击者往Web页面里插入恶意html代码，当用户浏览该页之时，嵌入其中Web里面的html代码会被执行，从而达到恶意攻击用户的特殊目的。XSS属于被动式的攻击，因为其被动且不好利用，所以许多人常忽略其危害性。所以我们经常只让用户输入纯文本的内容，但这样用户体验就比较差了。
+</p>
+<p>
+	一个更好的解决方法就是使用一个富文本编辑器WYSIWYG如CKEditor&nbsp;和&nbsp;TinyMCE。这些可以输出HTML并能够让用户可视化编辑。虽然他们可以在客户端进行校验，但是这样还不够安全，需要在服务器端进行校验并清除有害的HTML代码，这样才能确保输入到你网站的HTML是安全的。否则，攻击者能够绕过客户端的Javascript验证，并注入不安全的HMTL直接进入您的网站。
+</p>
+<p>
+	jsoup的whitelist清理器能够在服务器端对用户输入的HTML进行过滤，只输出一些安全的标签和属性。
+</p>
+<p>
+	jsoup提供了一系列的Whitelist基本配置，能够满足大多数要求；但如有必要，也可以进行修改，不过要小心。
+</p>
+<p>
+	这个cleaner非常好用不仅可以避免XSS攻击，还可以限制用户可以输入的标签范围。
+</p>
+<p>
+	jsoup 使用一个 Whitelist 类用来对 HTML 文档进行过滤，该类提供几个常用方法：
+</p>
+<h3>
+	4.2 whitelist常用方法
+</h3>
+<p>
+	API查看：Whitelist
+</p>
+<table>
+	<tbody>
+		<tr>
+			<th>
+				方法名
+			</th>
+			<th>
+				简介
+			</th>
+		</tr>
+	</tbody>
+	<tbody>
+		<tr>
+			<td>
+				none()
+			</td>
+			<td>
+				只允许包含文本信息
+			</td>
+		</tr>
+		<tr>
+			<td>
+				basic()
+			</td>
+			<td>
+				允许的标签包括：a, b, blockquote, br, cite, code, dd, dl, dt, em, i, li, ol, p, pre, q, small, strike, strong, sub, sup, u, ul, 以及合适的属性
+			</td>
+		</tr>
+		<tr>
+			<td>
+				simpleText()
+			</td>
+			<td>
+				只允许 b, em, i, strong, u 这些标签
+			</td>
+		</tr>
+		<tr>
+			<td>
+				basicWithImages()
+			</td>
+			<td>
+				在 basic() 的基础上增加了图片
+			</td>
+		</tr>
+		<tr>
+			<td>
+				relaxed()
+			</td>
+			<td>
+				这个过滤器允许的标签最多，包括：a, b, blockquote, br, caption, cite, code, col, colgroup, dd, dl, dt, em, h1, h2, h3, h4, h5, h6, i, img, li, ol, p, pre, q, small, strike, strong, sub, sup, table, tbody, td, tfoot, th, thead, tr, u, ul
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	如果这五个过滤器都无法满足你的要求呢，例如你允许用户插入 flash 动画，没关系，Whitelist 提供扩展功能，例如 whitelist.addTags("embed","object","param","span","div"); 也可调用 addAttributes 为某些元素增加属性。
+</p>
+<p>
+	参考：
+</p>
+<ul>
+	<li>
+		参阅XSS cheat sheet&nbsp;，有一个例子可以了解为什么不能使用正则表达式，而采用安全的whitelist parser-based清理器才是正确的选择。
+	</li>
+	<li>
+		参阅Cleaner&nbsp;，了解如何返回一个&nbsp;Document&nbsp;对象，而不是字符串
+	</li>
+	<li>
+		参阅Whitelist，了解如何创建一个自定义的whitelist
+	</li>
+	<li>
+		nofollow&nbsp;链接属性了解
+	</li>
+</ul>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/919.html">用户注册——发送邮件验证码（含实例）</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/921.html">数据库语法</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#jSOUP主要功能">jSOUP主要功能</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#使用准备">使用准备</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#1.输入">1.输入</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#2.数据抽取">2.数据抽取</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#3.数据修改">3.数据修改</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#4.HTML清理">4.HTML清理</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

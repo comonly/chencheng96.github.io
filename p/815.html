@@ -1,0 +1,254 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>java字符串操作-查找indexOf,截取substring,分割split_comonly.cn</title>
+<meta name="keywords" content="java字符串操作-查找indexOf,截取substring,分割split" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">java字符串操作-查找indexOf,截取substring,分割split</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-01-09</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	java-含工具类
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">查找indexOf,截取substring,分割split</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='1.查找子串idexOf'>
+	1. 查找子串indexOf
+</h2>
+str1.indexOf(97);//参数为字符的ascii码 &nbsp; &nbsp; &nbsp; &nbsp;//查找指定字符串第一次出现的位置<br />
+str1.indexOf("12"); &nbsp; &nbsp; &nbsp; &nbsp;//查找指定字符第一次出现的位置，从索引处开始（包括索引处）<br />
+str1.indexOf(97, 0); &nbsp; &nbsp; &nbsp; &nbsp;//查找指定字符串第一次出现的位置，从索引处开始（包括索引处<br />
+str1.indexOf("12232",0);<br />
+<h2 id='2.截取字符串ubtrig'>
+	2. 截取字符串substring
+</h2>
+java截取指定字符串中的某段字符<br />
+String str = "房估字(2014)第YPQD0006号"; String jieguo = str.substring(str.indexOf("第")+1,str.indexOf("号"));<br />
+<br />
+str.substring(int beginIndex); &nbsp; &nbsp; &nbsp;//截取掉str从首字母起长度为beginIndex的字符串，将剩余字符串赋值给str； &nbsp; 将字符串从索引号为2开始截取索引处到末尾（不包括索引处）（索引值从0开始）<br />
+str.substring(int beginIndex，int endIndex); &nbsp; &nbsp; &nbsp;//截取str中从beginIndex开始至endIndex结束时的字符串，并将其赋值给str; &nbsp; 指定区间（不包括结束索引处），Index从0开始<br />
+<br />
+<p>
+	通过StringUtils提供的方法
+</p>
+StringUtils.substringBefore(“dskeabcee”, “e”); &nbsp; &nbsp; &nbsp;//结果是：dsk &nbsp; 这里是以第一个”e”，为标准。<br />
+StringUtils.substringBeforeLast(“dskeabcee”, “e”) &nbsp; //结果为：dskeabce这里以最后一个“e”为准。<br />
+<h2 id='3.分割字符串lit'>
+	3. 分割字符串split
+</h2>
+<len;i++){ system.out.println(strs[i].tostring());="" }<="" span=""> java.lang.string.split<br />
+</len;i++){>
+<p>
+	<len;i++){ system.out.println(strs[i].tostring());="" }<="" span=""> split方法，将一个字符串分割为子字符串，然后将结果作为字符串数组返回，</len;i++){><len;i++){ system.out.println(strs[i].tostring());="" }<="" span="">在 stingObj 中每个出现 separator 的位置都要进行分解。</len;i++){> <br />
+<len;i++){ system.out.println(strs[i].tostring());="" }<="" span=""><len;i++){ system.out.println(strs[i].tostring());="" }<="" span="">如果分割字符为正则表达式里的字符，则需要"\"做转义。“ . ”在正则表达式中有特殊的含义，因此我们使用的时候必须进行转义。</len;i++){></len;i++){> <br />
+不过通过这种方式截取会有很大的性能损耗，因为分析正则非常耗时。
+</p>
+<len;i++){ system.out.println(strs[i].tostring());="" }<="" span=""> stringObj.split([separator，[limit]]) &nbsp; &nbsp; &nbsp;//split 的实现直接调用的 matcher 类的 split 的方法。</len;i++){> <br />
+<len;i++){ system.out.println(strs[i].tostring());="" }<="" span="">&nbsp; &nbsp; &nbsp; &nbsp; stringObj &nbsp; &nbsp;必选项。要被分解的 String 对象或文字。该对象不会被 split 方法修改。<br />
+&nbsp; &nbsp; &nbsp; &nbsp; separator &nbsp; 可选项。字符串或正则表达式 对象，它标识了分隔字符串时使用的是一个还是多个字符。如果忽略该选项，返回包含整个字符串的单一元素数组。 separator 不作为任何数组元素的部分返回。<br />
+</len;i++){>
+<p>
+	<len;i++){ system.out.println(strs[i].tostring());="" }<="" span="">&nbsp; &nbsp; &nbsp; &nbsp; limit &nbsp; &nbsp;可选项。该值用来限制返回数组中的元素个数。</len;i++){> <br />
+String str ="abc,12,3yy98,0";<br />
+String[] strs=str.split(","); &nbsp; &nbsp; &nbsp; &nbsp; //正则传入split()。返回的是一个字符串数组类型。 <br />
+for(int i=0,len=strs.length;i++) String[] splitstr=str1.split("a"); &nbsp; &nbsp; //以a为分割字符<br />
+for(String res : splitstr) System.out.println(res);
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/813.html">jsp使用kindeditor的上传路径,图片空间路径配置以及引用</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/816.html">【待处理】Android studio中怎么将方形按钮设置成圆角以及渐变效果</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#1.查找子串idexOf">1.查找子串idexOf</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#2.截取字符串ubtrig">2.截取字符串ubtrig</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#3.分割字符串lit">3.分割字符串lit</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,291 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>vue的使用小问题汇总_comonly.cn</title>
+<meta name="keywords" content="vue的使用小问题汇总" />
+<meta name="description" content="vue将HTML字符串解析为HTML标签
+
+
+	如果返回的数据是html标签字符串的话，在vue里要通过v-html来渲染
+&lt;div v-html="rawHtml"&gt;&lt;/div&gt;&nbsp; &nbsp;//v-html="变量"
+
+
+	vue获取URL中的参数
+
+
+	1&nbsp; &nbsp;获取?后面的参数
+&nbsp; &nbsp; &nbsp; http://192.168.1.105:8080/#/idInput?username=%22%E5%" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">vue的使用小问题汇总</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-10-14</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>vue将HTML字符串解析为HTML标签
+
+
+	如果返回的数据是html标签字符串的话，在vue里要通过v-html来渲染
+&lt;div v-html="rawHtml"&gt;&lt;/div&gt;&nbsp; &nbsp;//v-html="变量"
+
+
+	vue获取URL中的参数
+
+
+	1&nbsp; &nbsp;获取?后面的参数
+&nbsp; &nbsp; &nbsp; http://192.168.1.105:8080/#/idInput?username=%22%E5%</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	vue将HTML字符串解析为HTML标签
+</p>
+<p>
+	如果返回的数据是html标签字符串的话，在vue里要通过v-html来渲染<br />
+&lt;div v-html="rawHtml"&gt;&lt;/div&gt;&nbsp; &nbsp;//v-html="变量"<br />
+</p>
+<p>
+	vue获取URL中的参数
+</p>
+<p>
+	1&nbsp; &nbsp;获取?后面的参数<br />
+&nbsp; &nbsp; &nbsp; http://192.168.1.105:8080/#/idInput?username=%22%E5%BC%A0%E4%B8%89%22<br />
+&nbsp; &nbsp; &nbsp;获取参数方法&nbsp; &nbsp; &nbsp;let id = this.$route.query.username<br />
+2 获取不带?的URL中的参数<br />
+&nbsp; &nbsp; &nbsp; http://192.168.1.12:8080/#/home/newsinfo/234<br />
+&nbsp; &nbsp; 在路由中配置路由<br />
+&nbsp; &nbsp; { path: '/home/newsinfo/:id', component: Newsinfo }<br />
+&nbsp; &nbsp; &nbsp;.vue页面设置<br />
+&nbsp; &nbsp; &lt;template&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;router-link :to="'/home/newsinfo/' + item.id"&gt;<br />
+&nbsp; &nbsp; &lt;/template&gt;<br />
+&nbsp; &nbsp; &nbsp;获取参数方法&nbsp; &nbsp; let id = this.$route.params.id<br />
+</p>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1030.html">利用vue-cli来搭建vue项目——通过npm创建一个vue项目</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1032.html">Jupyter Notebook——交互式笔记本 安装使用</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="页面跳转">
+							<h2 style="display:inline;color:#5BC648;">页面跳转</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-10-15&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	返回主页 Eva3288：//https://www.cnblogs.com/eva3288/p/8204713.html
+</p>
+<p>
+	<br />
+</p>
+<p>
+	this.$router.push({path: ''/order/index''});
+</p>
+this.$router.push({path: '/order/page1',query:{ id:'2'}});<br />
+this.$router.push({name: '/order/page2',params:{ id:'6'}});<br />
+<br />
+//&nbsp; path:'路由里配置的index.vue的路径'<br />
+//&nbsp; params:{id:'1',name:'eva'} /query:{id:'5'}&nbsp; 需要传递的参数和值<br /></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#页面跳转">页面跳转</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

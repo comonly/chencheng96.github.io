@@ -1,0 +1,322 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>sql之left join、right join、inner join的区别_comonly.cn</title>
+<meta name="keywords" content="sql之left join、right join、inner join的区别" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">sql之left join、right join、inner join的区别</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-04-14</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	数据库
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">access,联合查询</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	left join(左联接) 返回包括左表中的所有记录和右表中联结字段相等的记录<br />
+right join(右联接) 返回包括右表中的所有记录和左表中联结字段相等的记录<br />
+inner join(等值连接) 只返回两个表中联结字段相等的行
+</p>
+<p>
+	举例如下：&nbsp;<br />
+--------------------------------------------<br />
+表A记录如下：<br />
+aID　　　　　aNum<br />
+1　　　　　a20050111<br />
+2　　　　　a20050112<br />
+3　　　　　a20050113<br />
+4　　　　　a20050114<br />
+5　　　　　a20050115
+</p>
+<p>
+	表B记录如下:<br />
+bID　　　　　bName<br />
+1　　　　　2006032401<br />
+2　　　　　2006032402<br />
+3　　　　　2006032403<br />
+4　　　　　2006032404<br />
+8　　　　　2006032408
+</p>
+<p>
+	--------------------------------------------<br />
+1.left join<br />
+sql语句如下:&nbsp;<br />
+select * from A<br />
+left join B&nbsp;<br />
+on A.aID = B.bID
+</p>
+<p>
+	结果如下:<br />
+aID　　　　　aNum　　　　　bID　　　　　bName<br />
+1　　　　　a20050111　　　　1　　　　　2006032401<br />
+2　　　　　a20050112　　　　2　　　　　2006032402<br />
+3　　　　　a20050113　　　　3　　　　　2006032403<br />
+4　　　　　a20050114　　　　4　　　　　2006032404<br />
+5　　　　　a20050115　　　　NULL　　　　　NULL
+</p>
+<p>
+	（所影响的行数为 5 行）<br />
+结果说明:<br />
+left join是以A表的记录为基础的,A可以看成左表,B可以看成右表,left join是以左表为准的.<br />
+换句话说,左表(A)的记录将会全部表示出来,而右表(B)只会显示符合搜索条件的记录(例子中为: A.aID = B.bID).<br />
+B表记录不足的地方均为NULL.<br />
+--------------------------------------------<br />
+2.right join<br />
+sql语句如下:&nbsp;<br />
+select * from A<br />
+right join B&nbsp;<br />
+on A.aID = B.bID
+</p>
+<p>
+	结果如下:<br />
+aID　　　　　aNum　　　　　bID　　　　　bName<br />
+1　　　　　a20050111　　　　1　　　　　2006032401<br />
+2　　　　　a20050112　　　　2　　　　　2006032402<br />
+3　　　　　a20050113　　　　3　　　　　2006032403<br />
+4　　　　　a20050114　　　　4　　　　　2006032404<br />
+NULL　　　　　NULL　　　　　8　　　　　2006032408
+</p>
+<p>
+	（所影响的行数为 5 行）<br />
+结果说明:<br />
+仔细观察一下,就会发现,和left join的结果刚好相反,这次是以右表(B)为基础的,A表不足的地方用NULL填充.<br />
+--------------------------------------------<br />
+3.inner join<br />
+sql语句如下:&nbsp;<br />
+select * from A<br />
+innerjoin B&nbsp;<br />
+on A.aID = B.bID
+</p>
+<p>
+	结果如下:<br />
+aID　　　　　aNum　　　　　bID　　　　　bName<br />
+1　　　　　a20050111　　　　1　　　　　2006032401<br />
+2　　　　　a20050112　　　　2　　　　　2006032402<br />
+3　　　　　a20050113　　　　3　　　　　2006032403<br />
+4　　　　　a20050114　　　　4　　　　　2006032404
+</p>
+<p>
+	结果说明:<br />
+很明显,这里只显示出了 A.aID = B.bID的记录.这说明inner join并不以谁为基础,它只显示符合条件的记录.<br />
+--------------------------------------------<br />
+注:&nbsp;<br />
+LEFT JOIN操作用于在任何的 FROM 子句中，组合来源表的记录。使用 LEFT JOIN 运算来创建一个左边外部联接。左边外部联接将包含了从第一个（左边）开始的两个表中的全部记录，即使在第二个（右边）表中并没有相符值的记录。
+</p>
+<p>
+	语法：FROM table1 LEFT JOIN table2 ON table1.field1 compopr table2.field2
+</p>
+<p>
+	说明：table1, table2参数用于指定要将记录组合的表的名称。<br />
+field1, field2参数指定被联接的字段的名称。且这些字段必须有相同的数据类型及包含相同类型的数据，但它们不需要有相同的名称。<br />
+compopr参数指定关系比较运算符："="， "&lt;"， "&gt;"， "&lt;="， "&gt;=" 或 "&lt;&gt;"。
+</p>
+<p>
+	如果在INNER JOIN操作中要联接包含Memo 数据类型或 OLE Object 数据类型数据的字段，将会发生错误.&nbsp;
+</p>
+<p>
+	<br />
+</p>
+<p>
+	首先，每次联合查询都需要用圆括号括起来：<br />
+Select * FROM (aa LEFT JOIN bb ON aa.a = bb.a ) LEFT JOIN cc ONcc.a = bb.a;<br />
+注意：在使用join语句查询时，如果有加多个On条件，必须用括号括起来，如：<br />
+Select * FROM (aa LEFT JOIN bb ON aa.a=bb.a) LEFT JOIN cc ON(bb.a=cc.a and bb.b=cc.b)&nbsp;
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/673.html">Cookie详解与应用(java)</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/675.html">怎么让一个div水平居中</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

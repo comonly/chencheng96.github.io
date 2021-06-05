@@ -1,0 +1,392 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>ODBC接口技术/ADO接口技术  用ADO实现访问数据库_comonly.cn</title>
+<meta name="keywords" content="ODBC接口技术/ADO接口技术  用ADO实现访问数据库" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">ODBC接口技术/ADO接口技术  用ADO实现访问数据库</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-05-20</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	javaweb---jsp asp数据库框架
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	在ASP脚本中可以通过三种方式访问数据库：
+</p>
+<p>
+	1.IDC(Internet Database Connector)方式。
+</p>
+<p>
+	2.ADO(ActiveX Data Objects)方式。
+</p>
+<p>
+	3.RDS(Remote Data Service)方式。
+</p>
+<p>
+	ADO可以与ASP结合，建立建立数据库信息的主页内容，在主页画面执行SQL命令，让用户在浏览器画面中输入，更新和删除站点服务器的数据库信息；
+</p>
+<p>
+	ADO使用RecordSets对象作为数据库的主要接口；ADO可使用VBScript，JavaScript语言来控制数据库的访问；ADO可连接多重支持ODBC的数据库。
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	创建和配置ODBC数据源(Open Database Connectivity,开放式数据库互联)
+</p>
+<p>
+	ODBC一种开放的独立于厂商的API应用程序接口
+</p>
+<p>
+	数据库驱动程序使用Data Source Name(DSN)定位和标识特定的ODBC兼容数据库，将信息从Web应用程序传递给数据库。
+</p>
+<p>
+	DNS，指“应用程序用以请求一个连接到ODBC数据源的连接(Connection)的名字”，它是一个代表ODBC连接的符号。它隐藏了诸如数据库文件名，所在目录，数据库驱动程序，用户ID，密码等细节。
+</p>
+<p>
+	控制面板——管理工具——数据源ODBC，打开ODBC数据源管理器。其中
+</p>
+<p>
+	用户DSN：这是为特定用户建立的DSN，只有建立这个DSN的用户才能看到并使用它。
+</p>
+<p>
+	系统DSN：这种DSN可以被任何登录到系统中的用户使用。
+</p>
+<p>
+	文件DSN：在上面两种情况中，DSN的细节都储存在系统的注册表中，而文件DSN是存储在文件中，他可以与安装了相同驱动程序的用户共享。
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	用ADO实现访问数据库
+</p>
+<p>
+	ADO包括的七个对象：
+</p>
+<p>
+	<br />
+Command：定义对数据源进行操作的命令
+</p>
+Connection
+              ：建立一个数据源的连接
+<p>
+	Error：提供数据访问错误的细节
+</p>
+<p>
+	Field：表示一般数据类型的字段<br />
+Parameter：表示Command对象的参数。
+</p>
+<p>
+	Property：表示由数据源定义ADO对象的动态特性》<br />
+Recordset：数据库命令结果集对象。
+</p>
+<p>
+	<br />
+通过ADO访问数据库的基本步骤有五步：
+</p>
+<p>
+	1，创建数据库源名。
+</p>
+<p>
+	2，创建数据库连接。
+</p>
+<p>
+	3，创建数据对象。
+</p>
+<p>
+	4，操作数据库。
+</p>
+<p>
+	5，关闭数据对象和连接。
+</p>
+<p>
+	建立数据库连接首先创建Connection对象的实例。下面脚本创建Connection对象，接着打开数据库连接：
+</p>
+<p>
+	Set Conn=Server CreateObject("ADOBD.CONNECTION")
+</p>
+<p>
+	上述语句创建了连接对象Conn,接下来打开数据库连接，语法如下：
+</p>
+<p>
+	Conn.Open"dsn_name","username","password"
+</p>
+<p>
+	这里用到了DSN，“dsn_name"代表DSN名称。其后的两个参数是访问数据库的用户名和口令，为可选参数。在这种情况下，Connection对象的Open方法引用基于DSN的文件，其中包含关于数据库的位置和配置信息。也可以不引用DSN，直接显式引用程序，数据源，用户ID和密码。
+</p>
+<p>
+	如果访问Access数据库系统DSN，代码如下：
+</p>
+<p>
+	Set Conn=Server CreateObject("ADOBD.CONNECTION") <br />
+Conn.Open"test_dsn"
+</p>
+<p>
+	访问SQL Server数据库代码 ：
+</p>
+<p>
+	Set Conn=Server CreateObject("ADOBD.CONNECTION") <br />
+Conn.Open"test_dsn_sql","sa","passwd"
+</p>
+<p>
+	包含创建数据库时设定的账号和口令
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	RecordSet对象保存的是数据库命令结果集，即通常所说的记录集。创建记录集的方法如下：
+</p>
+<p>
+	Set RecordSet=Conn.Execute(sqtStr)
+</p>
+<p>
+	这条语句创建并打开对象RecordSet,其中Conn是先前创建的链接对象，SqlStr代表一条标准的SQL语句，例如：SqlStr="SELECT*FROM member"。
+</p>
+<p>
+	“Set RecordSet=Conn.Execute(sqtStr) ”该语句执行后，对象RecordSet中就保存了数据表member中的所有记录。
+</p>
+<p>
+	Execute方法的参数是一个标准的SQL语句，所以可以利用它方便地执行数据插入，修改，删除等操作。
+</p>
+<p>
+	1，插入操作
+</p>
+<p>
+	SqlStr="INSERT INTO member(id,username,sex) VALUES(1,小静，女）"
+</p>
+<p>
+	Conn.Execute(SqlStr)
+</p>
+<p>
+	2,删除操作
+</p>
+<p>
+	SqlStr="DELETE FROM member "
+</p>
+<p>
+	Conn.Execute(SqlStr)
+</p>
+<p>
+	3，更新操作
+</p>
+<p>
+	SqlStr="UPDATE member SET username='小明‘WHERE id='1'"
+</p>
+<p>
+	Conn.Execute(SqlStr)
+</p>
+<p>
+	在使用了ADO对象后，一定要记住关闭它，因为它使用了服务器的资源，如果不释放的话将导致服务器资源浪费并影响服务器性能。通过调用close实现关闭，然后释放它，代码为“Conn.Close”。
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	<a href="http://www.iyaka.cn/www root direction/web/myself/page/learning10.html">结构化查询语言SQL</a>
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	&nbsp;
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/727.html">ASP常用的对象和组件</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/729.html">结构化查询语言SQL</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,604 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Java Web之请求和响应【转】_comonly.cn</title>
+<meta name="keywords" content="Java Web之请求和响应【转】" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Java Web之请求和响应【转】</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">luoxn28</li>
+          <li class="lmname"><a href="https://www.cnblogs.com/luoxn28/p/5470760.html" target="_blank">https://www.cnblogs.com/luoxn28/p/5470760.html</a></li>
+          <li class="timer">2018-10-01</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	javaweb---jsp asp数据库框架
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> Servlet最主要作用就是处理客户端请求并作出回应，为此，针对每次请求，Web容器在调用service()之前都会创建两个对象，分别是HttpServletRequest和HttpServletResponse。其中HttpServletRequest封装HTTP请求消息，HttpServletResponse封装HTTP响应消息。需要注意的是，Web服务器运行过程中，每个Servlet都会只创建一个实例对象，不过每次请求都会调用Servlet实例的service(ServletRequest req, ServletResponse res)方法，这里HttpServletRequest是ServletRequest的子类，HttpServletResponse是ServletResponse的子类。<br />
+<br />
+<p>
+	HttpServletRequest和HttpServletResponse接口继承关系图如下所示：
+</p>
+<p>
+	<img src="https://images2015.cnblogs.com/blog/772134/201605/772134-20160509000054077-429668737.png" alt="" /> 
+</p>
+<p>
+	<br />
+</p>
+<h2 id='1、HttServletReoe'>
+	1、HttpServletResponse
+</h2>
+<p>
+	HttpServletResponse接口继承自ServletResponse接口，由于HTTP响应消息分为状态行、响应消息体、消息体三部分，因此，在HttpServletResponse接口中定义了向客户端发送响应状态码、响应消息头、响应消息体的方法。虽然HttpServletResponse接口中的方法较多，但是我们常用的也就是那么几个，如果用到其他的方法了可以阅读响应的源码或者相关资料就行了。
+</p>
+<p>
+	发送状态码相关函数
+</p>
+<table border="0" class="ke-zeroborder">
+	<tbody>
+		<tr>
+			<td>
+				方法
+			</td>
+			<td>
+				说明
+			</td>
+		</tr>
+		<tr>
+			<td>
+				public void setStatus(int sc)
+			</td>
+			<td>
+				设置响应消息状态码，Web服务器默认产生一个状态码为200的状态行
+			</td>
+		</tr>
+		<tr>
+			<td>
+				public void sendError(int sc)
+			</td>
+			<td rowspan="2">
+				发送表示错误信息的状态码，第二个方法还增加了一个用于提示说明的文本信息
+			</td>
+		</tr>
+		<tr>
+			<td>
+				public void sendError(int sc, String msg)
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	发送响应消息头相关函数
+</p>
+<table border="0" class="ke-zeroborder">
+	<tbody>
+		<tr>
+			<td>
+				方法
+			</td>
+			<td>
+				说明
+			</td>
+		</tr>
+		<tr>
+			<td>
+				public void addHeader(String name, String value)
+			</td>
+			<td rowspan="2">
+				设置HTTP响应头字段，name指定字段名称，value指定字段值。addHeader可以增加同名的响应头字段，setHeader则会覆盖同名的头字段
+			</td>
+		</tr>
+		<tr>
+			<td>
+				public void setHeader(String name, String value)
+			</td>
+		</tr>
+		<tr>
+			<td>
+				public void setContentLength(int len)
+			</td>
+			<td>
+				设置响应消息的实体内容的大小，单位为字节，即设置Content-Length字段的值
+			</td>
+		</tr>
+		<tr>
+			<td>
+				public void setContentType(String type)
+			</td>
+			<td>
+				设置Servlet输出内容的MIME类型，即设置Content-Type字段的值
+			</td>
+		</tr>
+		<tr>
+			<td>
+				public void setCharacterEncoding(String charset)
+			</td>
+			<td>
+				设置输出内容字符编码，即设置Content-Type字段的值，注意，该方法优先级比setContentType的高
+			</td>
+		</tr>
+		<tr>
+			<td>
+				public void sendRedirect(String location)
+			</td>
+			<td>
+				Servlet请求重定向
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	发送响应消息体相关函数
+</p>
+<table border="0" class="ke-zeroborder">
+	<tbody>
+		<tr>
+			<td>
+				方法
+			</td>
+			<td>
+				说明
+			</td>
+		</tr>
+		<tr>
+			<td>
+				public ServletOutputStream getOutputStream()
+			</td>
+			<td>
+				获取HttpServletResponse的字节输出流ServletOutputStram类型
+			</td>
+		</tr>
+		<tr>
+			<td>
+				public PrintWriter getWriter()
+			</td>
+			<td>
+				获取HttpServletResponse的字符输出流ServletWriter类型
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	中文输出乱码问题
+</p>
+<p>
+	计算机中的数据都是以二进制形式存储的，因此，传输文本时，就会发生字符的字节之间的转换。字符与字节之间的转换时通过查码表完成的，字符转换为字节的过程称为编码，字节转换为字符的过程称为解码，如果编码和解码使用的码表不一样，则会出现乱码问题。
+</p>
+<p>
+	注意：HttpServletResponse对象的字符输出流在编码时，默认采用的是ISO 8859-1编码，该编码方式不兼容中文，比如会将"中国"编码为"63 63"(在ISO 8959-1的码表中查不到的字符会显示63)。当浏览器对接收到的数据进行解码时，会默认采用GB2312，将"63"解码为"?"，浏览器就将"中国"两个字符解码为"??"。
+</p>
+<h2 id='2、HttServletRequet'>
+	2、HttpServletRequest
+</h2>
+<p>
+	HttpServletRequest接口继承ServletRequest接口，专门用于封状HTTP请求消息。由于HTTP请求信息包括请求行、请求头和请求体三部分，&nbsp;所以HttpServletRequest接口定义了获取请求行、请求头和请求体的相关方法。
+</p>
+<p>
+	获取请求行的相关方法
+</p>
+<table border="0" class="ke-zeroborder">
+	<tbody>
+		<tr>
+			<td>
+				方法
+			</td>
+			<td>
+				说明
+			</td>
+		</tr>
+		<tr>
+			<td>
+				public String getMethod()
+			</td>
+			<td>
+				获取HTTP请求方式，POST、GET等
+			</td>
+		</tr>
+		<tr>
+			<td>
+				public String getRequestURI()
+			</td>
+			<td>
+				获取请求行中资源名称部分
+			</td>
+		</tr>
+		<tr>
+			<td>
+				public String getQueryString()
+			</td>
+			<td>
+				获取请求行中的参数部分
+			</td>
+		</tr>
+		<tr>
+			<td>
+				public String getProtocol()
+			</td>
+			<td>
+				获取请求行中协议名称和版本，如HTTP 1.1
+			</td>
+		</tr>
+		<tr>
+			<td>
+				public String getContextPath()
+			</td>
+			<td>
+				获取请求URL中属于Web应用程序的路径
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	其实关于请求行的方法从方法名中就可以看出其作用，这里就不一一贴出来了。
+</p>
+<p>
+	获取请求消息头的相关方法
+</p>
+<table border="0" class="ke-zeroborder">
+	<tbody>
+		<tr>
+			<td>
+				方法
+			</td>
+			<td>
+				说明
+			</td>
+		</tr>
+		<tr>
+			<td>
+				public String getHeader(String name)
+			</td>
+			<td>
+				获取指定字段的值，如果没有返回null，如果有多个返回第一个值
+			</td>
+		</tr>
+		<tr>
+			<td>
+				public EnumerationgetHeaders(String name)
+			</td>
+			<td>
+				返回一个指定字段的Enumeration集合对象
+			</td>
+		</tr>
+		<tr>
+			<td>
+				public EnumerationgetHeaderNames()
+			</td>
+			<td>
+				返回一个包含所有字段的Enumeration集合对象
+			</td>
+		</tr>
+		<tr>
+			<td>
+				public String getContentType()
+			</td>
+			<td>
+				获取Content-Type字段的值
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	打印请求消息头字段的所有值
+</p>
+<div>
+	<br />
+</div>
+<p>
+	获取请求体的相关方法
+</p>
+<table border="0" class="ke-zeroborder">
+	<tbody>
+		<tr>
+			<td>
+				方法
+			</td>
+			<td>
+				说明
+			</td>
+		</tr>
+		<tr>
+			<td>
+				public ServletInputStream getInputStream()
+			</td>
+			<td>
+				获取请求的ServletInputStream对象，如果实体内容为非文本，只能通过getInputStream方法获取请求体消息体
+			</td>
+		</tr>
+		<tr>
+			<td>
+				public BufferedReader getReader()
+			</td>
+			<td>
+				获取请求的BufferedReader对象，该对象会将实体内容字节数据转换为指定字符集编码的文本字符串
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	获取请求参数
+</p>
+<table border="0" class="ke-zeroborder">
+	<tbody>
+		<tr>
+			<td>
+				方法
+			</td>
+			<td>
+				说明
+			</td>
+		</tr>
+		<tr>
+			<td>
+				public String getParameter(String name)
+			</td>
+			<td>
+				获取指定的参数值，没有该参数返回null
+			</td>
+		</tr>
+		<tr>
+			<td>
+				public EnumerationgetParameterNames()
+			</td>
+			<td>
+				返回一个包含所有参数名的Enumeration对象
+			</td>
+		</tr>
+		<tr>
+			<td>
+				public String[] getParameterValues(String name)
+			</td>
+			<td>
+				HTTP请求中可能有多个相同的参数，获取同一个参数名对应的所有参数值
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	获取请求参数实例见：<a href="http://www.cnblogs.com/xdp-gacl/p/3798347.html" target="_blank">http://www.cnblogs.com/xdp-gacl/p/3798347.html</a> 
+</p>
+<h2 id='3、RequetDitcher接口'>
+	3、RequestDispatcher接口
+</h2>
+<p>
+	当一个Web资源受到客户端请求后，如果希望服务器通知另外一个资源如处理请求，除了使用功能sendRedirect()实现重定向外，还可以通过RequestDispatcher接口的实例对象来实现，在ServletRequest接口中定义了一个获取RequestDispatcher对象的方法--getRequestDispatcher(String path)，它返回某个路径所指定资源的RequestDispatcher对象，参数path必须以"/"开头，用于表示当前Web应用的根目录，也就是path路径必须是在本Web程序中，否则会出现异常。
+</p>
+<p>
+	RequestDispatcher接口中方法
+</p>
+<table border="0" class="ke-zeroborder">
+	<tbody>
+		<tr>
+			<td>
+				方法
+			</td>
+			<td>
+				功能
+			</td>
+		</tr>
+		<tr>
+			<td>
+				public void forward(ServletRequest request, ServletResponse response)
+			</td>
+			<td>
+				将一个Servlet传递给另外一个Web资源，将请求传递给其他资源进行响应
+			</td>
+		</tr>
+		<tr>
+			<td>
+				public void include(ServletRequest request, ServletResponse response)
+			</td>
+			<td>
+				用于将其他资源作为当前响应内容包含进来
+			</td>
+		</tr>
+	</tbody>
+</table>
+<h2 id='4、参考资料'>
+	4、参考资料
+</h2>
+<p>
+	1、<a href="http://www.cnblogs.com/xdp-gacl/p/3798347.html">javaweb学习总结(十)——HttpServletRequest对象(一)</a> 
+</p>
+<p>
+	2、<a href="http://www.cnblogs.com/luoxn28/p/5460073.html">Java Web之Servlet技术</a> 
+</p>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/994.html">Android与服务器交互数据</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/996.html">Android中的Context</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.cnblogs.com/luoxn28/p/5470760.html" target="_blank">https://www.cnblogs.com/luoxn28/p/5470760.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#1、HttServletReoe">1、HttServletReoe</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#2、HttServletRequet">2、HttServletRequet</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#3、RequetDitcher接口">3、RequetDitcher接口</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#4、参考资料">4、参考资料</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

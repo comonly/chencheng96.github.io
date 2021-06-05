@@ -1,0 +1,641 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>java的4个作用域变量四大域_comonly.cn</title>
+<meta name="keywords" content="java的4个作用域变量四大域" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">java的4个作用域变量四大域</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-04-21</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	javaweb---jsp asp数据库框架
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <ol>
+	<li>
+		如果把变量放到pageContext里，就说明它的作用域是page，它的有效范围只在当前jsp页面里。 从把变量放到pageContext开始，到jsp页面结束，你都可以使用这个变量。&nbsp;&nbsp;
+	</li>
+	<li>
+		如果把变量放到request里，就说明它的作用域是request，它的有效范围是当前请求周期。 所谓请求周期，就是指从http请求发起，到服务器处理结束，返回响应的整个过程。在这个过程中可能使用forward的方式跳转了多个jsp页面，在这些页面里你都可以使用这个变量。&nbsp;
+	</li>
+	<li>
+		如果把变量放到session里，就说明它的作用域是session，它的有效范围是当前会话。所谓当前会话，就是指从用户打开浏览器开始，到用户关闭浏览器这中间的过程。这个过程可能包含多个请求响应。也就是说，只要用户不关浏览器，服务器就有办法知道这些请求是一个人发起的，整个过程被称为一个会话（session），而放到会话中的变量，就可以在当前会话的所有请求里使用。（会话范围）在第一次调用request.getSession()方法时，服务器会检查是否已经有对应的session。如果没有，就在内存中创建一个session并返回。当一短时间内（默认30分钟）session没有被使用，则服务器会销毁该session。若服务器非正常关闭，未到期的session也会跟着销毁。若调用session提供的invalidate()方法，可以立即销毁session。
+	</li>
+	<li>
+		如果把变量放到application里，就说明它的作用域是application，它的有效范围是整个应用。 整个应用是指从应用启动，到应用结束。没有说“从服务器启动，到服务器关闭”，是因为一个服务器可能部署多个应用，当然你关闭了服务器，就会把上面所有的应用都关闭了。 application作用域里的变量，它们的存活时间是最长的，如果不进行手工删除，它们就一直可以使用。与上述三个不同的是，application里的变量可以被所有用户共用。如果用户甲的操作修改了application中的变量，用户乙访问时得到的是修改后的值。这在其他scope中都是不会发生的，page, request, session都是完全隔离的，无论如何修改都不会影响其他人的数据。
+	</li>
+</ol>
+<p>
+	JSP的九大隐式对象——输入/输出对象
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |——request
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |——response
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; |——out
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; ——作用域通信对象
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;| —— pageContext
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;| ——request
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;|——session
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;| ——application
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ——Servlet对象
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;| ——page
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;| ——config
+</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ——错误对象
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; | ——exception
+</p>
+<h2 id='4大作用域获取对象的方法（j和jv中）'>
+	4大作用域获取对象的方法（jsp和java中）
+</h2>
+<ol>
+	<li>
+		PageContext域：
+	</li>
+	<ul>
+		<li>
+			在java或jsp中都可以直接通过"pageContext"获取PageContext对象。
+		</li>
+	</ul>
+	<li>
+		ServletRequest域（request域）：
+	</li>
+	<ul>
+		<li>
+			在java中直接通过doPost或doGet方法的参数request获得ServletRequest对象。
+		</li>
+		<li>
+			在jsp中直接用"request"或者pageContext.getRequest()使用ServletRequest对象。
+		</li>
+	</ul>
+	<li>
+		Httpsession域（session域）：
+	</li>
+	<ul>
+		<li>
+			在java中通过doPost或doGet方法的参数request通过request.getSession()获得Httpsession对象。
+		</li>
+		<li>
+			在jsp中直接用"session", request.getSession()或者pageContext.getSession()使用Httpsession对象。
+		</li>
+	</ul>
+	<li>
+		ServletContext域（application域）：
+	</li>
+	<ol>
+		<li>
+			在java中通过doPost或doGet方法的参数request通过request.getSession().getServletContext()或者用this.getServletContext()获得ServletContext对象。
+		</li>
+	</ol>
+	<ul>
+		<li>
+			在jsp中直接用"application", request.getSession()或者pageContext.getServletContext()使用Httpsession对象。
+		</li>
+	</ul>
+	<li>
+		除了上述方法外，在jsp页面中还可以通过范围序号获取、设置和移除不同作用域的值。因为使用都是通过PageContext对象来引用，故该方法在下面PageContext中进行说明。
+	</li>
+</ol>
+<p>
+	对上述所有对象（不管在java或者jsp中）都有3个基本方法：
+</p>
+<ol>
+	<li>
+		public void setAttribute(java.lang.String name,java.lang.Object value)
+	</li>
+	<li>
+		public java.lang.Object getAttribute(java.lang.String name)
+	</li>
+	<li>
+		public void removeAttribute(java.lang.String name)
+	</li>
+</ol>
+<p>
+	PageContext对象的findAttribute("name")方法：查找各个域中的属性（与getAttribute的不同）。依次在page，request，session（如果有效的话）和application Scope（范围）查找以name为名的Attribute，找到就返回对象，都找不到返回null。
+</p>
+<h3>
+	PageContext域
+</h3>
+<p>
+	page指当前页面有效。在一个jsp页面里有效。pageContext对象是JSP技术中最重要的一个对象，它代表JSP页面的运行环境，这个对象不仅封装了对其它8大隐式对象的引用，它自身还是一个域对象，可以用来保存数据。并且，这个对象还封装了web开发中经常涉及到的一些常用操作，例如引入和跳转其它资源、检索其它域对象中的属性等。
+</p>
+<p>
+	通过pageContext获得其他对象
+</p>
+<ol>
+	<li>
+		getException方法返回exception隐式对象
+	</li>
+	<li>
+		getPage方法返回page隐式对象
+	</li>
+	<li>
+		getRequest方法返回request隐式对象
+	</li>
+	<li>
+		getResponse方法返回response隐式对象
+	</li>
+	<li>
+		getServletConfig方法返回config隐式对象
+	</li>
+	<li>
+		getServletContext方法返回application隐式对象
+	</li>
+	<li>
+		getSession方法返回session隐式对象
+	</li>
+	<li>
+		getOut方法返回out隐式对象
+	</li>
+</ol>
+<span>pageContext对象的方法（下面三种方法在获得相应作用域对象后都可以使用）</span><br />
+<ol>
+	<li>
+		public void setAttribute(java.lang.String name,java.lang.Object value)
+	</li>
+	<li>
+		public java.lang.Object getAttribute(java.lang.String name)
+	</li>
+	<li>
+		public void removeAttribute(java.lang.String name)
+	</li>
+</ol>
+<span>pageContext对象中还封装了访问 其它域 的方法（通过scope指定对哪个对象进行操作）</span><br />
+<ol>
+	<li>
+		public java.lang.Object getAttribute(java.lang.String name,int scope)
+	</li>
+	<li>
+		public void setAttribute(java.lang.String name, java.lang.Object value,int scope)
+	</li>
+	<li>
+		public void removeAttribute(java.lang.String name,int scope)
+	</li>
+</ol>
+<span>scope取值代表各个域的常量</span><br />
+<ul>
+	<li>
+		PageContext.APPLICATION_SCOPE
+	</li>
+	<li>
+		PageContext.SESSION_SCOPE
+	</li>
+	<li>
+		PageContext.REQUEST_SCOPE
+	</li>
+	<li>
+		PageContext.PAGE_SCOPE
+	</li>
+</ul>
+<pre class="prettyprint lang-java">//通过范围序号获取不同作用域的值
+范围1内的值：pageContext.getAttribute("name",1)
+范围2内的值：pageContext.getAttribute("name",2)
+范围3内的值：pageContext.getAttribute("name",3)
+范围4内的值：pageContext.getAttribute("name",4)
+
+//移除不同作用域的值【从最小的范围page开始，然后是reques、session以及application】
+pageContext.removeAttribute("name",3);
+pageContext.setAttribute("name","宇宙",4);
+
+//值的查找
+pageContext.findAttribute("name")
+
+//属性name的范围
+pageContext.getAttributesScope("name")</pre>
+<h3>
+	ServletRequest域（request域）
+</h3>
+<p>
+	a) 获得客户机信息的方法<br />
+&nbsp; &nbsp; getRequestURL方法返回客户端发出请求时的完整URL。<br />
+&nbsp; &nbsp; getRequestURI方法返回请求行中的资源名部分。<br />
+&nbsp; &nbsp; getQueryString 方法返回请求行中的参数部分。<br />
+&nbsp; &nbsp; getRemoteAddr方法返回发出请求的客户机的IP地址<br />
+&nbsp; &nbsp; getRemoteHost方法返回发出请求的客户机的完整主机名<br />
+&nbsp; &nbsp; getRemotePort方法返回客户机所使用的网络端口号<br />
+&nbsp; &nbsp; getLocalAddr方法返回WEB服务器的IP地址。<br />
+&nbsp; &nbsp; getLocalName方法返回WEB服务器的主机名<br />
+&nbsp; &nbsp; getMethod得到客户机请求方式<br />
+b) 获得客户机请求头<br />
+&nbsp; &nbsp; getHeader(string name)方法<br />
+&nbsp; &nbsp; getHeaders(String name)方法<br />
+&nbsp; &nbsp; getHeaderNames方法&nbsp;<br />
+c) 获得客户机请求参数(客户端提交的数据)<br />
+&nbsp; &nbsp; getParameter(name)方法，获取指定名称的参数值<br />
+&nbsp; &nbsp; getParameterValues（String name）方法，获取指定名称参数的所有值数组。它适用于一个参数名对应多个值的情况。如页面表单中的复选框，多选列表提交的值。<br />
+&nbsp; &nbsp; getParameterNames方法<br />
+&nbsp; &nbsp; getParameterMap方法
+</p>
+<h3>
+	Httpsession域（session域）
+</h3>
+<h4>
+	1. 方法
+</h4>
+<blockquote>
+</blockquote>
+<span>public boolean isNew()返回是否为一个新的客户端，或者客户端是否拒绝加入session</span><br />
+<span>public void invalidate()将session无效化，解绑任何与该session绑定的对象</span><br />
+<span>public Enumeration getAttributeNames()返回Session对象中存储的每一个属性对象，其结果为一个类举的实例．</span><br />
+<span>public long getCreationTime()返回session对象被创建的时间， 以毫秒为单位，最小单位为千分之一秒，从1970年1月1号凌晨开始算起</span><br />
+<span>public String getId()此方法返回惟一的标识，这些标识为每个Session而产生．当只有一个单一的值与一个Session联合时，或当日志信息与先前的Session有关时，它被当做键名用．</span><br />
+<span>public long getLastAccessedTime()返回客户端最后访问的时间，以毫秒为单位，最小单位为千分之一秒，从1970年1月1号凌晨开始算起</span><br />
+<span>public void setMaxInactiveInterval(int interval)用来指定时间，以秒为单位，servlet容器将会在这段时间内保持会话有效</span><br />
+<span>public int getMaxInactiveInterval()返回最大时间间隔，以秒为单位，servlet 容器将会在这段时间内保持会话打开，负值表示Session永远不会超时</span><br />
+<span>public void setAttribute(String name, Object value)&nbsp;使用指定的名称和值来产生一个对象并绑定到session中</span><br />
+<span>public Object getAttribute(String name)返回session对象中与指定名称绑定的对象，如果不存在则返回null</span><br />
+<span>public void removeAttribute(String name)移除session中指定名称的对象</span><br />
+<blockquote>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+</blockquote>
+<h4>
+	2. 删除Session数据
+</h4>
+<span>public void removeAttribute(String name)&nbsp; 方法来移除指定的属性。</span><br />
+<span>public void invalidate() 方法来使整个session无效。</span><br />
+<span>public void setMaxInactiveInterval(int interval)&nbsp; 方法来设置session超时。</span><br />
+<h4>
+	3. 退出登录
+</h4>
+<p>
+	支持servlet2.4版本的服务器，可以调用 logout()方法来登出用户，并且使所有相关的session无效。
+</p>
+<h4>
+	4. 设置服务器的超时时间，自动删除session
+</h4>
+<span>如果使用的是Tomcat，可以向下面这样配置web.xml文件：&lt;session-config&gt;&nbsp; &nbsp; &lt;session-timeout&gt;15&lt;/session-timeout&gt;&nbsp; &lt;/session-config&gt; 超时以分钟为单位，Tomcat中的默认的超时时间是30分钟。</span> 
+<h3>
+	ServletContext域（application域）
+</h3>
+<p>
+	ServletContext类可用于表示应用程序的上下文。一个ServletContext类的对象表示一个Web应用程序的上下文。具体来说：在Web服务器中，提供了一个Web应用程序的运行时环境，专门负责Web应用程序的部署、编译、运行以及生命周期的管理，通过ServletContext类，可以获取Web应用程序的运行时环境信息。JSP引擎、Servlet引擎、JSP容器和Servlet容器，都是指Web服务器，Web服务器用于管理所有Web应用程序。
+</p>
+<h4>
+	1. 读取资源文件
+</h4>
+<span>使用ServletContext接口可以直接访问web应用中的静态内容文档结构.包括HTML,GIF和JPEG文件。如以下方法:</span><br />
+<span>&nbsp;&nbsp;&nbsp;&nbsp;.getResource()</span><br />
+<span>&nbsp;&nbsp;&nbsp;&nbsp;.getResourceAsStream()</span><br />
+<span>这两个方法的参数都是以"/"开头的字符串,表示资源相对于context根的相对路径.文档结构可以存在于服务器文件系统,或是war包中,或是在远程服务器上,抑或其他位置。不可以用来获得动态资源,比如,getResource("/index.jsp"),这个方法将返回该jsp文件的源码,而不是动态页面.可以用 "Dispatching Requests" 获得动态内容.列出web应用中可被访问的资源,可以使用getResourcePaths(String path)方法。</span> 
+<h4>
+	2. application对象的常用方法
+</h4>
+<table border="1" cellpadding="0" cellspacing="0" bordercolor="#000000">
+	<tbody>
+		<tr>
+			<td>
+				方法名
+			</td>
+			<td>
+				描述
+			</td>
+		</tr>
+		<tr>
+			<td>
+				String&nbsp;getAttribute(String&nbsp;name)
+			</td>
+			<td>
+				根据属性名称获取属性值。
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Enumeration&nbsp;getAttributeNames()
+			</td>
+			<td>
+				获取所有的属性名称。
+			</td>
+		</tr>
+		<tr>
+			<td>
+				void&nbsp;setAttribute(String&nbsp;name,&nbsp;Object&nbsp;object)
+			</td>
+			<td>
+				设置属性，指定属性名称和属性值。
+			</td>
+		</tr>
+		<tr>
+			<td>
+				void&nbsp;removeAttribute(String&nbsp;name)
+			</td>
+			<td>
+				根据属性名称删除对应的属性。
+			</td>
+		</tr>
+		<tr>
+			<td>
+				ServletContext&nbsp;getContext(String&nbsp;uripath)
+			</td>
+			<td>
+				获取指定URL的ServletContext对象。
+			</td>
+		</tr>
+		<tr>
+			<td>
+				String&nbsp;getContextPath()
+			</td>
+			<td>
+				获取当前Web应用程序的根目录。
+			</td>
+		</tr>
+		<tr>
+			<td>
+				String&nbsp;getInitParameter(String&nbsp;name)
+			</td>
+			<td>
+				根据初始化参数名称，获取初始化参数值。
+			</td>
+		</tr>
+		<tr>
+			<td>
+				int&nbsp;getMajorVersion()
+			</td>
+			<td>
+				获取Servlet&nbsp;API的主版本号。
+			</td>
+		</tr>
+		<tr>
+			<td>
+				int&nbsp;getMinorVersion()
+			</td>
+			<td>
+				获取Servlet&nbsp;API的次版本号。
+			</td>
+		</tr>
+		<tr>
+			<td>
+				String&nbsp;getMimeType(String&nbsp;file)
+			</td>
+			<td>
+				获取指定文件的MIME&nbsp;类型。
+			</td>
+		</tr>
+		<tr>
+			<td>
+				String&nbsp;getServletInfo()
+			</td>
+			<td>
+				获取当前Web服务器的版本信息。
+			</td>
+		</tr>
+		<tr>
+			<td>
+				String&nbsp;getServletContextName()
+			</td>
+			<td>
+				获取当前Web应用程序的名称。
+			</td>
+		</tr>
+		<tr>
+			<td>
+				void&nbsp;log(String&nbsp;message)
+			</td>
+			<td>
+				将信息写入日志文件中。
+			</td>
+		</tr>
+	</tbody>
+</table>
+<h4>
+	3. 通过web.xml文件为整个web应用配置context域
+</h4>
+<span>修改web.xml配置文件，加入以下内容</span><br />
+<span>&lt;context -param&gt;</span><br />
+<span>&lt;param-name&gt;data&lt;/param-name&gt;</span><br />
+<span>&lt;param-value&gt;Hello world !&lt;/param-value&gt;</span><br />
+<span>&lt;/context - param&gt;</span><br />
+<span>从Servlet中访问这些初始化参数：</span><span>ServletContext application=this.getServletContext();</span><span>application.getInitParameter("data");//获取值为"</span><span>Hello world !</span><span>"</span></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/922.html">java web编码问题解决方案</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/924.html">页面分块的设计思想（使用include标签导入公用页面部分及域变量的使用策略）</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#4大作用域获取对象的方法（j和jv中）">4大作用域获取对象的方法（j和jv中）</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,229 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>为什么要使用自增ID作为主键_comonly.cn</title>
+<meta name="keywords" content="为什么要使用自增ID作为主键" />
+<meta name="description" content="1.从业务上来说
+在设计数据库时不需要费尽心思去考虑设置哪个字段为主键。然后是这些字段只是理论上是唯一的，例如使用图书编号为主键，这个图书编号只是理论上来说是唯一的，但实践中可能会出现重复的&nbsp; &nbsp; &nbsp; &nbsp; 情况。所以还是设置一个与业务无关的自增ID作为主键，然后增加一个图书编号的唯一性约束。
+2.从技术上来说
+如果表使用自增主键，那么每次插入新的记录，记录就会顺序添加到当前索引节点的后续位置，当一页写满，就会自动开辟一个新的页。 总的来说就是可以提高查询和插入" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">为什么要使用自增ID作为主键</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"> Mr-blue</li>
+          <li class="lmname"><a href="https://www.cnblogs.com/lanqi/p/10185172.html" target="_blank">https://www.cnblogs.com/lanqi/p/10185172.html</a></li>
+          <li class="timer">2020-10-04</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>1.从业务上来说
+在设计数据库时不需要费尽心思去考虑设置哪个字段为主键。然后是这些字段只是理论上是唯一的，例如使用图书编号为主键，这个图书编号只是理论上来说是唯一的，但实践中可能会出现重复的&nbsp; &nbsp; &nbsp; &nbsp; 情况。所以还是设置一个与业务无关的自增ID作为主键，然后增加一个图书编号的唯一性约束。
+2.从技术上来说
+如果表使用自增主键，那么每次插入新的记录，记录就会顺序添加到当前索引节点的后续位置，当一页写满，就会自动开辟一个新的页。 总的来说就是可以提高查询和插入</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 1.从业务上来说<br />
+在设计数据库时不需要费尽心思去考虑设置哪个字段为主键。然后是这些字段只是理论上是唯一的，例如使用图书编号为主键，这个图书编号只是理论上来说是唯一的，但实践中可能会出现重复的&nbsp; &nbsp; &nbsp; &nbsp; 情况。所以还是设置一个与业务无关的自增ID作为主键，然后增加一个图书编号的唯一性约束。<br />
+2.从技术上来说<br />
+如果表使用自增主键，那么每次插入新的记录，记录就会顺序添加到当前索引节点的后续位置，当一页写满，就会自动开辟一个新的页。 总的来说就是可以提高查询和插入的性能。<br />
+对InnoDB来说<br />
+1: 主键索引既存储索引值，又在叶子节点中存储行的数据，也就是说数据文件本身就是按照b+树方式存放数据的。<br />
+2: 如果没有定义主键，则会使用非空的UNIQUE键做主键 ; 如果没有非空的UNIQUE键，则系统生成一个6字节的rowid做主键;<br />
+聚簇索引中，N行形成一个页（一页通常大小为16K)。如果碰到不规则数据插入时，为了保持B+树的平衡，会造成频繁的页分裂和页旋转，插入速度比较慢。所以聚簇索引的主键值应尽量是连续增长的值，而不是随机值(不要用随机字符串或UUID)。<br />
+故对于InnoDB的主键，尽量用整型，而且是递增的整型。这样在存储/查询上都是非常高效的。<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1817.html">锁的分类以及相关讲解</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1819.html">redis排行榜数据处理topk显示内存置换导致的数据丢失问题</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.cnblogs.com/lanqi/p/10185172.html" target="_blank">https://www.cnblogs.com/lanqi/p/10185172.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,358 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>CRT detected that the application wrote to memory after end of heap buffer_comonly.cn</title>
+<meta name="keywords" content="CRT detected that the application wrote to memory after end of heap buffer" />
+<meta name="description" content="HEAP CORRUPTION DETECTED: after Normal block
+
+
+	
+
+
+	用new申请了一个特定大小的内存，但是后期对这块内存进行复制，可能超过了该内存大小的范围，再进行delete的时候，就会报错。
+
+
+	
+
+
+	1、heap corruption detected
+
+http://vopit.blog.51cto.com/2400931/645980
+
+heap corruption detected:after normal block(" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">CRT detected that the application wrote to memory after end of heap buffer</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-10-16</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>HEAP CORRUPTION DETECTED: after Normal block
+
+
+	
+
+
+	用new申请了一个特定大小的内存，但是后期对这块内存进行复制，可能超过了该内存大小的范围，再进行delete的时候，就会报错。
+
+
+	
+
+
+	1、heap corruption detected
+
+http://vopit.blog.51cto.com/2400931/645980
+
+heap corruption detected:after normal block(</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	HEAP CORRUPTION DETECTED: after Normal block
+</p>
+<p>
+	<br />
+</p>
+<p>
+	用new申请了一个特定大小的内存，但是后期对这块内存进行复制，可能超过了该内存大小的范围，再进行delete的时候，就会报错。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	1、heap corruption detected
+</p>
+http://vopit.blog.51cto.com/2400931/645980<br />
+<br />
+heap corruption detected:after normal block(#xxx) at 0x xxxxxxxx<br />
+crt detected that the application wrote to menory after end of heap buffer<br />
+这是典型的内存溢出错误,常在内存的delete处发生,而且一般在debug版本中可能出现,release版本中可能并不报错.<br />
+出现这个错误的原因一般都是操作new申请的内存溢出,因为在c++中,如果用new分配一段内存,操作的时候改变了该部分的大小,在delete时就会出错.比如说如下部分:<br />
+char* p=new char[5];<br />
+strcpy(p,"aaaaa");<br />
+delete[] p;<br />
+这段代码就会出错,因为申请了一个size为5的内存,但是strcpy过去了一个size为6的字符串,因此破坏了这个指针,运行debug版本的时候就会出现先前的错误,但是在release版本中,溢出一个字节的内存很有可能是没有错误的,然后潜在的隐患是肯定存在的,因此,我们在debug遇到这样的错误时候一定要仔细检查对new出的指针的操作.<br />
+<br />
+***************拷贝时，内容超出申请的空间***********<br />
+如memcpy的时候，size参数比new出来的空间还大<br />
+<br />
+<br />
+<br />
+2、heap corruption detected after normal block<br />
+http://hi.baidu.com/linzch/blog/item/3ceb4dedef60e7d9b31cb1e5.html<br />
+*********一般是内存溢出错误。需要检查指针对内存的申请情况*************<br />
+<br />
+3、 heap corruption detected<br />
+http://blog.csdn.net/fjz13/article/details/2535126<br />
+**********sscanf(str, "X", &amp;pCmd[i]);中pCmd分配的空间不足************<br />
+<br />
+4、HEAP CORRUPTION DETECTED：after Normal block(#***) at 0x****.CRT detected<br />
+that application wrote memory after end of heap buffer.<br />
+http://bbs.ednchina.com/BLOG_ARTICLE_2103923.HTM<br />
+错误原因：以对内在操作的过程中，所写的地址超出了，所分配内在的边界<br />
+解决办法：在可能出错的代码处，使用_CrtCheckMemory进行检测错误的现象是这样的：<br />
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	delete 只能用来删除用new分配的空间。<br />
+你用X=new int；那么这时X保存的是你向系统申请的空间的地址(new int的地址)，这个地址你可以用delete把它释放。但是你在后面写着X=&amp;varOne，那么这时X保存的是varOne变量的地址，这个变量是局部变量，函数返回时会自动释放的而不是你用delete释放的。你用了delete把varOne释放就是不合法的，确切的说varOne变量在栈区（内存的栈里头），而你用new分配的空间在堆里头，他们的内存区域是不同的，不能乱来。这里错误的原因是你把系统分配给你的varOne释放了导致错误，你释放的应该是new int的空间，而这个空间的地址本来用X保存的，但是你后面改了X的地址指向varOne，导致释放了varOne导致错误，因为他们内存区域不同，delete用于释放堆区的数据，而varOne是在栈区的。对于局部变量是放在栈区的，如果我们向系统申请空间，那么这个空间位于堆区，delete用于释放堆中的存储空间，不能胡来
+</p>
+<p>
+	<br />
+</p>
+<p>
+	delete详解：首先调用析构函数，完成类成员的释放，比如类成员有vector也指向了堆上的内存，就需要在析构函数中同样使用delete释放这块内存，或者说它自身处于一个容器当中，就需要在这个容器中erase它<br />
+<br />
+然后再free掉整个对象的内存；<br />
+<br />
+delete b过后，b仍然指向改内存，即地址不变，但指针可能为悬垂指针，访问它可能带来意想不到的结果，也可能正确访问，不确定，所以建议delete后，把指针设置成NULL，后面也可根据指针是否为NULL判断是否可用
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1504.html">TCP和UDP的区别</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1506.html">Error C2061:语法错误</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="c++中delete和析构函数之间的区别">
+							<h2 style="display:inline;color:#5BC648;">c++中delete和析构函数之间的区别</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-10-18&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p style="color:#393939;font-family:verdana, " font-size:14px;background-color:#faf7ef;"="">
+	delete=1.调用析构函数，释放对象中的成员资源
+	</p>
+<p style="color:#393939;font-family:verdana, " font-size:14px;background-color:#faf7ef;"="">
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2.归还对象空间（free）
+</p>
+<p style="color:#393939;font-family:verdana, " font-size:14px;background-color:#faf7ef;"="">
+	其中在调用析构函数的时候，有可能还会对其他对象进行delete，然后调用这个对象的析构函数。。。
+	</p>
+<p style="color:#393939;font-family:verdana, " font-size:14px;background-color:#faf7ef;"="">
+	看这个例子：
+</p>
+<p style="color:#393939;font-family:verdana, " font-size:14px;background-color:#faf7ef;"="">
+	转载原文地址：
+	</p>
+<p style="color:#393939;font-family:verdana, " font-size:14px;background-color:#faf7ef;"="">
+	https://www.cnblogs.com/wycnb/p/4664934.html
+</p>
+<p style="color:#393939;font-family:verdana, " font-size:14px;background-color:#faf7ef;"="">
+	delete用于释放new在堆中动态生成的对象空间。<br />
+释放时会自动调用类的析构函数，在析构函数中用于释放类内部动态分配的得到的资源。
+	</p>
+<p style="color:#393939;font-family:verdana, " font-size:14px;background-color:#faf7ef;"="">
+	然后delete再释放整个对象所占的内存空间
+</p>
+<p style="color:#393939;font-family:verdana, " font-size:14px;background-color:#faf7ef;"=""><br />
+	</p>
+<p style="color:#393939;font-family:verdana, " font-size:14px;background-color:#faf7ef;"="">1、new/delete是C++的操作符，而malloc/free是C中的函数。<br />
+2、new做两件事，一是分配内存，二是调用类的构造函数；同样，delete会调用类的析构函数和释放内存。而malloc和free只是分配和释放内存。<br />
+3、new建立的是一个对象，而malloc分配的是一块内存；new建立的对象可以用成员函数访问，不要直接访问它的地址空间；malloc分配的是一块内存区域，用指针访问，可以在里面移动指针；new出来的指针是带有类型信息的，而malloc返回的是void指针。<br />
+4、new/delete是保留字，不需要头文件支持；malloc/free需要头文件库函数支持。
+</p>
+<p style="color:#393939;font-family:verdana, " font-size:14px;background-color:#faf7ef;"=""><br />
+	</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#c++中delete和析构函数之间的区别">c++中delete和析构函数之间的区别</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

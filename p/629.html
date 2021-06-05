@@ -1,0 +1,373 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>表单对象—JavaScript_comonly.cn</title>
+<meta name="keywords" content="表单对象—JavaScript" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">表单对象—JavaScript</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-03-13</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">JavaScript,表单对象</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	表单对象代表一个HTML表单，通常在document对象的属性forms[]数组元素中可以找到表单对象。
+</p>
+<p>
+	表单对象（form）是document对象的一个子对象，代表一个HTML表单，JavaScript为每一个HTML表单&lt;form&gt;创建一个表单对象，可以在document对象属性的forms[]数组中找到这些表单对象。
+</p>
+<p>
+	获取表单对象的方法：
+</p>
+<p>
+	<em>document.forms[i];</em> &nbsp; &nbsp;//在document对象属性的forms[]数组中找到这些表单对象。
+</p>
+<p>
+	<em>document.formsname; </em>&nbsp; &nbsp;//通过&lt;form&gt;标签的name属性来获取表单对象。
+</p>
+<h2 id='表单对象的属性'>
+	表单对象的属性
+</h2>
+<p>
+	<table class="dataintable ke-zeroborder" style="margin:10px 0px 0px;padding:0px;border:1px solid #AAAAAA;width:700px;">
+		<tbody>
+			<tr>
+				<th style="border:1px solid #AAAAAA;vertical-align:baseline;">
+					集合
+				</th>
+				<th style="border:1px solid #AAAAAA;vertical-align:baseline;">
+					描述
+				</th>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					elements[]
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					包含表单中所有元素的数组。数组中的对象可以是button对象，checkbox对象，hidden对象，password对象，radio对象，select对象，submit对象，text对象，textarea对象
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</p>
+<h2 id='Form对象属性'>
+	Form 对象属性
+</h2>
+<table class="dataintable ke-zeroborder" style="margin:10px 0px 0px;padding:0px;border:1px solid #AAAAAA;width:700px;">
+	<tbody>
+		<tr>
+			<th style="border:1px solid #AAAAAA;vertical-align:baseline;">
+				属性
+			</th>
+			<th style="border:1px solid #AAAAAA;vertical-align:baseline;">
+				描述
+			</th>
+		</tr>
+		<tr>
+			<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+				acceptCharset
+			</td>
+			<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+				服务器可接受的字符集。
+			</td>
+		</tr>
+		<tr>
+			<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+				action
+			</td>
+			<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+				设置或返回表单的 action 属性。
+			</td>
+		</tr>
+		<tr>
+			<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+				enctype
+			</td>
+			<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+				设置或返回表单用来编码内容的 MIME 类型。
+			</td>
+		</tr>
+		<tr>
+			<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+				id
+			</td>
+			<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+				设置或返回表单的 id。
+			</td>
+		</tr>
+		<tr>
+			<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+				length
+			</td>
+			<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+				返回表单中的元素数目。相当于elements[]数组的长度。
+			</td>
+		</tr>
+		<tr>
+			<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+				method
+			</td>
+			<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+				设置或返回将数据发送到服务器的 HTTP 方法。分为get和post，默认为get方式
+			</td>
+		</tr>
+		<tr>
+			<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+				name
+			</td>
+			<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+				设置或返回表单的名称。
+			</td>
+		</tr>
+		<tr>
+			<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+				target
+			</td>
+			<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+				设置或返回表单提交结果的 Frame 或 Window 名。
+			</td>
+		</tr>
+	</tbody>
+</table>
+<h2 id='表单对象的方法'>
+	表单对象的方法
+</h2>
+<p>
+	<table class="dataintable ke-zeroborder" style="margin:10px 0px 0px;padding:0px;border:1px solid #AAAAAA;width:700px;">
+		<tbody>
+			<tr>
+				<th style="border:1px solid #AAAAAA;vertical-align:baseline;">
+					方法
+				</th>
+				<th style="border:1px solid #AAAAAA;vertical-align:baseline;">
+					描述
+				</th>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					reset()
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					把表单的所有输入元素重置为它们的默认值。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					submit()
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;">
+					提交表单。
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</p>
+<h2 id='表单对象的事件'>
+	表单对象的事件
+</h2>
+<p>
+	reset：重置表单时激发，返回一个布尔值，用于决定是否重置表单
+</p>
+<p>
+	submit：提交表单时激发，返回一个布尔值，用于决定是否提交表单
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/628.html">cookie—JavaScript</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/630.html">表单对象的应用—JavaScript</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#表单对象的属性">表单对象的属性</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Form对象属性">Form对象属性</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#表单对象的方法">表单对象的方法</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#表单对象的事件">表单对象的事件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

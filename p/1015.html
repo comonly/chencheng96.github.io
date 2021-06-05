@@ -1,0 +1,248 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>十大算法【转】_comonly.cn</title>
+<meta name="keywords" content="十大算法【转】" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">十大算法【转】</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-10-06</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	机器学习算法分析
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	1、蒙特卡罗算法（该算法又称随机性模拟算法，是通过计算机仿真来解决问题的算法，同时可以通过模拟可以来检验自己模型的正确性，是比赛时必用的方法）<br />
+2、数据拟合、参数估计、插值等数据处理算法（比赛中通常会遇到大量的数据需要处理， 而处理数据的关键就在于这些算法，通常使用Matlab作为工具）<br />
+3、线性规划、整数规划、多元规划、二次规划等规划类问题（建模竞赛大多数问题属于最优化问题，很多时候这些问题可以用数学规划算法来描述，通常使用Lindo、Lingo软件实现）<br />
+4、图论算法（这类算法可以分为很多种，包括最短路、网络流、二分图等算法，涉及到图论的问题可以用这些方法解决，需要认真准备）<br />
+5、动态规划、回溯搜索、分治算法、分支定界等计算机算法（这些算法是算法设计中比较常用的方法，很多场合可以用到竞赛中）<br />
+6、最优化理论的三大非经典算法：模拟退火法、神经网络、遗传算法（这些问题是用来解决一些较困难的最优化问题的算法，对于有些问题非常有帮助，但是算法的实现比较困难，需慎重使用） <br />
+7、网格算法和穷举法（网格算法和穷举法都是暴力搜索最优点的算法，在很多竞赛题中有应用，当重点讨论模型本身而轻视算法的时候，可以使用这种暴力方案，最好使用一些高级语言作为编程工具）<br />
+8、一些连续离散化方法（很多问题都是实际来的，数据可以是连续的，而计算机只认的是离散的数据，因此将其离散化后进行差分代替微分、求和代替积分等思想是非常重要的）<br />
+9、数值分析算法（如果在比赛中采用高级语言进行编程的话，那一些数值分析中常用的算法比如方程组求解、矩阵运算、函数积分等算法就需要额外编写库函数进行调用）<br />
+10、图象处理算法（赛题中有一类问题与图形有关，即使与图形无关，论文中也应该要不乏图片的，这些图形如何展示以及如何处理就是需要解决的问题，通常使用Matlab进行处理）
+</p>
+<div>
+	<br />
+</div>
+一、蒙特卡罗算法 1946年，美国拉斯阿莫斯国家实验室的三位科学家John von Neumann,Stan Ulam和Nick Metropolis共同发明了，蒙特卡罗方法。此算法被评为20世纪最伟大的十大算法之一 。蒙特卡罗方法（Monte Carlo method），又称随机抽样或统计模拟方法，是一种以概率统计理论为指导的一类非常重要的数值计算方法。此方法使用随机数（或更常见的伪随机数）来解决很多计算问题的方法。由于传统的经验方法由于不能逼近真实的物理过程，很难得到满意的结果，而蒙特卡罗方法由于能够真实地模拟实际物理过程，故解决问题与实际非常符合，可以得到很圆满的结果。<br />
+蒙特卡罗方法的基本原理及思想如下： 当所求解问题是某种随机事件出现的概率，或者是某个随机变量的期望值时，通过某种“实验”的方法，以这种事件出现的频率估计这一随机事件的概率，或者得到这个随机变量的某些数字特征，并将其作为问题的解。 有一个例子可以使你比较直观地了解蒙特卡洛方法：假设我们要计算一个不规则图形的面积，那么图形的不规则程度和分析性计算（比如，积分）的复杂程度是成正比的。蒙特卡洛方法是怎么计算的呢？假想你有一袋豆子，把豆子均匀地朝这个图形上撒，然后数这个图形之中有多少颗豆子，这个豆子的数目就是图形的面积。当你的豆子越小，撒的越多的时候，结果就越精确。在这里我们要假定豆子都在一个平面上，相互之间没有重叠。蒙特卡罗方法通过抓住事物运动的几何数量和几何特征，利用数学方法来加以模拟，即进行一种数字模拟实验。它是以一个概率模型为基础，按照这个模型所描绘的过程，通过模拟实验的结果，作为问题的近似解。蒙特卡罗方法与一般计算方法有很大区别，一般计算方法对于解决多维或因素复杂的问题非常困难，而蒙特卡罗方法对于解决这方面的问题却比较简单。其特点如下：<br />
+I、 直接追踪粒子，物理思路清晰，易于理解。<br />
+II、 采用随机抽样的方法，较真切的模拟粒子输运的过程，反映了统计涨落的规律。<br />
+III、不受系统多维、多因素等复杂性的限制，是解决复杂系统粒子输运问题的好方法。等等。<br />
+<br />
+二、数据拟合、参数估计、插值等数据处理算法我们通常会遇到大量的数据需要处理，而处理数据的关键就在于这些算法，通常使用Matlab作为工具。数据拟合在数学建模比赛中中有应用，与图形处理有关的问题很多与拟合有关系，一个例子就是98年数学建模美国赛A题，生物组织切片的三维插值处理，94年A题逢山开路，山体海拔高度的插值计算，还有吵的沸沸扬扬可能会考的“非典”问题也要用到数据拟合算法，观察数据的走向进行处理。此类问题在 MATLAB 中有很多现成的函数可以调用，熟悉MATLAB，这些方法都能游刃有余的用好。<br />
+<br />
+三、线性规划、整数规划、多元规划、二次规划等规划类问题数学建模竞赛中很多问题都和数学规划有关，可以说不少的模型都可以归结为一组不等式作为约束条件、几个函数表达式作为目标函数的问题，遇到这类问题，求解就是关键了，比如98年B题，用很多不等式完全可以把问题刻画清楚，因此列举出规划后用 Lindo 、Lingo 等软件来进行解决比较方便，所以还需要熟悉这两个软件。<br />
+<br />
+四、图论算法这类问题算法有很多，包括： Dijkstra 、 Floyd 、 Prim 、 Bellman-Ford，最大流，二分匹配等问题。关于此类图论算法，可参考Introduction to Algorithms--算法导论，关于图算法的第22章-第26章。同时，本BLOG内经典算法研究系列，对Dijkstra算法有所简单描述，经典算法研究系列：二、Dijkstra 算法初探。<br />
+<br />
+五、动态规划、回溯搜索、分治算法、分支定界等计算机算法在数学建模竞赛中，如:92年B题用分枝定界法，97年B题是典型的动态规划问题，此外98年B题体现了分治算法。这方面问题和 ACM 程序设计竞赛中的问题类似，推荐看一下算法导论，与《计算机算法设计与分析》（电子工业出版社）等与计算机算法有关的书。<br />
+<br />
+六、最优化理论的三大经典算法：模拟退火法、神经网络、遗传算法这十几年来最优化理论有了飞速发展，模拟退火法、神经网络、遗传算法这三类算法发展很快。在数学建模竞赛中：比如97年A题的模拟退火算法,00年B题的神经网络分类算法，01年B题这种难题也可以使用神经网络，还有美国竞赛89年A题也和BP算法有关系，当时是86年刚提出BP算法，89年就考了，说明赛题可能是当今前沿科技的抽象体现。03 年 B 题伽马刀问题也是目前研究的课题，目前算法最佳的是遗传算法。另，本人对人工智能非常感兴趣，遗传算法已在本BLOG内有所阐述，<br />
+<br />
+七、网格算法和穷举法网格算法和穷举法一样，只是网格法是连续问题的穷举。比如要求在 N个变量情况下的最优化问题，那么对这些变量可取的空间进行采点，比如在 [ a; b ]区间内取 M +1 个点，就是 a; a +( b ? a ) =M; a +2 ￠ ( b ? a ) =M ; …；b那么这样循环就需要进行 ( M + 1) N 次运算，所以计算量很大。在数学建模竞赛中：比如 97 年 A 题、99年B题都可以用网格法搜索，这种方法最好在运算速度较快的计算机中进行，还有要用高级语言来做，最好不要用MATLAB做网格，否则会算很久。穷举法大家都熟悉，自不用多说了。<br />
+<br />
+八、一些连续离散化方法大部分物理问题的编程解决，都和这种方法有一定的联系。物理问题是反映我们生活在一个连续的世界中，计算机只能处理离散的量，所以需要对连续量进行离散处理。这种方法应用很广，而且和上面的很多算法有关。事实上，网格算法、蒙特卡罗算法、模拟退火都用了这个思想。<br />
+<br />
+九、数值分析算法数值分析（numerical analysis），是数学的一个分支，主要研究连续数学（区别于离散数学）问题的算法。如果在比赛中采用高级语言进行编程的话，那一些数值分析中常用的算法比如方程组求解、矩阵运算、函数积分等算法就需要额外编写库函数进行调用。这类算法是针对高级语言而专门设的，如果你用的是MATLAB、Mathematica，大可不必准备，因为像数值分析中有很多函数一般的数学软件是具备的。<br />
+<br />
+十、图象处理算法在数学建模竞赛中：比如01 年 A 题中需要你会读 BMP 图象、美国赛 98年A题需要你知道三维插值计算，03年B题要求更高，不但需要编程计算还要进行处理，而数模论文中也有很多图片需要展示，因此图象处理就是关键。做好这类问题，重要的是把MATLAB 学好，特别是图象处理的部分。<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1014.html">算法问题的暴力解决及替代方案</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1016.html">算法分析与注册机编写</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,324 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>[计算机操作系统]从内存的时间局部性与空间局部性看多重循环的代码优化_comonly.cn</title>
+<meta name="keywords" content="[计算机操作系统]从内存的时间局部性与空间局部性看多重循环的代码优化" />
+<meta name="description" content="断断续续刷完了卡耐基梅隆大学的计算机操作系统的课，感觉获益匪浅，作为非CS科班出身的程序员，工作之余深感自己关于CS知识储备不足，而计算机操作系统是内功修炼。这门面向本科生的课详细全面的介绍了计算机操作系统，主讲人就是《深入理解计算机操作系统》这本书的作者布莱恩特教授。Youtobe上有他们完整学期课程的视频，现场录制的，B站上也有了。强烈推荐有空闲时间能够翻墙的朋友去上上这门课，效果真的比自己看书好太多倍了。传送门：
+https://www.bilibili.com/video/av39221579/" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">[计算机操作系统]从内存的时间局部性与空间局部性看多重循环的代码优化</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">街头小默</li>
+          <li class="lmname"><a href="https://blog.csdn.net/Murphy_CoolCoder/article/details/89478391" target="_blank">https://blog.csdn.net/Murphy_CoolCoder/article/details/89478391</a></li>
+          <li class="timer">2021-03-31</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>断断续续刷完了卡耐基梅隆大学的计算机操作系统的课，感觉获益匪浅，作为非CS科班出身的程序员，工作之余深感自己关于CS知识储备不足，而计算机操作系统是内功修炼。这门面向本科生的课详细全面的介绍了计算机操作系统，主讲人就是《深入理解计算机操作系统》这本书的作者布莱恩特教授。Youtobe上有他们完整学期课程的视频，现场录制的，B站上也有了。强烈推荐有空闲时间能够翻墙的朋友去上上这门课，效果真的比自己看书好太多倍了。传送门：
+https://www.bilibili.com/video/av39221579/</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 断断续续刷完了卡耐基梅隆大学的计算机操作系统的课，感觉获益匪浅，作为非CS科班出身的程序员，工作之余深感自己关于CS知识储备不足，而计算机操作系统是内功修炼。这门面向本科生的课详细全面的介绍了计算机操作系统，主讲人就是《深入理解计算机操作系统》这本书的作者布莱恩特教授。Youtobe上有他们完整学期课程的视频，现场录制的，B站上也有了。强烈推荐有空闲时间能够翻墙的朋友去上上这门课，效果真的比自己看书好太多倍了。传送门：<br />
+https://www.bilibili.com/video/av39221579/<br />
+作为自己的学习笔记，我将在后续整理出一些我觉得可以反复咀嚼的章节与大家分享。话不多说，进入正题。<br />
+我们可能都知道在写多重循环的时候要内大外小，访问二维数组尽量按行访问。可是为什么要这么做呢？这么做的意义在哪里呢？内存的时间局部性与空间局部性原理给了我们答案。<br />
+Locality, 内存局部性原理：程序倾向于使用地址接近或等于最近已使用的数据和指令地址。<br />
+Temporal locality (时间局部性)：最近引用过的数据很有可能在将来继续使用。<br />
+<br />
+Spatial locality (空间局部性)：相邻地址的数据在一段时间内倾向于被再次使用。<br />
+例如CPU 某次访问数组a[0]， a[1],那么下次他很有可能访问元素a[2];<br />
+<br />
+定义比较抽象，让我们来看一个例子：<br />
+<br />
+sum = 0;<br />
+for( i = 0; i &lt;n; i++)<br />
+&nbsp;<span> </span> sum += a[i];<br />
+return sum;<br />
+1<br />
+2<br />
+3<br />
+4<br />
+从内存的角度看，数组元素a[i]的访问具有空间局部性（访问相邻地址数据），局部变量sum在每一次迭代过程中均被更新，具有时间局部性（同一地址数据重复访问）。如果将这段代码翻译成机器码，指令也占用内存空间，从指令集存取的角度看，在循环内顺序执行的指令具有空间局部性，而每一次循环则具有时间局部性。<br />
+谈这个局部性有什么意义呢？这里就要涉及到我们计算机的存储结构与缓存技术。一个典型的计算机存储结构如下图所示，<br />
+<br />
+最高的地方L0是CPU寄存器，容量最小存储速度最快，越往下层容量越大存储速度越慢。而我们的内存主要由DRAM组成，从上图中我们可以看出，在内存memory与CPU之间的存储过程都有缓存cache存在，因为CPU的处理速度太快，为了提高运算效率加入缓存技术。DRAM的读取双字(4个字节)的时间大约是60ns,SRAM只需要4ns，而从硬盘读取双字的时间大约是10ms.<br />
+假如我们有一个CPU需要一个数据, 在循环中每次都从内存中读取，每次都要花费60ns，但如果我们将该数据放入缓存中，每次循环的读取时间只需要4ns, 少了15倍！如果我们每次所需要的指令或者数据都从内存中读取，对CPU的资源是 极大的浪费，如果我们将程序可能常用的数据放入缓存中，CPU读取的效率将提高很多。<br />
+DRAM读取过程：<br />
+DRAM即是我们的内存，那CPU是如何从DRAM上存取数据的呢？如下图所示，一个16X8的的DRAM芯片，上面有4*4个核，每个核可以存储8个bit，CPU访问内存时候根据一个2bit的地址访问某一核。例如CPU要访问（2,1）这个单元，过程如下：<br />
+step1： 根据行地址RAS（2），将行号为2的数据都放入缓冲区中。<br />
+<br />
+step2: 再根据列地址CAS(1)选择核单元（2,1），将数据从缓存中取出最终返回给CPU。这时请注意，第二行整行的数据其实都已经被放入了缓存，虽然并没有都使用，但根据空间局部性原理，附近地址的数据很有可能在下一次被继续访问到。<br />
+<br />
+<br />
+缓存模型<br />
+<br />
+这是一个缓存模型，这里有两个概念，一个是hit，一个是Miss。<br />
+Hit: CPU 需要数据14，并且在缓存中找到了14，则将直接读取，这一次过程称为Hit(击中)。<br />
+<br />
+Miss：CPU在缓存中没有找到该数据，进而在内存中寻找，并把他放入缓存中这一过程，成为一次Miss.<br />
+<br />
+这个时候再回过头来看我们时间局部性与空间局部性<br />
+时间局部性，第二次到第N次访问相同的地址的数据将被击中。<br />
+<br />
+空间局部性： 缓存单元里包含有多个字段，当缓存拿到了第一个字段后，第二到第N个字段都会被击中， 这个在DRAM读取过程中我们已经能够看到。<br />
+<br />
+了解到这些，作为程序员的我们就要知道在写代码时尽量去写缓存友好的代码。在多重循环中将注意力放到最内层的代码段优化代码进而提高内存使用效率。，因为最内层循环的代码是运行次数最多的代码段，根据时间局部性原：<br />
+1.尽量保证最深层循环的次数是最多的;<br />
+2.尽量使用可重复而不是新定义的变量；<br />
+例如，<br />
+双重循环A，<br />
+<br />
+for(i = 0; i&lt; 1000;i++)<br />
+{<br />
+<span> </span>for(j =0;j&lt;2;j++)<br />
+<span> </span>{<br />
+<span> </span>//业务代码<br />
+<span> </span>}<br />
+}<br />
+1<br />
+2<br />
+3<br />
+4<br />
+5<br />
+6<br />
+7<br />
+双重循环B<br />
+<br />
+for(j= 0; j&lt; 2;j++)<br />
+{<br />
+<span> </span>for(i =0;i&lt;1000;j++)<br />
+<span> </span>{<br />
+<span> </span>//业务代码<br />
+<span> </span>}<br />
+}<br />
+1<br />
+2<br />
+3<br />
+4<br />
+5<br />
+6<br />
+7<br />
+同样是执行了2000次，B就比A好，因为B利用到时间局部性原则，<br />
+空间局部性原则：<br />
+尽量访问在内存中存储结构步长为1的数据结构；<br />
+这个在二维数组的访问中很常见，因为二维数组是按行存储，如果按行访问，步长就是1，如果按列访问，步长就是行数目，失去了空间局部性。如果我们访问一个二维数组<br />
+方法A<br />
+<br />
+for(i=0;i &lt;N;i++)<br />
+<span> </span>for(j=0; j &lt; k; j++)<br />
+<span> </span>sum+=a[i][j];<br />
+1<br />
+2<br />
+3<br />
+方法B：<br />
+<br />
+for(j=0; j&lt;k; j++)<br />
+<span> </span>for(i=0 ; i&lt;N; i++)<br />
+<span> </span>sum+=a[i][j];<br />
+1<br />
+2<br />
+3<br />
+方法A显然比B好，因为A利用到了缓存的空间局部性原则，方法B却没有，他的缓存miss rate 相对于A将会大大增加，降低效率。<br />
+我们再来看一个例子，两个矩阵AB的乘积存储在矩阵C。<br />
+<br />
+由上图我们可以看出，方法一和方法二在内层循环中矩阵B均没有利用到空间局部性原则，而方法三矩阵AB均是按照行读取，利用到了空间局部性原理，效率不言而喻。当矩阵维度超过300时程序运行时间会有明显的不同。关于空间局部性原则我们只做了定性分析，缓存的hit rate与miss rate是可以做定量分析的，有兴趣的朋友可以查阅相关资料，这里就不做赘述了。<br />
+————————————————<br />
+版权声明：本文为CSDN博主「街头小默」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br />
+原文链接：https://blog.csdn.net/Murphy_CoolCoder/article/details/89478391<br />
+<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1954.html">linux top命令查看内存及多核CPU的使用讲述</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1958.html">linux必备高级技能——linux挂载共享文件，自动挂载</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/Murphy_CoolCoder/article/details/89478391" target="_blank">https://blog.csdn.net/Murphy_CoolCoder/article/details/89478391</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

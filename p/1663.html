@@ -1,0 +1,581 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>C读取配置文件的实现_comonly.cn</title>
+<meta name="keywords" content="C读取配置文件的实现" />
+<meta name="description" content="#ifndef __CFG_OP_H__
+#define __CFG_OP_H__
+
+
+#ifdef  __cplusplus
+extern "C" {
+#endif
+
+//获取配置项
+int GetCfgItem(char *pFileName /*in*/, char *pKey /*in*/, char * pValue/*in out*/, int * pValueLen /*out*/);
+
+//写配置项 
+int WriteCfgItem(char *pFileName" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">C读取配置文件的实现</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">哈哈呵h</li>
+          <li class="lmname"><a href="https://www.cnblogs.com/yaowen/p/4768128.html" target="_blank">https://www.cnblogs.com/yaowen/p/4768128.html</a></li>
+          <li class="timer">2020-02-27</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>#ifndef __CFG_OP_H__
+#define __CFG_OP_H__
+
+
+#ifdef  __cplusplus
+extern "C" {
+#endif
+
+//获取配置项
+int GetCfgItem(char *pFileName /*in*/, char *pKey /*in*/, char * pValue/*in out*/, int * pValueLen /*out*/);
+
+//写配置项 
+int WriteCfgItem(char *pFileName</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	<br />
+</p>
+<p>
+<pre class="prettyprint lang-cpp">#ifndef __CFG_OP_H__
+#define __CFG_OP_H__
+
+
+#ifdef  __cplusplus
+extern "C" {
+#endif
+
+//获取配置项
+int GetCfgItem(char *pFileName /*in*/, char *pKey /*in*/, char * pValue/*in out*/, int * pValueLen /*out*/);
+
+//写配置项 
+int WriteCfgItem(char *pFileName /*in*/, char *pItemName /*in*/, char *pItemValue/*in*/, int itemValueLen /*in*/);
+
+
+#ifdef  __cplusplus
+}
+#endif
+
+
+
+#endif</pre>
+</p>
+<p>
+<pre class="prettyprint lang-cpp">#define  _CRT_SECURE_NO_WARNINGS 
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdio.h&gt;
+
+#define MaxLine 2048 
+
+//获取配置项
+int GetCfgItem(char *pFileName /*in*/, char *pKey /*in*/, char * pValue/*in out*/, int * pValueLen /*out*/)
+{
+
+    int        ret = 0;
+    FILE    *fp = NULL;
+    char    *pTmp = NULL, *pEnd = NULL, *pBegin = NULL;
+
+    char lineBuf[MaxLine];
+
+    fp = fopen(pFileName, "r");//读的方式打开文件
+    if (fp == NULL)
+    {
+        ret = -1;
+        return ret;
+    }
+
+    while (!feof(fp))//没有到达文件末尾
+    {
+        memset(lineBuf, 0, sizeof(lineBuf));//清空内存空间
+         //fgets(_Out_z_cap_(_MaxCount) char * _Buf, _In_ int _MaxCount, _Inout_ FILE * _File);
+        fgets(lineBuf, MaxLine, fp);//从文件中一行一行的获取数据
+        //printf("lineBuf:%s ",lineBuf );
+
+        pTmp = strchr(lineBuf, '='); //有没有等号
+        if (pTmp == NULL) //没有=号
+        {
+            continue;
+        }
+
+        pTmp = strstr(lineBuf, pKey);//所在行 是不是有key
+        if (pTmp == NULL) //判断key是不是在 
+        {
+            continue;
+        }
+        pTmp = pTmp + strlen(pKey); //mykey1 = myvalude11111111 ==&gt; "= myvalude1111111"
+
+        pTmp = strchr(pTmp, '=');
+        if (pTmp == NULL) //判断key是不是在 //所在行 是不是有key
+        {
+            continue;
+        }
+        pTmp = pTmp + 1;
+        //
+        //printf("pTmp:%s ", pTmp);
+
+        //获取value 起点
+        while (1) 
+        {
+            if (*pTmp == ' ')
+            {
+                pTmp ++ ;
+            } 
+            else
+            {
+                pBegin = pTmp;
+                if (*pBegin == '\n')
+                {
+                    //没有配置value
+                    //printf("配置项:%s 没有配置value \n", pKey);
+                    goto End;
+                }
+                break;
+            }
+        }
+
+        //获取valude结束点
+        while (1) 
+        {
+            if ((*pTmp == ' ' || *pTmp == '\n'))
+            {
+                break;
+            }
+            else 
+            {
+                pTmp ++;
+            }
+        }
+        pEnd = pTmp;
+
+        //赋值
+        *pValueLen = pEnd-pBegin;
+        memcpy(pValue, pBegin, pEnd-pBegin);
+    }
+
+End:
+    if (fp == NULL)
+    {
+        fclose(fp);
+    }
+    return 0;
+
+}
+
+//写配置项 
+//实现流程
+//循环读每一行，检查key配置项是否存在 若存在修改对应value值
+//若不存在，在文件末尾 添加 "key = value"
+//难点：如何修改文件流中的值
+int WriteCfgItem(char *pFileName /*in*/, char *pKey /*in*/, char * pValue/*in*/, int ValueLen /*in*/)
+{
+    int        rv = 0, iTag = 0, length = 0;
+    FILE    *fp = NULL;
+    char    lineBuf[MaxLine];
+    char    *pTmp = NULL, *pBegin = NULL, *pEnd = NULL;
+    char    filebuf[1024*8] = {0};
+
+    if (pFileName==NULL || pKey==NULL || pValue==NULL) 
+    {
+        rv = -1;
+        printf("SetCfgItem() err. param err \n");
+        goto End;
+    }
+
+    fp = fopen(pFileName, "r+");
+    if (fp == NULL)
+    {
+        rv = -2;
+        printf("fopen() err. \n");
+        //goto End;
+    }
+
+    if (fp == NULL)//文件不存在就去创建一个文件
+    {
+        fp = fopen(pFileName, "w+t");
+        if (fp == NULL)
+        {
+            rv = -3;
+            printf("fopen() err. \n");
+            goto End;
+        }
+    }
+
+    fseek(fp, 0L, SEEK_END); //刚开始文件指针指向的是文件的开头，把文件指针从0位置开始，移动到文件末尾
+    //获取文件长度;
+    length = ftell(fp);//fp指向了文件的末尾
+
+    fseek(fp, 0L, SEEK_SET);//再把文件指针指向文件的头部
+
+    if (length &gt; 1024*8) //文件不能超过8K,不然内存不支持
+    {
+        rv = -3;
+        printf("文件超过1024*8, nunsupport");
+        goto End;
+    }
+
+    while (!feof(fp))
+    {
+        //读每一行
+        memset(lineBuf, 0, sizeof(lineBuf));
+        pTmp = fgets(lineBuf, MaxLine, fp);
+        if (pTmp == NULL) 
+        {
+            break;
+        }
+
+        //key关键字是否在本行
+        pTmp = strstr(lineBuf, pKey);
+        if (pTmp == NULL) //key关键字不在本行， copy到filebuf中
+        {
+            strcat(filebuf, lineBuf);//复制到filebuf中去
+            continue;
+        }
+        else  //key关键在在本行中，替换旧的行，再copy到filebuf中 
+        {
+            sprintf(lineBuf, "%s = %s\n", pKey, pValue);  
+            strcat(filebuf, lineBuf);
+            //若存在key
+            iTag = 1; 
+        }
+    }
+
+    //所有的行中若key关键字，不存在 追加
+    if (iTag == 0) 
+    {
+        fprintf(fp, "%s = %s\n", pKey, pValue);//格式化输入
+    }
+    else //若key关键字，存在，则重新创建文件
+    {
+        if (fp != NULL) 
+        { 
+            fclose(fp); //关闭文件
+            fp = NULL; //避免野指针
+        }
+
+        fp = fopen(pFileName, "w+t"); //重新建立一个文件
+        if (fp == NULL)
+        {
+            rv = -4;
+            printf("fopen() err. \n");
+            goto End;
+        }
+        fputs(filebuf, fp);//把所有文件缓冲的内容输入到fp，覆盖原来的文件
+        //fwrite(filebuf, sizeof(char), strlen(filebuf), fp);
+    }
+
+End:
+    if (fp != NULL)
+    {
+        fclose(fp); 
+    }
+    return rv;
+}</pre>
+</p>
+<p>
+<pre class="prettyprint lang-cpp">#define  _CRT_SECURE_NO_WARNINGS 
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdio.h&gt;
+#include "cfg_op.h"
+
+#define CFGNAME "c:/mycfg.ini"
+void mymenu()
+{
+    printf("=============================\n");
+    printf("1 测试写配置文件\n");
+    printf("2 测试读配置文件\n");
+    printf("0 退出\n");
+    printf("=============================\n");
+}
+
+//获取配置项
+int TGetCfg()
+{
+    int        ret = 0;
+    //读配置项 
+    char    name[1024] = {0};
+    char    valude[1024] = {0};
+    int        vlen = 0;
+
+    printf("\n请键入key:");
+    scanf("%s", name);
+
+    ret = GetCfgItem(CFGNAME /*in*/, name /*in*/, valude/*in*/, &amp;vlen);
+    if (ret != 0)
+    {
+        printf("func WriteCfgItem err:%d \n", ret);
+        return ret;
+    }
+    printf("valude:%s \n", valude);
+
+}
+
+//写配置项 
+int TWriteCfg()
+{
+    int        ret = 0;
+    //写配置项 
+    char name[1024] = {0};
+    char valude[1024] = {0};
+
+
+    printf("\n请键入key:");
+    scanf("%s", name);
+
+    printf("\n请键入valude:");
+    scanf("%s", valude);
+
+    ret = WriteCfgItem(CFGNAME /*in*/, name /*in*/, valude/*in*/,strlen(valude) /*in*/);
+    if (ret != 0)
+    {
+        printf("func WriteCfgItem err:%d \n", ret);
+        return ret;
+    }
+    printf("你的输入是：%s = %s \n", name , valude);
+    return ret;
+}
+
+void main()
+{
+
+    int choice;
+
+    for (;;)
+    {
+        //显示一个菜单
+        mymenu();
+        scanf("%d", &amp;choice);
+        switch (choice)
+        {
+            
+        case 1:   //写配置项
+            TWriteCfg();
+            break;
+        case 2: 
+            TGetCfg(); //读配置项
+            break;
+        case 0: 
+            exit(0);
+        default:;
+            exit(0);
+        }
+
+    }
+    printf("hello...\n");
+    system("pause");
+    return ;
+}</pre>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1662.html">Anaconda3的安装和使用python</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1664.html">C语言 整数字符串转换成int整数 判断能否转</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.cnblogs.com/yaowen/p/4768128.html" target="_blank">https://www.cnblogs.com/yaowen/p/4768128.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

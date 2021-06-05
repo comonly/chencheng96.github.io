@@ -1,0 +1,719 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>flex项目_comonly.cn</title>
+<meta name="keywords" content="flex项目" />
+<meta name="description" content="一，概述
+
+Flex语言包含了一个丰富的用户界面组件库，MXML（一种基于XML的标记语言）和ActionScript（基于ECMA 262的、强类型面向对象编程语言）。MXML用于排布用户界面和处理应用中其他方面的问题，而ActionScript用来处理用户交互逻辑。由于Flash平台的普及， Flex使开发者可以开发广泛的应用程序。开发者可以使用工业标准（如XML，CSS和SVC）和他们所熟悉的模式和范例来创建应用。Flex的分离协作方式和Flex公用组件模型也使得开发者和界面设计者能更好的进行协" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">flex项目</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">Flex Builder教程—iteye_13785</li>
+          <li class="lmname"><a href="https://blog.csdn.net/iteye_13785/article/details/81577459" target="_blank">https://blog.csdn.net/iteye_13785/article/details/81577459</a></li>
+          <li class="timer">2018-09-10</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	outdated
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>一，概述
+
+Flex语言包含了一个丰富的用户界面组件库，MXML（一种基于XML的标记语言）和ActionScript（基于ECMA 262的、强类型面向对象编程语言）。MXML用于排布用户界面和处理应用中其他方面的问题，而ActionScript用来处理用户交互逻辑。由于Flash平台的普及， Flex使开发者可以开发广泛的应用程序。开发者可以使用工业标准（如XML，CSS和SVC）和他们所熟悉的模式和范例来创建应用。Flex的分离协作方式和Flex公用组件模型也使得开发者和界面设计者能更好的进行协</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 一，概述<br />
+<br />
+Flex语言包含了一个丰富的用户界面组件库，MXML（一种基于XML的标记语言）和ActionScript（基于ECMA 262的、强类型面向对象编程语言）。MXML用于排布用户界面和处理应用中其他方面的问题，而ActionScript用来处理用户交互逻辑。由于Flash平台的普及， Flex使开发者可以开发广泛的应用程序。开发者可以使用工业标准（如XML，CSS和SVC）和他们所熟悉的模式和范例来创建应用。Flex的分离协作方式和Flex公用组件模型也使得开发者和界面设计者能更好的进行协作，在可靠的、易于维护的架构上生产出在用户体验方面有突破性的产品。 <br />
+<br />
+Flex Builder(FB)之于MXML就如DREAWEAVER之于HTML。FB实现了代码与界面分开，FLEX的类程序扩展名为*.as，语法与java/c++很象，FLEX程序文件扩展名为.mxml，其实就是拥有很多特殊元素的XML文件。 <br />
+<br />
+二，使用MXML组件构建用户界面<br />
+<br />
+MXML 语言支持两种用户界面组件类型: 控件和容器。容器是包含控件和其他容器的屏幕的矩形区域。控件是表单元素, 如按钮、文本字段和列表框。 <br />
+<br />
+可以使用Flex Component ExplorerFlex MXML组件浏览工具来查看所有控件的代码和样例。 <br />
+<br />
+1，加入常用可视控件: 使用可视控件组织界面，可以定义组件属性供外部访问 <br />
+<br />
+A, 基于文本的控件(Text controls): Label(单行文本显示)、Text(多行文本显示)、TextInput(单行文本显示与输入)、 TextArea(多行行文本显示与输入)和 RichTextEditor (富文本显示与输入)控件。用于显示文本和/或接收来自用户的文本输入，都有一个 text 属性用于设置要显示的文本。使用 RichTextEditor 控件可以输入文本、编辑文本和设置文本格式。用户通过使用位于 RichTextEditor 控件底部的子控件, 应用文本格式和 URL 链接。 <br />
+<br />
+B, 基于按钮的控件组件(Button 系列,Form controls):Button(激活时会发出click和buttonDown事件)、LinkButton(用于打开URL)、CheckBox(标签会被自动裁剪以适合控件边界。)、RadioButton(指由标签创建的组) 和 PopupButton 控件(常用于打开List控件或Menu控件签。)。 <br />
+<br />
+2，加入基于列表的控件，并获取数据 <br />
+<br />
+基于列表的控件: 是在其继承层次结构内的某些点上扩展 ListBase 类的那些控件。它们包括 ComboBox、List、HorizontalList、DataGrid、Tile、Menu 和 Tree 控件。都可从某数据提供程序的数据获得数据列表。 <br />
+<br />
+另: 许多标准控件 (包括 ColorPicker 和 MenuBar 控件) 也是数据提供程序控件。 <br />
+<br />
+可以使用两种方法设置组件的数据提供程序: <br />
+<br />
+<p>
+	1)，直接在MXML标签中加入数据，将 Array 或 Collection 定义为取得数据提供程序的控件的子标签。该方法具有实施快速的优点, 适合与静态数据一起使用及用于原型设计。<br />
+<!-- An inline data provider --><br />
+<br />
+<br />
+<br />
+<br />
+<br />
+2)，使用数据绑定: 使用[Bindable]元数据标签(属性非默认绑定,必须明确的声明被绑定的属性)，将控件绑定到使用 ActionScript 定义的现有 Array 或 Collection。 <br />
+<br />
+<!--[CDATA[<br /--> [Bindable]<br />
+private var subscriptions:ArrayCollection = <br />
+new ArrayCollection <br />
+(<br />
+[<br />
+{data:0, label:"Print"},<br />
+{data:1, label:"Website"},<br />
+]<br />
+); <br />
+]]&gt;<br />
+<br />
+<br />
+<mx:list <br=""> id="userSubscriptions" rowCount="3"<br />
+allowMultipleSelection="true" width="100%"<br />
+dataProvider="{subscriptions}"<br />
+/&gt;<br />
+<br />
+3， 使用REPEATER: 是非可视控件，类似于编程语言里的For循环，可在执行期复制其它组件。的卷标要自己输入，而dataProvider可在区段之中，以[Bindable]的Metadata定义之数组作连结。REPEATER还可嵌套使用。 <br />
+<br />
+<!--[CDATA[<br /--> [Bindable]<br />
+public var dp:Array=[1,2,3,4];<br />
+]]&gt;<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+4, 加入数据验证:数据模型支持自动数据验证，这就意味着你可以很方便地使用Flex验证器。as3.0验证的类包为mx.Validators.包中有一个基类Validator,其他的类都为其子类: <br />
+1)，用标签实现验证: //绑定验证对象:source:表示验证的对象，property:表示验证对象的属性<br />
+<br />
+<br />
+2)，用AS编程实现验证<br />
+<!--[CDATA[ <br /--> import mx.validators.PhoneNumberValidator; <br />
+// 创建验证器<br />
+private var v:PhoneNumberValidator = new PhoneNumberValidator(); <br />
+private function createValidator():void { <br />
+// 设置验证器<br />
+v.source = phoneInput; <br />
+v.property = "text"; <br />
+} <br />
+]]&gt; <br />
+<br />
+<br />
+<br />
+还可以加入按钮触发器，并修改默认提示错误 //trigger:表示触发验证事件的对象<br />
+//triggerEvent:表示对象触发验证事件的时机(如click,mouseOver等)<br />
+//requiredFieldError属性 表示必填项没填入数据的时的提示错误信息<br />
+//wrongLengthError:表示输入的数据阿拉伯数字长度小于10时提示的错误信息<br />
+//invalidCharError:表示输入数据不是阿拉伯数字时提示的错误信息 <br />
+<mx:phonenumbervalidator id="pnV" source="{phoneInput}" property="text" <br=""> trigger="{btn}" triggerEvent="click" <br />
+requiredFieldError="此项为必填" invalidCharError="请输入阿拉伯数字" wrongLengthError="请至少输入请输入10个阿拉伯数字" /&gt; <br />
+<br />
+<br />
+<br />
+3)，高级用法: 使用正则表达式创建自定义验证器 <br />
+5， 加入资源(图片,音频,视频,程序):运行时外载和编译时直接内嵌两种方式，外载方式要多花一段载入时间，但使用简单；内嵌方式可直接调用资源，但加重了程序的负担(体积变大，且图片编辑后需要重新编译) <br />
+1)，Image(图画)控件: 可外载或内嵌多种富媒体资源: JPEG、GIF、PNG位图、SVG矢量图(只能内嵌) , SWF动画(非Flex的SWF应用程序。),SWF库按钮(Button)，SWF库动画(MovieClip)， //外载一个富媒体，可使用绝对或者相对路径。<br />
+但加入SWF文件时，可用use-network参数指定其使用网络或者本地文件二者之一。<br />
+<br />
+//简单地内嵌一个富媒体.png,.jpg,.gif,<br />
+.swf(可将嵌入的SWF文件的实例当作 MovieClip.MovieClipAsset 类的实例处理,<br />
+不能直接访问嵌入的SWF文件的属性或方法。<br />
+但可用 LocalConnection以允许SWF之间进行通信。)，<br />
+.SVG(可将嵌入的SVG文件的实例当作Sprite.SpriteAsset类的实例处理。)<br />
+<br />
+//在脚本中定义富媒体对象，然后在MXML中可以多次嵌入<br />
+<br />
+<!--[CDATA[<br /--> [Embed(source="assets/logo.png")]<br />
+[Bindable]<br />
+public var Logo:Class; <br />
+]]&gt;<br />
+<br />
+<br />
+<br />
+//在脚本中定义图片的scale-9像框缩放功能就可以保持边框的清晰,<br />
+(旋转嵌入的scale-9 图像的实例会关闭该图像的scale-9功能。)。<br />
+<br />
+<!--[CDATA[<br /--> [Embed(<br />
+source="assets/fancy_border.png", <br />
+scaleGridTop="55", scaleGridBottom="137", <br />
+scaleGridLeft="57", scaleGridRight="266"<br />
+)]<br />
+[Bindable]<br />
+public var FancyBorderImage:Class;<br />
+]]&gt;<br />
+<br />
+<br />
+//嵌入 SWF 库资源<br />
+<br />
+<!--[CDATA[<br /--> [Embed(source="assets/library.swf", symbol="BadApple")]<br />
+[Bindable]<br />
+public var BadApple:Class;<br />
+]]&gt;<br />
+<br />
+<mx:image id="badApple" source="{BadApple}" width="150" <br=""> height="151.8"/&gt;<br />
+<br />
+<br />
+2) 设置翻转的图片:使用 CSS为外观外载/内嵌翻转的图像 <br />
+可以定义一个现有的CSS类型选择器为该类型的所有组件设置外观。还可以进一步创建自定义CSS 类。 <br />
+<br />
+Button <br />
+{<br />
+upSkin: Embed("assets/box_closed.png");<br />
+overSkin: Embed("assets/box.png");<br />
+downSkin: Embed("assets/box_new.png");<br />
+}<br />
+<br />
+<br />
+<br />
+3), SWFLoader控件: 通常用来加入Flex应用程序(可以使用AS与其通信)，当然也能用于加入Image控件所能加入的富媒体资源。 //外载入SWF程序<br />
+<br />
+//内嵌入SWF程序<br />
+<br />
+//还可以在FDS环境下加入MXML文件，要以buttonicon.mxml.swf形式加入，以提示FDS编译该文件。<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+4), 加入MP3音频: 您可以在 Flex 应用程序中通过使用[Embed]元数据标签嵌入MP3文件并播放它。注意音频文件的体积要优化。 <br />
+<br />
+<!--[CDATA[<br /--> import mx.core.SoundAsset;<br />
+import flash.media.*;<br />
+[Embed(source="assets/pie-yan-knee.mp3")]<br />
+[Bindable]<br />
+//MP3 的一个新实例<br />
+public var Song:Class;<br />
+//将该实例创建为一个 SoundAsset<br />
+public var mySong:SoundAsset = new Song() as SoundAsset;<br />
+public var channel:SoundChannel;<br />
+//使用 SoundAsset 类的 play() 方法来播放 MP3 文件的实例 <br />
+public function playSound():void <br />
+{<br />
+// 先消音，防止同时多次播放<br />
+stopSound(); <br />
+// 播放该音频，并存储返回的SoundChannel对象结束播放。<br />
+channel = mySong.play();<br />
+}<br />
+public function stopSound():void <br />
+{<br />
+// 当音频播放时，调用SoundChannel对象的 stop() 方法以停止播放<br />
+if ( channel != null ) channel.stop();<br />
+}<br />
+]]&gt;<br />
+<br />
+<br />
+<br />
+<br />
+5), 加入字体: 您希望在 Flex 应用程序中嵌入一种字体并将它用作基于文本的组件的样式。 <br />
+下面的示例创建引用嵌入的字体的 font-family 名称的一个类选择器。 接着它会创建一个 Text 控件并将其样式设置为该类选择器。 <br />
+提示: 您在嵌入字体以节省文件大小时仅可以从字体添加某些字符, 方法是指定您的 @font-face 声明的 unicode-range 属性。 <br />
+<br />
+@font-face <br />
+{<br />
+font-family: Copacetix;<br />
+src: url("assets/copacetix.ttf");<br />
+unicode-range:<br />
+U+0020-U+0040, /* Punctuation, Numbers */<br />
+U+0041-U+005A, /* Upper-Case A-Z */<br />
+U+005B-U+0060, /* Punctuation and Symbols */<br />
+U+0061-U+007A, /* Lower-Case a-z */<br />
+U+007B-U+007E; /* Punctuation and Symbols */<br />
+}<br />
+.MyTextStyle <br />
+{ <br />
+font-family: Copacetix; <br />
+font-size: 24pt; <br />
+}<br />
+<br />
+<br />
+<br />
+<br />
+三，数据绑定<br />
+以MXML标记来描述UI，数据绑定(Data binding)来连接数据，这样就真正实现了UI和程序逻辑的分离。Data binding可以一绑多或者多绑一。 <br />
+1， 在MXML中使用大括号{}语句: 格式为:{源对象.属性}。可直接传送给目标对象；高级用法是在{}中包含AS表达式、AS函数或者E4X表达式 <br />
+2， 在MXML中使用标签:这是{}语句的替代用法，格式为:；高级用法是在标签中包含AS表达式或者E4X表达式 //在Model数据中使用{}语句来绑定数据<br />
+<br />
+<br />
+{input1.text}<br />
+<br />
+<br />
+//用标签来绑定数据<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+3， 使用AS类来绑定:使用mx.binding.utils.BindingUtils的bindProperty()或者bindSetter() 方法 <br />
+四，界面布局和导航<br />
+容器定义了Flash Player的绘图表面的一个矩形区域。子容器包括控件和容器。Container 类是所有 Flex 容器类的基本类。扩展 Container 类的容器添加它们自己的功能以进行子组件布局。Application 容器是的Flex应用程序的唯一根部容器, 代表整个 Flash Player 绘图表面。 <br />
+1，布局容器: 使用布局容器可进行用户界面布局。 <br />
+A, 面板(Panel)容器 显示一个标题栏、一个标题、一个边框及其子级。默认情况下, Panel 容器会对子组件进行垂直布局, 并且可以通过将布局属性设置为 "absolute" 或 "horizontal"来覆盖此设置。 <br />
+B, HDividedBox容器 对子组件进行水平布局, 除了在子级之间插入一个可调整的分割线之外, 它与 HBox 容器很相似。 VDividedBox 容器对子组件进行垂直布局, 而且也在子级之间插入一个可调整的分割线。 <br />
+C, 平铺(Tile)容器 以多行或多列的形式排列其子级。 <br />
+D, 表单(Form)容器 以标准的表单格式排列其子级。 <br />
+E, ApplicationControlBar 容器 容纳提供全局导航和应用程序命令的组件, 并可以停靠在 Application 容器的上边缘。 <br />
+F, ControlBar容器将控件置于 Panel 或 TitleWindow 容器的下边缘。 <br />
+G, 另外可使用Spacer控件来辅助布局。Spacer控件并非容器，而是基于百分比的可用于挤占留空以准确定位的一个不可见控件。 <br />
+2, 导航容器: 使用导航容器可以控制其他容器的多个子级之间的用户移动或导航。导航器容器不能直接嵌套控件，只能嵌套容器。 <br />
+A，手风琴(Accordion)容器 定义一个子面板序列, 但一次仅显示一个面板。 若要导航容器, 用户会单击与他们需要访问的子面板相对应的导航按钮。 使用 Accordion 容器, 用户可以按任何顺序访问子面板以在表单中前后移动。 <br />
+B, TabNavigator容器 创建和管理一组选项卡, 使用它们可在其子级中间导航。 TabNavigator 容器的子级是其他容器。 TabNavigator 容器为每个子级创建一个选项卡。 当用户选中某个选项卡时, TabNavigator 容器会显示相关联的子级。 <br />
+C, ViewStack容器 由彼此堆叠在一起的子容器的一个集合组成, 一次只有一个容器是可见的或活动的。 ViewStack 容器不为用户定义切换当前活动容器的内置机制；您必须使用 LinkBar、TabBar、ButtonBar 或 ToggleButtonBar 控件或自己在 ActionScript 中构建逻辑让用户来更改当前活动的子级。 <br />
+3, 使用容器Containers进行定位布局 <br />
+定位方式有三种: <br />
+A, 自动定位:多数Flex容器使用默认预定义的规则来自动定位你在其中定义的所有的子组件。 <br />
+B, 使用绝对定位: 用于使控件重叠 <br />
+C, 使用基于约束的布局: 可以锚定容器的边缘或者中心点，然后控件就会随着容器的伸缩而伸缩 <br />
+Canvas容器，和layout属性为absolute的Application或Panel容器才能进行绝对定位，或约束布局。 <br />
+4，使用视图状态(或ViewStack导航容器)进行用户界面切换导航 <br />
+可以为一个Flex程序或组件定义几种视图状态，然后通过改变(切换)视图状态而改变用户界面。(ViewStack导航容器可实现同样效果) <br />
+1)，设计基础状态(Base state,Start,currentState=''):就是在默认状态下设计用户界面。 <br />
+2)，设计视图状态(currentState='SomeState'):在设计模式中，在状态查看（Window &gt; States）上点击新状态/New State 按钮。然后在此状态下编辑的界面即为该视图的对应界面。 <br />
+3)，创建用户行为切换控件: 定义用户变换状态的点击事件处理器。一般是使用一个LinkButtun，激活currentState='SomeState'以切换到某界面，激活currentState=''以回到默认界面。 <br />
+五，使用CSS格式化组件<br />
+1. 文字横竖排列Aligning Text Vertically &amp; Horizontally <br />
+样式对于定义Flex应用程序的外观和感觉 (外观) 很有用。您可以使用它们来更改单一组件的外观, 或在所有组件上应用它们。 <br />
+在 Flex 中应用样式有许多方法。 某些样式提供更多粒度控制并能以编程方式被执行。其他样式不像那么灵活, 但可能需要较少的计算。在 Flex 中, 可以使用以下几种方法将样式应用到控件: <br />
+1, 使用本地样式定义 <br />
+2, 使用外部样式表 <br />
+3, 使用线上样式 <br />
+4, 使用 setStyle() 方法 <br />
+六，使用特效丰富用户体验<br />
+1, 添加效果 <br />
+1), 效果是在较短时间上发生的对组件的更改。 效果的例子有: 淡化组件、调整组件大小和移动组件。 一种效果与一个触发器相结合才能形成一个行为, 如组件上的鼠标单击、组件获得焦点或组件变成可见的。 在 MXML 中, 您将效果应用为控件或容器的属性。 Adobe Flex 提供具有默认属性的一组内置效果。 <br />
+作为对某些用户或编程操作的响应, 行为使您可以将动画、动作和声音添加到应用程序中。 例如, 您可使用行为在获得焦点时弹出对话框, 或是在用户输入无效的值时发出声音。 <br />
+Flex 触发器属性是作为层叠样式表 (CSS) 样式被实施的。 在 Adobe Flex 2 语言参考中, 触发器被列出在标题“效果”的下面。 <br />
+若要创建行为, 您定义一个具有唯一 ID 的特定效果并将它绑定到触发器。 例如, 下面的代码创建两个缩放效果: 一个用于轻微缩小组件, 一个用于将组件还原至其原始大小。 这些效果通过使用它们的唯一 ID 被分配到“按钮”组件上的 mouseDownEffect 和 mouseUpEffect 触发器上。 <br />
+注意如何将 Panel 容器的 autoLayout 属性设置为 "false"。这样是为了阻止在按钮改变大小时面板改变大小。 <br />
+2)，使用效果方法和事件 <br />
+您可以调用效果上的方法来改变它们播放的方式。 例如, 可以通过调用效果的 pause() 方法来暂停效果, 并通过使用其 resume() 方法来继续该效果。可以通过调用效果的 end() 方法来结束该效果。 <br />
+当效果开始和效果结束时, 它也会发出 startEffect 和 endEffect 事件。 您可以监听这些事件并响应您的事件状态中的更改。 <br />
+下面的示例使用“移动”效果的方法和事件来创建一个简单的游戏。 该游戏的目标是使直升飞机尽可能接近靶而又不撞到它。 靠得越近, 赢得的点数越多。 <br />
+3, 使用过渡增加用户界面切换效果 <br />
+过渡(transition,变换)是定义在视图状态切换之间播放的一种或多种视觉效果。过渡不会替换效果；即, 您仍可以将单一效果应用到一个组件, 并通过使用一个效果触发器或者 playEffect()方法来调用该效果。创建过渡样例如下:<br />
+//fromState 属性指定当应用该过渡时您要更改的视图状态<br />
+//toState 属性指定您要更改为的视图状态<br />
+//effect 属性是对要播放的 Effect 对象的引用<br />
+<br />
+//和标签分别引发并行或按顺序播放的效果<br />
+<br />
+//效果标签<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+4, 为用户提供工具提示 <br />
+Adobe Flex ToolTip 使您能够为您的用户提供有帮助的信息。当用户在图形组件上移动鼠标指针时, 会弹出包含文本信息的工具提示。您可以使用工具提示来指导用户完成使用应用程序或自定义它们来提供其他功能。 <br />
+扩展 UIComponent 类 (该类实现 IToolTipManagerClient 界面) 的每个可视 Flex 组件都支持 toolTip 属性。您将 toolTip 属性的值设置为一个文本字符串, 并且, 当鼠标指针悬停在该组件上时, 会显示该文本字符串。 <br />
+尽管长消息很难读取, 但对工具提示文本的大小不存在任何限制。当工具提示文本达到工具提示框的宽度时, 文本会自动换至下一行。可以在工具提示文本中添加换行符。在 ActionScript 中, 您使用 \n 转义的新行字符。在 MXML 标签中, 您使用 XML 实体。 <br />
+可以通过使用层叠样式表 (CSS) 语法或 mx.styles.StyleManager 类更改工具提示文本和工具提示框的外观。对工具提示样式的更改适用于当前应用程序中的所有工具提示。 <br />
+5, 控制光标 <br />
+使用Flex光标管理器可以控制 Flex 应用程序中的光标图像。 例如, 如果应用程序执行的处理需要用户等待, 直到处理完成为止, 则可以将光标更改为某个自定义的光标图像, 比如沙漏, 以使它反映该等待期。 <br />
+您还可以更改光标以向用户提供反馈, 指示用户可以执行的操作。 例如, 您可以使用一个光标图像来指示用户输入被启用, 而使用另一个光标图像来指示输入被禁用。 <br />
+CursorManager 类控制一个光标优先顺序列表, 在其中具有最高优先级的光标当前是可见的。 如果光标列表包含具有相同优先级的多个光标, 则光标管理器会显示最近创建的光标。 <br />
+1), 使用默认的忙光标 <br />
+Flex 定义了一个默认的忙光标, 可用来指示应用程序正在处理, 且在应用程序对用户输入作出响应之前, 用户应等待, 直到处理完成。 默认的忙光标是一个动画时钟。 <br />
+可以使用以下几种方式来控制忙光标: <br />
+可以使用 CursorManager 方法来设置和删除忙光标。 <br />
+可以使用 SWFLoader、WebService、HttpService 和 RemoteObject 类的 showBusyCursor 属性自动显示忙光标。 <br />
+下面的示例使用 CursorManager 类的静态 setBusyCursor() 和 removeBusyCursor() 方法, 根据切换按钮的状态显示和隐藏默认的 Flex 忙光标。 <br />
+2), 使用自定义光标 <br />
+可以使用 JPEG、GIF、PNG 或 SVG 图像, Sprite 对象或 SWF 文件作为光标图像。 <br />
+若要使用光标管理器, 您将 mx.managers.CursorManager 类导入到应用程序中, 然后引用其属性和方法。 <br />
+下面的示例嵌入一个在 Adobe Flash 中创建的沙漏的 SWF 动画, 并将它用作一个自定义光标。 在该示例中, 创建自定义光标的方法是, 调用 CursorManager 类的 setCursor() 静态方法, 然后将它传送给对您希望用作自定义光标的嵌入资源的类的引用。 可以通过调用 CursorManager 类的 removeCursor() 静态方法并将它传送给 CursorManager 类的 currentCursorID 静态属性来删除活动的自定义光标。 <br />
+七，使用ActionScript处理事件<br />
+1, 事件模型与机制 <br />
+Flex的事件模型基于DOM3事件模型。通过创建注册事件监听器(事件处理程序,事件处理器,是函数方法用于响应指定的事件)，可以在组件的实例发出某个事件(如用户何时与界面组件交互, 以及在组件的外观或生命周期中何时发生重要的变化, 如组件的创建或破坏或调整其大小等)时, 对象事件自动派发此事件到所有注册过的监听器。 <br />
+1)，事件流:当一个事件被派发出来时, 事件对象从根节点开始自上而下开始扫描display list(如), 一直到目标对象, 检查每个节点是否有相应的监听器。目标对象指的是display list中产生事件的对象. 比如:。如果此时 resize了VBox, 则会从根(Application)开始, 下来检查Panel, HBox, 直到目标对象-产生resize事件的VBox为止. <br />
+2), 事件的派发 Flex中可以通过dispatchEvent()方法手工派发事件, 所有UIComponent的子类都可以调用此方法. 语法: //参数event_type是Event对象的type属性<br />
+//函数的返回值总是True.<br />
+objectInstance.dispatchEvent(new Event("event_type"):Boolean<br />
+<br />
+可以使用此方法派发任意事件, 而不仅仅是用户自定义事件, 比如: 可以派发一个Button的Click事件. var result:Boolean = buttonInstance.dispatchEvent(new Event(MouseEvent.CLICK)); <br />
+在Flex应用中不是必须对新派发的事件进行处理, 如果触发了一个事件, 而没有对应的Listener时,Flex忽略此事件. <br />
+如果想给Event对象添加新属性, 就必须继承Event类,然后定义新属性 <br />
+3), 事件的传播 <br />
+事件触发后, Flex有3个检测事件监听器的阶段, 3个阶段的发生的顺序如下: <br />
+A. 捕获阶段:在捕获阶段,Flex在显示列表中检查事件的祖先是否注册了事件的监听器. Flex从根节点开始顺序而下. 大多数情况中, 根节点是Application对象. 同时, Flex改变事件的currentTarget值. 缺省情况下, 在此阶段,没有容器监听事件. use_capture参数的值是False,在此阶段添加监听的唯一方法是在调用add_listener时,传入一个为True值的use_capture参数, 比如: myAccordion.addEventListener(MouseEvent.MOUSE_DOWN, customLogEvent, true);<br />
+如果是在Mxml中添加监听, Flex设置此参数为False, 没有办法进行修改. 如果设置了use_capture为True, 那么事件将不会上浮. 如果既想捕获又想上浮就必须调用 addEventListener两次. 一次use_capture参数为true, 一次为false; 捕获很少使用, 上浮的使用更为普遍. <br />
+B. 目标阶段: 在目标阶段, Flex激发事件的监听程序, 不检查其他的节点. <br />
+C. 上浮阶段:事件只在bubbles属性为True时才进行上浮. 可以上浮的事件包括: change, click, doubleClick, keyDown, keyUp, mouseDown, mouseUp. 在上浮阶段, Flex改变事件的currentTarget属性, 而target属性是初始派发事件的对象. <br />
+在任意一个阶段, 节点们都有机会操作事件. 比如: 用户点击了一个在VBox中的Button,在捕获阶段, Flex检查Application对象(根节点)和VBox是否有监听器处理此事件. Flex然后在目标阶段触发按钮的监听器.在上浮阶段, VBox和应用以与捕获阶段相反的顺序再次获得机会处理事件. <br />
+在Actionscript3.0中,你可以在任意目标节点上注册事件监听器. 但是部分事件会被直接传给目标节点,比如Socket类. 捕获阶段的节点顺序是从父节点到子节点的, 而上浮阶段刚好相反. <br />
+捕获事件缺省是关闭的,也就是说如果要捕获事件, 必须显式指定在捕获阶段进行处理. <br />
+每一个Event都有target和currentTarget属性, 帮助跟踪事件传播的过程. <br />
+4), 查询事件阶段 <br />
+使用事件的eventPhase可以获得事件当前的阶段, <br />
+1): CAPTURE_PHASE <br />
+2): AT_TARGET <br />
+3): BUBBLING_PHASE <br />
+示例: private function determineState(event:MouseEvent):Void { Debug.trace(event.eventPhase + ":" + event.currentTarget.id); } <br />
+5), 停止传播 <br />
+使用下面两个函数停止事件的传播: <br />
+stopPropagation() <br />
+stopImmediatePropagation() <br />
+2, 创建监听器 <br />
+组件有Flex提供的内建事件. 也可以使用派发-监听模型定义自己的事件监听器, 并指定监听器监听何种事件. <br />
+有三种方式: <br />
+1), 内部MXML中的AS函数法: 在MXML的声明中注册监听器: 这是第一个和使用最广泛的方法，在 MXML 中定义事件发生时会调用的事件处理程序。 <br />
+2), 外部AS文件中的AS函数法:通过ActionScript定义注册事件处理程序: 可以通过使用ActionScript 中的 addEventHandler() 等方法来注册事件处理程序。 可将 addEventHandler() 方法置于 Application 容器的 creationComplete 事件(在 Application 表单及其子级被初始化之后, 在启动应用程序时发生)的事件处理程序中。 详见Action Script教程。 <br />
+3), 代码混写法: 在MXML的控件标签中直接完全嵌入监听器(这也称为使用线上事件处理程序): 这样比较直接，代码也较少，但会导致代码很难阅读、维护和缩放。如果监听器是多个AS语句甚至更复杂的逻辑，不推荐此方法。 <br />
+六，数据服务器访问概述<br />
+Flex 被设计为可以与许多类型的服务器打交道，从而提供对本地和远端逻辑的访问。提供数据访问的MXML 组件被称之为数据服务器组件(data service components)。MXML 包含了如下几种类型的数据服务器组件： <br />
+1. HTTPService 提供对返回数据的HTTP URLs 的访问。通过 Http get/post 来传递纯文字资料。好处是非常普及于所有的后台，但缺点则是复杂的数据类型要经过复杂的序列化与解序列化程序才能在client/server间交换。 <br />
+2. WebService 提供对使用SOAP 的web 服务器的访问。WebService 也是很常见的选择，好处是规则共通，方便不同技术平台交换资料，缺点则同样是某些复杂数据结构无法轻易的交换，在编码与译码的过程中往往会出现意外，例如 Date 的表现方式。以 .NET 来说，使用 web service 应该是再方便不过的选择，只要把 asmx 档案准备好再从 flex client 呼叫即可。 <br />
+3. RemoteObject(Flash Remoting) 技术:官方支持的平台有三种，分别是 Java Coldfusion(但实际上Coldfusion应该只算是java的subset，它是一种 scripting tag library)与.NET。Flex Data Services 或Macromedia ColdFusion MX 7.0.2通过使用AMF协议提供对Java 对象（Java Beans、EJBs、POJOs）的访问。 <br />
+4，其它非官方RemoteObject技术: 由于AMF格式已被非官方反编译，所以有许多开源的remoting替代方案： <br />
+A，AMFPHP: 这是php版的remoting <br />
+B，OPENAMF: java版的remoting <br />
+C，Flap: Perl 与Python版的remoting <br />
+S，FlashORB: 商业版的remoting替代方案，目前支持java与.net <br />
+七，HTTPService<br />
+使用plaine text format的传输方式，通过xml, loadVars, loadVariables 等方式 <br />
+外部XML讀取 Actionscript 3.0 的賣點之一，就是加強XML讀取的方便性，讀取外部XML是常用的前後端整合手段，而XML節點的操作，比之前AS2用DOM更直觀，可以直接運用標籤與屬性名稱訪問節點。 <br />
+主要參考章節： Reading external XML documents Traversing XML structures <br />
+Lesson 6: RETRIEVING XML DATA (37 min) 1. Setting Up an XML Data Project &amp; Setting HTTP Service 2. Setting Up a DataGrid to Display XML Data 3. Adding a Label Control to a DataGrid 4. Using an ArrayCollection 5. Examining a Data Structure in Debugging Mode 6. Utilizing Data Returned in an Event Object 7. Using the HTTP Service Class to Catch Faults 8. Creating a Cross Domain Security File <br />
+Lesson 13: MANIPULATING XML (34 min) 1. Manipulating Client Side Data Using E4X Syntax 2. Creating a Tree Control to Display the XML Data 3. Adding a Change Event to Display Data from the Tree 4. Populating the Shopping Cart with Raw XML Content 5. Working with an XML List Collection 6. Using Conditional Logic to Compare &amp; Update Values <br />
+八，WebService<br />
+Lesson 14: USING WEB SERVICES (25 min) 1. Accessing Web Services 2. Invoking Web Services Methods &amp; Results 3. Using a FaultHandler 4. Call Multiple Methods from One Web Service Object 5. Passing Parameters to Web Services <br />
+九，Flex Data Services<br />
+FDS (Data Service, Messaging) <br />
+Flex Data Service 是 Flex 2 里新出现的技术，主要目地是希望提供更自动的方法来让 client 与 server 交换资料，它的核心实际上仍然是 AMF 与 RTMP (对，就是 Flash Media Server 用的那种)，部份功能也与 FMS 重叠，但它着重在 Data Sharing 与 Exchange 这部份。 <br />
+目前 FDS 只有 Java 的版本，也就是 server 端要用 java 写，但 Adobe 宣称将来会有 FDS for .NET 版。不过好消息是，有一家叫 theMidnightCoders 的公司抢先推出了 FDS 兼容版本，不但同时支持 AMF0 与 AMF3，更支持部份 FDS 的功能(主要是资料同步的部份，与server端的冲突处理与资料储存)。 <br />
+以 .NET 来说，付费的选择中 weborb 算是目前最优的选择，价钱只有官方版的一半，但功能更完整；而免钱的选择则当非 Fluorine 莫属。 <br />
+功能描述：如果你有Flex Data services，你可以发布一组MXML和AS文件，Flex Data Services可以在收到Http请求前，把你的MXML和AS文件编译成Swf文件。 <br />
+Flex执行以下步骤： <br />
+1． 编译MXML并产生一个SWF文件 <br />
+2． 贮藏已编译的MXML文件 <br />
+3． 向安户端返回SWF文件 <br />
+发布你的程序方法一：发布一个SWF文件 <br />
+访问方法：http://hostname/path/filename.swf <br />
+方法二：发布MXML和AS文件 <br />
+访问方法：http://hostname/path/filename.mxml <br />
+FDS在你的Java服务器上或者Java容器内运行。以保证在以下几个特征领域的广泛性 <br />
+1&gt;多个客户端的数据共享 <br />
+1． 支持C2C的数据通讯 <br />
+2． 服务器端数据增加 <br />
+3． 安户端访问服务器资源的证明 <br />
+4． 数据服务日志 <br />
+2&gt;提高RPC的广泛性 <br />
+十，其它RemoteObject技术<br />
+现有许多非官方的开源RemoteObject(Flash Remoting)技术，流行的服务端（Java、Php、.Net、Perl/Python、Ruby）技术Flex都已打通，您可以直接在Flex/Flash中通过RemoteObject直接调用 A，AMFPHP: Flash和PHP的整合 AMFPHP <br />
+B，AMF.NET: Flex调用不同参数类型的.Net WebMethod <br />
+C，AMF::Perl <br />
+D，RubyAmf <br />
+E，与JAVA: <br />
+F，和ASP的整合：Flash2ASP是能自动生成ASP和AS代码的工具。虽然Flash2ASP作后台速度不如AMFphp，但由于国内ASP资源丰富，而且Flash2ASP教程文档详细，也可作为一个选择。 <br />
+在线版 <br />
+说明图 <br />
+55分钟详细使用方法以及留言簿范例视频教程 <br />
+本地运行版下载(exe) <br />
+详细情况 <br />
+<br />
+<br />
+十一, 创建自定义组件<br />
+1, Flex是由as类结构实现的。类结构包含了组件类，管理类，数据服务类，和其他用来实现flex功能的类。下图展示的是类结构中flex可视化组件的一部分，关于控制和容器的部分： <br />
+<br />
+<br />
+所有的可视化组件继承自UIComponent as类。Flex中非可视化组件也是依靠as类结构来实现的。大部分的非可视化组件都是Validator，Formatter，或者是Effect 类。 <br />
+通过使用mxml和as语言扩展Flex类结构来创建自定义的组件。组件都继承了父类的属性，方法，行为，风格和效果。 <br />
+通过as创建一个flex组件时，必须继承自一个flex类。类的名称必须和类文件的名称相同。子类继承了父类的所有属性的和方法。在mxml中使用这个组件时，通过使用类名称的标签来引用。例如，类名称是myASButton，文件名则为myASButton.as，在mxml中使用&lt; myASButton&gt;标签来使用组件。 <br />
+在通过mxml创建一个组建时，flex编译器将自动的生成一个as类。mxml文件的名称必须和as类名称相同。同样，在mxml中使用这个名称标签来使用这个组件。 <br />
+下图展示了分别通过as和mxml创建的Flex Button组件的自定义组件： Button.as<br />
+MyASButton.as<br />
+package<br />
+{<br />
+public class MyASButton extends Button<br />
+{<br />
+//Override inherited methods and properties.<br />
+//Define new methods and properties.<br />
+//Define custom logic in ActionScript.<br />
+}<br />
+}<br />
+<br />
+<br />
+//Override inherited methods and properties.<br />
+//Define new methods and properties.<br />
+//Define custom logic in ActionScript.<br />
+<br />
+<!-- Add MXML code. --><br />
+<br />
+<br />
+上面的两种实现方法都生成了一个Button类的子类。同样的继承了所有的属性，方法和button类的所有元素。都可以重写类的属性，方法和逻辑。 <br />
+注意：父类中的变量是不能被覆盖，但是可以覆盖通过setter和getter方法实现的属性。你可以重新设置这些变量的值。 <br />
+另外，如果使用mxml创建组建，flex编译器完成了创建一个组件的子类的大部分工作，因此使用mxml创建组件比用as创建组件更加容易。 <br />
+<br />
+2, 决定是使用mxml还是as创建组件 <br />
+在创建组件之前需要做的一个首要决定是，使用as还是mxml。由你需要开发应用程序来决定你需要使用什么样的组件。 <br />
+下面是一些基本的指导方针： <br />
+mxml和as组件都定义了新的as类。基本上所有能用as完成的自定义组件都可以通过mxml来实现。一般来说，对于简单的自定义组建，例如修改已有组建的一些属性和方法，使用mxml要比使用as方便得多。当你在新的组件中使用了别的组建，而且需要使用flex layout容器来进行多个组件的布局设置，那么需要使用mxml来定义。如果你想修改某一个组件的行为，例如一个容器中子元素的布局方式，则使用as。如果你想通过创建UIComponent的子类来创建一个全新的可视化组件，则使用as。如果你想创建一个全新的非可视化组件，例如formatter，validator，或者effect，则使用as。注意：Flash Professional 8是不能开发AS3.0的组件的，如果要使用AS3.0开发Flex2组件，应该使用Flex Builder IDE。 <br />
+<br />
+3, 组件部署 <br />
+在部署你的mxml或as文件的自定义组件时，一般将这些文件放置在你的应用程序的子目录内，或者一个定义好的as类路径下。 <br />
+为了保密，你可能不希望使用源码的形式来部署你的源文件。因此你可以使用swc文件或者共享资源库（RSL）作为用来部署的文件。 <br />
+Swc文件是Flex组件的一种集合格式。使用swc文件可以方便的在开发人员之间进行交流，这样你使用使用一个文件，而不是很多mxml，as文件，或者图片和其他资源。更重要的是，swc文件中的swf已经被编译了，这意味着你不用看着繁杂的代码。 <br />
+Swc文件可以包含多个组件，使用PKZip打包格式将其打包在一起。你可以使用winzip，jar或者任何打包工具来打开这个文件。但是，一般来说不要直接在swc外部运行打包在swc里面的swf文件。 <br />
+创建swc文件，需要使用compc工具，该工具在flex安装目录下的bin目录内。compc工具可以将mxml文件，或as文件，或两种文件一起，打包成swc文件。 <br />
+要缩小你的swf格式的应用程序的大小，有一种方式是将共享资源打包到文件外部，由client下载并保存在缓存中。这些外部职员可以在程序运行的时候多次被使用，但是只需要从服务器传输到client端一次。这些文件就是共享资源库（RSL）。
+</p>
+<p>
+	<br />
+</p>
+<h2 id='来源页面待处理'>
+	来源页面待处理
+</h2>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/967.html">Java，Android等发送HTTP请求及接收</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/969.html">教务处CS系统配置及运行环境</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/iteye_13785/article/details/81577459" target="_blank">https://blog.csdn.net/iteye_13785/article/details/81577459</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="flex项目下自动生成的几个目录的用途">
+							<h2 style="display:inline;color:#5BC648;">flex项目下自动生成的几个目录的用途</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-09-10&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	//来源：https://blog.csdn.net/z9061/article/details/9134803
+</p>
+<p>
+	<br />
+</p>
+<p>
+	src ：是放mxml和as源代码的；
+</p>
+bin-debug ：是默认编译的输出文件夹；<br />
+html-template ：是用于自动生成嵌入swf的html的模板文件<br />
+<p>
+	libs：是放库文件的。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	html-template内部文件的用途：<br />
+Flex 项目中的html-template文件夹包含三个文件和一个文件夹:<br />
+1、index.template.html. HTML包装文件，它在运行时调用程序。<br />
+<br />
+2、swfobject.js. 一个JavaScript库，包含运行时加载Flash Player的方法，也包含判断用户Flash Player 版本的功能。<br />
+<br />
+Flex4 现在是使用swfobject.js 这个开源的JS库来部署Flash Player 和程序，而Flex3 是用 AC_OE_Tags.js，这一点是不同的。swfobject.js 相关详细资料可以参考Adobe官网http://code.google.com/p/swfobject 。<br />
+<br />
+3、playerProductInstall.swf. 一个Flash程序，被用来在高于6.65版本的Flash Player 被安装后更新用户系统的Flash Player。<br />
+<br />
+4、history文件夹，包含用于历史管理的几个文件文件：<br />
+<br />
+·historyFrame.html. HTML页面模板，在运行时被主页的&lt;iframe&gt;加载。<br />
+<br />
+·history.js.一个JavaScript库，包含了一些可以被historyFrame.html调用的方法。<br />
+<br />
+·history.css. 包含一些 historyFrame需要的样式。<br />
+<br />
+附注：html-template 文件夹和它内部的内容在部署程序的时候不必要拷贝到web服务器中，这些文件只是在编译阶段使用。<br />
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#来源页面待处理">来源页面待处理</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#flex项目下自动生成的几个目录的用途">flex项目下自动生成的几个目录的用途</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

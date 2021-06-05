@@ -1,0 +1,567 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Hibernate对数据库的操作_comonly.cn</title>
+<meta name="keywords" content="Hibernate对数据库的操作" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Hibernate对数据库的操作</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">别先生</li>
+          <li class="lmname"><a href="https://www.cnblogs.com/biehongli/p/6528001.html" target="_blank">https://www.cnblogs.com/biehongli/p/6528001.html</a></li>
+          <li class="timer">2018-09-13</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	javaweb---jsp asp数据库框架
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <pre class="prettyprint lang-js">Transaction tx = session.beginTransaction();
+//hibernate数据相关操作
+...
+tx.commit();//提交事务
+session.close();//释放资源</pre></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/973.html">Hibernate框架使用方法</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/975.html">Hibernate数据的三种状态【待处理】</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.cnblogs.com/biehongli/p/6528001.html" target="_blank">https://www.cnblogs.com/biehongli/p/6528001.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="HibernateUtils工具类">
+							<h2 style="display:inline;color:#5BC648;">HibernateUtils工具类</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-09-13&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><pre class="prettyprint lang-js">package cn.comonly.utils;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+//工具类
+public class HibernateUtils {
+
+    private final static Configuration cfg;
+    private final static SessionFactory sessionFactory;
+    
+    //用静态代码块来实现对象只在类加载的时候创建一次(静态代码块只执行一次)
+    static{
+        //创建configuration对象，
+        cfg = new Configuration().configure();
+        //根据Configuration对象创建sessionFactory对象
+        sessionFactory = cfg.buildSessionFactory();
+    }
+
+    //返回与本地线程绑定的session
+    public static Session getSession(){
+        return sessionFactory.getCurrentSession();
+    }
+    
+    //打开一个新的session
+    public static Session getSession() {
+	Session session=sessionFactory.openSession();
+	return session;
+    }
+
+    //创建一个方法用于返回sessionFactory对象
+    public static SessionFactory getSessionFactory(){
+        return sessionFactory;
+    }
+}</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="save方法（添加或修改）">
+							<h2 style="display:inline;color:#5BC648;">save方法（添加或修改）</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-09-13&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	1. 传入的参数是临时对象，提交事务后直接保存对象
+</p>
+<pre class="prettyprint lang-java">session.save(obj); </pre>
+<p>
+	2. 传入的是持久化对象直接返回，不起作用，若属性变化则更新，否则不更新
+</p>
+<pre class="prettyprint lang-java">//持久化对象，使用反射了解类的结构
+Student student=(Student)session.get(Student.class, "2016");
+//不起作用，不会执行insert SQL语句
+session.save(student);</pre>
+<p>
+	3.&nbsp;更新持久化对象并保存，清理一级缓存时，会与快照对比，如果发生了更新则执行同步到数据库。如果此时对该类开启了二级缓存，并设置访问策略为 “read-only”，那么此处将不能修改该持久化对象，否则将发生异常。
+</p>
+<pre class="prettyprint lang-java">//持久化对象，使用反射了解类的结构
+Student student=(Student)session.get(Student.class, "2016");
+student.setAge(25);
+//发生了改变，将执行update SQL语句
+session.save(student);</pre>
+<p>
+	4. 传入的游离对象，那就将其作为临时对象处理进行保存
+</p>
+<pre class="prettyprint lang-java">//持久化对象，使用反射了解类的结构
+Student student=(Student)session.get(Student.class, "2016");
+//使持久化对象成为游离对象，清理缓存或将指定对象清理缓存
+//session.clear();
+session.evict(student);
+//会执行insert SQL语句，在主键不冲突的情况下，将记录插入到数据库中
+session.save(student);</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="update方法（更新）">
+							<h2 style="display:inline;color:#5BC648;">update方法（更新）</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-09-13&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	1.&nbsp;若update方法传入的是临时对象且OID=null，那么就抛异常。若update方法传入的是临时对象且OID！=null，那就执行update语句
+</p>
+<pre class="prettyprint lang-java">//只能更新在数据库表里已经存在的，如下，数据表中已有"2015"这个主键
+Student stu=new Student();
+stu.setId("2015");
+stu.setName("Hello");
+stu.setGender("female");
+stu.setAge(19);
+session.update(stu);</pre>
+<p>
+	2.&nbsp;若update方法传入的是持久化对象，那么直接返回不起作用。若属性发生变化则更新，否则不更新。
+</p>
+<pre class="prettyprint lang-java">//持久化对象，使用反射了解类的结构
+Student student=(Student)session.get(Student.class, "2016");
+System.out.println(student);
+student.setAge(22);
+session.update(student);</pre>
+<p>
+	3.&nbsp;若update方法传入的是游离对象那么就进行update更新，不管属性是否发生变化
+</p>
+<p>
+	<span id="__kindeditor_bookmark_start_25__"> </span>
+</p>
+<pre class="prettyprint lang-java">//持久化对象，使用反射了解类的结构
+Student student=(Student)session.get(Student.class, "2016");
+System.out.println(student);
+//清理一级缓存，使之成为游离对象
+session.clear();
+session.update(student);</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="delete方法（删除）">
+							<h2 style="display:inline;color:#5BC648;">delete方法（删除）</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-09-13&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	用于删除一条记录，需要注意此方法是按主键作条件进行删除，删除的时候需要传入一个对象。
+</p>
+<pre class="prettyprint lang-java">Student stu=new Student(); 
+stu.setId("2015");
+session.delete(student); //执行删除</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="get和load方法（查询）">
+							<h2 style="display:inline;color:#5BC648;">get和load方法（查询）</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-09-13&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	重要参考：hibernate延迟加载(get和load的区别)<a href="https://www.cnblogs.com/xiaoluo501395377/p/3371776.html" target="_blank">https://www.cnblogs.com/xiaoluo501395377/p/3371776.html</a> 
+</p>
+<p>
+	1. load加载方式
+</p>
+<p>
+	当我们使用session.load()方法来加载一个对象时，此时并不会发出sql语句，当前得到的这个对象其实是一个代理对象，这个代理对象只保存了实体对象的id值，只有当我们要使用这个对象，得到其它属性时，这个时候才会发出sql语句，从数据库中去查询我们的对象。
+</p>
+<pre class="prettyprint lang-java">//通过load的方式加载对象时，会使用延迟加载机制，此时得到的User对象其实是一个代理对象，该代理对象里面仅仅只有id这个属性
+User user = (User)session.load(User.class, 2);
+//获取id不会从数据库查询
+System.out.println(user.getId());
+// 如果此时要得到user其他属性，则会从数据库中查询
+System.out.println(user.getUsername());</pre>
+试图得到一个id不存在的对象时（获取除id以外的属性时），此时会报ObjectNotFoundException异常。若session已经关闭了，再想调用数据库获取该对象时就会报LazyInitializationException异常：
+<pre class="prettyprint lang-bsh">org.hibernate.LazyInitializationException: could not initialize proxy - no Session　　.............</pre>
+<p>
+	2.&nbsp;get加载方式
+</p>
+<pre class="prettyprint lang-java">//通过get方法来加载对象时，不管使不使用该对象，都会发出sql语句，从数据库中查询
+User user = (User)session.get(User.class, 2);</pre>
+试图得到一个id不存在的对象时，此时会报NullPointException的异常</span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="Criteria（查询）">
+							<h2 style="display:inline;color:#5BC648;">Criteria（查询）</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-03-23&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	重要参考：Criteria查询<span id="__kindeditor_bookmark_start_4__"><a href="https://www.cnblogs.com/liunanjava/p/4340103.html" target="_blank">https://www.cnblogs.com/liunanjava/p/4340103.html</a></span>
+</p>
+<p>
+	1. 简单的实现：
+</p>
+<pre class="prettyprint lang-java">//这部分为使用Criteria来实现按条件查询
+Criteria criteria = session.createCriteria(Student.class);
+//添加条件
+criteria.add(Restrictions.eq("name", "小红"));
+Listlist = criteria.list();</pre>
+<p>
+	2. 可以使用多个查询条件或者条件 or
+</p>
+<pre class="prettyprint lang-js">criteria.add(Restrictions.or(Restrictions.eq("age", 23), Restrictions.like("username", "%李%")));
+//或者以下写法直接使用SQL语句
+criteria.add(Restrictions.sqlRestriction("age=20 or username like '%李%'"));</pre>
+<p>
+	3. 可以对结果进行排序
+</p>
+<pre class="prettyprint lang-js">criteria.addOrder(Order.desc(属性名称));降序
+criteria.addOrder(Order.asc(属性名称));升序</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="HQL语句">
+							<h2 style="display:inline;color:#5BC648;">HQL语句</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-03-23&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	查询
+</p>
+<pre class="prettyprint lang-java">List list=session.createQuery(“select user.name from User user ”).list(); </pre>
+<p>
+	修改
+</p>
+<pre class="prettyprint lang-java">String hql=”update User user set user.age=20 where user.age=18”; 
+Query queryupdate=session.createQuery(hql); 
+int ret=queryupdate.executeUpdate(); </pre>
+<p>
+	删除
+</p>
+<pre class="prettyprint lang-java">String hql="delete Person as p where p.id=?";
+Query query=session.createQuery(hql);
+query.setInteger(0,id);
+query.executeUpdate();</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="参考资料">
+							<h2 style="display:inline;color:#5BC648;">参考资料</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-03-23&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	save、update、saveOrUpdate详细介绍：<a href="https://blog.csdn.net/sinat_37976731/article/details/80663709" target="_blank">https://blog.csdn.net/sinat_37976731/article/details/80663709</a>
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="saveOrUpdate（添加修改）">
+							<h2 style="display:inline;color:#5BC648;">saveOrUpdate（添加修改）</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-03-23&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span>该方法包含了save和update方法的功能，如果传入的参数是临时对象，就调用save方法，如果传入的参数是游离对象（数据库表中可能是有记录的），那么就调用update方法，如果传入的参数是持久化对象，那么直接返回不起作用，若属性发生变化则更新，否则不更新</span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="getCurrentSession和openSession区别">
+							<h2 style="display:inline;color:#5BC648;">getCurrentSession和openSession区别</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-03-23&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	重点参考：hibernate中openSession()跟getCurrentSession()方法之间的区别<span id="__kindeditor_bookmark_start_0__"><a href="https://www.cnblogs.com/Ant-soldier/p/5051478.html" target="_blank">https://www.cnblogs.com/Ant-soldier/p/5051478.html</a></span>
+</p>
+<ol>
+	<li>
+		采用getCurrentSession()创建的Session会绑定到当前的线程中去、而采用OpenSession()则不会。
+	</li>
+	<li>
+		采用getCurrentSession()创建的Session在commit或rollback后会自动关闭，采用OpenSession()必须手动关闭。
+	</li>
+	<li>
+		采用getCurrentSession()需要在Hibernate.cfg.xml配置文件中加入如下配置：
+	</li>
+</ol>
+<ul>
+	<li>
+		如果是本地事物，及JDBC一个数据库：&lt;propety name=”Hibernate.current_session_context_class”&gt;thread&lt;/propety&gt;
+	</li>
+	<li>
+		如果是全局事物，及jta事物、多个数据库资源或事物资源：&lt;propety name=”Hibernate.current_session_context_class”&gt;jta&lt;/propety&gt;
+	</li>
+</ul>
+使用spring的getHiberanteTemplate 就不需要考虑事务管理和session关闭的问题。</span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#HibernateUtils工具类">HibernateUtils工具类</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#save方法（添加或修改）">save方法（添加或修改）</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#update方法（更新）">update方法（更新）</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#delete方法（删除）">delete方法（删除）</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#get和load方法（查询）">get和load方法（查询）</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Criteria（查询）">Criteria（查询）</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#HQL语句">HQL语句</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#参考资料">参考资料</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#saveOrUpdate（添加修改）">saveOrUpdate（添加修改）</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#getCurrentSession和openSession区别">getCurrentSession和openSession区别</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

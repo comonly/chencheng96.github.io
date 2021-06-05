@@ -1,0 +1,259 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>js的form表单提交url传参数(包含+等特殊字符)的两种解决方法_comonly.cn</title>
+<meta name="keywords" content="js的form表单提交url传参数(包含+等特殊字符)的两种解决方法" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">js的form表单提交url传参数(包含+等特殊字符)的两种解决方法</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-04-14</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">js,form,url</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='方法一：（伪装form表单提交）'>
+	方法一：（伪装form表单提交）
+</h2>
+<p>
+	linkredwin =function(A,B,C,D,E,F,G){<br />
+&nbsp; &nbsp; varformredwin = document.createElement("form");<br />
+&nbsp; &nbsp; formredwin.method ='POST';<br />
+&nbsp; &nbsp; document.body.appendChild(formredwin);<br />
+&nbsp; &nbsp; formredwin.action ="http://www.A.com/A.wiki?A="<br />
+&nbsp; &nbsp; &nbsp; &nbsp; +encodeURI(A) +"&amp;B="<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;strong&gt;&lt;span style="color: rgb(255, 0, 255);"&gt;+encodeURIComponent(B)&lt;/span&gt;&lt;/strong&gt; +"&amp;C="<br />
+&nbsp; &nbsp; &nbsp; &nbsp; +encodeURI(C) +"&amp;D="<br />
+&nbsp; &nbsp; &nbsp; &nbsp; +encodeURI(D) +"&amp;E="<br />
+&nbsp; &nbsp; &nbsp; &nbsp; +encodeURI(E) +"&amp;F="<br />
+&nbsp; &nbsp; &nbsp; &nbsp; +encodeURI(F)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; +"&amp;G="+encodeURI(G);<br />
+&nbsp; &nbsp; formredwin.submit();<br />
+&nbsp; &nbsp; formredwin.parentNode.removeChild(formredwin);<br />
+}
+</p>
+<h2 id='方法二：用编码替换'>
+	方法二：用编码替换
+</h2>
+<p>
+	1. + URL 中+号表示空格 %2B&nbsp;
+</p>
+<p>
+	2. 空格 URL中的空格可以用+号或者编码 %20&nbsp;
+</p>
+<p>
+	3. / 分隔目录和子目录 %2F&nbsp;&nbsp;
+</p>
+<p>
+	4. ? 分隔实际的 URL 和参数 %3F&nbsp;&nbsp;
+</p>
+<p>
+	5. % 指定特殊字符 %25&nbsp;&nbsp;
+</p>
+<p>
+	6. # 表示书签 %23&nbsp;&nbsp;
+</p>
+<p>
+	7. &amp; URL 中指定的参数间的分隔符 %26&nbsp;&nbsp;
+</p>
+<p>
+	8. = URL 中指定参数的值 %3D&nbsp;
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/681.html">Javascript获取HTML静态页面参数传递值示例</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/683.html">ASP用replace()替换字符串的用法</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#方法一：（伪装form表单提交）">方法一：（伪装form表单提交）</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#方法二：用编码替换">方法二：用编码替换</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

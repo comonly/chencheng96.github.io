@@ -1,0 +1,284 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>c++ 中 map 插入方式的比较及同值覆盖问题 按键排序，迭代器输出键序_comonly.cn</title>
+<meta name="keywords" content="c++ 中 map 插入方式的比较及同值覆盖问题 按键排序，迭代器输出键序" />
+<meta name="description" content="一、map 简介
+Map是STL的一个容器，它提供一对一的hash。
+一个map变量中的值以pair的形式存在，可以有多个pair，每个pair中存储两个值。
+
+第一个为关键字key，每个key只能在map中出现一次，类似数据库中的主键，可以为key指定不同的类型；
+第二个为key对应的值value，二者是一对一的关系，不同的key值可以对应相同的value，可以为key指定不同的类型。
+
+	
+
+
+	二、map的四种插入方法对比
+
+
+方式函数key值已存在时是否会覆盖原value" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">c++ 中 map 插入方式的比较及同值覆盖问题 按键排序，迭代器输出键序</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-11-05</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>一、map 简介
+Map是STL的一个容器，它提供一对一的hash。
+一个map变量中的值以pair的形式存在，可以有多个pair，每个pair中存储两个值。
+
+第一个为关键字key，每个key只能在map中出现一次，类似数据库中的主键，可以为key指定不同的类型；
+第二个为key对应的值value，二者是一对一的关系，不同的key值可以对应相同的value，可以为key指定不同的类型。
+
+	
+
+
+	二、map的四种插入方法对比
+
+
+方式函数key值已存在时是否会覆盖原value</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 一、map 简介<br />
+Map是STL的一个容器，它提供一对一的hash。<br />
+一个map变量中的值以pair的形式存在，可以有多个pair，每个pair中存储两个值。<br />
+<br />
+第一个为关键字key，每个key只能在map中出现一次，类似数据库中的主键，可以为key指定不同的类型；<br />
+第二个为key对应的值value，二者是一对一的关系，不同的key值可以对应相同的value，可以为key指定不同的类型。<br />
+<p>
+	<br />
+</p>
+<p>
+	二、map的四种插入方法对比
+</p>
+<br />
+方式函数key值已存在时是否会覆盖原value值<br />
+方法一 pair 不会覆盖<br />
+方法二 make_pair 不会覆盖<br />
+方法三 value_type 不会覆盖<br />
+方法四 [ ] <span style="color:#E53333;">会覆盖 数组方式</span><br />
+<p>
+	<br />
+</p>
+<p>
+	为了实现快速查找，map内部本身就是按序存储的（比如红黑树）。在我们插入&lt;key, value&gt;键值对时，就会按照key的大小顺序进行存储，其中key的类型必须能够进行 &lt; 运算，且唯一，默认排序是按照从小到大便利记忆联想到需要支持小于运算。
+</p>
+<p>
+	<br />
+</p>
+<p>
+<pre class="prettyprint lang-cpp">#include &lt;iostream&gt;
+#include &lt;map&gt;
+using namespace std;
+
+int main() {  
+	map&lt;int, int&gt; name_score_map;  
+	name_score_map[5] = 90;   
+	name_score_map[3] = 79;   
+	name_score_map[1] = 92;   
+	name_score_map.insert(make_pair(9,99));  
+	name_score_map.insert(make_pair(8,86));  
+	for (map&lt;int, int&gt;::iterator iter = name_score_map.begin();  
+		 iter != name_score_map.end(); ++iter) {  
+		cout &lt;&lt; iter-&gt;first &lt;&lt; endl;  
+	}  
+	return 0;  
+} </pre>
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1528.html">不重启电脑就让修改后的本地组策略生效</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1532.html">任务管理器中的cpu字段的含义</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

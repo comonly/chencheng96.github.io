@@ -1,0 +1,521 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>WEB前端——拖拉页面元素_comonly.cn</title>
+<meta name="keywords" content="WEB前端——拖拉页面元素" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">WEB前端——拖拉页面元素</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-04-17</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	拖<span>拉</span>事件指的是，用户在某个对象上按下鼠标键不放，拖动它到另一个位置，然后释放鼠标键，将该对象放在那里。拖<span>拉</span>的对象有好几种，包括Element节点、图片、链接、选中的文字等等。在HTML网页中，除了Element节点默认不可以拖拉，其他（图片、链接、选中的文字）是可以直接拖拉的。<span>对于它们<span>（图片、链接、选中的文字）</span>，用到这个属性的时候，往往是将其设为false，防止拖拉。</span> 
+</p>
+<h2 id='drggble属性设置'>
+	draggable属性设置
+</h2>
+<pre class="prettyprint lang-html">&lt;div draggable="true"&gt;
+此区域可拖拉
+&lt;!--注意这里是draggable属性，并不是style属性值，故不能通过CSS设置--&gt;
+&lt;/div&gt;</pre>
+注意，一旦某个Element节点的draggable属性设为true，就无法再用鼠标选中该节点内部的文字或子节点了。
+<h2 id='事件种类'>
+	事件种类
+</h2>
+当Element节点或选中的文本被拖拉时，就会持续触发拖拉事件，包括以下一些事件。<br />
+<ul>
+	<li>
+		drag事件：拖拉过程中，在被拖拉的节点上持续触发。
+	</li>
+	<li>
+		dragstart事件：拖拉开始时在被拖拉的节点上触发，该事件的target属性是被拖拉的节点。通常应该在这个事件的监听函数中，指定拖拉的数据。
+	</li>
+	<li>
+		dragend事件：拖拉结束时（释放鼠标键或按下escape键）在被拖拉的节点上触发，该事件的target属性是被拖拉的节点。它与dragStart事件，在同一个节点上触发。不管拖拉是否跨窗口，或者中途被取消，dragend事件总是会触发的。
+	</li>
+	<li>
+		dragenter事件：拖拉进入当前节点时，在当前节点上触发，该事件的target属性是当前节点。通常应该在这个事件的监听函数中，指定是否允许在当前节点放下（drop）拖拉的数据。如果当前节点没有该事件的监听函数，或者监听函数不执行任何操作，就意味着不允许在当前节点放下数据。在视觉上显示拖拉进入当前节点，也是在这个事件的监听函数中设置。
+	</li>
+	<li>
+		dragover事件：拖拉到当前节点上方时，在当前节点上持续触发，该事件的target属性是当前节点。该事件与dragenter事件基本类似，默认会重置当前的拖拉事件的效果（DataTransfer对象的dropEffect属性）为none，即不允许放下被拖拉的节点，所以如果允许在当前节点drop数据，通常会使用preventDefault方法，取消重置拖拉效果为none。<span>注意： 在拖动元素时，每隔 350 毫秒会触发 ondragover 事件。</span> 
+	</li>
+	<li>
+		dragleave事件：拖拉离开当前节点范围时，在当前节点上触发，该事件的target属性是当前节点。在视觉上显示拖拉离开当前节点，就在这个事件的监听函数中设置。
+	</li>
+	<li>
+		drop事件：被拖拉的节点或选中的文本，释放到目标节点时，在目标节点上触发。注意，如果当前节点不允许drop，即使在该节点上方松开鼠标键，也不会触发该事件。如果用户按下Escape键，取消这个操作，也不会触发该事件。该事件的监听函数负责取出拖拉数据，并进行相关处理。
+	</li>
+</ul>
+关于拖拉事件，有以下几点注意事项。<br />
+<ul>
+	<li>
+		拖拉过程只触发以上这些拖拉事件，尽管鼠标在移动，但是鼠标事件不会触发。
+	</li>
+	<li>
+		将文件从操作系统拖拉进浏览器，不会触发dragStart和dragend事件。
+	</li>
+	<li>
+		dragenter和dragover事件的监听函数，用来指定可以放下（drop）拖拉的数据。由于网页的大部分区域不适合作为drop的目标节点，所以这两个事件的默认设置为当前节点不允许drop。如果想要在目标节点上drop拖拉的数据，首先必须阻止这两个事件的默认行为，或者取消这两个事件。
+	</li>
+</ul>
+<pre class="prettyprint lang-html">&lt;div ondragover="return false"&gt;
+&lt;div ondragover="event.preventDefault()"&gt;</pre>
+上面代码中，如果不取消拖拉事件或者阻止默认行为，就不可能在div节点上drop被拖拉的节点。
+<h2 id='DtTrfer对象概述'>
+	DataTransfer对象概述
+</h2>
+<span>拖拉事件用一个DragEvent对象表示，该对象继承MouseEvent对象，因此也就继承了UIEvent和Event对象。DragEvent对象只有一个独有的属性DataTransfer，用来保存需要传递的数据，其他都是继承的属性。DataTransfer属性用来读写拖拉事件中传输的数据。</span><br />
+拖拉的数据保存两方面的数据：数据的种类（又称格式）和数据的值。数据的种类是一个MIME字符串，比如 text/plain或者image/jpeg，数据的值是一个字符串。一般来说，如果拖拉一段文本，则数据默认就是那段文本；如果拖拉一个链接，则数据默认就是链接的URL。<br />
+当拖拉事件开始的时候，可以提供数据类型和数据值；在拖拉过程中，通过dragenter和dragover事件的监听函数，检查数据类型，以确定是否允许放下（drop）被拖拉的对象。比如，在只允许放下链接的区域，检查拖拉的数据类型是否为text/uri-list。<br />
+发生drop事件时，监听函数取出拖拉的数据，对其进行处理。<br />
+<h3>
+	DataTransfer对象的属性
+</h3>
+（1）dropEffect<br />
+dropEffect属性设置放下（drop）被拖拉节点时的效果，可能的值包括copy（复制被拖拉的节点）、move（移动被拖拉的节点）、link（创建指向被拖拉的节点的链接）、none（无法放下被拖拉的节点）。设置除此以外的值，都是无效的。<br />
+<pre class="prettyprint lang-js">target.addEventListener('dragover', function(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  e.dataTransfer.dropEffect = 'copy';
+});</pre>
+dropEffect属性一般在dragenter和dragover事件的监听函数中设置，对于dragstart、drag、dragleave这三个事件，该属性不起作用。进入目标节点后，拖拉行为会初始化成用户设定的效果，用户可以通过按下Shift键和Control键，改变初始设置，在copy、move、link三种效果中切换。<br />
+鼠标箭头会根据dropEffect属性改变形状，提示目前正处于哪一种效果。这意味着，通过鼠标就能判断是否可以在当前节点drop被拖拉的节点。<br />
+（2）effectAllowed<br />
+effectAllowed属性设置本次拖拉中允许的效果，可能的值包括copy（复制被拖拉的节点）、move（移动被拖拉的节点）、link（创建指向被拖拉节点的链接）、copyLink（允许copy或link）、copyMove（允许copy或move）、linkMove（允许link或move）、all（允许所有效果）、none（无法放下被拖拉的节点）、uninitialized（默认值，等同于all）。如果某种效果是不允许的，用户就无法在目标节点中达成这种效果。<br />
+dragstart事件的监听函数，可以设置被拖拉节点允许的效果；dragenter和dragover事件的监听函数，可以设置目标节点允许的效果。<br />
+<pre class="prettyprint lang-js">event.dataTransfer.effectAllowed = "copy";</pre>
+dropEffect属性和effectAllowed属性，往往配合使用。<br />
+<pre class="prettyprint lang-js">event.dataTransfer.effectAllowed = "copyMove";
+event.dataTransfer.dropEffect = "copy";</pre>
+上面代码中，copy是指定的效果，但是可以通过Shift或Ctrl键（根据平台而定），将效果切换成move。只要dropEffect属性和effectAllowed属性之中，有一个为none，就无法在目标节点上完成drop操作。<br />
+（3）files<br />
+files属性是一个FileList对象，包含一组本地文件，可以用来在拖拉操作中传送。如果本次拖拉不涉及文件，则属性为空的FileList对象。<br />
+（4）types<br />
+types属性是一个数组，保存每一次拖拉的数据格式，比如拖拉文件，则格式信息就为File。<br />
+下面是一个例子，通过检查dataTransfer属性的类型，决定是否允许在当前节点执行drop操作。<br />
+<pre class="prettyprint lang-js">function contains(list, value){
+  for( var i = 0; i &lt; list.length; ++i ){
+    if(list[i] === value) return true;
+  }
+  return false;
+}
+
+function doDragOver(event){
+  var isLink = contains( event.dataTransfer.types, "text/uri-list");
+  if (isLink) event.preventDefault();
+}</pre>
+上面代码中，只有当被拖拉的节点是一个链接时，才允许在当前节点放下。<br />
+<h3>
+	DataTransfer对象的方法
+</h3>
+（1）setData()<br />
+setData方法用来设置事件所带有的指定类型的数据。它接受两个参数，第一个是数据类型，第二个是具体数据。如果指定的类型在现有数据中不存在，则该类型将写入types属性；如果已经存在，在该类型的现有数据将被替换。<br />
+<pre class="prettyprint lang-js">event.dataTransfer.setData("text/plain", "Text to drag");</pre>
+上面代码为事件加入纯文本格式的数据。<br />
+<br />
+如果拖拉文本框或者拖拉选中的文本，会默认将文本数据添加到dataTransfer属性，不用手动指定。<br />
+<pre class="prettyprint lang-html">&lt;div draggable="true" ondragstart="
+  event.dataTransfer.setData('text/plain', 'bbb')"&gt;
+  aaa
+&lt;/div&gt;</pre>
+上面代码中，拖拉数据实际上是bbb，而不是aaa。<br />
+下面是添加其他类型的数据。由于text/plain是最普遍支持的格式，为了保证兼容性，建议最后总是将数据保存一份纯文本的格式。<br />
+<pre class="prettyprint lang-js">var dt = event.dataTransfer;
+
+// 添加链接
+dt.setData("text/uri-list", "http://www.example.com");
+dt.setData("text/plain", "http://www.example.com");
+// 添加HTML代码
+dt.setData("text/html", "Hello there, &lt;strong&gt;stranger&lt;/strong&gt;");
+dt.setData("text/plain", "Hello there, &lt;strong&gt;stranger&lt;/strong&gt;");
+// 添加图像的URL
+dt.setData("text/uri-list", imageurl);
+dt.setData("text/plain", imageurl);</pre>
+可以一次提供多种格式的数据。<br />
+<pre class="prettyprint lang-js">var dt = event.dataTransfer;
+dt.setData("application/x-bookmark", bookmarkString);
+dt.setData("text/uri-list", "http://www.example.com");
+dt.setData("text/plain", "http://www.example.com");</pre>
+上面代码中，通过在同一个事件上面，存放三种类型的数据，使得拖拉事件可以在不同的对象上面，drop不同的值。注意，第一种格式是一个自定义格式，浏览器默认无法读取，这意味着，只有某个部署了特定代码的节点，才可能drop（读取到）这个数据。<br />
+（2）getData()<br />
+getData方法接受一个字符串（表示数据类型）作为参数，返回事件所带的指定类型的数据（通常是用setData方法添加的数据）。如果指定类型的数据不存在，则返回空字符串。通常只有drop事件触发后，才能取出数据。如果取出另一个域名存放的数据，将会报错。<br />
+下面是一个drop事件的监听函数，用来取出指定类型的数据。<br />
+<pre class="prettyprint lang-js">function onDrop(event){
+  var data = event.dataTransfer.getData("text/plain");
+  event.target.textContent = data;
+  event.preventDefault();
+}</pre>
+上面代码取出拖拉事件的文本数据，将其替换成当前节点的文本内容。注意，这时还必须取消浏览器的默认行为，因为假如用户拖拉的是一个链接，浏览器默认会在当前窗口打开这个链接。<br />
+getData方法返回的是一个字符串，如果其中包含多项数据，就必须手动解析。<br />
+<pre class="prettyprint lang-js">function doDrop(event){
+  var lines = event.dataTransfer.getData("text/uri-list").split("\n");
+  for (let line of lines) {
+    let link = document.createElement("a");
+    link.href = line;
+    link.textContent = line;
+    event.target.appendChild(link);
+  }
+  event.preventDefault();
+}</pre>
+上面代码中，getData方法返回的是一组链接，就必须自行解析。<br />
+类型值指定为URL，可以取出第一个有效链接。<br />
+<pre class="prettyprint lang-js">var link = event.dataTransfer.getData("URL");</pre>
+下面是一次性取出多种类型的数据。<br />
+<pre class="prettyprint lang-js">function doDrop(event){
+  var types = event.dataTransfer.types;
+  var supportedTypes = ["text/uri-list", "text/plain"];
+  types = supportedTypes.filter(function (value) types.includes(value));
+  if (types.length)
+    var data = event.dataTransfer.getData(types[0]);
+  event.preventDefault();
+}</pre>
+（3）clearData()<br />
+clearData方法接受一个字符串（表示数据类型）作为参数，删除事件所带的指定类型的数据。如果没有指定类型，则删除所有数据。如果指定类型不存在，则原数据不受影响。<br />
+<pre class="prettyprint lang-js">event.dataTransfer.clearData("text/uri-list");</pre>
+上面代码清除事件所带的URL数据。<br />
+（4）setDragImage()<br />
+拖动过程中（dragstart事件触发后），浏览器会显示一张图片跟随鼠标一起移动，表示被拖动的节点。这张图片是自动创造的，通常显示为被拖动节点的外观，不需要自己动手设置。setDragImage方法可以用来自定义这张图片，它接受三个参数，第一个是img图片元素或者canvas元素，如果省略或为null则使用被拖动的节点的外观，第二个和第三个参数为鼠标相对于该图片左上角的横坐标和右坐标。<br />
+下面是一个例子。
+<pre class="prettyprint lang-js">// HTML代码为
+// &lt;div id="drag-with-image" class="dragdemo" draggable="true"&gt; drag me
+// &lt;/div&gt;
+
+var div = document.getElementById("drag-with-image");
+div.addEventListener("dragstart", function(e) {
+  var img = document.createElement("img");
+  img.src = "http://path/to/img";
+  e.dataTransfer.setDragImage(img, 0, 0);
+}, false);</pre></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/906.html">WEB前端——js获元素属性（元素位置，宽高等属性）、鼠标位置、Event 对象及js函数传参</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/909.html">WEB前端——HTML的TextArea标记跟随文本内容自动设置高度，去除右侧滑动条 （实例）</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="实例">
+							<h2 style="display:inline;color:#5BC648;">实例</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-04-17&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><span style="color:#000000;font-family:&quot;font-size:12px;font-style:normal;font-weight:400;">下面的例子展示，如何动态改变被拖动节点的背景色。</span><br />
+<pre class="prettyprint lang-js">div.addEventListener("dragstart", function(e) {
+  this.style.backgroundColor = "red";
+}, false);
+div.addEventListener("dragend", function(e) {
+  this.style.backgroundColor = "green";
+}, false);</pre>
+<span style="color:#000000;font-family:&quot;font-size:12px;font-style:normal;font-weight:400;">上面代码中，div节点被拖动时，背景色会变为红色，拖动结束，又变回绿色。</span><br />
+<span style="color:#000000;font-family:&quot;font-size:12px;font-style:normal;font-weight:400;">下面是一个例子，显示如何实现将一个节点从当前父节点，拖拉到另一个父节点中。</span><br />
+<pre class="prettyprint lang-js">// HTML代码为
+// &lt;div class="dropzone"&gt;
+//    &lt;div id="draggable" draggable="true"&gt;
+//       该节点可拖拉 //    &lt;/div&gt;
+// &lt;/div&gt;
+// &lt;div class="dropzone"&gt;&lt;/div&gt;
+// &lt;div class="dropzone"&gt;&lt;/div&gt;
+// &lt;div class="dropzone"&gt;&lt;/div&gt;
+
+// 被拖拉节点
+var dragged;
+
+document.addEventListener("dragstart", function( event ) {
+  // 保存被拖拉节点
+  dragged = event.target;
+  // 被拖拉节点的背景色变透明
+  event.target.style.opacity = 0.5;
+  // 兼容Firefox
+  event.dataTransfer.setData('text/plain', 'anything');
+}, false);
+
+document.addEventListener('dragend', function( event ) {
+  // 被拖拉节点的背景色恢复正常
+  event.target.style.opacity = '';
+}, false);
+
+document.addEventListener('dragover', function( event ) {
+  // 防止拖拉效果被重置，允许被拖拉的节点放入目标节点
+  event.preventDefault();
+}, false);
+
+document.addEventListener('dragenter', function( event ) {
+  // 目标节点的背景色变紫色
+  // 由于该事件会冒泡，所以要过滤节点
+  if ( event.target.className == 'dropzone' ) {
+    event.target.style.background = 'purple';
+  }
+}, false);
+
+document.addEventListener('dragleave', function( event ) {
+  // 目标节点的背景色恢复原样
+  if ( event.target.className == 'dropzone' ) {
+    event.target.style.background = "";
+  }
+}, false);
+
+document.addEventListener('drop', function( event ) {
+  // 防止事件默认行为（比如某些Elment节点上可以打开链接）
+  event.preventDefault();
+  if ( event.target.className === 'dropzone' ) {
+    // 恢复目标节点背景色
+    event.target.style.background = '';
+    // 将被拖拉节点插入目标节点
+    dragged.parentNode.removeChild( dragged );
+    event.target.appendChild( dragged );
+  }
+
+}, false);</pre>
+<p>
+	<span style="color:#000000;font-family:&quot;font-size:12px;font-style:normal;font-weight:400;"><span style="color:#000000;font-family:&quot;font-size:12px;font-style:normal;font-weight:400;">下面就是一个接收拖拉文件的例子。</span><br />
+</span>
+</p>
+<p>
+	<span style="color:#000000;font-family:&quot;font-size:12px;font-style:normal;font-weight:400;"> </span>
+</p>
+<pre class="prettyprint lang-js">// HTML代码为
+// &lt;div id="output" style="min-height: 200px;border: 1px solid black;"&gt;
+//   文件拖拉到这里
+// &lt;/div&gt;
+
+var div = document.getElementById('output');
+
+div.addEventListener("dragenter", function( event ) {
+  div.textContent = '';
+  event.stopPropagation();
+  event.preventDefault();
+}, false);
+
+div.addEventListener("dragover", function( event ) {
+  event.stopPropagation();
+  event.preventDefault();
+}, false);
+
+div.addEventListener("drop", function( event ) {
+  event.stopPropagation();
+  event.preventDefault();
+  var files = event.dataTransfer.files;
+  for (var i = 0; i &lt; files.length; i++) {
+    div.textContent += files[i].name + ' ' + files[i].size + '字节\n';
+  }
+}, false);</pre>
+<span style="color:#000000;font-family:&quot;font-size:12px;font-style:normal;font-weight:400;">上面代码中，通过files属性读取拖拉文件的信息。如果想要读取文件内容，就要使用FileReader对象。</span><br />
+<pre class="prettyprint lang-js">div.addEventListener('drop', function(e) {
+  e.preventDefault();
+  e.stopPropagation();
+
+  var fileList = e.dataTransfer.files;
+  if (fileList.length &gt; 0) {
+    var file = fileList[0];
+    var reader = new FileReader();
+    reader.onloadend = function(e) {
+      if (e.target.readyState == FileReader.DONE) {
+        var content = reader.result;
+        contentDiv.innerHTML = "File: " + file.name + "\n\n" + content;
+      }
+    }
+    reader.readAsBinaryString(file);
+  } });<span style="color:#000000;font-family:&quot;font-size:12px;font-style:normal;font-weight:400;"> <span style="color:#000000;font-family:&quot;font-size:12px;font-style:normal;font-weight:400;"></span></span></pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#drggble属性设置">drggble属性设置</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#事件种类">事件种类</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#DtTrfer对象概述">DtTrfer对象概述</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#实例">实例</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

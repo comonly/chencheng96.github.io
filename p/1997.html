@@ -1,0 +1,446 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>kubectl 命令梳理_comonly.cn</title>
+<meta name="keywords" content="kubectl 命令梳理" />
+<meta name="description" content="kubectl命令梳理Kubctl命令是操作kubernetes集群的最直接的途径，下面对相关命令进行简介：语法$kubectl[command][TYPE][NAME][flags]command：子命令TYPE：资源类型NAME：资源名称flags：命令参数命令帮助kubectl命令的帮助很详细，kubectl-h会列出所有的子命令，在任何子命令后跟-h，都会输出详细的帮助以及用例，遇到问题可" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">kubectl 命令梳理</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">无锋剑</li>
+          <li class="lmname"><a href="https://blog.51cto.com/michaelkang/2430836" target="_blank">https://blog.51cto.com/michaelkang/2430836</a></li>
+          <li class="timer">2019-08-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>kubectl命令梳理Kubctl命令是操作kubernetes集群的最直接的途径，下面对相关命令进行简介：语法$kubectl[command][TYPE][NAME][flags]command：子命令TYPE：资源类型NAME：资源名称flags：命令参数命令帮助kubectl命令的帮助很详细，kubectl-h会列出所有的子命令，在任何子命令后跟-h，都会输出详细的帮助以及用例，遇到问题可</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <div class="con artical-content editor-preview-side"><h3>kubectl 命令梳理</h3>
+<p>Kubctl 命令是操作 kubernetes 集群的最直接的途径，下面对相关命令进行简介：</p>
+<h3>语法</h3>
+<pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> kubectl [<span class="hljs-built_in">command</span>] [TYPE] [NAME] [flags]</span></code></pre>
+<pre><code class="hljs cs">command：子命令
+TYPE：资源类型
+NAME：资源名称
+flags：命令参数
+
+命令帮助
+kubectl命令的帮助很详细，kubectl -h会列出所有的子命令，在任何子命令后跟 -h，都会输出详细的帮助以及用例，遇到问题可以随时查看帮助。
+
+资源对象
+kubectl大部分子命令后都可以指定要操作的资源对象，可以用kubectl api-resources命令参考
+
+全局参数
+kubectl options命令可以列出可以全局使用的命令参数，比较重要的有：
+
+--cluster=<span class="hljs-string">''</span>: 指定命令操作对象的集群
+--context=<span class="hljs-string">''</span>:  指定命令操作对象的上下文
+-n, --<span class="hljs-keyword">namespace</span>=<span class="hljs-string">''</span>: 指定命令操作对象的Namespace
+
+资源字段
+kubectl explain命令可以输出资源对应的属性字段及定义,在定义资源配置文件时候非常有用。</code></pre>
+<h3>Kubectl 自动补全</h3>
+<pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> <span class="hljs-built_in">source</span> &lt;(kubectl completion bash) <span class="hljs-comment"># setup autocomplete in bash, bash-completion package should be installed first.</span></span>
+<span class="hljs-meta">$</span><span class="bash"> <span class="hljs-built_in">source</span> &lt;(kubectl completion zsh)  <span class="hljs-comment"># setup autocomplete in zsh</span></span></code></pre>
+<h3>Kubectl 上下文和配置</h3>
+<p>设置 kubectl 命令交互的 kubernetes 集群并修改配置信息。参阅 使用 kubeconfig 文件进行跨集群验证 获取关于配置文件的详细信息。</p>
+<pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> kubectl config view <span class="hljs-comment"># 显示合并后的 kubeconfig 配置</span></span>
+<span class="hljs-meta">
+#</span><span class="bash"> 同时使用多个 kubeconfig 文件并查看合并后的配置</span>
+<span class="hljs-meta">$</span><span class="bash"> KUBECONFIG=~/.kube/config:~/.kube/kubconfig2 kubectl config view</span>
+<span class="hljs-meta">
+#</span><span class="bash"> 获取 e2e 用户的密码</span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl config view -o jsonpath=<span class="hljs-string">'{.users[?(@.name == "e2e")].user.password}'</span></span>
+<span class="hljs-meta">
+$</span><span class="bash"> kubectl config current-context              <span class="hljs-comment"># 显示当前的上下文</span></span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl config use-context my-cluster-name  <span class="hljs-comment"># 设置默认上下文为 my-cluster-name</span></span>
+<span class="hljs-meta">
+#</span><span class="bash"> 向 kubeconf 中增加支持基本认证的新集群</span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl config <span class="hljs-built_in">set</span>-credentials kubeuser/foo.kubernetes.com --username=kubeuser --password=kubepassword</span>
+<span class="hljs-meta">
+#</span><span class="bash"> 使用指定的用户名和 namespace 设置上下文</span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl config <span class="hljs-built_in">set</span>-context gce --user=cluster-admin --namespace=foo \</span>
+  &amp;&amp; kubectl config use-context gce</code></pre>
+<h3>创建对象</h3>
+<p>Kubernetes 的清单文件可以使用 json 或 yaml 格式定义。可以以 .yaml、.yml、或者 .json 为扩展名。</p>
+<pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> kubectl create <span class="hljs-_">-f</span> ./my-manifest.yaml           <span class="hljs-comment"># 创建资源</span></span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl create <span class="hljs-_">-f</span> ./my1.yaml <span class="hljs-_">-f</span> ./my2.yaml     <span class="hljs-comment"># 使用多个文件创建资源</span></span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl create <span class="hljs-_">-f</span> ./dir                        <span class="hljs-comment"># 使用目录下的所有清单文件来创建资源</span></span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl create <span class="hljs-_">-f</span> https://git.io/vPieo         <span class="hljs-comment"># 使用 url 来创建资源</span></span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl run nginx --image=nginx                <span class="hljs-comment"># 启动一个 nginx 实例</span></span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl explain pods,svc                       <span class="hljs-comment"># 获取 pod 和 svc 的文档</span></span>
+<span class="hljs-meta">
+#</span><span class="bash"> 从 stdin 输入中创建多个 YAML 对象</span>
+<span class="hljs-meta">$</span><span class="bash"> cat &lt;&lt;EOF | kubectl create <span class="hljs-_">-f</span> -</span>
+apiVersion: v1
+kind: Pod
+...
+    - "1000000"
+---
+apiVersion: v1
+kind: Pod
+...
+    - sleep
+    - "1000"
+EOF
+<span class="hljs-meta">
+#</span><span class="bash"> 创建包含几个 key 的 Secret</span>
+<span class="hljs-meta">$</span><span class="bash"> cat &lt;&lt;EOF | kubectl create <span class="hljs-_">-f</span> -</span>
+apiVersion: v1
+....
+EOF</code></pre>
+<h3>显示和查找资源</h3>
+<pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> Get commands with basic output</span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl get services                          <span class="hljs-comment"># 列出所有 namespace 中的所有 service</span></span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl get pods --all-namespaces             <span class="hljs-comment"># 列出所有 namespace 中的所有 pod</span></span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl get pods -o wide                      <span class="hljs-comment"># 列出所有 pod 并显示详细信息</span></span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl get deployment my-dep                 <span class="hljs-comment"># 列出指定 deployment</span></span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl get pods --include-uninitialized      <span class="hljs-comment"># 列出该 namespace 中的所有 pod 包括未初始化的</span></span>
+<span class="hljs-meta">
+#</span><span class="bash"> 使用详细输出来描述命令</span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl describe nodes my-node</span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl describe pods my-pod</span>
+<span class="hljs-meta">
+$</span><span class="bash"> kubectl get services --sort-by=.metadata.name <span class="hljs-comment"># List Services Sorted by Name</span></span>
+<span class="hljs-meta">
+#</span><span class="bash"> 根据重启次数排序列出 pod</span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl get pods --sort-by=<span class="hljs-string">'.status.containerStatuses[0].restartCount'</span></span>
+<span class="hljs-meta">
+#</span><span class="bash"> 获取所有具有 app=cassandra 的 pod 中的 version 标签</span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl get pods --selector=app=cassandra rc -o \</span>
+  jsonpath='{.items[*].metadata.labels.version}'
+<span class="hljs-meta">
+#</span><span class="bash"> 获取所有节点的 ExternalIP</span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl get nodes -o jsonpath=<span class="hljs-string">'{.items[*].status.addresses[?(@.type=="ExternalIP")].address}'</span></span>
+<span class="hljs-meta">
+#</span><span class="bash"> 列出属于某个 PC 的 Pod 的名字</span>
+<span class="hljs-meta">#</span><span class="bash"> “jq”命令用于转换复杂的 jsonpath，参考 https://stedolan.github.io/jq/</span>
+<span class="hljs-meta">$</span><span class="bash"> sel=<span class="hljs-variable">${$(kubectl get rc my-rc --output=json | jq -j '.spec.selector | to_entries | .[] | "\(.key)=\(.value),"')%?}</span></span>
+<span class="hljs-meta">$</span><span class="bash"> <span class="hljs-built_in">echo</span> $(kubectl get pods --selector=<span class="hljs-variable">$sel</span> --output=jsonpath={.items..metadata.name})</span>
+<span class="hljs-meta">
+#</span><span class="bash"> 查看哪些节点已就绪</span>
+<span class="hljs-meta">$</span><span class="bash"> JSONPATH=<span class="hljs-string">'{range .items[*]}{@.metadata.name}:{range @.status.conditions[*]}{@.type}={@.status};{end}{end}'</span> \</span>
+ &amp;&amp; kubectl get nodes -o jsonpath="$JSONPATH" | grep "Ready=True"
+<span class="hljs-meta">
+#</span><span class="bash"> 列出当前 Pod 中使用的 Secret</span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl get pods -o json | jq <span class="hljs-string">'.items[].spec.containers[].env[]?.valueFrom.secretKeyRef.name'</span> | grep -v null | sort | uniq</span></code></pre>
+<h3>更新资源</h3>
+<pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> kubectl rolling-update frontend-v1 <span class="hljs-_">-f</span> frontend-v2.json           <span class="hljs-comment"># 滚动更新 pod frontend-v1</span></span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl rolling-update frontend-v1 frontend-v2 --image=image:v2  <span class="hljs-comment"># 更新资源名称并更新镜像</span></span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl rolling-update frontend --image=image:v2                 <span class="hljs-comment"># 更新 frontend pod 中的镜像</span></span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl rolling-update frontend-v1 frontend-v2 --rollback        <span class="hljs-comment"># 退出已存在的进行中的滚动更新</span></span>
+<span class="hljs-meta">$</span><span class="bash"> cat pod.json | kubectl replace <span class="hljs-_">-f</span> -                              <span class="hljs-comment"># 基于 stdin 输入的 JSON 替换 pod</span></span>
+<span class="hljs-meta">
+#</span><span class="bash"> 强制替换，删除后重新创建资源。会导致服务中断。</span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl replace --force <span class="hljs-_">-f</span> ./pod.json</span>
+<span class="hljs-meta">
+#</span><span class="bash"> 为 nginx RC 创建服务，启用本地 80 端口连接到容器上的 8000 端口</span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl expose rc nginx --port=80 --target-port=8000</span>
+<span class="hljs-meta">
+#</span><span class="bash"> 更新单容器 pod 的镜像版本（tag）到 v4</span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl get pod mypod -o yaml | sed <span class="hljs-string">'s/\(image: myimage\):.*$/\1:v4/'</span> | kubectl replace <span class="hljs-_">-f</span> -</span>
+<span class="hljs-meta">
+$</span><span class="bash"> kubectl label pods my-pod new-label=awesome                      <span class="hljs-comment"># 添加标签</span></span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl annotate pods my-pod icon-url=http://goo.gl/XXBTWq       <span class="hljs-comment"># 添加注解</span></span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl autoscale deployment foo --min=2 --max=10                <span class="hljs-comment"># 自动扩展 deployment “foo”</span></span></code></pre>
+<h3>修补资源</h3>
+<p>使用策略合并补丁并修补资源。</p>
+<pre><code class="hljs makefile">$ kubectl patch node k8s-node-1 -p '{<span class="hljs-string">"spec"</span>:{<span class="hljs-string">"unschedulable"</span>:true}}' <span class="hljs-comment"># 部分更新节点</span>
+
+<span class="hljs-comment"># 更新容器镜像； spec.containers[*].name 是必须的，因为这是合并的关键字</span>
+$ kubectl patch pod valid-pod -p '{<span class="hljs-string">"spec"</span>:{<span class="hljs-string">"containers"</span>:[{<span class="hljs-string">"name"</span>:<span class="hljs-string">"kubernetes-serve-hostname"</span>,<span class="hljs-string">"image"</span>:<span class="hljs-string">"new image"</span>}]}}'
+
+<span class="hljs-comment"># 使用具有位置数组的 json 补丁更新容器镜像</span>
+$ kubectl patch pod valid-pod --type='json' -p='[{<span class="hljs-string">"op"</span>: <span class="hljs-string">"replace"</span>, <span class="hljs-string">"path"</span>: <span class="hljs-string">"/spec/containers/0/image"</span>, <span class="hljs-string">"value"</span>:<span class="hljs-string">"new image"</span>}]'
+
+<span class="hljs-comment"># 使用具有位置数组的 json 补丁禁用 deployment 的 livenessProbe</span>
+$ kubectl patch deployment valid-deployment  --type json   -p='[{<span class="hljs-string">"op"</span>: <span class="hljs-string">"remove"</span>, <span class="hljs-string">"path"</span>: <span class="hljs-string">"/spec/template/spec/containers/0/livenessProbe"</span>}]'</code></pre>
+<h3>编辑资源</h3>
+<p>在编辑器中编辑任何 API 资源。</p>
+<pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> kubectl edit svc/docker-registry                      <span class="hljs-comment"># 编辑名为 docker-registry 的 service</span></span>
+<span class="hljs-meta">$</span><span class="bash"> KUBE_EDITOR=<span class="hljs-string">"nano"</span> kubectl edit svc/docker-registry   <span class="hljs-comment"># 使用其它编辑器</span></span></code></pre>
+<h3>Scale 资源</h3>
+<pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> kubectl scale --replicas=3 rs/foo                                 <span class="hljs-comment"># Scale a replicaset named 'foo' to 3</span></span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl scale --replicas=3 <span class="hljs-_">-f</span> foo.yaml                            <span class="hljs-comment"># Scale a resource specified in "foo.yaml" to 3</span></span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl scale --current-replicas=2 --replicas=3 deployment/mysql  <span class="hljs-comment"># If the deployment named mysql's current size is 2, scale mysql to 3</span></span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl scale --replicas=5 rc/foo rc/bar rc/baz                   <span class="hljs-comment"># Scale multiple replication controllers</span></span></code></pre>
+<h3>删除资源</h3>
+<pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> kubectl delete <span class="hljs-_">-f</span> ./pod.json                                              <span class="hljs-comment"># 删除 pod.json 文件中定义的类型和名称的 pod</span></span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl delete pod,service baz foo                                        <span class="hljs-comment"># 删除名为“baz”的 pod 和名为“foo”的 service</span></span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl delete pods,services <span class="hljs-_">-l</span> name=myLabel                              <span class="hljs-comment"># 删除具有 name=myLabel 标签的 pod 和 serivce</span></span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl delete pods,services <span class="hljs-_">-l</span> name=myLabel --include-uninitialized      <span class="hljs-comment"># 删除具有 name=myLabel 标签的 pod 和 service，包括尚未初始化的</span></span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl -n my-ns delete po,svc --all                                      <span class="hljs-comment"># 删除 my-ns namespace 下的所有 pod 和 serivce，包括尚未初始化的</span></span></code></pre>
+<h3>与运行中的 Pod 交互</h3>
+<pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> kubectl logs my-pod                                 <span class="hljs-comment"># dump 输出 pod 的日志（stdout）</span></span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl logs my-pod -c my-container                 <span class="hljs-comment"># dump 输出 pod 中容器的日志（stdout，pod 中有多个容器的情况下使用）</span></span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl logs <span class="hljs-_">-f</span> my-pod                              <span class="hljs-comment"># 流式输出 pod 的日志（stdout）</span></span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl logs <span class="hljs-_">-f</span> my-pod -c my-container              <span class="hljs-comment"># 流式输出 pod 中容器的日志（stdout，pod 中有多个容器的情况下使用）</span></span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl run -i --tty busybox --image=busybox -- sh  <span class="hljs-comment"># 交互式 shell 的方式运行 pod</span></span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl attach my-pod -i                            <span class="hljs-comment"># 连接到运行中的容器</span></span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl port-forward my-pod 5000:6000               <span class="hljs-comment"># 转发 pod 中的 6000 端口到本地的 5000 端口</span></span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl <span class="hljs-built_in">exec</span> my-pod -- ls /                         <span class="hljs-comment"># 在已存在的容器中执行命令（只有一个容器的情况下）</span></span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl <span class="hljs-built_in">exec</span> my-pod -c my-container -- ls /         <span class="hljs-comment"># 在已存在的容器中执行命令（pod 中有多个容器的情况下）</span></span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl top pod POD_NAME --containers               <span class="hljs-comment"># 显示指定 pod 和容器的指标度量</span></span></code></pre>
+<h3>与节点和集群交互</h3>
+<pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> kubectl cordon my-node                                                <span class="hljs-comment"># 标记 my-node 不可调度</span></span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl drain my-node                                                 <span class="hljs-comment"># 清空 my-node 以待维护</span></span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl uncordon my-node                                              <span class="hljs-comment"># 标记 my-node 可调度</span></span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl top node my-node                                              <span class="hljs-comment"># 显示 my-node 的指标度量</span></span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl cluster-info                                                  <span class="hljs-comment"># 显示 master 和服务的地址</span></span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl cluster-info dump                                             <span class="hljs-comment"># 将当前集群状态输出到 stdout                                    </span></span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl cluster-info dump --output-directory=/path/to/cluster-state   <span class="hljs-comment"># 将当前集群状态输出到 /path/to/cluster-state</span></span>
+<span class="hljs-meta">
+#</span><span class="bash"> 如果该键和影响的污点（taint）已存在，则使用指定的值替换</span>
+<span class="hljs-meta">$</span><span class="bash"> kubectl taint nodes foo dedicated=special-user:NoSchedule</span></code></pre>
+<h2 id='源类型'>资源类型</h2>
+<p>下表列出的是 kubernetes 中所有支持的类型和缩写的别名。</p>
+<pre><code class="hljs objectivec">资源类型                          缩写别名          指定 Namespaced
+componentstatuses               cs                  <span class="hljs-literal">FALSE</span>
+configmaps                      cm                  <span class="hljs-literal">TRUE</span>
+endpoints                       ep                  <span class="hljs-literal">TRUE</span>
+limitranges                     limits              <span class="hljs-literal">TRUE</span>
+namespaces                      ns                  <span class="hljs-literal">FALSE</span>
+nodes                           no                  <span class="hljs-literal">FALSE</span>
+persistentvolumeclaims          pvc                 <span class="hljs-literal">TRUE</span>
+persistentvolumes               pv                  <span class="hljs-literal">FALSE</span>
+pods                            po                  <span class="hljs-literal">TRUE</span>
+replicationcontrollers          rc                  <span class="hljs-literal">TRUE</span>
+resourcequotas                  quota               <span class="hljs-literal">TRUE</span>
+serviceaccounts                 sa                  <span class="hljs-literal">TRUE</span>
+services                        svc                 <span class="hljs-literal">TRUE</span>
+customresourcedefinitions crd, crds                 <span class="hljs-literal">FALSE</span>
+daemonsets                      ds                  <span class="hljs-literal">TRUE</span>
+deployments                     deploy              <span class="hljs-literal">TRUE</span>
+replicasets                     rs                  <span class="hljs-literal">TRUE</span>
+statefulsets                    sts                 <span class="hljs-literal">TRUE</span>
+horizontalpodautoscalers        hpa                 <span class="hljs-literal">TRUE</span>
+cronjobs                        cj                  <span class="hljs-literal">TRUE</span>
+certificatesigningrequests      csr                 <span class="hljs-literal">FALSE</span>
+events                          ev                  <span class="hljs-literal">TRUE</span>
+ingresses                       ing                 <span class="hljs-literal">TRUE</span>
+networkpolicies                 netpol              <span class="hljs-literal">TRUE</span>
+poddisruptionbudgets            pdb                 <span class="hljs-literal">TRUE</span>
+podsecuritypolicies             psp                 <span class="hljs-literal">FALSE</span>
+priorityclasses                 pc                  <span class="hljs-literal">FALSE</span>
+storageclasses                  sc                  <span class="hljs-literal">FALSE</span>
+</code></pre>
+<h2 id='式化输出'>格式化输出</h2>
+<p>要以特定的格式向终端窗口输出详细信息，可以在 kubectl 命令中添加 -o 或者 -output 标志。</p>
+<pre><code class="hljs diff">输出格式    描述
+<span class="hljs-deletion">-o=custom-columns=&lt;spec&gt;    使用逗号分隔的自定义列列表打印表格</span>
+<span class="hljs-deletion">-o=custom-columns-file=&lt;filename&gt;   使用 文件中的自定义列模板打印表格</span>
+<span class="hljs-deletion">-o=json 输出 JSON 格式的 API 对象</span>
+<span class="hljs-deletion">-o=jsonpath=&lt;template&gt;  打印 jsonpath 表达式中定义的字段</span>
+<span class="hljs-deletion">-o=jsonpath-file=&lt;filename&gt; 打印由 文件中的 jsonpath 表达式定义的字段</span>
+<span class="hljs-deletion">-o=name 仅打印资源名称</span>
+<span class="hljs-deletion">-o=wide 以纯文本格式输出任何附加信息，对于 Pod ，包含节点名称</span>
+<span class="hljs-deletion">-o=yaml 输出 YAML 格式的 API 对象</span></code></pre>
+<h3>Kubectl 详细输出和调试</h3>
+<pre><code class="hljs sql">使用 -v 或 <span class="hljs-comment">--v 标志跟着一个整数来指定日志级别。</span>
+
+详细等级    描述
+<span class="hljs-comment">--v=0   总是对操作人员可见。</span>
+<span class="hljs-comment">--v=1   合理的默认日志级别，如果您不需要详细输出。</span>
+<span class="hljs-comment">--v=2   可能与系统的重大变化相关的，有关稳定状态的信息和重要的日志信息。这是对大多数系统推荐的日志级别。</span>
+<span class="hljs-comment">--v=3   有关更改的扩展信息。</span>
+<span class="hljs-comment">--v=4   调试级别详细输出。</span>
+<span class="hljs-comment">--v=6   显示请求的资源。</span>
+<span class="hljs-comment">--v=7   显示HTTP请求的header。</span>
+<span class="hljs-comment">--v=8   显示HTTP请求的内容。</span></code></pre></div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1996.html">[Spring cloud 一步步实现广告系统] 21. 系统错误汇总</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1998.html">基于Server2016系统搭建DNS服务器、Web服务器、DHCP服务器并使它们互联互通</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.51cto.com/michaelkang/2430836" target="_blank">https://blog.51cto.com/michaelkang/2430836</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#源类型">源类型</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#式化输出">式化输出</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

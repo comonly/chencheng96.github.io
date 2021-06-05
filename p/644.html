@@ -1,0 +1,329 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Application对象—ASP_comonly.cn</title>
+<meta name="keywords" content="Application对象—ASP" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Application对象—ASP</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-03-23</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	javaweb---jsp asp数据库框架
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">Application对象,ASP</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='Alictio对象的集合'>
+	Application对象的集合
+</h2>
+<p>
+	Contents集合：包含了所有存放在Application对象中未用&lt;OBJECT&gt;定义的变量名称及值的集合。包括Variant数组和Variant型的对象实例引用。
+</p>
+<p>
+	&nbsp; &nbsp;&lt;% Application.Contents("name")="test"
+</p>
+<p>
+	&nbsp; &nbsp;application.Contents("name")<span style="line-height:1.5;">%&gt;</span> 
+</p>
+<p>
+	<span style="line-height:1.5;">&nbsp; &nbsp;Application.Contents.count获取Contents集合变量的个数。</span> 
+</p>
+<p>
+	<span style="line-height:1.5;">&nbsp; &nbsp;可以使用Set关键字为Application设置组件变量实例。</span> 
+</p>
+<p>
+	StaticObject集合：该集合包含Application对象范围中未用&lt;OBJECT&gt;标记创建的所有对象。该集合用于确定对象特定属性的值，或用于遍历集合并获取所有对象的全部属性。
+</p>
+<p>
+	&nbsp; &nbsp;Application.StaticObject(obj) 取出Staticobject集合中的某对象。
+</p>
+<h2 id='Alictio对象的方法'>
+	Application对象的方法
+</h2>
+<p>
+	Remove方法：从Contents集合中删除一个指定的变量
+</p>
+<p>
+	&nbsp; &nbsp;Application.Contents.Remove("name") name是待删除变量的名字或者是contents集合中变量的序号。
+</p>
+<p>
+	&nbsp; &nbsp;<span>Application.Contents.Remove(2)</span> 
+</p>
+<p>
+	RemoveAll方法：从Contents集合中删除所有变量
+</p>
+<p>
+	&nbsp; &nbsp;Application.Contents.RemoveAll()
+</p>
+<p>
+	Lock方法：锁定Application对象，确保当前只有一个用户可以修改Application对象的变量值
+</p>
+<p>
+	Unlock方法：释放使用Lock方法锁定的Application对象。如果没有调用该方法，那么web服务器将在asp文件结束或者超时后将Application对象释放
+</p>
+<p>
+	&nbsp; &nbsp;Application.Lock
+</p>
+<p>
+	&nbsp; &nbsp;Application.Contents("name")="test"
+</p>
+<p>
+	&nbsp; &nbsp;Application.unLock
+</p>
+<p>
+	<br />
+</p>
+<p>
+	在Application对象中存储数组
+</p>
+<p>
+	&nbsp; &nbsp;var Array1(1)
+</p>
+<p>
+	&nbsp; &nbsp;Array1(0)="test"
+</p>
+<p>
+	&nbsp; &nbsp;Array1(1)="test_asd"
+</p>
+<p>
+	&nbsp; &nbsp;Application.Lock
+</p>
+<p>
+	&nbsp; &nbsp;Application.Contents("name")=Array1
+</p>
+<p>
+	&nbsp; &nbsp;Application.unLock
+</p>
+<h2 id='Alictio对象的事件'>
+	Application对象的事件
+</h2>
+<p>
+	OnStart事件：客户端请求某个应用中的某个网页的第一个实例后，在执行该页面之前触发该事件。
+</p>
+<p>
+	&nbsp; &nbsp;只在应用程序启动时执行一次，只能使用Application和Server对象。
+</p>
+<p>
+	&nbsp; &nbsp;Sub Application_OnStart
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp;Application.contents("count")=0
+</p>
+<p>
+	&nbsp; &nbsp;End Sub
+</p>
+<p>
+	OnEnd事件：在ASP应用结束时触发该事件，这个事件发生在最后一个用户会话结束后，在该应用中存储的所有变量都将被消除。
+</p>
+<p>
+	&nbsp; &nbsp;在应用程序结束时触发，该事件可以用来删除不需要的信息。<span>只能使用Application和Server对象。</span> 
+</p>
+<p>
+	<span></span> 
+</p>
+<p>
+	&nbsp; &nbsp;Sub Application_OnEnd
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp;Application.RemoveAll
+</p>
+<p>
+	&nbsp; &nbsp;End Sub
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/643.html">Response对象—ASP</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/645.html">global.asa文件</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Alictio对象的集合">Alictio对象的集合</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Alictio对象的方法">Alictio对象的方法</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Alictio对象的事件">Alictio对象的事件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

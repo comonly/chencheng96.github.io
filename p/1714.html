@@ -1,0 +1,272 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>【待处理】C++运行时数据的存储 存储堆栈_comonly.cn</title>
+<meta name="keywords" content="【待处理】C++运行时数据的存储 存储堆栈" />
+<meta name="description" content="编译后程序运行时在内存中的堆栈分布https://blog.csdn.net/a514371309/article/details/77987349
+
+
+	
+
+
+	
+
+
+	
+
+
+	按照错误提示我们可以知道该错误是“栈溢出”，回头一看可能出错的地方也就是在定义数组的地方了，当把预定义的数组大小改成10000之后，程序居然可以运行了，由此看来是我们定义的数组太大了，所以在定义数组的时候一定要谨记千万别太大，如果非要用容量比较大的数组的话建议可以使用new进行分配，然后在函数返回时记得d" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">【待处理】C++运行时数据的存储 存储堆栈</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2020-07-02</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>编译后程序运行时在内存中的堆栈分布https://blog.csdn.net/a514371309/article/details/77987349
+
+
+	
+
+
+	
+
+
+	
+
+
+	按照错误提示我们可以知道该错误是“栈溢出”，回头一看可能出错的地方也就是在定义数组的地方了，当把预定义的数组大小改成10000之后，程序居然可以运行了，由此看来是我们定义的数组太大了，所以在定义数组的时候一定要谨记千万别太大，如果非要用容量比较大的数组的话建议可以使用new进行分配，然后在函数返回时记得d</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <div style="font-size:14px;">
+	编译后程序运行时在内存中的堆栈分布<a href="https://blog.csdn.net/a514371309/article/details/77987349"><span style="color:#003884;">https://blog.csdn.net/a514371309/article/details/77987349</span></a>
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	按照错误提示我们可以知道该错误是“栈溢出”，回头一看可能出错的地方也就是在定义数组的地方了，当把预定义的数组大小改成10000之后，程序居然可以运行了，由此看来是我们定义的数组太大了，所以在定义数组的时候一定要谨记千万别太大，如果非要用容量比较大的数组的话建议可以使用new进行分配，然后在函数返回时记得delete就行了。
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	原因是Stack上存不了那么大的数据，分配时造成堆栈溢出。
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	然后在网上找到一个办法：
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	使用 new 分配内存
+</div>
+<div style="font-size:14px;">
+	Student * stu =  new Student[10000];
+</div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1713.html">【！待处理】C++内存管理之shared_ptr   中.get()方法</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1715.html">Java中synchronized使用及实现方法</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

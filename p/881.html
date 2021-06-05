@@ -1,0 +1,324 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Java基础 数据运算、流程控制和数组_comonly.cn</title>
+<meta name="keywords" content="Java基础 数据运算、流程控制和数组" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Java基础 数据运算、流程控制和数组</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-03-15</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	java-含工具类
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='数据类型，变量，常量'>
+	数据类型，变量，常量
+</h2>
+<p>
+	Java中数据类型分为两大类，基本数据类型（primitive types），另一类是引用类型（reference types）
+</p>
+<p>
+	Java的基本数据类型
+</p>
+<ul>
+	<li>
+		byte：8位，最大存储数据量是255，存放的数据范围是-128~127之间。
+	</li>
+	<li>
+		short：16位，最大数据存储量是65536，数据范围是-32768~32767之间。
+	</li>
+	<li>
+		int：32位，最大数据存储容量是2的32次方减1，数据范围是负的2的31次方到正的2的31次方减1。
+	</li>
+	<li>
+		long：64位，最大数据存储容量是2的64次方减1，数据范围为负的2的63次方到正的2的63次方减1。
+	</li>
+	<li>
+		float：32位，数据范围在3.4e-45~1.4e38，直接赋值时必须在数字后加上f或F。
+	</li>
+	<li>
+		double：64位，数据范围在4.9e-324~1.8e308，赋值时可以加d或D也可以不加。
+	</li>
+	<li>
+		boolean：只有true和false两个取值。
+	</li>
+	<li>
+		char：16位，存储Unicode码，用单引号赋值。
+	</li>
+</ul>
+<p>
+	Java中的变量必须先声明后使用。
+</p>
+<h4>
+	程序注释
+</h4>
+<ul>
+	<li>
+		//用于单行注释
+	</li>
+	<li>
+		/*...*/用于多行注释，注释从/*开始，到*/结束
+	</li>
+	<li>
+		/**...*/Java特有的文档注释（doc注释）Javadoc能识别注释中用标记@标识的一些特殊变量，并将doc注释加入它所生成的HTML文件。
+	</li>
+	<ul>
+		<li>
+			@see：引用其它类
+		</li>
+		<li>
+			@version：版本信息
+		</li>
+		<li>
+			@author：作者信息
+		</li>
+		<li>
+			@param：参数名说明
+		</li>
+		<li>
+			@return：说明
+		</li>
+		<li>
+			@exception：完整类名说明
+		</li>
+	</ul>
+</ul>
+<h2 id='运算符'>
+	运算符
+</h2>
+<p>
+	算术运算符分为二元算术运算符和一元算术运算符，其中取模运算%操作数可以是浮点数（37.2%10=7.2）。+可以用来连接字符串。
+</p>
+<p>
+	关系运算符（&gt;, &gt;=, &lt;, &lt;=, ==, !=）返回布尔类型的值true或false。
+</p>
+<p>
+	逻辑运算符（&amp;, |, !, ^, &amp;&amp;, ||）对布尔数据类型进行运算，结果仍是布尔型。
+</p>
+<p>
+	位运算符（~, &amp;, |, ^, &gt;&gt;, &lt;&lt;, &gt;&gt;&gt;）对二进制为进行操作。
+</p>
+<p>
+	条件运算符（x?y:z）
+</p>
+<h2 id='流程控制语句'>
+	流程控制语句
+</h2>
+<p>
+	分支语句（if...else，switch...case...default）
+</p>
+<p>
+	循环语句（for，while，do...while）
+</p>
+<p>
+	跳转语言（continue，break，return）
+</p>
+<p>
+	增强的for语句：int [] num={1,2,3,4}; for(int n : num){System.out.println(n); }这样的遍历只能取得其中的元素，无法改变元素。
+</p>
+<h2 id='数组'>
+	数组
+</h2>
+<p>
+	一维数组的定义：int [] score = new int[3];引用：score[1]
+</p>
+<p>
+	二维数组的定义：int a[][]=new int[2][3];或者分别为每一维分配空间：int a[][]=new int[2][]; a[0]=new int[3];a[1]=new int[3]; 二维数组是特殊的一维数组，每个元素都是一个一维数组。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/880.html">JavaWeb汇总</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/882.html">Java类、包、接口</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#数据类型，变量，常量">数据类型，变量，常量</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#运算符">运算符</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#流程控制语句">流程控制语句</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#数组">数组</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

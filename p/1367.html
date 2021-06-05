@@ -1,0 +1,275 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>网络负载平衡(NLB)群集中单播、多播区别_comonly.cn</title>
+<meta name="keywords" content="网络负载平衡(NLB)群集中单播、多播区别" />
+<meta name="description" content="MAC地址在添加群集时，设置群集参数会自动生成一个默认的网络地址。添加完群集后在群集属性/群集参数中可以看到网络地址。单播还是多播很重要，因为它决定了虚拟IP绑定的MAC地址，就是群集MAC地址！
+
+	多播
+
+
+	多播的NLB每个结点的网卡原有MAC不会被改变，NLB会分配给群集MAC地址专用的地址用于通讯。如果是选择多播，在路由器和交换机上手动添加静态映射，将虚拟IP地址绑定到群集的MAC地址。或者交换机要支持IGMP侦听！
+
+如果启用了多播，则网络负载平衡会将属于群集适配器的群集 MAC" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">网络负载平衡(NLB)群集中单播、多播区别</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-08-30</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>MAC地址在添加群集时，设置群集参数会自动生成一个默认的网络地址。添加完群集后在群集属性/群集参数中可以看到网络地址。单播还是多播很重要，因为它决定了虚拟IP绑定的MAC地址，就是群集MAC地址！
+
+	多播
+
+
+	多播的NLB每个结点的网卡原有MAC不会被改变，NLB会分配给群集MAC地址专用的地址用于通讯。如果是选择多播，在路由器和交换机上手动添加静态映射，将虚拟IP地址绑定到群集的MAC地址。或者交换机要支持IGMP侦听！
+
+如果启用了多播，则网络负载平衡会将属于群集适配器的群集 MAC</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> MAC地址在添加群集时，设置群集参数会自动生成一个默认的网络地址。添加完群集后在群集属性/群集参数中可以看到网络地址。单播还是多播很重要，因为它决定了虚拟IP绑定的MAC地址，就是群集MAC地址！<br />
+<h2 id='多播'>
+	多播
+</h2>
+<p>
+	多播的NLB每个结点的网卡原有MAC不会被改变，NLB会分配给群集MAC地址专用的地址用于通讯。如果是选择多播，在路由器和交换机上手动添加静态映射，将虚拟IP地址绑定到群集的MAC地址。或者交换机要支持IGMP侦听！
+</p>
+如果启用了多播，则网络负载平衡会将属于群集适配器的群集 MAC 地址转换为多播地址。这也确保了群集主 IP 地址解析为作为 ARP 协议一部分的该多播地址。同时，现在该适配器可以使用在单播模式下禁用的初始内置 MAC 地址。<br />
+当群集已配置为在多播模式下工作时，如果网络负载平衡客户端正在通过路由器访问一个群集，请确保路由器满足以下要求：<br />
+<ul>
+	<li>
+		接受 ARP 应答，此应答在 ARP 结构的有效负载部分有一个 MAC 地址，但正如以太网的报头中所标明的那样，它似乎来自具有另一个 MAC 地址的站点。
+	</li>
+	<li>
+		在多播模式中，接收在其 ARP 结构的有效负载中拥有一个多播 MAC 地址的 ARP 应答。
+	</li>
+</ul>
+多播允许路由器将群集的主 IP 地址和其他多宿主地址映射到相应的 MAC 地址。如果路由器不满足这些要求，您也可以在路由器中创建一个静态 ARP 项。在多播模式下，IGMP 多播复选框启用 Internet 组管理协议 (IGMP) 支持，通过只限制发送到“网络负载平衡端口”的通讯而限制交换流。即启用 IGMP 支持可以确保发送给网络负载平衡群集的通讯只通过服务于群集主机的端口，而不是所有交换机端口。
+<ol>
+	<li>
+		<span>多播模式下NLB节点之间可以通过自己原有的专用IP地址进行通讯，但是群集IP对应一个多播MAC进行通讯，可能会被不支持的路由器或一些交换机拒绝，必须通过在网络设备中添加静态数据的方法解决。</span>
+	</li>
+	<li>
+		<span>由于交换机所有端口中都是使用各个节点实际IP与MAC注册而群集使用多播MAC，所以交换机收到群集的数据包发现交换机没有一个端口是对应群集多播MAC就仍然会广播到所有端口，这样就仍然有交换机泛洪的问题。解决方法也可以采用和单播一样的使用VLAN解决，此外还可以通过勾选IGMP 多播来解决交换机泛洪，但是需要交换机支持此功能。</span>
+	</li>
+</ol>
+<p>
+	<span>若我们在NLB创建时选择多播的模式，在“群集IP配置”中的“网络地址”是以“03 -BF”开头，后面紧跟IP地址的十六进制表示。在IGMP多播模式下，将采用“01 – 00 - 5E”开头的MAC地址。在多播的模式下，实体主机之间可以互相通信。</span><span></span> 
+</p>
+<h2 id='单播'>
+	单播
+</h2>
+<p>
+	单播的每个结点是NLB分配的MAC地址，不会用到每个结点的网卡的原有MAC地址，这就是为什么结点服务器之间无法通讯的原因，因为所有NLB节点都是一样的MAC地址，虚拟IP绑定的群集MAC地址也是这个MAC地址。NLB修改所有发送的数据包中的源MAC地址，从而使交换机不能将此群集MAC地址绑定在某个端口上。
+</p>
+<p>
+	工作在单播模式下的NLB可以在所有网络环境下正常运行，但是由于它的工作特性，具有以下两个限制：
+</p>
+<ol>
+	<li>
+		由于NLB所使用的群集MAC地址没有绑定在某个具体的交换机端口上，所以所有的NLB通讯均通过在交换机的所有端口上广播进行，而不管此端口是否连接了NLB节点，这就出现了交换机泛洪的现象，这造成了额外的网络流量负担，可以通过将所有NLB节点添加到一个VLAN中隔离广播的办法解决。
+	</li>
+	<li>
+		由于所有的NLB节点具有相同的MAC地址，NLB节点之间不能通过自己原有的专用IP地址进行通讯。若我们在NLB创建时选择单播的模式，在“群集IP配置”中的“网络地址”是以“02 - BF”开头，后面紧跟IP地址的十六进制表示，该网络地址与实际主机的MAC地址相同，后续加入的主机也将修改为此MAC地址。（节点之间就无法ping通）。我们可以采用双网卡来解决节点间通信问题，一块网卡用于启用负责均衡，一块网卡用于节点间通讯。
+	</li>
+</ol>
+<p>
+	最后建议如果NLB节点服务器只有一块网卡，请使用多播模式；如果NLB节点服务器拥有多块网卡，或者网络设备（如二层交换机与路由器）不支持多播模式，则可以采用单播模式。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1366.html">DFS分布式文件系统及网络负载平衡(NLB)群集配置过程遇到的问题及解决</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1368.html">C++获取当前Windows系统版本和位数</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#多播">多播</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#单播">单播</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,1626 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Python数据类型_comonly.cn</title>
+<meta name="keywords" content="Python数据类型" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Python数据类型</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-02-22</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	python  perl
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">Python,数据类型</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='标识符命名规则'>
+	标识符命名规则
+</h2>
+<p>
+	Python标识符不能与关键字同名
+</p>
+<p>
+	名的开头和结尾都使用下划线（_）的情况应避免。Python定义的特殊的方法和变量使用的是这种名称。
+</p>
+<p>
+	使用无效标识符会产生SyntaxError异常。
+</p>
+<h2 id='Itegrl类型'>
+	Integral类型
+</h2>
+<h4>
+	整数
+</h4>
+<p>
+	默认十进制，二进制0b，八进制0o，十六进制0x。
+</p>
+<p>
+	数值型操作符：
+</p>
+<ul>
+	<li>
+		+，-，*，/，//（x除以y舍去小数部分），%（取模，余数），**（x的y次幂） （除*外都有增强版赋值操作符+=...）
+	</li>
+	<li>
+		abs(x)&nbsp; &nbsp; //返回x的绝对值
+	</li>
+	<li>
+		divmod(x,y)&nbsp; &nbsp; //二元组形式返回x除以y所得的商和余数（两个整数）
+	</li>
+	<li>
+		pow(x,y)&nbsp; &nbsp; //x的y次幂，同**
+	</li>
+	<li>
+		pow(x,y,z)&nbsp; &nbsp; //(x**y)%z的一种写法
+	</li>
+	<li>
+		round(x,n)&nbsp; &nbsp; //返回浮点数x四舍五入后得到的整数，若给定n，指示返回小数的位数
+	</li>
+</ul>
+<p>
+	整数转换函数：
+</p>
+<ul>
+	<li>
+		bin(i)&nbsp; &nbsp; //返回整数i的二进制表示（字符串）
+	</li>
+	<li>
+		hex(i)&nbsp; &nbsp; //返回i的十六进制表示
+	</li>
+	<li>
+		int(x)&nbsp; &nbsp; //将x转换为整数，失败产生ValueError异常。若x数据类型不知道到整数的转换，产生TypeError异常。若x是浮点数，截取整数部分。
+	</li>
+	<li>
+		int(s, base)&nbsp; &nbsp; //字符串s转换为整数，失败参数ValueError异常。基数可选范围2~36之间的整数
+	</li>
+	<li>
+		oct(i)&nbsp; &nbsp; //返回i的八进制表示（字符串）
+	</li>
+</ul>
+<p>
+	整数位逻辑操作符：
+</p>
+<ul>
+	<li>
+		|（OR），^（XOR），&amp;（AND），&lt;&lt;（i左移j位，不带溢出检查），&gt;&gt;（i右移j位，不带溢出检查），~（取反） （除~外都有增强版的赋值操作符|=）
+	</li>
+</ul>
+<h4>
+	布尔型
+</h4>
+<p>
+	True, False
+</p>
+<p>
+	3个逻辑操作符 and, or, not。and 和 or 都使用“短路”逻辑，并返回决定其结果的操作数。not返回True或False。
+</p>
+<h2 id='浮点类型'>
+	浮点类型
+</h2>
+<h4>
+	浮点数（float）
+</h4>
+<p>
+	存放双精度浮点数，数值用小数或指数表示（2e-2 即 0.02）。计算机使用基数2表示浮点数，意味着一些十进制数只能大约表示。
+</p>
+<p>
+	需要import sys，这是在我电脑上运行的sys.float_info结果：sys.float_info(max=1.7976931348623157e+308, max_exp=1024, max_10_exp=308, min=2.2250738585072014e-308, min_exp=-1021, min_10_exp=-307, dig=15, mant_dig=53, epsilon=2.220446049250313e-16, radix=2, rounds=1)。sys.float_info.epsilon是机器可以区分出的两个浮点数的最小区别。
+</p>
+<ul>
+	<li>
+		float.as_integer_ratio()方法可以获取浮点数的小数部分。(3.24).as_integer_ratio()返回(1823957849085051, 562949953421312)
+	</li>
+	<li>
+		float.is_integer()返回浮点数小数部分是否为0。5.09.is_integer()返回False
+	</li>
+	<li>
+		float(8)将整数转换为浮点数。
+	</li>
+	<li>
+		float.hex()将浮点数以16进制表示为字符串。float.hex(3.6)返回 '0x1.ccccccccccccdp+1' 。相反的转换可以用float.fromhex()实现。指数用p表示，因为e是十六进制数字。
+	</li>
+</ul>
+<p>
+	math模块（见 comment）提供了更多可用于float的函数，使用前需要import math。
+</p>
+<h4>
+	复数（complex）
+</h4>
+<p>
+	虚数部分后紧跟一个j 。复数两部分以属性名形式存在，分别为real和imag。&nbsp;&nbsp;&nbsp;&nbsp;a=1+3j &gt;&gt;&gt; a.real, a.imag输出(1.0, 3.0)
+</p>
+<p>
+	复数数据类型可以作为函数进行调用。complex()接收一个或两个参数，分别是实数和虚数。&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt; complex(3,4.5)返回(3+4.5j)
+</p>
+<p>
+	处理复数使用cmath模块，不能用math模块。（cmath模块大多数是math模块的复数版）
+</p>
+<h4>
+	十进制数字（decimal.Decimal）
+</h4>
+<p>
+	提供固定的十进制数（完全的准确性），使用前需导入decimal模块。通过 decimal.Decimal()函数创建十进制数。接受整数或字符串（简单十进制数或指数表示）做参数，不能用浮点数。
+</p>
+<h2 id='字符串'>
+	字符串
+</h2>
+<p>
+	使用str数据类型表示，存放Unicode字符序列。str()函数将字符串或者其他可以转换为字符串的数据类型转换为字符串。
+</p>
+<p>
+	可以用单引号，双引号引起。若字符串中包含与所引相同的引号需要用"\"进行转义。
+</p>
+<p>
+	&gt;&gt;&gt; a="my text\""&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt; a &nbsp;&nbsp;&nbsp;&nbsp;输出'my text"'&nbsp;
+</p>
+<p>
+	&gt;&gt;&gt; b='my text"'&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt; b&nbsp;&nbsp;&nbsp;&nbsp;输出'my text"'
+</p>
+<p>
+	Python使用换行作为语句终结，如果在圆括号，方括号，花括号或三引号（"""）包含的字符串内则是例外。
+</p>
+<p>
+	字符串在引号前用r引导，则字符串不进行转义，r"\n"相当于"\\n"
+</p>
+<h4>
+	字符串比较
+</h4>
+<p>
+	支持通常的比较操作符（&lt;, &lt;=, ==, !=, &gt;, &gt;=）在内存中逐个字节对字符串进行比较。但是不同语言（瑞典，德语……）中字符的排序不同。
+</p>
+<h4>
+	字符串分片与步距
+</h4>
+<p>
+	序列中单个数据项或字符串中的字符可以用数据项存取操作符[]来提取。'asdfghj'[5] 返回 'h'。字符串索引位置从0开始。
+</p>
+<p>
+	字符串可以使用负索引值。-1代表字符串最后一个字符，-2是倒数第二个，以此类推。&nbsp;'asdfghj'[-2] 返回 'h'。
+</p>
+<p>
+	字符串分片的3种语法（seq为字符串）：
+</p>
+<ul>
+	<li>
+		seq[start]&nbsp; &nbsp; //提取start位置的数据项
+	</li>
+	<li>
+		seq[start: end]&nbsp; &nbsp; //提取从start开始（含）到end结束（不含）的数据项。若忽略索引值默认起始为0， 终点为len(seq)。&nbsp;&nbsp;&nbsp;&nbsp;'asdfghj'[0:]返回 'asdfghj'
+	</li>
+	<li>
+		seq[start: end: step]&nbsp; &nbsp; //每隔step个字符进行提取。若step为负，start默认为-1。step不能为0。&nbsp;&nbsp;&nbsp;&nbsp;'asdfghj'[::-1] 返回 'jhgfdsa'
+	</li>
+</ul>
+<h4>
+	字符串操作符与方法
+</h4>
+<p>
+	字符串是固定序列，所有可用于固定序列的功能都可用于字符串。包括in（成员关系测试），+=（追加操作），*（复制），*=（增强的赋值复制）
+</p>
+<h4>
+	str.format()方法进行字符串格式化
+</h4>
+<p>
+	str.format()方法返回一个新字符串，新字符串中，原字符串的替换字段{i}被格式化后的参数替代。
+</p>
+<ul>
+	<li>
+		&nbsp;"the {0} the {1}".format(1,"1") &nbsp;&nbsp;&nbsp;&nbsp;输出&nbsp;&nbsp;&nbsp;&nbsp; 'the 1 the 1'
+	</li>
+	<li>
+		"{who} buy a {thing}".format(thing="apple",who="Tom")&nbsp; &nbsp; 输出&nbsp;&nbsp;&nbsp;&nbsp;'Tom buy a apple'
+	</li>
+	<li>
+		"{inf[0]} buy a {inf[1]}".format(inf=["Tom","apple"])&nbsp; &nbsp; 输出&nbsp;&nbsp;&nbsp;&nbsp;'Tom buy a apple'&nbsp; &nbsp; //字段名可以引用集合数据类型
+	</li>
+	<li>
+		//字段名也可以是字典项
+	</li>
+	<li>
+		import math&gt;&gt;&gt; "pi={0.pi}".format(math)&nbsp; &nbsp; 输出&nbsp;&nbsp;&nbsp;&nbsp;'pi=3.141592653589793'&nbsp; &nbsp; //可以存取命名的属性
+	</li>
+	<li>
+		&gt;&gt;&gt; name="li"&gt;&gt;&gt; age="23"&gt;&gt;&gt; "{name}'s age is {age}".format(**locals())&nbsp; &nbsp; 输出&nbsp;&nbsp;&nbsp;&nbsp;"li's age is 23"&nbsp; &nbsp; //当前还在作用范围内的局部变量可以通过内置的locals()函数访问，该函数返回一个字典，键是局部变量名，值是对变量的引用。映射拆分操作符**可以应用于映射（比如字典）产生一个适合传递给函数的键—值列表。
+	</li>
+</ul>
+<h4>
+	字符串的转换与格式规约
+</h4>
+<p>
+	&gt;&gt;&gt; decimal.Decimal("3.4084")<br />
+Decimal('3.4084')&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; #表象形式，提供一个字符串（被Python解释时将重建其表示的对象）<br />
+&gt;&gt;&gt; print(decimal.Decimal("3.4084"))<br />
+3.4084&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; #字符串形式，便于阅读
+</p>
+<p>
+	强制提供字符串形式或表象形式，可以通过向字段添加 conversion 指定符（s，用于强制使用字符串形式；r，用于强制使用表象形式；a，强制使用表象形式，仅限于ASCII字符）实现的。
+</p>
+<p>
+	<span>&gt;&gt;&gt; mo="我们"</span><br />
+<span>&gt;&gt;&gt; "{0!s} {0!r} {0!a} {0}".format(mo)<br />
+"我们 '我们' '\\u6211\\u4eec' 我们"<br />
+</span> 
+</p>
+<p>
+	格式规约包括：字符串格式规约，整数格式规约，浮点数格式规约
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/855.html">C对文件的输入输出</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/857.html">Python组合数据类型</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="">
+							<h2 style="display:inline;color:#5BC648;"></h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-02-22&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	Python关键字：
+</p>
+<p>
+	add, continue, except, global, lambda, pass, while, as, def, False, if, None, raise, with, assert, del, finally, import, nonlocal, return, yield, break, elif, for, in, not, True, class, else, from, is, or, try
+</p>
+<p>
+	<br />
+</p>
+<p>
+	Python内置属性的模块：
+</p>
+<p>
+	通过 dir(__builtins__) 获取。大写字母引导的名称是Python内置的异常名，其他的是函数名与数据类型名。
+</p>
+<p>
+	['ArithmeticError', 'AssertionError', 'AttributeError', 'BaseException', 'BlockingIOError', 'BrokenPipeError', 'BufferError', 'BytesWarning', 'ChildProcessError', 'ConnectionAbortedError', 'ConnectionError', 'ConnectionRefusedError', 'ConnectionResetError', 'DeprecationWarning', 'EOFError', 'Ellipsis', 'EnvironmentError', 'Exception', 'False', 'FileExistsError', 'FileNotFoundError', 'FloatingPointError', 'FutureWarning', 'GeneratorExit', 'IOError', 'ImportError', 'ImportWarning', 'IndentationError', 'IndexError', 'InterruptedError', 'IsADirectoryError', 'KeyError', 'KeyboardInterrupt', 'LookupError', 'MemoryError', 'ModuleNotFoundError', 'NameError', 'None', 'NotADirectoryError', 'NotImplemented', 'NotImplementedError', 'OSError', 'OverflowError', 'PendingDeprecationWarning', 'PermissionError', 'ProcessLookupError', 'RecursionError', 'ReferenceError', 'ResourceWarning', 'RuntimeError', 'RuntimeWarning', 'StopAsyncIteration', 'StopIteration', 'SyntaxError', 'SyntaxWarning', 'SystemError', 'SystemExit', 'TabError', 'TimeoutError', 'True', 'TypeError', 'UnboundLocalError', 'UnicodeDecodeError', 'UnicodeEncodeError', 'UnicodeError', 'UnicodeTranslateError', 'UnicodeWarning', 'UserWarning', 'ValueError', 'Warning', 'WindowsError', 'ZeroDivisionError', '_', '__build_class__', '__debug__', '__doc__', '__import__', '__loader__', '__name__', '__package__', '__spec__', 'abs', 'all', 'any', 'ascii', 'bin', 'bool', 'bytearray', 'bytes', 'callable', 'chr', 'classmethod', 'compile', 'complex', 'copyright', 'credits', 'delattr', 'dict', 'dir', 'divmod', 'enumerate', 'eval', 'exec', 'exit', 'filter', 'float', 'format', 'frozenset', 'getattr', 'globals', 'hasattr', 'hash', 'help', 'hex', 'id', 'input', 'int', 'isinstance', 'issubclass', 'iter', 'len', 'license', 'list', 'locals', 'map', 'max', 'memoryview', 'min', 'next', 'object', 'oct', 'open', 'ord', 'pow', 'print', 'property', 'quit', 'range', 'repr', 'reversed', 'round', 'set', 'setattr', 'slice', 'sorted', 'staticmethod', 'str', 'sum', 'super', 'tuple', 'type', 'vars', 'zip']
+</p>
+<p>
+	避免使用的标识符可以通过代码检查工具（PyLint可以识别程序中的一些问题）
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="">
+							<h2 style="display:inline;color:#5BC648;"></h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-02-22&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	math模块的函数与常量
+</p>
+<table border="2" width="100%" cellpadding="1" cellspacing="1">
+	<tbody>
+		<tr>
+			<td align="center">
+				<strong> 函数</strong> 
+			</td>
+			<td align="center">
+				<strong> 说明</strong> 
+			</td>
+			<td align="center">
+				<strong> 实例</strong> 
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.e
+			</td>
+			<td>
+				自然常数e
+			</td>
+			<td>
+				&gt;&gt;&gt; math.e<br />
+2.718281828459045
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.pi
+			</td>
+			<td>
+				圆周率pi
+			</td>
+			<td>
+				&gt;&gt;&gt; math.pi<br />
+3.141592653589793
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.degrees(x)
+			</td>
+			<td>
+				弧度转度
+			</td>
+			<td>
+				&gt;&gt;&gt; math.degrees(math.pi)<br />
+180.0
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.radians(x)
+			</td>
+			<td>
+				度转弧度
+			</td>
+			<td>
+				&gt;&gt;&gt; math.radians(45)<br />
+0.7853981633974483
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.exp(x)
+			</td>
+			<td>
+				返回e的x次方
+			</td>
+			<td>
+				&gt;&gt;&gt; math.exp(2)<br />
+7.38905609893065
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.expm1(x)
+			</td>
+			<td>
+				返回e的x次方减1
+			</td>
+			<td>
+				&gt;&gt;&gt; math.expm1(2)<br />
+6.38905609893065
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.log(x[, base])
+			</td>
+			<td>
+				返回x的以base为底的对数，base默认为e
+			</td>
+			<td>
+				&gt;&gt;&gt; math.log(math.e)<br />
+1.0<br />
+&gt;&gt;&gt; math.log(2, 10)<br />
+0.30102999566398114
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.log10(x)
+			</td>
+			<td>
+				返回x的以10为底的对数
+			</td>
+			<td>
+				&gt;&gt;&gt; math.log10(2)<br />
+0.30102999566398114
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.log1p(x)
+			</td>
+			<td>
+				返回1+x的自然对数（以e为底）
+			</td>
+			<td>
+				&gt;&gt;&gt; math.log1p(math.e-1)<br />
+1.0
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.pow(x, y)
+			</td>
+			<td>
+				返回x的y次方
+			</td>
+			<td>
+				&gt;&gt;&gt; math.pow(5,3)<br />
+125.0
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.sqrt(x)
+			</td>
+			<td>
+				返回x的平方根
+			</td>
+			<td>
+				&gt;&gt;&gt; math.sqrt(3)<br />
+1.7320508075688772
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.ceil(x)
+			</td>
+			<td>
+				返回不小于x的整数
+			</td>
+			<td>
+				&gt;&gt;&gt; math.ceil(5.2)<br />
+6.0
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.floor(x)
+			</td>
+			<td>
+				返回不大于x的整数
+			</td>
+			<td>
+				&gt;&gt;&gt; math.floor(5.8)<br />
+5.0
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.trunc(x)
+			</td>
+			<td>
+				返回x的整数部分
+			</td>
+			<td>
+				&gt;&gt;&gt; math.trunc(5.8)<br />
+5
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.modf(x)
+			</td>
+			<td>
+				返回x的小数和整数
+			</td>
+			<td>
+				&gt;&gt;&gt; math.modf(5.2)<br />
+(0.20000000000000018, 5.0)
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.fabs(x)
+			</td>
+			<td>
+				返回x的绝对值
+			</td>
+			<td>
+				&gt;&gt;&gt; math.fabs(-5)<br />
+5.0
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.fmod(x, y)
+			</td>
+			<td>
+				返回x%y（取余）
+			</td>
+			<td>
+				&gt;&gt;&gt; math.fmod(5,2)<br />
+1.0
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.fsum([x, y, ...])
+			</td>
+			<td>
+				返回无损精度的和
+			</td>
+			<td>
+				&gt;&gt;&gt; 0.1+0.2+0.3<br />
+0.6000000000000001<br />
+&gt;&gt;&gt; math.fsum([0.1, 0.2, 0.3])<br />
+0.6
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.factorial(x)
+			</td>
+			<td>
+				返回x的阶乘
+			</td>
+			<td>
+				&gt;&gt;&gt; math.factorial(5)<br />
+120
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.isinf(x)
+			</td>
+			<td>
+				若x为无穷大，返回True；否则，返回False
+			</td>
+			<td>
+				&gt;&gt;&gt; math.isinf(1.0e+308)<br />
+False<br />
+&gt;&gt;&gt; math.isinf(1.0e+309)<br />
+True
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.isnan(x)
+			</td>
+			<td>
+				若x不是数字，返回True；否则，返回False
+			</td>
+			<td>
+				&gt;&gt;&gt; math.isnan(1.2e3)<br />
+False
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.hypot(x, y)
+			</td>
+			<td>
+				返回以x和y为直角边的斜边长
+			</td>
+			<td>
+				&gt;&gt;&gt; math.hypot(3,4)<br />
+5.0
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.copysign(x, y)
+			</td>
+			<td>
+				若y&lt;0，返回-1乘以x的绝对值；<br />
+否则，返回x的绝对值
+			</td>
+			<td>
+				&gt;&gt;&gt; math.copysign(5.2, -1)<br />
+-5.2
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.frexp(x)
+			</td>
+			<td>
+				返回m和i，满足m乘以2的i次方
+			</td>
+			<td>
+				&gt;&gt;&gt; math.frexp(3)<br />
+(0.75, 2)
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.ldexp(m, i)
+			</td>
+			<td>
+				返回m乘以2的i次方
+			</td>
+			<td>
+				&gt;&gt;&gt; math.ldexp(0.75, 2)<br />
+3.0
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.sin(x)
+			</td>
+			<td>
+				返回x（弧度）的三角正弦值
+			</td>
+			<td>
+				&gt;&gt;&gt; math.sin(math.radians(30))<br />
+0.49999999999999994
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.asin(x)
+			</td>
+			<td>
+				返回x的反三角正弦值
+			</td>
+			<td>
+				&gt;&gt;&gt; math.asin(0.5)<br />
+0.5235987755982989
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.cos(x)
+			</td>
+			<td>
+				返回x（弧度）的三角余弦值
+			</td>
+			<td>
+				&gt;&gt;&gt; math.cos(math.radians(45))<br />
+0.7071067811865476
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.acos(x)
+			</td>
+			<td>
+				返回x的反三角余弦值
+			</td>
+			<td>
+				&gt;&gt;&gt; math.acos(math.sqrt(2)/2)<br />
+0.7853981633974483
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.tan(x)
+			</td>
+			<td>
+				返回x（弧度）的三角正切值
+			</td>
+			<td>
+				&gt;&gt;&gt; math.tan(math.radians(60))<br />
+1.7320508075688767
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.atan(x)
+			</td>
+			<td>
+				返回x的反三角正切值
+			</td>
+			<td>
+				&gt;&gt;&gt; math.atan(1.7320508075688767)<br />
+1.0471975511965976
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.atan2(x, y)
+			</td>
+			<td>
+				返回x/y的反三角正切值
+			</td>
+			<td>
+				&gt;&gt;&gt; math.atan2(2,1)<br />
+1.1071487177940904
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.sinh(x)
+			</td>
+			<td>
+				返回x的双曲正弦函数
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.asinh(x)
+			</td>
+			<td>
+				返回x的反双曲正弦函数
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.cosh(x)
+			</td>
+			<td>
+				返回x的双曲余弦函数
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.acosh(x)
+			</td>
+			<td>
+				返回x的反双曲余弦函数
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.tanh(x)
+			</td>
+			<td>
+				返回x的双曲正切函数
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.atanh(x)
+			</td>
+			<td>
+				返回x的反双曲正切函数
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.erf(x)
+			</td>
+			<td>
+				返回x的误差函数
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.erfc(x)
+			</td>
+			<td>
+				返回x的余误差函数
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.gamma(x)
+			</td>
+			<td>
+				返回x的伽玛函数
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				math.lgamma(x)
+			</td>
+			<td>
+				返回x的绝对值的自然对数的伽玛函数
+			</td>
+			<td>
+			</td>
+		</tr>
+	</tbody>
+</table></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="">
+							<h2 style="display:inline;color:#5BC648;"></h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-02-22&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	字符串方法
+</p>
+<table style="width:100%;" cellpadding="1" cellspacing="0" border="1" bordercolor="#000000">
+	<tbody>
+		<tr>
+			<td>
+				方法
+			</td>
+			<td>
+				描述
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.capitalize()
+			</td>
+			<td>
+				把字符串的第一个字符大写
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.center(width)
+			</td>
+			<td>
+				返回一个原字符串居中,并使用空格填充至长度 width 的新字符串
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.count(str, beg=0, end=len(string))
+			</td>
+			<td>
+				返回 str 在 string 里面出现的次数，如果 beg 或者 end 指定则返回指定范围内 str 出现的次数
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.decode(encoding='UTF-8', errors='strict')
+			</td>
+			<td>
+				以 encoding 指定的编码格式解码 string，如果出错默认报一个 ValueError 的 异 常 ， 除非 errors 指 定 的 是 'ignore' 或 者'replace'
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.encode(encoding='UTF-8', errors='strict')
+			</td>
+			<td>
+				以 encoding 指定的编码格式编码 string，如果出错默认报一个ValueError 的异常，除非 errors 指定的是'ignore'或者'replace'
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.endswith(obj, beg=0, end=len(string))
+			</td>
+			<td>
+				检查字符串是否以 obj 结束，如果beg 或者 end 指定则检查指定的范围内是否以 obj 结束，如果是，返回 True,否则返回 False.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.expandtabs(tabsize=8)
+			</td>
+			<td>
+				把字符串 string 中的 tab 符号转为空格，tab 符号默认的空格数是 8。
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.find(str, beg=0, end=len(string))
+			</td>
+			<td>
+				检测 str 是否包含在 string 中，如果 beg 和 end 指定范围，则检查是否包含在指定范围内，如果是返回开始的索引值，否则返回-1
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.format()
+			</td>
+			<td>
+				格式化字符串
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.index(str, beg=0, end=len(string))
+			</td>
+			<td>
+				跟find()方法一样，只不过如果str不在 string中会报一个异常.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.isalnum()
+			</td>
+			<td>
+				如果 string 至少有一个字符并且所有字符都是字母或数字则返回 True,否则返回 False
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.isalpha()
+			</td>
+			<td>
+				如果 string 至少有一个字符并且所有字符都是字母则返回 True,否则返回 False
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.isdecimal()
+			</td>
+			<td>
+				如果 string 只包含十进制数字则返回 True 否则返回 False.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.isdigit()
+			</td>
+			<td>
+				如果 string 只包含数字则返回 True 否则返回 False.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.islower()
+			</td>
+			<td>
+				如果 string 中包含至少一个区分大小写的字符，并且所有这些(区分大小写的)字符都是小写，则返回 True，否则返回 False
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.isnumeric()
+			</td>
+			<td>
+				如果 string 中只包含数字字符，则返回 True，否则返回 False
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.isspace()
+			</td>
+			<td>
+				如果 string 中只包含空格，则返回 True，否则返回 False.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.istitle()
+			</td>
+			<td>
+				如果 string 是标题化的(见 title())则返回 True，否则返回 False
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.isupper()
+			</td>
+			<td>
+				如果 string 中包含至少一个区分大小写的字符，并且所有这些(区分大小写的)字符都是大写，则返回 True，否则返回 False
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.join(seq)
+			</td>
+			<td>
+				以 string 作为分隔符，将 seq 中所有的元素(的字符串表示)合并为一个新的字符串
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.ljust(width)
+			</td>
+			<td>
+				返回一个原字符串左对齐,并使用空格填充至长度 width 的新字符串
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.lower()
+			</td>
+			<td>
+				转换 string 中所有大写字符为小写.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.lstrip()
+			</td>
+			<td>
+				截掉 string 左边的空格
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.maketrans(intab, outtab])
+			</td>
+			<td>
+				maketrans() 方法用于创建字符映射的转换表，对于接受两个参数的最简单的调用方式，第一个参数是字符串，表示需要转换的字符，第二个参数也是字符串表示转换的目标。
+			</td>
+		</tr>
+		<tr>
+			<td>
+				max(str)
+			</td>
+			<td>
+				返回字符串&nbsp;str&nbsp;中最大的字母。
+			</td>
+		</tr>
+		<tr>
+			<td>
+				min(str)
+			</td>
+			<td>
+				返回字符串&nbsp;str&nbsp;中最小的字母。
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.partition(str)
+			</td>
+			<td>
+				有点像 find()和 split()的结合体,从 str 出现的第一个位置起,把 字 符 串 string 分 成 一 个 3 元 素 的 元 组 (string_pre_str,str,string_post_str),如果 string 中不包含str 则 string_pre_str == string.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.replace(str1, str2,&nbsp; num=string.count(str1))
+			</td>
+			<td>
+				把 string 中的 str1 替换成 str2,如果 num 指定，则替换不超过 num 次.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.rfind(str, beg=0,end=len(string) )
+			</td>
+			<td>
+				类似于 find()函数，不过是从右边开始查找.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.rindex( str, beg=0,end=len(string))
+			</td>
+			<td>
+				类似于 index()，不过是从右边开始.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.rjust(width)
+			</td>
+			<td>
+				返回一个原字符串右对齐,并使用空格填充至长度 width 的新字符串
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.rpartition(str)
+			</td>
+			<td>
+				类似于 partition()函数,不过是从右边开始查找.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.rstrip()
+			</td>
+			<td>
+				删除 string 字符串末尾的空格.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.split(str="", num=string.count(str))
+			</td>
+			<td>
+				以 str 为分隔符切片 string，如果 num有指定值，则仅分隔 num 个子字符串
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.splitlines([keepends])
+			</td>
+			<td>
+				按照行('\r', '\r\n', \n')分隔，返回一个包含各行作为元素的列表，如果参数 keepends 为 False，不包含换行符，如果为 True，则保留换行符。
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.startswith(obj, beg=0,end=len(string))
+			</td>
+			<td>
+				检查字符串是否是以 obj 开头，是则返回 True，否则返回 False。如果beg 和 end 指定值，则在指定范围内检查.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.strip([obj])
+			</td>
+			<td>
+				在 string 上执行 lstrip()和 rstrip()
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.swapcase()
+			</td>
+			<td>
+				翻转 string 中的大小写
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.title()
+			</td>
+			<td>
+				返回"标题化"的 string,就是说所有单词都是以大写开始，其余字母均为小写(见 istitle())
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.translate(str, del="")
+			</td>
+			<td>
+				根据 str 给出的表(包含 256 个字符)转换 string 的字符,要过滤掉的字符放到 del 参数中
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.upper()
+			</td>
+			<td>
+				转换 string 中的小写字母为大写
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.zfill(width)
+			</td>
+			<td>
+				返回长度为 width 的字符串，原字符串 string 右对齐，前面填充0
+			</td>
+		</tr>
+		<tr>
+			<td>
+				string.isdecimal()
+			</td>
+			<td>
+				isdecimal()方法检查字符串是否只包含十进制字符。这种方法只存在于unicode对象。
+			</td>
+		</tr>
+	</tbody>
+</table></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="">
+							<h2 style="display:inline;color:#5BC648;"></h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-02-22&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	Python字符串转义
+</p>
+<table cellpadding="1" border="2" bordercolor="#000000" style="width:100%;">
+	<tbody>
+		<tr>
+			<th>
+				转义字符
+			</th>
+			<th>
+				描述
+			</th>
+		</tr>
+	</tbody>
+	<tbody>
+		<tr>
+			<td>
+				\(在行尾时)
+			</td>
+			<td>
+				续行符
+			</td>
+		</tr>
+		<tr>
+			<td>
+				\\
+			</td>
+			<td>
+				反斜杠符号
+			</td>
+		</tr>
+		<tr>
+			<td>
+				\'
+			</td>
+			<td>
+				单引号
+			</td>
+		</tr>
+		<tr>
+			<td>
+				\"
+			</td>
+			<td>
+				双引号
+			</td>
+		</tr>
+		<tr>
+			<td>
+				\a
+			</td>
+			<td>
+				响铃
+			</td>
+		</tr>
+		<tr>
+			<td>
+				\b
+			</td>
+			<td>
+				退格(Backspace)
+			</td>
+		</tr>
+		<tr>
+			<td>
+				\e
+			</td>
+			<td>
+				转义
+			</td>
+		</tr>
+		<tr>
+			<td>
+				\000
+			</td>
+			<td>
+				空
+			</td>
+		</tr>
+		<tr>
+			<td>
+				\n
+			</td>
+			<td>
+				换行
+			</td>
+		</tr>
+		<tr>
+			<td>
+				\v
+			</td>
+			<td>
+				纵向制表符
+			</td>
+		</tr>
+		<tr>
+			<td>
+				\t
+			</td>
+			<td>
+				横向制表符
+			</td>
+		</tr>
+		<tr>
+			<td>
+				\r
+			</td>
+			<td>
+				回车
+			</td>
+		</tr>
+		<tr>
+			<td>
+				\f
+			</td>
+			<td>
+				换页
+			</td>
+		</tr>
+		<tr>
+			<td>
+				\oyy
+			</td>
+			<td>
+				八进制数，yy代表的字符，例如：\o12代表换行
+			</td>
+		</tr>
+		<tr>
+			<td>
+				\xyy
+			</td>
+			<td>
+				十六进制数，yy代表的字符，例如：\x0a代表换行
+			</td>
+		</tr>
+		<tr>
+			<td>
+				\other
+			</td>
+			<td>
+				其它的字符以普通格式输出
+			</td>
+		</tr>
+	</tbody>
+</table></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="">
+							<h2 style="display:inline;color:#5BC648;"></h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-02-22&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><h4>
+	字符串格式规约
+</h4>
+<p>
+	包括填充字符，字段内对齐方式，字段宽度的最大值与最小值。
+</p>
+<p>
+	格式规约使用冒号（:）引入，其后跟可选的字符对（填充字符，<br />
+&nbsp;&nbsp;&nbsp;&nbsp;对齐字符【&lt;用于左对齐，^用于中间对齐，&gt;用于右对齐】，<br />
+&nbsp;&nbsp;&nbsp;&nbsp;可选的最小宽度（整数）【如果需要指定最大宽度，就在其后使用"." 后跟随一个整数】）
+</p>
+<pre class="prettyprint lang-py">&gt;&gt;&gt; s="The sword of truth"
+&gt;&gt;&gt; "{0}".format(s)     #default formatting
+'The sword of truth'
+&gt;&gt;&gt; "{0:&gt;25}".format(s) #right align,minimum width 25
+'       The sword of truth'
+&gt;&gt;&gt; "{0:-^25}".format(s)        #fill,center align,minimum width 25
+'---The sword of truth----'
+&gt;&gt;&gt; "{0:.10}".format(s) #maximum width 10
+'The sword '</pre>
+<h4>
+	整数格式规约
+</h4>
+<p>
+	控制填充字符，字段内对齐，符号，最小字段宽度，基数等。
+</p>
+<p>
+	格式规约使用冒号（:）引入，其后跟可选的字符对（填充字符，<br />
+&nbsp;&nbsp;&nbsp;&nbsp;对齐字符【&lt;用于左对齐，^用于中间对齐，&gt;用于右对齐，=用于在符号与数字之间进行填充】，<br />
+&nbsp;&nbsp;&nbsp;&nbsp;可选的符号字符【+表示必须输出，-表示只输出负号，空格表示为正数时输出空格】，<br />
+&nbsp;&nbsp;&nbsp;&nbsp;可选的最小宽度整数值【可以用字符#引导，以便获取某种基数进制为前缀的输出；也可以以0引导，以便对齐时用0填充】，<br />
+&nbsp;&nbsp;&nbsp;&nbsp;其他进制添加类型字符【b表示二进制，o表示八进制，x表示小写十六进制，X表示大小十六进制，也可以用d表示十进制，c表示输出整数对应的Unicode字符，n表示以场所敏感的方式输出数字】）
+</p>
+<p>
+	n充分考虑当前的场所，并在产生的输出信息中使用场所特定的十进制字符与分组字符。C场所的十进制字符是一个句点，分组字符是一个空字符串。
+</p>
+<pre class="prettyprint lang-py">&gt;&gt;&gt; d=123456
+&gt;&gt;&gt; "{0:0=12}".format(d)        #0fill,minimum width 12,填充字符为0，填充位置在符号与数字之间
+'000000123456'
+&gt;&gt;&gt; "{0:012}".format(d)         #0_pad,minimum width 12,填充字符为0，最小宽度12用0填充
+'000000123456'
+&gt;&gt;&gt; "{0:*^15}".format(d)        #*fill,center align,min width 15
+'****123456*****'
+&gt;&gt;&gt; "{0:b} {0:o} {0:x} {0:X}".format(d)        #不同进制（基数）
+'11110001001000000 361100 1e240 1E240'
+&gt;&gt;&gt;
+&gt;&gt;&gt; import locale
+&gt;&gt;&gt; locale.setlocale(locale.LC_ALL,"")   #自动确定用户场所
+'Chinese (Simplified)_China.936'
+&gt;&gt;&gt; x,y=(1234567890,1234.56)
+&gt;&gt;&gt; "{0:n} {1:n}".format(x,y)
+'1,234,567,890 1,234.56'        #两种不同场所，输出信息有区别
+&gt;&gt;&gt; locale.setlocale(locale.LC_ALL,"C")
+'C'
+&gt;&gt;&gt; "{0:n} {1:n}".format(x,y)
+'1234567890 1234.56'</pre>
+<h4>
+	浮点数格式规约
+</h4>
+<p>
+	可以控制<span>填充字符，字段内对齐，符号，最小字段宽度，十进制小数点后的数字个数，以及是以标准形式，指数形式还是百分数的形式输出数字。</span>
+</p>
+<p>
+	<span>在整数格式规约的基础上，在可选的最小宽度后面，通过写一个句点并在其后跟随一个整数，指定小数点后数字的个数。结尾处可以加上【e表示使用小写字母的指数形式，E<span>表示使用大写字母的指数形式</span>，f表示标准的浮点形式，g表示通常形式（f或e）】</span>
+</p>
+<pre class="prettyprint lang-py">&gt;&gt;&gt; "{:,.4f}".format(3.57821e6+8.23142141e6j)   #复数从Python3.1可以整体处理
+'3,578,210.0000+8,231,421.4100j'
+&gt;&gt;&gt; "{0.real:.3f}{0.imag:.3f}j".format(3.57821e6+8.23142141e6j)   #复数实部虚部分开处理
+'3578210.0008231421.410j'</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#标识符命名规则">标识符命名规则</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Itegrl类型">Itegrl类型</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#浮点类型">浮点类型</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#字符串">字符串</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

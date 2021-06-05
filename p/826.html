@@ -1,0 +1,984 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>myeclipse创建web project_comonly.cn</title>
+<meta name="keywords" content="myeclipse创建web project" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">myeclipse创建web project</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-01-15</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	javaweb---jsp asp数据库框架
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	<img src="/File/ForKindEditor/image/20180314162022_567.jpg" alt="" /> 
+</p>
+<p>
+	<span style="color:#E53333;">项目直接放在webapps下，可以直接将webapps下文件替换掉。myeclipse中通过File-New-Web Project创建一个web项目，目录直接选择安装的apache-tomcat下的webapps目录，会自动创建一系列文件。</span> 
+</p>
+<p>
+	Java Web应用通过基于XML的发布描述来配置其发布信息，这个文件名字为web.xml，该文件应放在WEB-INF目录下，包含如下配置信息：
+</p>
+<ul>
+	<li>
+		Servlet的定义
+	</li>
+	<li>
+		Servlet的初始化参数
+	</li>
+	<li>
+		Servlet以及JSP映射
+	</li>
+	<li>
+		Filter的定义
+	</li>
+	<li>
+		安全域配置参数
+	</li>
+	<li>
+		welcome文件清单
+	</li>
+	<li>
+		资源引用
+	</li>
+	<li>
+		环境变量的定义
+	</li>
+</ul>
+<h2 id='用标签操作JvBe'>
+	用标签操作JavaBean
+</h2>
+<ul>
+	<li>
+		&lt;jsp:useBean&gt;标签用来装载一个将在JSP页面中使用的JavaBean。&lt;jsp:useBean id="name" class="package.class"/&gt;
+	</li>
+	<ul>
+		<li>
+			id：命名引用该bean变量。如果能找到id和scope相同的Bean实例，jsp:useBean动作将使用已有的Bean实例而不是创建新的。
+		</li>
+		<li>
+			class="classname"：指定Bean完整的包名。
+		</li>
+		<li>
+			scope="scopeType"：指定Bean在哪种上下文内可用，可用取值为：page,request,session,application
+		</li>
+		<li>
+			type="className"：指定引用该对象的变量类型
+		</li>
+		<li>
+			beanName="beanName"：指定Bean的名字，如果提供了type属性和beanName属性，允许省略class属性。
+		</li>
+	</ul>
+	<li>
+		&lt;jsp:getProperty&gt;标签提取指定Bean属性的值，转换成字符串，然后输出。有两个必要的属性：
+	</li>
+	<ul>
+		<li>
+			name：表示要设置属性的Bean
+		</li>
+		<li>
+			property：表示要设置的属性
+		</li>
+	</ul>
+	<li>
+		&lt;jsp:setProperty&gt;用来设置已经实例化的Bean对象的属性，有4个属性
+	</li>
+	<ul>
+		<li>
+			name：表示要设置的Bean
+		</li>
+		<li>
+			property：表示要设置的属性
+		</li>
+		<li>
+			value：指定Bean属性的值
+		</li>
+		<li>
+			param：指定用哪个请求参数作为Bean属性的值
+		</li>
+	</ul>
+</ul>
+<p>
+	value属性字符串数据会在目标类中通过标准的valueOf方法自动转换成数字，boolen，Boolean，byte，Byte，char，Character。boolen和Boolean类型属性通过Boolen.valueOf转换，int和Integer类型的属性值通过Integer.valueOf转换。value和param不能同时使用。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	Servlet通过创建一个框架扩展服务器的能力，采用请求响应模式提供WEB服务。当客户机发送请求至服务器时，服务器将请求信息发送给Servlet，Servlet生成响应内容并将其传送给服务器，然后再由服务器将响应返回给客户端。
+</p>
+<p>
+	<img src="/File/ForKindEditor/image/20180314171237_460.jpg" alt="" /> 
+</p>
+<p>
+	<br />
+</p>
+<h2 id='创建Servlet'>
+	创建Servlet
+</h2>
+<p>
+	所有的Servlet必须直接或间接地实现javax.servlet.Servlet接口，这样才能在Servlet服务器或称为Servlet容器，Servlet引擎上运行，更简单的方法是继承HttpServlet类。
+</p>
+<h2 id='过滤器'>
+	过滤器
+</h2>
+<p>
+	过滤器（Filter）是一个可以传送请求或修改响应的对象。过滤器并不是Servlet，他们并不实际创建一个请求。他们是请求到达一个Servlet前的预处理程序，在响应离开Servlet后的后台处理程序。一个过滤器可以做的工作：
+</p>
+<ul>
+	<li>
+		在一个Servlet被调用前截获该调用。
+	</li>
+	<li>
+		在一个Servlet被调用前检查请求。
+	</li>
+	<li>
+		修改实际请求中提供了可定制请求对象的请求头和请求数据。
+	</li>
+	<li>
+		修改实际响应中提供了可定制响应对象的响应头和响应数据。
+	</li>
+	<li>
+		在一个Servlet被调用之后截获该调用。
+	</li>
+</ul>
+<p>
+	一个过滤器实现java.servlet.Filter接口并定义其3个方法：
+</p>
+<ul>
+	<li>
+		init：在过滤器执行service前被调用，以设置过滤器的配置对象
+	</li>
+	<li>
+		destroy：在过滤器执行service后被调用
+	</li>
+	<li>
+		doFilter：执行实际的过滤工作
+	</li>
+</ul>
+<h2 id='监听器'>
+	监听器
+</h2>
+<p>
+	监听器（Listener）可以监听客户端的请求，服务端的操作等。通过监听器，可以自动激发一下操作，如监听在线用户数量，当增加一个HttpSession时，加1。
+</p>
+<p>
+	常用的监听接口：
+</p>
+<ul>
+	<li>
+		ServletContextAttributeListener：监听ServletContext属性的操作，比如增加，删除，修改。
+	</li>
+	<li>
+		ServletContextListener：监听ServletContext。当创建ServletContext时，激发contextInitialized方法；当销毁时，激发contextDestroyed方法。
+	</li>
+	<li>
+		HttpSessionListener：监听HttpSession的操作。当创建一个Session时，激发sessionCreated方法；当销毁一个Session时，激发sessionDestroyed方法。
+	</li>
+	<li>
+		HttpSessionAttributeListener：监听HttpSession中的属性的操作。当Session中增加一个属性时，激发attributeAdded方法；当在Session中删除一个属性时，激发attributeRemoved方法；当在Session属性被重新设置时，激发attributeReplaced方法。
+	</li>
+</ul>
+<h2 id='自定义JSP标签'>
+	自定义JSP标签
+</h2>
+<p>
+	一种封装其他动态类型的机制，扩展了JSP语言。自定义标签通常发布在标签库中，该标签库定义了一个自定义标签集并包含实现标签的对象。一些功能可以通过自定义标签来实现，包括对隐藏对象的操作，处理表单，访问数据库及其他企业级服务，如e-mail、目录服务、处理流控制。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/825.html">牛客网知识点待处理</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/827.html">iMacros相关问题汇总</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="编写第一个JSP">
+							<h2 style="display:inline;color:#5BC648;">编写第一个JSP</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-03-14&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	不需要配置直接进行访问的简单JSP页面。JSP文件应放在WebRoot根目录下。在浏览器访问链接：http://localhost/<span>WebRoot/login.jsp</span>
+</p>
+<p>
+	login.jsp
+</p>
+<pre class="prettyprint lang-html">&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;第一个&lt;/title&gt;
+  &lt;/head&gt;
+  
+  &lt;body&gt;
+    &lt;form name="loginForm" method="post" action="welcome.jsp"&gt;
+    
+    用户名：&lt;input type="text" name="username"/&gt;
+    密码：&lt;input type="password" name="password"/&gt;
+    
+    &lt;input type="Submit" name="Submit" value="确定"/&gt;"
+    
+    &lt;/form&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>
+	welcome.jsp
+</p>
+<pre class="prettyprint lang-html">&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;欢迎&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;欢迎您：&lt;%=request.getParameter("username") %&gt;&lt;/body&gt;
+&lt;/html&gt;</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="用标签操作JavaBean">
+							<h2 style="display:inline;color:#5BC648;">用标签操作JavaBean</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-03-14&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><h4>
+	用标签操作JavaBean
+</h4>
+<p>
+	访问链接http://localhost/WebRoot/<span>BeanTest</span>.jsp
+</p>
+<p>
+	SimpleBean.java
+</p>
+<pre class="prettyprint lang-java">package vip.chencheng.learnJavaWeb;
+
+public class SimpleBean {
+	private String message="no message specified";
+	
+	public String getMessage(){
+		return (message);
+	}
+	public void setMessage(String message){
+		this.message=message;
+	}
+
+}</pre>
+BeanTest.jsp
+<pre class="prettyprint lang-html">&lt;html&gt;
+&lt;head&gt;&lt;title&gt;bean动作标签&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;
+&lt;!-- 使用JSP编译指令定义Bean --&gt;
+&lt;jsp:useBean id="test" class="vip.chencheng.learnJavaWeb.SimpleBean"/&gt;
+&lt;!-- 使用jsp编译指令给bean赋值 --&gt;
+&lt;jsp:setProperty property="message" name="test" value="hello myreader"/&gt;
+
+赋值的消息：&lt;jsp:getProperty name="test" property="message"/&gt;b
+
+&lt;/body&gt;
+&lt;/html&gt;</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="创建Servlet">
+							<h2 style="display:inline;color:#5BC648;">创建Servlet</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-03-14&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><h4>
+	创建Servlet
+</h4>
+<p>
+	访问链接http://localhost/WebRoot/helloreader
+</p>
+<p>
+	HelloServlet.java
+</p>
+<pre class="prettyprint lang-java">package vip.chencheng.learnJavaWeb;
+import java.io.*;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+public class HelloServlet extends HttpServlet {
+	
+	@Override
+	public void service(ServletRequest req, ServletResponse res)
+	throws IOException,ServletException{
+		String name=req.getParameter("name");
+		res.setContentType("text/html;charset=UTF-8");
+
+		PrintWriter out=res.getWriter();
+		
+		out.println("&lt;html&gt;");
+		out.println("&lt;body&gt;");
+		out.println("&lt;head&gt;");
+		out.println("&lt;title&gt;hello reader!&lt;/title&gt;");
+		out.println("&lt;/head&gt;");
+		out.println("&lt;body&gt;");
+		out.println("&lt;h1&gt;hello"+name+"!&lt;/h1&gt;");
+		out.println("&lt;p&gt;AS当前"+OnlineCounter.getOnline()+"&lt;/p&gt;");
+		out.println("&lt;/body&gt;");
+		out.println("&lt;/html&gt;");	
+	}
+
+}</pre>
+需要在web.xml中配置这个Servlet，让服务器可以根据用户请求的地址定位到这个Servlet类。在mapping中定义了可以通过“/helloreader”这个URL来访问页面
+<p>
+	在web.xml中添加配置
+</p>
+<pre class="prettyprint lang-xml">&lt;servlet&gt;
+    &lt;servlet-name&gt;helloreader&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;vip.chencheng.learnJavaWeb.HelloServlet&lt;/servlet-class&gt;
+ &lt;/servlet&gt;
+   &lt;!--定义Servlet与URL映射关系--&gt;
+&lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;helloreader&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/helloreader&lt;/url-pattern&gt;
+ &lt;/servlet-mapping&gt;</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="过滤器">
+							<h2 style="display:inline;color:#5BC648;">过滤器</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-03-14&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><h4>
+	过滤器
+</h4>
+<p>
+	使用下面的过滤器可以计算执行某个Servlet所用时间并记录在日志中。
+</p>
+<p>
+	TimerFilter.java
+</p>
+<pre class="prettyprint lang-java">package vip.chencheng.learnJavaWeb;
+
+import java.io.*;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+public class TimerFilter implements Filter {
+	private FilterConfig config = null;
+
+	public void destroy() {
+		config = null;
+		
+	}
+
+	public void doFilter(ServletRequest request, ServletResponse response,
+			FilterChain chain) throws IOException, ServletException {
+		long before=System.currentTimeMillis();
+		chain.doFilter(request, response);
+		long after = System.currentTimeMillis();
+		String name="";
+		if(request instanceof HttpServletRequest){
+			name=((HttpServletRequest) request).getRequestURI();
+		}
+		config.getServletContext().log(name+":"+(after-before)+"ms");
+		
+	}
+
+	public void init(FilterConfig config) throws ServletException {
+		this.config=config;
+		
+	}
+
+}</pre>
+<p>
+	实现过滤器，必须重写doFilter()方法。
+</p>
+<p>
+	还要在web.xml文件中用&lt;filter&gt;标签部署他：
+</p>
+<pre class="prettyprint lang-xml">  &lt;filter&gt;
+  &lt;filter-name&gt;timerFilter&lt;/filter-name&gt;
+  &lt;filter-class&gt;vip.chencheng.learnJavaWeb.TimerFilter&lt;/filter-class&gt;
+  &lt;/filter&gt;</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="监听器">
+							<h2 style="display:inline;color:#5BC648;">监听器</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-03-14&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><h4>
+	监听器
+</h4>
+<p>
+	下面利用HttpSessionListener接口计算在线用户数量。
+</p>
+<p>
+	OlineCounter.java创建一个关于在线人数的类
+</p>
+<pre class="prettyprint lang-java">package vip.chencheng.learnJavaWeb;
+
+public class OnlineCounter {
+	private static long online = 0;
+	public static long getOnline(){
+		return 0;
+	}
+	
+	public static void raise(){
+		online++;
+	}
+	
+	public static void reduce(){
+		online--;
+	}
+
+}</pre>
+OnOnlineCounterListener.java重写sessionCreated()方法，调用上面OnlineCounter的方法，在创建和销毁Session对象时改变在线人数。
+<pre class="prettyprint lang-java">package vip.chencheng.learnJavaWeb;
+
+import javax.servlet.http.HttpSessionEvent;
+import javax.servlet.http.HttpSessionListener;
+
+public class OnlineCounterListener implements HttpSessionListener {
+
+	public void sessionCreated(HttpSessionEvent hse) {
+		// TODO Auto-generated method stub
+		OnlineCounter.raise();
+	}
+
+	public void sessionDestroyed(HttpSessionEvent hse) {
+		// TODO Auto-generated method stub
+		OnlineCounter.reduce();
+	}
+
+}</pre>
+<p>
+	使用此过滤器要在web.xml文件用&lt;listener&gt;标签部署它
+</p>
+<pre class="prettyprint lang-xml">  &lt;listener&gt;
+  &lt;listener-class&gt;vip.chencheng.learnJavaWeb.OnlineCounterListener&lt;/listener-class&gt;
+  &lt;/listener&gt;</pre>
+<p>
+	在HelloServlet.java调用OnlineCounter.getOnline()来获取当前在线人数，显示出来
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="自定义JSP标签">
+							<h2 style="display:inline;color:#5BC648;">自定义JSP标签</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-03-14&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><h4>
+	自定义JSP标签
+</h4>
+<p>
+	标签处理类必须实现Tag接口的doStartTag和doEndTag方法。当JSP引擎碰到tag标签的开头时，doStartTag调用，因为tag没有body，此方法返回SKIP_BODY。<span>当JSP引擎碰到tag标签的结尾时，doEndTag调用，如果还有页面要计算，返回EVAL_PAGE，否则返回SKIP_PAGE。</span>
+</p>
+<p>
+	<span>一般不必直接实现Tag接口，而是实现TagSupport类。</span>
+</p>
+<p>
+	<span>SimpleTag.java</span>
+</p>
+<p>
+	<span> </span>
+</p>
+<pre class="prettyprint lang-java">package vip.chencheng.learnJavaWeb;
+
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspTagException;
+import javax.servlet.jsp.tagext.TagSupport;
+
+public class SimpleTag extends TagSupport {
+	public int doStartTag() throws JspException{
+		try{
+			pageContext.getOut().print("hello reader!");
+			pageContext.getOut().print("&lt;br&gt;");
+			pageContext.getOut().print("I'm from customTag");
+		} catch(Exception e){
+			throw new JspTagException("simpleTag: "+e.getMessage());
+		}
+		return SKIP_BODY;
+	}
+	
+	public int doEndTag(){
+		return EVAL_PAGE;
+	}
+
+}</pre>
+<p>
+	标签库文件简称TLD文件，用XML描述。TLD包括了标签库中所有标签的描述，一般被JSP服务器用来校验标签语法正确性，或者被JSP开发者用来开发新的标签。扩展名必须为.tld。放在web应用的WEB-INF目录或其子目录中。
+</p>
+<p>
+	helloreader.tld
+</p>
+<pre class="prettyprint lang-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE taglib
+PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN"
+"http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd"&gt;
+&lt;taglib&gt;
+	&lt;tlibversion&gt;1.0&lt;/tlibversion&gt;
+	&lt;jspversion&gt;1.1&lt;/jspversion&gt;
+	&lt;shortname&gt;hellodemo&lt;/shortname&gt;
+	&lt;tag&gt;
+		&lt;name&gt;hello&lt;/name&gt;
+		&lt;tagclass&gt;vip.chencheng.learnJavaWeb.SimpleTag&lt;/tagclass&gt;
+		&lt;bodycontent&gt;empty&lt;/bodycontent&gt;
+	&lt;/tag&gt;
+&lt;/taglib&gt;</pre>
+<p>
+	配置web.xml，使用自定义标签&lt;taglib&gt;
+</p>
+<pre class="prettyprint lang-xml"> &lt;jsp-config&gt;  
+       &lt;taglib&gt;  
+  		&lt;taglib-uri&gt;/WEB-INF/ helloreader.tld&lt;/taglib-uri&gt;
+  		&lt;!-- 加载标签，供页面使用 --&gt;
+  		&lt;taglib-location&gt;/WEB-INF&lt;/taglib-location&gt;
+	&lt;/taglib&gt;  
+&lt;/jsp-config&gt; </pre>
+<p>
+	显示自定义标签。访问链接http://localhost/WebRoot/tagTest.jsp
+</p>
+<p>
+	<span>tagTest.jsp</span>
+</p>
+<pre class="prettyprint lang-html">&lt;%@taglib uri="/WEB-INF/helloreader.tld" prefix="demo"  %&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;tag test&lt;/title&gt;
+  &lt;/head&gt;
+  
+  &lt;body&gt; 
+  &lt;demo:hello /&gt;
+  
+  &lt;/body&gt;
+&lt;/html&gt;</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="标签库及描述文件">
+							<h2 style="display:inline;color:#5BC648;">标签库及描述文件</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-03-14&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><h4>
+	标签库涉及4个基本概念：
+</h4>
+<ul>
+	<li>
+		标签（Tag）：标签是一种XML元素，通过标签可以使JSP网页变得简洁并且易于维护，还可以方便地实现同一个JSP文件支持多种语言版本。由于标签是XML元素，所以它的名称和属性都是大小写敏感的。
+	</li>
+	<li>
+		标签库（Tag Library）：由一系列功能相似、逻辑上互相联系的标签构成的集合称为标签库。
+	</li>
+	<li>
+		标签库描述文件（Tag Library Descriptor File）：标签库描述文件是一个XML文件，简称TLD文件，这个文件提供了标签库中类的JSP中对标签引用的映射关系。它是一个配置文件，和web.xml是类似的。
+	</li>
+	<li>
+		标签处理类（Tag Handle Class）：标签处理类是一个Java类，这个类继承了TagSupport或者扩展了SimpleTag接口，通过这个类可以实现自定义JSP标签的具体功能。
+	</li>
+</ul>
+<p>
+	开发一个自定义标签，主要作用就是创建TLD文件和编写标签处理类。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	TLD的文件扩展名必须为.tld，而且必须放在当前WEB应用的WEB-INF目录或其子目录中。一个TLD的内容的开头必须遵守标准的XML开头，用于描述DTD和xml的版本，例如：<br />
+&lt;?xml version=”1.0″ encoding=”ISO-8859-1″ ?&gt;&lt;!DOCTYPE taglib PUBLIC “-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN” “http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd”&gt;
+</p>
+<h4>
+	TLD必须以&lt;taglib&gt;来作为它的根元素，
+</h4>
+<p>
+	&lt;taglib&gt;的子元素如下表：
+</p>
+1）&lt;taglib&gt;的子元素
+<ul>
+	<li>
+		Element：Description
+	</li>
+	<li>
+		tlib-version：Tag库的版本
+	</li>
+	<li>
+		jsp-version：Tag库所需要的jsp的版本
+	</li>
+	<li>
+		short-name：助记符，tag的一个别名（可选）
+	</li>
+	<li>
+		uri：用于确定一个唯一的tag库
+	</li>
+	<li>
+		display-name：被可视化工具（诸如Jbuilder）用来显示的名称（可选）
+	</li>
+	<li>
+		small-icon：被可视化工具（诸如Jbuilder）用来显示的小图标（可选）
+	</li>
+	<li>
+		large-icon：被可视化工具（诸如Jbuilder）用来显示的大图标（可选）
+	</li>
+	<li>
+		description：对tag库的描述（可选）
+	</li>
+	<li>
+		listener：参见下面listener元素
+	</li>
+	<li>
+		tag：参见下面tag 元素
+	</li>
+	<li>
+		Listener元素：一个tag库可能定义一些类做为它的事件侦听类，这些类在TLD中被称为listener 元素，jsp服务器将会实例化这些侦听类，并且注册它们。Listener元素中有一个叫listener-class的子元素，这个元素的值必须是该侦听类的完整类名。
+	</li>
+</ul>
+2）Tag元素<br />
+每个tag元素在tag库中都要指出它的名字、类名、脚本变量、tag的属性。其中脚本变量的值可以直接在TLD中定义或通过tag附加信息的类来取得。每个属性描述了这个属性是否可以省略，它的值是否可以通过&lt;%= …%&gt;这样的JSP语法来获得，以及属性的类型。每一个tag在TLD中对应一个tag元素，下表是tag元素的子元素：<br />
+<ul>
+	<li>
+		name：独一无二的元素名
+	</li>
+	<li>
+		tag-class：Tag标签对应的tag处理类
+	</li>
+	<li>
+		tei-class：javax.servlet.jsp.tagext.TagExtraInfo的子类，用于表达脚本变量（可选）
+	</li>
+	<li>
+		body-content：Tag标签body的类型
+	</li>
+	<li>
+		display-name：被可视化工具（诸如Jbuilder）用来显示的名称（可选）
+	</li>
+	<li>
+		small-icon：被可视化工具（诸如Jbuilder）用来显示的小图标（可选）
+	</li>
+	<li>
+		large-icon：被可视化工具（诸如Jbuilder）用来显示的大图标（可选）
+	</li>
+	<li>
+		description：此tag标签的描述
+	</li>
+	<li>
+		variable：提供脚本变量的信息（同tei-class）(可选)
+	</li>
+	<li>
+		attribute：Tag标签的属性名
+	</li>
+</ul></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="完整的web.xml文件">
+							<h2 style="display:inline;color:#5BC648;">完整的web.xml文件</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-03-14&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><h4>
+	完整的web.xml文件
+</h4>
+<pre class="prettyprint lang-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;web-app version="2.5" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"&gt;
+  &lt;welcome-file-list&gt;
+  	&lt;welcome-file&gt;index.jsp&lt;/welcome-file&gt;
+  &lt;/welcome-file-list&gt;
+  
+  
+  &lt;filter&gt;
+  	&lt;filter-name&gt;timerFilter&lt;/filter-name&gt;
+  	&lt;filter-class&gt;vip.chencheng.learnJavaWeb.TimerFilter&lt;/filter-class&gt;
+  &lt;/filter&gt;
+  
+  &lt;listener&gt;
+  	&lt;listener-class&gt;vip.chencheng.learnJavaWeb.OnlineCounterListener&lt;/listener-class&gt;
+  &lt;/listener&gt;
+
+  &lt;servlet&gt;
+  	&lt;servlet-name&gt;helloreader&lt;/servlet-name&gt;
+  	&lt;servlet-class&gt;vip.chencheng.learnJavaWeb.HelloServlet&lt;/servlet-class&gt;
+  &lt;/servlet&gt;
+  &lt;servlet-mapping&gt;
+  	&lt;servlet-name&gt;helloreader&lt;/servlet-name&gt;
+  	&lt;url-pattern&gt;/helloreader&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+
+ &lt;jsp-config&gt;  
+    &lt;taglib&gt;  
+  		&lt;taglib-uri&gt;/WEB-INF/ helloreader.tld&lt;/taglib-uri&gt;
+  		&lt;!-- 加载标签，供页面使用 --&gt;
+  		&lt;taglib-location&gt;/WEB-INF&lt;/taglib-location&gt;
+	&lt;/taglib&gt;  
+&lt;/jsp-config&gt; 
+
+&lt;/web-app&gt;</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="myeclipse创建web project与部署">
+							<h2 style="display:inline;color:#5BC648;">myeclipse创建web project与部署</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2018-03-28&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span>创建javaweb时在myeclipse的工作空间直接创建即可。将myeclipse和tomcat整合后，右键项目，在tomcat服务器运行就会出现自动在tomcat的webapps下自动部署项目，一些myeclipse开发需要的文件就不会导入运行目录！！</span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#用标签操作JvBe">用标签操作JvBe</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#创建Servlet">创建Servlet</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#过滤器">过滤器</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#监听器">监听器</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#自定义JSP标签">自定义JSP标签</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#编写第一个JSP">编写第一个JSP</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#用标签操作JavaBean">用标签操作JavaBean</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#创建Servlet">创建Servlet</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#过滤器">过滤器</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#监听器">监听器</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#自定义JSP标签">自定义JSP标签</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#标签库及描述文件">标签库及描述文件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#完整的web.xml文件">完整的web.xml文件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#myeclipse创建web project与部署">myeclipse创建web project与部署</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

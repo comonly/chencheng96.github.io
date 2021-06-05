@@ -1,0 +1,292 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>EasyDarwin 和 ffmpeg 对实时流的处理_comonly.cn</title>
+<meta name="keywords" content="EasyDarwin 和 ffmpeg 对实时流的处理" />
+<meta name="description" content="文件转语音流
+
+
+	ffmpeg -re -stream_loop 0 -i "G:\视播一体\acc\test.aac" -map 0:0 -ar 48000 -ab 64000 -acodec mp3 -rtsp_transport tcp -f rtsp rtsp://192.168.20.154:5554/999.sdp
+	
+		
+	
+
+
+	
+
+
+	Fmpeg转发一个RTSP视频流：
+
+
+	ffmpeg -i rtsp://localhost/live -c copy" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">EasyDarwin 和 ffmpeg 对实时流的处理</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-10-30</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	软件介绍及安装流程
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>文件转语音流
+
+
+	ffmpeg -re -stream_loop 0 -i "G:\视播一体\acc\test.aac" -map 0:0 -ar 48000 -ab 64000 -acodec mp3 -rtsp_transport tcp -f rtsp rtsp://192.168.20.154:5554/999.sdp
+	
+		
+	
+
+
+	
+
+
+	Fmpeg转发一个RTSP视频流：
+
+
+	ffmpeg -i rtsp://localhost/live -c copy</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	文件转语音流
+</p>
+<p>
+	ffmpeg -re -stream_loop 0 -i "G:\视播一体\acc\test.aac" -map 0:0 -ar 48000 -ab 64000 -acodec mp3 -rtsp_transport tcp -f rtsp rtsp://192.168.20.154:5554/999.sdp<br />
+	<div>
+		<br />
+	</div>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	Fmpeg转发一个RTSP视频流：
+</p>
+<p>
+	ffmpeg -i rtsp://localhost/live -c copy -f flv rtmp://server/live/h264Stream
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<div style="font-size:14px;">
+	ffmpeg.exe -stream_loop -1 -re -i summer.mp3 -codec copy -f rtp udp://10.200.0.212:5000
+</div>
+<div style="font-size:14px;">
+	ffmpeg.exe -stream_loop -1 -re -i summer.mp3 -codec copy -f rtp udp://227.50.50.50:5000
+</div>
+<div style="font-size:14px;">
+	<br />
+</div>
+<div style="font-size:14px;">
+	单播、组播
+</div>
+<!--5f39ae17-8c62-4a45-bc43-b32064c9388a:W3siYmxvY2tJZCI6Ijk5MjItMTU2MTAzODI4NjA3NyIsImJsb2NrVHlwZSI6InBhcmFncmFwaCIsInN0eWxlcyI6eyJhbGlnbiI6ImxlZnQiLCJpbmRlbnQiOjAsInRleHQtaW5kZW50IjowLCJsaW5lLWhlaWdodCI6MS43NSwiYmFjay1jb2xvciI6IiIsInBhZGRpbmciOiIifSwidHlwZSI6InBhcmFncmFwaCIsInJpY2hUZXh0Ijp7ImRhdGEiOlt7ImNoYXIiOiJmIn0seyJjaGFyIjoiZiJ9LHsiY2hhciI6Im0ifSx7ImNoYXIiOiJwIn0seyJjaGFyIjoiZSJ9LHsiY2hhciI6ImcifSx7ImNoYXIiOiIuIn0seyJjaGFyIjoiZSJ9LHsiY2hhciI6IngifSx7ImNoYXIiOiJlIn0seyJjaGFyIjoiICJ9LHsiY2hhciI6Ii0ifSx7ImNoYXIiOiJzIn0seyJjaGFyIjoidCJ9LHsiY2hhciI6InIifSx7ImNoYXIiOiJlIn0seyJjaGFyIjoiYSJ9LHsiY2hhciI6Im0ifSx7ImNoYXIiOiJfIn0seyJjaGFyIjoibCJ9LHsiY2hhciI6Im8ifSx7ImNoYXIiOiJvIn0seyJjaGFyIjoicCJ9LHsiY2hhciI6IiAifSx7ImNoYXIiOiItIn0seyJjaGFyIjoiMSJ9LHsiY2hhciI6IiAifSx7ImNoYXIiOiItIn0seyJjaGFyIjoiciJ9LHsiY2hhciI6ImUifSx7ImNoYXIiOiIgIn0seyJjaGFyIjoiLSJ9LHsiY2hhciI6ImkifSx7ImNoYXIiOiIgIn0seyJjaGFyIjoicyJ9LHsiY2hhciI6InUifSx7ImNoYXIiOiJtIn0seyJjaGFyIjoibSJ9LHsiY2hhciI6ImUifSx7ImNoYXIiOiJyIn0seyJjaGFyIjoiLiJ9LHsiY2hhciI6Im0ifSx7ImNoYXIiOiJwIn0seyJjaGFyIjoiMyJ9LHsiY2hhciI6IiAifSx7ImNoYXIiOiItIn0seyJjaGFyIjoiYyJ9LHsiY2hhciI6Im8ifSx7ImNoYXIiOiJkIn0seyJjaGFyIjoiZSJ9LHsiY2hhciI6ImMifSx7ImNoYXIiOiIgIn0seyJjaGFyIjoiYyJ9LHsiY2hhciI6Im8ifSx7ImNoYXIiOiJwIn0seyJjaGFyIjoieSJ9LHsiY2hhciI6IiAifSx7ImNoYXIiOiItIn0seyJjaGFyIjoiZiJ9LHsiY2hhciI6IiAifSx7ImNoYXIiOiJyIn0seyJjaGFyIjoidCJ9LHsiY2hhciI6InAifSx7ImNoYXIiOiIgIn0seyJjaGFyIjoidSJ9LHsiY2hhciI6ImQifSx7ImNoYXIiOiJwIn0seyJjaGFyIjoiOiJ9LHsiY2hhciI6Ii8ifSx7ImNoYXIiOiIvIn0seyJjaGFyIjoiMSJ9LHsiY2hhciI6IjAifSx7ImNoYXIiOiIuIn0seyJjaGFyIjoiMiJ9LHsiY2hhciI6IjAifSx7ImNoYXIiOiIwIn0seyJjaGFyIjoiLiJ9LHsiY2hhciI6IjAifSx7ImNoYXIiOiIuIn0seyJjaGFyIjoiMiJ9LHsiY2hhciI6IjEifSx7ImNoYXIiOiIyIn0seyJjaGFyIjoiOiJ9LHsiY2hhciI6IjUifSx7ImNoYXIiOiIwIn0seyJjaGFyIjoiMCJ9LHsiY2hhciI6IjAifV0sImlzUmljaFRleHQiOnRydWUsImtlZXBMaW5lQnJlYWsiOnRydWV9fSx7ImJsb2NrSWQiOiIzMjUwLTE1NjEwMzg0NDY2NDYiLCJibG9ja1R5cGUiOiJwYXJhZ3JhcGgiLCJzdHlsZXMiOnsiYWxpZ24iOiJsZWZ0IiwiaW5kZW50IjowLCJ0ZXh0LWluZGVudCI6MCwibGluZS1oZWlnaHQiOjEuNzUsImJhY2stY29sb3IiOiIiLCJwYWRkaW5nIjoiIn0sInR5cGUiOiJwYXJhZ3JhcGgiLCJyaWNoVGV4dCI6eyJkYXRhIjpbeyJjaGFyIjoiZiJ9LHsiY2hhciI6ImYifSx7ImNoYXIiOiJtIn0seyJjaGFyIjoicCJ9LHsiY2hhciI6ImUifSx7ImNoYXIiOiJnIn0seyJjaGFyIjoiLiJ9LHsiY2hhciI6ImUifSx7ImNoYXIiOiJ4In0seyJjaGFyIjoiZSJ9LHsiY2hhciI6IiAifSx7ImNoYXIiOiItIn0seyJjaGFyIjoicyJ9LHsiY2hhciI6InQifSx7ImNoYXIiOiJyIn0seyJjaGFyIjoiZSJ9LHsiY2hhciI6ImEifSx7ImNoYXIiOiJtIn0seyJjaGFyIjoiXyJ9LHsiY2hhciI6ImwifSx7ImNoYXIiOiJvIn0seyJjaGFyIjoibyJ9LHsiY2hhciI6InAifSx7ImNoYXIiOiIgIn0seyJjaGFyIjoiLSJ9LHsiY2hhciI6IjEifSx7ImNoYXIiOiIgIn0seyJjaGFyIjoiLSJ9LHsiY2hhciI6InIifSx7ImNoYXIiOiJlIn0seyJjaGFyIjoiICJ9LHsiY2hhciI6Ii0ifSx7ImNoYXIiOiJpIn0seyJjaGFyIjoiICJ9LHsiY2hhciI6InMifSx7ImNoYXIiOiJ1In0seyJjaGFyIjoibSJ9LHsiY2hhciI6Im0ifSx7ImNoYXIiOiJlIn0seyJjaGFyIjoiciJ9LHsiY2hhciI6Ii4ifSx7ImNoYXIiOiJtIn0seyJjaGFyIjoicCJ9LHsiY2hhciI6IjMifSx7ImNoYXIiOiIgIn0seyJjaGFyIjoiLSJ9LHsiY2hhciI6ImMifSx7ImNoYXIiOiJvIn0seyJjaGFyIjoiZCJ9LHsiY2hhciI6ImUifSx7ImNoYXIiOiJjIn0seyJjaGFyIjoiICJ9LHsiY2hhciI6ImMifSx7ImNoYXIiOiJvIn0seyJjaGFyIjoicCJ9LHsiY2hhciI6InkifSx7ImNoYXIiOiIgIn0seyJjaGFyIjoiLSJ9LHsiY2hhciI6ImYifSx7ImNoYXIiOiIgIn0seyJjaGFyIjoiciJ9LHsiY2hhciI6InQifSx7ImNoYXIiOiJwIn0seyJjaGFyIjoiICJ9LHsiY2hhciI6InUifSx7ImNoYXIiOiJkIn0seyJjaGFyIjoicCJ9LHsiY2hhciI6IjoifSx7ImNoYXIiOiIvIn0seyJjaGFyIjoiLyJ9LHsiY2hhciI6IjIifSx7ImNoYXIiOiIyIn0seyJjaGFyIjoiNyJ9LHsiY2hhciI6Ii4ifSx7ImNoYXIiOiI1In0seyJjaGFyIjoiMCJ9LHsiY2hhciI6Ii4ifSx7ImNoYXIiOiI1In0seyJjaGFyIjoiMCJ9LHsiY2hhciI6Ii4ifSx7ImNoYXIiOiI1In0seyJjaGFyIjoiMCJ9LHsiY2hhciI6IjoifSx7ImNoYXIiOiI1In0seyJjaGFyIjoiMCJ9LHsiY2hhciI6IjAifSx7ImNoYXIiOiIwIn1dLCJpc1JpY2hUZXh0Ijp0cnVlLCJrZWVwTGluZUJyZWFrIjp0cnVlfX0seyJibG9ja0lkIjoiODU0My0xNTYxMDM4NTc0MTQ3IiwiYmxvY2tUeXBlIjoicGFyYWdyYXBoIiwic3R5bGVzIjp7ImFsaWduIjoibGVmdCIsImluZGVudCI6MCwidGV4dC1pbmRlbnQiOjAsImxpbmUtaGVpZ2h0IjoxLjc1LCJiYWNrLWNvbG9yIjoiIiwicGFkZGluZyI6IiJ9LCJ0eXBlIjoicGFyYWdyYXBoIiwicmljaFRleHQiOnsiZGF0YSI6W10sImlzUmljaFRleHQiOnRydWUsImtlZXBMaW5lQnJlYWsiOnRydWV9fSx7ImJsb2NrSWQiOiIzODMyLTE1NjEwMzg1NzQ0MjciLCJibG9ja1R5cGUiOiJwYXJhZ3JhcGgiLCJzdHlsZXMiOnsiYWxpZ24iOiJsZWZ0IiwiaW5kZW50IjowLCJ0ZXh0LWluZGVudCI6MCwibGluZS1oZWlnaHQiOjEuNzUsImJhY2stY29sb3IiOiIiLCJwYWRkaW5nIjoiIn0sInR5cGUiOiJwYXJhZ3JhcGgiLCJyaWNoVGV4dCI6eyJkYXRhIjpbeyJjaGFyIjoi5Y2VIn0seyJjaGFyIjoi5pKtIn0seyJjaGFyIjoi44CBIn0seyJjaGFyIjoi57uEIn0seyJjaGFyIjoi5pKtIn1dLCJpc1JpY2hUZXh0Ijp0cnVlLCJrZWVwTGluZUJyZWFrIjp0cnVlfX1d-->
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+EasyDarwin可以直接将实时流转发
+<p>
+	<br />
+</p>
+<p>
+	EasyDarwin源码：<a href="https://github.com/EasyDarwin/EasyDarwin">https://github.com/EasyDarwin/EasyDarwin</a> 
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1518.html">VS中 多行注释的快捷键</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1520.html">DFS 文件复制配置中无法访问其中一台的文件目录  默认文件共享问题</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

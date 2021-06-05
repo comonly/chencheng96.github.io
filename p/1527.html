@@ -1,0 +1,337 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>c++中string相关操作_comonly.cn</title>
+<meta name="keywords" content="c++中string相关操作" />
+<meta name="description" content="截取字符串
+
+
+	
+
+
+	string substr (size_t pos = 0, size_t len = npos) const;
+功能：按照条件截取字符串
+参数：pos=截取起始位&nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; len=截取长度
+
+
+
+	衍生：如果str="image007.jpg"，而我们想知道其文件扩展名（filename extension），那么可以这样操作：
+string str = "image007.j" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">c++中string相关操作</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-11-05</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>截取字符串
+
+
+	
+
+
+	string substr (size_t pos = 0, size_t len = npos) const;
+功能：按照条件截取字符串
+参数：pos=截取起始位&nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; len=截取长度
+
+
+
+	衍生：如果str="image007.jpg"，而我们想知道其文件扩展名（filename extension），那么可以这样操作：
+string str = "image007.j</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	截取字符串
+</p>
+<p>
+	<br />
+</p>
+<p>
+	string substr (size_t pos = 0, size_t len = npos) const;<br />
+功能：按照条件截取字符串<br />
+参数：pos=截取起始位&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; len=截取长度<br />
+<br />
+</p>
+<p>
+	衍生：如果str="image007.jpg"，而我们想知道其文件扩展名（filename extension），那么可以这样操作：<br />
+string str = "image007.jpg";<br />
+	<p>
+		string cut= str.substr(str.find_last_of(".")+1);
+	</p>
+	<p>
+		<br />
+	</p>
+	<p>
+	</p>
+	<p>
+		关于string::find_first_of()、string::find_first_not_of()、string::find_last_of()、string::find_last_not_of()，参考如下：<br />
+<br />
+string str1 = "cup,car,person,car,booo";<br />
+string str2 = "ako";<br />
+&nbsp;<br />
+<br />
+int num_1 = str1.find_first_of(str2);//返回str1中第一个与str2的第一个字符('a')相同字符的下标 ，返回5<br />
+int num_2 = str1.find_first_not_of(str2);//返回str1中第一个与str2的第一个字符('a')不同字符的下标 ，返回0<br />
+&nbsp;<br />
+&nbsp;<br />
+int num_3 = str1.find_last_of(str2);//返回str1中最后一个与str2的最后一个字符('o')相同字符的下标 ，返回22<br />
+int num_4 = str1.find_last_not_of(str2);//返回str1中最后一个与str2的最后一个字符('o')不同字符的下标 ，返回19
+	</p>
+	<p>
+		<br />
+	</p>
+	<p>
+		<br />
+	</p>
+	<p>
+		用法2：截取下标从2（第3个字符）开始截取3个字符的字符串<br />
+<br />
+<br />
+string str = "ABCDEFG";<br />
+string cut= str.substr(2,3);<br />
+最终，cut="CDE"，即从下标为2开始向后数3位。<br />
+衍生：如果str="image007.jpg"，而我们只要其文件名而不要扩展名，那么可以这样操作：<br />
+<br />
+string str = "image007.jpg";<br />
+string cut= str.substr(0,str.find_last_of("."));<br />
+最终，cut="image007"，得到不含扩展名的文件名。<br />
+	</p>
+</p>
+<p>
+	<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1526.html">C/C++内存泄漏及检测_CrtCheckMemory</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1528.html">不重启电脑就让修改后的本地组策略生效</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="C++切割字符串">
+							<h2 style="display:inline;color:#5BC648;">C++切割字符串</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-11-15&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><pre class="prettyprint lang-cpp">//字符串分割函数
+std::vector&lt;std::string&gt; split(std::string str, std::string pattern)
+{
+    std::string::size_type pos;
+    std::vector&lt;std::string&gt; result;
+    str += pattern;//扩展字符串以方便操作
+    int size = str.size();
+
+    for (int i = 0; i &lt; size; i++)
+    {
+        pos = str.find(pattern, i);
+        if (pos &lt; size)
+        {
+            std::string s = str.substr(i, pos - i);
+            result.push_back(s);
+            i = pos + pattern.size() - 1;
+        }
+    }
+    return result;
+}</pre></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#C++切割字符串">C++切割字符串</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

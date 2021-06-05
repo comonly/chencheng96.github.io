@@ -1,0 +1,515 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>nginx基本使用 -- 配置文件详解 与全局变量_comonly.cn</title>
+<meta name="keywords" content="nginx基本使用 -- 配置文件详解 与全局变量" />
+<meta name="description" content="能不能像php可以在Nginx里运行一样让JSP也可以方便地在Nginx中运行？
+
+
+nginx本身并不负责任何语言的处理。不过是通过反代，fcgi等形式调用语言处理器
+具体的我想你可以google下 node.js nginx" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">nginx基本使用 -- 配置文件详解 与全局变量</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2020-01-10</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>能不能像php可以在Nginx里运行一样让JSP也可以方便地在Nginx中运行？
+
+
+nginx本身并不负责任何语言的处理。不过是通过反代，fcgi等形式调用语言处理器
+具体的我想你可以google下 node.js nginx</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	能不能像php可以在Nginx里运行一样让JSP也可以方便地在Nginx中运行？
+</p>
+<br />
+nginx本身并不负责任何语言的处理。不过是通过反代，fcgi等形式调用语言处理器<br />
+具体的我想你可以google下 node.js nginx<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1636.html">ffmpeg 与 nginx-rtmp 推流</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1638.html">nginx模块开发中使用C++</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="nginx全局变量">
+							<h2 style="display:inline;color:#5BC648;">nginx全局变量</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-01-10&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	$arg_name<br />
+argument name in the request line.<br />
+请求URL中的参数名称。<br />
+<br />
+$args<br />
+arguments in the request line.<br />
+请求URL中包含的参数。<br />
+<br />
+$binary_remote_addr<br />
+client address in a binary form,value’s length is always 4 bytes for IPv4 addresses or 16 bytes for IPv6 addresses.<br />
+二进制形式的客户端地址，ipv4通常是4比特长度，ipv6通常为16比特长度。<br />
+<br />
+$body_bytes_sent<br />
+number of bytes sent to a client,not counting the response header;this variable is compatible withe the “%B” parameter of the mod_log_config Apache module.<br />
+发送给客户端的不包含响应头的字节数；这个变量兼容Apache的mod_log_config模块的“%B”参数。<br />
+<br />
+$bytes_sent<br />
+number of bytes sent to a client(1.3.8,1.2.5).<br />
+发送给客户端的字节数。<br />
+<br />
+$connection<br />
+connection serial number(1.3.8,1.2.5).<br />
+连接序列号。<br />
+<br />
+$connection_requests<br />
+current number of requests made through a connection(1.3.8,1.2.5).<br />
+当前通过连接发出的请求数。<br />
+<br />
+$content_length<br />
+“Content-Length” request header field.<br />
+请求头中的Content-Length字段。<br />
+<br />
+$content_type<br />
+“Content-Type” request header field.<br />
+请求头中的Content-Type字段。<br />
+<br />
+$cookie_name<br />
+the name cookie.<br />
+cookie的名称。<br />
+<br />
+$document_root<br />
+root or alias directive’s value for the current request.<br />
+当前请求的根目录或别名的值。<br />
+<br />
+$document_uri<br />
+same as $uri.<br />
+与$uri全局变量相同。<br />
+<br />
+$host<br />
+in this order of precedence:host name from the request line, or host name from the “Host” request header field, or the server name matching a request.<br />
+请求URL中的主机名字段，或请求头中的Host字段，或匹配请求的server_name（nginx配置）。<br />
+<br />
+$hostname<br />
+host name.<br />
+主机名称。<br />
+<br />
+$http_name<br />
+arbitrary request header field; the last part of a variable name is the field name converted to lower case with dashes replaced by underscores.<br />
+任意请求头字段；变量名的最后一部份是转换为小写的字段名，通过下划线相连。<br />
+<br />
+$https<br />
+“on” if connection operates in ssl mode, or an empty string otherwise.<br />
+如果是https请求方式则值为on，否则为空字符串。<br />
+<br />
+$http_HEADER<br />
+http请求信息里的HEADER字段。<br />
+<br />
+$http_host<br />
+与$host相同，但如果请求信息中没有Host行，则可能不同。<br />
+<br />
+$http_cookie<br />
+客户端的cookie信息。<br />
+<br />
+$http_referer<br />
+引用地址。<br />
+<br />
+$http_user_agent<br />
+客户端代理信息。<br />
+<br />
+$http_via<br />
+最后一个访问服务器的IP地址。<br />
+<br />
+$http_x_forwarded_for<br />
+相当于网络访问路径。<br />
+<br />
+$is_args<br />
+“?” if a request line has arguments, or an empty string otherwise.<br />
+如果URL包含参数则为？，否则为空字符串。<br />
+<br />
+$limit_rate<br />
+setting this variable enables response rate limiting.<br />
+nginx配置中的limit_rate配置项的值，影响响应速度限制。<br />
+<br />
+$msec<br />
+current time in seconds with the milliseconds resolution(1.3.9,1.2.6)<br />
+当前时间，单位为毫秒。<br />
+<br />
+$nginx_version<br />
+nginx version.<br />
+<br />
+$pid<br />
+PID of the worker process.<br />
+工作进程的PID。<br />
+<br />
+$pipe<br />
+“p” if request was pipelined, “.” otherwise(1.3.12,1.2.7).<br />
+<br />
+$proxy_protocol_addr<br />
+client address from the PROXY protocol header, or an empty string otherwise(1.5.12)<br />
+Thie PROXY protocol must be previously enabled by setting the proxy_protocol parameter in the listen directive.<br />
+来自代理协议头的客户端地址，否则为空字符串。<br />
+proxy_protocol在nginx配置listen参数时设定。<br />
+<br />
+$proxy_protocol_port<br />
+client port from the PROXY protocol header, or an empty string otherwise(1.11.0).<br />
+来自代理协议头的客户端端口，其它与$proxy_protocol_addr相同。<br />
+<br />
+$query_string<br />
+same as $args.<br />
+<br />
+$realpath_root<br />
+an absolute pathname corresponding to the root or alias directive’s value for the current request, with all symbolic links resolved to real paths.<br />
+对应于当前请求的根目录或别名值的绝对路径名，所有符号连接都解析为真实路径。<br />
+<br />
+$remote_addr<br />
+client address.<br />
+客户端地址。<br />
+<br />
+$remote_port<br />
+client port.<br />
+客户端端口。<br />
+<br />
+$remote_user<br />
+user name supplied with the Basic authentication.<br />
+用于基本验证的用户名。<br />
+<br />
+$request<br />
+full original request line.<br />
+完整的原始请求URL。<br />
+<br />
+$request_body<br />
+request body.<br />
+The variable’s value is made available in locations processed by the proxy_pass,fastcgi_pass,uwsgi_pass,and scgi_pass directives when the request body was read to a memory buffer.<br />
+请求体，当proxy_pass,fastcgi_pass,uwsgi_pass和scgi_pass指令将请求体读入缓存中时此变量值可用。<br />
+<br />
+$request_body_file<br />
+name of a temporary file with the request body.<br />
+请求主体的临时文件的名称。<br />
+<br />
+$request_completion<br />
+“OK” if a request has completed, or an empty string otherwise.<br />
+如果请求完成则值为OK，否则为空字符串。<br />
+<br />
+$request_filename<br />
+file path for the current request, based on the root or alias directives, and the request URI.<br />
+当前请求的文件路径，基于根目录或别名指令，以及请求URI。<br />
+<br />
+$request_id<br />
+unique request identifier generated from 16 random bytes, in hexadecimal(1.11.0).<br />
+16位随机字节生成的唯一标识符。<br />
+<br />
+$request_length<br />
+request length (including request line, header, and request body)(1.3.12,1.2.7).<br />
+请求长度，包含请求行，请求头，以及请求的消息体。<br />
+<br />
+$request_method<br />
+request method, usually “GET” or “POST”.<br />
+请求方法，通常为GET或POST。<br />
+<br />
+$request_time<br />
+request processing time in seconds with a milliseconds resolution(1.3.9,1.2.6); time elapsed since the first bytes were read from the client.<br />
+以毫秒为单位的请求处理时间；从客户端读取第1个字节之后的时间。<br />
+<br />
+$request_uri<br />
+full original request URI (with arguments).<br />
+完整的原始请求URI（带有参数）。<br />
+<br />
+$scheme<br />
+request scheme, “http” or “https”.<br />
+请求方案，http或https。<br />
+<br />
+$sent_http_name<br />
+arbitrary response header field; the last part of a variable name is the field name converted to lower case with dashes replaced by underscores.<br />
+任意的响应头字段；变量名的最后一部份是转换为小写的字段名，通过下划线相连。<br />
+<br />
+$send_trailer_name<br />
+arbitrary field sent at the end of the response(1.13.2); the last part of a variable name is the field name converted to lower case with dashes replaced by underscores.<br />
+响应结束时发送的任意字段；变量名的最后一部份是转换为小写的字段名，通过下划线相连。<br />
+<br />
+$server_addr<br />
+an address of the server which accepted a request.<br />
+响应请求的服务器地址。<br />
+<br />
+$server_name<br />
+name of the server which accepted a request.<br />
+响应请求的服务器名称。<br />
+<br />
+$server_port<br />
+port of the server which accepted a request.<br />
+响应请求的服务器端口。<br />
+<br />
+$server_protocol<br />
+request protocol, usually “HTTP/1.0”, “HTTP/1.1” or “HTTP/2.0”.<br />
+请求协议，通常是”HTTP/1.0”, “HTTP/1.1” 或”HTTP/2.0”。<br />
+<br />
+$status<br />
+response status(1.3.2,1.2.2)<br />
+响应状态。<br />
+<br />
+$tcpinfo_rtt<br />
+$tcpinfo_rttvar<br />
+$tcpinfo_snd_cwnd<br />
+$tcpinfo_rcv_space<br />
+information about the client TCP connection; available on systems that support the TCP_INFO socket option.<br />
+客户端TCP连接的相关信息，在支持TCP_INFO套接字选项的系统上可用。<br />
+<br />
+$time_iso8601<br />
+local time in the ISO 8601 standard format(1.3.12,1.2.7).<br />
+ISO 8601标准格式下的本地时间。<br />
+<br />
+$time_local<br />
+local time in the Common Log Format(1.3.12,1.2.7).<br />
+通用日志格式的本地时间。<br />
+<br />
+$uri<br />
+current URI in request, normalized.<br />
+The value of $uri may change during request processing, e.g. when doing internal redirects, or when using index files.<br />
+当前请求的URI。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	【转】nginx全局变量：<a href="https://blog.csdn.net/ljl890705/article/details/80169734" target="_blank">https://blog.csdn.net/ljl890705/article/details/80169734</a>
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="Nginx配置文件服务器的rewrite、全局变量、重定向和防盗链相关功能">
+							<h2 style="display:inline;color:#5BC648;">Nginx配置文件服务器的rewrite、全局变量、重定向和防盗链相关功能</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-01-10&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	Nginx服务器的rewrite、全局变量、重定向和防盗链相关功能：<a href="https://www.cnblogs.com/zhang-shijie/p/5453249.html" target="_blank">https://www.cnblogs.com/zhang-shijie/p/5453249.html</a>
+</p>
+<p>
+	<br />
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#nginx全局变量">nginx全局变量</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#Nginx配置文件服务器的rewrite、全局变量、重定向和防盗链相关功能">Nginx配置文件服务器的rewrite、全局变量、重定向和防盗链相关功能</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,323 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>链接—CSS美化网站_comonly.cn</title>
+<meta name="keywords" content="链接—CSS美化网站" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">链接—CSS美化网站</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-03-06</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">CSS,链接,美化</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h1>
+	链接
+</h1>
+<p>
+	链接的四种状态 &nbsp;<span style="color:#E53333;"><strong>a:link中间不能有空格！</strong></span>
+</p>
+<blockquote>
+	<p>
+		a:link{color: blue;}&nbsp;<span style="line-height:1.5;">网页中为访问的链接（初始状态）</span>
+	</p>
+	<p>
+		a:visited{cllor: red;} 点击链接后状态变成已访问
+	</p>
+	<p>
+		a:hover{color: #f33;} 鼠标移到链接上时链接的颜色
+	</p>
+	<p>
+		a:active{color: #900;} 按下鼠标却还没有的那短暂的十亿分之一秒
+	</p>
+</blockquote>
+<p>
+	如果改变顺序，hover和active状态将不起作用
+</p>
+<p>
+	<br />
+</p>
+<h2 id='链接的下划线'>
+	链接的下划线
+</h2>
+<p>
+	取消下划线，使用text-decoration属性，把属性设置为none
+</p>
+<blockquote>
+	<p>
+		a: link{text-decoration: none;&nbsp;} &nbsp; &nbsp;/*取消链接下划线*/
+	</p>
+	<p>
+		a: hover{text-decoration: underline;&nbsp;} &nbsp; /*鼠标经过链接时添加下划线*/
+	</p>
+</blockquote>
+<p>
+	下划线是一条1px的实心直线，没办法改变外观，可以用边框来代替，实现更复杂的下划线效果
+</p>
+<p>
+	a{
+</p>
+<blockquote>
+	<p>
+		text-decoration: none;
+	</p>
+	<p>
+		border-bottom: dashed 1px #000;
+	</p>
+</blockquote>
+<p>
+	}
+</p>
+<p>
+	边框线的粗细，颜色，线型都可修改，文本与下划线的距离可以使用padding属性来调整
+</p>
+<p>
+	<br />
+</p>
+<h2 id='按钮形式的链接'>
+	按钮形式的链接
+</h2>
+<p>
+	&lt;a href="#" class="button"&gt;首页&lt;/a&gt;
+</p>
+<p>
+	然后利用border，background，padding，color等属性设置不同宽度的边框，线条类型和颜色等产生按钮效果。
+</p>
+<p>
+	加上鼠标移动到链接的效果实现按钮的动态效果。
+</p>
+<p>
+	&lt;style type="text/css"&gt;<br />
+a{<br />
+font-family: 黑体;<br />
+font-size: 12px;<br />
+text-align: center;<br />
+margin: 3px; &nbsp; &nbsp; &nbsp;/*外边距3像素*/<br />
+text-decoration: none; &nbsp; &nbsp; /*取消下划线*/<br />
+}<br />
+a:link{ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /*设置初始状态时的外观*/<br />
+color: #662020;<br />
+padding: 4px 10px 4px 10px;<br />
+background: #eeddbb;<br />
+border-top:1px solid #eee; &nbsp; &nbsp;/*边框实现阴影效果*/<br />
+border-left: 1px solid #eee;<br />
+border-bottom: 1px solid #717171;<br />
+border-right: 1px solid #717171;<br />
+}<br />
+a:hover{ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /*设置鼠标移动到链接上的效果*/<br />
+color: #881818;<br />
+padding: 5px 8px 3px 12px;<br />
+background: #eecccc;<br />
+border-top:1px solid #717171; &nbsp;/*边框变换，亮暗颜色切换*/<br />
+border-left: 1px solid #717171;<br />
+border-bottom: 1px solid #eee;<br />
+border-right: 1px solid #eee;<br />
+}<br />
+&lt;/style&gt;<br />
+&lt;/hede&gt;<br />
+&lt;body&gt;<br />
+&lt;a href="#" class="button"&gt;首页&lt;/a&gt;<br />
+&lt;/body&gt;
+</p>
+<p>
+	<a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank"><span style="background-color:#FFE500;">点击查看运行效果</span></a>
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/590.html">精通CSS滤镜（filter）（实例解析）【转】</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/592.html">表单—CSS美化网站</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#链接的下划线">链接的下划线</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#按钮形式的链接">按钮形式的链接</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

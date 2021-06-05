@@ -1,0 +1,297 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>按键精灵常用插件介绍_comonly.cn</title>
+<meta name="keywords" content="按键精灵常用插件介绍" />
+<meta name="description" content="按键精灵连接，读取excel表格，更多可以在全部命令搜索文档进行查询 
+
+
+	Call Plugin.Office.OpenXls("F:\taobao\20170507.xls") &nbsp; //打开excel表格
+a2 = Plugin.Office.ReadXls(m,i,q) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//把第m页，i行，q列的单元格数据赋值给a2，a2需要之间进行定义。
+Call Plugin.Office.CloseXls()
+
+
+" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">按键精灵常用插件介绍</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-05-08</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	电脑配置设置  软件使用 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">EXCEL,access</a></div>
+      
+      
+        <div class="news_about"><strong>简介</strong>按键精灵连接，读取excel表格，更多可以在全部命令搜索文档进行查询 
+
+
+	Call Plugin.Office.OpenXls("F:\taobao\20170507.xls") &nbsp; //打开excel表格
+a2 = Plugin.Office.ReadXls(m,i,q) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//把第m页，i行，q列的单元格数据赋值给a2，a2需要之间进行定义。
+Call Plugin.Office.CloseXls()
+
+
+</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='按键精灵连接，读取excel表格，更多可以在全部命令搜索文档进行查询'>
+	按键精灵连接，读取excel表格，<span>更多可以在全部命令搜索文档进行查询</span> 
+</h2>
+<p>
+	Call Plugin.Office.OpenXls("F:\taobao\20170507.xls") &nbsp; //打开excel表格<br />
+a2 = Plugin.Office.ReadXls(m,i,q) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//把第m页，i行，q列的单元格数据赋值给a2，a2需要之间进行定义。<br />
+Call Plugin.Office.CloseXls()
+</p>
+<p>
+	比如
+</p>
+<p>
+	Dim a2<br />
+a2=&nbsp;Plugin.Office.ReadXls(1,2,3) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //<span>把第1页，2行，3列的单元格数据赋值给a2</span> 
+</p>
+<h2 id='按键精灵连接，读取cce数据库,更多可以在全部命令搜索数据库进行查询'>
+	按键精灵连接，读取access数据库,更多可以在全部命令搜索数据库进行查询
+</h2>
+<p>
+	Ret = Plugin.Access.Connect("C:\测试.mdb","密码") &nbsp; &nbsp;//连接Access数据库，返回的是是否连接成功<br />
+Ret = Plugin.Access.SelectData("ACCOUNT", "ID", "id &lt; 200") //查询Access数据库，返回查询结果<br />
+Ret = Plugin.Access.Query("Create Table Student(Num int,Name CHAR(10) Not Null,Age int,Weight int)") &nbsp; &nbsp; &nbsp;//执行SQL语句，返回是否执行成功<br />
+Ret = Plugin.Access.Close() &nbsp; &nbsp;//断开Access数据库连接<span>，返回是否执行成功</span> 
+</p>
+<h2 id='按键精灵，系统插件ScreeW=Plugi.Sy.GetScRX()'>
+	按键精灵，系统插件ScreenW = Plugin.Sys.GetScRX()
+</h2>
+<p>
+	本部分转自<a href="http://blog.csdn.net/liumeng305" target="_blank">Hani的 编程生活</a> 
+</p>
+<p>
+	<br />
+</p>
+<p>
+	ScreenH = Plugin.sys.GetScRY()
+</p>
+<p>
+	MessageBox "获得屏幕分辨率宽度 和高度 ：" &amp; ScreenW &amp; " &nbsp;" &amp; ScreenH<br />
+<br />
+time1 = Plugin.Sys.GetTime()//获取系统时间的毫秒数<br />
+<br />
+date = Plugin.Sys.GetDateTime()//获取系统日期和时间<br />
+<br />
+Call Plugin.sys.SetCLB("hello")//设置剪贴板内容<br />
+<br />
+Content = Plugin.Sys.GetCLB()//获取剪贴板内容<br />
+<br />
+OSType = Plugin.Sys.GetOSType()//获取系统型号<br />
+Select Case OSType<br />
+Case 0<br />
+MessageBox "windows95/98"<br />
+Case 1<br />
+MessageBox "windows Me/windowsNT/windowsXP"<br />
+Case 2<br />
+MessageBox "windows 2003"<br />
+Case Else<br />
+MessageBox "Unknow"<br />
+End Select<br />
+<br />
+Call Plugin.Msg.ShowScrTXT(0, 0, 1024, 100, "屏幕打字", "0000FF")//在屏幕中显示文字<br />
+Delay 3000<br />
+Call Plugin.Msg.HideScrTXT()<br />
+<br />
+Call Plugin.Msg.Tips("脚本开始运行")//托盘提示信息(tips)<br />
+<br />
+Call Plugin.Media.Beep(880,200)//让主板蜂鸣器报警
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/695.html">怎么制作手机网页</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/697.html">按键精灵常用语法介绍</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#按键精灵连接，读取excel表格，更多可以在全部命令搜索文档进行查询">按键精灵连接，读取excel表格，更多可以在全部命令搜索文档进行查询</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#按键精灵连接，读取cce数据库,更多可以在全部命令搜索数据库进行查询">按键精灵连接，读取cce数据库,更多可以在全部命令搜索数据库进行查询</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#按键精灵，系统插件ScreeW=Plugi.Sy.GetScRX()">按键精灵，系统插件ScreeW=Plugi.Sy.GetScRX()</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

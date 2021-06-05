@@ -1,0 +1,248 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>c++ 字符前面的 L 和 _T_comonly.cn</title>
+<meta name="keywords" content="c++ 字符前面的 L 和 _T" />
+<meta name="description" content="字符串前面加L表示该字符串是Unicode字符串。
+_T是一个宏，如果项目使用了Unicode字符集（定义了UNICODE宏），则自动在字符串前面加上L，否则字符串不变。因此，Visual C++里边定义字符串的时候，用_T来保证兼容性。VC支持ascii和unicode两种字符类型，用_T可以保证从ascii编码类型转换到unicode编码类型的时候，程序不需要修改。
+以下是别人的总结：
+一、在字符串前加一个L作用:&nbsp;&nbsp;
+&nbsp; 如 L"我的字符串" 表示将ANSI字符" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">c++ 字符前面的 L 和 _T</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-11-26</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>字符串前面加L表示该字符串是Unicode字符串。
+_T是一个宏，如果项目使用了Unicode字符集（定义了UNICODE宏），则自动在字符串前面加上L，否则字符串不变。因此，Visual C++里边定义字符串的时候，用_T来保证兼容性。VC支持ascii和unicode两种字符类型，用_T可以保证从ascii编码类型转换到unicode编码类型的时候，程序不需要修改。
+以下是别人的总结：
+一、在字符串前加一个L作用:&nbsp;&nbsp;
+&nbsp; 如 L"我的字符串" 表示将ANSI字符</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 字符串前面加L表示该字符串是Unicode字符串。<br />
+_T是一个宏，如果项目使用了Unicode字符集（定义了UNICODE宏），则自动在字符串前面加上L，否则字符串不变。因此，Visual C++里边定义字符串的时候，用_T来保证兼容性。VC支持ascii和unicode两种字符类型，用_T可以保证从ascii编码类型转换到unicode编码类型的时候，程序不需要修改。<br />
+以下是别人的总结：<br />
+一、在字符串前加一个L作用:&nbsp;&nbsp;<br />
+&nbsp; 如 L"我的字符串" 表示将ANSI字符串转换成unicode的字符串，就是每个字符占用两个字节。&nbsp;&nbsp;<br />
+&nbsp; strlen("asd") = 3;&nbsp; &nbsp;<br />
+&nbsp; strlen(L"asd") = 6;&nbsp;&nbsp;<br />
+&nbsp; 二、 _T宏可以把一个引号引起来的字符串，根据你的环境设置，使得编译器会根据编译目标环境选择合适的（Unicode还是ANSI）字符处理方式&nbsp;&nbsp;<br />
+&nbsp; 如果你定义了UNICODE，那么_T宏会把字符串前面加一个L。这时 _T("ABCD") 相当于 L"ABCD" ，这是宽字符串。&nbsp;<br />
+&nbsp; 如果没有定义，那么_T宏不会在字符串前面加那个L，_T("ABCD") 就等价于 "ABCD"&nbsp;&nbsp;<br />
+三、TEXT,_TEXT 和_T 一样的&nbsp;&nbsp;<br />
+如下面三语句：&nbsp; &nbsp;<br />
+&nbsp; TCHAR szStr1[] = TEXT("str1");&nbsp; &nbsp;<br />
+&nbsp; char szStr2[] = "str2";&nbsp; &nbsp;<br />
+&nbsp; WCHAR szStr3[] = L("str3");&nbsp; &nbsp;<br />
+&nbsp; 那么第一句话在定义了UNICODE时会解释为第三句话，没有定义时就等于第二句话。&nbsp; &nbsp;<br />
+&nbsp; 但二句话无论是否定义了UNICODE都是生成一个ANSI字符串，而第三句话总是生成UNICODE字符串。&nbsp;<br />
+&nbsp; 为了程序的可移植性，建议都用第一种表示方法。但在某些情况下，某个字符必须为ANSI或UNICODE，那就用后两种方法。<br />
+别人的总结2：<br />
+你要确定你需要的字符串是宽字符还是窄字符。_T("")是说如果你定义了UNICODE 那么就是L"",没有定义就是"";以下情况用_T（）比较好，其他情况最好别用：<br />
+1，用THCAR，LPTSTR，LPCTSTR等tchar数据类型的时候<br />
+2，用_tprintf之类的_t版本运行时函数时候<br />
+3，像下面这样有w和a版本的api，调用CreateFile的时候<br />
+#ifdef UNICODE<br />
+#define CreateFile CreateFileW<br />
+#else<br />
+#define CreateFile CreateFileA<br />
+#endif // !UNICODE<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1573.html">地图瓦片——地图实现方式</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1575.html">typedef 的用法，C语言typedef详解</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

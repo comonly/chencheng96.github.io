@@ -1,0 +1,605 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>列表和导航菜单—CSS_comonly.cn</title>
+<meta name="keywords" content="列表和导航菜单—CSS" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">列表和导航菜单—CSS</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2017-03-05</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">CSS,列表,菜单</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h1>
+	列表样式
+</h1>
+<p>
+	主要指列表项目的符号类型，用list-style-type属性设置
+</p>
+<p>
+	<span>list-style-type属性取值</span> 
+</p>
+<p>
+	<table class="dataintable" style="margin:10px 0px 0px;padding:0px;border:1px solid #AAAAAA;width:709px;color:#000000;font-family:Verdana, Arial, 宋体;font-size:12px;background-color:#F9F9F9;">
+		<tbody>
+			<tr>
+				<th style="border:1px solid #AAAAAA;vertical-align:baseline;background-color:#D5D5D5;">
+					值
+				</th>
+				<th style="border:1px solid #AAAAAA;vertical-align:baseline;background-color:#D5D5D5;">
+					描述
+				</th>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					none
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					无标记。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					disc
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					默认。标记是实心圆。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					circle
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					标记是空心圆。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					square
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					标记是实心方块。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					decimal
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					标记是数字。
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					decimal-leading-zero
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					0开头的数字标记。(01, 02, 03, 等。)
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					lower-roman
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					小写罗马数字(i, ii, iii, iv, v, 等。)
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					upper-roman
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					大写罗马数字(I, II, III, IV, V, 等。)
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					lower-alpha
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					小写英文字母The marker is lower-alpha (a, b, c, d, e, 等。)
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					upper-alpha
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					大写英文字母The marker is upper-alpha (A, B, C, D, E, 等。)
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					lower-greek
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					小写希腊字母(alpha, beta, gamma, 等。)
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					lower-latin
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					小写拉丁字母(a, b, c, d, e, 等。)
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					upper-latin
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					大写拉丁字母(A, B, C, D, E, 等。)
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					hebrew
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					传统的希伯来编号方式
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					armenian
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					传统的亚美尼亚编号方式
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					georgian
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					传统的乔治亚编号方式(an, ban, gan, 等。)
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					cjk-ideographic
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					简单的表意数字
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					hiragana
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					标记是：a, i, u, e, o, ka, ki, 等。（日文片假名）
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					katakana
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					标记是：A, I, U, E, O, KA, KI, 等。（日文片假名）
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					hiragana-iroha
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					标记是：i, ro, ha, ni, ho, he, to, 等。（日文片假名）
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					katakana-iroha
+				</td>
+				<td style="border:1px solid #AAAAAA;vertical-align:text-top;background-color:#EFEFEF;">
+					标记是：I, RO, HA, NI, HO, HE, TO, 等。（日文片假名）
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</p>
+<p>
+	&lt;style type="text/css"&gt;<br />
+.t1{list-style-type: circle;}<br />
+.t2{list-style-type: upper-roman;}<br />
+&lt;/style&gt;<br />
+...<br />
+&lt;ul class="t1"&gt;<br />
+&lt;li&gt;项目一&lt;/li&gt;<br />
+&lt;li&gt;项目一&lt;/li&gt;<br />
+&lt;li&gt;项目一&lt;/li&gt;<br />
+&lt;/ul&gt;<br />
+&lt;ul class="t2"&gt;<br />
+&lt;li&gt;项目一&lt;/li&gt;<br />
+&lt;li&gt;项目一&lt;/li&gt;<br />
+&lt;li&gt;项目一&lt;/li&gt;<br />
+&lt;/ul&gt;
+</p>
+<p>
+	<a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank"><span style="background-color:#FFE500;">点击查看运行效果</span></a> 
+</p>
+<p>
+	<br />
+</p>
+<h1>
+	项目符号图形
+</h1>
+<p>
+	list-style-image用来定义列表样式图片
+</p>
+<p>
+	list-style-image: url(image.gif); &nbsp; &nbsp; &nbsp; &nbsp;/*不能用引号将路径引着*/
+</p>
+<p>
+	list-style-image: none
+</p>
+<p>
+	<br />
+</p>
+<p>
+	&lt;style type="text/css"&gt;<br />
+.t1{list-style-image: url(http://www.iyaka.cn/advertiser/kindeditor/plugins/emoticons/images/79.gif);}<br />
+.t2{list-style-image: url(http://www.iyaka.cn/advertiser/kindeditor/plugins/emoticons/images/29.gif);}<br />
+&lt;/style&gt;<br />
+...<br />
+&lt;ul class="t1"&gt;<br />
+&lt;li&gt;项目一&lt;/li&gt;<br />
+&lt;li&gt;项目一&lt;/li&gt;<br />
+&lt;li&gt;项目一&lt;/li&gt;<br />
+&lt;/ul&gt;<br />
+&lt;ul class="t2"&gt;<br />
+&lt;li&gt;项目一&lt;/li&gt;<br />
+&lt;li&gt;项目一&lt;/li&gt;<br />
+&lt;li&gt;项目一&lt;/li&gt;<br />
+&lt;/ul&gt;
+</p>
+<a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank"><span style="background-color:#FFE500;">点击查看运行效果</span></a> 
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<h1>
+	项目符号和序号定位
+</h1>
+<p>
+	list-style-position属性控制项目符号的位置，让项目符号显示在文本之外或者文本之内
+</p>
+<p>
+	list-style-position: outside;
+</p>
+<p>
+	list-style-position: inside;
+</p>
+<p>
+	<br />
+</p>
+<p>
+	&lt;style type="text/css"&gt;<br />
+.t1{<br />
+list-style-image: url(http://www.iyaka.cn/advertiser/kindeditor/plugins/emoticons/images/79.gif); list-style-position: inside;}<br />
+.t2{list-style-image: url(http://www.iyaka.cn/advertiser/kindeditor/plugins/emoticons/images/79.gif);}<br />
+&lt;/style&gt;<br />
+...<br />
+&lt;ul class="t1"&gt;<br />
+显示在文本之内<br />
+&lt;li&gt;项目一&lt;/li&gt;<br />
+&lt;li&gt;项目二&lt;/li&gt;<br />
+&lt;/ul&gt;<br />
+&lt;ul class="t2"&gt;<br />
+显示在文本之外<br />
+&lt;li&gt;项目一&lt;/li&gt;<br />
+&lt;li&gt;项目二&lt;/li&gt;<br />
+&lt;/ul&gt;
+</p>
+<p>
+	<a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank"><span style="background-color:#FFE500;">点击查看运行效果</span></a> 
+</p>
+<p>
+	<br />
+</p>
+<p>
+	可以用群选择器消除所有列表的缩进
+</p>
+<p>
+	ul,ol{padding-left: 0;margin-left: 0;}
+</p>
+<p>
+	<br />
+</p>
+<p>
+	列表的综合属性
+</p>
+<p>
+	list-style: disc url(000.gif) outside; &nbsp; &nbsp;如果图片找不到就使用disc
+</p>
+<p>
+	<br />
+</p>
+<h1>
+	导航菜单
+</h1>
+<h2 id='水平导航菜单'>
+	水平导航菜单
+</h2>
+<p>
+	<span>&lt;style type="text/css"&gt;<br />
+.nav{<br />
+list-syle: none; &nbsp; &nbsp; &nbsp; /*取消项目符号*/<br />
+border: 1px dashed #000; &nbsp; &nbsp; /*设置边框*/<br />
+margin-left: 0; &nbsp; &nbsp; &nbsp; &nbsp; /*左边距*/<br />
+padding-left: 0; &nbsp; &nbsp; &nbsp;/*左填充*/<br />
+overflow: hidden; &nbsp; &nbsp; &nbsp; /*溢出隐藏*/<br />
+zoom:1; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/*溢出隐藏，专门针对IE6*/<br />
+}<br />
+.nav li{<br />
+float: left;<br />
+}<br />
+.nav a{<br />
+width: 12em; &nbsp; &nbsp; &nbsp;/*字体大小*/<br />
+display: block; &nbsp; &nbsp; /*转换为块级标签，使宽度值生效*/<br />
+border: 1px dashed #000; &nbsp; &nbsp; &nbsp; &nbsp; /*边框*/<br />
+padding: 5px; &nbsp; &nbsp; &nbsp; &nbsp;/*填充*/<br />
+background: #999; &nbsp; &nbsp; &nbsp; &nbsp; /*背景色*/<br />
+text-decoration: none; &nbsp; &nbsp; &nbsp; /*去除下划线*/<br />
+color: #333; &nbsp; &nbsp; &nbsp;/*文字颜色*/<br />
+text-align: center; &nbsp; &nbsp;/*文字居中*/<br />
+}<br />
+&lt;/style&gt;<br />
+...<br />
+&lt;ul class="nav"&gt;<br />
+&lt;li&gt;&lt;a href="http://www.iyaka.cn/"&gt;首页&lt;/a&gt;&lt;/li&gt;<br />
+&lt;li&gt;&lt;a href="http://www.iyaka.cn/"&gt;产品介绍&lt;/a&gt;&lt;/li&gt;<br />
+&lt;li&gt;&lt;a href="http://www.iyaka.cn/"&gt;联系我们&lt;/a&gt;&lt;/li&gt;<br />
+&lt;/ul&gt;<br />
+</span>
+</p>
+<p>
+	<span><a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank"><span style="background-color:#FFE500;">点击查看运行效果</span></a></span>
+</p>
+<p>
+	<span><br />
+</span>
+</p>
+<h2 id='垂直导航菜单'>
+	<span>垂直导航菜单</span>
+</h2>
+<p>
+	<span>&lt;style type="text/css"&gt;<br />
+.nav{<br />
+list-syle: none; &nbsp; &nbsp; &nbsp; /*取消项目符号*/<br />
+border: 1px dashed #000; &nbsp; &nbsp; /*设置边框*/<br />
+overflow: hidden; &nbsp; &nbsp; &nbsp; /*溢出隐藏*/<br />
+zoom:1; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/*溢出隐藏，专门针对IE6*/<br />
+width:300px; &nbsp; &nbsp;/*设置块宽度*/<br />
+}<br />
+.nav li{<br />
+float: left;<br />
+}<br />
+.nav a{<br />
+width: 12em; &nbsp; &nbsp; &nbsp;/*字体大小*/<br />
+display: block; &nbsp; &nbsp; /*转换为块级标签，使宽度值生效*/<br />
+border: 1px dashed #000; &nbsp; &nbsp; &nbsp; &nbsp; /*边框*/<br />
+padding: 5px; &nbsp; &nbsp; &nbsp; &nbsp;/*填充*/<br />
+background: #999; &nbsp; &nbsp; &nbsp; &nbsp; /*背景色*/<br />
+text-decoration: none; &nbsp; &nbsp; &nbsp; /*去除下划线*/<br />
+color: #333; &nbsp; &nbsp; &nbsp;/*文字颜色*/<br />
+text-align: center; &nbsp; &nbsp;/*文字居中*/<br />
+height: 2em; &nbsp; &nbsp; /*高度*/<br />
+line-height: 2em; /*行高和高度相同，实现文本居中对齐*/<br />
+}<br />
+&lt;/style&gt;<br />
+...<br />
+&lt;ul class="nav"&gt;<br />
+&lt;li&gt;&lt;a href="http://www.iyaka.cn/"&gt;首页&lt;/a&gt;&lt;/li&gt;<br />
+&lt;li&gt;&lt;a href="http://www.iyaka.cn/"&gt;产品介绍&lt;/a&gt;&lt;/li&gt;<br />
+&lt;li&gt;&lt;a href="http://www.iyaka.cn/"&gt;联系我们&lt;/a&gt;&lt;/li&gt;<br />
+&lt;/ul&gt;</span>
+</p>
+<p>
+	<span><a href="http://www.iyaka.cn/main/extend/online_test.asp" target="_blank"><span style="background-color:#FFE500;">点击查看运行效果</span></a><span style="background-color:#FFE500;"></span><span style="background-color:#FFE500;"></span></span>
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/586.html">页面模块CSS命名规则【转】</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/588.html">定位 层—CSS</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#水平导航菜单">水平导航菜单</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#垂直导航菜单">垂直导航菜单</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

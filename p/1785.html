@@ -1,0 +1,300 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>C++函数模板和模板函数、类模板和模板类_comonly.cn</title>
+<meta name="keywords" content="C++函数模板和模板函数、类模板和模板类" />
+<meta name="description" content="这期间有涉及到函数模板与模板函数，类模板与模板类的概念 （类似于类与类对象的区别）
+注意：模板类的函数声明和实现必须都在头文件中完成，不能像普通类那样声明在.h文件中，实现在.cpp文件中。
+
+
+	1、函数模板和模板函数
+
+
+	函数模板：函数模板的重点是模板。表示的是一个模板，专门用来生产函数。
+template &lt;typename T&gt;&nbsp;
+void fun(T a)
+{&nbsp;
+}&nbsp;
+
+
+	模板函数：是函数模板的实例化，是一个函数。
+fu" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">C++函数模板和模板函数、类模板和模板类</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">爱拍凯特</li>
+          <li class="lmname"><a href="https://blog.csdn.net/apacat/article/details/89945878" target="_blank">https://blog.csdn.net/apacat/article/details/89945878</a></li>
+          <li class="timer">2020-10-03</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>这期间有涉及到函数模板与模板函数，类模板与模板类的概念 （类似于类与类对象的区别）
+注意：模板类的函数声明和实现必须都在头文件中完成，不能像普通类那样声明在.h文件中，实现在.cpp文件中。
+
+
+	1、函数模板和模板函数
+
+
+	函数模板：函数模板的重点是模板。表示的是一个模板，专门用来生产函数。
+template &lt;typename T&gt;&nbsp;
+void fun(T a)
+{&nbsp;
+}&nbsp;
+
+
+	模板函数：是函数模板的实例化，是一个函数。
+fu</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	这期间有涉及到函数模板与模板函数，类模板与模板类的概念 （类似于类与类对象的区别）<br />
+注意：模板类的函数声明和实现必须都在头文件中完成，不能像普通类那样声明在.h文件中，实现在.cpp文件中。
+</p>
+<p>
+	1、函数模板和模板函数
+</p>
+<p>
+	函数模板：函数模板的重点是模板。表示的是一个模板，专门用来生产函数。<br />
+template &lt;typename T&gt;&nbsp;<br />
+void fun(T a)<br />
+{&nbsp;<br />
+}&nbsp;
+</p>
+<p>
+	模板函数：是函数模板的实例化，是一个函数。<br />
+fun(7);//隐式生成fun &lt;int&gt;&nbsp;<br />
+fun(3.9);//隐式生成fun &lt;double&gt;&nbsp;<br />
+fun(‘b’);//隐式生成fun &lt;char&gt;&nbsp;<br />
+Shape* ps &nbsp; = &nbsp; new &nbsp;Cirlcle;&nbsp;<br />
+fun(ps);//隐式生成fun &lt;Shape*&gt;&nbsp;
+</p>
+<p>
+	2、类模板和模板类
+</p>
+<p>
+	类模板：类模板的重点是模板。表示的是一个模板，专门用于产生类的模子。<br />
+template &lt;typename T&gt;&nbsp;<br />
+class Vector&nbsp;<br />
+{&nbsp;<br />
+};&nbsp;
+</p>
+<p>
+	模板类：类模板的实例化，是一个包含具体数据类型的类
+</p>
+<p>
+	函数模板的实例化是由编译程序在处理函数调用时自动完成的，而类模板的实例化必须由程序员在程序中显式地指定。即函数模板允许隐式调用和显式调用而类模板只能显示调用。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1784.html">c++ 模板函数 拖尾返回类型</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1786.html">模板类声明和定义为何要写一起</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/apacat/article/details/89945878" target="_blank">https://blog.csdn.net/apacat/article/details/89945878</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="区别">
+							<h2 style="display:inline;color:#5BC648;">区别</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-10-03&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span>1.类模板没有自动类型推导；<br />
+2.类模板在模板参数列表中可以有默认参数；<br /></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#区别">区别</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

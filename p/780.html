@@ -1,0 +1,282 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>perl的LWP模块简单介绍_comonly.cn</title>
+<meta name="keywords" content="perl的LWP模块简单介绍" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">perl的LWP模块简单介绍</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">菜鸟的博客</li>
+          <li class="lmname"><a href="http://blog.sina.com.cn/s/blog_4af3f0d20100fwi0.html" target="_blank">http://blog.sina.com.cn/s/blog_4af3f0d20100fwi0.html</a></li>
+          <li class="timer">2017-07-13</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	python  perl
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">perl,lwp</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 一 LWP::Simple 功能<br />
+1. 如何在Perl中使用该模块？<br />
+use LWP::Simple;<br />
+2. 如何获取一个页面内容？<br />
+my $content = get(’http://www.yahoo.com.cn’);<br />
+get函数把从www.yahoo.com.cn上获取得页面内容全部赋给$content这个变量，如果获取失败将返回一个undef的值。<br />
+3. 如何获取头(Header)？<br />
+my (b, d, $e) = header(’http://www.yahoo.com.cn’);<br />
+如果获取成功header函数将返回五个变量，$a-e分别代表内容类型，文档长度，最后更新的时间，过期和服务器名称。<br />
+4. 如何输出指定页面内容？<br />
+my $code = getprint(’http://www.yahoo.com.cn’);<br />
+getprint将试图打印www.yahoo.com.cn的内容，然后返回一个状态号，比如成功将返回200，文件没有找到将返回404。<br />
+5. 如何把获取的内容保存到一个文件中？<br />
+my $code = getstore(’http://www.yahoo.com.cn’, ‘/path/file.html’);<br />
+getstore将试图把获取的内容保存到第二个参数指定的文件中，返回一个状态号，状态号的形式如上。<br />
+6. 如何同步远程和本地文件？<br />
+my $code = mirror(’http://www.yahoo.com.cn’,'/path/file.html’);<br />
+mirror函数将比较远程和本地文件的一致性，然后返回一个状态号，比如文件相同将返回304，如果本地文件同步成功将返回200。<br />
+7. 如何测试返回状态的正确性？<br />
+is_success($code)<br />
+is_error($code)<br />
+is_success和is_error这两个函数可以传递一个状态号为参数，程序会判断返回的是否为成功状态。比如is_success(403)将返回假。<br />
+二 LWP::UserAgent 功能<br />
+1、取得页面头信息<br />
+#!/usr/bin/perluse strict;<br />
+use warnings;<br />
+use LWP::UserAgent;my $ua = LWP::UserAgent-&gt;new;<br />
+$ua-&gt;agent(’spider name’);<br />
+my $res = $ua-&gt;head(’http://www.yahoo.com.cn’);<br />
+foreach ($res-&gt;header_field_names) { print “$_: “, $res-&gt;header($_), “\n”;}<br />
+2、获取指定页面<br />
+my $ua = LWP::UserAgent-&gt;new;<br />
+$ua-&gt;agent(’spider name’);<br />
+my $response = $ua-&gt;get(’http://www.yahoo.com.cn’);<br />
+3、POST方式提交数据<br />
+use strict;<br />
+use warnings;<br />
+use LWP 5.64;<br />
+my $browser = LWP::UserAgent-&gt;new; my $word = ‘tarragon’; my $url = ‘http://www.altavista.com/sites/search/web’;<br />
+my $response = $browser-&gt;post( $url,<br />
+&nbsp; &nbsp; [ ‘q’ =&gt; $word, # the Altavista query string<br />
+&nbsp; &nbsp; &nbsp; ‘pg’ =&gt; ‘q’, ‘avkw’ =&gt; ‘tgz’, ‘kl’ =&gt; ‘XX’,<br />
+&nbsp; &nbsp; ]<br />
+);<br />
+die “$url error: “, $response-&gt;status_line<br />
+&nbsp; &nbsp;unless $response-&gt;is_success;<br />
+die “Weird content type at $url — “, $response-&gt;content_type<br />
+&nbsp; &nbsp;unless $response-&gt;content_type eq ‘text/html’;<br />
+4、通过get方式提交数据<br />
+use URI;<br />
+my $url = URI-&gt;new( ‘http://us.imdb.com/Tsearch’ );<br />
+&nbsp; &nbsp; # makes an object representing the URL $url-&gt;query_form( # And here the form data pairs:<br />
+&nbsp; &nbsp; ‘title’ &nbsp; &nbsp;=&gt; ‘Blade Runner’,<br />
+&nbsp; &nbsp; ‘restrict’ =&gt; ‘Movies and TV’,<br />
+); my $response = $browser-&gt;get($url);<br />
+三、HTTPS的支持<br />
+需要安装Crypt::SSLeay协议，以便支持加密传输。<br />
+命令行PPM下的安装：<br />
+ppm&gt; install http://theoryx5.uwinnipeg.ca/ppms/Crypt-SSLeay.ppd<br />
+图形化下面的安装：<br />
+点击Edit-&gt;Preferences, Add Repository，添加http://theoryx5.uwinnipeg.ca/ppms/作为安装源。再选择Crypt-SSLeay即可。<br />
+测试代码：<br />
+use strict;<br />
+use warnings;<br />
+use LWP::UserAgent;my $url = ‘https://www.helsinki.fi/’;my $ua = LWP::UserAgent-&gt;new;<br />
+my $response = $ua-&gt;get( $url );$response-&gt;is_success or<br />
+&nbsp; &nbsp; die “Failed to GET ‘$url’: “, $response-&gt;status_line;<br />
+print $response-&gt;as_string;<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/779.html">Perl的正则表达式</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/781.html">Access和sql server的语法区别 db2 oracle</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="http://blog.sina.com.cn/s/blog_4af3f0d20100fwi0.html" target="_blank">http://blog.sina.com.cn/s/blog_4af3f0d20100fwi0.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

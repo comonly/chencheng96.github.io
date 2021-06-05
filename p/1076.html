@@ -1,0 +1,260 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>spring-mvc返回视图jsp页面及重定向_comonly.cn</title>
+<meta name="keywords" content="spring-mvc返回视图jsp页面及重定向" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">spring-mvc返回视图jsp页面及重定向</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">Atimynyc</li>
+          <li class="lmname"><a href="https://blog.csdn.net/atimynyc/article/details/79777727" target="_blank">https://blog.csdn.net/atimynyc/article/details/79777727</a></li>
+          <li class="timer">2019-02-27</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	java框架-spring等
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	controller层通过加上ResponseBody，springmvc就知道该接口是返回数据
+</p>
+<h2 id='通过ModelAdView'>
+	通过ModelAndView
+</h2>
+<pre class="prettyprint lang-java">public ModelAndView itemsList() throws Exception{
+			
+	List&lt;Items&gt; list = itmesService.list();
+	//创建ModelAndView视图
+	ModelAndView modelAndView = new ModelAndView();
+	//将list数据添加到试图里
+	modelAndView.addObject("itemList", list);
+	modelAndView.setViewName("itemList");//设置视图的名称，即返回到哪个页面
+	//由于有视图解析器的作用，省去了前缀和后缀，其实访问的页面为（"/WEB-INF/jsp/itemList.jsp"）
+	return modelAndView;
+}</pre>
+<h2 id='通过ModelAdView实现重定向'>
+	通过ModelAndView实现重定向
+</h2>
+<pre class="prettyprint lang-java">public ModelAndView getPage404MV() {        
+    ModelAndView mv = new ModelAndView("redirect:/404.htm");
+    return mv;
+}</pre>
+要使用forward重定向就只需把redirect换成forward即可，特别的ModelAndView默认使用forward重定向方式。
+<h2 id='使用Strig返回j'>
+	使用String返回jsp
+</h2>
+<pre class="prettyprint lang-js">@RequestMapping("/itemEdit/{id}")
+public String itemEdit(@PathVariable("id") Integer id, HttpServletRequest reuqest, Model model) throws Exception{
+	
+	//String idStr = reuqest.getParameter("id");
+	Items items = itmesService.findItemsById(id);
+	//将items数据加到视图中
+	model.addAttribute("item", items); //这里返回editItem，在@Controller的注解下，回自动添加前缀和后缀，实则是返回到页面("/WEB-INF/jsp/editItem.jsp")
+	return "editItem";
+}</pre>
+<h2 id='返回void'>
+	返回void
+</h2>
+<pre class="prettyprint lang-java">public void update(Items items,HttpServletRequest request,HttpServletResponse response)throws Exception{
+	//返回数据，将items的内容放入items里，jsp页面调用items就行
+	request.setAttribute("items", items);
+	//返回指定的页面
+	//如果是void类型的话，就不会去调用SpringMvc的架构，因此无法自动加载视图解析器，所以跳转的
+	//网页名称应该为其全路径名称
+	request.getRequestDispatcher("/WEB-INF/jsp/success.jsp").forward(request, response);
+}</pre></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1075.html">3中注入</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1077.html">spring-mvc返回json类型数据，及数据格式的统一</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/atimynyc/article/details/79777727" target="_blank">https://blog.csdn.net/atimynyc/article/details/79777727</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#通过ModelAdView">通过ModelAdView</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#通过ModelAdView实现重定向">通过ModelAdView实现重定向</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#使用Strig返回j">使用Strig返回j</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#返回void">返回void</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

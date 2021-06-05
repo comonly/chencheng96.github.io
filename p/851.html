@@ -1,0 +1,489 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>c++网络应用——套接字Winsocket_comonly.cn</title>
+<meta name="keywords" content="c++网络应用——套接字Winsocket" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">c++网络应用——套接字Winsocket</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2018-02-14</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	c c++
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	TCP/IP通信协议中，套接字（Socket）就是IP地址与端口号的组合。
+</p>
+<p>
+	Winsocket是Windows下的网络套接字编程接口。在Window操作系统中，套接字是通过动态链接库方式提供给用户调用的，主要由Winsock.h头文件和动态链接库winsock.dll组成。
+</p>
+<h2 id='套接字类型'>
+	套接字类型
+</h2>
+<ol>
+	<li>
+		字节流套接字（Stream Sockets），基于TCP协议的连接和传输方式，又称为TCP套接字。字节流套接字提供的通信流能保证数据传输的正确性和顺序性。
+	</li>
+	<li>
+		数据报套接字（Datagram Sockets），基于UDP协议的连接和传输方式，又称为UDP套接字。数据报套接字定义的是一种无连接的服务，数据通过相互独立地提出报文进行传输。由于不需要对传输的数据进行确认，因此，传输速度较快。
+	</li>
+	<li>
+		原始套接字，允许对底层协议如IP或ICMP进行直接访问，提供TCP套接字和UDP套接字所不提供的功能，主要用于对一些协议的开发，如构造自己的TCP或UDP分组等。
+	</li>
+</ol>
+<h2 id='套接字函数'>
+	套接字函数
+</h2>
+<p>
+	C++提供的Windows下的套接字函数需要我insock.h头文件和动态链接库winsock.dll。
+</p>
+<h4>
+	socket函数
+</h4>
+<p>
+	获得套接字描述符（套接口）
+</p>
+<p>
+	int socket(int family, int type, int protocol); 函数返回值：若调用成功则返回套接字描述符，非负整数，出错返回 -1。
+</p>
+<ul>
+	<li>
+		family指使用的协议族，常用的有AF_INET(IPv4协议)和AF_INET6(IPv6协议)。还有AF_LOCAL(UNIX协议)，AF_ROUTE(路由套接字)，AF_KEY(密钥套接字)。
+	</li>
+	<li>
+		type指套接字类型，SOCK_STREAM(字节流套接字) SOCK_DGRAM(数据报套接字) 和 SOCK_RAM(原始套接字)。
+	</li>
+	<li>
+		protocol，如果套接字类型不是原始套接字，那么该参数为0。
+	</li>
+</ul>
+<h4>
+	bind函数
+</h4>
+<p>
+	为套接字描述符分配一个本地IP地址和一个端口号，将IP地址和端口号与套接字描述符绑定在一起。仅用于TCP连接，若指定端口号为0，则系统将随机分配一个临时端口号。UDP连接无必要。
+</p>
+<p>
+	int bind(int sockfd, struct sockaddr *myaddr, int addrlen); 函数返回值：若调用成功返回0，出错返回 -1。
+</p>
+<ul>
+	<li>
+		sockfd是socket函数返回的套接字描述符。
+	</li>
+	<li>
+		myaddr和addrlen分别是一个指向本地IP地址结构的指针和该指针的结构。
+	</li>
+</ul>
+<p>
+	struct sockaddr和struct sockaddr_in都是用来存放socket信息的。
+</p>
+<pre class="prettyprint lang-cpp">struct sockaddr {
+	unsigned short sa_family;    //通信协议类型族，AF_xxx
+	char sa_data[14];};    //14字节协议地址，包含该socket的IP地址和端口号
+
+struct sockaddr_in {
+	short int sin_family;    //通信协议类型族
+	unsigned short int sin_port;    //    端口号
+	struct in_addr sin_addr;    //IP地址
+	unsigned char sin_zero[8];};    //填充0以保持与sockaddr结构的长度相同</pre>
+<h4>
+	connect函数
+</h4>
+<p>
+	用于在客户端通过socket套接字建立网络连接。如果用于TCP服务的字节流套接字，connect使用三次握手建立一个连接；如果应用UDP服务的数据报套接字，由于没有bind函数，connect有绑定IP和端口号的作用。
+</p>
+<p>
+	int connect(int sockfd, const struct sockaddr *serv_addr, socklen_t addrlen); 函数返回值：成功返回0，失败返回 -1。
+</p>
+<ul>
+	<li>
+		sockfd是socket函数返回的套接字描述符。
+	</li>
+	<li>
+		serv_addr和addrlen分别是服务器IP地址结构的指针和该结构的长度。
+	</li>
+</ul>
+<h4>
+	listen函数
+</h4>
+<p>
+	应用于TCP连接的服务程序，通过socket套接字等待来自客户端的连接请求。
+</p>
+<p>
+	int listen(int sockfd, int backlog); 函数返回值：成功返回0，失败返回 -1。
+</p>
+<ul>
+	<li>
+		sockfd是socket函数经绑定bind后的套接字描述符。
+	</li>
+	<li>
+		backlog为设置可连接客户端的最大连接个数。默认值20
+	</li>
+</ul>
+<h4>
+	accept函数
+</h4>
+<p>
+	应用于TCP连接的服务程序函数。调用accept后，服务器程序会一直处于阻塞状态，等待来自客户端的连接请求。
+</p>
+<p>
+	int accept(int sockfd, struct sockaddr *cliaddr, socklen_t *addrlen); 函数返回值：若接收到客户端的连接请求，则返回非负的套接字描述符，若失败，返回 -1。
+</p>
+<ul>
+	<li>
+		sockfd是socket函数经监听后的套接字描述符。
+	</li>
+	<li>
+		cliaddr和addrlen分别是客户端的套接口地址结构和该地址结构的长度。
+	</li>
+</ul>
+<p>
+	函数返回一个全新的套接字描述符，原来的套接字描述符还在继续侦听指定的端口，而新产生的则准备发送或接收数据。
+</p>
+<h4>
+	Send函数和recv函数
+</h4>
+<p>
+	分别用于发送和接受数据。
+</p>
+<p>
+	int send(int sockfd, const void *msg, int len, int flags); 函数返回发送的字节数，出错返回 -1。
+</p>
+<p>
+	int recv(int sockfd, void *buf, int len, unsigned int flags); 返回接收数据的字节数，出错返回 -1。
+</p>
+<ul>
+	<li>
+		sockfd是socket函数的套接字描述符。
+	</li>
+	<li>
+		msg是发送的数据的指针，buf是接收的数据的指针。
+	</li>
+	<li>
+		len是数据的长度，把flags设置为0。
+	</li>
+</ul>
+<h4>
+	sendto函数和recvfrom函数
+</h4>
+<p>
+	用于发送和接收数据。
+</p>
+<pre class="prettyprint lang-cpp">int sendto(
+	const void *msg,
+	int len,
+	unsigned int flags,
+	const struct sockaddr *to,
+	int tolen);
+int recvfrom(
+	void *buf,
+	int len,
+	unsigned int flags,
+	struct sockaddr *from,
+	int *fromlen);</pre>
+<p>
+	函数返回值：sendto函数返回发送的字节数，recvfrom函数返回接收数据的字节数。出错返回 -1。
+</p>
+<h4>
+	WSAStartup函数
+</h4>
+<p>
+	在Windows的套接字程序中，每个Winsock程序必须使用WSAStartup载入Winsocket动态链接库，并进行初始化。
+</p>
+<p>
+	int WSAStartup(WORD wVersionRequested, LPWSADATA lpWSAData);
+</p>
+<ul>
+	<li>
+		wVersionRequested指定载入的Winsock版本，通常使用宏MAKEWORD(x,y)来指定版本号，x为主版本，y代表次版本。
+	</li>
+	<li>
+		lpWSAData是一个指向WSAData结构的指针。
+	</li>
+</ul>
+<h4>
+	WSACleanup函数
+</h4>
+<p>
+	使用完Winsock接口后需调用WSACleanup()函数释放占用的资源。
+</p>
+<p>
+	int&nbsp;WSACleanup(void);
+</p>
+<h2 id='利用套接字Wiocket方式进行数据通信与传输：'>
+	利用套接字Winsocket方式进行数据通信与传输：
+</h2>
+<p>
+	服务端程序 tcpsrv.cpp
+</p>
+<pre class="prettyprint lang-cpp">#include &lt;iostream&gt;
+using namespace std;
+#include &lt;Winsock2.h&gt;
+#pragma comment(lib, "wsock32")	//动态链接库wsock32.dll
+void main()
+{
+	//定义动态链接需要的参数，加载动态链接库并初始化
+	WORD wVersionRequested;
+	WSADATA wsaData;
+	wVersionRequested=MAKEWORD(1, 1);
+	WSAStartup(wVersionRequested, &amp;wsaData);
+	//创建监听的套接字
+	SOCKET sockSrv=socket(AF_INET, SOCK_STREAM, 0);
+	//定义套接字的sockaddr结构对象，并设置其数据项
+	SOCKADDR_IN addrSrv;
+	addrSrv.sin_addr.S_un.S_addr=htonl(INADDR_ANY);
+	addrSrv.sin_family=AF_INET;
+	addrSrv.sin_port=htons(4321);
+	//将套接字绑定到端口上
+	bind(sockSrv, (SOCKADDR*)&amp;addrSrv, sizeof(SOCKADDR));
+	//套接字设置为监听模式监听5个客户
+	listen(sockSrv, 5);
+	//创建一个新的sockaddr对象，用于与客户机通信
+	SOCKADDR_IN addrClient;
+	int len=sizeof(SOCKADDR);
+	while(1)
+	{
+		//监听端口，等待客户端连接请求。一旦连接，用新的套接字通信
+		SOCKET sockConn=accept(sockSrv, (SOCKADDR*)&amp;addrClient, &amp;len);
+		char sendBuf[100]={"这是服务器的回复，welcome"};
+		//向客户端发送信息
+		send(sockConn, sendBuf, strlen(sendBuf)+1, 0);
+		char recvBuf[100];
+		//接受客户端的信息
+		recv(sockConn, recvBuf, 100, 0);
+		cout&lt;&lt;recvBuf&lt;&lt;endl;
+		//关闭套接字
+		closesocket(sockConn);
+	}
+	//关闭动态链接库
+	WSACleanup();
+}</pre>
+<p>
+	客户端程序 tcpclient.cpp
+</p>
+<pre class="prettyprint lang-cpp">#include &lt;iostream&gt;
+using namespace std;
+#include &lt;Winsock2.h&gt;
+#pragma comment(lib, "wsock32")//动态链接库
+void main()
+{
+	WORD wVersionRequested;
+	WSADATA wsaData;
+	//加载动态链接库
+	wVersionRequested=MAKEWORD(1, 1);
+	WSAStartup(wVersionRequested, &amp;wsaData);
+	//创建套接字
+	SOCKET sockClient=socket(AF_INET, SOCK_STREAM, 0);
+	//设置套接字对象的结构体数据项
+	SOCKADDR_IN addrSrv;
+	addrSrv.sin_addr.S_un.S_addr=inet_addr("127.0.0.1");
+	addrSrv.sin_family=AF_INET;
+	addrSrv.sin_port=htons(4321);
+	//发起连接
+	connect(sockClient, (SOCKADDR*)&amp;addrSrv, sizeof(SOCKADDR));
+	char recvBuf[100];
+	//接受服务器发来的数据
+	recv(sockClient, recvBuf, 100, 0);
+	cout&lt;&lt;recvBuf&lt;&lt;endl;
+	//向服务器发送数据
+	send(sockClient, "这是客户机的信息", strlen("这是客户机的信息")+1, 0);
+	//断开连接
+	closesocket(sockClient);
+}</pre></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/850.html">c++输入输出流</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/852.html">C基础</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#套接字类型">套接字类型</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#套接字函数">套接字函数</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#利用套接字Wiocket方式进行数据通信与传输：">利用套接字Wiocket方式进行数据通信与传输：</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

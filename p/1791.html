@@ -1,0 +1,410 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>c++ 关于菱形继承&虚继承的问题_comonly.cn</title>
+<meta name="keywords" content="c++ 关于菱形继承&虚继承的问题" />
+<meta name="description" content="C++的三大特性为：封装，继承，多态。但是在继承中，存在一些使用方面的问题需要注意，接下来就总结一波。
+
+
+	
+		继承：
+	
+	
+		1. 单继承–一个子类只有一个直接父类时称这个继承关系为单继承
+	
+	
+		2. 多继承–一个子类有两个或以上直接父类时称这个继承关系为多继承
+	
+
+
+	例如下面这两个例子：
+
+
+	例一（单继承）：
+
+class A
+{ public: int _a;
+};
+
+class B : public A // B是 子类/派生类， " />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">c++ 关于菱形继承&虚继承的问题</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">Suhw</li>
+          <li class="lmname"><a href="https://blog.csdn.net/sssssuuuuu666/article/details/75736954" target="_blank">https://blog.csdn.net/sssssuuuuu666/article/details/75736954</a></li>
+          <li class="timer">2020-10-03</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>C++的三大特性为：封装，继承，多态。但是在继承中，存在一些使用方面的问题需要注意，接下来就总结一波。
+
+
+	
+		继承：
+	
+	
+		1. 单继承–一个子类只有一个直接父类时称这个继承关系为单继承
+	
+	
+		2. 多继承–一个子类有两个或以上直接父类时称这个继承关系为多继承
+	
+
+
+	例如下面这两个例子：
+
+
+	例一（单继承）：
+
+class A
+{ public: int _a;
+};
+
+class B : public A // B是 子类/派生类， </div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h4 id="c的三大特性为封装继承多态但是在继承中存在一些使用方面的问题需要注意接下来就总结一波" style="font-family:&quot;font-size:20px;color:#4F4F4F;background-color:#FFFFFF;">
+	<span>C++的三大特性为：封装，继承，多态。但是在继承中，存在一些使用方面的问题需要注意，接下来就总结一波。</span>
+</h4>
+<blockquote style="color:rgba(0, 0, 0, 0.5);background:#EEF0F4;font-family:-apple-system, &quot;font-size:14px;">
+	<h4 id="继承" style="font-family:&quot;font-size:20px;color:#4F4F4F;">
+		<span>继承：</span>
+	</h4>
+	<h4 id="1-单继承一个子类只有一个直接父类时称这个继承关系为单继承" style="font-family:&quot;font-size:20px;color:#4F4F4F;">
+		1. 单继承–一个子类只有一个直接父类时称这个继承关系为单继承
+	</h4>
+	<h4 id="2-多继承一个子类有两个或以上直接父类时称这个继承关系为多继承" style="font-family:&quot;font-size:20px;color:#4F4F4F;">
+		2. 多继承–一个子类有两个或以上直接父类时称这个继承关系为多继承
+	</h4>
+</blockquote>
+<h4 id="例如下面这两个例子" style="font-family:&quot;font-size:20px;color:#4F4F4F;background-color:#FFFFFF;">
+	<span>例如下面这两个例子：</span>
+</h4>
+<h4 id="例一单继承" style="font-family:&quot;font-size:20px;color:#4F4F4F;background-color:#FFFFFF;">
+	<span>例一（单继承）：</span>
+</h4>
+<pre class="prettyprint">class A
+{ <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">public</span>: <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">int</span> _a;
+};
+
+class B : <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">public</span> A // B是 子类/派生类， 公有 继承父类/基类 A
+{ <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">public</span>: <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">int</span> _b;
+};
+
+class C : <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">public</span> B  //C是 子类/派生类， 公有继承 父类/基类 B
+{ <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">public</span>: <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">int</span> _c;
+};</pre>
+<p style="font-size:18px;color:#4D4D4D;font-family:-apple-system, &quot;background-color:#FFFFFF;">
+	例二（多继承）：
+</p>
+<pre class="prettyprint">class A
+{ <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">public</span>: <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">int</span> _a;
+};
+
+class B 
+{ <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">public</span>: <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">int</span> _b;
+};
+
+class C : <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">public</span> A , <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">public</span> B // 子类C同时公有继承父类A和父类B
+{ <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">public</span>: <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">int</span> _c;
+};</pre>
+<hr />
+<h4 id="用图很形象的表示一下" style="font-family:&quot;font-size:20px;color:#4F4F4F;background-color:#FFFFFF;">
+	<span>用图很形象的表示一下：</span>
+</h4>
+<p style="font-size:18px;color:#4D4D4D;font-family:-apple-system, &quot;background-color:#FFFFFF;">
+	<img src="https://img-blog.csdn.net/20170721172711088?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc3Nzc3N1dXV1dTY2Ng==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" title="" />
+</p>
+<hr />
+<h4 id="但是在使用过程中很容易出现一种继承关系叫菱形继承就好比下面这种继承方式" style="font-family:&quot;font-size:20px;color:#4F4F4F;background-color:#FFFFFF;">
+	但是在使用过程中，很容易出现一种继承关系叫<span><span>菱形继承</span>。</span>就好比下面这种继承方式。
+</h4>
+<pre class="prettyprint">class A
+{ <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">public</span>: <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">int</span> _a;
+};
+
+class B : <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">public</span> A
+{ <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">public</span>: <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">int</span> _b;
+};
+
+class C : <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">public</span> A
+{ <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">public</span>: <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">int</span> _c;
+};
+
+class D : <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">public</span> B, <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">public</span> C
+{ <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">public</span>: <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">int</span> _d;
+};</pre>
+<p style="font-size:18px;color:#4D4D4D;font-family:-apple-system, &quot;background-color:#FFFFFF;">
+	<img src="https://img-blog.csdn.net/20170722122055692?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc3Nzc3N1dXV1dTY2Ng==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" title="" />
+</p>
+<hr />
+<h4 id="继承的方式简单画出来就是下面这样" style="font-family:&quot;font-size:20px;color:#4F4F4F;background-color:#FFFFFF;">
+	继承的方式简单画出来就是下面这样：
+</h4>
+<p style="font-size:18px;color:#4D4D4D;font-family:-apple-system, &quot;background-color:#FFFFFF;">
+	<img src="https://img-blog.csdn.net/20170722123348731?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc3Nzc3N1dXV1dTY2Ng==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" title="" />
+</p>
+<hr />
+<h4 id="我们在使用过程中会发现以下缺点" style="font-family:&quot;font-size:20px;color:#4F4F4F;background-color:#FFFFFF;">
+	我们在使用过程中会发现以下缺点：
+</h4>
+<h4 id="1-当我们用d类创建出对象d时可以访问到a但是一旦编译就会出现错误错误说明为-c2385-对a的访问不明确从图中也可以看出如果用d访问a时可能在b类里也同时可能存在于c类中这就是所谓的二义性" style="font-family:&quot;font-size:20px;color:#4F4F4F;background-color:#FFFFFF;">
+	1、 当我们用D类创建出对象d时，可以访问到_a，但是一旦编译就会出现错误。错误说明为： C2385: 对“_a”的访问不明确。从图中也可以看出，如果用d访问_a时，可能在B类里，也同时可能存在于c类中。这就是所谓的<span>“二义性”</span>；
+</h4>
+<h4 id="2虽然b类和c类都公有继承a但是在d类公有继承bc时存放了两份a类造成了数据的冗余" style="font-family:&quot;font-size:20px;color:#4F4F4F;background-color:#FFFFFF;">
+	2、虽然B类和C类都公有继承A，但是在D类公有继承B，C时，存放了两份A类，造成了<span><span>数据的冗余</span>。</span>
+</h4>
+<hr />
+<h4 id="c针对这种缺陷提出了另外一种继承方式叫做虚继承" style="font-family:&quot;font-size:20px;color:#4F4F4F;background-color:#FFFFFF;">
+	<span>C++针对这种缺陷提出了另外一种继承方式叫做<span>虚继承</span></span>。
+</h4>
+<blockquote style="color:rgba(0, 0, 0, 0.5);background:#EEF0F4;font-family:-apple-system, &quot;font-size:14px;">
+	<h4 id="虚继承" style="font-family:&quot;font-size:20px;color:#4F4F4F;">
+		<span>虚继承</span>
+	</h4>
+	<h4 id="c使用虚拟继承virtual-inheritance解决从不同途径继承来的同名的数据成员在内存中有不同的拷贝造成数据不一致问题将共同基类设置为虚基类这时从不同的路径继承过来的同名数据成员在内存中就只有一个拷贝同一个函数名也只有一个映射" style="font-family:&quot;font-size:20px;color:#4F4F4F;">
+		C++使用虚拟继承（Virtual Inheritance），解决从不同途径继承来的同名的数据成员在内存中有不同的拷贝造成数据不一致问题，将共同基类设置为虚基类。这时从不同的路径继承过来的同名数据成员在内存中就只有一个拷贝，同一个函数名也只有一个映射。
+	</h4>
+	<h4 id="语法" style="font-family:&quot;font-size:20px;color:#4F4F4F;">
+		◇<span>语法：</span>
+	</h4>
+	<h4 id="class-派生类-virtual-基类1virtual-基类2virtual-基类n" style="font-family:&quot;font-size:20px;color:#4F4F4F;">
+		class 派生类: virtual 基类1，virtual 基类2，…，virtual 基类n
+	</h4>
+	<h4 id="title" style="font-family:&quot;font-size:20px;color:#4F4F4F;">
+		{
+	</h4>
+	<h4 id="派生类成员声明" style="font-family:&quot;font-size:20px;color:#4F4F4F;">
+		…//派生类成员声明
+	</h4>
+	<h4 id="title-1" style="font-family:&quot;font-size:20px;color:#4F4F4F;">
+		};
+	</h4>
+</blockquote>
+<hr />
+<h4 id="在有了虚继承的概念后我们就可以规避上面的缺点了" style="font-family:&quot;font-size:20px;color:#4F4F4F;background-color:#FFFFFF;">
+	在有了虚继承的概念后，我们就可以规避上面的缺点了。
+</h4>
+<pre class="prettyprint">class A
+{ <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">public</span>: <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">int</span> _a;
+};
+
+class B : <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">virtual</span> <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">public</span> A
+{ <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">public</span>: <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">int</span> _b;
+};
+
+class C : <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">virtual</span> <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">public</span> A
+{ <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">public</span>: <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">int</span> _c;
+};
+
+class D : <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">public</span> B, <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">public</span> C
+{ <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">public</span>: <span class="hljs-keyword" style="font-size:inherit;color:#000088 !important;">int</span> _d;
+};</pre>
+<p style="font-size:18px;color:#4D4D4D;font-family:-apple-system, &quot;background-color:#FFFFFF;">
+	当我们使用了虚继承时，继承模型就改变为下面这样：<br />
+<img src="https://img-blog.csdn.net/20170722152316349?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc3Nzc3N1dXV1dTY2Ng==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" title="" />
+</p>
+<h4 id="由于我所使用的是vs2015在此编译器下对应的处理方式就是这样将class-b-和-class-c设置为虚继承后编译器将class-a存放在了最下端并在b和c类的前四个字节中存放了一个地址当我们访问过去向下再多看四个字节时就会发现这其中存放了一个数字而这个数字就类似于偏移量记录了该类的首地址距父类首地址之间的字节差距比如class-b中我们找到对应数字为14但是这个数字是16进制转为10进制为20在class-b的首地址加上20个字节就恰好是class-a的首地址同理class-c" style="font-family:&quot;font-size:20px;color:#4F4F4F;background-color:#FFFFFF;">
+	由于我所使用的是vs2015，在此编译器下对应的处理方式就是这样。将class B 和 class C设置为虚继承后，编译器将class A存放在了最下端，并在B和C类的前四个字节中存放了一个地址，当我们访问过去向下再多看四个字节时就会发现这其中存放了一个数字。而这个数字就类似于“偏移量”，记录了该类的首地址距父类首地址之间的字节差距。比如class B中，我们找到对应数字为14，但是这个数字是16进制，转为10进制为20，在class B的首地址加上20个字节就恰好是class A的首地址，同理class C。
+</h4>
+<h4 id="因此在class-d访问a时就不会产生二义性a数据也只存放了一份解决了之前菱形继承所带来的问题" style="font-family:&quot;font-size:20px;color:#4F4F4F;background-color:#FFFFFF;">
+	因此在class D访问_a时，就不会产生二义性，_a数据也只存放了一份，解决了之前菱形继承所带来的问题。
+</h4>
+<h4 id="但是还存在一个问题当我们求没有使用虚继承之前的class-d的大小结果是20但是在使用了虚继承后大小变为24所以虽然使用虚继承解决数据冗余问题也带来了性能上的损耗关于如何计算内存大小可以参考此链接" style="font-family:&quot;font-size:20px;color:#4F4F4F;background-color:#FFFFFF;">
+	<span>但是还存在一个问题：</span>当我们求没有使用虚继承之前的class D的大小，结果是20，但是在使用了虚继承后大小变为24。所以虽然使用虚继承解决数据冗余问题也带来了性能上的损耗。（关于如何计算内存大小，可以参考<a href="http://blog.csdn.net/sssssuuuuu666/article/details/75175108">此链接</a>。）
+</h4></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1790.html">C++虚函数和虚函数表概念及实现原理</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1792.html">C++无法重载点符号、::、sizeof等的原因</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/sssssuuuuu666/article/details/75736954" target="_blank">https://blog.csdn.net/sssssuuuuu666/article/details/75736954</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

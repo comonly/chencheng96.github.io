@@ -1,0 +1,384 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>MySQL5.6解压版的安装_comonly.cn</title>
+<meta name="keywords" content="MySQL5.6解压版的安装" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">MySQL5.6解压版的安装</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-01-11</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	数据库
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">mysql,安装</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <h2 id='解压版的安装'>
+	解压版的安装
+</h2>
+<p>
+	解压到你指定的位置然后进行配置：
+</p>
+<ol>
+	<li>
+		配置环境变量很简单：在PATH后面添加: 你的mysql bin文件夹的路径 (如:C:\Program Files\MySQL\MySQL Server 5.6\bin )
+	</li>
+	<li>
+		修改一下配置文件，自己在MySQL Server 5.6目录下建立一个my.ini文件，my.ini文件的编码必须是英文编码（如windows中的ANSI），不能是UTF-8或GBK等。内容如下：
+	</li>
+</ol>
+<pre class="prettyprint lang-bsh">[mysqld]
+#设置3306端口
+port = 3306
+# 设置mysql的安装目录
+basedir=D:\Program Files\mysql\mysql-5.7.23-winx64
+# 设置mysql数据库的数据的存放目录
+datadir=D:\Program Files\mysql\mysql-5.7.23-winx64\data
+# 允许最大连接数
+max_connections=200
+# 服务端使用的字符集默认为8比特编码的latin1字符集
+character-set-server=utf8
+# 创建新表时将使用的默认存储引擎
+default-storage-engine=INNODB
+skip-grant-tables
+ 
+sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES
+[mysql]
+# 设置mysql客户端默认字符集
+default-character-set=utf8</pre>
+<ol>
+	<li>
+		安装服务，以管理员身份运行cmd（一定要用管理员身份运行，不然权限不够），输入：cd C:\Program Files\MySQL\MySQL Server 5.6\bin 进入mysql的bin文件夹。输入mysqld -install(如果不用管理员身份运行，将会因为权限不够而出现错误：Install/Remove of the Service Denied!) 。正常会提示安装成功。
+	</li>
+	<li>
+		启动服务，在cmd中输入:net start mysql,服务启动成功！
+	</li>
+	<li>
+		登录数据库，输入mysql -u root -p（第一次登录没有密码，直接按回车过）,登录成功！
+	</li>
+</ol>
+<h2 id='问题汇总'>
+	问题汇总
+</h2>
+不记得root密码报Access denied for user 'root'@'localhost'(using password:YES)错误，找回密码<br />
+<ol>
+	<li>
+		打开my.ini，在mysqld下面添加skip-grant-tables，保存退出（上面写的内容中已经添加了）。
+	</li>
+	<li>
+		重启MySQL服务，可以用系统自带的服务来重启也可以命令行操作。
+	</li>
+	<li>
+		运行cmd，输入mysql -u root -p 这时候提示你输入密码，直接回车就可以进入。
+	</li>
+</ol>
+设置root密码<br />
+<ol>
+	<li>
+		进入mysql数据库：mysql&gt; use mysql; 提示Database changed
+	</li>
+	<li>
+		给root用户设置新密码，mysql&gt; update user set password=password("123456") where user="root";（注意5.7.1的MySQL的user表中已经没有passwrod了，此时会提示），新本的mysql的user表中的password字段已经改成了authentication_string 字段了。这时候，需要输入的命令是update user set authentication_string = password("123456") where user="root" ; 修改成功会有提示。
+	</li>
+</ol>
+mysql5.7 本地mysql 服务启动后停止 的问题解决——提示“服务没报告任何错误”<br />
+<ol>
+	<li>
+		可能是数据的问题，将data文件夹直接删掉
+	</li>
+	<li>
+		执行：mysqld --initialize 进行初始化（此时mysql会自动帮你重新创建data文件夹）
+	</li>
+	<li>
+		重新启动服务，执行：net start mysql
+	</li>
+</ol></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1043.html">Access数据库在jdk1.8版本无法使用jdbc-odbc问题的解决过程及问题汇总</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1045.html">web.xml配置servlet的映射规则</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="密码设置">
+							<h2 style="display:inline;color:#5BC648;">密码设置</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-06-08&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	MySQL 5.7 忘记root密码，使用--skip-grant-tables重置root密码的通用方法<a href="https://majing.io/posts/10000005451184">https://majing.io/posts/10000005451184</a>
+</p>
+<p>
+	无法登录时打开my.ini，在mysqld下面添加skip-grant-tables，保存重启，取消登录验证。修改密码后删除该行，重启验证。
+</p>
+<p>
+	在重置密码前，先要重载授权表：<br />
+<pre class="prettyprint lang-bsh">mysql&gt; FLUSH PRIVILEGES;
+MySQL 5.7.6+：
+
+mysql&gt; ALTER USER 'root'@'localhost' IDENTIFIED BY 'MyNewPass';</pre>
+MySQL 5.7.6以及之后的版本，使用ALTER USER语法来修改密码<br />
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="另一种安装方法 及 默认密码">
+							<h2 style="display:inline;color:#5BC648;">另一种安装方法 及 默认密码</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-03-14&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	bin目录下，mysqld --initialize --console
+</p>
+<p>
+	安装完成后密码会打印在屏幕上
+</p>
+<p>
+	--console 命令去掉后，会打印初始密码到到 xxx.err 日志中。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	生成无密码用户初始化使用如下命令<br />
+mysqld –initialize -insecure<br />
+</p>
+<p>
+	之后net start mysql 启动服务 stop关闭服务。
+</p>
+<p>
+	mysql-u -root -p 连接数据库
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="windows下指令">
+							<h2 style="display:inline;color:#5BC648;">windows下指令</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-04-27&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span>C:\WINDOWS\system32&gt;net start MySQL<br />
+MySQL 服务正在启动 .<br />
+MySQL 服务已经启动成功。<br />
+<br />
+<br />
+C:\WINDOWS\system32&gt;net stop MySQL<br />
+MySQL 服务正在停止..<br />
+MySQL 服务已成功停止。<br /></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#解压版的安装">解压版的安装</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#问题汇总">问题汇总</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#密码设置">密码设置</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#另一种安装方法 及 默认密码">另一种安装方法 及 默认密码</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#windows下指令">windows下指令</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

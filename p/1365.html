@@ -1,0 +1,272 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>域安全策略 解决 密码必须符合复杂性要求_comonly.cn</title>
+<meta name="keywords" content="域安全策略 解决 密码必须符合复杂性要求" />
+<meta name="description" content="组策略管理只有在域服务器上才能找到。
+
+
+	
+
+
+	通常我们在域系统-管理工具上面是找不到“域安全策略”的，我们只能找到“本地安全策略”，而更改“本地安全策略”是不会对域产生任何的作用的。
+
+下面这个步骤教你如何找到“域安全策略”
+
+1.Start（开始）–Programs（程序）–Administrative Tools（管理工具）–Group Policy Management（策略管理器） 展开组策略管理器
+
+	选择–Forest（林）–Domains（域）–Group Po" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">域安全策略 解决 密码必须符合复杂性要求</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-08-30</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>组策略管理只有在域服务器上才能找到。
+
+
+	
+
+
+	通常我们在域系统-管理工具上面是找不到“域安全策略”的，我们只能找到“本地安全策略”，而更改“本地安全策略”是不会对域产生任何的作用的。
+
+下面这个步骤教你如何找到“域安全策略”
+
+1.Start（开始）–Programs（程序）–Administrative Tools（管理工具）–Group Policy Management（策略管理器） 展开组策略管理器
+
+	选择–Forest（林）–Domains（域）–Group Po</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	<span style="color:#E53333;">组策略管理只有在域服务器上才能找到。</span>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	通常我们在域系统-管理工具上面是找不到“域安全策略”的，我们只能找到“本地安全策略”，而更改“本地安全策略”是不会对域产生任何的作用的。
+</p>
+下面这个步骤教你如何找到“域安全策略”<br />
+<br />
+1.Start（开始）–Programs（程序）–Administrative Tools（管理工具）–Group Policy Management（策略管理器） 展开组策略管理器<br />
+<p>
+	选择–Forest（林）–Domains（域）–Group Policy Objects（组策略对象）–Default Domain Policy（默认域策略），右键选择Edit（编辑）,点击:Computer Configuration（计算机配置）–Policies（策略）–Windows Settings（Windows设置）–Security Settings（安全设置）
+</p>
+<p>
+	组策略修改方法：<a href="https://www.cnblogs.com/sjdn/articles/5379034.html" target="_blank">https://www.cnblogs.com/sjdn/articles/5379034.html</a>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<span style="color:#E53333;">密码选项中的各个策略选项，双击后点击说明可以看到配置的含义。根据需要选择配置即可。（仅修改密码必须符号复杂性要求可能无效</span><span style="color:#E53333;">）</span>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	2.更改之后就需要更新一下策略，使此策略修改生效。方法有下面3个：<br />
+1、等待系统自动刷新组策略，约5分钟~15分钟.<br />
+2、重启域控制器（若是修改的用户策略，注销即可）<br />
+3、使用gpupdate命令<br />
+仅刷新计算机策略：gpupdate/target:computer<br />
+仅刷新用户策略：gpupdate/target:user<br />
+二者都刷新：gpupdate　/force
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1364.html">虚拟机MAC地址重复</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1366.html">DFS分布式文件系统及网络负载平衡(NLB)群集配置过程遇到的问题及解决</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

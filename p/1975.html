@@ -1,0 +1,216 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>部署Exchange管理端_comonly.cn</title>
+<meta name="keywords" content="部署Exchange管理端" />
+<meta name="description" content="本次使用环境Windows Server 2019,需要使用Exchange 2019管理端。在部署Exchange之前，需要在准备部署Exchange 2019 管理端的服务器上添加必须的角色和功能，同时加入到AD，并以域管理员账号登录。打开服务器管理器，在服务器管理器页面点击添加功能和角色，打开添加角色和功能向导，在该页面默认下一步即可。在安装类型页面选择“基于角色或基于功能的安装”在服务器选" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">部署Exchange管理端</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">capfzgs</li>
+          <li class="lmname"><a href="https://blog.51cto.com/capfzgs/2430777" target="_blank">https://blog.51cto.com/capfzgs/2430777</a></li>
+          <li class="timer">2019-08-19</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>本次使用环境Windows Server 2019,需要使用Exchange 2019管理端。在部署Exchange之前，需要在准备部署Exchange 2019 管理端的服务器上添加必须的角色和功能，同时加入到AD，并以域管理员账号登录。打开服务器管理器，在服务器管理器页面点击添加功能和角色，打开添加角色和功能向导，在该页面默认下一步即可。在安装类型页面选择“基于角色或基于功能的安装”在服务器选</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <div class="con editor-preview-side" id="result"><p>本次使用环境Windows Server 2019,需要使用Exchange 2019管理端。</p><p>在部署Exchange之前，需要在准备部署Exchange 2019 管理端的服务器上添加必须的角色和功能，同时加入到AD，并以域管理员账号登录。</p><p>打开服务器管理器，在服务器管理器页面点击添加功能和角色，打开添加角色和功能向导，在该页面默认下一步即可。</p><p><a href="https://s1.51cto.com/images/blog/201908/19/073abb92f295ca42f69eda26815623d1.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" style="color: rgb(66, 133, 244);"><img width="244" height="175" title="企业微信截图_15661953614034" style="background-image: none; cursor: pointer;" alt="企业微信截图_15661953614034" src="https://s1.51cto.com/images/blog/201908/19/ff86f7086923d12e22eb0564b24db1dc.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" border="0"></a></p><p>在安装类型页面选择“基于角色或基于功能的安装”</p><p><a href="https://s1.51cto.com/images/blog/201908/19/9009d9a2242a464ad2f9b1dcc528e2a5.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" style="color: rgb(66, 133, 244);"><img width="244" height="176" title="image" style="margin: 0px; background-image: none; cursor: pointer;" alt="image" src="https://s1.51cto.com/images/blog/201908/19/fe6b51eccbebb8c0125da3c209a52a82.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" border="0"></a></p><p>在服务器选择页面，选择要安装的服务器</p><p><a href="https://s1.51cto.com/images/blog/201908/19/e09904d43757d43ecb227c59d546665c.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" style="color: rgb(66, 133, 244);"><img width="244" height="174" title="image" style="margin: 0px; background-image: none; cursor: pointer;" alt="image" src="https://s1.51cto.com/images/blog/201908/19/115475ffd51b173ef01e3e2bebc8818e.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" border="0"></a></p><p>在服务器角色页面，选择Web服务器（IIS） </p><p><a href="https://s1.51cto.com/images/blog/201908/19/8004db7ef8f6e3b0eb00c6082523f1ef.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" style="color: rgb(66, 133, 244);"><img width="244" height="147" title="image" style="margin: 0px; background-image: none; cursor: pointer;" alt="image" src="https://s1.51cto.com/images/blog/201908/19/e24483aa814aaf6862d6bc5e3ec9c6a1.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" border="0"></a></p><p>在选择功能页面，点击要添加的功能</p><p><a href="https://s1.51cto.com/images/blog/201908/19/0fd27f2111aec06a7193c419e4525b81.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" style="color: rgb(66, 133, 244);"><img width="244" height="175" title="image" style="margin: 0px; background-image: none; cursor: pointer;" alt="image" src="https://s1.51cto.com/images/blog/201908/19/805e9365999aef2f608db12f8f746426.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" border="0"></a></p><p>在Web服务器角色（IIS）页面，保持默认下一步即可</p><p><a href="https://s1.51cto.com/images/blog/201908/19/8ce52508d1b3009aea9239285592da53.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" style="color: rgb(66, 133, 244);"><img width="244" height="175" title="image" style="margin: 0px; background-image: none; cursor: pointer;" alt="image" src="https://s1.51cto.com/images/blog/201908/19/f3274bee533d15d69dfced47e8f06f71.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" border="0"></a></p><p>在角色服务页面，选择管理勾选管理工具，（IIS管理控制台、IIS管理兼容性、IIS元数据库兼容性、IIS WMI兼容性、IIS管理控制台）,并点击下一步</p><p><a href="https://s1.51cto.com/images/blog/201908/19/0a1089a90a94cd526f60c59334e47c1c.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" style="color: rgb(66, 133, 244);"><img width="244" height="174" title="image" style="margin: 0px; background-image: none; cursor: pointer;" alt="image" src="https://s1.51cto.com/images/blog/201908/19/5088fb0b7cb3d52012b46c1082ec3bd2.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" border="0"></a></p><p>在确认页面点击安装即可。</p><p><a href="https://s1.51cto.com/images/blog/201908/19/c8afbab81e50f2f87d4a93a1b185f1f0.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" style="color: rgb(66, 133, 244);"><img width="244" height="174" title="image" style="margin: 0px; background-image: none; cursor: pointer;" alt="image" src="https://s1.51cto.com/images/blog/201908/19/43dc6f9c0963a6fdd2853be9410c916d.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" border="0"></a></p><p>完成角色添加完毕之后，直接关闭页面即可。</p><p>安装必须的软件包</p><ul><li>安装Visual C++ Redistributable Package for Visual Studio 2012</li>
+<li>安装Visual C++ Redistributable Package for Visual Studio 2013</li></ul><p>准备完毕后，即可进行部署Exchange管理端。将ExchangeISO挂载到安装的服务器，点击介质的setup.exe,即可进入安装向导，在是否检查更新页面，点击现在不检查更新，然后下一步即可</p><p><a href="https://s1.51cto.com/images/blog/201908/19/708157f2e742847b3368e66777d27180.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" style="color: rgb(66, 133, 244);"><img width="244" height="214" title="image" style="margin: 0px; background-image: none; cursor: pointer;" alt="image" src="https://s1.51cto.com/images/blog/201908/19/8754f0519600eac22d6a746b1f7f95ac.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" border="0"></a></p><p>单击下一步按钮后，显示如图所示的“正在复制文件”对话框，复制必须的文件到管理计算机中。</p><p><a href="https://s1.51cto.com/images/blog/201908/19/af87d7398dcf9dacd5692aacb3aab56b.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" style="color: rgb(66, 133, 244);"><img width="244" height="214" title="image" style="margin: 0px; background-image: none; cursor: pointer;" alt="image" src="https://s1.51cto.com/images/blog/201908/19/2247c108ff7d2bd46c058d5077c9ac80.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" border="0"></a></p><p>文件复制完毕后，显示如图所示的正在初始化安装程序窗口</p><p><a href="https://s1.51cto.com/images/blog/201908/19/597a618b4460aa1a614ff52ff6d1b900.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" style="color: rgb(66, 133, 244);"><img width="244" height="214" title="image" style="margin: 0px; background-image: none; cursor: pointer;" alt="image" src="https://s1.51cto.com/images/blog/201908/19/b3b6f58f530891d6ffcdc79c735fbd3d.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" border="0"></a></p><p>初始化安装程序后，打开Exchange简介窗口</p><p><a href="https://s1.51cto.com/images/blog/201908/19/0449180229299f49d9906e0aa14a7e04.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" style="color: rgb(66, 133, 244);"><img width="244" height="214" title="image" style="margin: 0px; background-image: none; cursor: pointer;" alt="image" src="https://s1.51cto.com/images/blog/201908/19/8eaa89b0fb09a2d600410d210abcc775.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" border="0"></a></p><p>点击完“下一步”按钮，阅读许可协议，并勾选我接受许可协议中的条款</p><p><a href="https://s1.51cto.com/images/blog/201908/19/f3db01314df7e2ef03bc02ef1bab0892.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" style="color: rgb(66, 133, 244);"><img width="244" height="214" title="image" style="margin: 0px; background-image: none; cursor: pointer;" alt="image" src="https://s1.51cto.com/images/blog/201908/19/19f91ba0f4b1b9ef76b64194a9630a8a.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" border="0"></a></p><p>点击下一步，进入推荐设置页面，在此我们选择不使用推荐设置</p><p><a href="https://s1.51cto.com/images/blog/201908/19/7287a27676e3de1c445dda8b19328a6a.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" style="color: rgb(66, 133, 244);"><img width="244" height="215" title="image" style="margin: 0px; background-image: none; cursor: pointer;" alt="image" src="https://s1.51cto.com/images/blog/201908/19/da58355e99a64ece788c73edd48126df.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" border="0"></a></p><p>点击“下一步”按钮后，进入到服务器角色选择页面，在此我们选择“管理工具”即可</p><p><a href="https://s1.51cto.com/images/blog/201908/19/5d5712a68b6f583af22c05756dceee2d.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" style="color: rgb(66, 133, 244);"><img width="244" height="213" title="image" style="margin: 0px; background-image: none; cursor: pointer;" alt="image" src="https://s1.51cto.com/images/blog/201908/19/7d0927e2282345b13c7fbeafd3785d53.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" border="0"></a></p><p>点击下一步后，进入到“安装空间和位置”页面，在此我们自定义选择路径</p><p><a href="https://s1.51cto.com/images/blog/201908/19/c3caeec481e52e18ebfe9e1bb2805129.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" style="color: rgb(66, 133, 244);"><img width="244" height="214" title="image" style="margin: 0px; background-image: none; cursor: pointer;" alt="image" src="https://s1.51cto.com/images/blog/201908/19/f6c20c9335d4ed448c0c7a58acc8abdc.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" border="0"></a></p><p>系统将进入准备情况检查阶段，检查无误后，点击“安装”即可</p><p><a href="https://s1.51cto.com/images/blog/201908/19/c87962350bcd879540ea82b5c77c0409.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" style="color: rgb(66, 133, 244);"><img width="244" height="214" title="image" style="margin: 0px; background-image: none; cursor: pointer;" alt="image" src="https://s1.51cto.com/images/blog/201908/19/e7d67f630d1b44c20f1141df10d0ee19.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" border="0"></a></p><p>进入安装进度页面</p><p><a href="https://s1.51cto.com/images/blog/201908/19/d02d86f5b34feaee9287203a427ddcd2.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" style="color: rgb(66, 133, 244);"><img width="244" height="214" title="image" style="margin: 0px; background-image: none; cursor: pointer;" alt="image" src="https://s1.51cto.com/images/blog/201908/19/43c3b8807d8fc22db349da95d80175a1.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" border="0"></a></p><p>经过漫长的等待，管理工具完成安装，点击完成即可。</p><p><a href="https://s1.51cto.com/images/blog/201908/19/46193b5578d76281662e578a1fd2ee25.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" style="color: rgb(66, 133, 244);"><img width="244" height="214" title="image" style="margin: 0px; background-image: none; cursor: pointer;" alt="image" src="https://s1.51cto.com/images/blog/201908/19/3ee6fea0bdc81844bcee6a1fbea6a9f4.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" border="0"></a></p><p>重启计算机，在windows开始按钮，会多出如下几个文件夹</p><p><a href="https://s1.51cto.com/images/blog/201908/19/ab55a629401a1354c9a1dbe50908e043.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" style="color: rgb(66, 133, 244);"><img width="244" height="133" title="image" style="margin: 0px; background-image: none; cursor: pointer;" alt="image" src="https://s1.51cto.com/images/blog/201908/19/b50dc041108b6360ab85ebb46d3f60a6.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" border="0"></a></p><p>Exchange管理工具完成安装。</p></div></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1974.html">Hadoop MapReduce</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1976.html">一文了解OOM及解决方案</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.51cto.com/capfzgs/2430777" target="_blank">https://blog.51cto.com/capfzgs/2430777</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

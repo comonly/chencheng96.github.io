@@ -1,0 +1,398 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Linux IO模式及 select、poll、epoll详解_comonly.cn</title>
+<meta name="keywords" content="Linux IO模式及 select、poll、epoll详解" />
+<meta name="description" content="select，poll，epoll都是IO多路复用的机制。I/O多路复用就是通过一种机制，一个进程可以监视多个描述符，一旦某个描述符就绪（一般是读就绪或者写就绪），能够通知程序进行相应的读写操作。但select，poll，epoll本质上都是同步I/O，因为他们都需要在读写事件就绪后自己负责进行读写，也就是说这个读写过程是阻塞的，而异步I/O则无需自己负责进行读写，异步I/O的实现会负责把数据从内核拷贝到用户空间。" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Linux IO模式及 select、poll、epoll详解</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">人云思云</li>
+          <li class="lmname"><a href="https://segmentfault.com/a/1190000003063859" target="_blank">https://segmentfault.com/a/1190000003063859</a></li>
+          <li class="timer">2020-09-26</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>select，poll，epoll都是IO多路复用的机制。I/O多路复用就是通过一种机制，一个进程可以监视多个描述符，一旦某个描述符就绪（一般是读就绪或者写就绪），能够通知程序进行相应的读写操作。但select，poll，epoll本质上都是同步I/O，因为他们都需要在读写事件就绪后自己负责进行读写，也就是说这个读写过程是阻塞的，而异步I/O则无需自己负责进行读写，异步I/O的实现会负责把数据从内核拷贝到用户空间。</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> select，poll，epoll都是IO多路复用的机制。I/O多路复用就是通过一种机制，一个进程可以监视多个描述符，一旦某个描述符就绪（一般是读就绪或者写就绪），能够通知程序进行相应的读写操作。但select，poll，epoll本质上都是同步I/O，因为他们都需要在读写事件就绪后自己负责进行读写，也就是说这个读写过程是阻塞的，而异步I/O则无需自己负责进行读写，异步I/O的实现会负责把数据从内核拷贝到用户空间。</div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1762.html">Linux的零拷贝技术(zero-copy)</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1764.html">CAS 比较并替换</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://segmentfault.com/a/1190000003063859" target="_blank">https://segmentfault.com/a/1190000003063859</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="epoll底层实现">
+							<h2 style="display:inline;color:#5BC648;">epoll底层实现</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-09-26&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	Epoll的本质（内部实现原理）<a href="https://blog.csdn.net/songchuwang1868/article/details/89877739">https://blog.csdn.net/songchuwang1868/article/details/89877739</a>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	epoll一种网络模式，采用的是 IO多路复用技术（就是可以监控多个文件描述符），相比较于select 和poll是非常快的；
+</p>
+<br />
+首先看这三个函数:<br />
+<p>
+	int epoll_create(int size);
+</p>
+int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event);<br />
+<p>
+	int epoll_wait(int epfd, struct epoll_event *events,int maxevents, int timeout);
+</p>
+<p>
+	<br />
+</p>
+首先epoll_create创建一个epoll文件描述符，底层同时创建一个红黑树，和一个就绪链表；红黑树存储所监控的文件描述符的节点数据，就绪链表存储就绪的文件描述符的节点数据；epoll_ctl将会添加新的描述符，首先判断是红黑树上是否有此文件描述符节点，如果有，则立即返回。如果没有， 则在树干上插入新的节点，并且告知内核注册回调函数。当接收到某个文件描述符过来数据时，那么内核将该节点插入到就绪链表里面。epoll_wait将会接收到消息，并且将数据拷贝到用户空间，清空链表。对于LT模式epoll_wait清空就绪链表之后会检查该文件描述符是哪一种模式，如果为LT模式，且必须该节点确实有事件未处理，那么就会把该节点重新放入到刚刚删除掉的且刚准备好的就绪链表，epoll_wait马上返回。ET模式不会检查，只会调用一次<br />
+<br />
+每个epollfd在内核中有一个对应的eventpoll结构对象.其中关键的成员是一个readylist(eventpoll:rdllist)和一棵红黑树(eventpoll:rbr).<br />
+<br />
+一个fd被添加到epoll中之后(EPOLL_ADD),内核会为它生成一个对应的epitem结构对象.epitem被添加到eventpoll的红黑树中.红黑树的作用是使用者调用EPOLL_MOD的时候可以快速找到fd对应的epitem。调用epoll_wait的时候,将readylist中的epitem出列,将触发的事件拷贝到用户空间.之后判断epitem是否需要重新添加回readylist.<br />
+<br />
+epitem重新添加到readylist必须满足下列条件:<br />
+1) epitem上有用户关注的事件触发.<br />
+2) epitem被设置为水平触发模式(如果一个epitem被设置为边界触发则这个epitem不会被重新添加到readylist中，在什么时候重新添加到readylist请继续往下看).<br />
+<br />
+注意，如果epitem被设置为EPOLLONESHOT模式，则当这个epitem上的事件拷贝到用户空间之后,会将这个epitem上的关注事件清空(只是关注事件被清空,并没有从epoll中删除，要删除必须对那个描述符调用EPOLL_DEL)，也就是说即使这个epitem上有触发事件，但是因为没有用户关注的事件所以不会被重新添加到readylist中.<br />
+<br />
+epitem被添加到readylist中的各种情况(当一个epitem被添加到readylist如果有线程阻塞在epoll_wait中,那个线程会被唤醒):<br />
+1)对一个fd调用EPOLL_ADD，如果这个fd上有用户关注的激活事件，则这个fd会被添加到readylist.<br />
+2)对一个fd调用EPOLL_MOD改变关注的事件，如果新增加了一个关注事件且对应的fd上有相应的事件激活，则这个fd会被添加到readylist.<br />
+3)当一个fd上有事件触发时(例如一个socket上有外来的数据)会调用ep_poll_callback(见eventpoll::ep_ptable_queue_proc),如果触发的事件是用户关注的事件，则这个fd会被添加到readylist中.<br />
+<br />
+了解了epoll的执行过程之后,可以回答一个在使用边界触发时常见的疑问.在一个fd被设置为边界触发的情况下,调用read/write,如何正确的判断那个fd已经没有数据可读/不再可写.epoll文档中的建议是直到触发EAGAIN错误.而实际上只要你请求字节数小于read/write的返回值就可以确定那个fd上已经没有数据可读/不再可写.<br />
+<br />
+<p>
+	最后用一个epollfd监听另一个epollfd也是合法的,epoll通过调用eventpoll::ep_eventpoll_poll来判断一个epollfd上是否有触发的事件(只能是读事件).
+</p>
+<p>
+	<br />
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="select、poll、epoll之间的区别">
+							<h2 style="display:inline;color:#5BC648;">select、poll、epoll之间的区别</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-09-26&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	<a href="https://www.cnblogs.com/aspirant/p/9166944.html">https://www.cnblogs.com/aspirant/p/9166944.html</a>
+</p>
+<p>
+	(1)select==&gt;时间复杂度O(n)
+</p>
+它仅仅知道了，有I/O事件发生了，却并不知道是哪那几个流（可能有一个，多个，甚至全部），我们只能无差别轮询所有流，找出能读出数据，或者写入数据的流，对他们进行操作。所以select具有O(n)的无差别轮询复杂度，同时处理的流越多，无差别轮询时间就越长。<br />
+<br />
+(2)poll==&gt;时间复杂度O(n)<br />
+poll本质上和select没有区别，它将用户传入的数组拷贝到内核空间，然后查询每个fd对应的设备状态， 但是它没有最大连接数的限制，原因是它是基于链表来存储的.<br />
+<br />
+(3)epoll==&gt;时间复杂度O(1)<br />
+epoll可以理解为event poll，不同于忙轮询和无差别轮询，epoll会把哪个流发生了怎样的I/O事件通知我们。所以我们说epoll实际上是事件驱动（每个事件关联上fd）的，此时我们对这些流的操作都是有意义的。（复杂度降低到了O(1)）<br />
+<br />
+select，poll，epoll都是IO多路复用的机制。I/O多路复用就通过一种机制，可以监视多个描述符，一旦某个描述符就绪（一般是读就绪或者写就绪），能够通知程序进行相应的读写操作。但select，poll，epoll本质上都是同步I/O，因为他们都需要在读写事件就绪后自己负责进行读写，也就是说这个读写过程是阻塞的，而异步I/O则无需自己负责进行读写，异步I/O的实现会负责把数据从内核拷贝到用户空间。&nbsp;&nbsp;<br />
+<br />
+epoll跟select都能提供多路I/O复用的解决方案。在现在的Linux内核里有都能够支持，其中epoll是Linux所特有，而select则应该是POSIX所规定，一般操作系统均有实现<br />
+<br />
+select本质上是通过设置或者检查存放fd标志位的数据结构来进行下一步处理。这样所带来的缺点是：<br />
+<br />
+1、 单个进程可监视的fd数量被限制，即能监听端口的大小有限。<br />
+&nbsp; &nbsp; &nbsp; 一般来说这个数目和系统内存关系很大，具体数目可以cat /proc/sys/fs/file-max察看。32位机默认是1024个。64位机默认是2048.<br />
+2、 对socket进行扫描时是线性扫描，即采用轮询的方法，效率较低：<br />
+&nbsp; &nbsp; &nbsp; &nbsp;当套接字比较多的时候，每次select()都要通过遍历FD_SETSIZE个Socket来完成调度,不管哪个Socket是活跃的,都遍历一遍。这会浪费很多CPU时间。如果能给套接字注册某个回调函数，当他们活跃时，自动完成相关操作，那就避免了轮询，这正是epoll与kqueue做的。<br />
+3、需要维护一个用来存放大量fd的数据结构，这样会使得用户空间和内核空间在传递该结构时复制开销大<br />
+<br />
+poll本质上和select没有区别，它将用户传入的数组拷贝到内核空间，然后查询每个fd对应的设备状态，如果设备就绪则在设备等待队列中加入一项并继续遍历，如果遍历完所有fd后没有发现就绪设备，则挂起当前进程，直到设备就绪或者主动超时，被唤醒后它又要再次遍历fd。这个过程经历了多次无谓的遍历。<br />
+<br />
+它没有最大连接数的限制，原因是它是基于链表来存储的，但是同样有一个缺点：<br />
+1、大量的fd的数组被整体复制于用户态和内核地址空间之间，而不管这样的复制是不是有意义。&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />
+2、poll还有一个特点是“水平触发”，如果报告了fd后，没有被处理，那么下次poll时会再次报告该fd。<br />
+<br />
+epoll有EPOLLLT和EPOLLET两种触发模式，LT是默认的模式，ET是“高速”模式。LT模式下，只要这个fd还有数据可读，每次 epoll_wait都会返回它的事件，提醒用户程序去操作，而在ET（边缘触发）模式中，它只会提示一次，直到下次再有数据流入之前都不会再提示了，无 论fd中是否还有数据可读。所以在ET模式下，read一个fd的时候一定要把它的buffer读光，也就是说一直读到read的返回值小于请求值，或者 遇到EAGAIN错误。还有一个特点是，epoll使用“事件”的就绪通知方式，通过epoll_ctl注册fd，一旦该fd就绪，内核就会采用类似callback的回调机制来激活该fd，epoll_wait便可以收到通知。<br />
+<br />
+epoll为什么要有EPOLLET触发模式？<br />
+<br />
+如果采用EPOLLLT模式的话，系统中一旦有大量你不需要读写的就绪文件描述符，它们每次调用epoll_wait都会返回，这样会大大降低处理程序检索自己关心的就绪文件描述符的效率.。而采用EPOLLET这种边沿触发模式的话，当被监控的文件描述符上有可读写事件发生时，epoll_wait()会通知处理程序去读写。如果这次没有把数据全部读写完(如读写缓冲区太小)，那么下次调用epoll_wait()时，它不会通知你，也就是它只会通知你一次，直到该文件描述符上出现第二次可读写事件才会通知你！！！这种模式比水平触发效率高，系统不会充斥大量你不关心的就绪文件描述符<br />
+<br />
+epoll的优点：<br />
+1、没有最大并发连接的限制，能打开的FD的上限远大于1024（1G的内存上能监听约10万个端口）；<br />
+2、效率提升，不是轮询的方式，不会随着FD数目的增加效率下降。只有活跃可用的FD才会调用callback函数；<br />
+即Epoll最大的优点就在于它只管你“活跃”的连接，而跟连接总数无关，因此在实际的网络环境中，Epoll的效率就会远远高于select和poll。<br />
+3、 内存拷贝，利用mmap()文件映射内存加速与内核空间的消息传递；即epoll使用mmap减少复制开销。<br />
+select、poll、epoll 区别总结：<br />
+1、支持一个进程所能打开的最大连接数<br />
+select<br />
+单个进程所能打开的最大连接数有FD_SETSIZE宏定义，其大小是32个整数的大小（在32位的机器上，大小就是3232，同理64位机器上FD_SETSIZE为3264），当然我们可以对进行修改，然后重新编译内核，但是性能可能会受到影响，这需要进一步的测试。<br />
+poll<br />
+poll本质上和select没有区别，但是它没有最大连接数的限制，原因是它是基于链表来存储的<br />
+epoll<br />
+虽然连接数有上限，但是很大，1G内存的机器上可以打开10万左右的连接，2G内存的机器可以打开20万左右的连接<br />
+<br />
+2、FD剧增后带来的IO效率问题<br />
+select<br />
+因为每次调用时都会对连接进行线性遍历，所以随着FD的增加会造成遍历速度慢的“线性下降性能问题”。<br />
+poll<br />
+同上<br />
+epoll<br />
+因为epoll内核中实现是根据每个fd上的callback函数来实现的，只有活跃的socket才会主动调用callback，所以在活跃socket较少的情况下，使用epoll没有前面两者的线性下降的性能问题，但是所有socket都很活跃的情况下，可能会有性能问题。<br />
+<br />
+3、 消息传递方式<br />
+select<br />
+内核需要将消息传递到用户空间，都需要内核拷贝动作<br />
+poll<br />
+同上<br />
+epoll<br />
+epoll通过内核和用户空间共享一块内存来实现的。<br />
+<br />
+总结：<br />
+综上，在选择select，poll，epoll时要根据具体的使用场合以及这三种方式的自身特点。<br />
+1、表面上看epoll的性能最好，但是在连接数少并且连接都十分活跃的情况下，select和poll的性能可能比epoll好，毕竟epoll的通知机制需要很多函数回调。<br />
+2、select低效是因为每次它都需要轮询。但低效也是相对的，视情况而定，也可通过良好的设计改善&nbsp;<br /></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="ET/LT模式区别">
+							<h2 style="display:inline;color:#5BC648;">ET/LT模式区别</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2020-09-26&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	<a href="https://blog.csdn.net/YMY_mine/article/details/81212731">https://blog.csdn.net/YMY_mine/article/details/81212731</a> 
+</p>
+<p>
+	一、ET模式（边沿触发）的文件描述符(fd)：
+</p>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;当epoll_wait检测到fd上有事件发生并将此事件通知应用程序后，应用程序必须立即处理该事件，因为后续的epoll_wait调用将不再向应用程序通知这一事件。<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;epoll_wait只有在客户端第一次发数据是才会返回,以后即使缓冲区里还有数据，也不会返回了。epoll_wait是否返回，是看客户端是否发数据，客户端发数据了就会返回，且只返回一次。<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;eg：客户端发送数据，I/O函数只会提醒一次服务端fd上有数据，以后将不会再提醒。所以要求服务端必须一次把数据读完---&gt;循环读数据 (读完数据后，可能会阻塞)&nbsp; ---&gt;将描述符设置成非阻塞模式<br />
+<br />
+二、LT模式（水平触发）的文件描述符(fd)：<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;当epoll_wait检测到fd上有事件发生并将此事件通知应用程序后，应用程序可以不立即处理该事件，这样，当应用程序下一次调用epoll_wait时，epoll_wait还会再次向应用程序通知此事件，直到此事件被处理。<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;eg：客户端发送数据，I/O函数会提醒描述符fd有数据----&gt;recv读数据，若一次没有读完，I/O函数会一直提醒服务端fd上有数据，直到recv缓冲区里的数据读完<br />
+<br />
+三、可见ET模式在很大程度上降低了同一个epoll事件被重复触发的次数，因此ET模式效率比LT模式高<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;原因：ET模式下事件被触发的次数比LT模式下少很多<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;注意：每个使用ET模式的文件描述符都应该是非阻塞的。 如果描述符是阻塞的，那么读或写操作将会因没有后续事件而一直处于阻塞状态 ( 饥渴状态 )。<br /></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#epoll底层实现">epoll底层实现</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#select、poll、epoll之间的区别">select、poll、epoll之间的区别</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#ET/LT模式区别">ET/LT模式区别</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

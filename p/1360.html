@@ -1,0 +1,431 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>TortoiseSVN通过SubWCRev命令获取版本号_comonly.cn</title>
+<meta name="keywords" content="TortoiseSVN通过SubWCRev命令获取版本号" />
+<meta name="description" content="命令行中基本调用方法（可以写成.bat文件）
+
+SubWCRev WorkingCopyPath [SrcVersionFile DstVersionFile] [-nmdfe]
+
+	WorkingCopyPath是要检查的工作副本路径，你可以只对工作副本使用SubWCRev，而不是直接对版本库，这个路径可以是绝对路径，也可以是工作目录的相对路径。
+
+
+	比如.\表示当前路径，如果该目录没有包含到svn仓库，则获取到的版本号为0.
+$WCREV$变量获取的是WorkingCopyPath路" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">TortoiseSVN通过SubWCRev命令获取版本号</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-08-29</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>命令行中基本调用方法（可以写成.bat文件）
+
+SubWCRev WorkingCopyPath [SrcVersionFile DstVersionFile] [-nmdfe]
+
+	WorkingCopyPath是要检查的工作副本路径，你可以只对工作副本使用SubWCRev，而不是直接对版本库，这个路径可以是绝对路径，也可以是工作目录的相对路径。
+
+
+	比如.\表示当前路径，如果该目录没有包含到svn仓库，则获取到的版本号为0.
+$WCREV$变量获取的是WorkingCopyPath路</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	命令行中基本调用方法（可以写成.bat文件）
+</p>
+<pre class="prettyprint lang-bsh">SubWCRev WorkingCopyPath [SrcVersionFile DstVersionFile] [-nmdfe]</pre>
+<p>
+	WorkingCopyPath是要检查的工作副本路径，你可以只对工作副本使用SubWCRev，而不是直接对版本库，这个路径可以是绝对路径，也可以是工作目录的相对路径。
+</p>
+<p>
+	<span style="color:#E53333;">比如.\表示当前路径，如果该目录没有包含到svn仓库，则获取到的版本号为0.</span><br />
+<span style="color:#E53333;">$WCREV$变量获取的是WorkingCopyPath路径下最新的svn版本号。</span><br />
+<br />
+如果你想让SubWCRev执行关键字替换，像版本库版本，地址等字段保存到文本文件，就需要提供一个模版文件SrcVersionFile，输出文件DstVersionFile就是模版替换之后的版本。
+</p>
+<p>
+	可供替换的关键字：
+</p>
+<div>
+	<div>
+		<table border="1" cellpadding="0" cellspacing="0">
+			<tbody>
+				<tr>
+					<th>
+						关键字
+					</th>
+					<th>
+						描述
+					</th>
+				</tr>
+			</tbody>
+			<tbody>
+				<tr>
+					<td>
+						$WCREV$
+					</td>
+					<td>
+						用工作副本中最高的提交版本来替换
+					</td>
+				</tr>
+				<tr>
+					<td>
+						$WCREV&amp;$
+					</td>
+					<td>
+						用工作副本中的最高提交修订版本号替换，ANDed with the value after the &amp; char. 例如：$WCREV&amp;0xFFFF$
+					</td>
+				</tr>
+				<tr>
+					<td>
+						$WCREV-$, $WCREV+$
+					</td>
+					<td>
+						Replaced with the highest commit revision in the working copy, with the value after the + or - char added or subtracted. For example:&nbsp;$WCREV-1000$
+					</td>
+				</tr>
+				<tr>
+					<td>
+						$WCDATE$, $WCDATEUTC$
+					</td>
+					<td>
+						Replaced with the commit date/time of the highest commit revision. By default, international format is used:&nbsp;yyyy-mm-dd hh:mm:ss. Alternatively, you can specify a custom format which will be used with&nbsp;strftime(), for example:&nbsp;$WCDATE=%a %b %d %I:%M:%S %p$. For a list of available formatting characters, look at the <a href="https://msdn.microsoft.com/en-us/library/fe06s4ak.aspx" target="_top">在线引用</a>.
+					</td>
+				</tr>
+				<tr>
+					<td>
+						$WCNOW$, $WCNOWUTC$
+					</td>
+					<td>
+						Replaced with the current system date/time. This can be used to indicate the build time. Time formatting can be used as described for&nbsp;$WCDATE$.
+					</td>
+				</tr>
+				<tr>
+					<td>
+						$WCRANGE$
+					</td>
+					<td>
+						Replaced with the update revision range in the working copy. If the working copy is in a consistent state, this will be a single revision. If the working copy contains mixed revisions, either due to being out of date, or due to a deliberate update-to-revision, then the range will be shown in the form 100:200.
+					</td>
+				</tr>
+				<tr>
+					<td>
+						$WCMIXED$
+					</td>
+					<td>
+						当有混合版本时用&nbsp;TText&nbsp;替换&nbsp;$WCMIXED?TText:FText$，否则用&nbsp;FText&nbsp;替换。
+					</td>
+				</tr>
+				<tr>
+					<td>
+						$WCMODS$
+					</td>
+					<td>
+						若本地存在修改，就用&nbsp;TText&nbsp;替换&nbsp;$WCMODS?TText:FText$，否则用&nbsp;FText&nbsp;替换。
+					</td>
+				</tr>
+				<tr>
+					<td>
+						$WCUNVER$
+					</td>
+					<td>
+						$WCUNVER?TText:FText$&nbsp;is replaced with&nbsp;TText&nbsp;if there are unversioned items in the working copy, or&nbsp;FText&nbsp;if not.
+					</td>
+				</tr>
+				<tr>
+					<td>
+						$WCEXTALLFIXED$
+					</td>
+					<td>
+						$WCEXTALLFIXED?TText:FText$&nbsp;is replaced with&nbsp;TText&nbsp;if all externals are fixed to an explicit revision, or&nbsp;FText&nbsp;if not.
+					</td>
+				</tr>
+				<tr>
+					<td>
+						$WCISTAGGED$
+					</td>
+					<td>
+						$WCISTAGGED?TText:FText$&nbsp;is replaced with&nbsp;TText&nbsp;if the repository URL contains the tags classification pattern, or&nbsp;FText&nbsp;if not.
+					</td>
+				</tr>
+				<tr>
+					<td>
+						$WCURL$
+					</td>
+					<td>
+						用传递给SubWCRev的工作目录的版本库地址替换。
+					</td>
+				</tr>
+				<tr>
+					<td>
+						$WCINSVN$
+					</td>
+					<td>
+						$WCINSVN?TText:FText$&nbsp;is replaced with&nbsp;TText&nbsp;if the entry is versioned, or&nbsp;FText&nbsp;if not.
+					</td>
+				</tr>
+				<tr>
+					<td>
+						$WCNEEDSLOCK$
+					</td>
+					<td>
+						$WCNEEDSLOCK?TText:FText$&nbsp;is replaced with&nbsp;TText&nbsp;if the entry has the&nbsp;svn:needs-lock&nbsp;property set, or&nbsp;FText&nbsp;if not.
+					</td>
+				</tr>
+				<tr>
+					<td>
+						$WCISLOCKED$
+					</td>
+					<td>
+						$WCISLOCKED?TText:FText$&nbsp;is replaced with&nbsp;TText&nbsp;if the entry is locked, or&nbsp;FText&nbsp;if not.
+					</td>
+				</tr>
+				<tr>
+					<td>
+						$WCLOCKDATE$, $WCLOCKDATEUTC$
+					</td>
+					<td>
+						Replaced with the lock date. Time formatting can be used as described for&nbsp;$WCDATE$.
+					</td>
+				</tr>
+				<tr>
+					<td>
+						$WCLOCKOWNER$
+					</td>
+					<td>
+						Replaced with the name of the lock owner.
+					</td>
+				</tr>
+				<tr>
+					<td>
+						$WCLOCKCOMMENT$
+					</td>
+					<td>
+						Replaced with the comment of the lock.
+					</td>
+				</tr>
+				<tr>
+					<td>
+						$WCUNVER$
+					</td>
+					<td>
+						$WCUNVER?TText:FText$&nbsp;is replaced with&nbsp;TText&nbsp;if there are unversioned files or folders in the working copy, or&nbsp;FText&nbsp;if not.
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<p>
+	<br />
+</p>
+<p>
+	使用方法：
+</p>
+<p>
+	定义一个模版文件origin.txt,内容：
+</p>
+<pre class="prettyprint">将要替换的内容，当前svn版本号： $WCREV$</pre>
+执行：
+<pre class="prettyprint lang-bsh">subwcrev.exe .\   origin.txt  origin_copy.txt</pre>
+生成文件origin_copy.txt,内容：
+<pre class="prettyprint">将要替换的内容，当前svn版本号： 0</pre>
+<p>
+	官网使用教程：<a href="https://tortoisesvn.net/docs/nightly/TortoiseSVN_zh_CN/tsvn-subwcrev.html" target="_blank">https://tortoisesvn.net/docs/nightly/TortoiseSVN_zh_CN/tsvn-subwcrev.html</a> 
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1359.html">.bat批处理相关用法</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1361.html">C++中HRESULT相关介绍</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

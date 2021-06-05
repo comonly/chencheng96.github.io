@@ -1,0 +1,302 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>IIS中的重写工具下关于操作重定向URL中的{R:N}与{C:N}_comonly.cn</title>
+<meta name="keywords" content="IIS中的重写工具下关于操作重定向URL中的{R:N}与{C:N}" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">IIS中的重写工具下关于操作重定向URL中的{R:N}与{C:N}</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">十有三</li>
+          <li class="lmname"><a href="http://shiyousan.com/post/635648886502897428" target="_blank">http://shiyousan.com/post/635648886502897428</a></li>
+          <li class="timer">2017-03-30</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	服务器apache等
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+        <div class="tags"><a href="/" target="_blank">IIS,正向引用,反向引用</a></div>
+      
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	URL Rewrite(URL重写工具)作为IIS下较为常用的模块组件， 提供了重写、重定向、自定义响应、中止请求等功能。但是其相关的中文资料比较缺少，官方倒是有完整和详细的英文文档，之前我在项目中遇到需要设置重写/重定向URL操作规则时，对于范例中的{R:N}和{C:N}规则就理解的十分辛苦，因此写下本文分享下经验。
+</p>
+<p>
+	这里先附上官网的文档，其实文档链接在IIS的URL重写模块的右边菜单就有：<a href="http://www.iis.net/learn/extensions/url-rewrite-module/url-rewrite-module-configuration-reference" target="_blank">URL Rewrite Module Configuration Reference（URL重写模块配置参考） </a> ，也可以看这篇URL 重写模块页
+</p>
+<h2 id='R和C表示的是什么意思？'>
+	R和C表示的是什么意思？
+</h2>
+<p>
+	这里先看官方文档的说明：
+</p>
+<div>
+	Back-references to condition patterns are identified by {C:N} where N is from 0 to 9. Back-references to rule patterns are identified by {R:N} where N is from 0 to 9. Note that for both types of back-references, {R:0} and {C:0}, will contain the matched string.
+</div>
+<p>
+	文档链接地址：<a href="http://www.iis.net/learn/extensions/url-rewrite-module/url-rewrite-module-configuration-reference#Using_back-references_in_rewrite_rules" target="_blank">Using back-references in rewrite rules</a> 
+</p>
+<p>
+	{R:N}和{C:N}主要是使用了正则表达式的back-references(中文名词：反向引用/逆向引用/后向引用/向后引用)，关于正则的反向引用这里就不多加说明，可以参考这三篇文章：
+</p>
+<ol>
+	<li>
+		<a href="https://msdn.microsoft.com/zh-cn/library/ksz2azbh(VS.80).aspx" target="_blank">反向引用</a> 
+	</li>
+	<li>
+		<a href="http://deerchao.net/tutorials/regex/regex.htm#backreference" target="_blank">后向引用</a> 
+	</li>
+	<li>
+		<a href="https://technet.microsoft.com/zh-cn/library/ee215190(v=ws.10).aspx" target="_blank">Using Back References</a> 
+	</li>
+</ol>
+<p>
+	我们只要知道R表示的是rule patterns(规则模式，就是匹配URL的模式)，C表示的是condition patterns（条件模式，规则条件的属性）。{R:N}和{C:N}中的N是指正则表达式中反向引用所捕获到的组号，有0至9的组号。需要注意的是，{R:0}和{C:0}表示全部匹配。其它的比如{R:1}或者{C:1}的组号是1，所以会匹配到分组1所捕获到的内容，其他带组号的则对应其正则所匹配到的组号内容。
+</p>
+<p>
+	关于规则模式和规则条件，可以参考这两篇文章
+</p>
+<ol>
+	<li>
+		<a href="http://www.iyaka.cn/blog/14_657.html" target="_blank">详解IIS中URL重写工具的规则条件(Rule conditions)</a> 
+	</li>
+	<li>
+		<a href="http://www.iyaka.cn/blog/14_659.html" target="_blank">详解IIS中URL重写工具的匹配URL-规则模式(rule patterns)</a> 
+	</li>
+</ol>
+<h2 id='示例详解说明{R:N}和{C:N}'>
+	示例详解说明{R:N}和{C:N}
+</h2>
+<p>
+	假设我们要将地址http://192.168.1.100:8080/Home/TestUrlRewrite做301重定向到http://192.168.1.100:8080/TestUrlRewrite/Index，那么我们IIS中的设置如下：
+</p>
+<h3>
+	1、匹配URL（rule patterns）:
+</h3>
+<p>
+	<img style="width:662px;height:244px;" alt="设置规则模式" src="http://shiyousan.com/UserFiles/images/2015/04/635648886502897428/01_635648886502897428.jpg" /> 
+</p>
+<p>
+	上图中我们设置模式的正则表达式为^(.*?)/?Home(/TesturlRewrite)$，我们点击打开测试模式，输入要测试匹配的URL地址：http://192.168.1.100:8080/Home/TestUrlRewrite，如下图所示：
+</p>
+<p>
+	<img style="width:428px;height:477px;" alt="规则模式测试" src="http://shiyousan.com/UserFiles/images/2015/04/635648886502897428/02_635648886502897428.jpg" /> 
+</p>
+<p>
+	由上图可知，我们成功匹配了测试的URL，根据匹配模式的正则，我们一共可以捕获到3组内容，其中{R:0}上面有说过表示的是全部的内容，{R:1}捕获到的是http://192.168.1.100:8080，{R:2}捕获到的反向引用是/TestUrlRewrite
+</p>
+<h3>
+	2、规则条件（Rule conditions）:
+</h3>
+<p>
+	<img style="width:468px;height:155px;" alt="条件模式设置" src="http://shiyousan.com/UserFiles/images/2015/04/635648886502897428/03_635648886502897428.jpg" /> 
+</p>
+<p>
+	这里我们添加了一个条件过滤，只匹配192.168.1.100:8080这个HTTP_HOST主机。在测试的时候只捕获到一个反向引用组，即{C:0}:
+</p>
+<p>
+	<img style="width:313px;height:448px;" alt="条件模式测试" src="http://shiyousan.com/UserFiles/images/2015/04/635648886502897428/04_635648886502897428.jpg" /> 
+</p>
+<h3>
+	3、操作规则（Rule Action）：
+</h3>
+<p>
+	最后设置操作规则，设置重定向URL为：{R:2}/Index，上面我们已经知道{R:2}就是反向引用所捕获的/TestUrlRewrite，完整重定向的URL地址为：/TestUrlRewrite/Index。这样就成功实现了使用反向引用来进行重定向操作。
+</p>
+<p>
+	<img style="width:658px;height:303px;" alt="设置操作规则" src="http://shiyousan.com/UserFiles/images/2015/04/635648886502897428/05_635648886502897428.jpg" /> 
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/657.html">IIS中URL重写工具的规则条件(Rule conditions)</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/659.html">IIS中URL重写工具的匹配URL-规则模式(rule patterns)</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="http://shiyousan.com/post/635648886502897428" target="_blank">http://shiyousan.com/post/635648886502897428</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#R和C表示的是什么意思？">R和C表示的是什么意思？</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#示例详解说明{R:N}和{C:N}">示例详解说明{R:N}和{C:N}</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,235 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>MPEG中的三种图像类型（I帧、P帧、B帧）及码流组成_comonly.cn</title>
+<meta name="keywords" content="MPEG中的三种图像类型（I帧、P帧、B帧）及码流组成" />
+<meta name="description" content="我们已经提到，MPEG是基于DCT、运动补偿和Huffman编码算法的，由此，MPEG在压缩中使用了帧内压缩和帧间压缩两种方式。为了在编码中实现最大的压缩比，MPEG使用三种类型的图像，即I帧，P帧和B帧。
+
+I帧(Intra-Frame)是帧内压缩，不使用运动补偿，提供中等的压缩比。由于I帧不依赖于其他帧，所以是随机存取的入点，同时是解码中的基准帧。
+
+P帧(Predicated-Frame)根据前面的I帧或P帧进行预测，使用运动补偿算法进行压缩，因而压缩比要比I帧高，数据量平均达到I帧的 1/" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">MPEG中的三种图像类型（I帧、P帧、B帧）及码流组成</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">muojie</li>
+          <li class="lmname"><a href="https://blog.csdn.net/muojie/article/details/6077890" target="_blank">https://blog.csdn.net/muojie/article/details/6077890</a></li>
+          <li class="timer">2020-10-05</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	程序简版
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>我们已经提到，MPEG是基于DCT、运动补偿和Huffman编码算法的，由此，MPEG在压缩中使用了帧内压缩和帧间压缩两种方式。为了在编码中实现最大的压缩比，MPEG使用三种类型的图像，即I帧，P帧和B帧。
+
+I帧(Intra-Frame)是帧内压缩，不使用运动补偿，提供中等的压缩比。由于I帧不依赖于其他帧，所以是随机存取的入点，同时是解码中的基准帧。
+
+P帧(Predicated-Frame)根据前面的I帧或P帧进行预测，使用运动补偿算法进行压缩，因而压缩比要比I帧高，数据量平均达到I帧的 1/</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 我们已经提到，MPEG是基于DCT、运动补偿和Huffman编码算法的，由此，MPEG在压缩中使用了帧内压缩和帧间压缩两种方式。为了在编码中实现最大的压缩比，MPEG使用三种类型的图像，即I帧，P帧和B帧。<br />
+<br />
+I帧(Intra-Frame)是帧内压缩，不使用运动补偿，提供中等的压缩比。由于I帧不依赖于其他帧，所以是随机存取的入点，同时是解码中的基准帧。<br />
+<br />
+P帧(Predicated-Frame)根据前面的I帧或P帧进行预测，使用运动补偿算法进行压缩，因而压缩比要比I帧高，数据量平均达到I帧的 1/3左右。P帧是对前后的B帧和后继的P帧进行解码的基准帧。P帧本身是有误差的，如果P帧的前一个基准帧也是P帧，就会造成误差传播。<br />
+<br />
+B帧(Bidirectinal-Frame)是基于内插重建的帧，它基于前后的两个I、P帧或P、P帧，它使用双向预测，数据量平均可以达到I帧的 1/9左右。B帧本身不作为基准，因此可以在提供更高的压缩比的情况下不传播误差。 需要指出的是，尽管我们使用帧（Frame）这个词，但是MPEG2本身没有规定进行数字图像压缩时必须使用帧作为单位，对于隔行的视频图像，可以使用场 （Field）作为单位。<br />
+<br />
+一个GOP由一串IBP帧组成，起始为I帧。GOP的长度是一个I帧到下一个I 帧的间隔&nbsp;，一般用N表示，图１中的N=9。这个长度是可变的，长GOP可以提供高的压缩比，但是会造成随机存取的延迟（必须等到下一个I帧）和误差的积累（P帧的误差传播）。&nbsp;一般是一秒内有两个I帧，用来作为随机存取的入口。<br />
+<br />
+图1 GOP中的图像序列<br />
+<br />
+在MPEG2中也没有规定GOP的结构，帧重复方式可以是IP，IB，IBP，IBBP，甚至全部是I帧。基准帧的重复频率用M表示，图１中的M=3。不同的帧重复频率提供不同的输出码率,同时影响存取延迟。</div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1830.html">浮点数在计算机中存储方式</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1832.html">项目如何进行压力测试？</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/muojie/article/details/6077890" target="_blank">https://blog.csdn.net/muojie/article/details/6077890</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

@@ -1,0 +1,1580 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>vue项目搭建通过vue-cli包括组件路由的使用实现基本的前端项目全流程_comonly.cn</title>
+<meta name="keywords" content="vue项目搭建通过vue-cli包括组件路由的使用实现基本的前端项目全流程" />
+<meta name="description" content="github上项目地址：https://github.com/comonly/javaweb_blog/tree/master/blog_diverse_frontend
+
+
+	
+
+
+	1. 项目通过：vue init webpack project-name 自动构建。
+2. 使用 axios 异步请求数据。
+3. 样式使用 ElementUI。
+
+
+	
+
+
+	利用vue-cli来搭建vue项目——通过npm创建一个vue项目：http://comonly.cn/p/1030" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">vue项目搭建通过vue-cli包括组件路由的使用实现基本的前端项目全流程</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2019-10-27</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>github上项目地址：https://github.com/comonly/javaweb_blog/tree/master/blog_diverse_frontend
+
+
+	
+
+
+	1. 项目通过：vue init webpack project-name 自动构建。
+2. 使用 axios 异步请求数据。
+3. 样式使用 ElementUI。
+
+
+	
+
+
+	利用vue-cli来搭建vue项目——通过npm创建一个vue项目：http://comonly.cn/p/1030</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	github上项目地址：<a href="https://github.com/comonly/javaweb_blog/tree/master/blog_diverse_frontend" target="_blank">https://github.com/comonly/javaweb_blog/tree/master/blog_diverse_frontend</a>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	1. 项目通过：vue init webpack project-name 自动构建。<br />
+2. 使用 axios 异步请求数据。<br />
+3. 样式使用 ElementUI。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	利用vue-cli来搭建vue项目——通过npm创建一个vue项目：<a href="http://comonly.cn/p/1030.html" target="_blank">http://comonly.cn/p/1030.html</a> 
+</p>
+<p>
+	<br />
+</p>
+<p>
+	src目录main.js文件中配置需要用到的工具。
+</p>
+<p>
+	同时要在 package.json 文件中添加需要的 模块 。
+</p>
+<p>
+	"dependencies": {<br />
+"vue": "^2.5.2",<br />
+"vue-router": "^3.0.1",<br />
+"element-ui": "^2.4.8",<br />
+"axios": "^0.18.0",<br />
+"vue-axios": "^2.1.4"<br />
+}
+</p>
+<p>
+	<br />
+</p>
+<p>
+	接着在src/components目录下创建组件。
+</p>
+<p>
+	然后在src/router目录下添加路由。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/1128.html">maven项目spring-mvc创建web后端返回json格式数据项目创建全流程</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/1130.html">电脑配置设置相关 工具 插件 软件使用</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    <h2>文章评论</h2>	
+		  	
+				<ul>
+					<div class="gbko">
+						<span id="src目录main.js文件">
+							<h2 style="display:inline;color:#5BC648;">src目录main.js文件</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-10-27&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><div style="color:#D4D4D4;background-color:#1E1E1E;font-family:Consolas, &quot;font-size:16px;">
+	<div>
+		<span style="color:#6a9955;">//&nbsp;The&nbsp;Vue&nbsp;build&nbsp;version&nbsp;to&nbsp;load&nbsp;with&nbsp;the&nbsp;`import`&nbsp;command</span> 
+	</div>
+	<div>
+		<span style="color:#6a9955;">//&nbsp;(runtime-only&nbsp;or&nbsp;standalone)&nbsp;has&nbsp;been&nbsp;set&nbsp;in&nbsp;webpack.base.conf&nbsp;with&nbsp;an&nbsp;alias.</span> 
+	</div>
+	<div>
+		<span style="color:#c586c0;">import</span>&nbsp;<span style="color:#9cdcfe;">Vue</span>&nbsp;<span style="color:#c586c0;">from</span>&nbsp;<span style="color:#ce9178;">'vue'</span> 
+	</div>
+	<div>
+		<span style="color:#c586c0;">import</span>&nbsp;<span style="color:#9cdcfe;">App</span>&nbsp;<span style="color:#c586c0;">from</span>&nbsp;<span style="color:#ce9178;">'./App'</span> 
+	</div>
+	<div>
+		<span style="color:#c586c0;">import</span>&nbsp;<span style="color:#9cdcfe;">router</span>&nbsp;<span style="color:#c586c0;">from</span>&nbsp;<span style="color:#ce9178;">'./router'</span> 
+	</div>
+	<div>
+		<span style="color:#c586c0;">import</span>&nbsp;<span style="color:#9cdcfe;">axios</span>&nbsp;<span style="color:#c586c0;">from</span>&nbsp;<span style="color:#ce9178;">'axios'</span> 
+	</div>
+	<div>
+		<span style="color:#c586c0;">import</span>&nbsp;<span style="color:#9cdcfe;">VueAxios</span>&nbsp;<span style="color:#c586c0;">from</span>&nbsp;<span style="color:#ce9178;">'vue-axios'</span> 
+	</div>
+	<div>
+		<span style="color:#c586c0;">import</span>&nbsp;<span style="color:#9cdcfe;">ElementUI</span>&nbsp;<span style="color:#c586c0;">from</span>&nbsp;<span style="color:#ce9178;">'element-ui'</span> 
+	</div>
+	<div>
+		<span style="color:#c586c0;">import</span>&nbsp;<span style="color:#ce9178;">'element-ui/lib/theme-chalk/index.css'</span>;
+	</div>
+<br />
+	<div>
+		<span style="color:#9cdcfe;">Vue</span>.<span style="color:#9cdcfe;">config</span>.<span style="color:#9cdcfe;">productionTip</span>&nbsp;=&nbsp;<span style="color:#569cd6;">false</span> 
+	</div>
+<br />
+	<div>
+		<span style="color:#6a9955;">//elm&nbsp;ul组件</span> 
+	</div>
+	<div>
+		<span style="color:#9cdcfe;">Vue</span>.<span style="color:#dcdcaa;">use</span>(<span style="color:#9cdcfe;">ElementUI</span>);
+	</div>
+<br />
+	<div>
+		<span style="color:#6a9955;">//全局引入axios</span> 
+	</div>
+	<div>
+		<span style="color:#6a9955;">//需要npm两个包axios和vue-axios</span> 
+	</div>
+	<div>
+		<span style="color:#9cdcfe;">Vue</span>.<span style="color:#dcdcaa;">use</span>(<span style="color:#9cdcfe;">VueAxios</span>,<span style="color:#9cdcfe;">axios</span>);
+	</div>
+	<div>
+		<span style="color:#6a9955;">//axios相关配置&nbsp;//更多配置待处理</span> 
+	</div>
+	<div>
+		<span style="color:#9cdcfe;">axios</span>.<span style="color:#9cdcfe;">defaults</span>.<span style="color:#9cdcfe;">baseURL</span>&nbsp;=&nbsp;<span style="color:#ce9178;">'http://localhost:8080/blog_spring_backend/'</span>;
+	</div>
+<br />
+	<div>
+		<span style="color:#6a9955;">/*&nbsp;eslint-disable&nbsp;no-new&nbsp;*/</span> 
+	</div>
+	<div>
+		<span style="color:#569cd6;">new</span>&nbsp;<span style="color:#4ec9b0;">Vue</span>({
+	</div>
+	<div>
+		&nbsp;&nbsp;<span style="color:#9cdcfe;">el:</span>&nbsp;<span style="color:#ce9178;">'#app'</span>,
+	</div>
+	<div>
+		&nbsp;&nbsp;<span style="color:#9cdcfe;">router</span>,
+	</div>
+	<div>
+		&nbsp;&nbsp;<span style="color:#9cdcfe;">components:</span>&nbsp;{&nbsp;<span style="color:#9cdcfe;">App</span>&nbsp;},
+	</div>
+	<div>
+		&nbsp;&nbsp;<span style="color:#9cdcfe;">template:</span>&nbsp;<span style="color:#ce9178;">'&lt;App/&gt;'</span> 
+	</div>
+	<div>
+		})
+	</div>
+<br />
+</div></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="组件中嵌套组件">
+							<h2 style="display:inline;color:#5BC648;">组件中嵌套组件</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-10-27&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><div>
+	<div>
+		&lt;template&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&lt;div&nbsp;class="hello"&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&lt;el-link&nbsp;type="primary"&nbsp;href="/#/detail/PassageModify"&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;el-button&nbsp;&nbsp;icon="el-icon-edit"&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;添加新文章
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/el-button&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&lt;/el-link&gt;
+	</div>
+<br />
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;MainLeft&gt;&lt;/MainLeft&gt;</span>
+	</div>
+<br />
+	<div>
+		&nbsp;&nbsp;&lt;/div&gt;
+	</div>
+	<div>
+		&lt;/template&gt;
+	</div>
+<br />
+	<div>
+		&lt;script&gt;
+	</div>
+	<div>
+		<span style="color:#E53333;">import&nbsp;MainLeft&nbsp;from&nbsp;'@/components/index/MainLeft'</span>
+	</div>
+	<div>
+		export&nbsp;default&nbsp;{
+	</div>
+	<div>
+		&nbsp;&nbsp;name:&nbsp;'HelloWorld',
+	</div>
+	<div>
+		&nbsp;&nbsp;data&nbsp;()&nbsp;{
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;{
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;msg:&nbsp;'Welcome&nbsp;to&nbsp;Your&nbsp;Vue.js&nbsp;App'
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;}
+	</div>
+	<div>
+		&nbsp;&nbsp;},
+	</div>
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;components:&nbsp;{</span>
+	</div>
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;&nbsp;&nbsp;MainLeft</span>
+	</div>
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;},</span>
+	</div>
+	<div>
+		&nbsp;&nbsp;methods:&nbsp;{
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;toDetail&nbsp;()&nbsp;{
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.$router.push({name:&nbsp;'PassageDetail',&nbsp;params:&nbsp;{&nbsp;val:&nbsp;'row'&nbsp;}})
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;}
+	</div>
+	<div>
+		&nbsp;&nbsp;}
+	</div>
+	<div>
+		}
+	</div>
+	<div>
+		&lt;/script&gt;
+	</div>
+<br />
+	<div>
+		&lt;!--&nbsp;Add&nbsp;"scoped"&nbsp;attribute&nbsp;to&nbsp;limit&nbsp;CSS&nbsp;to&nbsp;this&nbsp;component&nbsp;only&nbsp;--&gt;
+	</div>
+	<div>
+		&lt;style&nbsp;scoped&gt;
+	</div>
+	<div>
+		a&nbsp;{
+	</div>
+	<div>
+		&nbsp;&nbsp;color:&nbsp;#42b983;
+	</div>
+	<div>
+		}
+	</div>
+	<div>
+		&lt;/style&gt;
+	</div>
+<br />
+</div></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="通过a标签跳转及axio请求数据">
+							<h2 style="display:inline;color:#5BC648;">通过a标签跳转及axio请求数据</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-10-27&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><div>
+	<div>
+		&lt;template&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&lt;el-table
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;:data="tableData"
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;stripe
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;style="width:&nbsp;100%"&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&lt;el-table-column
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;prop="pnumber"
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label="编号"
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width="180"&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;template&nbsp;slot-scope="scope"&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#E53333;">&lt;el-link&nbsp;type="primary"&nbsp;:href="'/#/detail/PassageDetail?id='&nbsp;+&nbsp;scope.row.pnumber"&gt;查看&lt;i&nbsp;class="el-icon-view&nbsp;el-icon--right"&gt;</span>&lt;/i&gt;&nbsp;&lt;/el-link&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/template&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&lt;/el-table-column&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&lt;el-table-column
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;prop="ptitle"
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label="标题"&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&lt;/el-table-column&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&lt;el-table-column
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;prop="ptime"
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label="日期"
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width="180"&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&lt;/el-table-column&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&lt;el-table-column
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;prop="plabel"
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label="关键字"
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width="180"&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&lt;/el-table-column&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&lt;el-table-column
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;prop="pcoming"
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label="来源"&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&lt;/el-table-column&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&lt;/el-table&gt;
+	</div>
+	<div>
+		&lt;/template&gt;
+	</div>
+<br />
+	<div>
+		&lt;script&gt;
+	</div>
+	<div>
+		export&nbsp;default&nbsp;{
+	</div>
+	<div>
+		&nbsp;&nbsp;name:&nbsp;'MainLeft',
+	</div>
+	<div>
+		&nbsp;&nbsp;mounted(){
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;this.getData();&nbsp;//获取数据前先取数据
+	</div>
+	<div>
+		&nbsp;&nbsp;},
+	</div>
+	<div>
+		&nbsp;&nbsp;data&nbsp;()&nbsp;{
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;{
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tableData:&nbsp;[]
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;}
+	</div>
+	<div>
+		&nbsp;&nbsp;},
+	</div>
+	<div>
+		&nbsp;&nbsp;methods:&nbsp;{
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;getData(){
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;_this=this;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//需要处理异步请求的问题
+	</div>
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.axios.get('passage/passIndex')</span>
+	</div>
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.then(function&nbsp;(response)&nbsp;{</span>
+	</div>
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//将response获得的数据进行处理</span>
+	</div>
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//将获取到的数据以数组形式传递出去</span>
+	</div>
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;dataList=response.data;</span>
+	</div>
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_this.tableData=dataList;</span>
+	</div>
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_this.$message({</span>
+	</div>
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;message:&nbsp;'查询成功',</span>
+	</div>
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type:&nbsp;'success'</span>
+	</div>
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})</span>
+	</div>
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})</span>
+	</div>
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.catch(function&nbsp;(error)&nbsp;{</span>
+	</div>
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log(error);</span>
+	</div>
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert("网络连接错误,无法获取服务器数据，请检查后刷新页面");</span>
+	</div>
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})</span>
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;
+	</div>
+	<div>
+		&nbsp;&nbsp;}
+	</div>
+	<div>
+		}
+	</div>
+	<div>
+		&lt;/script&gt;
+	</div>
+<br />
+	<div>
+		&lt;!--&nbsp;Add&nbsp;"scoped"&nbsp;attribute&nbsp;to&nbsp;limit&nbsp;CSS&nbsp;to&nbsp;this&nbsp;component&nbsp;only&nbsp;--&gt;
+	</div>
+	<div>
+		&lt;style&nbsp;scoped&gt;
+	</div>
+	<div>
+		a&nbsp;{
+	</div>
+	<div>
+		&nbsp;&nbsp;color:&nbsp;#42b983;
+	</div>
+	<div>
+		}
+	</div>
+	<div>
+		&lt;/style&gt;
+	</div>
+<br />
+</div></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="通过路由跳转">
+							<h2 style="display:inline;color:#5BC648;">通过路由跳转</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-10-27&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><div>
+	<div>
+		&lt;template&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&lt;div&gt;&nbsp;&nbsp;&nbsp;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&lt;el-button&nbsp;type="primary"&nbsp;@click="deletePassage()"&gt;删除&lt;/el-button&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&amp;nbsp;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&lt;el-link&nbsp;type="primary"&nbsp;:href="'/#/detail/PassageModify?id='&nbsp;+&nbsp;msg.pnumber"&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;el-button&nbsp;type="warning"&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;修改&lt;i&nbsp;class="el-icon-view&nbsp;el-icon--right"&gt;&lt;/i&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/el-button&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&lt;/el-link&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;{{&nbsp;msg.pnumber&nbsp;}}&lt;/p&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;{{&nbsp;msg.ptitle&nbsp;}}&lt;/p&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;{{&nbsp;msg.ptime&nbsp;}}&lt;/p&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;{{&nbsp;msg.plabel&nbsp;}}&lt;/p&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&nbsp;v-html="msg.pcount"&gt;&lt;/p&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;{{&nbsp;msg.pcoming&nbsp;}}&lt;/p&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;{{&nbsp;msg.pcomingUrl&nbsp;}}&lt;/p&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;{{&nbsp;msg.pimage&nbsp;}}&lt;/p&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;{{&nbsp;msg.pkind&nbsp;}}&lt;/p&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;{{&nbsp;msg.pbelong&nbsp;}}&lt;/p&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;{{&nbsp;msg.pdescribe&nbsp;}}&lt;/p&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&lt;/div&gt;
+	</div>
+	<div>
+		&lt;/template&gt;
+	</div>
+<br />
+	<div>
+		&lt;script&gt;
+	</div>
+	<div>
+		export&nbsp;default&nbsp;{
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;
+	</div>
+	<div>
+		&nbsp;&nbsp;name:&nbsp;'PassageDetail',
+	</div>
+	<div>
+		&nbsp;&nbsp;mounted(){
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;this.getData();&nbsp;//获取数据前先取数据
+	</div>
+	<div>
+		&nbsp;&nbsp;},
+	</div>
+	<div>
+		&nbsp;&nbsp;data&nbsp;()&nbsp;{
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;{
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;msg:&nbsp;{}
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;}
+	</div>
+	<div>
+		&nbsp;&nbsp;},
+	</div>
+	<div>
+		&nbsp;&nbsp;methods:&nbsp;{
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;deletePassage(){
+	</div>
+<br />
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.$confirm('确认删除？')
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.then(_&nbsp;=&gt;&nbsp;{
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.sendDelete();
+	</div>
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.$router.replace({path:&nbsp;'/'});</span>
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.catch(_&nbsp;=&gt;&nbsp;{});
+	</div>
+<br />
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;},
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;sendDelete(){
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;_this=this;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//需要处理异步请求的问题
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.axios.get('/passage/passDelete?id='&nbsp;+&nbsp;this.msg.pnumber)
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.then(function&nbsp;(response)&nbsp;{
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//将response获得的数据进行处理
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//将获取到的数据以数组形式传递出去
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;dataList=response.data;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_this.msg=dataList;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_this.$message({
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;message:&nbsp;'删除成功',
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type:&nbsp;'success'
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
+	</div>
+<br />
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.catch(function&nbsp;(error)&nbsp;{
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log(error);
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert("网络连接错误,无法获取服务器数据，请检查后刷新页面");
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;},
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;getData(){
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;_this=this;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//需要处理异步请求的问题
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.axios.get('/passage/passDetail?id='&nbsp;+&nbsp;this.$route.query.id)
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.then(function&nbsp;(response)&nbsp;{
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//将response获得的数据进行处理
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//将获取到的数据以数组形式传递出去
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;dataList=response.data;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_this.msg=dataList;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_this.$message({
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;message:&nbsp;'查询成功',
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type:&nbsp;'success'
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
+	</div>
+<br />
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.catch(function&nbsp;(error)&nbsp;{
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log(error);
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert("网络连接错误,无法获取服务器数据，请检查后刷新页面");
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;}
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	</div>
+	<div>
+		&nbsp;&nbsp;}
+	</div>
+	<div>
+		}
+	</div>
+	<div>
+		&lt;/script&gt;
+	</div>
+</div></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="post方式请求">
+							<h2 style="display:inline;color:#5BC648;">post方式请求</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-10-27&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><div>
+	<div>
+		&lt;template&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&lt;div&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&lt;el-button&nbsp;type="primary"&nbsp;@click="submitPassage()"&gt;提交&lt;i&nbsp;class="el-icon-view&nbsp;el-icon--right"&gt;&lt;/i&gt;&lt;/el-button&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;
+	</div>
+	<div>
+		&lt;div&nbsp;style="margin:&nbsp;20px;"&gt;&lt;/div&gt;
+	</div>
+	<div>
+		&lt;el-form&nbsp;:label-position="labelPosition"&nbsp;label-width="80px"&nbsp;:model="msg"&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&lt;el-form-item&nbsp;label="编号"&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&lt;el-input&nbsp;v-model="msg.pnumber"&nbsp;:disabled="true"&gt;&lt;/el-input&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&lt;/el-form-item&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&lt;el-form-item&nbsp;label="标题"&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&lt;el-input&nbsp;v-model="msg.ptitle"&gt;&lt;/el-input&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&lt;/el-form-item&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&lt;el-form-item&nbsp;label="时间"&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&lt;el-input&nbsp;v-model="msg.ptime"&nbsp;:disabled="true"&gt;&lt;/el-input&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&lt;/el-form-item&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&lt;el-form-item&nbsp;label="标签"&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&lt;el-input&nbsp;v-model="msg.plabel"&gt;&lt;/el-input&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&lt;/el-form-item&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&lt;el-form-item&nbsp;label="内容"&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&lt;el-input&nbsp;v-model="msg.pcount"&gt;&lt;/el-input&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&lt;/el-form-item&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&lt;el-form-item&nbsp;label="来源"&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&lt;el-input&nbsp;v-model="msg.pcoming"&gt;&lt;/el-input&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&lt;/el-form-item&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&lt;el-form-item&nbsp;label="来源地址"&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&lt;el-input&nbsp;v-model="msg.pcomingUrl"&gt;&lt;/el-input&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&lt;/el-form-item&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&lt;el-form-item&nbsp;label="描述"&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&lt;el-input&nbsp;v-model="msg.pdescribe"&gt;&lt;/el-input&gt;
+	</div>
+	<div>
+		&nbsp;&nbsp;&lt;/el-form-item&gt;
+	</div>
+	<div>
+		&lt;/el-form&gt;
+	</div>
+<br />
+	<div>
+		&nbsp;&nbsp;&lt;/div&gt;
+	</div>
+	<div>
+		&lt;/template&gt;
+	</div>
+<br />
+	<div>
+		&lt;script&gt;
+	</div>
+	<div>
+		export&nbsp;default&nbsp;{
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;
+	</div>
+	<div>
+		&nbsp;&nbsp;name:&nbsp;'PassageDetail',
+	</div>
+	<div>
+		&nbsp;&nbsp;mounted(){
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;if(!(this.$route.query.id&nbsp;&gt;&nbsp;0))return;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;this.getData();&nbsp;//获取数据前先取数据
+	</div>
+	<div>
+		&nbsp;&nbsp;},
+	</div>
+	<div>
+		&nbsp;&nbsp;data&nbsp;()&nbsp;{
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;{
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;labelPosition:&nbsp;'right',
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;msg:&nbsp;{}
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;}
+	</div>
+	<div>
+		&nbsp;&nbsp;},
+	</div>
+	<div>
+		&nbsp;&nbsp;methods:&nbsp;{
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;modifyPassage(){
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;_this=this;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//需要处理异步请求的问题
+	</div>
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.axios({</span>
+	</div>
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;method:'post',</span>
+	</div>
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;url:'/passage/passChangeSubmit',</span>
+	</div>
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data:_this.msg,</span>
+	</div>
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})</span>
+	</div>
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.then(function&nbsp;(response)&nbsp;{</span>
+	</div>
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//将response获得的数据进行处理</span>
+	</div>
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//将获取到的数据以数组形式传递出去</span>
+	</div>
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;dataList=response.data;</span>
+	</div>
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_this.msg=dataList;</span>
+	</div>
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_this.$message({</span>
+	</div>
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;message:&nbsp;'修改成功',</span>
+	</div>
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type:&nbsp;'success'</span>
+	</div>
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});</span>
+	</div>
+<br />
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})</span>
+	</div>
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.catch(function&nbsp;(error)&nbsp;{</span>
+	</div>
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log(error);</span>
+	</div>
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert("网络连接错误,无法获取服务器数据，请检查后刷新页面");</span>
+	</div>
+	<div>
+		<span style="color:#E53333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});</span>
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;},
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;addPassage(){
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;_this=this;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//需要处理异步请求的问题
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.axios({
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;method:'post',
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;url:'/passage/passAddSubmit',
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data:_this.msg,
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.then(function&nbsp;(response)&nbsp;{
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//将response获得的数据进行处理
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//将获取到的数据以数组形式传递出去
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;dataList=response.data;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_this.msg=dataList;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_this.$message({
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;message:&nbsp;'添加成功',
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type:&nbsp;'success'
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
+	</div>
+<br />
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.catch(function&nbsp;(error)&nbsp;{
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log(error);
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert("网络连接错误,无法获取服务器数据，请检查后刷新页面");
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;},
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;submitPassage(){
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(this.msg.pnumber)
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.modifyPassage();
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.getData();
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else{
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.addPassage();
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.$router.replace({path:&nbsp;'/'});
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;},
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;getData(){
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;_this=this;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//需要处理异步请求的问题
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.axios.get('/passage/passDetail?id='&nbsp;+&nbsp;this.$route.query.id)
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.then(function&nbsp;(response)&nbsp;{
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//将response获得的数据进行处理
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//将获取到的数据以数组形式传递出去
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;dataList=response.data;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_this.msg=dataList;
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_this.$message({
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;message:&nbsp;'查询成功',
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type:&nbsp;'success'
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
+	</div>
+<br />
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.catch(function&nbsp;(error)&nbsp;{
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log(error);
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert("网络连接错误,无法获取服务器数据，请检查后刷新页面");
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;}
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	</div>
+	<div>
+		&nbsp;&nbsp;}
+	</div>
+	<div>
+		}
+	</div>
+	<div>
+		&lt;/script&gt;
+	</div>
+</div></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="router/index.js中路由配置">
+							<h2 style="display:inline;color:#5BC648;">router/index.js中路由配置</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-10-27&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><p>
+	<br />
+</p>
+<div>
+	import&nbsp;Vue&nbsp;from&nbsp;'vue'
+</div>
+<div>
+	import&nbsp;Router&nbsp;from&nbsp;'vue-router'
+</div>
+<div>
+	//导入其他js文件的声明
+</div>
+<div>
+	import&nbsp;passage&nbsp;from&nbsp;'./passage.js'
+</div>
+<br />
+<div>
+	Vue.use(Router)
+</div>
+<br />
+<div>
+	//passage[0].children=passage[0].children;//.concat(addDev,manageDev,repairDev,scrapDev,repaiInfor);
+</div>
+<p>
+	<br />
+</p>
+<p>
+	<span style="color:#E53333;">//通过concat连接passage.js文件，这样可以把不同模块的js放在不同文件中定义。</span>
+</p>
+<div>
+	var&nbsp;routerInfo&nbsp;=&nbsp;[].concat(passage)
+</div>
+<br />
+<div>
+	export&nbsp;default&nbsp;new&nbsp;Router({
+</div>
+<div>
+	&nbsp;&nbsp;routes:&nbsp;[].concat(routerInfo)
+</div>
+<div>
+	})
+</div>
+<p>
+	<br />
+</p></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+				<ul>
+					<div class="gbko">
+						<span id="单个模块中的路由定义，需要在index.js中引入使用">
+							<h2 style="display:inline;color:#5BC648;">单个模块中的路由定义，需要在index.js中引入使用</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;2019-10-27&nbsp;&nbsp;&nbsp;&nbsp;
+								
+						</span><!-- 标题，时间 -->
+						
+						<br/>
+						<span><div>
+	<br />
+	<div>
+		import&nbsp;HelloWorld&nbsp;from&nbsp;'@/components/index/HelloWorld'
+	</div>
+	<div>
+		import&nbsp;PassageDetail&nbsp;from&nbsp;'@/components/detail/PassageDetail'
+	</div>
+	<div>
+		import&nbsp;PassageModify&nbsp;from&nbsp;'@/components/detail/PassageModify'
+	</div>
+<br />
+	<div>
+		export&nbsp;default([
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;{
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path:&nbsp;'/',
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name:&nbsp;'HelloWorld',
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;component:&nbsp;HelloWorld
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;},
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;{
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path:&nbsp;'/detail/PassageDetail',
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name:&nbsp;'PassageDetail',
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;component:&nbsp;PassageDetail
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;},
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;{
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path:&nbsp;'/detail/PassageModify',
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name:&nbsp;'PassageModify',
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;component:&nbsp;PassageModify
+	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;}
+	</div>
+	<div>
+		&nbsp;&nbsp;]
+	</div>
+	<div>
+		)
+	</div>
+<br />
+</div></span><!-- 内容 -->
+					</div>
+	      		</ul>
+			
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		评论列表
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#src目录main.js文件">src目录main.js文件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#组件中嵌套组件">组件中嵌套组件</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#通过a标签跳转及axio请求数据">通过a标签跳转及axio请求数据</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#通过路由跳转">通过路由跳转</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#post方式请求">post方式请求</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#router/index.js中路由配置">router/index.js中路由配置</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#单个模块中的路由定义，需要在index.js中引入使用">单个模块中的路由定义，需要在index.js中引入使用</a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>
