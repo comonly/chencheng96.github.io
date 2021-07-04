@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta content="comonly.cn对外接口临时页面，新页面路径为：i h a v e d r m">
+    <title>临时页面——comonly.cn</title>
+</head>
+
+<body>
+        <div>
+            你没有相关页面访问权限，请联系管理员获取相关权限~, 还有 <span id = "time" style="color:#F00">6</span> 秒返回首页，
+            <a href="/">立即返回首页</a>
+        </div>
+        <div style="height: 500px;"></div>
+
+</body>
+
+<script type="text/javascript">
+
+    var int=self.setInterval("clock()",1000);
+    var time = 6;
+    function clock(){
+        time = time - 1;
+        x = document.getElementById("time");  // 找到元素
+        x.innerHTML = time;    // 改变内容
+
+        if(time==0){
+            window.location.href="/"; 
+        }
+
+    }
+    
+</script>
+
+</html>
