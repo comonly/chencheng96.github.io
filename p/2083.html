@@ -8,42 +8,18 @@
 <!doctype html>
 <html>
 <head>
-<title>华能水电（600025）和深圳能源（000027）-- 同板块的突破问题_comonly.cn</title>
-<meta name="keywords" content="华能水电（600025）和深圳能源（000027）-- 同板块的突破问题" />
-<meta name="description" content="声明：文中提到的个股，仅仅是案例所用，绝无推荐的意思，本人当前并不持有，请勿据此操作。
+<title>Uncaught SyntaxError: Cannot use import statement outside a module_comonly.cn</title>
+<meta name="keywords" content="Uncaught SyntaxError: Cannot use import statement outside a module" />
+<meta name="description" content="js文件导入其他js 的方法
 
 
-	20210310 电力板块部分个股有周线级别的突破：
+	本地html文件中的script标签引入ES6的模块，直接在浏览器中打开该html文件，发现报错了：Uncaught SyntaxError: Cannot use import statement outside a module
 
 
-	 
+	里报错的原因是用了es6的语法， 浏览器默认将它作为js解析会出现问题，需要将它作为模块导入，script标签默认type="text/javascript"，需要改为type="module"
 
 
-	
-
-
-	同板块的华能水电没有突破，但是曲线很紧凑，如果买入至少赔率不会太大，而板块效应很有可能让股价有较大的提升。
-
-
-	 
-
-
-	
-
-
-	再来看看15天后两个个股的走势图：
-
-
-	  
-
-
-	
-
-
-	确实突破了，但是最早突破的领头羊上涨的幅度更大。
-
-
-	如何在赔率和首先启动的" />
+	在浏览器中打开" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="/css/css_yangqingqing.css" rel="stylesheet">
 </head>
@@ -52,12 +28,12 @@
  <div class="blank"></div>
  <div class="infosbox">
     <div class="newsview">
-      <h3 class="news_title">华能水电（600025）和深圳能源（000027）-- 同板块的突破问题</h3>
+      <h3 class="news_title">Uncaught SyntaxError: Cannot use import statement outside a module</h3>
       <div class="bloginfo">
         <ul>
-          <li class="author"></li>
-          <li class="lmname"><a href="" target="_blank"></a></li>
-          <li class="timer">2021-03-27</li>
+          <li class="author">码飞_CC</li>
+          <li class="lmname"><a href="https://blog.csdn.net/cc18868876837/article/details/113915176" target="_blank">https://blog.csdn.net/cc18868876837/article/details/113915176</a></li>
+          <li class="timer">2021-08-05</li>
           	
          
           
@@ -65,7 +41,7 @@
 		  <li class="view">
  
 
-	实盘记录
+	web html css js 插件
  	  	
 		  </li>		  
 		  <li class="view">公开</li>
@@ -79,89 +55,38 @@
       </div>
       
       
-        <div class="news_about"><strong>简介</strong>声明：文中提到的个股，仅仅是案例所用，绝无推荐的意思，本人当前并不持有，请勿据此操作。
+        <div class="news_about"><strong>简介</strong>js文件导入其他js 的方法
 
 
-	20210310 电力板块部分个股有周线级别的突破：
+	本地html文件中的script标签引入ES6的模块，直接在浏览器中打开该html文件，发现报错了：Uncaught SyntaxError: Cannot use import statement outside a module
 
 
-	 
+	里报错的原因是用了es6的语法， 浏览器默认将它作为js解析会出现问题，需要将它作为模块导入，script标签默认type="text/javascript"，需要改为type="module"
 
 
-	
-
-
-	同板块的华能水电没有突破，但是曲线很紧凑，如果买入至少赔率不会太大，而板块效应很有可能让股价有较大的提升。
-
-
-	 
-
-
-	
-
-
-	再来看看15天后两个个股的走势图：
-
-
-	  
-
-
-	
-
-
-	确实突破了，但是最早突破的领头羊上涨的幅度更大。
-
-
-	如何在赔率和首先启动的</div>
+	在浏览器中打开</div>
       
       <!-- <div class="news_con"> -->
       <div class="realContent_kindeditor"> <p>
-	<strong><span style="color:#E53333;">声明：文中提到的个股，仅仅是案例所用，绝无推荐的意思，本人当前并不持有，请勿据此操作。</span></strong><span style="color:#E53333;"></span>
+	js文件导入其他js 的方法
 </p>
 <p>
-	20210310 电力板块部分个股有周线级别的突破：
+	本地html文件中的script标签引入ES6的模块，直接在浏览器中打开该html文件，发现报错了：Uncaught SyntaxError: Cannot use import statement outside a module
 </p>
 <p>
-	<img src="/file/image/l/20210327142741_clipboard.png" title="img" alt="img" /> 
+	里报错的原因是用了es6的语法， 浏览器默认将它作为js解析会出现问题，需要将它作为模块导入，script标签默认type="text/javascript"，需要改为type="module"
 </p>
 <p>
-	<br />
+	在浏览器中打开，发现又报错了：Access to script at 'file:///E:/**********/indexes.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: http, data, chrome, chrome-extension, chrome-untrusted, https.<br />
+<br />
+从错误提示看，脚本是被跨域策略给拦截了，跨域请求只支持这些协议：http, data, chrome, chrome-extension, chrome-untrusted, https.，而我们的协议是file，这里我们需要本地起一个服务器来作为资源的提供方，简单的方式是安装VSCode的一个扩展Live Server<br />
+<br />
+该插件安装完成后，在index.html页面右键选择Open with Live Server
 </p>
 <p>
-	同板块的华能水电没有突破，但是曲线很紧凑，如果买入至少赔率不会太大，而板块效应很有可能让股价有较大的提升。
+	然后就可以成功运行了
 </p>
 <p>
-	<img src="/file/image/l/20210327142928_clipboard.png" title="img" alt="img" /> 
-</p>
-<p>
-	<br />
-</p>
-<p>
-	再来看看15天后两个个股的走势图：
-</p>
-<p>
-	<img src="/file/image/l/20210327143103_clipboard.png" title="img" alt="img" /> <img src="/file/image/l/20210327143118_clipboard.png" title="img" alt="img" /> 
-</p>
-<p>
-	<br />
-</p>
-<p>
-	确实突破了，但是最早突破的领头羊上涨的幅度更大。
-</p>
-<p>
-	如何在赔率和首先启动的热门股上进行选择呢？10日线附近如何做出确定？
-</p>
-<p>
-	<br />
-</p>
-<p>
-	<img src="/file/image/l/20210327143542_clipboard.png" title="img" alt="img" /> 
-</p>
-<p>
-	然后看一下板块的表现：
-</p>
-<p>
-	<img src="/file/image/l/20210327143722_clipboard.png" title="img" alt="img" /> 
 </p></div>
       <!-- 
       <p class="diggit">
@@ -175,19 +100,21 @@
       
         
         
-            <p>上一篇：<a href="/p/1949.html">word标题离页眉太近</a></p>
+            <p>上一篇：<a href="/p/2082.html">Vue组件子传父 HTML attributes are case-insensitive and camelCased props...</a></p>
         
         
       
       
         
         
-            <p>下一篇：<a href="/p/1951.html">高位下跌后，在10周线稳定个股走强的可行性</a></p>
+            <p>下一篇：<a href="/p/2084.html">在HTML文件中用import引入js模块</a></p>
         
       
     </div>
     
     <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/cc18868876837/article/details/113915176" target="_blank">https://blog.csdn.net/cc18868876837/article/details/113915176</a></div>
     
 	
 	<div><!-- 添加新的评论 -->
