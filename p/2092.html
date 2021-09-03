@@ -1,0 +1,350 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>负载均衡--F5 基本原理介绍_comonly.cn</title>
+<meta name="keywords" content="负载均衡--F5 基本原理介绍" />
+<meta name="description" content="原文链接：http://kuaibao.qq.com/s/20180308G1NPIS00?refer=cp_1026
+文章来源：企鹅号 - 民生运维
+
+1. 负载均衡的基本单位
+
+目前负载均衡设备的基本处理单位是TCP连接，也就是说当一个TCP连接建立后，在该连接中的所有客户端请求和服务器响应信息都通过这一个TCP连接进行。
+
+只有客户端发起新的连接的时候，才会根据负载均衡算法重新计算，才可能分发到其他服务器上。
+
+2. 基本工作模式
+
+F5支持全代理模式，同时也可以工作在四层转发" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">负载均衡--F5 基本原理介绍</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"></li>
+          <li class="lmname"><a href="" target="_blank"></a></li>
+          <li class="timer">2021-08-28</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	java框架-spring等
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>原文链接：http://kuaibao.qq.com/s/20180308G1NPIS00?refer=cp_1026
+文章来源：企鹅号 - 民生运维
+
+1. 负载均衡的基本单位
+
+目前负载均衡设备的基本处理单位是TCP连接，也就是说当一个TCP连接建立后，在该连接中的所有客户端请求和服务器响应信息都通过这一个TCP连接进行。
+
+只有客户端发起新的连接的时候，才会根据负载均衡算法重新计算，才可能分发到其他服务器上。
+
+2. 基本工作模式
+
+F5支持全代理模式，同时也可以工作在四层转发</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 原文链接：http://kuaibao.qq.com/s/20180308G1NPIS00?refer=cp_1026<br />
+文章来源：企鹅号 - 民生运维<br />
+<br />
+1. 负载均衡的基本单位<br />
+<br />
+目前负载均衡设备的基本处理单位是TCP连接，也就是说当一个TCP连接建立后，在该连接中的所有客户端请求和服务器响应信息都通过这一个TCP连接进行。<br />
+<br />
+只有客户端发起新的连接的时候，才会根据负载均衡算法重新计算，才可能分发到其他服务器上。<br />
+<br />
+2. 基本工作模式<br />
+<br />
+F5支持全代理模式，同时也可以工作在四层转发模式。<br />
+<br />
+全代理模式就是VS配置成standard类型，此模式下客户端和F5建立一个连接，客户端将请求发送给F5，F5再和服务器建立连接，并将请求发送给服务器，服务器返回信息后，F5再将返的回信息送给客户端。在此模式下F5可以查看请求和响应的所有信息，可以根据所有信息进行分发和处理。<br />
+<br />
+四层转发模式就是VS配置成Performance L4类型，此模式下F5只做四层转发，也就是F5只处理四层以下的信息，即端口和IP信息，具体业务数据不做任何处理。客户端发送给F5的数据包，F5只根据需要将IP和端口处理之后就直接发送给服务器，响应信息也类似处理。在此模式下，F5只能查看四层一下信息，不处理业务信息，好处是处理过程简单、速度快。缺点是无法对四层以上的协议数据进行精确处理。<br />
+<br />
+3. 负载均衡算法<br />
+<br />
+F5支持的负载均衡算法分类两大类：静态算法和动态算法，总共将近20种，这里只分析常用的三种算法：轮询、比率、最小连接数。<br />
+<br />
+3.1 轮询<br />
+<br />
+轮询算法就是按照后台服务器轮流分发，不考虑服务器承受能力和压力情况。该算法简单、方便，主要适用于特别大量的访问，同时要求服务器的处理性能基本一致，每个请求产生的压力也相当。实际中该算法使用不多。<br />
+<br />
+3.2 比例<br />
+<br />
+比率算法是首先对每台服务器设定一定的比例，该算法根据该比例进行分发，该算法主要用于已经明确后台服务器的处理能力不同，并能够知道处理能力的大概比例关系的情况；还有一种情况下就是，当需要对后台服务器进行迁移的时候，可以使用该算法，通过调整每台服务器的比例关系，将流量逐渐迁移。<br />
+<br />
+3.3 最小连接数<br />
+<br />
+最小连接数算法是一种最常用的算法，该算法会自动计算分配到每台服务器上的连接数，然后按照每台服务器处理的连接数，选择一个最小连接数的服务器进行流量分发。该算法适用于后台服务器处理能力相当的大部分情况。该算法也是目前最佳实践验证的较为理想的负载均衡算法。<br />
+<br />
+4. 会话保持<br />
+<br />
+由于负载均衡是按照连接尽心分发的，而很多业务都有会话信息，一个会话信息会包括多个连接，从业务角度看，一个会话的连接都应该分发到同一台服务器上，这样才能保证该会话的一致性。F5提供了超过10种的会话保持方式，这里只介绍最常用的两种：源地址会话保持和cookie会话保持。<br />
+<br />
+4.1 源地址会话保持<br />
+<br />
+源地址会话保持是最简单的一种方式，就是当同一个源IP过来的请求，就认为是同一个会话，将其分发到同一个服务器上，这种情况可能会将多个会话分发到一台服务器上，但是可以满足业务的基本需求。<br />
+<br />
+该方式的优点是，根据源IP地址判断，满足所有IP协议的使用，使用范围广；缺点是：很多用户通过proxy上网，这样会把多个用户的多个会话当成一个会话，发送到一台服务器上，引起负载不均，同时，针对当前手机用户，会存在上网方式变化的情况（例如：从WiFi切换到4G等），源地址会发生变化，导致会话保持失败。<br />
+<br />
+4.2 Cookie会话保持<br />
+<br />
+Cookie会话保持采用在用户访问的响应信息中增加一个cookie标识，来标识这个会话分发的具体服务器，这样用户第一次来访问的时候是没有这个cookie标识的，就可以负载均衡，第二次之后就会带有这个标识，这样就能够将后续的访问都分发到同一台服务器。该cookie一般设置为session cookie，就是该cookie和浏览器的会话联系，当你清除浏览器的会话信息或关闭浏览器再重新打开的时候，cookie会被清除。再通过该浏览器访问的话，就不会带有原来的cookie信息，F5就认为是一个新的会话。<br />
+<br />
+该方式的优点是，能够更精确的标识一个用户的会话，比较准确，使得后台服务器的压力相对比较均衡；缺点是：cookie属于http协议，对于非http协议，无法使用该方式。<br />
+<br />
+5. 健康检查<br />
+<br />
+负载均衡是对后台服务器的流量均衡分发，但分发的前提是要求服务器能够正常提供服务，健康检查就是判读服务器是否能够提供服务的方法。F5提供的健康检查方式有将近40种，这里只介绍常用的三种：ICMP、TCP、HTTP。<br />
+<br />
+5.1 ICMP<br />
+<br />
+ICMP是最简单的方式，就是对真实服务器发送”ping”命令。“ping”是常用的程序来确认一个IP地址是否在网络中存在，或者用来确认主机是否正常工作。<br />
+<br />
+5.2 TCP<br />
+<br />
+F5会试图联接到一个特定应用在运行的TCP端口。简单理解就是通过telnet连接服务的特定端口，如果能够连通，则正常；如果不能连通，则服务有问题。在深入的情况下，还可以在在连通端口后发送特定命令，并判断返回结果。通过是否符合预期来确定服务器工作状态。<br />
+<br />
+5.3 HTTP<br />
+<br />
+HTTP用于检查http服务的状态，用户可以定义发送和接受的字符串，发送字串是指发送到一个服务器的请求命令，例如：“GET /” 字符串发送到一个HTTP 服务器。服务器回应得字符串要求与设定的字符串相匹配，例如“f5.com”。如果不匹配则认为服务器有问题，不能提供正常服务。<br />
+<br />
+6. 节点状态类型<br />
+<br />
+为了更好的控制流量、迁移流量，F5对后台服务器节点操作，形成三种状态：Enabled、Disabled、Forced Offline。<br />
+<br />
+6.1 Enabled<br />
+<br />
+Enabled是服务器节点的正常状态，当服务器能够提供正常服务的情况，将该节点设置为Enabled状态，该状态下，服务器节点能够正常提供服务，接收所有请求。<br />
+<br />
+6.2 Disabled<br />
+<br />
+Disabled是当服务器需要进行维护时，希望后续流量不分发到该服务节点上时设定的状态。该模式下该服务节点只接收已经建立的连接的信息和已经存在会话保持记录信息的流量信息，不接收没有会话保持记录的新建连接。该状态下，由于一些业务的连接信息或者会话保持记录信息比较长，可能会在很长时间后依然有流量处理。<br />
+<br />
+6.3 Forced Offline<br />
+<br />
+Forced Offline是当服务器需要紧急维护时，需要尽快下线设备情况下设定的状态。该模式下该服务节点只接收已经建立的连接的信息，也就是说已经建立的连接的信息继续完成，其他所有请求都会分发到其他服务节点。该状态下，只要不是长连接，基本上都会很快没有流量。<br />
+<br />
+7. SSL卸载<br />
+<br />
+SSL的启用增加了业务的安全性，但SSL的加解密会消耗大量的计算资源，为了解决服务器性能不够的问题，可以在F5上进行SSL卸载，即客户端到F5采用SSL加密协议，F5和服务器之间运行http明文协议。这样既实现了业务的加密处理，保证了安全性，也解决了服务器SSL卸载性能不够的问题。<br />
+<br />
+7.1 单向认证<br />
+<br />
+单向认证是只需要在服务端配置证书和key，客户端不需要证书。客户端通过获取服务器证书验证服务器的合法性，同时使用服务器证书和服务器进行加密处理。F5作为SSL服务器端，需要导入证书和key，客户端通过访问F5上的SSL服务，同时和F5进行SSL协商，实现SSL加密。<br />
+<br />
+7.2 双向认证<br />
+<br />
+双向认证是在单向认证的基础上，要求客户端也提供证书，服务器在协商过程中，也会验证客户端证书的有效性及身份，确保客户端的真实性。F5在配置层面要求在单向认证的基础上，配置客户端证书的根证书，这个根证书用来验证客户端证书的有效性。<br />
+<br />
+7.3 加密算法<br />
+<br />
+在SSL卸载中，F5提供了RSA、ECC等各种算法，满足当前SSL的各个版本的要求，同时提供了各种算法的配置方法，包括SSL版本：SSLv2、SSLv3、TLS1.0、TLS1.1、TLS1.2等。目前支持苹果公司要求ATS以及中国网联SSL算法的要求。<br />
+<br />
+8. 部署方式（串联、并联）<br />
+<br />
+F5设备支持各种灵活的部署方式，常用的有串联和并联两种部署方式。下面分别介绍一下。<br />
+<br />
+8.1 串联<br />
+<br />
+串联是F5的最基本部署方式，在这种情况下，F5上配置2个vlan，分别配置不同网段的地址，客户端和服务器端分别位于这两个不同的网段。该部署方式适用于新建网络或者网络出口，便于使用网络隔离的场景。<br />
+<br />
+8.2 并联<br />
+<br />
+并联主要用于F5对服务器负载均衡的情况，F5只配置一个vlan，该vlan和服务器在同一网段，为了保证往返路径的一致性，要求F5上启用SNAT功能，这样服务器收到的请求信息的源地址会转换成F5的地址，这样回包的时候，就能够直接回给F5处理。在此情况下，如果服务器需要审计或记录客户端的正式地址则需要特殊处理。这种模式适用于F5对其后端业务按需做负载均衡，这样只有需要做负载均衡的流量才会经过F5，其他流量可直接通过网络转发，不必再次经过F5。<br />
+<br />
+8.3 源地址透传<br />
+<br />
+源地址透传是指，将客户端的源地址传递给服务器，用于对用户业务记录或审计。F5有两种方式可以实现源地址透传，第一种：F5不启用SNAT(源地址转换)，同时服务器网关指向F5；第二种：F5将客户端源地址插入到http header中。<br />
+<br />
+第一种方式，主要用户串接模式，服务器网关指向F5，同时F5关闭SNAT。这样服务器收到的数据包的源地址就是客户端的源地址，直接读取即可。这种方式可以适用于TCP协议，http协议也可以使用，但http协议更多使用第二种方式。<br />
+<br />
+第二种方式：F5将客户端源地址插入到http header中。在http协议中有一个header是x-forwarded-for，这个header就是在源地址发生变化后，存储原来的客户端地址，F5可以在做源地址后，将原来的客户端地址存储到x-forwarded-for中，服务器端需要的时候，直接读取这个header即可获取到客户端地址。该方式只适用于http协议，其他协议没有相应的设置。<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/2091.html">负载均衡--LVS负载均衡（LVS简介、三种工作模式、十种调度算法）</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/2093.html">serverless</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

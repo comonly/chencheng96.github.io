@@ -1,0 +1,971 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>深入了解Java数据结构（集合及底层实现）_comonly.cn</title>
+<meta name="keywords" content="深入了解Java数据结构（集合及底层实现）" />
+<meta name="description" content="一、集合介绍
+&nbsp; &nbsp; Collection(单列集合)
+&nbsp; &nbsp; &nbsp; &nbsp; List(有序,可重复)
+
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ArrayList
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 底层数据结构是数组,查询快,增删慢（因为：增删后涉及到其他数据的位移）
+&nbsp; &nbsp; &nbsp; &nbs" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">深入了解Java数据结构（集合及底层实现）</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">Fox_bert</li>
+          <li class="lmname"><a href="https://blog.csdn.net/fox_bert/article/details/90272656" target="_blank">https://blog.csdn.net/fox_bert/article/details/90272656</a></li>
+          <li class="timer">2021-08-20</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	java-含工具类
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>一、集合介绍
+&nbsp; &nbsp; Collection(单列集合)
+&nbsp; &nbsp; &nbsp; &nbsp; List(有序,可重复)
+
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ArrayList
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 底层数据结构是数组,查询快,增删慢（因为：增删后涉及到其他数据的位移）
+&nbsp; &nbsp; &nbsp; &nbs</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> 一、集合介绍<br />
+&nbsp; &nbsp; Collection(单列集合)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; List(有序,可重复)<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ArrayList<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 底层数据结构是数组,查询快,增删慢（因为：增删后涉及到其他数据的位移）<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 线程不安全,效率高<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vector<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 底层数据结构是数组,查询快,增删慢（因为：增删后涉及到其他数据的位移）<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 线程安全,效率低<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; LinkedList<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 底层数据结构是双向链表,查询慢,增删快<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 线程不安全,效率高<br />
+<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; Set(无序,唯一)<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; HashSet<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 底层数据结构是哈希表。<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 哈希表依赖两个方法：hashCode()和equals()<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 执行顺序：<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 首先判断hashCode()值是否相同<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 是：继续执行equals(),看其返回值<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 是true:说明元素重复，不添加<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 是false:就直接添加到集合<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 否：就直接添加到集合<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 最终：<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 自动生成hashCode()和equals()即可<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; LinkedHashSet<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 底层数据结构由链表和哈希表组成。<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 由链表保证元素有序。<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 由哈希表保证元素唯一。<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; TreeSet<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 底层数据结构是红黑树。(是一种自平衡的二叉树)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 如何保证元素唯一性呢?<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 根据比较的返回值是否是0来决定<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 如何保证元素的排序呢?<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 两种方式<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 自然排序(元素具备比较性)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 让元素所属的类实现Comparable接口<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 比较器排序(集合具备比较性)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 让集合接收一个Comparator的实现类对象<br />
+<br />
+<br />
+&nbsp; &nbsp; Map(双列集合)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; A:Map集合的数据结构仅仅针对键有效，与值无关。<br />
+&nbsp; &nbsp; &nbsp; &nbsp; B:存储的是键值对形式的元素，键唯一，值可重复。<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; HashMap<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 底层数据结构是:<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; jdk1.8以下：（数组+单向链表）哈希表<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; jdk1.8+：（数组+[单向链表 / 红黑树]）哈希表，根据情况会选择链表和红黑树之间进行转换<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 线程不安全，效率高<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 哈希表依赖两个方法：hashCode()和equals()<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 执行顺序：<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 首先判断hashCode()值是否相同<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 是：继续执行equals(),看其返回值<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 是true:说明元素重复，不添加<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 是false:就直接添加到集合<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 否：就直接添加到集合<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 最终：<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 自动生成hashCode()和equals()即可<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; LinkedHashMap<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 底层数据结构由链表和哈希表组成。<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 由链表保证元素有序。<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 由哈希表保证元素唯一。<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; Hashtable<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 底层数据结构是哈希表。线程安全，效率低<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 哈希表依赖两个方法：hashCode()和equals()<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 执行顺序：<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 首先判断hashCode()值是否相同<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 是：继续执行equals(),看其返回值<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 是true:说明元素重复，不添加<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 是false:就直接添加到集合<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 否：就直接添加到集合<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 最终：<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 自动生成hashCode()和equals()即可<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; TreeMap<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 底层数据结构是红黑树。(是一种自平衡的二叉树)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 如何保证元素唯一性呢?<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 根据比较的返回值是否是0来决定<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 如何保证元素的排序呢?<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 两种方式<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 自然排序(元素具备比较性)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 让元素所属的类实现Comparable接口<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 比较器排序(集合具备比较性)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 让集合接收一个Comparator的实现类对象<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<br />
+<br />
+二、常见数据结构<br />
+1、数组结构<br />
+<br />
+数组结构我想不必多说了<br />
+<br />
+数组是最最基本的数据结构，很多语言都内置支持数组。数组是使用一块连续的内存空间保存数据，保存的数据的个数在分配内存的时候就是确定的<br />
+<br />
+<br />
+<br />
+2、链表结构<br />
+<br />
+单向链表&nbsp;<br />
+<br />
+<br />
+<br />
+双向链表<br />
+<br />
+&nbsp;<br />
+<br />
+3、二叉树结构<br />
+<br />
+<br />
+<br />
+4、散列表结构（哈希表）<br />
+<br />
+&nbsp;<br />
+<br />
+&nbsp;<br />
+<br />
+三、关于集合选取原则<br />
+&nbsp; &nbsp; 是否是键值对象形式:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; 是：Map<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 键是否需要排序:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 是：TreeMap<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 否：HashMap<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 不知道，就使用HashMap。<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; 否：Collection<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 元素是否唯一:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 是：Set<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 元素是否需要排序:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 是：TreeSet<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 否：HashSet<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 不知道，就使用HashSet<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 否：List<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 要安全吗:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 是：Vector<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 否：ArrayList或者LinkedList<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 增删多：LinkedList<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 查询多：ArrayList<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 不知道，就使用ArrayList<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 不知道，就使用ArrayList<br />
+<br />
+<br />
+四、集合的常见方法及遍历方式<br />
+&nbsp; &nbsp; Collection:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; add()<br />
+&nbsp; &nbsp; &nbsp; &nbsp; remove()<br />
+&nbsp; &nbsp; &nbsp; &nbsp; contains()<br />
+&nbsp; &nbsp; &nbsp; &nbsp; iterator()<br />
+&nbsp; &nbsp; &nbsp; &nbsp; size()<br />
+&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; 遍历：<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 增强for<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 迭代器<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; |--List<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; get()<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 遍历：<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 普通for<br />
+&nbsp; &nbsp; &nbsp; &nbsp; |--Set<br />
+&nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; Map:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; put()<br />
+&nbsp; &nbsp; &nbsp; &nbsp; remove()<br />
+&nbsp; &nbsp; &nbsp; &nbsp; containskey(),containsValue()<br />
+&nbsp; &nbsp; &nbsp; &nbsp; keySet()<br />
+&nbsp; &nbsp; &nbsp; &nbsp; get()<br />
+&nbsp; &nbsp; &nbsp; &nbsp; value()<br />
+&nbsp; &nbsp; &nbsp; &nbsp; entrySet()<br />
+&nbsp; &nbsp; &nbsp; &nbsp; size()<br />
+&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; 遍历：<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 根据键找值<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 根据键值对对象分别找键和值<br />
+<br />
+&nbsp;<br />
+<br />
+五、HashMap底层实现原理（jdk1.7\jdk1.8+）<br />
+面试常问特点：<br />
+<br />
+1、底层结构<br />
+<br />
+jdk1.8以下：HashMap的底层是：数组+链表(单向链表)<br />
+jdk1.8+：HashMap的底层是：数组+[链表(单向链表) / 红黑树 ]<br />
+2、线程不安全（put方法没有加锁）&nbsp;<br />
+<br />
+3、初始化默认大小：16 【1 &lt;&lt; 4】<br />
+<br />
+4、扩容&nbsp;<br />
+<br />
+&nbsp; &nbsp; &nbsp; 扩容触发机制：<br />
+<br />
+&nbsp; &nbsp; &nbsp; 当前存储过的键值对的数量【即HashMap中的一个size属性】必须大于等于阈值（threshold）【注意：阈值=数组length*加载因子】；<br />
+&nbsp; &nbsp; &nbsp; 当前加入的数据是否发生hash冲突<br />
+&nbsp; &nbsp; &nbsp; 加载因子：0.75 当元素存储（使用）到达现有数组的75%的时候进行扩容（例如：下标100的数组，任意75个下标存储后就会扩容）<br />
+<br />
+&nbsp; &nbsp; &nbsp; 扩大容量：每次在原基础乘以2，扩容后为原来的2倍<br />
+<br />
+&nbsp; &nbsp; &nbsp;/**<br />
+&nbsp; &nbsp; &nbsp;* The default initial capacity - MUST be a power of two.<br />
+&nbsp; &nbsp; &nbsp;*/<br />
+&nbsp; &nbsp; static final int DEFAULT_INITIAL_CAPACITY = 1 &lt;&lt; 4; // aka 16<br />
+&nbsp;<br />
+&nbsp; &nbsp; &nbsp;/**<br />
+&nbsp; &nbsp; &nbsp;* The load factor used when none specified in constructor.<br />
+&nbsp; &nbsp; &nbsp;*/<br />
+&nbsp; &nbsp; static final float DEFAULT_LOAD_FACTOR = 0.75f;<br />
+&nbsp;<br />
+&nbsp; &nbsp; &nbsp;/**<br />
+&nbsp; &nbsp; &nbsp;* The next size value at which to resize (capacity * load factor).<br />
+&nbsp; &nbsp; &nbsp;* @serial<br />
+&nbsp; &nbsp; &nbsp;*/<br />
+&nbsp; &nbsp; // If table == EMPTY_TABLE then this is the initial capacity at which the<br />
+&nbsp; &nbsp; // table will be created when inflated.<br />
+&nbsp; &nbsp; int threshold;<br />
+&nbsp;<br />
+&nbsp; &nbsp; &nbsp;/**<br />
+&nbsp; &nbsp; &nbsp;* Constructs an empty &lt;tt&gt;HashMap&lt;/tt&gt; with the default initial capacity<br />
+&nbsp; &nbsp; &nbsp;* (16) and the default load factor (0.75).<br />
+&nbsp; &nbsp; &nbsp;*/<br />
+&nbsp; &nbsp; public HashMap() {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; this(DEFAULT_INITIAL_CAPACITY, DEFAULT_LOAD_FACTOR);<br />
+&nbsp; &nbsp; }<br />
+&nbsp;<br />
+<br />
+准确点来说是 Entry[]数组 （根据Entry的内部结构不同，来断定具体是什么数据结构）<br />
+<br />
+数组的特点是：寻址容易，插入和删除困难（因为添加删除会涉及到其他元素的位移）；<br />
+链表的特点是：寻址困难，插入和删除容易（因为寻址需要一个一个的遍历过去，无法直接定位）；<br />
+那么我们能不能综合两者的特性，做出一种寻址容易，插入删除也容易的数据结构？答案是肯定的，这就是我们要提起的哈希表，哈希表有多种不同的实现方法，我接下来解释的是最常用的一种方法——拉链法，我们可以理解为“链表的数组”<br />
+&nbsp;<br />
+<br />
+问：数组我们都知道，但什么是Entry数组呢？<br />
+<br />
+答：就是一个数组里放的都是Entry<br />
+<br />
+问：那这里的Entry又是什么呢？<br />
+<br />
+答：<br />
+<br />
+注意：每个集合类里面的存放实现都有可能是不一样的（比如 TreeSet 里面也有 Entry，但是和 HashMap 的 Entry 内部结构实现是不同的）<br />
+<br />
+HashMap 的 Entry 就是我们说的链表结构 (单向链表)<br />
+<br />
+下图中我们可以看到，在HashMap里面有个静态类 Entry&lt;K,V&gt; 也是 key value 形式的；<br />
+<br />
+里面有 next 属性，类型也是Entry&lt;K,V&gt;<br />
+<br />
+这就是一个 Entry 里面嵌套了另一个 Entry（典型的链表结构）<br />
+<br />
+注意：我们可以看到这个 Entry类里面只有一个 Entry&lt;key,value&gt; next 属性，只有下一个，所以这是一个 单向链表<br />
+<br />
+HashMap 结构 ，里面有个Entry（这是用来存放数据的）<br />
+<br />
+<br />
+<br />
+内部类 Entry 结构&nbsp;<br />
+<br />
+<br />
+<br />
+下面是HashMap的结构图，结合上面的代码就很好理解了吧<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+&nbsp;<br />
+<br />
+1、HashMap中有一个table的全局属性属性，该属性是Enrty数组<br />
+数据都在这里面存放<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+首先执行初始化 ：初始化会加载一些配置信息<br />
+<br />
+初始化完成，如果在调用put方法时，发现table里面没有任何数据，那么会调用 inflateTable(int toSize)<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+&nbsp;<br />
+<br />
+2、【重点】HashMap 是如何添加数据的（我们主要看红色标注区域）<br />
+<br />
+<br />
+（1）首先拿到我们的 key 算出对应的 HashCode【line：492】<br />
+<br />
+（2）根据 key 和 table.length 调用 indexFor() 来计算出一个数值 i，这个数值是 table 数组的下标【line：493】<br />
+<br />
+（3）重点来了，我们需要比较这个 key 是否已经存在，如果存在则给对应的 value 重新赋值【line：494~502】<br />
+<br />
+根据计算出来的下标 i 拿到该 table数组 在该下标内的 Entry<br />
+判断 entry 是不是 null ，如果不是则表示该值已存在，拿到值（for遍历过程）<br />
+判断数组中存在的 entry 的 hash 和我们计算出的 hash 是否一致、 key 是否一致<br />
+如果一致，则说明 HashMap 中该 key 已经存在，我们进入 if() 内进行赋值操作，并返回旧的值<br />
+（4）如果该数组下标内没有找到对应的 key，我们则调用 addEntry() 方法进行添加【line：505】<br />
+<br />
+addEntry()方法如下：<br />
+<br />
+先进行扩容机制的判断【line：878~882】<br />
+调用createEntry()方法进行添加键值对<br />
+进行链表的添加（将旧节点加入新节点的 next 中）<br />
+添加完成后为全局变量size++（扩容时会用size进行判断）<br />
+大概看一下我们就可以理解，有兴趣的同学可以看一下 （红色区域为添加，蓝色区域后面会讲到）<br />
+<br />
+链表的添加方式：每次都是在最外层创建一个新的链表点，然后把旧的链表插入新的点，所以最外层的（顶层的）永远是最新的<br />
+<br />
+<br />
+<br />
+（5）get(key)方法如何实现的呢？<br />
+<br />
+如果你认真的跟着我上面的步骤理解了 put(key,value)方法，我想不用看源码也能大概说出来是如何实现的<br />
+<br />
+我们根据 key 算出 hashCode<br />
+用这个 HashCode 再算出，数组中的一个下标<br />
+如果这个下标是null 那么我们返回null<br />
+如果不是，那我们就遍历对比链表里面的每一个Entry，找到就返回，找不到就返回null<br />
+亮点，我们也附带学习了遍历链表的方法&nbsp;<br />
+<br />
+&nbsp;<br />
+<br />
+3、【重点】扩容机制源码&nbsp;<br />
+扩容必须同时满足两个条件：<br />
+<br />
+&nbsp;存放新值的时候，发现当前已有键值对（key-value）元素的个数（size）必须大于等于阈值（阈值=加载因子*当前数组长度）<br />
+&nbsp;存放新值的时候，当前新值数据key发生hash碰撞（当前key计算的hash值换算出来的数组下标位置已经存在值）<br />
+在put()方法中有调用addEntry()方法，这个方法里面是具体的存值，在存值之前还有判断是否需要扩容<br />
+<br />
+判断扩容条件：(size &gt;= threshold) &amp;&amp; (null != table[bucketIndex])【line：878】<br />
+<br />
+如果下面两个条件都发生，那么就扩容<br />
+<br />
+判断当前个数是否大于等于阈值(size &gt;= threshold)<br />
+当前存放是否发生哈希碰撞(null != table[bucketIndex])<br />
+扩容调用方法：resize(int) 【line：879】<br />
+<br />
+扩容大小为原先数组大小的两倍&nbsp;<br />
+<br />
+<br />
+<br />
+阈值：threshold&nbsp;&nbsp;<br />
+<br />
+threshold 就是所说的阈值，它是一个全局变量，决定了数组是否进行扩容的判断条件之一【上图中 line：878】&nbsp;<br />
+<br />
+阈值根据加载因子和数组大小决定的&nbsp;<br />
+<br />
+默认情况下： 阈值=加载因子 * 当前数组大小<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+HashMap的构造函数有4个：<br />
+<br />
+下图中的3个构造函数可以看到都是调用了同一个构造函数 public HashMap (int initialCapacity, float loadFactor)<br />
+<br />
+代码中选中的是加载因子&nbsp;<br />
+<br />
+<br />
+<br />
+public HashMap (int initialCapacity, float loadFactor)<br />
+<br />
+<br />
+<br />
+&nbsp;<br />
+<br />
+如果需要扩容，调用扩容的方法：resize(int)<br />
+<br />
+<br />
+<br />
+&nbsp;<br />
+<br />
+总结：<br />
+<br />
+HashMap的扩容需要同时满足两个条件：<br />
+<br />
+&nbsp;存放新值的时候，发现当前已有键值对（key-value）元素的个数（size）必须大于等于阈值（阈值=加载因子*当前数组长度）<br />
+&nbsp;存放新值的时候，当前新值数据key发生hash碰撞（当前key计算的hash值换算出来的数组下标位置已经存在值）<br />
+因为上面这两个条件，所以存在下面这些情况<br />
+<br />
+就是hashmap在存值的时候（默认大小为16，负载因子0.75，阈值12），可能达到最后存满16个值的时候，再存入第17个值才会发生扩容现象，因为前16个值，每个值在底层数组中分别占据一个位置，并没有发生hash碰撞。【key不触发hash碰撞】<br />
+当然也有可能存储更多值（超多16个值，最多可以存26个值）都还没有扩容。原理：前11个值全部hash碰撞，存到数组的同一个位置（这时元素个数小于阈值12，不会扩容），后面所有存入的15个值全部分散到数组剩下的15个位置（这时元素个数大于等于阈值，但是每次存入的元素并没有发生hash碰撞，所以不会扩容），前面11+15=26，所以在存入第27个值的时候才同时满足上面两个条件，这时候才会发生扩容现象。<br />
+&nbsp;<br />
+<br />
+HashMap（jdk1.8+）的变化<br />
+变化如下：<br />
+<br />
+数据存储结构进行改变<br />
+对数组下标的定位生成，做了改动，使之更具有分散性（减少经常向同一个下标存储的情况）<br />
+加入了链表和红黑树相互转变的机制（减少链的深度）<br />
+<br />
+<br />
+1、存储key value的内部存储类 Entry 变为 Node 或 TreeNode<br />
+transient Node&lt;K,V&gt;[] table;<br />
+static class Node&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; final int hash;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; final K key;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; V value;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; Node&lt;K,V&gt; next;<br />
+&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; Node(int hash, K key, V value, Node&lt;K,V&gt; next) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; this.hash = hash;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; this.key = key;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; this.value = value;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; this.next = next;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; public final K getKey()&nbsp; &nbsp; &nbsp; &nbsp; { return key; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; public final V getValue()&nbsp; &nbsp; &nbsp; { return value; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; public final String toString() { return key + "=" + value; }<br />
+&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; public final int hashCode() {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return Objects.hashCode(key) ^ Objects.hashCode(value);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; public final V setValue(V newValue) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; V oldValue = value;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; value = newValue;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return oldValue;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; public final boolean equals(Object o) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (o == this)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return true;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (o instanceof Map.Entry) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Map.Entry&lt;?,?&gt; e = (Map.Entry&lt;?,?&gt;)o;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (Objects.equals(key, e.getKey()) &amp;&amp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Objects.equals(value, e.getValue()))<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return true;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return false;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; }<br />
+&nbsp;TreeNode<br />
+<br />
+&nbsp; &nbsp; &nbsp;/**<br />
+&nbsp; &nbsp; &nbsp;* Entry for Tree bins. Extends LinkedHashMap.Entry (which in turn<br />
+&nbsp; &nbsp; &nbsp;* extends Node) so can be used as extension of either regular or<br />
+&nbsp; &nbsp; &nbsp;* linked node.<br />
+&nbsp; &nbsp; &nbsp;*/<br />
+&nbsp; &nbsp; static final class TreeNode&lt;K,V&gt; extends LinkedHashMap.Entry&lt;K,V&gt; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; TreeNode&lt;K,V&gt; parent;&nbsp; // red-black tree links<br />
+&nbsp; &nbsp; &nbsp; &nbsp; TreeNode&lt;K,V&gt; left;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; TreeNode&lt;K,V&gt; right;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; TreeNode&lt;K,V&gt; prev;&nbsp; &nbsp; // needed to unlink next upon deletion<br />
+&nbsp; &nbsp; &nbsp; &nbsp; boolean red;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; TreeNode(int hash, K key, V val, Node&lt;K,V&gt; next) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; super(hash, key, val, next);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp;<br />
+&nbsp; &nbsp; &nbsp;......<br />
+&nbsp;<br />
+&nbsp; &nbsp; &nbsp;}<br />
+2、put方法的改变（加入了红黑树的转变机制）<br />
+使用树型结构，而不去使用单向链表<br />
+<br />
+当节点超过8时，从链表转变为红黑树结构，从而减小链的深度&nbsp;<br />
+<br />
+当节点小于6时，从红黑树转变为链表结构<br />
+<br />
+&nbsp; &nbsp; &nbsp;/**<br />
+&nbsp; &nbsp; &nbsp;* The bin count threshold for using a tree rather than list for a<br />
+&nbsp; &nbsp; &nbsp;* bin.&nbsp; Bins are converted to trees when adding an element to a<br />
+&nbsp; &nbsp; &nbsp;* bin with at least this many nodes. The value must be greater<br />
+&nbsp; &nbsp; &nbsp;* than 2 and should be at least 8 to mesh with assumptions in<br />
+&nbsp; &nbsp; &nbsp;* tree removal about conversion back to plain bins upon<br />
+&nbsp; &nbsp; &nbsp;* shrinkage.<br />
+&nbsp; &nbsp; &nbsp;*/<br />
+&nbsp; &nbsp; static final int TREEIFY_THRESHOLD = 8;<br />
+&nbsp;<br />
+&nbsp; &nbsp; /**<br />
+&nbsp; &nbsp; &nbsp;* The bin count threshold for untreeifying a (split) bin during a<br />
+&nbsp; &nbsp; &nbsp;* resize operation. Should be less than TREEIFY_THRESHOLD, and at<br />
+&nbsp; &nbsp; &nbsp;* most 6 to mesh with shrinkage detection under removal.<br />
+&nbsp; &nbsp; &nbsp;*/<br />
+&nbsp; &nbsp; static final int UNTREEIFY_THRESHOLD = 6;<br />
+put方法的改变<br />
+<br />
+&nbsp;<br />
+<br />
+（1）根据情况判断是否进行初始化【line：628~629】<br />
+<br />
+（2）计算出数组的下标，取出数据存入变量p，判断是否为null，如果为null则直接生成新节点存入，跳至661【line：630~631】<br />
+<br />
+（3）如果该下标中存在数据则进入else【line：632~660】<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;（1、下标中先取链表的 顶层 Node节点，判断key是否相同。相同则直接进入line：653进行数据替换【line：634~636】<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;（2、判断该下标Node节点类型是否为TreeNode（树结构），如果是则使用内部类TreeNode的putTreeVal进行存储【line：637~638】<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;（3、如果传入的key不是 顶层 Node节点，数组下标节点也不是TreeNode（树结构），那么就对该下标下的Node节点进行循环遍历【line：639~652】<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;（4、对value值进行替换处理<br />
+<br />
+&nbsp;<br />
+<br />
+&nbsp;<br />
+<br />
+&nbsp;<br />
+<br />
+LinkedHashMap 底层实现原理<br />
+&nbsp;LinkedHashMap 继承了 HashMap 所以很多方法都是继承来的，但是 LinkedHashMap 又是有序的，我们可以看到构造器中有个 accessOrder 参数，这个就是来控制有序的。<br />
+<br />
+<br />
+<br />
+&nbsp;<br />
+<br />
+六、HashTable底层实现原理<br />
+面试常问特点：<br />
+<br />
+1、底层结构<br />
+<br />
+jdk1.8以下：HashMap的底层是：数组+链表(单向链表)<br />
+<br />
+jdk1.8+：HashMap的底层是：数组+[链表(单向链表) / 红黑树 ]<br />
+<br />
+2、线程安全（put方法加了synchronized修饰）&nbsp;<br />
+<br />
+3、初始化默认大小：11&nbsp;<br />
+<br />
+4、扩容&nbsp;<br />
+<br />
+&nbsp; &nbsp; &nbsp; 扩容触发机制：数据大小【size()】大于等于阈值【count &gt;= threshold】<br />
+<br />
+&nbsp; &nbsp; &nbsp; 加载因子：0.75<br />
+<br />
+&nbsp; &nbsp; &nbsp; 扩大容量：每次原大小乘以2再加1【(old.length &lt;&lt; 1)+1】<br />
+<br />
+&nbsp; &nbsp; &nbsp;/**<br />
+&nbsp; &nbsp; &nbsp;* Constructs a new, empty hashtable with a default initial capacity (11)<br />
+&nbsp; &nbsp; &nbsp;* and load factor (0.75).<br />
+&nbsp; &nbsp; &nbsp;*/<br />
+&nbsp; &nbsp; public Hashtable() {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; this(11, 0.75f);<br />
+&nbsp; &nbsp; }<br />
+关于2n+1的扩展，在hashtable选择用取模的方式来进行，那么尽量使用素数、奇数会让结果更加均匀一些，具体证明，可以看看已经证明这点的技术文章<br />
+关于hash，hashmap用2的幂，主要是其还有一个hash过程即二次hash，不是直接用key的hashcode，这个过程打散了数据<br />
+总体就是一个减少hash冲突，并且找索引效率还要高，实现都是要考量这两因素的&nbsp;<br />
+<br />
+1、添加方法和HashMap几乎是一样的&nbsp;<br />
+<br />
+<br />
+（1）用 key 算出对应的 HashCode【line：465】<br />
+<br />
+（2）根据 HashCode和 table.length 计算出 table 数组的下标【line：466】<br />
+<br />
+（3）循环遍历table下标中的entry链表，比较这个 key 是否已经存在，如果存在则给对应的 value 重新赋值【line：468~475】<br />
+<br />
+（4）如果该数组下标内没有对应的key，我们则调用 addEntry() 方法进行添加【line：477】<br />
+<br />
+<br />
+<br />
+&nbsp;<br />
+<br />
+2、扩容方法 rehash()<br />
+<br />
+<br />
+&nbsp;<br />
+<br />
+七、TreeMap 底层实现原理<br />
+1、了解结构&nbsp;<br />
+<br />
+TreeMap 有一个 Entry&lt;k,v&gt; root 属性 （用来存放数据的）<br />
+<br />
+Entry 类型又有三个 Entry 类型的 left、right、parent 属性,和自己的 key、value属性；（用来存放 树结构 左、右、父的对象数据，还有自己的值；color 属性是当前树节点的颜色）<br />
+<br />
+由此可见 Entry 类型是个 红黑树 的结构，而 TreeMap 里面存储的是 Entry 结果自然就是红黑树<br />
+<br />
+&nbsp;<br />
+<br />
+<br />
+<br />
+2、内部类 Entry 结构<br />
+<br />
+<br />
+<br />
+&nbsp;<br />
+<br />
+八、ArrayList 底层实现原理<br />
+面试常问特点：<br />
+<br />
+1、底层结构：数组&nbsp;<br />
+<br />
+2、线程不安全（add方法没有加锁）&nbsp;&nbsp;<br />
+<br />
+3、初始化默认大小：10&nbsp;<br />
+<br />
+4、扩容<br />
+<br />
+&nbsp; &nbsp; &nbsp; 扩容触发机制：当存储第11个数据时，11超过了默认的10，就会触发扩容<br />
+<br />
+&nbsp; &nbsp; &nbsp; 扩大容量：每次在原基础上增加0.5倍，扩容后为原来的1.5倍<br />
+<br />
+&nbsp; &nbsp; &nbsp;/**<br />
+&nbsp; &nbsp; &nbsp;* Default initial capacity.<br />
+&nbsp; &nbsp; &nbsp;*/<br />
+&nbsp; &nbsp; private static final int DEFAULT_CAPACITY = 10;<br />
+&nbsp;<br />
+&nbsp; &nbsp; /**<br />
+&nbsp; &nbsp; &nbsp;* Shared empty array instance used for empty instances.<br />
+&nbsp; &nbsp; &nbsp;*/<br />
+&nbsp; &nbsp; private static final Object[] EMPTY_ELEMENTDATA = {};<br />
+&nbsp;<br />
+&nbsp; &nbsp; &nbsp;/**<br />
+&nbsp; &nbsp; &nbsp;* Constructs an empty list with an initial capacity of ten.<br />
+&nbsp; &nbsp; &nbsp;*/<br />
+&nbsp; &nbsp; public ArrayList() {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; super();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; this.elementData = EMPTY_ELEMENTDATA;<br />
+&nbsp; &nbsp; }<br />
+&nbsp;<br />
+<br />
+扩容机制源码<br />
+ensureCapacityInternal() 方法<br />
+<br />
+（1）在调用Add方法时，会先通过 ensureCapacityInternal() 方法确保当前ArrayList维护的数组具有存储新元素的能力【Line:440】<br />
+<br />
+（2）ensureCapacityInternal() 判断ArrayList默认的元素存储数据是否为空，为空则设置最小要求的存储能力为必要存储的元素和默认存储元素个数的两个数据之间的最大值，然后调用ensureExplicitCapacity方法实现这种最低要求的存储能力【Line:208】<br />
+<br />
+（3）如果最低要求的存储能力 &gt; ArrayList 已有的存储能力，这就表示ArrayList的存储能力不足，因此需要调用 grow();方法进行扩容 【Line:215】<br />
+<br />
+<br />
+<br />
+&nbsp;<br />
+<br />
+&nbsp;<br />
+<br />
+扩容方法源码（扩容后为原来的1.5倍）<br />
+<br />
+grow()方法&nbsp;<br />
+<br />
+（1）数字转换为二进制，使用向右位移符 &gt;&gt; 移动所有二进制数，实现除法（源码中 oldCapacity &gt;&gt; 1表示所有二进制向右移动1位，表示除以2，移出去的数直接忽略）<br />
+<br />
+（2）新size = 旧的size + 扩大的size（Line：236）<br />
+<br />
+（3）创建一个新的数组<br />
+<br />
+（4）通过Arrays.copyOf方法，将原数组的数据复制到新数组<br />
+<br />
+<br />
+<br />
+总结：<br />
+<br />
+举例说明：添加20个元素到ArrayList中&nbsp;<br />
+<br />
+当第一次插入元素时才分配10（默认）个对象空间。之后扩容会按照1.5倍增长。<br />
+<br />
+也就是当添加第11个数据的时候，Arraylist继续扩容变为10*1.5=15；<br />
+<br />
+当添加第16个数据时，继续扩容变为15 * 1.5 =22个；<br />
+<br />
+&nbsp;<br />
+<br />
+&nbsp;<br />
+<br />
+九、Vector 底层实现原理<br />
+面试常问特点：<br />
+<br />
+1、底层结构：数组&nbsp;<br />
+<br />
+2、线程安全（add方法添加synchronized锁）&nbsp;<br />
+<br />
+3、初始化默认大小：10&nbsp;<br />
+<br />
+&nbsp; &nbsp; &nbsp; 扩容触发机制：当存储第N+1个数据时，N+1超过了先前的数组最大个数N，就会触发扩容<br />
+<br />
+&nbsp; &nbsp; &nbsp; 扩大容量：每次在原基础上增加1倍，也就是总大小为原来的2倍<br />
+<br />
+&nbsp; &nbsp; /**<br />
+&nbsp; &nbsp; &nbsp;* Constructs an empty vector so that its internal data array<br />
+&nbsp; &nbsp; &nbsp;* has size {@code 10} and its standard capacity increment is<br />
+&nbsp; &nbsp; &nbsp;* zero.<br />
+&nbsp; &nbsp; &nbsp;*/<br />
+&nbsp; &nbsp; public Vector() {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; this(10);<br />
+&nbsp; &nbsp; }<br />
+&nbsp;<br />
+<br />
+扩容机制源码<br />
+ensureCapacityHelper() 方法&nbsp;<br />
+<br />
+基本上ArrayList一样<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+扩容方法源码（扩容后为原来的2倍）<br />
+<br />
+grow()方法&nbsp;<br />
+<br />
+（1）(capacityIncrement &gt; 0) ? capacityIncrement : oldCapacity（大多情况会返回 oldCapacity）<br />
+<br />
+（2）新size = 旧的size + 旧的size（Line：256）<br />
+<br />
+（3）创建一个新的数组<br />
+<br />
+（4）通过Arrays.copyOf方法，将原数组的数据复制到新数组<br />
+<br />
+<br />
+<br />
+&nbsp;<br />
+<br />
+总结：<br />
+<br />
+举例说明：添加40个元素到 Vector 中&nbsp;<br />
+<br />
+当第一次插入元素时才分配10（默认）个对象空间。之后扩容会按照2倍增长。<br />
+<br />
+也就是当添加第11个数据的时候，Vector 继续扩容变为10*2=20；<br />
+<br />
+当添加第21个数据时，继续扩容变为20 * 2 =40个；<br />
+<br />
+&nbsp;<br />
+<br />
+十、LinkedList 底层实现原理<br />
+1、了解结构。我们进入类中，看到它的变量<br />
+<br />
+LinkedList 有两个 Node 类型的 first、last属性，和自己的size；（用来存放第一个和最后一个，还有总大小的值）<br />
+<br />
+Node 类型又有两个 Node 类型的 next、prev属性,和自己的 item 属性；（用来存放 前一个和后一个对象数据，还有自己的值）<br />
+<br />
+由此可见 Node 类型是个 双向链表 的结构，而 LinkedList 里面存储的是 Node 结果自然就是 双向链表<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+2、内部类 Node 结构<br />
+<br />
+<br /></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/2086.html">Vue2和Vue3开发组件的区别</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/2088.html">SpringBoot自动注入分析</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://blog.csdn.net/fox_bert/article/details/90272656" target="_blank">https://blog.csdn.net/fox_bert/article/details/90272656</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

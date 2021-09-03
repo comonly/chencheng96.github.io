@@ -1,0 +1,662 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>SpringBoot自动注入分析_comonly.cn</title>
+<meta name="keywords" content="SpringBoot自动注入分析" />
+<meta name="description" content="我们经常会被问到这么一个问题：SpringBoot相对于spring有哪些优势呢？其中有一条答案就是SpringBoot自动注入。那么自动注入的原理是什么呢？我们进行如下分析。
+
+1：首先我们分析项目的启动类时，发现都会加上@SpringBootApplication这个注解，我们分析这个继续进入这个注解会发现，它是由多个注解组成的，如下
+
+
+复制代码
+&nbsp;1 @Target(ElementType.TYPE)
+&nbsp;2 @Retention(RetentionPolicy.R" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">SpringBoot自动注入分析</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author"> 李斯特王</li>
+          <li class="lmname"><a href="https://www.cnblogs.com/wanghaoyang/p/11693973.html" target="_blank">https://www.cnblogs.com/wanghaoyang/p/11693973.html</a></li>
+          <li class="timer">2021-08-28</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	javaweb---jsp asp数据库框架
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>我们经常会被问到这么一个问题：SpringBoot相对于spring有哪些优势呢？其中有一条答案就是SpringBoot自动注入。那么自动注入的原理是什么呢？我们进行如下分析。
+
+1：首先我们分析项目的启动类时，发现都会加上@SpringBootApplication这个注解，我们分析这个继续进入这个注解会发现，它是由多个注解组成的，如下
+
+
+复制代码
+&nbsp;1 @Target(ElementType.TYPE)
+&nbsp;2 @Retention(RetentionPolicy.R</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	我们经常会被问到这么一个问题：SpringBoot相对于spring有哪些优势呢？其中有一条答案就是SpringBoot自动注入。那么自动注入的原理是什么呢？我们进行如下分析。<br />
+<br />
+1：首先我们分析项目的启动类时，发现都会加上@SpringBootApplication这个注解，我们分析这个继续进入这个注解会发现，它是由多个注解组成的，如下<br />
+<br />
+<br />
+复制代码<br />
+&nbsp;1 @Target(ElementType.TYPE)<br />
+&nbsp;2 @Retention(RetentionPolicy.RUNTIME)<br />
+&nbsp;3 @Documented<br />
+&nbsp;4 @Inherited<br />
+&nbsp;5 @SpringBootConfiguration<br />
+&nbsp;6 @EnableAutoConfiguration<br />
+&nbsp;7 @ComponentScan(excludeFilters = {<br />
+&nbsp;8&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;@Filter(type = FilterType.CUSTOM, classes = TypeExcludeFilter.class),<br />
+&nbsp;9&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;@Filter(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class) })<br />
+10 public @interface SpringBootApplication {<br />
+复制代码<br />
+2：服务启动会扫描 org.springframework.boot.autoconfigure下的 META-INF/spring.factories 这个文件，这个文件中保存着springboot 启动时默认会自动注入的类，部分如下<br />
+<br />
+<br />
+复制代码<br />
+&nbsp;1 # Auto Configure<br />
+&nbsp;2 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\<br />
+&nbsp;3 org.springframework.boot.autoconfigure.admin.SpringApplicationAdminJmxAutoConfiguration,\<br />
+&nbsp;4 org.springframework.boot.autoconfigure.aop.AopAutoConfiguration,\<br />
+&nbsp;5 org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration,\<br />
+&nbsp;6 org.springframework.boot.autoconfigure.batch.BatchAutoConfiguration,\<br />
+&nbsp;7 org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration,\<br />
+&nbsp;8 org.springframework.boot.autoconfigure.cassandra.CassandraAutoConfiguration,\<br />
+&nbsp;9 org.springframework.boot.autoconfigure.cloud.CloudAutoConfiguration,\<br />
+10 org.springframework.boot.autoconfigure.context.ConfigurationPropertiesAutoConfiguration,\<br />
+11 org.springframework.boot.autoconfigure.context.MessageSourceAutoConfiguration,\<br />
+12 org.springframework.boot.autoconfigure.context.PropertyPlaceholderAutoConfiguration,\<br />
+13 org.springframework.boot.autoconfigure.couchbase.CouchbaseAutoConfiguration,\<br />
+14 org.springframework.boot.autoconfigure.dao.PersistenceExceptionTranslationAutoConfiguration,\<br />
+15 org.springframework.boot.autoconfigure.data.cassandra.CassandraDataAutoConfiguration,\<br />
+16 org.springframework.boot.autoconfigure.data.cassandra.CassandraRepositoriesAutoConfiguration,\<br />
+17 org.springframework.boot.autoconfigure.data.couchbase.CouchbaseDataAutoConfiguration,\<br />
+18 org.springframework.boot.autoconfigure.data.couchbase.CouchbaseRepositoriesAutoConfiguration,\<br />
+19 org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchAutoConfiguration,\<br />
+20 org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchDataAutoConfiguration,\<br />
+21 org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchRepositoriesAutoConfiguration,\<br />
+22 org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration,\<br />
+23 org.springframework.boot.autoconfigure.data.ldap.LdapDataAutoConfiguration,\<br />
+24 org.springframework.boot.autoconfigure.data.ldap.LdapRepositoriesAutoConfiguration,\<br />
+25 org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration,\<br />
+26 org.springframework.boot.autoconfigure.data.mongo.MongoRepositoriesAutoConfiguration,\<br />
+27 org.springframework.boot.autoconfigure.data.neo4j.Neo4jDataAutoConfiguration,\<br />
+28 org.springframework.boot.autoconfigure.data.neo4j.Neo4jRepositoriesAutoConfiguration,\<br />
+29 org.springframework.boot.autoconfigure.data.solr.SolrRepositoriesAutoConfiguration,\<br />
+30 org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration,\<br />
+31 org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration,\<br />
+32 org.springframework.boot.autoconfigure.data.rest.RepositoryRestMvcAutoConfiguration,\<br />
+33 org.springframework.boot.autoconfigure.data.web.SpringDataWebAutoConfiguration,\<br />
+34 org.springframework.boot.autoconfigure.elasticsearch.jest.JestAutoConfiguration,\<br />
+35 org.springframework.boot.autoconfigure.freemarker.FreeMarkerAutoConfiguration,\<br />
+36 org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration,\<br />
+37 org.springframework.boot.autoconfigure.h2.H2ConsoleAutoConfiguration,\<br />
+38 org.springframework.boot.autoconfigure.hateoas.HypermediaAutoConfiguration,\<br />
+39 org.springframework.boot.autoconfigure.hazelcast.HazelcastAutoConfiguration,\<br />
+40 org.springframework.boot.autoconfigure.hazelcast.HazelcastJpaDependencyAutoConfiguration,\<br />
+41 org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration,\<br />
+42 org.springframework.boot.autoconfigure.integration.IntegrationAutoConfiguration,\<br />
+43 org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration,\<br />
+44 org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,\<br />
+45 org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration,\<br />
+46 org.springframework.boot.autoconfigure.jdbc.JndiDataSourceAutoConfiguration,\<br />
+47 org.springframework.boot.autoconfigure.jdbc.XADataSourceAutoConfiguration,\<br />
+48 org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration,\<br />
+49 org.springframework.boot.autoconfigure.jms.JmsAutoConfiguration,\<br />
+50 org.springframework.boot.autoconfigure.jmx.JmxAutoConfiguration,\<br />
+51 org.springframework.boot.autoconfigure.jms.JndiConnectionFactoryAutoConfiguration,\<br />
+52 org.springframework.boot.autoconfigure.jms.activemq.ActiveMQAutoConfiguration,\<br />
+53 org.springframework.boot.autoconfigure.jms.artemis.ArtemisAutoConfiguration,\<br />
+54 org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration,\<br />
+55 org.springframework.boot.autoconfigure.groovy.template.GroovyTemplateAutoConfiguration,\<br />
+56 org.springframework.boot.autoconfigure.jersey.JerseyAutoConfiguration,\<br />
+57 org.springframework.boot.autoconfigure.jooq.JooqAutoConfiguration,\<br />
+58 org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration,\<br />
+59 org.springframework.boot.autoconfigure.ldap.embedded.EmbeddedLdapAutoConfiguration,\<br />
+60 org.springframework.boot.autoconfigure.ldap.LdapAutoConfiguration,\<br />
+61 org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration,\<br />
+62 org.springframework.boot.autoconfigure.mail.MailSenderAutoConfiguration,\<br />
+63 org.springframework.boot.autoconfigure.mail.MailSenderValidatorAutoConfiguration,\<br />
+64 org.springframework.boot.autoconfigure.mobile.DeviceResolverAutoConfiguration,\<br />
+65 org.springframework.boot.autoconfigure.mobile.DeviceDelegatingViewResolverAutoConfiguration,\<br />
+66 org.springframework.boot.autoconfigure.mobile.SitePreferenceAutoConfiguration,\<br />
+67 org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoConfiguration,\<br />
+68 org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration,\<br />
+69 org.springframework.boot.autoconfigure.mustache.MustacheAutoConfiguration,\<br />
+70 org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration,\<br />
+71 org.springframework.boot.autoconfigure.reactor.ReactorAutoConfiguration,\<br />
+72 org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration,\<br />
+73 org.springframework.boot.autoconfigure.security.SecurityFilterAutoConfiguration,\<br />
+74 org.springframework.boot.autoconfigure.security.FallbackWebSecurityAutoConfiguration,\<br />
+75 org.springframework.boot.autoconfigure.security.oauth2.OAuth2AutoConfiguration,\<br />
+76 org.springframework.boot.autoconfigure.sendgrid.SendGridAutoConfiguration,\<br />
+77 org.springframework.boot.autoconfigure.session.SessionAutoConfiguration,\<br />
+78 org.springframework.boot.autoconfigure.social.SocialWebAutoConfiguration,\<br />
+79 org.springframework.boot.autoconfigure.social.FacebookAutoConfiguration,\<br />
+80 org.springframework.boot.autoconfigure.social.LinkedInAutoConfiguration,\<br />
+81 org.springframework.boot.autoconfigure.social.TwitterAutoConfiguration,\<br />
+82 org.springframework.boot.autoconfigure.solr.SolrAutoConfiguration,\<br />
+83 org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration,\<br />
+84 org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration,\<br />
+85 org.springframework.boot.autoconfigure.transaction.jta.JtaAutoConfiguration,\<br />
+86 org.springframework.boot.autoconfigure.validation.ValidationAutoConfiguration,\<br />
+87 org.springframework.boot.autoconfigure.web.DispatcherServletAutoConfiguration,\<br />
+88 org.springframework.boot.autoconfigure.web.EmbeddedServletContainerAutoConfiguration,\<br />
+89 org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration,\<br />
+90 org.springframework.boot.autoconfigure.web.HttpEncodingAutoConfiguration,\<br />
+91 org.springframework.boot.autoconfigure.web.HttpMessageConvertersAutoConfiguration,\<br />
+92 org.springframework.boot.autoconfigure.web.MultipartAutoConfiguration,\<br />
+93 org.springframework.boot.autoconfigure.web.ServerPropertiesAutoConfiguration,\<br />
+94 org.springframework.boot.autoconfigure.web.WebClientAutoConfiguration,\<br />
+95 org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration,\<br />
+96 org.springframework.boot.autoconfigure.websocket.WebSocketAutoConfiguration,\<br />
+97 org.springframework.boot.autoconfigure.websocket.WebSocketMessagingAutoConfiguration,\<br />
+98 org.springframework.boot.autoconfigure.webservices.WebServicesAutoConfiguration<br />
+复制代码<br />
+3：你是不是在其中发现了自己常用的redis，mysql等相关的类？没错，springboot会尝试加载这些类，我们以 org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration 这个类为例，进去看一下它的源码，部分示例如下<br />
+<br />
+<br />
+复制代码<br />
+&nbsp;1 @Configuration<br />
+&nbsp;2 @ConditionalOnClass({ JedisConnection.class, RedisOperations.class, Jedis.class })<br />
+&nbsp;3 @EnableConfigurationProperties(RedisProperties.class)<br />
+&nbsp;4 public class RedisAutoConfiguration {<br />
+&nbsp;5&nbsp;<br />
+&nbsp;6&nbsp; &nbsp; &nbsp;/**<br />
+&nbsp;7&nbsp; &nbsp; &nbsp; * Redis connection configuration.<br />
+&nbsp;8&nbsp; &nbsp; &nbsp; */<br />
+&nbsp;9&nbsp; &nbsp; &nbsp;@Configuration<br />
+10&nbsp; &nbsp; &nbsp;@ConditionalOnClass(GenericObjectPool.class)<br />
+11&nbsp; &nbsp; &nbsp;protected static class RedisConnectionConfiguration {<br />
+12&nbsp;<br />
+13&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;private final RedisProperties properties;<br />
+14&nbsp;<br />
+15&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;private final RedisSentinelConfiguration sentinelConfiguration;<br />
+16&nbsp;<br />
+17&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;private final RedisClusterConfiguration clusterConfiguration;<br />
+18&nbsp;<br />
+19&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;public RedisConnectionConfiguration(RedisProperties properties,<br />
+20&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ObjectProvider&lt;RedisSentinelConfiguration&gt; sentinelConfiguration,<br />
+21&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ObjectProvider&lt;RedisClusterConfiguration&gt; clusterConfiguration) {<br />
+22&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;this.properties = properties;<br />
+23&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;this.sentinelConfiguration = sentinelConfiguration.getIfAvailable();<br />
+24&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;this.clusterConfiguration = clusterConfiguration.getIfAvailable();<br />
+25&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}<br />
+26&nbsp;<br />
+27&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;@Bean<br />
+28&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;@ConditionalOnMissingBean(RedisConnectionFactory.class)<br />
+29&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;public JedisConnectionFactory redisConnectionFactory()<br />
+30&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;throws UnknownHostException {<br />
+31&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return applyProperties(createJedisConnectionFactory());<br />
+32&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}<br />
+复制代码<br />
+我们能看到这个类上加了这个注解 @ConditionalOnClass({ JedisConnection.class, RedisOperations.class, Jedis.class }) 意思就是如果你的classpath中没有这些类的话，那么这个类就不能被加载，那么这些被依赖的类在哪出现呢？没错，就在我们在pom.xml中引入的依赖所对应的包里。<br />
+<br />
+看到这里你因该就明白了，META-INF/spring.factories 文件中被列出来的那些类都会被springboot去尝试加载，但是有些模块我们没引入相关的依赖，那么这个类就会加载失败。即这个模块没有被成功加载。<br />
+<br />
+4：我们通过上面的redis的自动加载类时，看到上面还有个 @EnableConfigurationProperties(RedisProperties.class) 注解，这个注解来注入关于redis的配置信息，这个信息都在 RedisProperties.class 中保存，我们看下 RedisProperties的源码<br />
+<br />
+<br />
+复制代码<br />
+&nbsp; 1 @ConfigurationProperties(prefix = "spring.redis")<br />
+&nbsp; 2 public class RedisProperties {<br />
+&nbsp; 3&nbsp;<br />
+&nbsp; 4&nbsp; &nbsp; &nbsp;/**<br />
+&nbsp; 5&nbsp; &nbsp; &nbsp; * Database index used by the connection factory.<br />
+&nbsp; 6&nbsp; &nbsp; &nbsp; */<br />
+&nbsp; 7&nbsp; &nbsp; &nbsp;private int database = 0;<br />
+&nbsp; 8&nbsp;<br />
+&nbsp; 9&nbsp; &nbsp; &nbsp;/**<br />
+&nbsp;10&nbsp; &nbsp; &nbsp; * Redis url, which will overrule host, port and password if set.<br />
+&nbsp;11&nbsp; &nbsp; &nbsp; */<br />
+&nbsp;12&nbsp; &nbsp; &nbsp;private String url;<br />
+&nbsp;13&nbsp;<br />
+&nbsp;14&nbsp; &nbsp; &nbsp;/**<br />
+&nbsp;15&nbsp; &nbsp; &nbsp; * Redis server host.<br />
+&nbsp;16&nbsp; &nbsp; &nbsp; */<br />
+&nbsp;17&nbsp; &nbsp; &nbsp;private String host = "localhost";<br />
+&nbsp;18&nbsp;<br />
+&nbsp;19&nbsp; &nbsp; &nbsp;/**<br />
+&nbsp;20&nbsp; &nbsp; &nbsp; * Login password of the redis server.<br />
+&nbsp;21&nbsp; &nbsp; &nbsp; */<br />
+&nbsp;22&nbsp; &nbsp; &nbsp;private String password;<br />
+&nbsp;23&nbsp;<br />
+&nbsp;24&nbsp; &nbsp; &nbsp;/**<br />
+&nbsp;25&nbsp; &nbsp; &nbsp; * Redis server port.<br />
+&nbsp;26&nbsp; &nbsp; &nbsp; */<br />
+&nbsp;27&nbsp; &nbsp; &nbsp;private int port = 6379;<br />
+&nbsp;28&nbsp;<br />
+&nbsp;29&nbsp; &nbsp; &nbsp;/**<br />
+&nbsp;30&nbsp; &nbsp; &nbsp; * Enable SSL.<br />
+&nbsp;31&nbsp; &nbsp; &nbsp; */<br />
+&nbsp;32&nbsp; &nbsp; &nbsp;private boolean ssl;<br />
+&nbsp;33&nbsp;<br />
+&nbsp;34&nbsp; &nbsp; &nbsp;/**<br />
+&nbsp;35&nbsp; &nbsp; &nbsp; * Connection timeout in milliseconds.<br />
+&nbsp;36&nbsp; &nbsp; &nbsp; */<br />
+&nbsp;37&nbsp; &nbsp; &nbsp;private int timeout;<br />
+&nbsp;38&nbsp;<br />
+&nbsp;39&nbsp; &nbsp; &nbsp;private Pool pool;<br />
+&nbsp;40&nbsp;<br />
+&nbsp;41&nbsp; &nbsp; &nbsp;private Sentinel sentinel;<br />
+&nbsp;42&nbsp;<br />
+&nbsp;43&nbsp; &nbsp; &nbsp;private Cluster cluster;<br />
+&nbsp;44&nbsp;<br />
+&nbsp;45&nbsp; &nbsp; &nbsp;public int getDatabase() {<br />
+&nbsp;46&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return this.database;<br />
+&nbsp;47&nbsp; &nbsp; &nbsp;}<br />
+&nbsp;48&nbsp;<br />
+&nbsp;49&nbsp; &nbsp; &nbsp;public void setDatabase(int database) {<br />
+&nbsp;50&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;this.database = database;<br />
+&nbsp;51&nbsp; &nbsp; &nbsp;}<br />
+&nbsp;52&nbsp;<br />
+&nbsp;53&nbsp; &nbsp; &nbsp;public String getUrl() {<br />
+&nbsp;54&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return this.url;<br />
+&nbsp;55&nbsp; &nbsp; &nbsp;}<br />
+&nbsp;56&nbsp;<br />
+&nbsp;57&nbsp; &nbsp; &nbsp;public void setUrl(String url) {<br />
+&nbsp;58&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;this.url = url;<br />
+&nbsp;59&nbsp; &nbsp; &nbsp;}<br />
+&nbsp;60&nbsp;<br />
+&nbsp;61&nbsp; &nbsp; &nbsp;public String getHost() {<br />
+&nbsp;62&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return this.host;<br />
+&nbsp;63&nbsp; &nbsp; &nbsp;}<br />
+&nbsp;64&nbsp;<br />
+&nbsp;65&nbsp; &nbsp; &nbsp;public void setHost(String host) {<br />
+&nbsp;66&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;this.host = host;<br />
+&nbsp;67&nbsp; &nbsp; &nbsp;}<br />
+&nbsp;68&nbsp;<br />
+&nbsp;69&nbsp; &nbsp; &nbsp;public String getPassword() {<br />
+&nbsp;70&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return this.password;<br />
+&nbsp;71&nbsp; &nbsp; &nbsp;}<br />
+&nbsp;72&nbsp;<br />
+&nbsp;73&nbsp; &nbsp; &nbsp;public void setPassword(String password) {<br />
+&nbsp;74&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;this.password = password;<br />
+&nbsp;75&nbsp; &nbsp; &nbsp;}<br />
+&nbsp;76&nbsp;<br />
+&nbsp;77&nbsp; &nbsp; &nbsp;public int getPort() {<br />
+&nbsp;78&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return this.port;<br />
+&nbsp;79&nbsp; &nbsp; &nbsp;}<br />
+&nbsp;80&nbsp;<br />
+&nbsp;81&nbsp; &nbsp; &nbsp;public void setPort(int port) {<br />
+&nbsp;82&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;this.port = port;<br />
+&nbsp;83&nbsp; &nbsp; &nbsp;}<br />
+&nbsp;84&nbsp;<br />
+&nbsp;85&nbsp; &nbsp; &nbsp;public boolean isSsl() {<br />
+&nbsp;86&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return this.ssl;<br />
+&nbsp;87&nbsp; &nbsp; &nbsp;}<br />
+&nbsp;88&nbsp;<br />
+&nbsp;89&nbsp; &nbsp; &nbsp;public void setSsl(boolean ssl) {<br />
+&nbsp;90&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;this.ssl = ssl;<br />
+&nbsp;91&nbsp; &nbsp; &nbsp;}<br />
+&nbsp;92&nbsp;<br />
+&nbsp;93&nbsp; &nbsp; &nbsp;public void setTimeout(int timeout) {<br />
+&nbsp;94&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;this.timeout = timeout;<br />
+&nbsp;95&nbsp; &nbsp; &nbsp;}<br />
+&nbsp;96&nbsp;<br />
+&nbsp;97&nbsp; &nbsp; &nbsp;public int getTimeout() {<br />
+&nbsp;98&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return this.timeout;<br />
+&nbsp;99&nbsp; &nbsp; &nbsp;}<br />
+100&nbsp;<br />
+101&nbsp; &nbsp; &nbsp;public Sentinel getSentinel() {<br />
+102&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return this.sentinel;<br />
+103&nbsp; &nbsp; &nbsp;}<br />
+104&nbsp;<br />
+105&nbsp; &nbsp; &nbsp;public void setSentinel(Sentinel sentinel) {<br />
+106&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;this.sentinel = sentinel;<br />
+107&nbsp; &nbsp; &nbsp;}<br />
+108&nbsp;<br />
+109&nbsp; &nbsp; &nbsp;public Pool getPool() {<br />
+110&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return this.pool;<br />
+111&nbsp; &nbsp; &nbsp;}<br />
+112&nbsp;<br />
+113&nbsp; &nbsp; &nbsp;public void setPool(Pool pool) {<br />
+114&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;this.pool = pool;<br />
+115&nbsp; &nbsp; &nbsp;}<br />
+116&nbsp;<br />
+117&nbsp; &nbsp; &nbsp;public Cluster getCluster() {<br />
+118&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return this.cluster;<br />
+119&nbsp; &nbsp; &nbsp;}<br />
+120&nbsp;<br />
+121&nbsp; &nbsp; &nbsp;public void setCluster(Cluster cluster) {<br />
+122&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;this.cluster = cluster;<br />
+123&nbsp; &nbsp; &nbsp;}<br />
+124&nbsp;<br />
+125&nbsp; &nbsp; &nbsp;/**<br />
+126&nbsp; &nbsp; &nbsp; * Pool properties.<br />
+127&nbsp; &nbsp; &nbsp; */<br />
+128&nbsp; &nbsp; &nbsp;public static class Pool {<br />
+129&nbsp;<br />
+130&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/**<br />
+131&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; * Max number of "idle" connections in the pool. Use a negative value to indicate<br />
+132&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; * an unlimited number of idle connections.<br />
+133&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; */<br />
+134&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;private int maxIdle = 8;<br />
+135&nbsp;<br />
+136&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/**<br />
+137&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; * Target for the minimum number of idle connections to maintain in the pool. This<br />
+138&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; * setting only has an effect if it is positive.<br />
+139&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; */<br />
+140&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;private int minIdle = 0;<br />
+141&nbsp;<br />
+142&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/**<br />
+143&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; * Max number of connections that can be allocated by the pool at a given time.<br />
+144&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; * Use a negative value for no limit.<br />
+145&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; */<br />
+146&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;private int maxActive = 8;<br />
+147&nbsp;<br />
+148&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/**<br />
+149&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; * Maximum amount of time (in milliseconds) a connection allocation should block<br />
+150&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; * before throwing an exception when the pool is exhausted. Use a negative value<br />
+151&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; * to block indefinitely.<br />
+152&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; */<br />
+153&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;private int maxWait = -1;<br />
+154&nbsp;<br />
+155&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;public int getMaxIdle() {<br />
+156&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return this.maxIdle;<br />
+157&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}<br />
+158&nbsp;<br />
+159&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;public void setMaxIdle(int maxIdle) {<br />
+160&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;this.maxIdle = maxIdle;<br />
+161&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}<br />
+162&nbsp;<br />
+163&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;public int getMinIdle() {<br />
+164&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return this.minIdle;<br />
+165&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}<br />
+166&nbsp;<br />
+167&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;public void setMinIdle(int minIdle) {<br />
+168&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;this.minIdle = minIdle;<br />
+169&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}<br />
+170&nbsp;<br />
+171&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;public int getMaxActive() {<br />
+172&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return this.maxActive;<br />
+173&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}<br />
+174&nbsp;<br />
+175&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;public void setMaxActive(int maxActive) {<br />
+176&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;this.maxActive = maxActive;<br />
+177&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}<br />
+178&nbsp;<br />
+179&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;public int getMaxWait() {<br />
+180&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return this.maxWait;<br />
+181&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}<br />
+182&nbsp;<br />
+183&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;public void setMaxWait(int maxWait) {<br />
+184&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;this.maxWait = maxWait;<br />
+185&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}<br />
+186&nbsp;<br />
+187&nbsp; &nbsp; &nbsp;}<br />
+188&nbsp;<br />
+189&nbsp; &nbsp; &nbsp;/**<br />
+190&nbsp; &nbsp; &nbsp; * Cluster properties.<br />
+191&nbsp; &nbsp; &nbsp; */<br />
+192&nbsp; &nbsp; &nbsp;public static class Cluster {<br />
+193&nbsp;<br />
+194&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/**<br />
+195&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; * Comma-separated list of "host:port" pairs to bootstrap from. This represents an<br />
+196&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; * "initial" list of cluster nodes and is required to have at least one entry.<br />
+197&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; */<br />
+198&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;private List&lt;String&gt; nodes;<br />
+199&nbsp;<br />
+200&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/**<br />
+201&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; * Maximum number of redirects to follow when executing commands across the<br />
+202&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; * cluster.<br />
+203&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; */<br />
+204&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;private Integer maxRedirects;<br />
+205&nbsp;<br />
+206&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;public List&lt;String&gt; getNodes() {<br />
+207&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return this.nodes;<br />
+208&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}<br />
+209&nbsp;<br />
+210&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;public void setNodes(List&lt;String&gt; nodes) {<br />
+211&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;this.nodes = nodes;<br />
+212&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}<br />
+213&nbsp;<br />
+214&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;public Integer getMaxRedirects() {<br />
+215&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return this.maxRedirects;<br />
+216&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}<br />
+217&nbsp;<br />
+218&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;public void setMaxRedirects(Integer maxRedirects) {<br />
+219&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;this.maxRedirects = maxRedirects;<br />
+220&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}<br />
+221&nbsp;<br />
+222&nbsp; &nbsp; &nbsp;}<br />
+223&nbsp;<br />
+224&nbsp; &nbsp; &nbsp;/**<br />
+225&nbsp; &nbsp; &nbsp; * Redis sentinel properties.<br />
+226&nbsp; &nbsp; &nbsp; */<br />
+227&nbsp; &nbsp; &nbsp;public static class Sentinel {<br />
+228&nbsp;<br />
+229&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/**<br />
+230&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; * Name of Redis server.<br />
+231&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; */<br />
+232&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;private String master;<br />
+233&nbsp;<br />
+234&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/**<br />
+235&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; * Comma-separated list of host:port pairs.<br />
+236&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; */<br />
+237&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;private String nodes;<br />
+238&nbsp;<br />
+239&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;public String getMaster() {<br />
+240&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return this.master;<br />
+241&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}<br />
+242&nbsp;<br />
+243&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;public void setMaster(String master) {<br />
+244&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;this.master = master;<br />
+245&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}<br />
+246&nbsp;<br />
+247&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;public String getNodes() {<br />
+248&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return this.nodes;<br />
+249&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}<br />
+250&nbsp;<br />
+251&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;public void setNodes(String nodes) {<br />
+252&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;this.nodes = nodes;<br />
+253&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}<br />
+254&nbsp;<br />
+255&nbsp; &nbsp; &nbsp;}<br />
+256&nbsp;<br />
+257 }<br />
+复制代码<br />
+发现里面的配置项基本都是有默认值的，通过上面的注解可以明白，如果配置文件中存在 spring.redis 开头的配置项，则使用配置文件中的，如果没有的话则使用文件中默认写死的配置。你是不是想到了springboot的另外一个优势：约定大于配置。<br />
+<br />
+这里我们大概了解了SpringBoot自动配置的原理和流程，里面的那些细节我们不在分析。同理，对于那些第三方或者我们自己写的starter，springboot启动的时候会扫描starter的jar包下 META-INF/spring.factories 这个文件，解析内容并加载里面对用的类。<br />
+<br />
+由此，我们总结出以下几点<br />
+<br />
+1：SpringBoot的自动配置是如何实现的<br />
+<br />
+2：有关的那些注解，如@EnableAutoConfiguration, @ConditionalOnClass, @Configuration等也是SpringBoot的核心注解，也值得我们了解其用法和原理。<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/2087.html">深入了解Java数据结构（集合及底层实现）</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/2089.html">spring boot插件开发实战和原理</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.cnblogs.com/wanghaoyang/p/11693973.html" target="_blank">https://www.cnblogs.com/wanghaoyang/p/11693973.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

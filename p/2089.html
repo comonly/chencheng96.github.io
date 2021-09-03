@@ -1,0 +1,376 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>spring boot插件开发实战和原理_comonly.cn</title>
+<meta name="keywords" content="spring boot插件开发实战和原理" />
+<meta name="description" content="本文转载自spring boot插件开发实战和原理
+	
+
+
+	实战：编写spring boot插件
+
+
+	1.1.&nbsp;为什么要编写boot插件
+
+
+	因为我们在开发的时候需要提供一些共同的功能，所以我们编写个共同的jar包。开发人员在使用jar包的时候不用考虑jar包的内容，直接使用具体的功能即可，但是可能由于包路径的不同，你所编写的bean没有被初始化到spring容器中。不应该让开发人员去扫描你的包路径去初始化bean。所以我们要自己动手去把bean初始化到bean容器中，" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">spring boot插件开发实战和原理</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">Yungyu</li>
+          <li class="lmname"><a href="https://www.cnblogs.com/yungyu16/p/13234581.html" target="_blank">https://www.cnblogs.com/yungyu16/p/13234581.html</a></li>
+          <li class="timer">2021-08-28</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	javaweb---jsp asp数据库框架
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>本文转载自spring boot插件开发实战和原理
+	
+
+
+	实战：编写spring boot插件
+
+
+	1.1.&nbsp;为什么要编写boot插件
+
+
+	因为我们在开发的时候需要提供一些共同的功能，所以我们编写个共同的jar包。开发人员在使用jar包的时候不用考虑jar包的内容，直接使用具体的功能即可，但是可能由于包路径的不同，你所编写的bean没有被初始化到spring容器中。不应该让开发人员去扫描你的包路径去初始化bean。所以我们要自己动手去把bean初始化到bean容器中，</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <blockquote style="background:#F7F7F7;color:#747474;font-family:&quot;font-size:16px;">
+	<p style="text-indent:2em;">
+		本文转载自<a href="https://juejin.im/post/5e776204f265da574a1ed691" target="_blank">spring boot插件开发实战和原理</a>
+	</p>
+</blockquote>
+<h1 id="实战：编写spring-boot插件" style="font-size:28px;background-color:#3199E4;color:#FFFFFF;font-family:&quot;">
+	实战：编写spring boot插件
+</h1>
+<h2 id="为什么要编写boot插件" style="font-size:21px;color:#3199E4;font-family:&quot;background-color:#FFFFFF;">
+	1.1.&nbsp;为什么要编写boot插件
+</h2>
+<p style="text-indent:2em;font-family:&quot;font-size:16px;background-color:#FFFFFF;">
+	因为我们在开发的时候需要提供一些共同的功能，所以我们编写个共同的jar包。开发人员在使用jar包的时候不用考虑jar包的内容，直接使用具体的功能即可，但是可能由于包路径的不同，你所编写的bean没有被初始化到spring容器中。不应该让开发人员去扫描你的包路径去初始化bean。所以我们要自己动手去把bean初始化到bean容器中，这也是spring扩展能力的由来（spriing.factories）
+</p>
+<h2 id="实战" style="font-size:21px;color:#3199E4;font-family:&quot;background-color:#FFFFFF;">
+	1.2.&nbsp;实战
+</h2>
+<p style="text-indent:2em;font-family:&quot;font-size:16px;background-color:#FFFFFF;">
+	编写插件代码,编写配置类（例如：DemoAutoConfig），在其中定义你需要的bean 在resources下创建META-INF/spring.factories 编写spring.factories
+</p>
+<pre>org.springframework.boot.autoconfigure.EnableAutoConfiguration= <span class="hljs-keyword" style="color:#F92672;">com</span>.demo.DemoAutoConfig</pre>
+<h1 id="springfactories-常用配置接口" style="font-size:28px;background-color:#3199E4;color:#FFFFFF;font-family:&quot;">
+	spring.factories 常用配置接口
+</h1>
+<h2 id="orgspringframeworkbootspringapplicationrunlistener" style="font-size:21px;color:#3199E4;font-family:&quot;background-color:#FFFFFF;">
+	2.1.&nbsp;org.springframework.boot.SpringApplicationRunListener
+</h2>
+<p style="text-indent:2em;font-family:&quot;font-size:16px;background-color:#FFFFFF;">
+	SpringApplicationRunListener来监听Spring Boot的启动流程，并且在各个流程中处理自己的逻辑。在应用启动时，在Spring容器初始化的各个阶段回调对应的方法。
+</p>
+<h2 id="orgspringframeworkcontextapplicationcontextinitializer" style="font-size:21px;color:#3199E4;font-family:&quot;background-color:#FFFFFF;">
+	2.2.&nbsp;org.springframework.context.ApplicationContextInitializer
+</h2>
+<p style="text-indent:2em;font-family:&quot;font-size:16px;background-color:#FFFFFF;">
+	ApplicationContextInitializer是在springboot启动过程上下文 ConfigurableApplicationContext刷新方法前(refresh)调用，对ConfigurableApplicationContext的实例做进一步的设置或者处理。
+</p>
+<h2 id="orgspringframeworkbootautoconfigureenableautoconfiguration" style="font-size:21px;color:#3199E4;font-family:&quot;background-color:#FFFFFF;">
+	2.3.&nbsp;org.springframework.boot.autoconfigure.EnableAutoConfiguration
+</h2>
+<p style="text-indent:2em;font-family:&quot;font-size:16px;background-color:#FFFFFF;">
+	定义系统自动装配的类。
+</p>
+<h2 id="orgspringframeworkbootenvenvironmentpostprocessor" style="font-size:21px;color:#3199E4;font-family:&quot;background-color:#FFFFFF;">
+	2.4.&nbsp;org.springframework.boot.env.EnvironmentPostProcessor
+</h2>
+<p style="text-indent:2em;font-family:&quot;font-size:16px;background-color:#FFFFFF;">
+	配置环境的集中管理。比如扩展去做排除加载系统默认的哪些配置类，方便自定义扩展。
+</p>
+<h2 id="orgspringframeworkbootautoconfigureautoconfigurationimportfilter" style="font-size:21px;color:#3199E4;font-family:&quot;background-color:#FFFFFF;">
+	2.5.&nbsp;org.springframework.boot.autoconfigure.AutoConfigurationImportFilter
+</h2>
+<p style="text-indent:2em;font-family:&quot;font-size:16px;background-color:#FFFFFF;">
+	自动装配类排除
+</p>
+<h1 id="spring-factories-原理" style="font-size:28px;background-color:#3199E4;color:#FFFFFF;font-family:&quot;">
+	spring factories 原理
+</h1>
+<h2 id="获取配置流程" style="font-size:21px;color:#3199E4;font-family:&quot;background-color:#FFFFFF;">
+	3.1.&nbsp;获取配置流程
+</h2>
+<p style="text-indent:2em;font-family:&quot;font-size:16px;background-color:#FFFFFF;">
+	在启动类注解@SpringBootApplication中可以看到引用了@EnableAutoConfiguration。 其中@Import(AutoConfigurationImportSelector.class)
+</p>
+<pre><span class="hljs-keyword" style="color:#F92672;">public</span> String[] selectImports(AnnotationMetadata annotationMetadata) { <span class="hljs-keyword" style="color:#F92672;">if</span> (!isEnabled(annotationMetadata)) { <span class="hljs-keyword" style="color:#F92672;">return</span> NO_IMPORTS;
+    }
+    AutoConfigurationMetadata autoConfigurationMetadata = AutoConfigurationMetadataLoader
+            .loadMetadata(<span class="hljs-keyword" style="color:#F92672;">this</span>.beanClassLoader);
+    AutoConfigurationEntry autoConfigurationEntry = getAutoConfigurationEntry(autoConfigurationMetadata,
+            annotationMetadata); <span class="hljs-keyword" style="color:#F92672;">return</span> StringUtils.toStringArray(autoConfigurationEntry.getConfigurations());
+}</pre>
+<p style="text-indent:2em;font-family:&quot;font-size:16px;background-color:#FFFFFF;">
+	其中getAutoConfigurationEntry方法
+</p>
+<pre><span class="hljs-keyword" style="color:#F92672;">protected</span> AutoConfigurationEntry <span class="hljs-function"><span class="hljs-title" style="color:#A6E22E;">getAutoConfigurationEntry</span>(<span class="hljs-params" style="color:#F8F8F2;">AutoConfigurationMetadata autoConfigurationMetadata,
+			AnnotationMetadata annotationMetadata</span>)</span> { <span class="hljs-keyword" style="color:#F92672;">if</span> (!isEnabled(annotationMetadata)) { <span class="hljs-keyword" style="color:#F92672;">return</span> EMPTY_ENTRY;
+    }
+    AnnotationAttributes attributes = getAttributes(annotationMetadata);
+    List&lt;<span class="hljs-built_in" style="color:#E6DB74;">String</span>&gt; configurations = getCandidateConfigurations(annotationMetadata, attributes);
+    configurations = removeDuplicates(configurations); <span class="hljs-built_in" style="color:#E6DB74;">Set</span>&lt;<span class="hljs-built_in" style="color:#E6DB74;">String</span>&gt; exclusions = getExclusions(annotationMetadata, attributes);
+    checkExcludedClasses(configurations, exclusions);
+    configurations.removeAll(exclusions);
+    configurations = filter(configurations, autoConfigurationMetadata);
+    fireAutoConfigurationImportEvents(configurations, exclusions); <span class="hljs-keyword" style="color:#F92672;">return</span> <span class="hljs-keyword" style="color:#F92672;">new</span> AutoConfigurationEntry(configurations, exclusions);
+}</pre>
+<p style="text-indent:2em;font-family:&quot;font-size:16px;background-color:#FFFFFF;">
+	其中getCandidateConfigurations
+</p>
+<pre><span class="hljs-keyword" style="color:#F92672;">protected</span> <span class="hljs-keyword" style="color:#F92672;">List</span>&lt;<span class="hljs-keyword" style="color:#F92672;">String</span>&gt; getCandidateConfigurations(AnnotationMetadata metadata, AnnotationAttributes attributes) { <span class="hljs-keyword" style="color:#F92672;">List</span>&lt;<span class="hljs-keyword" style="color:#F92672;">String</span>&gt; configurations = SpringFactoriesLoader.loadFactoryNames(getSpringFactoriesLoaderFactoryClass(),
+            getBeanClassLoader());
+    Assert.notEmpty(configurations, <span class="hljs-string" style="color:#E6DB74;">"No auto configuration classes found in META-INF/spring.factories. If you "</span> + <span class="hljs-string" style="color:#E6DB74;">"are using a custom packaging, make sure that file is correct."</span>); <span class="hljs-keyword" style="color:#F92672;">return</span> configurations;
+}</pre>
+<p style="text-indent:2em;font-family:&quot;font-size:16px;background-color:#FFFFFF;">
+	调用了SpringFactoriesLoader.loadFactoryNames
+</p>
+<pre><span class="hljs-keyword" style="color:#F92672;">public</span> <span class="hljs-built_in" style="color:#E6DB74;">static</span> <span class="hljs-keyword" style="color:#F92672;">List</span>&lt;<span class="hljs-keyword" style="color:#F92672;">String</span>&gt; loadFactoryNames(<span class="hljs-class"><span class="hljs-keyword" style="color:#F92672;">Class</span>&lt;?&gt; <span class="hljs-title" style="color:#F8F8F2;">factoryType</span>, @<span class="hljs-title" style="color:#F8F8F2;">Nullable</span> <span class="hljs-title" style="color:#F8F8F2;">ClassLoader</span> <span class="hljs-title" style="color:#F8F8F2;">classLoader</span>) </span>{ <span class="hljs-keyword" style="color:#F92672;">String</span> factoryTypeName = factoryType.getName(); <span class="hljs-keyword" style="color:#F92672;">return</span> loadSpringFactories(classLoader).getOrDefault(factoryTypeName, Collections.emptyList());
+}</pre>
+<p style="text-indent:2em;font-family:&quot;font-size:16px;background-color:#FFFFFF;">
+	loadSpringFactories方法
+</p>
+<pre><span class="hljs-keyword" style="color:#F92672;">public</span> <span class="hljs-keyword" style="color:#F92672;">static</span> final <span class="hljs-built_in" style="color:#E6DB74;">String</span> FACTORIES_RESOURCE_LOCATION = <span class="hljs-string" style="color:#E6DB74;">"META-INF/spring.factories"</span>; <span class="hljs-keyword" style="color:#F92672;">private</span> <span class="hljs-keyword" style="color:#F92672;">static</span> final <span class="hljs-built_in" style="color:#E6DB74;">Map</span>&lt;ClassLoader, MultiValueMap&lt;<span class="hljs-built_in" style="color:#E6DB74;">String</span>, <span class="hljs-built_in" style="color:#E6DB74;">String</span>&gt;&gt; cache = <span class="hljs-keyword" style="color:#F92672;">new</span> ConcurrentReferenceHashMap&lt;&gt;(); <span class="hljs-keyword" style="color:#F92672;">private</span> <span class="hljs-keyword" style="color:#F92672;">static</span> <span class="hljs-built_in" style="color:#E6DB74;">Map</span>&lt;<span class="hljs-built_in" style="color:#E6DB74;">String</span>, List&lt;<span class="hljs-built_in" style="color:#E6DB74;">String</span>&gt;&gt; <span class="hljs-function"><span class="hljs-title" style="color:#A6E22E;">loadSpringFactories</span>(<span class="hljs-params" style="color:#F8F8F2;"><span class="hljs-meta" style="color:#75715E;">@Nullable</span> ClassLoader classLoader</span>)</span> {
+    MultiValueMap&lt;<span class="hljs-built_in" style="color:#E6DB74;">String</span>, <span class="hljs-built_in" style="color:#E6DB74;">String</span>&gt; result = cache.get(classLoader); <span class="hljs-keyword" style="color:#F92672;">if</span> (result != <span class="hljs-literal" style="color:#AE81FF;">null</span>) { <span class="hljs-keyword" style="color:#F92672;">return</span> result;
+    } <span class="hljs-keyword" style="color:#F92672;">try</span> {
+        Enumeration&lt;URL&gt; urls = (classLoader != <span class="hljs-literal" style="color:#AE81FF;">null</span> ?
+                classLoader.getResources(FACTORIES_RESOURCE_LOCATION) :
+                ClassLoader.getSystemResources(FACTORIES_RESOURCE_LOCATION));
+        result = <span class="hljs-keyword" style="color:#F92672;">new</span> LinkedMultiValueMap&lt;&gt;(); <span class="hljs-keyword" style="color:#F92672;">while</span> (urls.hasMoreElements()) {
+            URL url = urls.nextElement();
+            UrlResource resource = <span class="hljs-keyword" style="color:#F92672;">new</span> UrlResource(url);
+            Properties properties = PropertiesLoaderUtils.loadProperties(resource); <span class="hljs-keyword" style="color:#F92672;">for</span> (<span class="hljs-built_in" style="color:#E6DB74;">Map</span>.Entry&lt;?, ?&gt; entry : properties.entrySet()) { <span class="hljs-built_in" style="color:#E6DB74;">String</span> factoryTypeName = ((<span class="hljs-built_in" style="color:#E6DB74;">String</span>) entry.getKey()).trim(); <span class="hljs-keyword" style="color:#F92672;">for</span> (<span class="hljs-built_in" style="color:#E6DB74;">String</span> factoryImplementationName : StringUtils.commaDelimitedListToStringArray((<span class="hljs-built_in" style="color:#E6DB74;">String</span>) entry.getValue())) {
+                    result.add(factoryTypeName, factoryImplementationName.trim());
+                }
+            }
+        }
+        cache.put(classLoader, result); <span class="hljs-keyword" style="color:#F92672;">return</span> result;
+    } <span class="hljs-keyword" style="color:#F92672;">catch</span> (IOException ex) { <span class="hljs-keyword" style="color:#F92672;">throw</span> <span class="hljs-keyword" style="color:#F92672;">new</span> IllegalArgumentException(<span class="hljs-string" style="color:#E6DB74;">"Unable to load factories from location ["</span> +
+                FACTORIES_RESOURCE_LOCATION + <span class="hljs-string" style="color:#E6DB74;">"]"</span>, ex);
+    }
+}</pre>
+<h2 id="加载配置流程" style="font-size:21px;color:#3199E4;font-family:&quot;background-color:#FFFFFF;">
+	3.2.&nbsp;加载配置流程
+</h2>
+<p style="text-indent:2em;font-family:&quot;font-size:16px;background-color:#FFFFFF;">
+	在main方法启动的时候我们会调用SpringApplication.run方法 run方法中调用了getSpringFactoriesInstances 调用createSpringFactoriesInstances
+</p>
+<pre><span class="hljs-keyword" style="color:#F92672;">private</span> &lt;T&gt; List&lt;T&gt; <span class="hljs-function"><span class="hljs-title" style="color:#A6E22E;">createSpringFactoriesInstances</span>(<span class="hljs-params" style="color:#F8F8F2;">Class&lt;T&gt; <span class="hljs-keyword" style="color:#F92672;">type</span>, Class&lt;?&gt;[] parameterTypes,
+			ClassLoader classLoader, <span class="hljs-built_in" style="color:#E6DB74;">Object</span>[] args, <span class="hljs-built_in" style="color:#E6DB74;">Set</span>&lt;<span class="hljs-built_in" style="color:#E6DB74;">String</span>&gt; names</span>)</span> {
+    List&lt;T&gt; instances = <span class="hljs-keyword" style="color:#F92672;">new</span> ArrayList&lt;&gt;(names.size()); <span class="hljs-keyword" style="color:#F92672;">for</span> (<span class="hljs-built_in" style="color:#E6DB74;">String</span> name : names) { <span class="hljs-keyword" style="color:#F92672;">try</span> {
+            Class&lt;?&gt; instanceClass = ClassUtils.forName(name, classLoader);
+            Assert.isAssignable(<span class="hljs-keyword" style="color:#F92672;">type</span>, instanceClass);
+            Constructor&lt;?&gt; <span class="hljs-title" style="color:#A6E22E;">constructor</span> = <span class="hljs-title" style="color:#A6E22E;">instanceClass</span>.<span class="hljs-title" style="color:#A6E22E;">getDeclaredConstructor</span>(<span class="hljs-params" style="color:#F8F8F2;">parameterTypes</span>);
+            T instance = (T) BeanUtils.instantiateClass(<span class="hljs-title" style="color:#A6E22E;">constructor</span>, <span class="hljs-title" style="color:#A6E22E;">args</span>);
+            instances.add(instance);
+        } <span class="hljs-keyword" style="color:#F92672;">catch</span> (Throwable ex) { <span class="hljs-keyword" style="color:#F92672;">throw</span> <span class="hljs-keyword" style="color:#F92672;">new</span> IllegalArgumentException(<span class="hljs-string" style="color:#E6DB74;">"Cannot instantiate "</span> + <span class="hljs-keyword" style="color:#F92672;">type</span> + <span class="hljs-string" style="color:#E6DB74;">" : "</span> + name, ex);
+        }
+    } <span class="hljs-keyword" style="color:#F92672;">return</span> instances;
+}</pre>
+<h1 id="总结" style="font-size:28px;background-color:#3199E4;color:#FFFFFF;font-family:&quot;">
+	总结
+</h1>
+<p style="text-indent:2em;font-family:&quot;font-size:16px;background-color:#FFFFFF;">
+	这是一种类似插件的设计方式，只要引入对应的jar包，就会扫描到jar里的spring.factories，对应的实现类也就会被实例化。
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/2088.html">SpringBoot自动注入分析</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/2090.html">数据库连接池补充--Tomcat 的 JDBC 连接池</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://www.cnblogs.com/yungyu16/p/13234581.html" target="_blank">https://www.cnblogs.com/yungyu16/p/13234581.html</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>

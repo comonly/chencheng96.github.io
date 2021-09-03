@@ -1,0 +1,609 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Vue2和Vue3开发组件的区别_comonly.cn</title>
+<meta name="keywords" content="Vue2和Vue3开发组件的区别" />
+<meta name="description" content="我们一直都有关注和阅读很多关于Vue3的新特性和功能即将到来。但是我们没有一个具体的概念在开发中会有如何的改变和不一样的体验。还有一些童鞋已经开始又慌又抓狂了 -- “又要开始学新的写法了 (ノToT )ノ ~┻┻”。
+
+所以这里我使用Vue2和Vue3开发一个简单的表格组件来展示一下Vue2和Vue3开发组件的区别。看完这片文章后，你将会有一个概念Vue2和Vue3开发组件时的区别，并且为Vue3的开发之路做好准备。ღ(◔ ◔ღ)ミ
+
+废话少说，让我们开始吧～ (๑ •̀ㅂ•́) ✧
+
+创建" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/css_yangqingqing.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+ <div class="blank"></div>
+ <div class="infosbox">
+    <div class="newsview">
+      <h3 class="news_title">Vue2和Vue3开发组件的区别</h3>
+      <div class="bloginfo">
+        <ul>
+          <li class="author">三钻</li>
+          <li class="lmname"><a href="https://zhuanlan.zhihu.com/p/139590941" target="_blank">https://zhuanlan.zhihu.com/p/139590941</a></li>
+          <li class="timer">2021-08-18</li>
+          	
+         
+          
+          <!-- origin -->
+		  <li class="view">
+ 
+
+	web html css js 插件
+ 	  	
+		  </li>		  
+		  <li class="view">公开</li>
+
+ 
+          <!-- 
+          <li class="view">4567已阅读</li>
+          <li class="like">8888888</li>
+           -->
+        </ul>
+      </div>
+      
+      
+        <div class="news_about"><strong>简介</strong>我们一直都有关注和阅读很多关于Vue3的新特性和功能即将到来。但是我们没有一个具体的概念在开发中会有如何的改变和不一样的体验。还有一些童鞋已经开始又慌又抓狂了 -- “又要开始学新的写法了 (ノToT )ノ ~┻┻”。
+
+所以这里我使用Vue2和Vue3开发一个简单的表格组件来展示一下Vue2和Vue3开发组件的区别。看完这片文章后，你将会有一个概念Vue2和Vue3开发组件时的区别，并且为Vue3的开发之路做好准备。ღ(◔ ◔ღ)ミ
+
+废话少说，让我们开始吧～ (๑ •̀ㅂ•́) ✧
+
+创建</div>
+      
+      <!-- <div class="news_con"> -->
+      <div class="realContent_kindeditor"> <p>
+	我们一直都有关注和阅读很多关于Vue3的新特性和功能即将到来。但是我们没有一个具体的概念在开发中会有如何的改变和不一样的体验。还有一些童鞋已经开始又慌又抓狂了 -- “又要开始学新的写法了 (ノToT )ノ ~┻┻”。<br />
+<br />
+所以这里我使用Vue2和Vue3开发一个简单的表格组件来展示一下Vue2和Vue3开发组件的区别。看完这片文章后，你将会有一个概念Vue2和Vue3开发组件时的区别，并且为Vue3的开发之路做好准备。ღ(◔ ◔ღ)ミ<br />
+<br />
+废话少说，让我们开始吧～ (๑ •̀ㅂ•́) ✧<br />
+<br />
+创建一个 template<br />
+组件来说，大多代码在Vue2和Vue3都非常相似。Vue3支持碎片(Fragments)，就是说在组件可以拥有多个根节点。<br />
+<br />
+这种新特性可以减少很多组件之间的div包裹元素。在开发vue的时候，我们会发现每一个组件都会有个div元素包裹着。就会出现很多层多余的div元素。碎片(Fragments)解决了这个问题。对于有完美强迫症的童鞋“真的时太棒了”。我们这里的例子里就不展示了，用简单的单根节点的组件。<br />
+<br />
+Vue2 表格template<br />
+<br />
+&lt;template&gt;<br />
+&nbsp; &lt;div class='form-element'&gt;<br />
+&nbsp; &nbsp; &lt;h2&gt; {{ title }} &lt;/h2&gt;<br />
+&nbsp; &nbsp; &lt;input type='text' v-model='username' placeholder='Username' /&gt;<br />
+&nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; &lt;input type='password' v-model='password' placeholder='Password' /&gt;<br />
+<br />
+&nbsp; &nbsp; &lt;button @click='login'&gt;<br />
+&nbsp; &nbsp; &nbsp; Submit<br />
+&nbsp; &nbsp; &lt;/button&gt;<br />
+&nbsp; &nbsp; &lt;p&gt;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; Values: {{ username + ' ' + password }}<br />
+&nbsp; &nbsp; &lt;/p&gt;<br />
+&nbsp; &lt;/div&gt;<br />
+&lt;/template&gt;<br />
+在Vue3的唯一真正的不同在于数据获取。Vue3中的反应数据（Reactive Data）是包含在一个反应状态（Reactive State）变量中。— 所以我们需要访问这个反应状态来获取数据值。<br />
+<br />
+&lt;template&gt;<br />
+&nbsp; &lt;div class='form-element'&gt;<br />
+&nbsp; &nbsp; &lt;h2&gt; {{ state.title }} &lt;/h2&gt;<br />
+&nbsp; &nbsp; &lt;input<br />
+&nbsp; &nbsp; &nbsp;type='text'<br />
+&nbsp; &nbsp; &nbsp;v-model='state.username'<br />
+&nbsp; &nbsp; &nbsp;placeholder='Username'<br />
+&nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; &lt;input<br />
+&nbsp; &nbsp; &nbsp;type='password'<br />
+&nbsp; &nbsp; &nbsp;v-model='state.password'<br />
+&nbsp; &nbsp; &nbsp;placeholder='Password'<br />
+&nbsp; &nbsp; /&gt;<br />
+<br />
+&nbsp; &nbsp; &lt;button @click='login'&gt;<br />
+&nbsp; &nbsp; &nbsp; Submit<br />
+&nbsp; &nbsp; &lt;/button&gt;<br />
+&nbsp; &nbsp; &lt;p&gt;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; Values: {{ state.username + ' ' + state.password }}<br />
+&nbsp; &nbsp; &lt;/p&gt;<br />
+&nbsp; &lt;/div&gt;<br />
+&lt;/template&gt;<br />
+建立数据 data<br />
+这里就是Vue2与Vue3 最大的区别 — Vue2使用选项类型API（Options API）对比Vue3合成型API（Composition API）<br />
+<br />
+旧的选项型API在代码里分割了不同的属性（properties）：data，computed属性，methods，等等。新的合成型API能让我们用方法（function）来分割，相比于旧的API使用属性来分组，这样代码会更加简便和整洁。<br />
+<br />
+现在我们来对比一下Vue2写法和Vue3写法在代码里面的区别。<br />
+Vue2 - 这里把两个数据放入data属性中<br />
+<br />
+export default {<br />
+&nbsp; props: {<br />
+&nbsp; &nbsp; title: String<br />
+&nbsp; },<br />
+&nbsp; data () {<br />
+&nbsp; &nbsp; return {<br />
+&nbsp; &nbsp; &nbsp; username: '',<br />
+&nbsp; &nbsp; &nbsp; password: ''<br />
+&nbsp; &nbsp; }<br />
+&nbsp; }<br />
+}<br />
+在Vue3.0，我们就需要使用一个新的setup()方法，此方法在组件初始化构造的时候触发。<br />
+<br />
+为了可以让开发者对反应型数据有更多的控制，我们可以直接使用到 Vue3 的反应API（reactivity API）。<br />
+<br />
+使用以下三步来建立反应性数据:<br />
+<br />
+从vue引入reactive<br />
+使用reactive()方法来声名我们的数据为反应性数据<br />
+使用setup()方法来返回我们的反应性数据，从而我们的template可以获取这些反应性数据<br />
+上一波代码，让大家更容易理解是怎么实现的。<br />
+<br />
+import { reactive } from 'vue'<br />
+<br />
+export default {<br />
+&nbsp; props: {<br />
+&nbsp; &nbsp; title: String<br />
+&nbsp; },<br />
+&nbsp; setup () {<br />
+&nbsp; &nbsp; const state = reactive({<br />
+&nbsp; &nbsp; &nbsp; username: '',<br />
+&nbsp; &nbsp; &nbsp; password: ''<br />
+&nbsp; &nbsp; })<br />
+<br />
+&nbsp; &nbsp; return { state }<br />
+&nbsp; }<br />
+}<br />
+这里构造的反应性数据就可以被template使用，可以通过state.username和state.password获得数据的值。<br />
+<br />
+Vue2 对比 Vue3的 methods 编写<br />
+Vue2 的选项型API是把methods分割到独立的属性区域的。我们可以直接在这个属性里面添加方法来处理各种前端逻辑。<br />
+<br />
+export default {<br />
+&nbsp; props: {<br />
+&nbsp; &nbsp; title: String<br />
+&nbsp; },<br />
+&nbsp; data () {<br />
+&nbsp; &nbsp; return {<br />
+&nbsp; &nbsp; &nbsp; username: '',<br />
+&nbsp; &nbsp; &nbsp; password: ''<br />
+&nbsp; &nbsp; }<br />
+&nbsp; },<br />
+&nbsp; methods: {<br />
+&nbsp; &nbsp; login () {<br />
+&nbsp; &nbsp; &nbsp; // 登陆方法<br />
+&nbsp; &nbsp; }<br />
+&nbsp; }<br />
+}<br />
+Vue3 的合成型API里面的setup()方法也是可以用来操控methods的。创建声名方法其实和声名数据状态是一样的。— 我们需要先声名一个方法然后在setup()方法中返回(return)， 这样我们的组件内就可以调用这个方法了。<br />
+<br />
+export default {<br />
+&nbsp; props: {<br />
+&nbsp; &nbsp; title: String<br />
+&nbsp; },<br />
+&nbsp; setup () {<br />
+&nbsp; &nbsp; const state = reactive({<br />
+&nbsp; &nbsp; &nbsp; username: '',<br />
+&nbsp; &nbsp; &nbsp; password: ''<br />
+&nbsp; &nbsp; })<br />
+<br />
+&nbsp; &nbsp; const login = () =&gt; {<br />
+&nbsp; &nbsp; &nbsp; // 登陆方法<br />
+&nbsp; &nbsp; }<br />
+&nbsp; &nbsp; return {&nbsp;<br />
+&nbsp; &nbsp; &nbsp; login,<br />
+&nbsp; &nbsp; &nbsp; state<br />
+&nbsp; &nbsp; }<br />
+&nbsp; }<br />
+}<br />
+生命周期钩子 — Lifecyle Hooks<br />
+在 Vue2，我们可以直接在组件属性中调用Vue的生命周期的钩子。以下使用一个组件已挂载（mounted）生命周期触发钩子。<br />
+<br />
+export default {<br />
+&nbsp; props: {<br />
+&nbsp; &nbsp; title: String<br />
+&nbsp; },<br />
+&nbsp; data () {<br />
+&nbsp; &nbsp; return {<br />
+&nbsp; &nbsp; &nbsp; username: '',<br />
+&nbsp; &nbsp; &nbsp; password: ''<br />
+&nbsp; &nbsp; }<br />
+&nbsp; },<br />
+&nbsp; mounted () {<br />
+&nbsp; &nbsp; console.log('组件已挂载')<br />
+&nbsp; },<br />
+&nbsp; methods: {<br />
+&nbsp; &nbsp; login () {<br />
+&nbsp; &nbsp; &nbsp; // login method<br />
+&nbsp; &nbsp; }<br />
+&nbsp; }<br />
+}<br />
+现在 Vue3 的合成型API里面的setup()方法可以包含了基本所有东西。生命周期的钩子就是其中之一！<br />
+<br />
+但是在 Vue3 生周期钩子不是全局可调用的了，需要另外从vue中引入。和刚刚引入reactive一样，生命周期的挂载钩子叫onMounted。<br />
+<br />
+引入后我们就可以在setup()方法里面使用onMounted挂载的钩子了。<br />
+<br />
+import { reactive, onMounted } from 'vue'<br />
+<br />
+export default {<br />
+&nbsp; props: {<br />
+&nbsp; &nbsp; title: String<br />
+&nbsp; },<br />
+&nbsp; setup () {<br />
+&nbsp; &nbsp; // ..<br />
+<br />
+&nbsp; &nbsp; onMounted(() =&gt; {<br />
+&nbsp; &nbsp; &nbsp; console.log('组件已挂载')<br />
+&nbsp; &nbsp; })<br />
+<br />
+&nbsp; &nbsp; // ...<br />
+&nbsp; }<br />
+}<br />
+计算属性 - Computed Properties<br />
+我们一起试试添加一个计算属性来转换username成小写字母。<br />
+<br />
+在 Vue2 中实现，我们只需要在组件内的选项属性中添加即可<br />
+<br />
+export default {<br />
+&nbsp; // ..&nbsp;<br />
+&nbsp; computed: {<br />
+&nbsp; &nbsp; lowerCaseUsername () {<br />
+&nbsp; &nbsp; &nbsp; return this.username.toLowerCase()<br />
+&nbsp; &nbsp; }<br />
+&nbsp; }<br />
+}<br />
+Vue3 的设计模式给予开发者们按需引入需要使用的依赖包。这样一来就不需要多余的引用导致性能或者打包后太大的问题。Vue2就是有这个一直存在的问题。<br />
+<br />
+所以在 Vue3 使用计算属性，我们先需要在组件内引入computed。<br />
+<br />
+使用方式就和反应性数据（reactive data）一样，在state中加入一个计算属性:<br />
+<br />
+import { reactive, onMounted, computed } from 'vue'<br />
+<br />
+export default {<br />
+&nbsp; props: {<br />
+&nbsp; &nbsp; title: String<br />
+&nbsp; },<br />
+&nbsp; setup () {<br />
+&nbsp; &nbsp; const state = reactive({<br />
+&nbsp; &nbsp; &nbsp; username: '',<br />
+&nbsp; &nbsp; &nbsp; password: '',<br />
+&nbsp; &nbsp; &nbsp; lowerCaseUsername: computed(() =&gt; state.username.toLowerCase())<br />
+&nbsp; &nbsp; })<br />
+<br />
+&nbsp; &nbsp; // ...<br />
+&nbsp; }<br />
+接收 Props<br />
+接收组件props参数传递这一块为我们带来了Vue2和Vue3之间最大的区别。—this在vue3中与vue2代表着完全不一样的东西。<br />
+<br />
+在 Vue2，this代表的是当前组件，不是某一个特定的属性。所以我们可以直接使用this访问prop属性值。就比如下面的例子在挂载完成后打印处当前传入组件的参数title。<br />
+<br />
+mounted () {<br />
+&nbsp; &nbsp; console.log('title: ' + this.title)<br />
+}<br />
+但是在 Vue3 中，this无法直接拿到props属性，emit events（触发事件）和组件内的其他属性。不过全新的setup()方法可以接收两个参数：<br />
+<br />
+props - 不可变的组件参数<br />
+context - Vue3 暴露出来的属性（emit，slots，attrs）<br />
+所以在 Vue3 接收与使用props就会变成这样：<br />
+<br />
+setup (props) {<br />
+&nbsp; &nbsp; // ...<br />
+<br />
+&nbsp; &nbsp; onMounted(() =&gt; {<br />
+&nbsp; &nbsp; &nbsp; console.log('title: ' + props.title)<br />
+&nbsp; &nbsp; })<br />
+<br />
+&nbsp; &nbsp; // ...<br />
+}<br />
+事件 - Emitting Events<br />
+在 Vue2 中自定义事件是非常直接的，但是在 Vue3 的话，我们会有更多的控制的自由度。<br />
+<br />
+举例，现在我们想在点击提交按钮时触发一个login的事件。<br />
+<br />
+在 Vue2 中我们会调用到this.$emit然后传入事件名和参数对象。<br />
+<br />
+login () {<br />
+&nbsp; &nbsp; &nbsp; this.$emit('login', {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; username: this.username,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; password: this.password<br />
+&nbsp; &nbsp; &nbsp; })<br />
+&nbsp;}<br />
+但是在 Vue3中，我们刚刚说过this已经不是和vue2代表着这个组件了，所以我们需要不一样的自定义事件的方式。<br />
+<br />
+那怎么办呀？! ლಠ益ಠ)ლ<br />
+<br />
+不用慌，在setup()中的第二个参数content对象中就有emit，这个是和this.$emit是一样的。那么我们只要在setup()接收第二个参数中使用分解对象法取出emit就可以在setup方法中随意使用了。<br />
+<br />
+然后我们在login方法中编写登陆事件：<br />
+<br />
+setup (props, { emit }) {<br />
+&nbsp; &nbsp; // ...<br />
+<br />
+&nbsp; &nbsp; const login = () =&gt; {<br />
+&nbsp; &nbsp; &nbsp; emit('login', {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; username: state.username,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; password: state.password<br />
+&nbsp; &nbsp; &nbsp; })<br />
+&nbsp; &nbsp; }<br />
+<br />
+&nbsp; &nbsp; // ...<br />
+}<br />
+最终的vue2对比vue3代码<br />
+<br />
+<br />
+<br />
+真的是太棒了，能看到这里的童鞋们，你们现在基本都看到vue2与vue3其实概念与理念都是一样的。只是有一些属性获取方式和声名和定义方式稍微变了。一直在鬼哭狼嚎的小小前端开发猿人们，你们可以松一口气了吧。<br />
+<br />
+总结一下，我觉得 Vue3 给我们前端开发者带来了全新的开发体验，更好的使用弹性，可控度也得到了大大的提升。如果你是一个学过或者接触过 React 然后现在想使用Vue的话，应该特别兴奋，因为很多使用方式都和React非常相近了 ！<br />
+<br />
+全新的合成式API（Composition API）可以提升代码的解耦程度 —— 特别是大型的前端应用，效果会更加明显。还有就是按需引用的有了更细微的可控性，让项目的性能和打包大小有更好的控制。<br />
+<br />
+最后我把完成的 Vue2 和 Vue3 的组件代码发出来给大家：<br />
+<br />
+Vue2<br />
+<br />
+&lt;template&gt;<br />
+&nbsp; &lt;div class='form-element'&gt;<br />
+&nbsp; &nbsp; &lt;h2&gt; {{ title }} &lt;/h2&gt;<br />
+&nbsp; &nbsp; &lt;input type='text' v-model='username' placeholder='Username' /&gt;<br />
+&nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; &lt;input type='password' v-model='password' placeholder='Password' /&gt;<br />
+<br />
+&nbsp; &nbsp; &lt;button @click='login'&gt;<br />
+&nbsp; &nbsp; &nbsp; Submit<br />
+&nbsp; &nbsp; &lt;/button&gt;<br />
+&nbsp; &nbsp; &lt;p&gt;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; Values: {{ username + ' ' + password }}<br />
+&nbsp; &nbsp; &lt;/p&gt;<br />
+&nbsp; &lt;/div&gt;<br />
+&lt;/template&gt;<br />
+&lt;script&gt;<br />
+export default {<br />
+&nbsp; props: {<br />
+&nbsp; &nbsp; title: String<br />
+&nbsp; },<br />
+&nbsp; data () {<br />
+&nbsp; &nbsp; return {<br />
+&nbsp; &nbsp; &nbsp; username: '',<br />
+&nbsp; &nbsp; &nbsp; password: ''<br />
+&nbsp; &nbsp; }<br />
+&nbsp; },<br />
+&nbsp; mounted () {<br />
+&nbsp; &nbsp; console.log('title: ' + this.title)<br />
+&nbsp; },<br />
+&nbsp; computed: {<br />
+&nbsp; &nbsp; lowerCaseUsername () {<br />
+&nbsp; &nbsp; &nbsp; return this.username.toLowerCase()<br />
+&nbsp; &nbsp; }<br />
+&nbsp; },<br />
+&nbsp; methods: {<br />
+&nbsp; &nbsp; login () {<br />
+&nbsp; &nbsp; &nbsp; this.$emit('login', {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; username: this.username,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; password: this.password<br />
+&nbsp; &nbsp; &nbsp; })<br />
+&nbsp; &nbsp; }<br />
+&nbsp; }<br />
+}<br />
+&lt;/script&gt;<br />
+Vue3<br />
+<br />
+&lt;template&gt;<br />
+&nbsp; &lt;div class='form-element'&gt;<br />
+&nbsp; &nbsp; &lt;h2&gt; {{ state.title }} &lt;/h2&gt;<br />
+&nbsp; &nbsp; &lt;input type='text' v-model='state.username' placeholder='Username' /&gt;<br />
+&nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; &lt;input type='password' v-model='state.password' placeholder='Password' /&gt;<br />
+<br />
+&nbsp; &nbsp; &lt;button @click='login'&gt;<br />
+&nbsp; &nbsp; &nbsp; Submit<br />
+&nbsp; &nbsp; &lt;/button&gt;<br />
+&nbsp; &nbsp; &lt;p&gt;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; Values: {{ state.username + ' ' + state.password }}<br />
+&nbsp; &nbsp; &lt;/p&gt;<br />
+&nbsp; &lt;/div&gt;<br />
+&lt;/template&gt;<br />
+&lt;script&gt;<br />
+import { reactive, onMounted, computed } from 'vue'<br />
+<br />
+export default {<br />
+&nbsp; props: {<br />
+&nbsp; &nbsp; title: String<br />
+&nbsp; },<br />
+&nbsp; setup (props, { emit }) {<br />
+&nbsp; &nbsp; const state = reactive({<br />
+&nbsp; &nbsp; &nbsp; username: '',<br />
+&nbsp; &nbsp; &nbsp; password: '',<br />
+&nbsp; &nbsp; &nbsp; lowerCaseUsername: computed(() =&gt; state.username.toLowerCase())<br />
+&nbsp; &nbsp; })<br />
+<br />
+&nbsp; &nbsp; onMounted(() =&gt; {<br />
+&nbsp; &nbsp; &nbsp; console.log('title: ' + props.title)<br />
+&nbsp; &nbsp; })<br />
+<br />
+&nbsp; &nbsp; const login = () =&gt; {<br />
+&nbsp; &nbsp; &nbsp; emit('login', {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; username: state.username,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; password: state.password<br />
+&nbsp; &nbsp; &nbsp; })<br />
+&nbsp; &nbsp; }<br />
+<br />
+&nbsp; &nbsp; return {&nbsp;<br />
+&nbsp; &nbsp; &nbsp; login,<br />
+&nbsp; &nbsp; &nbsp; state<br />
+&nbsp; &nbsp; }<br />
+&nbsp; }<br />
+}<br />
+&lt;/script&gt;<br />
+</p></div>
+      <!-- 
+      <p class="diggit">
+        <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&amp;id=20&amp;down=5"></script>13</b>)
+      </p>
+       -->
+
+    </div>
+    
+    <div class="nextinfo">
+      
+        
+        
+            <p>上一篇：<a href="/p/2085.html">vue数据更新了，页面不变--Vue 不能检测通过数组索引直接修改一个数组项</a></p>
+        
+        
+      
+      
+        
+        
+            <p>下一篇：<a href="/p/2087.html">深入了解Java数据结构（集合及底层实现）</a></p>
+        
+      
+    </div>
+    
+    <!-- 转载声明 -->
+    
+        <div style="padding-left:20px;">本文转自：<a href="https://zhuanlan.zhihu.com/p/139590941" target="_blank">https://zhuanlan.zhihu.com/p/139590941</a></div>
+    
+	
+	<div><!-- 添加新的评论 -->
+		
+   
+		
+		<div class="news_pl">
+		    	
+		  	
+		</div>
+	
+	</div>
+
+ 
+ 		
+	</div>
+
+</div>
+
+<div class="blank"></div>
+
+	<div  style="position: fixed;display: float;top: 2px;right: 2px;width: 200px;"><!-- 评论部分 -->
+
+		<!---->
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+			<div>
+				<span style="display:block;margin:10px;"><a style="text-decoration:none;color:#5BC648;" href="#"></a></span><!-- 标题列表，快速查看-->
+			</div>
+		
+		
+	
+		
+		
+	</div>
+
+	<link href="/extends/kindeditor-4.1.10/plugins/code/prettify.css" rel="stylesheet" type="text/css"></script>
+	<script charset="utf-8" src="/extends/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+	<script type="text/javascript">
+	prettyPrint();
+	</script>
+
+<!-- 显示访问记录 -->
+
+	<footer>
+		<!-- 底部居中的 -->
+		<p>Copyright © <a href="http://comonly.cn/" target="_blank">comonly.cn</a> </p>
+		<p>备案号：<a href="http://www.miitbeian.gov.cn/">鄂ICP备16003690号-3</a></p>
+		<div class="cnzz_bot">
+			<style>
+			.cnzz_bot img{
+			    margin:0 auto;
+			}
+			</style>
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277884732'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277884732%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</footer>
+
+ 
+</body>
+</html>
